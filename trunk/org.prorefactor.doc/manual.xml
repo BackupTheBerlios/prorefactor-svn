@@ -973,9 +973,9 @@ display bInvoice except totalAmount.</programlisting>
     projects.</para>
 
     <para>Experience programming in Java with Eclipse's IDE is not necessary,
-    but since this document glosses over a few details, it would be helpful if
-    you were at familiar with the workbench menu items and basics of the IDE
-    such as creating a Java project.</para>
+    but since these instructions gloss over a few details, it would be helpful
+    if you were familiar with Eclipse basics such as creating a Java
+    project.</para>
 
     <section>
       <title>Prepare Your Eclipse Workspace</title>
@@ -1093,8 +1093,8 @@ display bInvoice except totalAmount.</programlisting>
           <option>-Djava.library.path=<replaceable>/your/path</replaceable></option>
           to the default VM args, where
           <filename><replaceable>/your/path</replaceable></filename> is the
-          jpplus plug-in directory (which is where
-          <filename>proparse.dll</filename> and
+          <filename>org.prorefactor.core</filename> plug-in directory (which
+          is where <filename>proparse.dll</filename> and
           <filename>proparse_jni.dll</filename> can be found).</para>
         </listitem>
       </orderedlist>
@@ -1105,197 +1105,65 @@ display bInvoice except totalAmount.</programlisting>
 
       <para>For this option, it is not necessary to have installed ProRefactor
       into Eclipse. You will need to follow the links from the ProRefactor.org
-      web site to gain access to the development project and
-      repository.</para>
+      web site to gain access to the development project and repository. The
+      project web page has instructions for both anonymous and developer
+      access to the repository.</para>
 
-      <para>ProRefactor's source is stored in a <ulink
-      url="http://subversion.tigris.org/">Subversion</ulink> repository. Here,
-      we will assume that you will use the <ulink
-      url="http://subclipse.tigris.org/">Subclipse</ulink> plug-in to Eclipse
-      for Subversion repository access, but other options are available from
-      the Subversion web site.</para>
+      <note>
+        <para>There are three top level directories in the ProRefactor
+        repository: <filename>branches</filename>, <filename>tags</filename>,
+        and <filename>trunk</filename>. You only want the
+        <filename>trunk</filename> directory, not the entire project
+        repository.</para>
+      </note>
 
-      <para>XXXXX This all needs to change.</para>
+      <para>For example, you might use the following Subversion command for
+      checking out the source code anonymously.</para>
 
-      <variablelist>
-        <varlistentry>
-          <term>Step 1. Use Subclipse to Access the Repository</term>
+      <programlisting>svn checkout svn://svn.berlios.de/prorefactor/trunk</programlisting>
 
-          <listitem>
-            <orderedlist>
-              <listitem>
-                <para>First install the Subclipse Eclipse plug-in. The
-                installation directions are on their web site of course, but
-                as of this writing, the directions are simply: <quote>Add
-                http://subclipse.tigris.org/update as an update site in
-                Eclipse's update manager (which you can find in the Help
-                menu).</quote></para>
-              </listitem>
+      <para>This will create several directories named
+      <filename>org.prorefactor.*</filename>.</para>
 
-              <listitem>
-                <para>Switch to the SVN Repository Exploring
-                perspective.</para>
-              </listitem>
+      <para>Once you have checked the source out from the repository, you are
+      ready to load that source into Eclipse projects.</para>
 
-              <listitem>
-                <para>Right click on the SVN Repository view to get the pop-up
-                menu, and choose <guimenuitem>New &gt; Repository
-                Location</guimenuitem>. Enter the details for your access to
-                the project repository.</para>
-              </listitem>
-            </orderedlist>
-          </listitem>
-        </varlistentry>
+      <para>From the Eclipse menu, choose <guimenuitem>File &gt; Import...
+      &gt; Existing Project into Workspace</guimenuitem> for each of the
+      <literal>org.prorefactor</literal> project directories in the following
+      order: <literal>antlr</literal>, <literal>core</literal>,
+      <literal>refactor</literal>, <literal>eclipse</literal>,
+      <literal>javadoc</literal>, <literal>doc</literal>,
+      <literal>feature</literal>, <literal>update</literal>. Eclipse will
+      automatically build (compile) each project as you import it.</para>
 
-        <varlistentry>
-          <term>Step 2. Check Out Antlr</term>
+      <para>In <guilabel>Window &gt; Preferences &gt; Java &gt; Installed
+      JREs</guilabel>, edit your default JRE. Add:
+      <option>-Djava.library.path=<replaceable>/your/path</replaceable></option>
+      to the default VM args, where <replaceable>/your/path</replaceable> is
+      your <filename>org.prorefactor.core</filename> project directory, where
+      <filename>proparse.dll</filename> and
+      <filename>proparse_jni.dll</filename> can be found.</para>
 
-          <listitem>
-            <orderedlist>
-              <listitem>
-                <para>Select <literal>antlr</literal> in the Subclipse
-                repository browser. From the pop-up menu, choose
-                <guimenuitem>Check Out As... &gt; Java Project</guimenuitem>.
-                Use separate source and output folders. Click
-                <guibutton>Finish</guibutton>. Once you click Finish, there
-                appears to be a bug in Subversion's project creation; a dialog
-                appears warning that the resource already exists, delete it?
-                Just click <guibutton>OK</guibutton>, and the project will be
-                created by Subversion. Be patient, as the initial check out
-                can take a while.</para>
-              </listitem>
+      <para>Now you can run the regression tests. You can navigate to the
+      following two source files, and run them as JUnit tests:</para>
 
-              <listitem>
-                <para>Switch to the Java perspective. Open the
-                <literal>antlr</literal> project properties dialog. Select
-                <guilabel>Java Build Path</guilabel>, and the
-                <guilabel>Libraries</guilabel> tab. Click the <guibutton>Add
-                Library</guibutton> button, and select <guilabel>Required
-                Plug-ins</guilabel>. Click <guibutton>Next</guibutton> and
-                then click <guibutton>Finish</guibutton>. Click
-                <guibutton>OK</guibutton> to close the Preferences dialog.
-                (This is necessary for the rest of the projects, but for the
-                Antlr project, we only do this to force a change and force the
-                <filename>.classpath</filename> file to be written out, so
-                that the project will compile. There appears to be a bug in
-                Subclipse in this regard.)</para>
-              </listitem>
+      <itemizedlist>
+        <listitem>
+          <para><filename>org.prorefactor.core.unittest.AllPRCoreTests.java</filename></para>
+        </listitem>
 
-              <listitem>
-                <para>Once you have finished configuring the project, Eclipse
-                will build the project (Eclipse default behavior is to build
-                automatically). There will be some warnings, but there should
-                be no errors.</para>
-              </listitem>
-            </orderedlist>
-          </listitem>
-        </varlistentry>
+        <listitem>
+          <para><filename>org.prorefactor.refactor.unittest.AllRefactorTests.java</filename></para>
+        </listitem>
+      </itemizedlist>
 
-        <varlistentry>
-          <term>Step 3. Check Out JPPlus</term>
-
-          <listitem>
-            <orderedlist>
-              <listitem>
-                <para>Check out <literal>jpplus</literal> from the Subversion
-                repository, again as a Java project.</para>
-              </listitem>
-
-              <listitem>
-                <para>Switch to the Java perspective. Open the
-                <literal>jpplus</literal> project properties dialog. Select
-                <guilabel>Java Build Path</guilabel>, and the
-                <guilabel>Libraries</guilabel> tab. Click the <guibutton>Add
-                Library</guibutton> button, and add <guilabel>Required
-                Plug-ins</guilabel>.</para>
-              </listitem>
-
-              <listitem>
-                <para>Once you have finished configuring the jpplus project,
-                Eclipse will build the project (Eclipse default behavior is to
-                build automatically). There will be some warnings, but there
-                should be no errors.</para>
-              </listitem>
-
-              <listitem>
-                <para>In <guilabel>Window &gt; Preferences &gt; Java &gt;
-                Installed JREs</guilabel>, edit your default JRE. Add:
-                <option>-Djava.library.path=<replaceable>/your/path</replaceable></option>
-                to the default VM args, where
-                <replaceable>/your/path</replaceable> is your jpplus project
-                directory, where <filename>proparse.dll</filename> and
-                <filename>proparse_jni.dll</filename> can be found.</para>
-              </listitem>
-
-              <listitem>
-                <para>Now you can run the regression tests. Navigate to
-                <filename>org.prorefactor.core.unittest.AllJPPlusTests.java</filename>,
-                and run it as a JUnit test. There should be no
-                failures.</para>
-              </listitem>
-            </orderedlist>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Step 4. Check Out RefactorPack</term>
-
-          <listitem>
-            <orderedlist>
-              <listitem>
-                <para>Check out <literal>refactorpack</literal> from the
-                Subversion repository, again as a Java project.</para>
-              </listitem>
-
-              <listitem>
-                <para>Switch to the Java perspective. Open the refactorpack
-                project properties dialog. Select <guilabel>Java Build
-                Path</guilabel>, and the <guilabel>Libraries</guilabel> tab.
-                Click the <guibutton>Add Library</guibutton> button, and add
-                <guilabel>Required Plug-ins</guilabel>. The project should now
-                build cleanly, and
-                <filename>org.prorefactor.refactor.unittest.AllRefactorpackTests.java</filename>
-                (a JUnit test) should run cleanly.</para>
-              </listitem>
-            </orderedlist>
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>Step 5. Check Out ProRefactor</term>
-
-          <listitem>
-            <orderedlist>
-              <listitem>
-                <para>Check out the <literal>prorefactor</literal> project
-                from the Subversion repository, again as a Java
-                project.</para>
-              </listitem>
-
-              <listitem>
-                <para>Switch to the Java perspective. Open the prorefactor
-                project properties dialog. Select <guilabel>Java Build
-                Path</guilabel>, and the <guilabel>Libraries</guilabel> tab.
-                Click the <guibutton>Add Library</guibutton> button, and add
-                <guilabel>Required Plug-ins</guilabel>. You don't need to
-                select any projects individually - you can just click
-                <guibutton>Finish</guibutton>. The project should now build
-                cleanly.</para>
-              </listitem>
-
-              <listitem>
-                <para>To launch the Run-time Workbench, choose
-                <guimenuitem>Run &gt; Run As &gt; Run-time
-                Workbench</guimenuitem>. From the Run-time Workbench, you
-                should be able to select the ProRefactor perspective, create
-                test projects, and launch the ProRefactor menu actions. Here
-                is where you would test any changes or additions that you make
-                to ProRefactor or your own plug-ins.</para>
-              </listitem>
-            </orderedlist>
-          </listitem>
-        </varlistentry>
-      </variablelist>
+      <para>To launch the Run-time Workbench, choose <guimenuitem>Run &gt; Run
+      As &gt; Run-time Workbench</guimenuitem>. From the Run-time Workbench,
+      you should be able to select the ProRefactor perspective, create test
+      projects, and launch the ProRefactor menu actions. This is where you
+      would test any changes or additions that you make to ProRefactor or your
+      own plug-ins.</para>
     </section>
 
     <section>
@@ -1325,7 +1193,7 @@ display bInvoice except totalAmount.</programlisting>
 
       <para>In the <guilabel>Classpath</guilabel> tab, choose the
       <guibutton>Add Folders...</guibutton> button, and add the
-      <filename>jpplus/bin</filename> folder.</para>
+      <filename>org.prorefactor.core/bin</filename> folder.</para>
 
       <para>Leave the JRE set to launch a separate JRE. Running from the same
       JRE as the workspace does not set up the class path correctly for our
@@ -1768,8 +1636,8 @@ END.
               bug could cause some field names to be missed when writing your
               proparse.schema file. (Needed "DICTDB" prefix on _field in the
               FOR loops, otherwise it missed some records. I don't know why.)
-              See Project Configuration or jpplus/4gl/api for the updated two
-              schemadump program files.</para>
+              See Project Configuration for the updated two schemadump program
+              files.</para>
             </listitem>
 
             <listitem>
