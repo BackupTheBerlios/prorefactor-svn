@@ -24,9 +24,10 @@
 	    <fileset dir="../org.prorefactor.eclipse/src" defaultexcludes="yes">
 	      <include name="**/*.java"/>
 	    </fileset>
-	    <doctitle><![CDATA[<h1>ProRefactor</h1>]]></doctitle>
+	    <doctitle><![CDATA[<h1>ProRefactor 1.2.3</h1>]]></doctitle>
 	    <bottom><![CDATA[<i>Copyright &#169; 2002-2005 Joanju and others. All Rights Reserved.</i>]]></bottom>
 	    <tag name="todo" scope="all" description="To do:" />
 	  </javadoc>
+      <zip zipfile="doc.zip" basedir="javadoc" filesonly="false" whenempty="skip" update="false"/>
   </target>
 </project>

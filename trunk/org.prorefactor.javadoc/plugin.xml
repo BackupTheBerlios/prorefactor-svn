@@ -5,5 +5,14 @@
    name="ProRefactor Javadoc"
    version="1.2.3"
    provider-name="ProRefactor.org">
+   <requires>
+      <import plugin="org.eclipse.help"/>
+   </requires>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            primary="true"
+            file="toc.xml"/>
+   </extension>
 
 </plugin>
