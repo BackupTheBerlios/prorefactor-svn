@@ -159,9 +159,9 @@
                id="org.prorefactor.actions.names">
          </action>
          <menu
-               label="S&amp;pecialized"
+               label="E&amp;xperimental"
                path="org.prorefactor.MainMenu/separator1"
-               id="prorefactor.specialized">
+               id="prorefactor.experimental">
             <separator
                   name="separator1">
             </separator>
@@ -170,21 +170,21 @@
                label="&amp;Wrap Procedure Block..."
                class="org.prorefactor.eclipse.actions.WrapProcedureBlock"
                tooltip="Wrap procedural code into an internal procedure"
-               menubarPath="org.prorefactor.MainMenu/prorefactor.specialized/separator1"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.experimental/separator1"
                id="org.prorefactor.actions.wrapProcedureBlock">
          </action>
          <action
                label="&amp;Bubble Declarations..."
                class="org.prorefactor.eclipse.actions.BubbleDeclarationsAction"
                tooltip="Bubble Declarations Refactor"
-               menubarPath="org.prorefactor.MainMenu/prorefactor.specialized/separator1"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.experimental/separator1"
                id="org.prorefactor.actions.bubbleDeclarations">
          </action>
          <action
                label="&amp;Append Program..."
                class="org.prorefactor.eclipse.actions.AppendProgramAction"
                tooltip="Append one compilable program to another"
-               menubarPath="org.prorefactor.MainMenu/prorefactor.specialized/separator1"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.experimental/separator1"
                id="org.prorefactor.actions.appendProgram">
          </action>
          <action
@@ -304,21 +304,29 @@
             </selection>
          </action>
          <action
-               label="E&amp;xpand Selection"
-               icon="icons/expand.gif"
-               class="org.prorefactor.eclipse.actions.ExpandSelectionAction"
-               tooltip="Selects or expands selection of code around the cursor position."
-               menubarPath="org.prorefactor.popup.texteditor/group1"
                enablesFor="*"
+               label="&amp;Expand Selection"
+               tooltip="Selects or expands selection of code around the cursor position."
+               class="org.prorefactor.eclipse.actions.ExpandSelectionAction"
+               icon="icons/expand.gif"
+               menubarPath="org.prorefactor.popup.texteditor/group1"
                id="org.prorefactor.textEditorContrib.expand">
             <selection
                   class="org.eclipse.jface.text.ITextSelection">
             </selection>
          </action>
+         <menu
+               label="E&amp;xperimental"
+               path="org.prorefactor.popup.texteditor/group1"
+               id="experimental">
+            <separator
+                  name="separator1">
+            </separator>
+         </menu>
          <action
                label="&amp;Extract Method"
                class="org.prorefactor.eclipse.actions.ExtractMethodAction"
-               menubarPath="org.prorefactor.popup.texteditor/group1"
+               menubarPath="org.prorefactor.popup.texteditor/experimental/separator1"
                enablesFor="2+"
                id="org.prorefactor.popup.texteditor.extractmethod">
          </action>
