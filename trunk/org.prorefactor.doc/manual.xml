@@ -7,6 +7,8 @@
 
     <date>2005</date>
 
+    <releaseinfo>ProRefactor version 1.2.3</releaseinfo>
+
     <author>
       <firstname>John</firstname>
 
@@ -18,6 +20,13 @@
 
       <holder>Joanju and other ProRefactor.org Contributors</holder>
     </copyright>
+
+    <legalnotice>
+      <para>All rights reserved. This user manual and the accompanying
+      materials are made available under the terms of the Eclipse Public
+      License v1.0 which accompanies the software distribution, and is
+      available at http://www.eclipse.org/legal/epl-v10.html.</para>
+    </legalnotice>
   </bookinfo>
 
   <chapter>
@@ -1556,6 +1565,42 @@ END.
     <title>Release Notes</title>
 
     <variablelist>
+      <varlistentry>
+        <term>Version 1.2.3</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Migration from Joanju.com to ProRefactor.org.</para>
+            </listitem>
+
+            <listitem>
+              <para>If you are updating your environment from the old
+              Joanju.com plugins, then:</para>
+
+              <itemizedlist>
+                <listitem>
+                  <para>Remove the old <literal>com.joanju.*</literal>
+                  features/plugins.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Change your .project file to replace
+                  <literal>com.joanju.prorefactor.ProRefactorNature</literal>
+                  with
+                  <literal>org.prorefactor.eclipse.ProRefactorNature</literal>.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Install ProRefactor from ProRefactor.org, and restart
+                  Eclipse. </para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term>Version 1.2.2</term>
 
