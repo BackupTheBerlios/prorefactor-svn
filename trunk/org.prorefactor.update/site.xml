@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+
+   <description url="http://prorefactor.org/update/">
+      ProRefactor Update Site
+   </description>
+   <feature url="features/org.prorefactor_1.2.3.jar" id="org.prorefactor" version="1.2.3">
+      <category name="ProRefactor.org"/>
+   </feature>
+   <category-def name="ProRefactor.org" label="ProRefactor.org">
+      <description>
+         Analysis and refactoring for Progress 4GL source code.
+      </description>
+   </category-def>
+</site>

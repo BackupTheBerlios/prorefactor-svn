@@ -1,0 +1,554 @@
+/**
+ * TP01Support.java
+ * @author John Green
+ * 19-Nov-2002
+ * www.joanju.com
+ * 
+ * Copyright (c) 2002-2004 Joanju Limited.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+
+package org.prorefactor.treeparser01;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import org.prorefactor.core.IConstants;
+import org.prorefactor.core.JPNode;
+import org.prorefactor.core.schema.Field;
+import org.prorefactor.core.schema.Schema;
+import org.prorefactor.core.schema.Table;
+import org.prorefactor.treeparser.Block;
+import org.prorefactor.treeparser.BufferScope;
+import org.prorefactor.treeparser.CQ;
+import org.prorefactor.treeparser.FieldBuffer;
+import org.prorefactor.treeparser.FieldLookupResult;
+import org.prorefactor.treeparser.ParseUnit;
+import org.prorefactor.treeparser.Routine;
+import org.prorefactor.treeparser.Symbol;
+import org.prorefactor.treeparser.SymbolScope;
+import org.prorefactor.treeparser.SymbolScopeRoot;
+import org.prorefactor.treeparser.TableBuffer;
+import org.prorefactor.treeparser.Variable;
+
+import antlr.collections.AST;
+
+
+
+
+/**
+ * Provides all functions called by TreeParser01.
+ * TreeParser01 does not, itself, define any actions.
+ * Instead, it only makes calls to the functions defined
+ * in this class.
+ */
+public class TP01Support extends TP01Action {
+
+
+	/* Note that blockStack is *only* valid for determining
+	 * the current block - the stack itself cannot be used for determining
+	 * a block's parent, buffer scopes, etc. That logic is found within
+	 * the Block class.
+	 * Conversely, we cannot use Block.parent to find the current block
+	 * when we close out a block. That is because a scope's root block 
+	 * parent is always the program block, but a programmer may code a 
+	 * scope into a non-root block... which we need to make current again
+	 * once done inside the scope.
+	 */
+	private ArrayList blockStack = new ArrayList();
+
+	private Block currentBlock;
+	private HashMap funcForwards = new HashMap();
+	private ParseUnit parseUnit = new ParseUnit();
+	private Schema schema = Schema.getInstance();
+
+	/** The symbol last, or currently being, defined.
+	 * Needed when we have complex syntax like DEFINE id ... LIKE,
+	 * where we want to track the LIKE but it's not in the same grammar
+	 * production as the DEFINE.
+	 */ 
+	private Symbol currSymbol;
+
+	SymbolScope currentScope;
+	SymbolScopeRoot rootScope;
+	TableBuffer lastTableReferenced;
+	TableBuffer prevTableReferenced;
+	TableBuffer currDefTable;
+
+	{	// initialization
+		rootScope = new SymbolScopeRoot();
+		currentScope = rootScope;
+		// See programRoot() for initiazation of the root Block.
+	}
+
+
+
+	///// Methods /////
+
+	
+	
+	/** Get the Table symbol linked from a RECORD_NAME AST. */
+	private Table astTableLink(AST tableAST) {
+		TableBuffer buffer = (TableBuffer) ((JPNode)tableAST).getLink(JPNode.SYMBOL);
+		assert buffer != null;
+		return buffer.getTable();
+	}
+
+
+
+	/** Beginning of a block. */
+	public void blockBegin(AST blockAST) {
+		JPNode node = (JPNode) blockAST;
+		currentBlock = pushBlock(new Block(currentBlock, node));
+		node.setLink(JPNode.BLOCK, currentBlock);
+	}
+
+
+
+	/** End of a block. */
+	public void blockEnd() {
+		currentBlock = popBlock();
+	}
+
+
+
+	/** A CAN-FIND needs to have its own buffer and buffer scope,
+	 * because CAN-FIND(x where x.y = z) does *not* cause a buffer
+	 * reference to be created for x within the surrounding block.
+	 * (Ensuring that the x.y reference does not create a buffer
+	 * reference was the tricky part.)
+	 * Also note the behaviour of the 4GL: You can use an existing
+	 * named buffer within a CAN-FIND, but of course the CAN-FIND
+	 * does not move any pointers around. We accomplish this by
+	 * making a local-scoped named buffer using that same name.
+	 */
+	protected void canFindBegin(AST canfindAST, AST recordAST) {
+		JPNode recordNode = (JPNode) recordAST;
+		// Keep a ref to the current block...
+		Block b = currentBlock;
+		// ...create a can-find scope and block (assigns currentBlock)...
+		scopeAdd(canfindAST);
+		// ...and then set this "can-find block" to use it as its parent.
+		currentBlock.setParent(b);
+		String buffName = recordAST.getText();
+		Table table;
+		boolean isDefault = false;
+		TableBuffer tableBuffer = currentScope.lookupBuffer(buffName);
+		if (tableBuffer != null) {
+			table = tableBuffer.getTable();
+			isDefault = tableBuffer.isDefault();
+		} else {
+			table = schema.lookupTable(buffName);
+			isDefault = true;
+		}
+		TableBuffer newBuff = currentScope.defineBuffer(isDefault ? "" : buffName, table);
+		recordNode.setLink(JPNode.SYMBOL, newBuff);
+		currentBlock.addHiddenCursor(recordNode);
+	}
+
+
+
+	protected void canFindEnd(AST canfindAST) {
+		scopeClose(canfindAST);
+	}
+	
+	
+	
+	/** The tree parser calls this at an AS node */
+	public void defAs(AST asAST) {
+		currSymbol.setAsNode((JPNode)asAST);
+	}
+
+	
+	
+	/** The tree parser calls this at a LIKE node */
+	public void defLike(AST likeAST) {
+		currSymbol.setLikeNode((JPNode)likeAST);
+	}
+
+
+
+	/** Define a buffer. If the buffer is initialized at the same time it is
+	 * defined (as in a buffer parameter), then parameter init should be true.
+	 */
+	public void defineBuffer(AST defAST, AST idAST, AST tableAST, boolean init) {
+		JPNode idNode = (JPNode) idAST;
+		Table table = astTableLink(tableAST);
+		TableBuffer bufSymbol = currentScope.defineBuffer(idNode.getText(), table);
+		currSymbol = bufSymbol;
+		bufSymbol.setDefOrIdNode((JPNode)defAST);
+		idNode.setLink(JPNode.SYMBOL, bufSymbol);
+		if (init) {
+			BufferScope bufScope = currentBlock.getBufferForReference(bufSymbol);
+			idNode.setLink(JPNode.BUFFERSCOPE, bufScope);
+		}
+	} // defineBuffer()
+
+
+
+	/** Define an unnamed buffer which is scoped (symbol and buffer) to the trigger scope/block.
+	 * @param anode The RECORD_NAME node. Must already have the Table symbol linked to it.
+	 */
+	public void defineBufferForTrigger(AST tableAST) {
+		Table table = astTableLink(tableAST);
+		TableBuffer bufSymbol = currentScope.defineBuffer("", table);
+		currentBlock.getBufferForReference(bufSymbol); // Create the BufferScope
+		currSymbol = bufSymbol;
+	} // defineTriggerBuffer(AST anode)
+
+
+
+	public void defineTableField(AST idAST) {
+		JPNode idNode = (JPNode)idAST;
+		FieldBuffer fieldBuff = rootScope.defineTableField(idNode.getText(), currDefTable);
+		currSymbol = fieldBuff;
+		fieldBuff.setDefOrIdNode(idNode);
+		idNode.setLink(JPNode.SYMBOL, fieldBuff);
+	}
+
+
+
+	public void defineTableLike(AST tableAST) {
+		// Get table for "LIKE table"
+		Table table = astTableLink(tableAST);
+		// For each field in "table", create a field def in currDefTable
+		for ( Iterator it = table.getFieldSet().iterator() ; it.hasNext() ; ) {
+			rootScope.defineTableField(((Field)it.next()).getName(), currDefTable );
+		}
+	} // defineTableLike()
+	
+	
+	
+	private void defineTable(JPNode defNode, JPNode idNode, int storeType) {
+		TableBuffer buffer = rootScope.defineTable(idNode.getText(), storeType);
+		buffer.setDefOrIdNode(defNode);
+		currSymbol = buffer;
+		currDefTable = buffer;
+		idNode.setLink(JPNode.SYMBOL, buffer);
+	}
+
+
+
+	public void defineTemptable(AST defAST, AST idAST) {
+		defineTable((JPNode)defAST, (JPNode)idAST, IConstants.ST_TTABLE);
+	}
+
+
+
+	public void defineVariable(AST defAST, AST idAST) {
+		JPNode defNode = (JPNode) defAST;
+		JPNode idNode = (JPNode) idAST;
+		Variable variable = new Variable(idNode.getText(), currentScope);
+		variable.setDefOrIdNode(defNode);
+		currSymbol = variable;
+		currentScope.add(variable);
+		idNode.setLink(JPNode.SYMBOL, variable);
+	} // defineVariable()
+
+
+
+	public void defineWorktable(AST defAST, AST idAST) {
+		defineTable((JPNode)defAST, (JPNode)idAST, IConstants.ST_WTABLE);
+	}
+
+
+
+	/** Process a Field_ref node.
+	 * @param refAST The Field_ref node.
+	 * @param idAST The ID node.
+	 * @param contextQualifier What sort of reference is this? Read? Update? Etc.
+	 * @param 
+	 * @param whichTable For name resolution - which table must this be a field of?
+	 * Input 0 for any table, 1 for the lastTableReferenced, 2 for the prevTableReferenced.
+	 */
+	public void field(AST refAST, AST idAST, int contextQualifier, int whichTable) {
+		JPNode idNode = (JPNode) idAST;
+		JPNode refNode = (JPNode) refAST;
+		String name = idNode.getText();
+		FieldLookupResult result = null;
+
+		refNode.attrSet(IConstants.CONTEXT_QUALIFIER, contextQualifier);
+
+		// Check if this is a Field_ref being "inline defined"
+		// If so, we define it right now.
+		if (refNode.attrGet(IConstants.INLINE_VAR_DEF) == 1) defineVariable(idAST, idAST);
+
+		// Lookup the field, with special handling for FIELDS/USING/EXCEPT phrases	
+		if (whichTable == 0) {
+			boolean getBufferScope = (contextQualifier != CQ.SYMBOL);
+			result = currentBlock.lookupField(name, getBufferScope);
+		} else {
+			// If we are in a FIELDS phrase, then we know which table the field is from.
+			// The field lookup in Table expects an unqualified name.
+			String [] parts = name.split("\\.");
+			String fieldPart = parts[parts.length - 1];
+			TableBuffer ourBuffer = whichTable==2 ? prevTableReferenced : lastTableReferenced;
+			Field field = ourBuffer.getTable().lookupField(fieldPart);
+			if (field==null) throw new Error(
+					idNode.getFilename()
+					+ ":"
+					+ idNode.getLine()
+					+ " Unknown field or variable name: " + fieldPart
+					);
+			FieldBuffer fieldBuffer = ourBuffer.getFieldBuffer(field);
+			result = new FieldLookupResult();
+			result.field = fieldBuffer;
+		}
+
+		if (result == null) 
+			throw new Error(
+				idNode.getFilename()
+				+ ":"
+				+ idNode.getLine()
+				+ " Unknown field or variable name: " + name
+				);
+
+		if (result.isUnqualified)
+			refNode.attrSet(IConstants.UNQUALIFIED_FIELD, IConstants.TRUE);
+		if (result.isAbbreviated)
+			refNode.attrSet(IConstants.ABBREVIATED, IConstants.TRUE);
+		// Variable
+		if (result.variable != null) {
+			refNode.setLink(JPNode.SYMBOL, result.variable);
+			refNode.attrSet(IConstants.STORETYPE, IConstants.ST_VAR);
+			result.variable.noteReference(contextQualifier);
+		}
+		// Buffer attributes
+		if (result.bufferScope != null) {
+			refNode.setLink(JPNode.BUFFERSCOPE, result.bufferScope);
+		}
+		// Table field
+		if (result.field != null) {
+			refNode.setLink(JPNode.SYMBOL, result.field);
+			result.field.noteReference(contextQualifier);
+		}
+
+	} // field()
+
+
+
+	/** If this function definition did not list any parameters, but it had a
+	 * function forward declaration, then we use the block and scope from that
+	 * declaration, in case it is where the parameters were listed.
+	 */
+	protected void funcDef(AST funcAST, AST idAST) {
+		// If there are symbols (i.e. parameters, buffer params) already defined in
+		// this function scope, then we don't do anything.
+		if (	currentScope.getVariableSet().size() > 0
+			||	currentScope.getBufferSet().size() > 0
+			) return;
+		SymbolScope forwardScope = (SymbolScope) funcForwards.get(idAST.getText());
+		if (forwardScope==null) return;
+		scopeSwap(forwardScope);
+		((JPNode)funcAST).setLink(JPNode.BLOCK, currentBlock);
+	}
+
+
+
+	protected void funcForward(AST idAST) {
+		funcForwards.put(idAST.getText(), currentScope);
+	}
+
+
+
+	public ParseUnit getParseUnit() { return parseUnit; }
+
+
+	
+	// Shortcut to JPNode.getHandle()
+	protected int h(AST node) {
+		return ((JPNode)node).getHandle();
+	}
+
+
+
+	protected Block popBlock() {
+		blockStack.remove(blockStack.size()-1);
+		return (Block) blockStack.get(blockStack.size()-1);
+	}
+
+
+	public void procedureBegin(AST procNode, AST idNode){
+		SymbolScope definingScope = currentScope;
+		scopeAdd(procNode);
+		Routine r = new Routine(idNode.getText(), definingScope, currentScope);
+		definingScope.add(r);
+	}
+	
+	
+	public void procedureEnd(AST node){
+		scopeClose(node);
+	}
+
+	public void programRoot(AST rootAST) {
+		JPNode node = (JPNode) rootAST;
+		currentBlock = pushBlock(new Block(rootScope, node));
+		rootScope.setRootBlock(currentBlock);
+		node.setLink(JPNode.BLOCK, currentBlock);
+		parseUnit.setTopNode(node);
+		parseUnit.setRootScope(rootScope);
+	}
+
+
+
+	protected Block pushBlock(Block block) {
+		blockStack.add(block);
+		return block;
+	}
+
+
+
+	/** For a RECORD_NAME node, do checks and assignments for the TableBuffer. */
+	private void recordNodeSymbol(JPNode node, TableBuffer buffer) {
+		String nodeText = node.getText();
+		if (buffer == null)
+			throw new Error(
+				node.getFilename()
+				+ ":"
+				+ node.getLine()
+				+ " Could not resolve table: " + nodeText
+				);
+		Table table = buffer.getTable();
+		// If we get a mismatch between storetype here and the storetype determined
+		// by proparse.dll then there's a bug somewhere. This is just a double-check.
+		if (table.getStoretype() != node.attrGet(IConstants.STORETYPE) )
+			throw new Error(
+				node.getFilename()
+				+ ":"
+				+ node.getLine()
+				+ " Storetype mismatch between proparse.dll and treeparser01: "
+				+ nodeText
+				+ " " + node.attrGet(IConstants.STORETYPE)
+				+ " " + table.getStoretype()
+				);
+		prevTableReferenced = lastTableReferenced;
+		lastTableReferenced = buffer;
+		// For an unnamed buffer, determine if it's abbreviated.
+		// Note that named buffers, temp and work table names cannot be abbreviated.
+		if (buffer.isDefault() && table.getStoretype()==IConstants.ST_DBTABLE) {
+			String [] nameParts = nodeText.split("\\.");
+			int tableNameLen = nameParts[nameParts.length-1].length();
+			if (table.getName().length() > tableNameLen)
+				node.attrSet(IConstants.ABBREVIATED, 1);
+		}
+	} // recordNameBufferSymbol
+
+
+
+	/** Action to take at various RECORD_NAME nodes. */
+	public void recordNameNode(AST anode, int contextQualifier) {
+		JPNode node = (JPNode) anode;
+		node.attrSet(IConstants.CONTEXT_QUALIFIER, contextQualifier);
+		TableBuffer buffer = null;
+		switch (contextQualifier) {
+			case CQ.INIT :
+			case CQ.INITWEAK :
+			case CQ.REF :
+			case CQ.REFUP :
+			case CQ.UPDATING :
+			case CQ.BUFFERSYMBOL :
+				buffer = currentScope.getBufferSymbol(node.getText());
+				break;
+			case CQ.SYMBOL :
+				buffer = currentScope.lookupTableOrBufferSymbol(anode.getText());
+				break;
+			case CQ.TEMPTABLESYMBOL :
+				buffer = currentScope.lookupTempTable(anode.getText());
+				break;
+			case CQ.SCHEMATABLESYMBOL :
+				Table table = schema.lookupTable(anode.getText());
+				if (table!=null) buffer = currentScope.getUnnamedBuffer(table);
+				break;
+			default :
+				assert false;
+		}
+		recordNodeSymbol(node, buffer); // Does checks, sets attributes.
+		node.setLink(JPNode.SYMBOL, buffer);
+		switch (contextQualifier) {
+			case CQ.INIT :
+			case CQ.REF :
+			case CQ.REFUP :
+			case CQ.UPDATING :
+				node.setLink(
+					JPNode.BUFFERSCOPE
+					, currentBlock.getBufferForReference(buffer) );
+				break;
+			case CQ.INITWEAK :
+				node.setLink(
+					JPNode.BUFFERSCOPE
+					, currentBlock.addWeakBufferScope(buffer) );
+				break;
+		}
+		buffer.noteReference(contextQualifier);
+	} // recordNameNode
+	
+
+
+	public void scopeAdd(AST anode) {
+		JPNode node = (JPNode) anode;
+		currentScope = currentScope.addScope();
+		currentBlock = pushBlock(new Block(currentScope, node));
+		currentScope.setRootBlock(currentBlock);
+		node.setLink(JPNode.BLOCK, currentBlock);
+	} // scopeAdd()
+
+
+
+	protected void scopeClose(AST scopeRootNode) {
+		currentScope = currentScope.getParentScope();
+		blockEnd();
+	} // scopeClose()
+
+
+
+	/** In the case of a function definition that comes some time after a function
+	 * forward declaration, we want to use the scope that was created with the forward
+	 * declaration, because it is the scope that has all of the parameter definitions.
+	 * We have to do this because the definition itself may have left out the parameter
+	 * list - it's not required - it just uses the parameter list from the declaration.
+	 */
+	private void scopeSwap(SymbolScope scope) {
+		currentScope = scope;
+		blockEnd(); // pop the unused block from the stack
+		currentBlock = pushBlock(scope.getRootBlock());
+	}
+
+
+
+	/** It would be unusual to already have a ParseUnit before calling
+	 * TP01, since TP01 is usually the first tree parser and it (by default)
+	 * creates its own ParseUnit. However, after instantiating TP01, you can
+	 * assign your own ParseUnit before executing the tree parse.
+	 */
+	public void setParseUnit(ParseUnit parseUnit) { this.parseUnit = parseUnit; }
+
+	
+	
+	/** Create a "strong" buffer scope.
+	 * This is called within a DO FOR or REPEAT FOR statement.
+	 * @param anode Is the RECORD_NAME node. It must already have
+	 * the BufferSymbol linked to it.
+	 */
+	public void strongScope(AST anode) {
+		currentBlock.addStrongBufferScope((JPNode)anode);
+	}
+
+
+
+	public SymbolScopeRoot getRootScope(){
+		return rootScope;
+	}
+	
+	public SymbolScope getCurrentScope(){
+		return currentScope;
+	}
+	
+
+
+
+} // class TP01Support

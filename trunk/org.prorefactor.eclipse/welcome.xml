@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<welcomePage 
+	title="ProRefactor"
+	format="nowrap">
+
+	<intro>Welcome to ProRefactor</intro>
+
+
+
+<item><b>Documentation</b>
+All documentation is currently found at http://www.prorefactor.org/docs/.
+
+
+</welcomePage>

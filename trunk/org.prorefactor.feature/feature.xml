@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.prorefactor"
+      label="org.prorefactor"
+      version="1.2.3"
+      provider-name="ProRefactor.org"
+      plugin="org.prorefactor.eclipse">
+
+   <description url="http://www.prorefactor.org/">
+      ProRefactor.org - code analysis and refactoring for the Progress 4GL.
+   </description>
+
+   <copyright>
+      Copyright (C) 2002-2005 Joanju and others
+   </copyright>
+
+   <license url="license.html">
+      ProRefactor.org Software User Agreement
+29th December, 2004
+================
+Usage Of Content
+================
+PROREFACTOR.ORG MAKES AVAILABLE SOFTWARE, DOCUMENTATION, INFORMATION 
+AND/OR OTHER MATERIALS (COLLECTIVELY &quot;CONTENT&quot;). USE OF 
+THE CONTENT IS GOVERNED BY THE TERMS AND CONDITIONS OF THIS 
+AGREEMENT AND/OR THE TERMS AND CONDITIONS OF LICENSE AGREEMENTS
+OR NOTICES INDICATED OR REFERENCED BELOW. BY USING THE CONTENT,
+YOU AGREE THAT YOUR USE OF THE CONTENT IS GOVERNED BY THIS AGREEMENT 
+AND/OR THE TERMS AND CONDITIONS OF ANY APPLICABLE LICENSE AGREEMENTS 
+OR NOTICES INDICATED OR REFERENCED BELOW. IF YOU DO NOT AGREE
+TO THE TERMS AND CONDITIONS OF THIS AGREEMENT AND THE TERMS AND
+CONDITIONS OF ANY APPLICABLE LICENSE AGREEMENTS OR NOTICES INDICATED
+OR REFERENCED BELOW, THEN YOU MAY NOT USE THE CONTENT.
+===================
+Applicable Licenses
+===================
+Unless otherwise indicated, all Content made available by 
+ProRefactor.org is provided to you under the terms and conditions
+of the Eclipse Public License Version 1.0 (&quot;EPL&quot;). A copy
+of the EPL is provided with this Content and is also available
+at http://www.eclipse.org/legal/epl-v10.html. For purposes of
+the EPL, &quot;Program&quot; will mean the Content.
+
+Content includes, but is not limited to, source code, object
+code, documentation and other files maintained in the
+ProRefactor.org repository and made available as downloadable
+archives.
+   </license>
+
+   <requires>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.search"/>
+      <import plugin="org.eclipse.compare"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.jface"/>
+   </requires>
+
+   <plugin
+         id="org.prorefactor.core"
+         download-size="0"
+         install-size="0"
+         version="1.2.3"/>
+
+   <plugin
+         id="org.prorefactor.eclipse"
+         download-size="0"
+         install-size="0"
+         version="1.2.3"/>
+
+   <plugin
+         id="org.prorefactor.javadoc"
+         download-size="0"
+         install-size="0"
+         version="1.2.3"/>
+
+   <plugin
+         id="org.prorefactor.refactor"
+         download-size="0"
+         install-size="0"
+         version="1.2.3"/>
+
+   <plugin
+         id="org.prorefactor.antlr"
+         download-size="0"
+         install-size="0"
+         version="2.7.4"/>
+
+   <plugin
+         id="org.prorefactor.doc"
+         download-size="0"
+         install-size="0"
+         version="1.2.3"/>
+
+</feature>

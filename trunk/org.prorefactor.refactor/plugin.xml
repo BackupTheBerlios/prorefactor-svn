@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.prorefactor.refactor"
+   name="ProRefactor Refactorings"
+   version="1.2.3"
+   provider-name="ProRefactor.org"
+   class="">
+
+   <runtime>
+      <library name="refactor.jar">
+         <export name="*"/>
+         <packages prefixes="org.prorefactor"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.prorefactor.core" export="true"/>
+      <import plugin="org.eclipse.swt" export="true"/>
+      <import plugin="org.eclipse.jface" export="true"/>
+      <import plugin="org.eclipse.jface.text" export="true"/>
+   </requires>
+
+</plugin>

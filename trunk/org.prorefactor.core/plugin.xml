@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.prorefactor.core"
+   name="ProRefactor Core"
+   version="1.2.3"
+   provider-name="ProRefactor.org"
+   class="">
+
+   <runtime>
+      <library name="core.jar">
+         <export name="*"/>
+         <packages prefixes="org.prorefactor,com.joanju"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.junit" export="true"/>
+      <import plugin="org.prorefactor.antlr" export="true"/>
+   </requires>
+
+</plugin>

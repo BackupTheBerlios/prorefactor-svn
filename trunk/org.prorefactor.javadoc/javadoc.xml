@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ProRefactor" default="javadoc">
+  <target name="javadoc" description="Build javadoc dir">
+	  <javadoc 
+	           destdir="javadoc"
+	           source="1.4"
+	           author="true"
+	           version="true"
+	           use="true"
+	           classpath="../org.prorefactor.antlr/bin;../org.prorefactor.core/bin;../org.prorefactor.refactor/bin;../org.prorefactor.eclipse/bin;"
+	           windowtitle="ProRefactor">
+	    <fileset dir="../org.prorefactor.core/src" defaultexcludes="yes">
+	      <include name="**/*.java"/>
+	      <exclude name="org/prorefactor/treeparserbase/JPTreeParser**"/>
+	      <exclude name="org/prorefactor/treeparser01/TreeParser01**"/>
+	      <exclude name="org/prorefactor/treeparser02/TreeParser02**"/>
+	    </fileset>
+	    <fileset dir="../org.prorefactor.refactor/src" defaultexcludes="yes">
+	      <include name="**/*.java"/>
+	      <exclude name="org/prorefactor/treeparser03/TreeParser03**"/>
+	      <exclude name="org/prorefactor/refactor/tp04/TP04.java"/>
+	      <exclude name="org/prorefactor/refactor/tp04/TP04TokenTypes.java"/>
+	    </fileset>
+	    <fileset dir="../org.prorefactor.eclipse/src" defaultexcludes="yes">
+	      <include name="**/*.java"/>
+	    </fileset>
+	    <doctitle><![CDATA[<h1>ProRefactor</h1>]]></doctitle>
+	    <bottom><![CDATA[<i>Copyright &#169; 2002-2005 Joanju and others. All Rights Reserved.</i>]]></bottom>
+	    <tag name="todo" scope="all" description="To do:" />
+	  </javadoc>
+  </target>
+</project>

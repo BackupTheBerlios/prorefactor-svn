@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-Name: ProRefactor
+Bundle-SymbolicName: org.prorefactor.eclipse; singleton=true
+Bundle-Version: 1.2.3
+Bundle-ClassPath: eclipse.jar
+Bundle-Activator: org.prorefactor.eclipse.Plugin
+Bundle-Vendor: ProRefactor.org
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.jface.text;reprovide=true,
+ org.eclipse.ui.workbench.texteditor;reprovide=true,
+ org.eclipse.ui.editors;reprovide=true,
+ org.eclipse.core.resources;reprovide=true,
+ org.eclipse.ui;reprovide=true,
+ org.prorefactor.refactor;reprovide=true,
+ org.prorefactor.core;reprovide=true,
+ org.eclipse.search;reprovide=true,
+ org.eclipse.compare;reprovide=true,
+ org.eclipse.ui.ide;reprovide=true,
+ org.eclipse.ui.console;reprovide=true,
+ org.eclipse.core.runtime;reprovide=true,
+ org.prorefactor.doc,
+ org.eclipse.help
+Eclipse-AutoStart: true

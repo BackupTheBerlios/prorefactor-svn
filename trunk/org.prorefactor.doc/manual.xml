@@ -1,0 +1,1934 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+<book>
+  <bookinfo>
+    <title>ProRefactor</title>
+
+    <date>2005</date>
+
+    <author>
+      <firstname>John</firstname>
+
+      <surname>Green</surname>
+    </author>
+
+    <copyright>
+      <year>2004-2005</year>
+
+      <holder>Joanju and other ProRefactor.org Contributors</holder>
+    </copyright>
+  </bookinfo>
+
+  <chapter>
+    <title>Introduction</title>
+
+    <section>
+      <title>Computer Assisted Refactoring</title>
+
+      <para>Refactoring is the act of improving your source code without
+      changing its behavior. So - your business logic stays intact, but
+      something in the source code gets improved which makes it easier to work
+      with, more portable to other platforms, easier to translate, etc.
+      Automated refactoring tools are programmer productivity tools. They help
+      improve the speed and accuracy of performing specific
+      refactorings.</para>
+
+      <figure>
+        <title>Refactoring from string concatenation to single string with
+        <literal>SUBSTITUTE</literal></title>
+
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="screenshots/review_changes.jpg" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>Here we automate the transformation from string concatenation to
+      the use of a single string with <literal>SUBSTITUTE</literal>. This is
+      done because the full sentence in a single string is easier to translate
+      (for internationalization) than the sentence fragmented into two
+      strings. Joanju Proparse enables complex code transformations, where
+      context and semantics must be examined. These kinds of refactoring
+      cannot be done with simple search and replace tools. Refactoring
+      Toolkits such as ProRefactor are critical for making software "soft"
+      again, and are key to making agile development really work, maintenance
+      programming less expensive, etc.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Getting Started</title>
+
+    <section>
+      <title>Installing ProRefactor</title>
+
+      <para>ProRefactor is an Eclipse plug-in, and Eclipse provides a user
+      interface to make the installation and updates of plug-ins easy. If you
+      have ever used Eclipse's Feature Updates wizard in the past, then you
+      probably do not need to read this section at all.</para>
+
+      <section>
+        <title>Java</title>
+
+        <para>ProRefactor and Eclipse require a recent version of Java. Java
+        can be freely downloaded and installed from <ulink
+        url="http://java.sun.com/">java.sun.com</ulink>.</para>
+      </section>
+
+      <section>
+        <title>Eclipse</title>
+
+        <para>ProRefactor requires a recent version of Eclipse. Eclipse can be
+        freely downloaded and installed from <ulink
+        url="http://www.eclipse.org/">www.eclipse.org</ulink>.<note>
+            <para>ProRefactor creates a <filename>prorefactor</filename>
+            subdirectory in your Eclipse <emphasis>working
+            directory</emphasis>. Your project settings are stored there, and
+            ProRefactor writes various additional files and directories
+            there.</para>
+          </note></para>
+      </section>
+
+      <section>
+        <title>ProRefactor</title>
+
+        <para>Start Eclipse and choose <guimenuitem>Help &gt; Software Updates
+        &gt; Find and Install...</guimenuitem> and use the following URL:
+        <literal>http://prorefactor.org/update/</literal>. (If this does not
+        work as expected, see the ProRefactor.org web site for any news about
+        updates and installing ProRefactor into Eclipse.)</para>
+      </section>
+
+      <section>
+        <title>Linux and Unixes</title>
+
+        <para>The Proparse shared libraries are not distributed with
+        ProRefactor, and those must be installed separately. Proparse comes
+        with its own install notes, but there are a few additional items worth
+        mention with regards to ProRefactor. The shared libraries and the DLL
+        symlink may be installed into one of two places: either into the
+        org.prorefactor.core plug-in directory, or else into your
+        <literal>LD_LIBRARY_PATH</literal> (or equivalent). Since there is a
+        new org.prorefactor.core plug-in directory with each new ProRefactor
+        release, it probably only makes sense to install Proparse's shared
+        libraries into your <literal>LD_LIBRARY_PATH</literal>.</para>
+
+        <note>
+          <para>Linux provides a shared library loading mechanism via the
+          <filename>/etc/ld.so.conf</filename> file. This does not (at
+          present) work for loading shared libraries into Java or
+          Eclipse.</para>
+        </note>
+      </section>
+
+      <section>
+        <title>All Done</title>
+
+        <para>You should now be able to select the ProRefactor perspective
+        from Eclipse's <guimenu>Window</guimenu> menu.</para>
+      </section>
+    </section>
+
+    <section>
+      <title>Working with Projects</title>
+
+      <para>Users of most IDEs are familiar with the concept of a
+      <firstterm>project</firstterm>, but there are a few points of interest
+      which are unique to Eclipse projects and ProRefactor.</para>
+
+      <section>
+        <title>Project Nature</title>
+
+        <para>Eclipse projects may have one or more
+        <firstterm>natures</firstterm>. Because Eclipse is an IDE for many
+        types of development environments, it also recognizes that any
+        individual project could contain source code for two or more different
+        sorts of development environments, for example, both C++ and Java.
+        Each project nature describes various attributes for a project, such
+        as which project <firstterm>builders</firstterm> are available within
+        the project. (i.e. There would be a builder for compiling the C++
+        code, and a builder for compiling the Java code.)</para>
+
+        <para>ProRefactor provides its own project nature. Most of
+        ProRefactor's features are not available unless you are working with a
+        project which has the ProRefactor nature.</para>
+      </section>
+
+      <section>
+        <title>Create a ProRefactor Project</title>
+
+        <para>You can create a new Eclipse/ProRefactor project to refer to
+        your existing Progress source code by choosing <guimenuitem>File &gt;
+        New &gt; Project &gt; Progress &gt; ProRefactor
+        Project</guimenuitem>.</para>
+
+        <note>
+          <para>TODO: ProRefactor does not yet provide any method for adding
+          the ProRefactor nature to an existing project. Contact
+          ProRefactor.org if you need to be able to do this.</para>
+        </note>
+      </section>
+
+      <section id="sec_proj_config">
+        <title>Project Configuration</title>
+
+        <para>Select your ProRefactor project, and choose <guimenuitem>Project
+        &gt; Properties</guimenuitem>. Choose <guimenuitem>ProRefactor
+        Environment</guimenuitem> in the categories on the left of the dialog.
+        Do not enter any settings, because there is a way to have these
+        settings generated automatically for you.</para>
+
+        <tip>
+          <para>You can click the <guibutton>Apply</guibutton> button to force
+          ProRefactor to create the <filename>prorefactor</filename>
+          subdirectories in your Eclipse working directory.</para>
+        </tip>
+
+        <figure>
+          <title>ProRefactor Environment in Project Properties</title>
+
+          <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="screenshots/progress_settings.jpg" />
+              </imageobject>
+            </mediaobject>
+          </screenshot>
+        </figure>
+
+        <para>When you save the configuration settings for your project,
+        ProRefactor creates the following directories in your working
+        directory:</para>
+
+        <literallayout><filename>prorefactor/projects/<replaceable>your_project_name</replaceable></filename>
+<filename>prorefactor/settings</filename></literallayout>
+
+        <para>See <xref linkend="sec_configdump" /> for a program that can be
+        run from your Progress project environment in order to create the file
+        <filename>progress.settings</filename>, which should be placed in
+        <filename>prorefactor/projects/<replaceable>your_project_name</replaceable></filename>.
+        See the comments at the top of the program for <literal>RUN</literal>
+        parameters.</para>
+
+        <para>If you used <filename>configdump.p</filename> to generate your
+        project settings, have another look at the <guimenuitem>Project &gt;
+        Properties &gt; ProRefactor Environment</guimenuitem> page. Look for
+        any relative path references in your <envar>PROPATH</envar> setting -
+        they probably need to be changed to fully qualified paths.</para>
+
+        <para>See <xref linkend="sec_schemadump" /> for a program that can be
+        run from your Progress project environment in order to create the file
+        <filename>proparse.schema</filename>, which can be placed in
+        <filename>prorefactor/projects/<replaceable>your_project_name</replaceable></filename>.
+        It can also be placed in any arbitrary directory, and then you can
+        configure ProRefactor to find it there. This option exists so that
+        multiple workstations can all use a single shared
+        <filename>proparse.schema</filename> file on a local network. See the
+        comments at the top of the program for <literal>RUN</literal>
+        parameters.</para>
+      </section>
+    </section>
+  </chapter>
+
+  <chapter id="cha_user_interface">
+    <title>User Interface</title>
+
+    <para>This chapter reviews the general aspects of the user interface which
+    are not specific to any one refactoring feature. It also reviews user
+    interface features which are unrelated to refactoring.</para>
+
+    <section>
+      <title>Eclipse Workbench</title>
+
+      <para>It is beyond the scope of this document to describe the Eclipse
+      Workbench in any detail, however, a few quick notes and terms will make
+      the rest of this chapter more understandable if you are new to
+      Eclipse.</para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Workbench</term>
+
+          <listitem>
+            <para>Eclipse's Workbench is the entire Eclipse window and all of
+            its contents. You may on occasion have more than one workbench
+            active, but normally you would only work in one workbench at a
+            time.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Workspace</term>
+
+          <listitem>
+            <para>A workspace consists of the list of the list of projects and
+            settings that you see in your workbench.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Project</term>
+
+          <listitem>
+            <para>This term has the same meaning as most other IDEs. A project
+            has a single, top-most directory, which in turn contains all of
+            your project's sub-folders and files.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Resource</term>
+
+          <listitem>
+            <para>A resource in Eclipse is a project, a directory, or a file.
+            In simple terms, it is anything that you might see in the
+            Navigator view.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>View</term>
+
+          <listitem>
+            <para>Within the workbench window, you can find various frames
+            which are separated by movable splitter bars. In Eclipse, these
+            frames are called views. Access to most views is through a tabbed
+            interface. Examples of views are the Navigator view, the Outline
+            view, the Console view, and the Tasks view.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Editor</term>
+
+          <listitem>
+            <para>Editors in Eclipse treated differently than views. Multiple
+            editors can be open with a tabbed interface, and can be an
+            unlimited number of types of editors within your Eclipse
+            workbench. For example, there is an editor for plain text, there
+            is an editor for Java, and there is an editor for C++.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Perspective</term>
+
+          <listitem>
+            <para>A perspective describes an arrangement and visibility of the
+            various elements on the workbench. That includes the menus, button
+            bars, views, and editors. There are default perspectives for Java,
+            Java Debugging, for ProRefactor, and for many other plug-ins.
+            Although perspectives all come with a default layout, those
+            layouts can be modified. Eclipse remembers your layout
+            changes.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Plug-in</term>
+
+          <listitem>
+            <para>Eclipse uses a plug-in architecture. This means that the
+            Eclipse core is extremely small, and most of the elements that you
+            see on the Eclipse workbench are actually contributed by plug-ins
+            - even those elements of the workbench which are part of the basic
+            workbench. There are also plug-ins which are not part of the basic
+            workbench, and those include Java and C++ plug-ins which are part
+            of the Eclipse.org project, as well as third-party plug-ins such
+            as ProRefactor.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+
+    <section>
+      <title>Menus</title>
+
+      <para>ProRefactor contributes menus to various parts of the Eclipse
+      workbench. By default, these ProRefactor menus are only available when
+      you are in the ProRefactor perspective. In the main menu bar, across the
+      top of the workbench window, a <guimenu>ProRefactor</guimenu> menu is
+      available.</para>
+
+      <para>The ProRefactor plug-in contributes a
+      <firstterm>context</firstterm> sub-menu to the Navigator view. A context
+      menu is a pop-up menu which is available by using
+      right-mouse-click.</para>
+
+      <para>The ProRefactor plug-in also contributes a context menu to editors
+      such as Eclipse's Text Editor.</para>
+    </section>
+
+    <section>
+      <title>Operating on Many Resources</title>
+
+      <figure>
+        <title>Selecting multiple resources in the Navigator view</title>
+
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="screenshots/multi_select.jpg" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>Some features of ProRefactor are only available for a single
+      compile unit at a time. However, some features are capable of operating
+      on a selection of one or more resources, as selected in Eclipse's
+      Navigator view. In the Navigator view, you can select one or more files,
+      directories, projects, or any combination of these.</para>
+
+      <para>Once the desired resources have been selected, the Navigator
+      context menu shows what operations may be performed on those. There is a
+      ProRefactor sub-menu on the Navigator's context menu.</para>
+    </section>
+
+    <section>
+      <title>Expand and Contract Selection</title>
+
+      <graphic fileref="screenshots/expand_buttons.jpg" />
+
+      <para>Sometimes when viewing poorly formatted source code, it is
+      difficult to find where a block begins and ends. ProRefactor provides a
+      feature which can help.</para>
+
+      <para>ProRefactor contributes two buttons to the button bar which are
+      called <guibutton>Expand Selection</guibutton> and <guibutton>Contract
+      Selection</guibutton>. These actions are also available from the
+      editor's context menu. This feature only works on source files which can
+      be compiled. (i.e. It does not currently work within an include file if
+      that file can not be compiled on its own.)</para>
+
+      <para>Simply place your cursor in the editor anywhere within the block
+      of code that you are interested in, and choose <guibutton>Expand
+      Selection</guibutton>. ProRefactor will parse the file, and then select
+      some of the text in the editor around where your cursor was
+      placed.</para>
+
+      <para>Expand and Contract Selection selects text by finding the begin
+      and end points for the source code for a node in Proparse's syntax tree.
+      By choosing <guibutton>Expand Selection</guibutton> repeatedly, you can
+      climb the nodes in the syntax tree until you have selected the text for
+      the code block that you are interested in.</para>
+    </section>
+
+    <section>
+      <title>Parse</title>
+
+      <para>The menu item <guimenuitem>Parse</guimenuitem> can be found on the
+      main menu under <guimenu>ProRefactor</guimenu>, as well as on the
+      Navigator view's <guimenu>ProRefactor</guimenu> context menu. This
+      causes ProRefactor to parse the selected resource(s). For example, you
+      can select your entire project (or multiple projects), and choose
+      <guimenuitem>Parse</guimenuitem> in order to parse all of the compile
+      units in those projects.</para>
+
+      <note>
+        <para>ProRefactor considers <filename>.p</filename> and
+        <filename>.w</filename> files to be compile units. This may be
+        configurable in future versions.</para>
+      </note>
+
+      <para>ProRefactor stores information about your compile units, and it
+      uses this information to determine if the compile unit needs to be
+      re-parsed. It does this by checking the time stamps on the compile unit
+      and all the include files that it references.</para>
+    </section>
+
+    <section id="sec_output_directory">
+      <title>Output Directory</title>
+
+      <para>Most of the refactorings in ProRefactor make use of a
+      <quote>wizard</quote> style of interface, with one or more pages to be
+      reviewed before launching.</para>
+
+      <para>Some of the refactorings, especially those which process any
+      number of resources, write their results out to a temporary
+      directory.</para>
+
+      <figure>
+        <title>The Output Directory wizard page</title>
+
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="screenshots/out_dir_page.jpg" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>The target directory that you select must exist, and it must be
+      empty. Choosing the <guibutton>Browse</guibutton> button presents you
+      with a dialog from which you can choose or create a directory.</para>
+
+      <para>Typically, once the refactoring has been completed, you will want
+      to review the newly changed code before copying it into your project
+      directory. See <xref linkend="sec_directory_diff" /> for some free tools
+      which ease the process of reviewing many changes.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Catalog of Refactorings</title>
+
+    <section>
+      <title>Names Refactoring (tables and fields)</title>
+
+      <para>This refactoring is intended to be used as part of a legacy code
+      clean-up project. It is unlikely to be used on a day-to-day
+      basis.</para>
+
+      <para>This refactoring allows you to automatically:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>set the case on table and field names to uppercase or
+          lowercase</para>
+        </listitem>
+
+        <listitem>
+          <para>add the table name qualifier to unqualified field names</para>
+        </listitem>
+
+        <listitem>
+          <para>expand abbreviated table and field names</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Usage</title>
+
+        <orderedlist>
+          <listitem>
+            <para>In the Navigator view, select the files, directories, and/or
+            projects to be refactored.</para>
+          </listitem>
+
+          <listitem>
+            <para>From the Navigator view's context menu, choose
+            <guimenuitem>ProRefactor &gt; Names (table and field)
+            Refactoring</guimenuitem>.</para>
+          </listitem>
+
+          <listitem>
+            <para>The Names Refactoring wizard will be presented, where you
+            are required to choose an empty output directory for the source
+            code that gets changed. See <xref
+            linkend="sec_output_directory" />.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>This refactoring checks if an include file is changed multiple
+        times for multiple compile units. If the changes are different for
+        different compile units, then the include file is not written to the
+        output directory, and warning messages are issued.</para>
+      </section>
+
+      <section>
+        <title>Example Output</title>
+
+        <para>Using "sports2000" schema, we automatically refactored
+        this:</para>
+
+        <programlisting>FIND FIRST CUST.
+DISPLAY BAL.</programlisting>
+
+        <para>into this:</para>
+
+        <programlisting>FIND FIRST customer.
+DISPLAY customer.balance.</programlisting>
+      </section>
+    </section>
+
+    <section>
+      <title>NO-UNDO Refactoring</title>
+
+      <para>This refactoring is intended to be used as part of a legacy code
+      modernization project. It is unlikely to be used on a day-to-day
+      basis.</para>
+
+      <para>Although most Progress programmers recognize that
+      <literal>NO-UNDO</literal> is important for application performance, it
+      is not unusual to find legacy applications where
+      <literal>NO-UNDO</literal> was not consistently added to
+      <literal>DEFINE</literal> statements. This refactoring is intended to be
+      run as a single pass through old code, in order to correct those
+      statements.</para>
+
+      <section>
+        <title>Usage</title>
+
+        <orderedlist>
+          <listitem>
+            <para>In the Navigator view, select the files, directories, and/or
+            projects to be refactored.</para>
+          </listitem>
+
+          <listitem>
+            <para>From the Navigator view's context menu, choose
+            <guimenuitem>ProRefactor &gt; NO-UNDO
+            Refactoring</guimenuitem>.</para>
+          </listitem>
+
+          <listitem>
+            <para>The NO-UNDO Refactoring wizard will be presented, where you
+            are required to choose an empty output directory for the source
+            code that gets changed. See <xref
+            linkend="sec_output_directory" />.</para>
+          </listitem>
+        </orderedlist>
+      </section>
+
+      <section>
+        <title>Features</title>
+
+        <para>This NO-UNDO refactoring has a few features which are worthy of
+        note.</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>It does not add NO-UNDO to DEFINE statements which are
+            preceded by a "prolint nowarn" directive.</para>
+          </listitem>
+
+          <listitem>
+            <para>It does not add NO-UNDO to DEFINE statements which have a
+            comment containing the string "undo".</para>
+          </listitem>
+
+          <listitem>
+            <para>It does not add NO-UNDO to DEFINE statements where that
+            variable being defined is assigned or otherwise updated and then
+            explicitly undone by an UNDO statement. See the code below for an
+            example.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>These features work nicely with <link
+        linkend="sec_prolint">Prolint</link>. If ProRefactor's NO-UNDO
+        Refactoring does not add NO-UNDO to a DEFINE statement, for whatever
+        reason, Prolint will continue to warn about that DEFINE statement
+        until you explicitly tell Prolint that it is intentional with a
+        prolint-nowarn directive. (Or else of course you might review the code
+        and decide to add NO-UNDO by hand.) Here is a snippet of code which is
+        the output from the unit test used for the NO-UNDO refactoring. All of
+        the NO-UNDO options on DEFINE statements were added by the NO-UNDO
+        refactoring, but more interesting is to note where the NO-UNDO
+        refactoring did <emphasis>not</emphasis> add NO-UNDO.</para>
+
+        <programlisting>/* n o - u n d o . p
+ * This file contains tests for our  N O - U N D O  refactoring.
+ * IMPORTANT!! Comments containing "u n d o" (without the spaces)
+ * have an impact on the refactoring's behaviour!
+ */
+
+
+{&amp;_proparse_ prolint-nowarn(noundo)}
+DEFINE VARIABLE myInt AS INTEGER.
+
+PROCEDURE myProc1:
+  DEFINE INPUT PARAMETER p1 AS LOGICAL NO-UNDO.
+END.
+
+PROCEDURE myProc2 EXTERNAL "whatever.dll":
+  DEFINE INPUT PARAMETER p2 AS LONG.
+END.
+
+
+/* Test for  U N D O  statement. */
+DEFINE VARIABLE myChar AS CHARACTER.
+DEFINE VARIABLE myChar2 AS CHARACTER NO-UNDO.
+DEFINE VARIABLE myChar3 AS CHARACTER NO-UNDO.
+DO:
+  myChar3 = "".
+  DO:
+    myChar = "".
+    UNDO, LEAVE.
+    myChar2 = "".
+  END.
+END.
+
+
+/* U N D O  statement tests for named block and OUTPUT val */
+DEFINE VARIABLE myChar10 AS CHARACTER.
+DEFINE VARIABLE myChar11 AS CHARACTER.
+my-block:
+DO:
+  RUN changeVal(OUTPUT myChar10).
+  DO:
+    RUN changeVal(OUTPUT myChar11).
+    UNDO my-block, LEAVE.
+  END.
+END.
+
+PROCEDURE changeVal:
+  DEFINE OUTPUT PARAMETER changed AS CHARACTER NO-UNDO.
+END.
+
+
+/* This should remain UNDO */
+DEFINE VARIABLE c1 AS CHARACTER.
+
+/* This var should be UNDO           */
+/* with this two line comment.       */
+DEFINE VARIABLE c2 AS CHARACTER.
+
+DEFINE /* UNDOable */ VARIABLE c3 AS CHARACTER.
+
+DEFINE VARIABLE c4 AS CHARACTER. /* not no-undo */
+
+/* This comment does not change UNDO for the next define,
+   because of the blank line between the comment and the statement.
+*/
+
+DEFINE VARIABLE c5 AS CHARACTER NO-UNDO.
+
+DEFINE VARIABLE c6 AS CHARACTER NO-UNDO.
+/* Comment on line after does not change UNDO for previous statement. */</programlisting>
+      </section>
+    </section>
+
+    <section>
+      <title>Rename Schema Refactoring</title>
+
+      <para>This refactoring finds and changes all hard-coded references to
+      database table and fields that you want to rename. You select the
+      projects or directories that you want to change, input a list of old and
+      new names, and the refactoring writes the modified files to an output
+      directory which you can review before merging the changes into your
+      source.</para>
+
+      <section>
+        <title>Usage</title>
+
+        <orderedlist>
+          <listitem>
+            <para>In the Navigator view, select the files, directories, and/or
+            projects to be refactored.</para>
+          </listitem>
+
+          <listitem>
+            <para>From the Navigator view's context menu, choose
+            <guimenuitem>ProRefactor &gt; Rename Schema</guimenuitem>.</para>
+          </listitem>
+
+          <listitem>
+            <para>The Rename Schema Refactoring wizard is presented. Input a
+            list of old and new name pairs into the editor, or else enter the
+            name of a file which contains old and new name pairs.</para>
+          </listitem>
+
+          <listitem>
+            <para>This refactoring writes the modified files out to a
+            temporary directory of your choice. See <xref
+            linkend="sec_output_directory" />.</para>
+          </listitem>
+        </orderedlist>
+
+        <figure>
+          <title>The Rename Schema Wizard</title>
+
+          <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="screenshots/rename_schema_page.jpg" />
+              </imageobject>
+            </mediaobject>
+          </screenshot>
+        </figure>
+      </section>
+
+      <section>
+        <title>Features</title>
+
+        <itemizedlist>
+          <listitem>
+            <para>Is not fooled by buffer names or by abbreviated table or
+            field names.</para>
+          </listitem>
+
+          <listitem>
+            <para>Name qualifiers (db.table, table.field, db.table.field) are
+            retained during the change.</para>
+          </listitem>
+
+          <listitem>
+            <para>A table can be renamed at the same time that fields in that
+            table are renamed.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section>
+        <title>Caveats</title>
+
+        <itemizedlist>
+          <listitem>
+            <para>Database name changes are not supported (logical, alias, or
+            otherwise).</para>
+          </listitem>
+
+          <listitem>
+            <para>Buffer names are not changed.</para>
+          </listitem>
+
+          <listitem>
+            <para>Once this refactor is complete, and you have merged the
+            results into your code, you should use a grep tool to find any
+            remaining old name references in comments, strings, and
+            preprocessor directives. Also consider any dynamic queries where
+            you may be deriving the strings from external sources.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section>
+        <title>Example</title>
+
+        <para>Here is an example renaming list:</para>
+
+        <programlisting>sports2000.customer client
+sports2000.customer.name legalName
+sports2000.invoice.amount totalAmount</programlisting>
+
+        <para>Here is the code before refactoring:</para>
+
+        <programlisting>find first customer.
+display customer.name.
+display cust.na.
+display customer except name.
+display customer.creditLimit.
+
+find first invoice.
+display invoice.amount.
+display invoice except amount.
+
+def buffer bCustomer for customer.
+find first bCustomer.
+display bCustomer.name.
+display bCustomer except name.
+display bCustomer.creditLimit.
+
+def buffer bInvoice for invoice.
+find first bInvoice.
+display bInvoice.amount.
+display bInvoice except amount.</programlisting>
+
+        <para>Here is the code after Rename Schema refactoring has been
+        run:</para>
+
+        <programlisting>find first Client.
+display Client.legalName.
+display Client.legalName.
+display Client except legalName.
+display Client.creditLimit.
+
+find first invoice.
+display invoice.totalAmount.
+display invoice except totalAmount.
+
+def buffer bCustomer for Client.
+find first bCustomer.
+display bCustomer.legalName.
+display bCustomer except legalName.
+display bCustomer.creditLimit.
+
+def buffer bInvoice for invoice.
+find first bInvoice.
+display bInvoice.totalAmount.
+display bInvoice except totalAmount.</programlisting>
+      </section>
+    </section>
+
+    <section>
+      <title>SUBSTITUTE Refactoring</title>
+
+      <para>This refactoring is intended to be used as part of a legacy code
+      modernization project. It is unlikely to be used on a day-to-day
+      basis.</para>
+
+      <para>This feature assists in the transformation from string
+      concatenation to the use of a single string with
+      <literal>SUBSTITUTE</literal>. This is done because the full sentence in
+      a single string is easier to translate (for internationalization) than
+      the sentence fragmented into two strings.</para>
+
+      <figure id="fig_review_changes2">
+        <title>The <literal>SUBSTITUTE</literal> Refactoring in action</title>
+
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="screenshots/review_changes2.jpg" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <orderedlist>
+        <listitem>
+          <para>In the Navigator view, select the files, directories, and/or
+          projects to be refactored.</para>
+        </listitem>
+
+        <listitem>
+          <para>From the Navigator view's context menu, choose
+          <guimenuitem>ProRefactor &gt; SUBSTITUTE
+          Refactoring</guimenuitem>.</para>
+        </listitem>
+
+        <listitem>
+          <para>ProRefactor will parse the selected resources, and find any
+          string concatenations which might require refactoring. It will
+          present the suspect code in a dialog box similar to that shown in
+          <xref linkend="fig_review_changes2" />.</para>
+        </listitem>
+
+        <listitem>
+          <para>Review, and then accept or reject the code change. You may
+          make manual changes to the source code before accepting the
+          changes.</para>
+        </listitem>
+      </orderedlist>
+
+      <note>
+        <para>In some cases, ProRefactor may be unable to automatically
+        suggest changes to the source code. You will be informed of this by a
+        message, and you will be able to make the code change by hand if
+        desired.</para>
+      </note>
+
+      <para>In the <guilabel>Review Changes</guilabel> dialog, the
+      <guibutton>Cancel</guibutton> button will reject the current changes and
+      stop any further processing.</para>
+    </section>
+
+    <section>
+      <title>Qualify Fields Refactoring</title>
+
+      <para>Generally, using unqualified field names is not viewed as "best
+      practice" for 4gl developers. There are a number of pitfalls in using
+      unqualified field names, one of the most significant is that when moving
+      code around you can accidentally change which buffers are being
+      implicitly used for the unqualified fields. This can lead to bugs that
+      are rather difficult to track down.</para>
+
+      <para>ProRefactor has the semantic and contextual knowledge necessary to
+      determine which buffer name is being implicitly used for unqualified
+      field names. This refactoring finds unqualified field names in the
+      current file (must be a compilable file) and adds the appropriate table
+      or buffer names.</para>
+
+      <section>
+        <title>Usage</title>
+
+        <orderedlist>
+          <listitem>
+            <para>This refactoring operates on the currently selected file or
+            the file that is currently open in an editor. The file must be
+            compilable.</para>
+          </listitem>
+
+          <listitem>
+            <para>From the main menu, choose <guimenuitem>ProRefactor &gt;
+            Qualify Field Names</guimenuitem>. The preview dialog appears,
+            allowing you to accept or reject the changes.</para>
+          </listitem>
+        </orderedlist>
+
+        <figure>
+          <title>Qualify Fields Preview</title>
+
+          <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="screenshots/qualify_fields_preview.jpg" />
+              </imageobject>
+            </mediaobject>
+          </screenshot>
+        </figure>
+      </section>
+
+      <section>
+        <title>Features</title>
+
+        <para>This refactoring recognizes FIELDS, EXCEPT, and USING phrases,
+        and does not qualify field names within those.</para>
+      </section>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Extending ProRefactor</title>
+
+    <para>This chapter describes how to load ProRefactor source into an
+    Eclipse workspace, so that you can use it and reference it from your own
+    projects.</para>
+
+    <para>Experience programming in Java with Eclipse's IDE is not necessary,
+    but since this document glosses over a few details, it would be helpful if
+    you were at familiar with the workbench menu items and basics of the IDE
+    such as creating a Java project.</para>
+
+    <section>
+      <title>Prepare Your Eclipse Workspace</title>
+
+      <orderedlist>
+        <listitem>
+          <para>If you don't want to pollute your existing workspace, start
+          Eclipse with an empty workspace (use: <option>-data
+          <replaceable>new_workspace_location</replaceable></option> on the
+          command line).</para>
+        </listitem>
+
+        <listitem>
+          <para>We make use of the Java version 1.4 <literal>assert</literal>
+          statement. In <guimenuitem>Window &gt; Preferences &gt; Java &gt;
+          Compiler &gt; Compliance</guimenuitem>, set source and class
+          compatibility to version 1.4. While in Java preferences, also go to
+          <guilabel>Installed JREs</guilabel>, and edit your default JRE. Add
+          <option>-ea -Xss2M</option> to the default VM args. This enables
+          assertions, and sets the stack size to be large enough for
+          recursively descending large syntax trees.</para>
+        </listitem>
+
+        <listitem>
+          <para>Switch to the Java perspective.</para>
+        </listitem>
+
+        <listitem>
+          <para>Choose <guimenuitem>File &gt; Import... &gt; External Plug-ins
+          and Fragments</guimenuitem>.</para>
+        </listitem>
+
+        <listitem>
+          <para>All of the defaults should be fine for the first page. You
+          want to import from the target platform, all plug-ins and fragments,
+          binary projects with linked content. Click
+          <guibutton>Next</guibutton>.</para>
+        </listitem>
+
+        <listitem>
+          <para>On the <guilabel>Selection</guilabel> page add all
+          <literal>org.eclipse</literal> and the <literal>org.junit</literal>
+          plug-ins. Do not select the <literal>org.prorefactor.*</literal>
+          plug-ins. We will come back to those.</para>
+        </listitem>
+
+        <listitem>
+          <para>Click <guibutton>Finish</guibutton>. The plug-ins will be
+          imported into binary projects and their build class paths
+          initialized. You can now browse and search the full Eclipse
+          source.</para>
+        </listitem>
+
+        <listitem>
+          <para>Switch to the Package Explorer view. Most of the time, you
+          don't want to see the binary projects. Select
+          <guimenuitem>Filters</guimenuitem> from the Package Explorer view
+          pull-down menu. Select <guilabel>Binary plug-in and feature
+          projects</guilabel> in the subsequent dialog. If you started Eclipse
+          in a clean workspace, the Package Explorer will be empty after you
+          invoke the filter because you haven't created any source plug-in
+          projects yet.</para>
+        </listitem>
+
+        <listitem>
+          <para>One thing to keep in mind when you install a new version of
+          Eclipse (or ProRefactor.org plug-ins): Do not forget to re-import
+          the plug-ins. To do so, click the <guibutton>Existing Binary
+          Projects</guibutton> button on the import wizard's plug-in selection
+          page. This will replace your existing binary projects with the code
+          for the new versions.</para>
+        </listitem>
+      </orderedlist>
+
+      <para>You now have two choices for importing ProRefactor source. If you
+      want read-only access to ProRefactor, then follow the steps under <link
+      linkend="sec_import_source">"Option One"</link>, below. If you want
+      access to the version control repository, then follow the steps under
+      <link linkend="sec_checkout_source">"Option Two"</link>, below.</para>
+    </section>
+
+    <section id="sec_import_source">
+      <title>Option One: Import ProRefactor Plug-in Source</title>
+
+      <para>This option assumes that you have installed ProRefactor into
+      Eclipse.</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Choose <guimenuitem>File &gt; Import... &gt; External Plug-ins
+          and Fragments</guimenuitem>.</para>
+        </listitem>
+
+        <listitem>
+          <para>This time, you want to import the projects with source
+          folders, rather than just a binary with linked content.</para>
+        </listitem>
+
+        <listitem>
+          <para>Select the <literal>org.prorefactor.*</literal> plug-ins, and
+          click <guibutton>Finish</guibutton>.</para>
+        </listitem>
+
+        <listitem>
+          <para>If you started from a clean workspace, the only projects
+          visible in the Package Explorer should now be the ProRefactor.org
+          projects which contain source code. You can browse and search the
+          source in those projects.</para>
+        </listitem>
+
+        <listitem>
+          <para>In <guimenuitem>Window &gt; Preferences &gt; Java &gt;
+          Compiler &gt; Installed JRE</guimenuitem>s, edit your default JRE.
+          Add
+          <option>-Djava.library.path=<replaceable>/your/path</replaceable></option>
+          to the default VM args, where
+          <filename><replaceable>/your/path</replaceable></filename> is the
+          jpplus plug-in directory (which is where
+          <filename>proparse.dll</filename> and
+          <filename>proparse_jni.dll</filename> can be found).</para>
+        </listitem>
+      </orderedlist>
+    </section>
+
+    <section id="sec_checkout_source">
+      <title>Option Two: Checkout ProRefactor from Subversion</title>
+
+      <para>For this option, it is not necessary to have installed ProRefactor
+      into Eclipse. You will need to follow the links from the ProRefactor.org
+      web site to gain access to the development project and
+      repository.</para>
+
+      <para>ProRefactor's source is stored in a <ulink
+      url="http://subversion.tigris.org/">Subversion</ulink> repository. Here,
+      we will assume that you will use the <ulink
+      url="http://subclipse.tigris.org/">Subclipse</ulink> plug-in to Eclipse
+      for Subversion repository access, but other options are available from
+      the Subversion web site.</para>
+
+      <para>XXXXX This all needs to change.</para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Step 1. Use Subclipse to Access the Repository</term>
+
+          <listitem>
+            <orderedlist>
+              <listitem>
+                <para>First install the Subclipse Eclipse plug-in. The
+                installation directions are on their web site of course, but
+                as of this writing, the directions are simply: <quote>Add
+                http://subclipse.tigris.org/update as an update site in
+                Eclipse's update manager (which you can find in the Help
+                menu).</quote></para>
+              </listitem>
+
+              <listitem>
+                <para>Switch to the SVN Repository Exploring
+                perspective.</para>
+              </listitem>
+
+              <listitem>
+                <para>Right click on the SVN Repository view to get the pop-up
+                menu, and choose <guimenuitem>New &gt; Repository
+                Location</guimenuitem>. Enter the details for your access to
+                the project repository.</para>
+              </listitem>
+            </orderedlist>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Step 2. Check Out Antlr</term>
+
+          <listitem>
+            <orderedlist>
+              <listitem>
+                <para>Select <literal>antlr</literal> in the Subclipse
+                repository browser. From the pop-up menu, choose
+                <guimenuitem>Check Out As... &gt; Java Project</guimenuitem>.
+                Use separate source and output folders. Click
+                <guibutton>Finish</guibutton>. Once you click Finish, there
+                appears to be a bug in Subversion's project creation; a dialog
+                appears warning that the resource already exists, delete it?
+                Just click <guibutton>OK</guibutton>, and the project will be
+                created by Subversion. Be patient, as the initial check out
+                can take a while.</para>
+              </listitem>
+
+              <listitem>
+                <para>Switch to the Java perspective. Open the
+                <literal>antlr</literal> project properties dialog. Select
+                <guilabel>Java Build Path</guilabel>, and the
+                <guilabel>Libraries</guilabel> tab. Click the <guibutton>Add
+                Library</guibutton> button, and select <guilabel>Required
+                Plug-ins</guilabel>. Click <guibutton>Next</guibutton> and
+                then click <guibutton>Finish</guibutton>. Click
+                <guibutton>OK</guibutton> to close the Preferences dialog.
+                (This is necessary for the rest of the projects, but for the
+                Antlr project, we only do this to force a change and force the
+                <filename>.classpath</filename> file to be written out, so
+                that the project will compile. There appears to be a bug in
+                Subclipse in this regard.)</para>
+              </listitem>
+
+              <listitem>
+                <para>Once you have finished configuring the project, Eclipse
+                will build the project (Eclipse default behavior is to build
+                automatically). There will be some warnings, but there should
+                be no errors.</para>
+              </listitem>
+            </orderedlist>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Step 3. Check Out JPPlus</term>
+
+          <listitem>
+            <orderedlist>
+              <listitem>
+                <para>Check out <literal>jpplus</literal> from the Subversion
+                repository, again as a Java project.</para>
+              </listitem>
+
+              <listitem>
+                <para>Switch to the Java perspective. Open the
+                <literal>jpplus</literal> project properties dialog. Select
+                <guilabel>Java Build Path</guilabel>, and the
+                <guilabel>Libraries</guilabel> tab. Click the <guibutton>Add
+                Library</guibutton> button, and add <guilabel>Required
+                Plug-ins</guilabel>.</para>
+              </listitem>
+
+              <listitem>
+                <para>Once you have finished configuring the jpplus project,
+                Eclipse will build the project (Eclipse default behavior is to
+                build automatically). There will be some warnings, but there
+                should be no errors.</para>
+              </listitem>
+
+              <listitem>
+                <para>In <guilabel>Window &gt; Preferences &gt; Java &gt;
+                Installed JREs</guilabel>, edit your default JRE. Add:
+                <option>-Djava.library.path=<replaceable>/your/path</replaceable></option>
+                to the default VM args, where
+                <replaceable>/your/path</replaceable> is your jpplus project
+                directory, where <filename>proparse.dll</filename> and
+                <filename>proparse_jni.dll</filename> can be found.</para>
+              </listitem>
+
+              <listitem>
+                <para>Now you can run the regression tests. Navigate to
+                <filename>org.prorefactor.core.unittest.AllJPPlusTests.java</filename>,
+                and run it as a JUnit test. There should be no
+                failures.</para>
+              </listitem>
+            </orderedlist>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Step 4. Check Out RefactorPack</term>
+
+          <listitem>
+            <orderedlist>
+              <listitem>
+                <para>Check out <literal>refactorpack</literal> from the
+                Subversion repository, again as a Java project.</para>
+              </listitem>
+
+              <listitem>
+                <para>Switch to the Java perspective. Open the refactorpack
+                project properties dialog. Select <guilabel>Java Build
+                Path</guilabel>, and the <guilabel>Libraries</guilabel> tab.
+                Click the <guibutton>Add Library</guibutton> button, and add
+                <guilabel>Required Plug-ins</guilabel>. The project should now
+                build cleanly, and
+                <filename>org.prorefactor.refactor.unittest.AllRefactorpackTests.java</filename>
+                (a JUnit test) should run cleanly.</para>
+              </listitem>
+            </orderedlist>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Step 5. Check Out ProRefactor</term>
+
+          <listitem>
+            <orderedlist>
+              <listitem>
+                <para>Check out the <literal>prorefactor</literal> project
+                from the Subversion repository, again as a Java
+                project.</para>
+              </listitem>
+
+              <listitem>
+                <para>Switch to the Java perspective. Open the prorefactor
+                project properties dialog. Select <guilabel>Java Build
+                Path</guilabel>, and the <guilabel>Libraries</guilabel> tab.
+                Click the <guibutton>Add Library</guibutton> button, and add
+                <guilabel>Required Plug-ins</guilabel>. You don't need to
+                select any projects individually - you can just click
+                <guibutton>Finish</guibutton>. The project should now build
+                cleanly.</para>
+              </listitem>
+
+              <listitem>
+                <para>To launch the Run-time Workbench, choose
+                <guimenuitem>Run &gt; Run As &gt; Run-time
+                Workbench</guimenuitem>. From the Run-time Workbench, you
+                should be able to select the ProRefactor perspective, create
+                test projects, and launch the ProRefactor menu actions. Here
+                is where you would test any changes or additions that you make
+                to ProRefactor or your own plug-ins.</para>
+              </listitem>
+            </orderedlist>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+
+    <section>
+      <title>Building Tree Parsers</title>
+
+      <para>We use Ant to do the build, but Ant has to be able to find Antlr.
+      Choose <guilabel>Window &gt; Preferences &gt; Ant &gt; Runtime &gt;
+      Classpath</guilabel>. Select <guilabel>Global Entries</guilabel>. Add
+      the <filename>bin</filename> directory of your antlr project if you are
+      working with the Subversion repository source, or add the
+      <filename>plugins/org.prorefactor.antlr/antlr.jar</filename> file
+      otherwise. Ignore the warning about <quote>tools.jar</quote>.</para>
+
+      <para>There is additional post-processing which must be done after Antlr
+      has generated the source for the tree parser. Because of this, a little
+      bit of careful configuration of the launch configuration for
+      <filename>build.xml</filename> is required. If you look at the source
+      for <filename>build.xml</filename> (for example, look at the package
+      <literal>org.prorefactor.treeparserbase</literal>), you will see that
+      after Antlr is launched, a <classname>PostProcessor</classname> class is
+      called. The Java/Ant session must have that
+      <classname>PostProcessor</classname> in its class path.</para>
+
+      <para>Select the <filename>build.xml</filename> file, right-click,
+      choose <guimenuitem>Run &gt; Ant Build...</guimenuitem> to get the
+      properties dialog.</para>
+
+      <para>In the <guilabel>Classpath</guilabel> tab, choose the
+      <guibutton>Add Folders...</guibutton> button, and add the
+      <filename>jpplus/bin</filename> folder.</para>
+
+      <para>Leave the JRE set to launch a separate JRE. Running from the same
+      JRE as the workspace does not set up the class path correctly for our
+      needs.</para>
+
+      <para>Also in the same properties dialog, choose the
+      <guilabel>Refresh</guilabel> tab, and enable the automatic refresh of
+      the containing folder. Now when you choose <guimenuitem>Run &gt; Ant
+      Build</guimenuitem>, the refresh and re-compile will be done
+      automatically.</para>
+    </section>
+
+    <section>
+      <title>Your Own Plugin</title>
+
+      <para>This section describes how to create your own plugin, in order to
+      add your own tools to the Eclipse workbench. It briefly describes in
+      general terms how to contribute menus and actions to an Eclipse
+      workbench, and it also gives a few initial pointers for creating menu
+      actions which use Proparse and the ProRefactor class libraries.</para>
+
+      <para>This section assumes that you have followed the steps in the
+      previous sections in this chapter.</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Choose <guimenuitem>File &gt; New &gt; Project &gt; Plug-in
+          Development &gt; Plug-in Project</guimenuitem>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Enter your project name (ex:
+          <replaceable>com.xyz.example</replaceable>), and if desired, specify
+          the directory to create it in. Click <guibutton>Next</guibutton>.
+          The defaults on the next page should be OK. Note that the Plug-in ID
+          must be unique. Click <guibutton>Next</guibutton>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Choose <guilabel>Create a plug-in project using a code
+          generation wizard</guilabel>, and choose <guilabel>Hello,
+          World</guilabel>. Click <guibutton>Next</guibutton>.</para>
+        </listitem>
+
+        <listitem>
+          <para>The defaults on the Content page should be OK, but you can
+          change these settings if desired and then click
+          <guibutton>Next</guibutton>.</para>
+        </listitem>
+
+        <listitem>
+          <para>The defaults on the <guilabel>Action Set</guilabel> page
+          should be OK, but you can change these settings if desired and then
+          click <guibutton>Finish</guibutton>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Your new plugin should already be capable of being run and
+          tested. Choose <guimenuitem>Run... &gt; Run Time
+          Workbench</guimenuitem>. Your <quote>Sample Menu</quote> that your
+          new plugin contributes should appear in the Resource Perspective.
+          However, there appears to be a bug when we run this test: The new
+          Sample Menu only appears in the ProRefactor perspective. There is
+          probably a bug in ProRefactor's plugin manifest. (3 Jan 2004) Your
+          new plugin contributes the Sample Menu, as well as a new button on
+          the button bar. Close your Runtime Workbench, and we'll add a new
+          menu item.</para>
+        </listitem>
+
+        <listitem>
+          <para>Open your <filename>plugin.xml</filename>, and click on the
+          <guilabel>Dependencies</guilabel> page. Add the ProRefactor.org
+          plug-ins as dependencies for your plug-in project. You also have to
+          add those plugins to your project's build path. To do that, simply
+          right-click on that <guilabel>Dependencies</guilabel> page, and
+          choose the menu item <guimenuitem>Compute Build
+          Path</guimenuitem>.</para>
+        </listitem>
+
+        <listitem>
+          <para>In the Package Explorer, navigate to
+          <literal>org.prorefactor.prorefactor.actions</literal>, then copy
+          <filename>ParseAction.java</filename>, and paste it into your
+          project's <quote>actions</quote> package.</para>
+        </listitem>
+
+        <listitem>
+          <para>Double-click on your copy of ParseAction to open it into the
+          Java editor. There are compile problems due to missing imports.
+          Choose <guimenuitem>Source &gt; Organize Imports</guimenuitem> to
+          automatically add the necessary import statements. Save your
+          changes, and press <keycombo>
+              <keycap>Ctrl</keycap>
+
+              <keycap>b</keycap>
+            </keycombo> to force a fresh build of ParseAction.</para>
+        </listitem>
+
+        <listitem>
+          <para>Open your <filename>plugin.xml</filename>, and click on the
+          <guilabel>Extensions</guilabel> page. Under <guilabel>Sample Action
+          Set</guilabel> right-click on <guilabel>Sample Action</guilabel> and
+          click <guimenuitem>Copy</guimenuitem>. Back on <guilabel>Sample
+          Action Set</guilabel> right-click and click
+          <guimenuitem>Paste</guimenuitem>. You should now have two identical
+          Sample Action items.</para>
+        </listitem>
+
+        <listitem>
+          <para>Double-click on the second <guilabel>Sample Action</guilabel>
+          item, so that the Properties page appears. Change the class name to
+          <quote>ParseAction</quote>. Change the id. Change the label to
+          <quote>Simple &amp;Parse</quote>. Delete the toolbarPath and the
+          tooltip.</para>
+        </listitem>
+
+        <listitem>
+          <para>Save your changes to your <filename>plugin.xml</filename>
+          file, and then launch the Run Time Workbench again. You will have to
+          load or create a small project with a valid <filename>.p</filename>
+          program file in order to test your new menu item. All it does is
+          parse the selected resource (or resources).</para>
+        </listitem>
+      </orderedlist>
+
+      <section>
+        <title>What Next?</title>
+
+        <para>Have a look at the <classname>ParseAction</classname> class that
+        you took a copy of. It makes use of an instance of
+        <classname>org.prorefactor.prorefactor.actions.ActionManager</classname>,
+        which does all of the work of examining what resources are selected,
+        load the parser, parse the selected resources, and show results in the
+        Console. For each resource that it parses, it does a callback to
+        <function>processFile()</function>, passing the integer node handle
+        for the top node of the AST. In the case of
+        <classname>ParseAction</classname>, no further action is taken for the
+        given AST, but if you look at other class files such as
+        <classname>org.prorefactor.prorefactor.actions.QualifyFieldsAction</classname>,
+        you will see examples of doing some processing against the selected
+        compile units. The same as we copied
+        <classname>ParseAction</classname>, you can copy these other examples
+        of launching parsing and refactoring actions.</para>
+      </section>
+    </section>
+  </chapter>
+
+  <appendix id="app_program_code_listings">
+    <title>Program Code Listings</title>
+
+    <section id="sec_configdump">
+      <title>configdump.p</title>
+
+      <para>Use this program to automatically dump your Progress settings
+      (including <envar>PROPATH</envar>, etc.) to a project configuration
+      file.</para>
+
+      <programlisting>/* configdump.p
+Dumps the PROGRESS environment settings to a text file.
+
+Input parameter is "outfile". Input ? to just use
+"progress.properties" in your working directory.
+*/
+
+DEFINE INPUT PARAMETER outFile AS CHARACTER NO-UNDO.
+
+DEFINE VARIABLE thePropath AS CHARACTER NO-UNDO.
+DEFINE VARIABLE i          AS INTEGER   NO-UNDO.
+
+IF outFile = ? THEN ASSIGN outFile = "progress.properties":U.
+
+IF SEARCH(outFile) &lt;&gt; ? THEN DO:
+  DEFINE VARIABLE isOk AS LOGICAL INITIAL NO.
+  MESSAGE outFile "already exists. Overwrite?"
+    VIEW-AS ALERT-BOX BUTTONS YES-NO UPDATE isOk.
+  IF NOT isOk THEN RETURN.
+END.
+
+OUTPUT TO VALUE (outFile).
+
+IF SESSION:BATCH-MODE THEN
+  PUT UNFORMATTED "batch_mode=true":U SKIP.
+ELSE
+  PUT UNFORMATTED "batch_mode=false":U SKIP.
+
+PUT UNFORMATTED "opsys=":U + OPSYS SKIP.
+PUT UNFORMATTED "proversion=":U + PROVERSION SKIP.
+PUT UNFORMATTED "window_system=":U + SESSION:WINDOW-SYSTEM SKIP.
+
+/* In the properties file, colons and backslashes are escaped. */
+ASSIGN thePropath = PROPATH.
+ASSIGN thePropath = REPLACE(thePropath, "~\":U, "~\~\":U).
+ASSIGN thePropath = REPLACE(thePropath, ":":U, "~\:":U).
+PUT UNFORMATTED "propath=":U + thePropath SKIP.
+
+PUT UNFORMATTED "database_aliases=":U.
+REPEAT i=1 TO NUM-ALIASES:
+  IF ALIAS(i) = "DICTDB":U THEN NEXT.
+  IF i &gt; 1 THEN PUT UNFORMATTED ",":U.
+  PUT UNFORMATTED ALIAS(i) + ",":U + LDBNAME(ALIAS(i)).
+END.
+PUT UNFORMATTED SKIP.
+
+OUTPUT CLOSE.</programlisting>
+    </section>
+
+    <section id="sec_schemadump">
+      <title>schemadump.p</title>
+
+      <para>Use these programs to automatically dump your Progress schema to a
+      text file which can be loaded by ProRefactor. Run
+      <filename>schemadump1.p</filename>, which in turn calls
+      <filename>schemadump2.p</filename>. The source for these programs may
+      also be found in your
+      <filename>eclipse/plugins/org.prorefactor.core.../4gl/api</filename>
+      directory.</para>
+
+      <programlisting>/* schemadump1.p
+Dumps the schema for each database out to a text file
+in a format expected by Proparse subroutines.
+Assumes that the alias DICTDB already exists.
+
+Input parameter is "outfile". Input ? to just use
+"proparse.schema" in your working directory.
+*/
+
+DEFINE INPUT PARAMETER outFile AS CHARACTER NO-UNDO.
+
+DEFINE VARIABLE dictdb_orig AS CHARACTER NO-UNDO.
+DEFINE VARIABLE program2    AS CHARACTER NO-UNDO.
+DEFINE VARIABLE dbnum       AS INTEGER NO-UNDO.
+DEFINE VARIABLE i1          AS INTEGER NO-UNDO.
+
+IF outFile = ? THEN ASSIGN outFile = "proparse.schema":U.
+
+ASSIGN program2 = REPLACE(PROGRAM-NAME(1), "schemadump1.p", "schemadump2.p").
+
+OUTPUT TO VALUE (outFile).
+
+ASSIGN dictdb_orig = LDBNAME("dictdb":U).
+REPEAT dbnum = 1 TO NUM-DBS:
+  IF DBTYPE(dbnum) &lt;&gt; "PROGRESS":U THEN NEXT.
+  DELETE ALIAS DICTDB.
+  CREATE ALIAS DICTDB FOR DATABASE VALUE(LDBNAME(dbnum)).
+  PUT UNFORMATTED ":: ":U LDBNAME(dbnum) " ":U dbnum SKIP.
+  RUN VALUE(program2).
+END.
+DELETE ALIAS dictdb.
+CREATE ALIAS dictdb FOR DATABASE VALUE(dictdb_orig).
+
+/* Now dump the meta-schema as "dictdb" */
+PUT UNFORMATTED ":: dictdb 0":U SKIP.
+FOR EACH DICTDB._file WHERE _file._tbl-type &lt;&gt; "T":U NO-LOCK BY _file._file-name:
+  PUT UNFORMATTED ": ":U _file._file-name " ":U RECID(_file) SKIP.
+  FOR EACH DICTDB._field OF _file NO-LOCK BY _field._field-name:
+    PUT UNFORMATTED _field._field-name " ":U RECID(_field) SKIP.
+  END.
+END.
+
+OUTPUT CLOSE.
+</programlisting>
+
+      <programlisting>/* schemadump2.p
+Dumps the schema for DICTDB
+*/
+
+FOR EACH DICTDB._file WHERE _file._tbl-type = "T":U NO-LOCK BY _file._file-name:
+  PUT UNFORMATTED ": " _file._file-name " " RECID(_file) SKIP.
+  FOR EACH DICTDB._field OF _file NO-LOCK BY _field._field-name:
+    PUT UNFORMATTED _field._field-name " " RECID(_field) SKIP.
+  END.
+END.
+</programlisting>
+    </section>
+  </appendix>
+
+  <appendix>
+    <title>Troubleshooting</title>
+
+    <section>
+      <title>Eclipse shuts down when parsing</title>
+
+      <section>
+        <title>Summary</title>
+
+        <para>Add <option>-vmargs -Xss2M</option> to your shortcut for running
+        Eclipse.</para>
+      </section>
+
+      <section>
+        <title>Details</title>
+
+        <para>Proparse requires a large stack in order to store all nodes of a
+        large program in memory. Since it was Java that loaded Proparse, it is
+        the Java Virtual Machine which needs to be configured for running with
+        a large stack.</para>
+
+        <para>If the stack size is not large enough, the JVM will shut down
+        with a stack overflow error, but you will not see any error details
+        when launching Eclipse and <filename>javaw.exe</filename> as Windows
+        processes. It doesn't take a huge program to cause this stack
+        overflow. A program with one or two thousand lines of
+        <literal>COMPILE</literal> statements is enough to do it. The stack
+        size for <filename>javaw.exe</filename> by default is 1MB. The
+        argument <option>-vmargs</option> tells
+        <filename>eclipse.exe</filename> to pass any following arguments on to
+        the JVM. The argument <option>-Xss2M</option> tells the JVM to set the
+        stack size to 2MB.</para>
+      </section>
+    </section>
+  </appendix>
+
+  <appendix id="app_links">
+    <title>Links</title>
+
+    <section id="sec_directory_diff">
+      <title>Directory Diff</title>
+
+      <para>Some of ProRefactor's refactorings write modified files (sometimes
+      many files) out to a temporary directory, where you can review the
+      modifications before merging those into your working source
+      directory.</para>
+
+      <para>If you do not already have a utility for visually reviewing all
+      file changes from one copy of a directory structure to another, then you
+      will need one. Here are a couple of free alternatives:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>CSDiff at <ulink
+          url="http://www.componentsoftware.com/products/csdiff/">www.componentsoftware.com/products/csdiff/</ulink></para>
+        </listitem>
+
+        <listitem>
+          <para>WinMerge at <ulink
+          url="http://winmerge.sourceforge.net/">winmerge.sourceforge.net/</ulink></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>These free tools make it simple and pleasant to review large sets
+      of modified files.</para>
+    </section>
+
+    <section id="sec_prolint">
+      <title>Prolint</title>
+
+      <para>Prolint is an open-source application written by Jurjen Dijkstra
+      and contributed to by many. Like <firstterm>lint</firstterm> tools for
+      other languages, its purpose is to find things in your code which are
+      valid syntax (as far as the compiler is concerned), but questionable
+      nonetheless.</para>
+
+      <para>Jurjen manages Prolint at <ulink
+      url="http://www.prolint.org/">www.prolint.org</ulink>. Prolint is
+      written in the 4gl.</para>
+    </section>
+  </appendix>
+
+  <appendix id="app_rel_notes">
+    <title>Release Notes</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Version 1.2.2</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Added the "Rename Schema" refactoring.</para>
+            </listitem>
+
+            <listitem>
+              <para>Moved "Parse" off the "Tool Devel Utils" menu and onto the
+              main menu. This action now skips parse units where the parse
+              unit binary is up to date.</para>
+            </listitem>
+
+            <listitem>
+              <para>(Internal) Added partial support for new "parse unit
+              binaries", which will be used to speed up some searches.</para>
+            </listitem>
+
+            <listitem>
+              <para>The NO-UNDO refactoring was broken in the previous
+              release. Fixed. Also fixed the unit test that missed the
+              break.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixed an incompatibility between proparse.dll and Eclipse,
+              which was causing Eclipse to sometimes crash when it first
+              loaded proparse.dll.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.2.1</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Is now deployed via update site, rather than zip file
+              package.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixed bug #079: Was not evaluating unqualified fields
+              correctly in DISPLAY..EXCEPT and DEFINE FRAME..EXCEPT. Thanks
+              Bruce Craigie for the bug report.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.2.0</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Updated for OE10 syntax, Proparse version 2.2a01, and
+              Eclipse 3.0. This release requires Eclipse 3.0, due to a new API
+              to Eclipse's "Console" view. There are no feature changes in
+              this release.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.1.10</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>IMPORTANT: Fixed a bug in "schemadump". Please re-run your
+              schema dump, even if your project's schema has not changed. The
+              bug could cause some field names to be missed when writing your
+              proparse.schema file. (Needed "DICTDB" prefix on _field in the
+              FOR loops, otherwise it missed some records. I don't know why.)
+              See Project Configuration or jpplus/4gl/api for the updated two
+              schemadump program files.</para>
+            </listitem>
+
+            <listitem>
+              <para>New refactoring added: Qualify Field Names.</para>
+            </listitem>
+
+            <listitem>
+              <para>ProRefactor menu items now work against the file in the
+              current editor, if the Navigator view is not the actively
+              selected view.</para>
+            </listitem>
+
+            <listitem>
+              <para>ProRefactor menu items, that are capable of working
+              against multiple selected files/directories/projects, are now
+              available from the Navigator popup menu.</para>
+            </listitem>
+
+            <listitem>
+              <para>Some minor bug fixes.</para>
+            </listitem>
+
+            <listitem>
+              <para>Continued development on "Extract Method". Still
+              WIP.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.1.9</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>"Extract Method" is work in process - you can see its menu
+              contribution on the text editor's pop-up menu. Displays in the
+              console the input, input-output, and output arguments that would
+              be needed for the selected range of code, but does not yet do
+              any code changes.</para>
+            </listitem>
+
+            <listitem>
+              <para>Added new editor contributions: "Expand Selection" and
+              "Contract Selection". Currently only compilable files (.p/.w)
+              are supported. For a given cursor position in the editor, finds
+              the location in the AST, and then allows you to repeatedly
+              expand and contract the selected text. The selected text is
+              based on the AST: each selection is a branch for an expression,
+              statement, or block. Saves time if you need to find a block
+              begin and end within a complex or poorly formatted source
+              file.</para>
+            </listitem>
+
+            <listitem>
+              <para>Started work on a new package
+              "org.prorefactor.refactor.source". Is not yet complete.</para>
+            </listitem>
+
+            <listitem>
+              <para>Some menu item and other name changes. Continued cleanup
+              of the plugin manifest.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.1.8</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Partial fix for finding "insert point" for Wrap Procedure
+              Block. It will still have a hard time with some include
+              files.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.1.7</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Fixed a bug in the rollback mechanism.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixed bug in Bubble Declarations which caused "ignored"
+              file to be changed.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.1.6</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Fixed bug in Bubble Declarations which prevented it from
+              running if the bdr_ignore.txt file did not exist.</para>
+            </listitem>
+
+            <listitem>
+              <para>Bubble Declarations: When splitting an include file, no
+              longer creates a -methods.i file. Methods are simply tacked onto
+              the end of the -shared.i file.</para>
+            </listitem>
+
+            <listitem>
+              <para>Bubble Declarations: No longer modifies an original source
+              file, even if it is "split" into -shared.i, etc. (The source is
+              duplicated between the old .i and the new -shared.i, etc, split
+              files.) If a split file (-shared.i etc.) already exists, it is
+              not overwritten. This vastly simplifies the entire Bubble
+              Declarations refactoring.</para>
+            </listitem>
+
+            <listitem>
+              <para>Bubble Declarations: Ignore list: Changed so that
+              references to includes in the ignore list do get moved. The only
+              effect of the ignore list is that the files will not be split or
+              modified.</para>
+            </listitem>
+
+            <listitem>
+              <para>(Source/internal) Started making changes to JPNode and the
+              tree parsers which will make it possible to start using Java
+              ASTs which are "disconnected" from the parser. If you have
+              created your own tree parser, please note the changes.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Version 1.1.5</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>In Bubble Declarations, added a mechanism for ignoring
+              include files (and nested includes), as well as a mechanism for
+              ignoring sections of code delimited with directives.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixed a bug in Bubble Declarations which caused methods to
+              sometimes be inserted amongst local DEFINE statements.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </appendix>
+</book>

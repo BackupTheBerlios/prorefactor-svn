@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+
+<contexts>
+
+	<context id="outputDirPage">
+		<description>Output Directory wizard page</description>
+		<topic href="sec_output_directory.html"
+			label="Output Directory wizard page" />
+	</context>
+
+</contexts>

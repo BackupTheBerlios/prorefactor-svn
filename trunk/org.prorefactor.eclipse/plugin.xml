@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.prorefactor.eclipse"
+   name="ProRefactor Eclipse plug-in"
+   version="1.2.3"
+   provider-name="ProRefactor.org"
+   class="org.prorefactor.eclipse.Plugin">
+
+   <runtime>
+      <library name="eclipse.jar">
+         <export name="*"/>
+         <packages prefixes="org.prorefactor"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.jface.text" export="true"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor" export="true"/>
+      <import plugin="org.eclipse.ui.editors" export="true"/>
+      <import plugin="org.eclipse.core.resources" export="true"/>
+      <import plugin="org.eclipse.ui" export="true"/>
+      <import plugin="org.prorefactor.refactor" export="true"/>
+      <import plugin="org.prorefactor.core" export="true"/>
+      <import plugin="org.eclipse.search" export="true"/>
+      <import plugin="org.eclipse.compare" export="true"/>
+      <import plugin="org.eclipse.ui.ide" export="true"/>
+      <import plugin="org.eclipse.ui.console" export="true"/>
+      <import plugin="org.eclipse.core.runtime" export="true"/>
+   </requires>
+
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="Progress Refactoring"
+            class="org.prorefactor.eclipse.preferences.PreferencePage"
+            id="org.prorefactor.preferences.PreferencePage">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="ProRefactor"
+            icon="icons/proeclipse.gif"
+            class="org.prorefactor.eclipse.perspectives.Perspective"
+            id="org.prorefactor.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="ProRefactorNature"
+         name="ProRefactor Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.prorefactor.eclipse.ProRefactorNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         id="NewProgressProjectWizard"
+         name="Progress Project"
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            name="ProRefactor Project"
+            category="com.progress.ide"
+            class="org.prorefactor.eclipse.wizards.ProjectWizard"
+            preferredPerspectives="org.prorefactor.perspective"
+            finalPerspective="org.prorefactor.perspective"
+            project="true"
+            id="ProRefactor.ProjectWizard">
+      </wizard>
+      <category
+            name="Progress"
+            id="com.progress.ide">
+      </category>
+   </extension>
+   <extension
+         id="ProgressProjectPropertyPages"
+         name="Progress Project Property Pages"
+         point="org.eclipse.ui.propertyPages">
+      <page
+            objectClass="org.eclipse.core.resources.IProject"
+            name="ProRefactor Environment"
+            class="org.prorefactor.eclipse.properties.ProgressSettings"
+            nameFilter="*"
+            id="org.prorefactor.properties.proparseSettings">
+         <filter
+               name="nature"
+               value="org.prorefactor.eclipse.ProRefactorNature">
+         </filter>
+      </page>
+      <page
+            objectClass="org.eclipse.core.resources.IProject"
+            name="ProRefactor Settings"
+            class="org.prorefactor.eclipse.properties.ProparseSettings"
+            nameFilter="*"
+            id="org.prorefactor.properties.proparseSettings">
+         <filter
+               name="nature"
+               value="org.prorefactor.eclipse.ProRefactorNature">
+         </filter>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.projectNatureImages">
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="ProRefactor"
+            visible="false"
+            id="org.prorefactor.actionSet">
+         <menu
+               label="Pr&amp;oRefactor"
+               id="org.prorefactor.MainMenu">
+            <separator
+                  name="separator1">
+            </separator>
+            <separator
+                  name="separator2">
+            </separator>
+            <separator
+                  name="separator3">
+            </separator>
+         </menu>
+         <action
+               label="&amp;SUBSTITUTE Refactoring"
+               class="org.prorefactor.eclipse.actions.SubstituteAction"
+               tooltip="SUBSTITUTE Refactor"
+               menubarPath="org.prorefactor.MainMenu/separator1"
+               id="org.prorefactor.actions.substitute">
+         </action>
+         <action
+               label="R&amp;ename Schema..."
+               class="org.prorefactor.eclipse.actions.RenameAction"
+               tooltip="Rename schema table and field names"
+               menubarPath="org.prorefactor.MainMenu/separator1"
+               id="org.prorefactor.actions.RenameSchema">
+         </action>
+         <action
+               label="&amp;Qualify Field Names..."
+               class="org.prorefactor.eclipse.actions.QualifyFieldsAction"
+               tooltip="Add table/buffer names to unqualified fields (current editor)"
+               menubarPath="org.prorefactor.MainMenu/separator1"
+               id="org.prorefactor.actions.QualifyFields">
+         </action>
+         <action
+               label="NO-&amp;UNDO Refactoring..."
+               class="org.prorefactor.eclipse.actions.NoUndoAction"
+               tooltip="NO-UNDO Refactor"
+               menubarPath="org.prorefactor.MainMenu/separator1"
+               id="org.prorefactor.actions.noundo">
+         </action>
+         <action
+               label="&amp;Names (table and field) Refactoring..."
+               class="org.prorefactor.eclipse.actions.NamesAction"
+               tooltip="Names (table and field) Refactor"
+               menubarPath="org.prorefactor.MainMenu/separator1"
+               id="org.prorefactor.actions.names">
+         </action>
+         <menu
+               label="S&amp;pecialized"
+               path="org.prorefactor.MainMenu/separator1"
+               id="prorefactor.specialized">
+            <separator
+                  name="separator1">
+            </separator>
+         </menu>
+         <action
+               label="&amp;Wrap Procedure Block..."
+               class="org.prorefactor.eclipse.actions.WrapProcedureBlock"
+               tooltip="Wrap procedural code into an internal procedure"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.specialized/separator1"
+               id="org.prorefactor.actions.wrapProcedureBlock">
+         </action>
+         <action
+               label="&amp;Bubble Declarations..."
+               class="org.prorefactor.eclipse.actions.BubbleDeclarationsAction"
+               tooltip="Bubble Declarations Refactor"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.specialized/separator1"
+               id="org.prorefactor.actions.bubbleDeclarations">
+         </action>
+         <action
+               label="&amp;Append Program..."
+               class="org.prorefactor.eclipse.actions.AppendProgramAction"
+               tooltip="Append one compilable program to another"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.specialized/separator1"
+               id="org.prorefactor.actions.appendProgram">
+         </action>
+         <action
+               label="&amp;Roll Back..."
+               class="org.prorefactor.eclipse.actions.RollbackAction"
+               tooltip="Roll Back previous refactoring"
+               menubarPath="org.prorefactor.MainMenu/separator2"
+               id="org.prorefactor.actions.rollback">
+         </action>
+         <action
+               label="P&amp;arse"
+               class="org.prorefactor.eclipse.actions.ParseAction"
+               tooltip="Parse and build Parse Unit Binary files if out of date"
+               menubarPath="org.prorefactor.MainMenu/separator3"
+               id="org.prorefactor.actions.testparse">
+         </action>
+         <menu
+               label="Tool &amp;Devel Utils"
+               path="org.prorefactor.MainMenu/separator3"
+               id="prorefactor.toolDevel">
+            <separator
+                  name="separator1">
+            </separator>
+            <separator
+                  name="separator2">
+            </separator>
+         </menu>
+         <action
+               label="Write .&amp;xml file"
+               class="org.prorefactor.eclipse.actions.XMLAction"
+               tooltip="Write XML"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.toolDevel/separator1"
+               id="org.prorefactor.actions.writexml">
+         </action>
+         <action
+               label="Write .&amp;listing file"
+               class="org.prorefactor.eclipse.actions.ListingAction"
+               tooltip="Write Proparse preprocess listing file"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.toolDevel/separator1"
+               id="org.prorefactor.actions.writexml">
+         </action>
+         <action
+               label="&amp;Scan Lister"
+               class="org.prorefactor.eclipse.actions.ScanLister"
+               tooltip="Write Scanner results to console"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.toolDevel/separator1"
+               id="org.prorefactor.actions.scanlister">
+         </action>
+         <action
+               label="Proparse &amp;Version"
+               class="org.prorefactor.eclipse.actions.ProparseVersion"
+               tooltip="Display Proparse version"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.toolDevel/separator2"
+               id="org.prorefactor.actions.proparseversion">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.prorefactor.perspective">
+         <actionSet
+               id="org.prorefactor.actionSet">
+         </actionSet>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         id="org.prorefactor.markers.refactor"
+         name="ProRefactor Message"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+      <super
+            type="org.eclipse.core.resources.taskmarker">
+      </super>
+   </extension>
+   <extension
+         id="searchPage"
+         name="ProRefactor Search Page"
+         point="org.eclipse.search.searchPages">
+      <page
+            enabled="false"
+            label="ProRefactor"
+            class="org.prorefactor.eclipse.search.SearchPage1"
+            id="prorefactor.search.page1">
+      </page>
+   </extension>
+   <extension
+         id="org.prorefactor.popup"
+         name="ProRefactor Popup Menus"
+         point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+            targetID="#TextEditorContext"
+            id="org.prorefactor.popup.texteditor">
+         <menu
+               label="Pr&amp;oRefactor"
+               path="additions"
+               id="org.prorefactor.popup.texteditor">
+            <groupMarker
+                  name="org.prorefactor.popup.texteditor.group1">
+            </groupMarker>
+         </menu>
+         <action
+               label="&amp;Contract Selection"
+               icon="icons/contract.gif"
+               class="org.prorefactor.eclipse.actions.ContractSelectionAction"
+               tooltip="Contracts selection of code after using Expand Selection."
+               menubarPath="org.prorefactor.popup.texteditor/group1"
+               enablesFor="*"
+               id="org.prorefactor.textEditorContrib.contract">
+            <selection
+                  class="org.eclipse.jface.text.ITextSelection">
+            </selection>
+         </action>
+         <action
+               label="E&amp;xpand Selection"
+               icon="icons/expand.gif"
+               class="org.prorefactor.eclipse.actions.ExpandSelectionAction"
+               tooltip="Selects or expands selection of code around the cursor position."
+               menubarPath="org.prorefactor.popup.texteditor/group1"
+               enablesFor="*"
+               id="org.prorefactor.textEditorContrib.expand">
+            <selection
+                  class="org.eclipse.jface.text.ITextSelection">
+            </selection>
+         </action>
+         <action
+               label="&amp;Extract Method"
+               class="org.prorefactor.eclipse.actions.ExtractMethodAction"
+               menubarPath="org.prorefactor.popup.texteditor/group1"
+               enablesFor="2+"
+               id="org.prorefactor.popup.texteditor.extractmethod">
+         </action>
+      </viewerContribution>
+      <viewerContribution
+            targetID="org.eclipse.ui.views.ResourceNavigator"
+            id="org.prorefactor.popup.navigator">
+         <menu
+               label="Pr&amp;oRefactor"
+               path="additions"
+               id="org.prorefactor.popup.NavMenu">
+            <separator
+                  name="separator1">
+            </separator>
+            <separator
+                  name="separator2">
+            </separator>
+         </menu>
+         <action
+               label="&amp;SUBSTITUTE Refactoring"
+               class="org.prorefactor.eclipse.actions.SubstituteAction"
+               tooltip="SUBSTITUTE Refactor"
+               menubarPath="org.prorefactor.popup.NavMenu/separator1"
+               id="org.prorefactor.popup.NavMenu.substitute">
+         </action>
+         <action
+               label="R&amp;ename Schema..."
+               class="org.prorefactor.eclipse.actions.RenameAction"
+               tooltip="Rename schema table and field names"
+               menubarPath="org.prorefactor.popup.NavMenu/separator1"
+               id="org.prorefactor.popup.NavMenu.RenameSchema">
+         </action>
+         <action
+               label="NO-&amp;UNDO Refactoring..."
+               class="org.prorefactor.eclipse.actions.NoUndoAction"
+               tooltip="NO-UNDO Refactor"
+               menubarPath="org.prorefactor.popup.NavMenu/separator1"
+               id="org.prorefactor.popup.NavMenu.noundo">
+         </action>
+         <action
+               label="&amp;Names (table and field) Refactoring..."
+               class="org.prorefactor.eclipse.actions.NamesAction"
+               tooltip="Names (table and field) Refactor"
+               menubarPath="org.prorefactor.popup.NavMenu/separator1"
+               id="org.prorefactor.popup.NavMenu.names">
+         </action>
+         <action
+               label="P&amp;arse"
+               class="org.prorefactor.eclipse.actions.ParseAction"
+               tooltip="Parse and build Parse Unit Binary files if out of date"
+               menubarPath="org.prorefactor.popup.NavMenu/separator2"
+               id="org.prorefactor.popup.NavMenu.testparse">
+         </action>
+         <menu
+               label="Tool &amp;Devel Utils"
+               path="org.prorefactor.popup.NavMenu/separator2"
+               id="navpopup.toolDevel">
+            <separator
+                  name="separator1">
+            </separator>
+            <separator
+                  name="separator2">
+            </separator>
+         </menu>
+         <action
+               label="Write .&amp;xml file"
+               class="org.prorefactor.eclipse.actions.XMLAction"
+               tooltip="Write XML"
+               menubarPath="org.prorefactor.popup.NavMenu/navpopup.toolDevel/separator1"
+               id="org.prorefactor.popup.NavMenu.writexml">
+         </action>
+         <action
+               label="Write .&amp;listing file"
+               class="org.prorefactor.eclipse.actions.ListingAction"
+               tooltip="Write Proparse preprocess listing file"
+               menubarPath="org.prorefactor.popup.NavMenu/navpopup.toolDevel/separator1"
+               id="org.prorefactor.popup.NavMenu.listing">
+         </action>
+      </viewerContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            targetID="com.progress.ide.editor.ProgressEditor"
+            id="org.prorefactor.progressEditorContrib">
+         <action
+               label="ProRefactor: Contract Selection"
+               icon="icons/contract.gif"
+               class="org.prorefactor.eclipse.actions.ContractSelectionAction"
+               tooltip="ProRefactor: Contract Text Selection"
+               toolbarPath="Normal/additions"
+               id="org.prorefactor.textEditorContrib.contract">
+            <selection
+                  class="org.eclipse.jface.text.ITextSelection">
+            </selection>
+         </action>
+         <action
+               label="ProRefactor: Expand Selection"
+               icon="icons/expand.gif"
+               class="org.prorefactor.eclipse.actions.ExpandSelectionAction"
+               tooltip="ProRefactor: Expand Text Selection"
+               toolbarPath="Normal/additions"
+               id="org.prorefactor.textEditorContrib.expand">
+            <selection
+                  class="org.eclipse.jface.text.ITextSelection">
+            </selection>
+         </action>
+      </editorContribution>
+      <editorContribution
+            targetID="org.eclipse.ui.DefaultTextEditor"
+            id="org.prorefactor.textEditorContrib">
+         <action
+               label="ProRefactor: Contract Selection"
+               icon="icons/contract.gif"
+               class="org.prorefactor.eclipse.actions.ContractSelectionAction"
+               tooltip="ProRefactor: Contract Text Selection"
+               toolbarPath="Normal/additions"
+               id="org.prorefactor.textEditorContrib.contract">
+            <selection
+                  class="org.eclipse.jface.text.ITextSelection">
+            </selection>
+         </action>
+         <action
+               label="ProRefactor: Expand Selection"
+               icon="icons/expand.gif"
+               class="org.prorefactor.eclipse.actions.ExpandSelectionAction"
+               tooltip="ProRefactor: Expand Text Selection"
+               toolbarPath="Normal/additions"
+               id="org.prorefactor.textEditorContrib.expand">
+            <selection
+                  class="org.eclipse.jface.text.ITextSelection">
+            </selection>
+         </action>
+      </editorContribution>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="helpcontexts.xml"
+            plugin="org.prorefactor.doc"/>
+   </extension>
+
+</plugin>
