@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.prorefactor.lib"
+   name="ProRefactor required Libraries"
+   version="1.2.4"
+   provider-name="ProRefactor.org">
+
+   <runtime>
+      <library name="hibernate/cglib-full-2.0.2.jar">
+         <export name="*"/>
+      </library>
+      <library name="hsqldb/hsqldb.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/commons-collections-2.1.1.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/commons-lang-1.0.1.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/commons-logging-1.0.4.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/dom4j-1.4.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/ehcache-0.9.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/jdbc2_0-stdext.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/jta.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/odmg-3.0.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/xerces-2.4.0.jar">
+         <export name="*"/>
+      </library>
+      <library name="hibernate/xml-apis.jar">
+         <export name="*"/>
+      </library>
+      <library name="jakarta/commons-io-1.0/commons-io-1.0.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+</plugin>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE org.apache.commons.menus SYSTEM '../../commons-build/menus/menus.dtd'>
+<project name="IO">
+
+  <title>IO</title>
+
+  <body>
+    <links>
+      <item name="Jakarta Commons" href="http://jakarta.apache.org/commons/"/>
+    </links>
+
+    <menu name="Commons IO">
+      <item name="Overview" href="index.html"/>
+      <item name="Javadoc" href="apidocs/index.html"/>
+      <item name="Best practices" href="bestpractices.html"/>
+      <item name="Building" href="building.html"/>
+      <item name="Mailing lists" href="mail-lists.html"/>
+      <item name="Team" href="team-list.html"/>
+      <item name="Tasks" href="tasks.html"/>
+      <item name="Proposal" href="proposal.html"/>
+      <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons/io/"/>
+    </menu>
+    
+    &common-menus;
+
+  </body>
+</project>
