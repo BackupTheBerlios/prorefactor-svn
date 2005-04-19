@@ -30,8 +30,17 @@ import org.prorefactor.treeparser01.TreeParser01;
 /** A single point of reference for an AST, a macro tree, symbol tables, etc.
  */
 public class CompileUnit extends ParseUnit {
+	
+	/** Constructor with default values.
+	 * @param file The compile unit's source file - usually a ".p" or ".w".
+	 */
+	public CompileUnit(File file) {
+		this.file = file;
+		this.style = CompileUnit.DEFAULT;
+		this.sourceFilePool = new SourceFilePool();
+	}
 
-	/**
+	/** Constructor with specified SourceFilePool and connection style.
 	 * @param file The compile unit's source file - usually a ".p" or ".w".
 	 * @param pool Will create a new one if null.
 	 * @param style A bitset, use bitwise OR to combine flags. ex: CompileUnit.DEFAULT

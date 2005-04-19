@@ -11,6 +11,7 @@
 package org.prorefactor.eclipse;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,6 +23,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.prorefactor.refactor.FileStuff;
 import org.prorefactor.refactor.messages.Message;
 
 
@@ -55,15 +57,26 @@ public class ResourceUtil {
 
 
 	/** Find an IFile in the workspace that matches a full String pathname. */
-	public static IFile getIFile(String filename) {
-		Path temp = new Path(filename);
+	public static IFile getIFile(String fullPath) {
+		Path temp = new Path(fullPath);
 		if (! temp.toFile().exists() ) return null;
 		IFile tempIFile = Plugin.getWorkspace().getRoot().getFileForLocation(temp);
 		return tempIFile;
 	}
 
+	
+	
+	/** Find an IFile in the workspace for any relative or qualified file path.
+	 * Returns null if the file or resource is not found.
+	 */
+	private static IFile getIFileRelaxed(String filename) {
+		File file = FileStuff.findFile(filename);
+		if (file==null) return null;
+		return getIFile((FileStuff.fullpath(file)));
+	}
 
-
+	
+	
 	/** For an ArrayList of org.prorefactor.refactor.messages.Message objects,
 	 * create markers of type "org.prorefactor.markers.refactor".
 	 */

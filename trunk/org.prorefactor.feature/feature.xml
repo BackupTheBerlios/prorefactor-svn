@@ -2,7 +2,7 @@
 <feature
       id="org.prorefactor"
       label="org.prorefactor"
-      version="1.2.3"
+      version="1.2.4"
       provider-name="ProRefactor.org"
       plugin="org.prorefactor.eclipse">
 

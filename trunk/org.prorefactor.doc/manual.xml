@@ -7,7 +7,7 @@
 
     <date>2005</date>
 
-    <releaseinfo>ProRefactor version 1.2.3</releaseinfo>
+    <pubdate>April 2005, ProRefactor version 1.2.4</pubdate>
 
     <author>
       <firstname>John</firstname>
@@ -1140,11 +1140,12 @@ display bInvoice except totalAmount.</programlisting>
       <para>From the Eclipse menu, choose <guimenuitem>File &gt; Import...
       &gt; Existing Project into Workspace</guimenuitem> for each of the
       <literal>org.prorefactor</literal> project directories in the following
-      order: <literal>antlr</literal>, <literal>core</literal>,
-      <literal>refactor</literal>, <literal>eclipse</literal>,
-      <literal>javadoc</literal>, <literal>doc</literal>,
-      <literal>feature</literal>, <literal>update</literal>. Eclipse will
-      automatically build (compile) each project as you import it.</para>
+      order: <literal>antlr</literal>, <literal>lib</literal>,
+      <literal>core</literal>, <literal>refactor</literal>,
+      <literal>eclipse</literal>, <literal>javadoc</literal>,
+      <literal>doc</literal>, <literal>feature</literal>,
+      <literal>update</literal>. Eclipse will automatically build (compile)
+      each project as you import it.</para>
 
       <para>In <guilabel>Window &gt; Preferences &gt; Java &gt; Installed
       JREs</guilabel>, edit your default JRE. Add:
@@ -1566,6 +1567,29 @@ END.
 
     <variablelist>
       <varlistentry>
+        <term>Version 1.2.4</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>No feature enhancements - just internal changes.</para>
+            </listitem>
+
+            <listitem>
+              <para>Added new sub-project named org.eclipse.lib, which
+              contains common third party libraries like Jakarta Commons and
+              Hibernate.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixed org.prorefactor.eclipse, which was not exporting any
+              run-time packages. (Needed for Prolint/Eclipse)</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
         <term>Version 1.2.3</term>
 
         <listitem>
@@ -1593,7 +1617,7 @@ END.
 
                 <listitem>
                   <para>Install ProRefactor from ProRefactor.org, and restart
-                  Eclipse. </para>
+                  Eclipse.</para>
                 </listitem>
               </itemizedlist>
             </listitem>

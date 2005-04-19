@@ -3,7 +3,7 @@
 <plugin
    id="org.prorefactor.javadoc"
    name="ProRefactor Javadoc"
-   version="1.2.3"
+   version="1.2.4"
    provider-name="ProRefactor.org">
    <requires>
       <import plugin="org.eclipse.help"/>
