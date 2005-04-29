@@ -110,11 +110,11 @@ abstract public class Symbol {
 
 	
 	
-	/** From TokenTypes: VARIABLE, FRAME, MENU, MENU-ITEM, etc.
+	/** From TokenTypes: VARIABLE, FRAME, MENU, MENUITEM, etc.
 	 * A TableBuffer object always returns BUFFER, regardless of whether
 	 * the object is a named buffer or a default buffer.
-	 * @see org.prorefactor.treeparser.TableBuffer#getProgressType().
 	 * A FieldBuffer object always returns FIELD.
+	 * @see org.prorefactor.treeparser.TableBuffer#getProgressType().
 	 */
 	public int getProgressType() {
 		// If there is no DEFINE node, then we assume inline VARIABLE def,

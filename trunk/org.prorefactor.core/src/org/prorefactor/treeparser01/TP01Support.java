@@ -26,9 +26,11 @@ import org.prorefactor.core.schema.Table;
 import org.prorefactor.treeparser.Block;
 import org.prorefactor.treeparser.BufferScope;
 import org.prorefactor.treeparser.CQ;
+import org.prorefactor.treeparser.DataType;
 import org.prorefactor.treeparser.FieldBuffer;
 import org.prorefactor.treeparser.FieldLookupResult;
 import org.prorefactor.treeparser.ParseUnit;
+import org.prorefactor.treeparser.Primative;
 import org.prorefactor.treeparser.Routine;
 import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.SymbolScope;
@@ -89,6 +91,11 @@ public class TP01Support extends TP01Action {
 
 
 	///// Methods /////
+
+	
+	public void addToScope(Object o) {
+		currentScope.add((Variable)o);
+	}
 
 	
 	
@@ -161,18 +168,30 @@ public class TP01Support extends TP01Action {
 	
 	/** The tree parser calls this at an AS node */
 	public void defAs(AST asAST) {
-		currSymbol.setAsNode((JPNode)asAST);
+		JPNode asNode = (JPNode)asAST;
+		currSymbol.setAsNode(asNode);
+		((Primative)currSymbol).setDataType(DataType.getDataType(asNode.nextNode().getType()));
+		assert
+			((Primative)currSymbol).getDataType() != null
+			: "Failed to set datatype at " + asNode.getFilename() + " line " + asNode.getLine()
+			;
 	}
 
 	
 	
 	/** The tree parser calls this at a LIKE node */
 	public void defLike(AST likeAST) {
-		currSymbol.setLikeNode((JPNode)likeAST);
+		JPNode likeNode = (JPNode)likeAST;
+		currSymbol.setLikeNode(likeNode);
+		((Primative)currSymbol).setDataType(fieldRefDataType(likeNode.nextNode()));
+		assert
+			((Primative)currSymbol).getDataType() != null
+			: "Failed to set datatype at " + likeNode.getFilename() + " line " + likeNode.getLine()
+			;
 	}
-
-
-
+	
+	
+	
 	/** Define a buffer. If the buffer is initialized at the same time it is
 	 * defined (as in a buffer parameter), then parameter init should be true.
 	 */
@@ -218,9 +237,12 @@ public class TP01Support extends TP01Action {
 		Table table = astTableLink(tableAST);
 		// For each field in "table", create a field def in currDefTable
 		for ( Iterator it = table.getFieldSet().iterator() ; it.hasNext() ; ) {
-			rootScope.defineTableField(((Field)it.next()).getName(), currDefTable );
+			Field field = (Field)it.next();
+			rootScope.defineTableField(field.getName(), currDefTable )
+				.setDataType(field.getDataType())
+				;
 		}
-	} // defineTableLike()
+	}
 	
 	
 	
@@ -240,15 +262,33 @@ public class TP01Support extends TP01Action {
 
 
 
-	public void defineVariable(AST defAST, AST idAST) {
+	public Variable defineVariable(AST defAST, AST idAST) {
+		/* Some notes:
+		 * We need to create the Variable Symbol right away, because further
+		 * actions in the grammar might need to set attributes on it.
+		 * We can't add it to the scope yet, because of statements like this:
+		 *   def var xyz like xyz.
+		 * The tree parser is responsible for calling addToScope at the end of
+		 * the statement or when it is otherwise safe to do so.
+		 */
 		JPNode defNode = (JPNode) defAST;
 		JPNode idNode = (JPNode) idAST;
 		Variable variable = new Variable(idNode.getText(), currentScope);
 		variable.setDefOrIdNode(defNode);
 		currSymbol = variable;
-		currentScope.add(variable);
 		idNode.setLink(JPNode.SYMBOL, variable);
-	} // defineVariable()
+		return variable;
+	}
+	public Variable defineVariable(AST defAST, AST idAST, int dataType) {
+		Variable v = defineVariable(defAST, idAST);
+		((Variable)currSymbol).setDataType(DataType.getDataType(dataType));
+		return v;
+	}
+	public Variable defineVariable(AST defAST, AST idAST, AST likeAST) {
+		Variable v = defineVariable(defAST, idAST);
+		((Variable)currSymbol).setDataType(fieldRefDataType(likeAST));
+		return v;
+	}
 
 
 
@@ -276,7 +316,8 @@ public class TP01Support extends TP01Action {
 
 		// Check if this is a Field_ref being "inline defined"
 		// If so, we define it right now.
-		if (refNode.attrGet(IConstants.INLINE_VAR_DEF) == 1) defineVariable(idAST, idAST);
+		if (refNode.attrGet(IConstants.INLINE_VAR_DEF) == 1)
+			addToScope(defineVariable(idAST, idAST));
 
 		// Lookup the field, with special handling for FIELDS/USING/EXCEPT phrases	
 		if (whichTable == 0) {
@@ -348,6 +389,11 @@ public class TP01Support extends TP01Action {
 		((JPNode)funcAST).setLink(JPNode.BLOCK, currentBlock);
 	}
 
+
+	/** This is a really good example of why we need to subclass JPNode! */
+	private static DataType fieldRefDataType(AST refAST) {
+		return ((Primative)((JPNode)refAST).getLink(JPNode.SYMBOL)).getDataType();
+	}
 
 
 	protected void funcForward(AST idAST) {

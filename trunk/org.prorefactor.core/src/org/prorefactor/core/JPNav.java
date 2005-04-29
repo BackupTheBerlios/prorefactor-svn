@@ -12,13 +12,15 @@ package org.prorefactor.core;
 
 
 
+
 /** This class contains static methods for navigating JPNode objects in an AST.
  * Methods here are specific to Proparse's tree structure.
  * For general node navigation (firstChild, etc.) see JPNode.
+ * <p>
+ * I plan to subclass JPNode, for example, to FieldRefNode, which will allow
+ * this class and its members to go away entirely.
  */
 public class JPNav {
-
-
 
 	/** Find the ID node for a Field_ref node */
 	public static JPNode findFieldRefIdNode(JPNode refNode) {
@@ -26,7 +28,5 @@ public class JPNav {
 		assert idNode != null;
 		return idNode;
 	}
-
-
 
 }

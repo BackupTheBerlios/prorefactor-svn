@@ -13,6 +13,8 @@
 package org.prorefactor.treeparser01;
 
 
+import org.prorefactor.treeparser.Variable;
+
 import antlr.collections.AST;
 
 
@@ -22,6 +24,12 @@ import antlr.collections.AST;
  * TP01Support is the default implementation.
  */
 public class TP01Action {
+	
+	
+	/** Called by the tree parser at the end of a DEFINE statement, passing
+	 * in the new Variable object which is expected now to be added to the current scope.
+	 */
+	public void addToScope(Object o) {}
 
 
 	/** Beginning of a block. */
@@ -75,9 +83,12 @@ public class TP01Action {
 	public void defineTemptable(AST defAST, AST idNode) {}
 
 	
-	/** Called by the tree parser when any sort of variable is defined. */
-	public void defineVariable(AST defAST, AST idNode) {}
-
+	/** Called by the tree parser when a variable is defined. */
+	public Variable defineVariable(AST defAST, AST idNode) {return null;}
+	/** Some syntaxes imply a data type without LIKE/AS. */
+	public Variable defineVariable(AST defAST, AST idAST, int dataType) {return null;}
+	/** Some syntaxes have an implicit LIKE. */
+	public Variable defineVariable(AST defAST, AST idAST, AST likeAST) {return null;}
 	
 	/** Called by the tree parser when a work-table is defined. */
 	public void defineWorktable(AST defAST, AST idNode) {}
@@ -171,8 +182,8 @@ public class TP01Action {
 	 * @param scopeRootNode The function, procedure, triggers, or on node.
 	 */
 	protected void scopeClose(AST scopeRootNode) {}
-
-		
+	
+	
 	/** Create a "strong" buffer scope.
 	 * This is called within a DO FOR or REPEAT FOR statement.
 	 * @param anode Is the RECORD_NAME node. It must already have

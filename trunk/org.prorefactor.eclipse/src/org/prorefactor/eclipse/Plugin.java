@@ -74,13 +74,13 @@ public class Plugin extends AbstractUIPlugin {
 	
 	
 	/** Convenience method for writing an Exception to the Error Log */
-	public static void log(Exception e) {
+	public static void log(Throwable e) {
 		plugin.getLog().log(
 			new Status(
 				IStatus.ERROR
 				, Plugin.ID
 				, IStatus.ERROR
-				, e.getMessage()
+				, ( e.getMessage() != null ? e.getMessage() : "" )
 				, e 
 				)
 			);

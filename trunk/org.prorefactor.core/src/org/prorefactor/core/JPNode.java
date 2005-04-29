@@ -352,14 +352,30 @@ public class JPNode extends BaseAST implements IJPNode {
 	}
 
 
-	public JPNode nextSibling() {
-		return (JPNode) getNextSibling();
+	/** First child if there is one, otherwise next sibling. */
+	public JPNode nextNode() {
+		if (firstChild()!=null) return firstChild();
+		return nextSibling();
 	}
-
+	
+	
+	public JPNode nextSibling() { return (JPNode) getNextSibling(); }
 
 
 	public JPNode parent() { return parent; }
 
+	
+	/** Previous sibling if there is one, otherwise parent. */
+	public JPNode prevNode() {
+		if (parent==null) return null;
+		JPNode n = parent().firstChild();
+		if (n==null || n==this) return parent;
+		while (n!=null) {
+			if (n.nextSibling()==this) return n;
+			n = n.nextSibling();
+		}
+		throw new AssertionError("JPNode.prevNode() failed - corrupt tree?");
+	}
 
 
 	/** @see #getLink(Integer) */

@@ -3,9 +3,10 @@
 	package org.prorefactor.treeparser01;
 
 	import org.prorefactor.core.IJPNode;
-import org.prorefactor.treeparser.CQ;
-import org.prorefactor.treeparser.IJPTreeParser;
-
+	import org.prorefactor.treeparser.CQ;
+	import org.prorefactor.treeparser.IJPTreeParser;
+	
+	import java.util.ArrayList;
 
 import antlr.TreeParser;
 import antlr.Token;
@@ -45,25 +46,47 @@ public class TreeParser01 extends antlr.TreeParser       implements TreeParser01
 
 	/** Create a tree parser with a specific action object. */
 	public TreeParser01(TP01Action actionObject) {
-		tpSupport = actionObject;
+		action = actionObject;
 	}
 	
-	/** By default, the support object is a new TP01Support. */
-	TP01Action tpSupport = null; // See initialization block, below.
+	/** By default, the action object is a new TP01Support. */
+	TP01Action action = null; // See initialization block, below.
 
 	// Initialization block
 	{
-		if (tpSupport==null) tpSupport = new TP01Support();
+		if (action==null) action = new TP01Support();
 	}
 
-	/** Get the support object. */
-	public TP01Action getTpSupport() { return tpSupport; }
+	/** Get the action object. getActionObject and getTpSupport are identical.
+	 * @deprecated
+	 */
+	public TP01Action getTpSupport() { return action; }
+	/** Get the action object. getActionObject and getTpSupport are identical. */
+	public TP01Action getActionObject() { return action; }
 
-	/** Set the support object.
+	/** Set the action object.
 	 * By default, the support object is a new TP01Support,
 	 * but you can configure this to be any TP01Action object.
+	 * setTpSupport and setActionObject are identical.
+	 * @deprecated
 	 */
-	public void setTpSupport(TP01Action action) { tpSupport = action; }
+	public void setTpSupport(TP01Action action) { this.action = action; }
+	/** Set the action object.
+	 * By default, the support object is a new TP01Support,
+	 * but you can configure this to be any TP01Action object.
+	 * setTpSupport and setActionObject are identical.
+	 */
+	public void setActionObject(TP01Action action) { this.action = action; }
+
+
+	/** This tree parser's stack. I think it is best to keep the stack
+	 * in the tree parser grammar for visibility sake, rather than hide
+	 * it in the support class. If we move grammar and actions around
+	 * within this .g, the effect on the stack should be highly visible.
+	 */	
+	private ArrayList stack = new ArrayList();
+	private void push(Object o) { stack.add(o); }
+	private Object pop() { return stack.remove(stack.size()-1); }
 
 
 public TreeParser01() {
@@ -80,7 +103,7 @@ public TreeParser01() {
 		match(_t,Program_root);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.programRoot(p);
+			action.programRoot(p);
 		}
 		{
 		_loop4:
@@ -1563,7 +1586,7 @@ public TreeParser01() {
 		match(_t,DO);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.blockBegin(d);
+			action.blockBegin(d);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -1647,7 +1670,7 @@ public TreeParser01() {
 		block_end(_t);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
-			tpSupport.blockEnd();
+			action.blockEnd();
 		}
 		_t = __t1113;
 		_t = _t.getNextSibling();
@@ -1664,7 +1687,7 @@ public TreeParser01() {
 		match(_t,FOR);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.blockBegin(f);
+			action.blockBegin(f);
 		}
 		for_record_spec(_t,CQ.INITWEAK);
 		_t = _retTree;
@@ -1689,7 +1712,7 @@ public TreeParser01() {
 		block_end(_t);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
-			tpSupport.blockEnd();
+			action.blockEnd();
 		}
 		_t = __t1228;
 		_t = _t.getNextSibling();
@@ -1706,7 +1729,7 @@ public TreeParser01() {
 		match(_t,REPEAT);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.blockBegin(r);
+			action.blockBegin(r);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -1790,7 +1813,7 @@ public TreeParser01() {
 		block_end(_t);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
-			tpSupport.blockEnd();
+			action.blockEnd();
 		}
 		_t = __t2000;
 		_t = _t.getNextSibling();
@@ -1869,7 +1892,7 @@ public TreeParser01() {
 		tbl(_t,CQ.BUFFERSYMBOL);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
-			tpSupport.strongScope(rn1);
+			action.strongScope(rn1);
 		}
 		{
 		_loop21:
@@ -1883,7 +1906,7 @@ public TreeParser01() {
 				tbl(_t,CQ.BUFFERSYMBOL);
 				_t = _retTree;
 				if ( inputState.guessing==0 ) {
-					tpSupport.strongScope(rn2);
+					action.strongScope(rn2);
 				}
 			}
 			else {
@@ -1908,7 +1931,7 @@ public TreeParser01() {
 		match(_t,RECORD_NAME);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.recordNameNode(id, contextQualifier);
+			action.recordNameNode(id, contextQualifier);
 		}
 		_retTree = _t;
 	}
@@ -2203,7 +2226,7 @@ public TreeParser01() {
 		_t = __t124;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.field(ref, id, contextQualifier, 0);
+			action.field(ref, id, contextQualifier, 0);
 		}
 		_retTree = _t;
 	}
@@ -3889,7 +3912,7 @@ public TreeParser01() {
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.recordNameNode(rp1, contextQualifier);
+			action.recordNameNode(rp1, contextQualifier);
 		}
 		recordphrase(_t);
 		_t = _retTree;
@@ -3932,7 +3955,7 @@ public TreeParser01() {
 				match(_t,RECORD_NAME);
 				_t = _t.getFirstChild();
 				if ( inputState.guessing==0 ) {
-					tpSupport.recordNameNode(rp2, contextQualifier);
+					action.recordNameNode(rp2, contextQualifier);
 				}
 				recordphrase(_t);
 				_t = _retTree;
@@ -10299,7 +10322,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -10720,6 +10743,9 @@ public TreeParser01() {
 		}
 		state_end(_t);
 		_t = _retTree;
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
+		}
 		_t = __t735;
 		_t = _t.getNextSibling();
 		_retTree = _t;
@@ -10802,7 +10828,7 @@ public TreeParser01() {
 		tbl(_t,CQ.SYMBOL);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
-			tpSupport.defineBuffer(def, id, rec, false);
+			action.defineBuffer(def, id, rec, false);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -10965,7 +10991,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		{
 		_loop813:
@@ -11322,6 +11348,9 @@ public TreeParser01() {
 		}
 		state_end(_t);
 		_t = _retTree;
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
+		}
 		_t = __t788;
 		_t = _t.getNextSibling();
 		_retTree = _t;
@@ -11397,7 +11426,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		AST tmp729_AST_in = (AST)_t;
 		match(_t,FOR);
@@ -11477,6 +11506,9 @@ public TreeParser01() {
 		}
 		state_end(_t);
 		_t = _retTree;
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
+		}
 		_t = __t816;
 		_t = _t.getNextSibling();
 		_retTree = _t;
@@ -11552,7 +11584,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		AST tmp737_AST_in = (AST)_t;
 		match(_t,FOR);
@@ -11621,6 +11653,9 @@ public TreeParser01() {
 			}
 			
 		} while (true);
+		}
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
 		}
 		_t = __t836;
 		_t = _t.getNextSibling();
@@ -11697,7 +11732,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		{
 		_loop857:
@@ -11842,6 +11877,9 @@ public TreeParser01() {
 		}
 		state_end(_t);
 		_t = _retTree;
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
+		}
 		_t = __t852;
 		_t = _t.getNextSibling();
 		_retTree = _t;
@@ -11917,7 +11955,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		{
 		_loop880:
@@ -12062,6 +12100,9 @@ public TreeParser01() {
 		}
 		state_end(_t);
 		_t = _retTree;
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
+		}
 		_t = __t871;
 		_t = _t.getNextSibling();
 		_retTree = _t;
@@ -12137,7 +12178,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		{
 		_loop888:
@@ -12169,6 +12210,9 @@ public TreeParser01() {
 		}
 		state_end(_t);
 		_t = _retTree;
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
+		}
 		_t = __t883;
 		_t = _t.getNextSibling();
 		_retTree = _t;
@@ -12266,7 +12310,7 @@ public TreeParser01() {
 			tbl(_t,CQ.SYMBOL);
 			_t = _retTree;
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineBuffer(def, bid, brec, true);
+				action.defineBuffer(def, bid, brec, true);
 			}
 			{
 			if (_t==null) _t=ASTNULL;
@@ -12485,7 +12529,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					tpSupport.defineVariable(def, id);
+					action.addToScope(action.defineVariable(def, id, HANDLE));
 				}
 				break;
 			}
@@ -12558,7 +12602,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					tpSupport.defineVariable(def, id3);
+					action.addToScope(action.defineVariable(def, id3, HANDLE));
 				}
 				break;
 			}
@@ -12568,7 +12612,7 @@ public TreeParser01() {
 				match(_t,ID);
 				_t = _t.getNextSibling();
 				if ( inputState.guessing==0 ) {
-					tpSupport.defineVariable(def, id2);
+					push(action.defineVariable(def, id2));
 				}
 				defineparam_var(_t);
 				_t = _retTree;
@@ -12591,6 +12635,9 @@ public TreeParser01() {
 					throw new NoViableAltException(_t);
 				}
 				}
+				}
+				if ( inputState.guessing==0 ) {
+					action.addToScope(pop());
 				}
 				break;
 			}
@@ -12684,6 +12731,9 @@ public TreeParser01() {
 		id = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
+		if ( inputState.guessing==0 ) {
+			push(action.defineVariable(def, id));
+		}
 		AST tmp797_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
@@ -12799,7 +12849,7 @@ public TreeParser01() {
 		_t = __t952;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			action.addToScope(pop());
 		}
 		_retTree = _t;
 	}
@@ -12873,6 +12923,9 @@ public TreeParser01() {
 		id = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
+		if ( inputState.guessing==0 ) {
+			push(action.defineVariable(def, id));
+		}
 		{
 		_loop973:
 		do {
@@ -13003,7 +13056,7 @@ public TreeParser01() {
 		_t = __t964;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			action.addToScope(pop());
 		}
 		_retTree = _t;
 	}
@@ -13082,7 +13135,7 @@ public TreeParser01() {
 		_t = __t976;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			action.addToScope(action.defineVariable(def, id));
 		}
 		_retTree = _t;
 	}
@@ -13156,6 +13209,9 @@ public TreeParser01() {
 		id = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
+		if ( inputState.guessing==0 ) {
+			push(action.defineVariable(def, id));
+		}
 		{
 		_loop986:
 		do {
@@ -13189,7 +13245,7 @@ public TreeParser01() {
 		_t = __t981;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(def, id);
+			action.addToScope(pop());
 		}
 		_retTree = _t;
 	}
@@ -13265,7 +13321,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineTemptable(def, id);
+				action.defineTemptable(def, id);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -13366,7 +13422,7 @@ public TreeParser01() {
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-					tpSupport.defineBuffer(bt, bt, id, false);
+					action.defineBuffer(bt, bt, id, false);
 			}
 			_t = __t998;
 			_t = _t.getNextSibling();
@@ -13642,7 +13698,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.defineWorktable(def, id);
+				action.defineWorktable(def, id);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -13805,7 +13861,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.defineVariable(def, id);
+			push(action.defineVariable(def, id));
 		}
 		{
 		_loop1041:
@@ -13845,6 +13901,9 @@ public TreeParser01() {
 		_t = _retTree;
 		_t = __t1036;
 		_t = _t.getNextSibling();
+		if ( inputState.guessing==0 ) {
+			action.addToScope(pop());
+		}
 		_retTree = _t;
 	}
 	
@@ -15295,7 +15354,7 @@ public TreeParser01() {
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.recordNameNode(r, CQ.INIT);
+			action.recordNameNode(r, CQ.INIT);
 		}
 		recordphrase(_t);
 		_t = _retTree;
@@ -15511,7 +15570,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.scopeAdd(f);
+				action.scopeAdd(f);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -15693,7 +15752,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.funcForward(id);
+				action.funcForward(id);
 			}
 			break;
 		}
@@ -15703,7 +15762,7 @@ public TreeParser01() {
 			block_colon(_t);
 			_t = _retTree;
 			if ( inputState.guessing==0 ) {
-				tpSupport.funcDef(f, id);
+				action.funcDef(f, id);
 			}
 			code_block(_t);
 			_t = _retTree;
@@ -15817,7 +15876,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					tpSupport.funcForward(id);
+					action.funcForward(id);
 				}
 			}
 			else if ((_t.getType()==IN_KW||_t.getType()==MAP)) {
@@ -15900,7 +15959,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					tpSupport.funcForward(id);
+					action.funcForward(id);
 				}
 			}
 		else {
@@ -15911,7 +15970,7 @@ public TreeParser01() {
 		_t = __t1330;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.scopeClose(f);
+				action.scopeClose(f);
 		}
 		_retTree = _t;
 	}
@@ -17789,6 +17848,7 @@ public TreeParser01() {
 		AST rec = null;
 		AST id1 = null;
 		AST id2 = null;
+		AST fld = null;
 		AST id = null;
 		
 		AST __t1665 = _t;
@@ -17796,7 +17856,7 @@ public TreeParser01() {
 		match(_t,ON);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.scopeAdd(onNode);
+			action.scopeAdd(onNode);
 		}
 		{
 		boolean synPredMatched1668 = false;
@@ -18035,7 +18095,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					tpSupport.defineBufferForTrigger(t1);
+					action.defineBufferForTrigger(t1);
 				}
 				break;
 			}
@@ -18355,7 +18415,7 @@ public TreeParser01() {
 					}
 					}
 					if ( inputState.guessing==0 ) {
-						tpSupport.defineBuffer(id1, id1, rec, true);
+						action.defineBuffer(id1, id1, rec, true);
 					}
 					break;
 				}
@@ -18485,7 +18545,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					if (id1 == null) tpSupport.defineBufferForTrigger(rec);
+					if (id1 == null) action.defineBufferForTrigger(rec);
 				}
 				{
 				if (_t==null) _t=ASTNULL;
@@ -18655,7 +18715,7 @@ public TreeParser01() {
 					}
 					}
 					if ( inputState.guessing==0 ) {
-						tpSupport.defineBuffer(id2, id2, rec, true);
+						action.defineBuffer(id2, id2, rec, true);
 					}
 					break;
 				}
@@ -18793,6 +18853,7 @@ public TreeParser01() {
 				AST tmp1067_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
+				fld = _t==ASTNULL ? null : (AST)_t;
 				fld(_t,CQ.INIT);
 				_t = _retTree;
 				{
@@ -18969,6 +19030,9 @@ public TreeParser01() {
 					id = (AST)_t;
 					match(_t,ID);
 					_t = _t.getNextSibling();
+					if ( inputState.guessing==0 ) {
+						push(action.defineVariable(id, id, fld));
+					}
 					{
 					if (_t==null) _t=ASTNULL;
 					if ((_tokenSet_16.member(_t.getType()))) {
@@ -18981,6 +19045,9 @@ public TreeParser01() {
 						throw new NoViableAltException(_t);
 					}
 					
+					}
+					if ( inputState.guessing==0 ) {
+						action.addToScope(pop());
 					}
 					break;
 				}
@@ -19107,9 +19174,6 @@ public TreeParser01() {
 					throw new NoViableAltException(_t);
 				}
 				}
-				}
-				if ( inputState.guessing==0 ) {
-						tpSupport.defineVariable(id, id);
 				}
 				break;
 			}
@@ -19950,7 +20014,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.scopeClose(onNode);
+				action.scopeClose(onNode);
 			}
 			_t = __t1665;
 			_t = _t.getNextSibling();
@@ -21006,7 +21070,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-				tpSupport.procedureBegin(p, id);
+				action.procedureBegin(p, id);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -21156,7 +21220,7 @@ public TreeParser01() {
 		}
 		}
 		if ( inputState.guessing==0 ) {
-				tpSupport.procedureEnd(p);
+				action.procedureEnd(p);
 		}
 		_t = __t1815;
 		_t = _t.getNextSibling();
@@ -22530,7 +22594,7 @@ public TreeParser01() {
 		filenameorvalue(_t);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
-			tpSupport.runBegin(r);
+			action.runBegin(r);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -22602,7 +22666,7 @@ public TreeParser01() {
 						fld(_t,CQ.UPDATING);
 						_t = _retTree;
 						if ( inputState.guessing==0 ) {
-							tpSupport.runPersistentSet(hnd);
+							action.runPersistentSet(hnd);
 						}
 						break;
 					}
@@ -22741,7 +22805,7 @@ public TreeParser01() {
 				_t = __t2055;
 				_t = _t.getNextSibling();
 				if ( inputState.guessing==0 ) {
-					tpSupport.runInHandle(hexp);
+					action.runInHandle(hexp);
 				}
 				break;
 			}
@@ -22858,7 +22922,7 @@ public TreeParser01() {
 		} while (true);
 		}
 		if ( inputState.guessing==0 ) {
-			tpSupport.runEnd(r);
+			action.runEnd(r);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -24772,7 +24836,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineBufferForTrigger(t1);
+				action.defineBufferForTrigger(t1);
 			}
 			break;
 		}
@@ -24885,7 +24949,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					tpSupport.defineBuffer(id4, id4, rec, true);
+					action.defineBuffer(id4, id4, rec, true);
 				}
 				break;
 			}
@@ -24902,7 +24966,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				if (id4 == null) tpSupport.defineBufferForTrigger(rec);
+				if (id4 == null) action.defineBufferForTrigger(rec);
 			}
 			{
 			if (_t==null) _t=ASTNULL;
@@ -24957,7 +25021,7 @@ public TreeParser01() {
 				}
 				}
 				if ( inputState.guessing==0 ) {
-					tpSupport.defineBuffer(id3, id3, rec, true);
+					action.defineBuffer(id3, id3, rec, true);
 				}
 				break;
 			}
@@ -25051,13 +25115,16 @@ public TreeParser01() {
 				id = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
+				if ( inputState.guessing==0 ) {
+					push(action.defineVariable(id, id));
+				}
 				defineparam_var(_t);
 				_t = _retTree;
+				if ( inputState.guessing==0 ) {
+					action.addToScope(pop());
+				}
 				_t = __t2311;
 				_t = _t.getNextSibling();
-				if ( inputState.guessing==0 ) {
-						tpSupport.defineVariable(id, id);
-				}
 				break;
 			}
 			case EOF:
@@ -25104,12 +25171,15 @@ public TreeParser01() {
 				id2 = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
+				if ( inputState.guessing==0 ) {
+					push(action.defineVariable(id2, id2));
+				}
 				defineparam_var(_t);
 				_t = _retTree;
 				_t = __t2314;
 				_t = _t.getNextSibling();
 				if ( inputState.guessing==0 ) {
-						tpSupport.defineVariable(id2, id2);
+					action.addToScope(pop());
 				}
 				break;
 			}
@@ -27508,14 +27578,14 @@ public TreeParser01() {
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-				tpSupport.canFindBegin(cf, r);
-								tpSupport.recordNameNode(r, CQ.INIT);
+				action.canFindBegin(cf, r);
+								action.recordNameNode(r, CQ.INIT);
 							
 		}
 		recordphrase(_t);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
-			tpSupport.canFindEnd(cf);
+			action.canFindEnd(cf);
 		}
 		_t = __t332;
 		_t = _t.getNextSibling();
@@ -31290,7 +31360,7 @@ public TreeParser01() {
 			_t = __t68;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				tpSupport.fnvExpression(exp);
+				action.fnvExpression(exp);
 			}
 			break;
 		}
@@ -31300,7 +31370,7 @@ public TreeParser01() {
 			match(_t,FILENAME);
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				tpSupport.fnvFilename(fn);
+				action.fnvFilename(fn);
 			}
 			break;
 		}
@@ -32425,7 +32495,7 @@ public TreeParser01() {
 		_t = __t131;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.field(ref, id, contextQualifier, 1);
+			action.field(ref, id, contextQualifier, 1);
 		}
 		_retTree = _t;
 	}
@@ -32528,7 +32598,7 @@ public TreeParser01() {
 		_t = __t138;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.field(ref, id, contextQualifier, 2);
+			action.field(ref, id, contextQualifier, 2);
 		}
 		_retTree = _t;
 	}
@@ -33497,7 +33567,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id1, id1);
+				action.addToScope(action.defineVariable(id1, id1, DECIMAL));
 			}
 			_t = __t199;
 			_t = _t.getNextSibling();
@@ -33530,7 +33600,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id2, id2);
+				action.addToScope(action.defineVariable(id2, id2, INTEGER));
 			}
 			_t = __t201;
 			_t = _t.getNextSibling();
@@ -33563,7 +33633,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id3, id3);
+				action.addToScope(action.defineVariable(id3, id3, DECIMAL));
 			}
 			_t = __t203;
 			_t = _t.getNextSibling();
@@ -33596,7 +33666,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id4, id4);
+				action.addToScope(action.defineVariable(id4, id4, DECIMAL));
 			}
 			_t = __t205;
 			_t = _t.getNextSibling();
@@ -33629,7 +33699,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id5, id5);
+				action.addToScope(action.defineVariable(id5, id5, DECIMAL));
 			}
 			_t = __t207;
 			_t = _t.getNextSibling();
@@ -33662,7 +33732,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id6, id6);
+				action.addToScope(action.defineVariable(id6, id6, DECIMAL));
 			}
 			_t = __t209;
 			_t = _t.getNextSibling();
@@ -33695,7 +33765,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id7, id7);
+				action.addToScope(action.defineVariable(id7, id7, DECIMAL));
 			}
 			_t = __t211;
 			_t = _t.getNextSibling();
@@ -33728,7 +33798,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id8, id8);
+				action.addToScope(action.defineVariable(id8, id8, DECIMAL));
 			}
 			_t = __t213;
 			_t = _t.getNextSibling();
@@ -33761,7 +33831,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id9, id9);
+				action.addToScope(action.defineVariable(id9, id9, DECIMAL));
 			}
 			_t = __t215;
 			_t = _t.getNextSibling();
@@ -33794,7 +33864,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineVariable(id10, id10);
+				action.addToScope(action.defineVariable(id10, id10, DECIMAL));
 			}
 			_t = __t217;
 			_t = _t.getNextSibling();
@@ -42981,12 +43051,12 @@ public TreeParser01() {
 				case COPYLOB:
 				{
 					if ( inputState.guessing==0 ) {
-						tpSupport.scopeAdd(t);
+						action.scopeAdd(t);
 					}
 					blockorstate(_t);
 					_t = _retTree;
 					if ( inputState.guessing==0 ) {
-						tpSupport.scopeClose(t);
+						action.scopeClose(t);
 					}
 					break;
 				}
@@ -43625,7 +43695,7 @@ public TreeParser01() {
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
-			tpSupport.recordNameNode(r, CQ.INIT);
+			action.recordNameNode(r, CQ.INIT);
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -44000,7 +44070,7 @@ public TreeParser01() {
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-					tpSupport.defineVariable(id, id);
+				push(action.defineVariable(id, id));
 			}
 			{
 			_loop902:
@@ -44094,6 +44164,9 @@ public TreeParser01() {
 			}
 			}
 			}
+			if ( inputState.guessing==0 ) {
+				action.addToScope(pop());
+			}
 			_t = __t898;
 			_t = _t.getNextSibling();
 			break;
@@ -44107,6 +44180,9 @@ public TreeParser01() {
 			id2 = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
+			if ( inputState.guessing==0 ) {
+				push(action.defineVariable(id2, id2));
+			}
 			{
 			_loop907:
 			do {
@@ -44154,11 +44230,11 @@ public TreeParser01() {
 				}
 			} while (true);
 			}
+			if ( inputState.guessing==0 ) {
+				action.addToScope(pop());
+			}
 			_t = __t904;
 			_t = _t.getNextSibling();
-			if ( inputState.guessing==0 ) {
-					tpSupport.defineVariable(id2, id2);
-			}
 			break;
 		}
 		case RULE:
@@ -44395,7 +44471,7 @@ public TreeParser01() {
 			_t = __t939;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				tpSupport.defAs(as);
+				action.defAs(as);
 			}
 			break;
 		}
@@ -44590,7 +44666,7 @@ public TreeParser01() {
 				_t = __t948;
 				_t = _t.getNextSibling();
 				if ( inputState.guessing==0 ) {
-					tpSupport.defLike(li);
+					action.defLike(li);
 				}
 				break;
 			}
@@ -45210,7 +45286,7 @@ public TreeParser01() {
 		_t = __t1014;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.defineTableLike(rec);
+			action.defineTableLike(rec);
 		}
 		_retTree = _t;
 	}
@@ -45228,7 +45304,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			tpSupport.defineTableField(id);
+			action.defineTableField(id);
 		}
 		{
 		_loop1024:
@@ -45268,7 +45344,7 @@ public TreeParser01() {
 			_t = __t1199;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				tpSupport.defAs(as);
+				action.defAs(as);
 			}
 			break;
 		}
@@ -45417,7 +45493,7 @@ public TreeParser01() {
 			_t = __t1206;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				tpSupport.defLike(li);
+				action.defLike(li);
 			}
 			break;
 		}
@@ -45924,7 +46000,7 @@ public TreeParser01() {
 			_t = __t1350;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				tpSupport.defineBuffer(id, id, rec, true);
+				action.defineBuffer(id, id, rec, true);
 			}
 			break;
 		}
@@ -46079,7 +46155,7 @@ public TreeParser01() {
 			}
 			}
 			if ( inputState.guessing==0 ) {
-					tpSupport.defineVariable(id2, id2);
+				action.addToScope(action.defineVariable(id2, id2, HANDLE));
 			}
 			break;
 		}
@@ -46160,8 +46236,8 @@ public TreeParser01() {
 			}
 			if ( inputState.guessing==0 ) {
 					if (id != null) {
-								tpSupport.defineVariable(id, id);
-								tpSupport.defAs(as);
+								action.addToScope(action.defineVariable(id, id));
+								action.defAs(as);
 							}
 						
 			}

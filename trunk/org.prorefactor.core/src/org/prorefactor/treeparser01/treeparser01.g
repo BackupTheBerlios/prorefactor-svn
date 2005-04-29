@@ -5,10 +5,10 @@ treeparser01.g - Primary tree walker.
 This tree parser adds base attributes to the tree, such as
 name resolution, scoping, etc.
 
-To find actions taken within this grammar, search for "tpSupport",
-which is the tree parser support object.
+To find actions taken within this grammar, search for "action.",
+which is the tree parser action object.
 
-Copyright (C) 2001-2004 Joanju Limited.
+Copyright (C) 2001-2005 Joanju (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,6 +23,8 @@ header {
 	import org.prorefactor.core.IJPNode;
 	import org.prorefactor.treeparser.CQ;
 	import org.prorefactor.treeparser.IJPTreeParser;
+	
+	import java.util.ArrayList;
 }
 
 
@@ -69,25 +71,47 @@ options {
 
 	/** Create a tree parser with a specific action object. */
 	public TreeParser01(TP01Action actionObject) {
-		tpSupport = actionObject;
+		action = actionObject;
 	}
 	
-	/** By default, the support object is a new TP01Support. */
-	TP01Action tpSupport = null; // See initialization block, below.
+	/** By default, the action object is a new TP01Support. */
+	TP01Action action = null; // See initialization block, below.
 
 	// Initialization block
 	{
-		if (tpSupport==null) tpSupport = new TP01Support();
+		if (action==null) action = new TP01Support();
 	}
 
-	/** Get the support object. */
-	public TP01Action getTpSupport() { return tpSupport; }
+	/** Get the action object. getActionObject and getTpSupport are identical.
+	 * @deprecated
+	 */
+	public TP01Action getTpSupport() { return action; }
+	/** Get the action object. getActionObject and getTpSupport are identical. */
+	public TP01Action getActionObject() { return action; }
 
-	/** Set the support object.
+	/** Set the action object.
 	 * By default, the support object is a new TP01Support,
 	 * but you can configure this to be any TP01Action object.
+	 * setTpSupport and setActionObject are identical.
+	 * @deprecated
 	 */
-	public void setTpSupport(TP01Action action) { tpSupport = action; }
+	public void setTpSupport(TP01Action action) { this.action = action; }
+	/** Set the action object.
+	 * By default, the support object is a new TP01Support,
+	 * but you can configure this to be any TP01Action object.
+	 * setTpSupport and setActionObject are identical.
+	 */
+	public void setActionObject(TP01Action action) { this.action = action; }
+
+
+	/** This tree parser's stack. I think it is best to keep the stack
+	 * in the tree parser grammar for visibility sake, rather than hide
+	 * it in the support class. If we move grammar and actions around
+	 * within this .g, the effect on the stack should be highly visible.
+	 */	
+	private ArrayList stack = new ArrayList();
+	private void push(Object o) { stack.add(o); }
+	private Object pop() { return stack.remove(stack.size()-1); }
 
 
 } // end of what's added to the top of the class definition
@@ -100,7 +124,7 @@ options {
 
 
 program
-	:	#(	p:Program_root {tpSupport.programRoot(#p);}
+	:	#(	p:Program_root {action.programRoot(#p);}
 			(blockorstate)*
 			Program_tail
 		)
@@ -133,8 +157,8 @@ block_end
 	|	END state_end
 	;
 block_for
-	:	#(	FOR rn1:tbl[CQ.BUFFERSYMBOL] {tpSupport.strongScope(#rn1);}
-			(COMMA rn2:tbl[CQ.BUFFERSYMBOL] {tpSupport.strongScope(#rn2);} )*
+	:	#(	FOR rn1:tbl[CQ.BUFFERSYMBOL] {action.strongScope(#rn1);}
+			(COMMA rn2:tbl[CQ.BUFFERSYMBOL] {action.strongScope(#rn2);} )*
 		)
 	;
 block_opt
@@ -459,8 +483,8 @@ anyorvalue
 	|	TYPELESS_TOKEN
 	;
 filenameorvalue 
-	:	#(VALUE LEFTPAREN exp:expression RIGHTPAREN ) { tpSupport.fnvExpression(#exp); }
-	|	fn:FILENAME { tpSupport.fnvFilename(#fn); }
+	:	#(VALUE LEFTPAREN exp:expression RIGHTPAREN ) { action.fnvExpression(#exp); }
+	|	fn:FILENAME { action.fnvFilename(#fn); }
 	;
 valueexpression
 	:	#(VALUE LEFTPAREN expression RIGHTPAREN )
@@ -506,7 +530,7 @@ exprt
 	:	constant
 	|	#(USER_FUNC parameterlist_noroot )
 	|	functioncall
-	|  systemhandlename
+	|	systemhandlename
 	|	widattr
 	|	fld[CQ.REF]
 	|	#(Entered_func fld[CQ.SYMBOL] (NOT)? ENTERED )
@@ -553,7 +577,7 @@ widname
 	;
 
 tbl[int contextQualifier]
-	:	id:RECORD_NAME {tpSupport.recordNameNode(#id, contextQualifier);}
+	:	id:RECORD_NAME {action.recordNameNode(#id, contextQualifier);}
 	;
 
 // The only difference between fld and fld1 is that fld1 passes 1 to
@@ -562,15 +586,15 @@ tbl[int contextQualifier]
 // referenced table.
 fld[int contextQualifier]
 	:	#(ref:Field_ref (INPUT)? (#(FRAME ID) | #(BROWSE ID))? id:ID (array_subscript)? )
-		{tpSupport.field(#ref, #id, contextQualifier, 0);}
+		{action.field(#ref, #id, contextQualifier, 0);}
 	;
 fld1[int contextQualifier]
 	:	#(ref:Field_ref (INPUT)? (#(FRAME ID) | #(BROWSE ID))? id:ID (array_subscript)? )
-		{tpSupport.field(#ref, #id, contextQualifier, 1);}
+		{action.field(#ref, #id, contextQualifier, 1);}
 	;
 fld2[int contextQualifier]
 	:	#(ref:Field_ref (INPUT)? (#(FRAME ID) | #(BROWSE ID))? id:ID (array_subscript)? )
-		{tpSupport.field(#ref, #id, contextQualifier, 2);}
+		{action.field(#ref, #id, contextQualifier, 2);}
 	;
 
 array_subscript
@@ -716,17 +740,20 @@ aggregatephrase
 	:	#(Aggregate_phrase LEFTPAREN (aggregate_opt)+ ( #(BY expression (DESCENDING)? ) )* RIGHTPAREN )
 	;
 aggregate_opt
+
 	// It appears that the compiler treats COUNT, MAX, TOTAL, etc as new variables.
-	:	#(id1:AVERAGE (label_constant)? {tpSupport.defineVariable(#id1, #id1);} )
-	|	#(id2:COUNT (label_constant)? {tpSupport.defineVariable(#id2, #id2);} )
-	|	#(id3:MAXIMUM (label_constant)? {tpSupport.defineVariable(#id3, #id3);} )
-	|	#(id4:MINIMUM (label_constant)? {tpSupport.defineVariable(#id4, #id4);} )
-	|	#(id5:TOTAL (label_constant)? {tpSupport.defineVariable(#id5, #id5);} )
-	|	#(id6:SUBAVERAGE (label_constant)? {tpSupport.defineVariable(#id6, #id6);} )
-	|	#(id7:SUBCOUNT (label_constant)? {tpSupport.defineVariable(#id7, #id7);} )
-	|	#(id8:SUBMAXIMUM (label_constant)? {tpSupport.defineVariable(#id8, #id8);} )
-	|	#(id9:SUBMINIMUM (label_constant)? {tpSupport.defineVariable(#id9, #id9);} )
-	|	#(id10:SUBTOTAL (label_constant)? {tpSupport.defineVariable(#id10, #id10);} )
+	// TODO: To get an accurrate datatype for things like MAXIMUM, we would have to work out
+	// the datatype of the expression being accumulated.
+	:	#(id1:AVERAGE (label_constant)? {action.addToScope(action.defineVariable(#id1, #id1, DECIMAL));} )
+	|	#(id2:COUNT (label_constant)? {action.addToScope(action.defineVariable(#id2, #id2, INTEGER));} )
+	|	#(id3:MAXIMUM (label_constant)? {action.addToScope(action.defineVariable(#id3, #id3, DECIMAL));} )
+	|	#(id4:MINIMUM (label_constant)? {action.addToScope(action.defineVariable(#id4, #id4, DECIMAL));} )
+	|	#(id5:TOTAL (label_constant)? {action.addToScope(action.defineVariable(#id5, #id5, DECIMAL));} )
+	|	#(id6:SUBAVERAGE (label_constant)? {action.addToScope(action.defineVariable(#id6, #id6, DECIMAL));} )
+	|	#(id7:SUBCOUNT (label_constant)? {action.addToScope(action.defineVariable(#id7, #id7, DECIMAL));} )
+	|	#(id8:SUBMAXIMUM (label_constant)? {action.addToScope(action.defineVariable(#id8, #id8, DECIMAL));} )
+	|	#(id9:SUBMINIMUM (label_constant)? {action.addToScope(action.defineVariable(#id9, #id9, DECIMAL));} )
+	|	#(id10:SUBTOTAL (label_constant)? {action.addToScope(action.defineVariable(#id10, #id10, DECIMAL));} )
 	;
 
 aliasfunc
@@ -859,11 +886,11 @@ candofunc
 canfindfunc
 	:	#(	cf:CANFIND LEFTPAREN (findwhich)?
 			#(	r:RECORD_NAME
-				{	tpSupport.canFindBegin(#cf, #r);
-					tpSupport.recordNameNode(#r, CQ.INIT);
+				{	action.canFindBegin(#cf, #r);
+					action.recordNameNode(#r, CQ.INIT);
 				}
 				recordphrase
-				{tpSupport.canFindEnd(#cf);}
+				{action.canFindEnd(#cf);}
 			)
 			RIGHTPAREN
 		)
@@ -1322,8 +1349,8 @@ decryptfunc
 	;
 
 definebrowsestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BROWSE id:ID
-			{	tpSupport.defineVariable(#def, #id); }
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BROWSE
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(#(QUERY ID))? (lockhow|NOWAIT)*
 			(	#(	DISPLAY
 					(	#(	Form_item
@@ -1353,20 +1380,21 @@ definebrowsestate
 			(tooltip_expr)?
 			(#(CONTEXTHELPID expression))?
 			state_end
+			{ action.addToScope(pop()); }
 		)
 	;
 
 definebufferstate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUFFER id:ID
 			FOR rec:tbl[CQ.SYMBOL]
-			{ tpSupport.defineBuffer(#def, #id, #rec, false); }
+			{ action.defineBuffer(#def, #id, #rec, false); }
 			(PRESELECT)? (label_constant)? (#(FIELDS (fld1[CQ.SYMBOL])* ))? state_end
 		)
 	;
 
 definebuttonstate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUTTON id:ID
-			{	tpSupport.defineVariable(#def, #id); }
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUTTON 
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(	AUTOGO
 			|	AUTOENDKEY
 			|	DEFAULT
@@ -1389,15 +1417,17 @@ definebuttonstate
 			)*
 			(triggerphrase)?
 			state_end
+			{ action.addToScope(pop()); }
 		)
 	;
 
 definedatasetstate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASET id:ID
-			{tpSupport.defineVariable(#def, #id);}
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASET
+			id:ID { push(action.defineVariable(#def, #id)); }
 			FOR tbl[CQ.INIT] (COMMA tbl[CQ.INIT])*
 			( data_relation ( (COMMA)? data_relation)* )?
 			state_end
+			{ action.addToScope(pop()); }
 		)
 	;
 data_relation
@@ -1411,32 +1441,34 @@ field_mapping_phrase
 	;
 
 definedatasourcestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASOURCE id:ID
-			{tpSupport.defineVariable(#def, #id);}
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASOURCE
+			id:ID { push(action.defineVariable(#def, #id)); }
 			FOR (#(QUERY ID))?
 			(source_buffer_phrase)? (COMMA source_buffer_phrase)*
+			{ action.addToScope(pop()); }
 		)
 	;
 source_buffer_phrase
-	:	#(	r:RECORD_NAME {tpSupport.recordNameNode(#r, CQ.INIT);}
+	:	#(	r:RECORD_NAME {action.recordNameNode(#r, CQ.INIT);}
 			( KEYS LEFTPAREN ( ROWID | fld[CQ.SYMBOL] (COMMA fld[CQ.SYMBOL])* ) RIGHTPAREN )?
 		)
 	;
 
 defineframestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? FRAME id:ID
-			{	tpSupport.defineVariable(#def, #id); }
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? FRAME
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(form_item[CQ.SYMBOL])*
 			(	#(HEADER (display_item)+ )
 			|	#(BACKGROUND (display_item)+ )
 			)?
 			(#(EXCEPT (fld1[CQ.SYMBOL])*))?  (framephrase)?  state_end
+			{ action.addToScope(pop()); }
 		)
 	;
 
 defineimagestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? IMAGE id:ID
-			{	tpSupport.defineVariable(#def, #id); }
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? IMAGE
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(	#(LIKE fld[CQ.SYMBOL] (VALIDATE)?)
 			|	imagephrase_opt 
 			|	sizephrase
@@ -1448,13 +1480,15 @@ defineimagestate
 			)*
 			(triggerphrase)?
 			state_end
+			{ action.addToScope(pop()); }
 		)
 	;
 
 definemenustate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? MENU id:ID
-			{	tpSupport.defineVariable(#def, #id); }
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? MENU
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
+			{ action.addToScope(pop()); }
 		)
 	;
 menu_opt
@@ -1467,8 +1501,8 @@ menu_opt
 	|	SUBMENUHELP
 	;
 menu_list_item
-	:	(	#(	MENUITEM id:ID
-				{	tpSupport.defineVariable(#id, #id); }
+	:	(	#(	MENUITEM
+				id:ID { push(action.defineVariable(#id, #id)); }
 				(	#(ACCELERATOR expression )
 				|	color_expr
 				|	DISABLED
@@ -1478,9 +1512,13 @@ menu_list_item
 				|	TOGGLEBOX
 				)*
 				(triggerphrase)? 
+				{ action.addToScope(pop()); }
 			)
-		|	#(SUBMENU id2:ID (DISABLED | label_constant | #(FONT expression) | color_expr)* )
-			{	tpSupport.defineVariable(#id2, #id2); }
+		|	#(	SUBMENU
+				id2:ID { push(action.defineVariable(#id2, #id2)); }
+				(DISABLED | label_constant | #(FONT expression) | color_expr)*
+				{ action.addToScope(pop()); }
+			)
 		|	#(RULE (#(FONT expression) | color_expr)* )
 		|	SKIP
 		)
@@ -1491,15 +1529,18 @@ menu_list_item
 defineparameterstate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)?
 			(	PARAMETER BUFFER bid:ID FOR brec:tbl[CQ.SYMBOL]
-				{tpSupport.defineBuffer(#def, #bid, #brec, true);}
+				{action.defineBuffer(#def, #bid, #brec, true);}
 				(PRESELECT)? (label_constant)? (#(FIELDS (fld1[CQ.SYMBOL])* ))?
 			|	(INPUT|OUTPUT|INPUTOUTPUT|RETURN) PARAMETER
 				(	TABLE FOR tbl[CQ.TEMPTABLESYMBOL] (APPEND)?
-				|	TABLEHANDLE (FOR)? id:ID (APPEND)? {tpSupport.defineVariable(#def, #id);}
+				|	TABLEHANDLE (FOR)? id:ID (APPEND)?
+					{ action.addToScope(action.defineVariable(#def, #id, HANDLE)); }
 				|	DATASET FOR ID (APPEND|BYVALUE)*
-				|	DATASETHANDLE id3:ID (BYVALUE)? {tpSupport.defineVariable(#def, #id3);}
-				|	id2:ID { tpSupport.defineVariable(#def, #id2); }
+				|	DATASETHANDLE id3:ID (BYVALUE)?
+					{ action.addToScope(action.defineVariable(#def, #id3, HANDLE)); }
+				|	id2:ID { push(action.defineVariable(#def, #id2)); }
 					defineparam_var (triggerphrase)?
+					{ action.addToScope(pop()); }
 				)
 			)
 			state_end
@@ -1511,27 +1552,29 @@ defineparam_var
 				|	datatype_param
 				)
 			)
-			{tpSupport.defAs(#as);}
+			{action.defAs(#as);}
 		)?
 		(	options{greedy=true;}
 		:	casesens_or_not | #(FORMAT expression) | #(DECIMALS expression )
-		|	#(li:LIKE fld[CQ.SYMBOL] (VALIDATE)?) {tpSupport.defLike(#li);}
+		|	#(li:LIKE fld[CQ.SYMBOL] (VALIDATE)?) {action.defLike(#li);}
 		|	initial_constant | label_constant | NOUNDO | extentphrase
 		)*
 	;
 
 definequerystate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? QUERY id:ID
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? QUERY
+			id:ID { push(action.defineVariable(#def, #id)); }
 			FOR tbl[CQ.INIT] (record_fields)?
 			(COMMA tbl[CQ.INIT] (record_fields)?)*
 			( #(CACHE expression) | SCROLLING | RCODEINFORMATION)*
 			state_end
 		)
-		{	tpSupport.defineVariable(#def, #id); }
+		{ action.addToScope(pop()); }
 	;
 
 definerectanglestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? RECTANGLE id:ID
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? RECTANGLE
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(	NOFILL
 			|	#(EDGECHARS expression )
 			|	#(EDGEPIXELS expression )
@@ -1544,29 +1587,30 @@ definerectanglestate
 			(triggerphrase)?
 			state_end
 		)
-		{	tpSupport.defineVariable(#def, #id); }
+		{ action.addToScope(pop()); }
 	;
 
 definestreamstate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? STREAM id:ID state_end )
-		{	tpSupport.defineVariable(#def, #id); }
+		{ action.addToScope(action.defineVariable(#def, #id)); }
 	;
 
 definesubmenustate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? SUBMENU id:ID
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? SUBMENU
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
 		)
-		{	tpSupport.defineVariable(#def, #id); }
+		{ action.addToScope(pop()); }
 	;
    
 definetemptablestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? TEMPTABLE id:ID
-			{	tpSupport.defineTemptable(#def, #id); }
+			{	action.defineTemptable(#def, #id); }
 			(UNDO|NOUNDO)?
 			(def_table_like)?
 			(label_constant)?
 			(	#(	BEFORETABLE bt:ID
-					{	tpSupport.defineBuffer(#bt, #bt, #id, false); }
+					{	action.defineBuffer(#bt, #bt, #id, false); }
 				)
 			)?
 			(RCODEINFORMATION)?
@@ -1582,27 +1626,28 @@ def_table_like
 	:	#(	LIKE rec:tbl[CQ.SYMBOL] (VALIDATE)?
 			( #(USEINDEX ID ((AS|IS) PRIMARY)? ) )*
 		)
-		{ tpSupport.defineTableLike(#rec); }
+		{ action.defineTableLike(#rec); }
 	;
 def_table_field
 	:	#(	FIELD id:ID
-			{ tpSupport.defineTableField(#id); }
+			{ action.defineTableField(#id); }
 			(fieldoption)*
 		)
 	;
    
 defineworktablestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? WORKTABLE id:ID
-			{	tpSupport.defineWorktable(#def, #id); }
+			{	action.defineWorktable(#def, #id); }
 			(NOUNDO)? (def_table_like)? (label_constant)? (def_table_field)* state_end
 		)
 	;
 
 definevariablestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? VARIABLE id:ID
-			{ tpSupport.defineVariable(#def, #id); }
+	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? VARIABLE
+			id:ID { push(action.defineVariable(#def, #id)); }
 			(fieldoption)* (triggerphrase)? state_end
 		)
+		{ action.addToScope(pop()); }
 	;
 
 deletestate
@@ -1667,9 +1712,9 @@ display_with
 	;
 
 dostate
-	:	#(	d:DO {tpSupport.blockBegin(#d);}
+	:	#(	d:DO {action.blockBegin(#d);}
 			(block_for)? (block_preselect)? (block_opt)* block_colon
-			code_block block_end {tpSupport.blockEnd();}
+			code_block block_end {action.blockEnd();}
 		)
 	;
 
@@ -1758,7 +1803,7 @@ extentphrase
 	;
 
 fieldoption
-	:	#(as:AS datatype_field )  {tpSupport.defAs(#as);}
+	:	#(as:AS datatype_field )  {action.defAs(#as);}
 	|	casesens_or_not
 	|	color_expr
 	|	#(COLUMNCODEPAGE expression )
@@ -1771,7 +1816,7 @@ fieldoption
 	|	#(HELP constant)
 	|	initial_constant
 	|	label_constant
-	|	#(li:LIKE fld[CQ.SYMBOL] (VALIDATE)? ) {tpSupport.defLike(#li);}
+	|	#(li:LIKE fld[CQ.SYMBOL] (VALIDATE)? ) {action.defLike(#li);}
 	|	#(MOUSEPOINTER expression )
 	|	NOUNDO
 	|	viewasphrase
@@ -1789,7 +1834,7 @@ fillfunc
 findstate
 	:	#(	FIND (findwhich)?
 			#(	r:RECORD_NAME
-				{tpSupport.recordNameNode(#r, CQ.INIT);}
+				{action.recordNameNode(#r, CQ.INIT);}
 				recordphrase
 			)
 			(NOWAIT|NOPREFETCH|NOERROR_KW)* state_end
@@ -1809,21 +1854,21 @@ fixcodepage_pseudfn
 	;
 
 forstate
-	:	#(	f:FOR {tpSupport.blockBegin(#f);}
+	:	#(	f:FOR {action.blockBegin(#f);}
 			for_record_spec[CQ.INITWEAK] (block_opt)* block_colon
-			code_block block_end {tpSupport.blockEnd();}
+			code_block block_end {action.blockEnd();}
 		)
 	;
 for_record_spec[int contextQualifier]
 	// Also used in PRESELECT
 	:	(findwhich)?
 		#(	rp1:RECORD_NAME
-			{tpSupport.recordNameNode(#rp1, contextQualifier);}
+			{action.recordNameNode(#rp1, contextQualifier);}
 			recordphrase
 		)
 		(	COMMA (findwhich)?
 			#(	rp2:RECORD_NAME
-				{tpSupport.recordNameNode(#rp2, contextQualifier);}
+				{action.recordNameNode(#rp2, contextQualifier);}
 				recordphrase
 			)
 		)*
@@ -1981,23 +2026,23 @@ framevaluefunc
 
 functionstate
 	:	#(	f:FUNCTION id:ID
-			{	tpSupport.scopeAdd(#f); }	
+			{	action.scopeAdd(#f); }	
 			(RETURNS|RETURN)? datatype_var (PRIVATE)?
 			( #(Parameter_list LEFTPAREN (function_param)? (COMMA function_param)* RIGHTPAREN ) )?
-			(	FORWARDS (LEXCOLON|PERIOD|EOF) {tpSupport.funcForward(#id);}
-			|	(IN_KW SUPER)=> IN_KW SUPER (LEXCOLON|PERIOD|EOF)  {tpSupport.funcForward(#id);}
-			|	(MAP (TO)? ID)? IN_KW expression (LEXCOLON|PERIOD|EOF)  {tpSupport.funcForward(#id);}
-			|	block_colon {tpSupport.funcDef(#f, #id);} code_block
+			(	FORWARDS (LEXCOLON|PERIOD|EOF) {action.funcForward(#id);}
+			|	(IN_KW SUPER)=> IN_KW SUPER (LEXCOLON|PERIOD|EOF)  {action.funcForward(#id);}
+			|	(MAP (TO)? ID)? IN_KW expression (LEXCOLON|PERIOD|EOF)  {action.funcForward(#id);}
+			|	block_colon {action.funcDef(#f, #id);} code_block
 				(	EOF
 				|	#(END (FUNCTION)? ) state_end
 				)
 			)
 		)
-		{	tpSupport.scopeClose(#f); }
+		{	action.scopeClose(#f); }
 	;
 function_param
 	:	#(BUFFER (id:ID)? FOR rec:tbl[CQ.SYMBOL] (PRESELECT)? )
-		{ tpSupport.defineBuffer(#id, #id, #rec, true); }
+		{ action.defineBuffer(#id, #id, #rec, true); }
 	|	#(INPUT function_param_arg )
 	|	#(OUTPUT function_param_arg )
 	|	#(INPUTOUTPUT function_param_arg )
@@ -2005,12 +2050,12 @@ function_param
 function_param_arg
 	:	(TABLE)=> TABLE (FOR)? tbl[CQ.TEMPTABLESYMBOL] (APPEND)?
 	|	(TABLEHANDLE)=> TABLEHANDLE (FOR)? id2:ID (APPEND)?
-		{	tpSupport.defineVariable(#id2, #id2); }
+		{ action.addToScope(action.defineVariable(#id2, #id2, HANDLE)); }
 	|	// ID AS is optional - you are allowed to list just the datatype.
 		(id:ID as:AS)? datatype_var (extentphrase)?
 		{	if (#id != null) {
-				tpSupport.defineVariable(#id, #id);
-				tpSupport.defAs(#as);
+				action.addToScope(action.defineVariable(#id, #id));
+				action.defAs(#as);
 			}
 		}
 	;
@@ -2457,22 +2502,25 @@ numresultsfunc
 
 onstate
 	:	#(	onNode:ON
-			{tpSupport.scopeAdd(#onNode);}
+			{action.scopeAdd(#onNode);}
 			(	(ASSIGN|CREATE|DELETE_KW|FIND|WRITE)=>
 				(	(CREATE|DELETE_KW|FIND) OF t1:tbl[CQ.SYMBOL] (label_constant)?
-					{tpSupport.defineBufferForTrigger(#t1);}
+					{action.defineBufferForTrigger(#t1);}
 				|	WRITE OF rec:tbl[CQ.SYMBOL] (label_constant)?
 					(	(NEW (BUFFER)? id1:ID) (label_constant)?
-						{tpSupport.defineBuffer(#id1, #id1, #rec, true);}
+						{action.defineBuffer(#id1, #id1, #rec, true);}
 					)?
-					{if (#id1 == null) tpSupport.defineBufferForTrigger(#rec);}
+					{if (#id1 == null) action.defineBufferForTrigger(#rec);}
 					(	(OLD (BUFFER)? id2:ID) (label_constant)?
-						{tpSupport.defineBuffer(#id2, #id2, #rec, true);}
+						{action.defineBuffer(#id2, #id2, #rec, true);}
 					)? 
-				|	ASSIGN OF fld[CQ.INIT]
+				|	ASSIGN OF fld:fld[CQ.INIT]
 					(#(TABLE LABEL constant))?
-					(OLD (VALUE)? id:ID (options{greedy=true;}:defineparam_var)?)?
-					{	tpSupport.defineVariable(#id, #id); }
+					(	OLD (VALUE)?
+						id:ID { push(action.defineVariable(#id, #id, #fld)); }
+						(options{greedy=true;}:defineparam_var)?
+						{ action.addToScope(pop()); }
+					)?
 		 		)
 				(OVERRIDE)?
 				(	REVERT state_end
@@ -2501,7 +2549,7 @@ onstate
 				|	blockorstate
 				)
 			)
-			{tpSupport.scopeClose(#onNode);}
+			{action.scopeClose(#onNode);}
 		)
 	;
 
@@ -2622,7 +2670,7 @@ pdbnamefunc
 
 procedurestate
 	:	#(	p:PROCEDURE id:ID
-			{	tpSupport.procedureBegin(#p, #id); }
+			{	action.procedureBegin(#p, #id); }
 			(	#(	EXTERNAL constant
 					(	CDECL_KW
 					|	PASCAL_KW
@@ -2635,7 +2683,7 @@ procedurestate
 			|	IN_KW SUPER
 			)?
 			block_colon code_block (EOF | #(END (PROCEDURE)?) state_end)
-			{	tpSupport.procedureEnd(#p); }
+			{	action.procedureEnd(#p); }
 		)
 	;
 
@@ -2861,9 +2909,9 @@ releaseobjectstate
 	;
 
 repeatstate
-	:	#(	r:REPEAT {tpSupport.blockBegin(#r);}
+	:	#(	r:REPEAT {action.blockBegin(#r);}
 			(block_for)? (block_preselect)? (block_opt)* block_colon
-			code_block block_end {tpSupport.blockEnd();}
+			code_block block_end {action.blockEnd();}
 		)
 	;
 
@@ -2928,18 +2976,18 @@ rowstatefunc
 	;
 
 runstate
-	:	#(	r:RUN filenameorvalue { tpSupport.runBegin(#r); } 
+	:	#(	r:RUN filenameorvalue { action.runBegin(#r); } 
 			(LEFTANGLE LEFTANGLE filenameorvalue RIGHTANGLE RIGHTANGLE)?
-			(	#(PERSISTENT ( #(SET (hnd:fld[CQ.UPDATING] { tpSupport.runPersistentSet(#hnd); } )? ) )? )
+			(	#(PERSISTENT ( #(SET (hnd:fld[CQ.UPDATING] { action.runPersistentSet(#hnd); } )? ) )? )
 			|	#(SET (fld[CQ.UPDATING])? )
 			|	#(ON (SERVER)? expression (TRANSACTION (DISTINCT)?)? )
-			|	#(IN_KW hexp:expression) { tpSupport.runInHandle(#hexp); } 
+			|	#(IN_KW hexp:expression) { action.runInHandle(#hexp); } 
 			|	#(	ASYNCHRONOUS ( #(SET (fld[CQ.UPDATING])? ) )?
 					(#(EVENTPROCEDURE expression ) )?
 					(#(IN_KW expression))?
 				)
 			)*
-			{ tpSupport.runEnd(#r); }
+			{ action.runEnd(#r); }
 			(parameterlist)?
 			(NOERROR_KW|anyorvalue)*
 			state_end
@@ -3243,7 +3291,7 @@ triggerphrase
 			#(	Code_block
 				(	#(ON eventlist (ANYWHERE)?
 						(	PERSISTENT runstate
-						|	{tpSupport.scopeAdd(#t);} blockorstate {tpSupport.scopeClose(#t);}
+						|	{action.scopeAdd(#t);} blockorstate {action.scopeClose(#t);}
 						) 
 					) 
 				)*
@@ -3256,22 +3304,29 @@ triggerprocedurestate
 	:	#(	TRIGGER PROCEDURE FOR
 			(	(CREATE|DELETE_KW|FIND|REPLICATIONCREATE|REPLICATIONDELETE)
 				OF t1:tbl[CQ.SYMBOL] (label_constant)?
-				{tpSupport.defineBufferForTrigger(#t1);}
+				{action.defineBufferForTrigger(#t1);}
 			|	(WRITE|REPLICATIONWRITE) OF rec:tbl[CQ.SYMBOL] (label_constant)?
 				(	NEW (BUFFER)? id4:ID (label_constant)?
-					{tpSupport.defineBuffer(#id4, #id4, #rec, true);}
+					{action.defineBuffer(#id4, #id4, #rec, true);}
 				)?
-				{if (#id4 == null) tpSupport.defineBufferForTrigger(#rec);}
+				{if (#id4 == null) action.defineBufferForTrigger(#rec);}
 				(	OLD (BUFFER)? id3:ID (label_constant)? 
-					{tpSupport.defineBuffer(#id3, #id3, #rec, true);}
+					{action.defineBuffer(#id3, #id3, #rec, true);}
 				)?
 			|	ASSIGN
 				(	#(OF fld[CQ.SYMBOL] (#(TABLE LABEL constant))? )
-				|	#(NEW (VALUE)? id:ID defineparam_var )
-					{	tpSupport.defineVariable(#id, #id); }
+				|	#(	NEW (VALUE)?
+						id:ID { push(action.defineVariable(#id, #id)); }
+						defineparam_var
+						{ action.addToScope(pop()); }
+					)
+					
 				)? 
-				(	#(OLD (VALUE)? id2:ID defineparam_var )
-					{	tpSupport.defineVariable(#id2, #id2); }
+				(	#(	OLD (VALUE)?
+						id2:ID { push(action.defineVariable(#id2, #id2)); }
+						defineparam_var
+					)
+					{ action.addToScope(pop()); }
 				)?
 			)
 			state_end

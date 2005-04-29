@@ -1,1897 +1,1844 @@
 :: sports2000 1
-: Benefits 6657
-DependentCare 6664
-EmpNum 6658
-HealthCare 6659
-LifeInsurance 6660
-MedicalSpending 6663
-Pension401K 6661
-StockPurchase 6662
-: BillTo 6693
-Address 6697
-Address2 6698
-BillToID 6695
-City 6699
-Contact 6702
-CustNum 6694
-Name 6696
-Phone 6703
-PostalCode 6701
-State 6700
-: Bin 6828
-BinName 6834
-BinNum 6833
-Itemnum 6831
-Qty 6832
-WarehouseNum 6830
-: Customer 5642
-Address 6372
-Address2 6373
-Balance 6382
-City 6374
-Comments 6380
-Contact 6378
-Country 6376
-CreditLimit 6381
-CustNum 6370
-Discount 6384
-EmailAddress 6387
-Fax 6386
-Name 6371
-Phone 6377
-PostalCode 6385
-SalesRep 6379
-State 6375
-Terms 6383
-: Department 6613
-DeptCode 6614
-DeptName 6615
-: Employee 6544
-Address 6548
-Address2 6549
-Birthdate 6567
-City 6550
-DeptCode 6553
-EmpNum 6565
-FirstName 6547
-HomePhone 6561
-LastName 6546
-Position 6560
-PostalCode 6552
-SickDaysLeft 6564
-StartDate 6566
-State 6551
-VacationDaysLeft 6563
-WorkPhone 6562
-: Family 6603
-BenefitDate 6607
-Birthdate 6606
-CoveredOnBenefits 6608
-EmpNum 6609
-Relation 6605
-RelativeName 6604
-: Feedback 6520
-Comments 6531
-Company 6522
-Contact 6521
-Department 6532
-EmailAddress 6528
-Fax 6530
-Phone 6529
-Rating 6533
-: InventoryTrans 6848
-BinNum 6852
-InvTransNum 6850
-InvType 6856
-Itemnum 6854
-Ordernum 6858
-PONum 6857
-Qty 6853
-TransDate 6855
-Transtime 6859
-WarehouseNum 6851
-: Invoice 6325
-Adjustment 6333
-Amount 6331
-CustNum 6329
-InvoiceDate 6330
-Invoicenum 6328
-OrderNum 6334
-ShipCharge 6335
-TotalPaid 6332
-: Item 6411
-Allocated 6421
-CatDescription 6419
-Category1 6424
-Category2 6425
-CatPage 6417
-ItemName 6416
-Itemnum 6415
-Minqty 6432
-Onhand 6420
-OnOrder 6423
-Price 6418
-ReOrder 6422
-Special 6426
-Weight 6427
-: LocalDefault 6478
-Country 6480
-CurrencySymbol 6498
-DateFormat 6497
-LocalDefNum 6499
-PostalFormat 6484
-PostalLabel 6483
-Region1Label 6481
-Region2Label 6482
-TelFormat 6496
-: Order 6707
-BillToID 6760
-Carrier 6755
-Creditcard 6764
-CustNum 6710
-Instructions 6756
-OrderDate 6752
-Ordernum 6709
-OrderStatus 6762
-PO 6757
-PromiseDate 6754
-SalesRep 6759
-ShipDate 6753
-ShipToID 6761
-Terms 6758
-WarehouseNum 6763
-: OrderLine 6445
-Discount 6454
-ExtendedPrice 6455
-Itemnum 6451
-Linenum 6450
-OrderLineStatus 6456
-Ordernum 6449
-Price 6452
-Qty 6453
-: POLine 6880
-Discount 6885
-ExtendedPrice 6886
-Itemnum 6882
-Linenum 6881
-POLineStatus 6888
-PONum 6887
-Price 6883
-Qty 6884
-: PurchaseOrder 6860
-DateEntered 6863
-PONum 6862
-POStatus 6866
-ReceiveDate 6865
-SupplierIDNum 6864
-: RefCall 6502
-CallDate 6506
-CallNum 6504
-CustNum 6505
-Parent 6508
-SalesRep 6507
-Txt 6509
-: Salesrep 6465
-MonthQuota 6469
-Region 6467
-RepName 6466
-SalesRep 6468
-: ShipTo 6667
-Address 6671
-Address2 6672
-City 6673
-Comments 6688
-Contact 6670
-CustNum 6668
-Name 6689
-Phone 6676
-PostalCode 6675
-ShipToID 6669
-State 6674
-: State 6472
-Region 6475
-State 6473
-StateName 6474
-: Supplier 6776
-Address 6788
-Address2 6789
-City 6790
-Comments 6796
-Country 6792
-Discount 6799
-LoginDate 6795
-Name 6787
-Password 6794
-Phone 6793
-PostalCode 6798
-ShipAmount 6797
-State 6791
-SupplierIDNum 6786
-: SupplierItemXref 6892
-Itemnum 6894
-SupplierIDNum 6893
-: TimeSheet 6575
-AMTimeIn 6579
-AMTimeOut 6580
-DayRecorded 6577
-EmpNum 6576
-OvertimeHours 6592
-PMTimeIn 6581
-PMTimeOut 6582
-RegularHours 6583
-TypeRecorded 6578
-: Vacation 6596
-EmpNum 6597
-EndDate 6599
-StartDate 6598
-: Warehouse 6802
-Address 6818
-Address2 6819
-City 6820
-Country 6817
-Phone 6823
-PostalCode 6822
-State 6821
-WarehouseName 6816
-WarehouseNum 6804
+: Benefits 7697
+DependentCare 7712 INTEGER
+EmpNum 7698 INTEGER
+HealthCare 7699 CHARACTER
+LifeInsurance 7700 INTEGER
+MedicalSpending 7703 INTEGER
+Pension401K 7701 INTEGER
+StockPurchase 7702 INTEGER
+: BillTo 7730
+Address 7744 CHARACTER
+Address2 7745 CHARACTER
+BillToID 7732 INTEGER
+City 7746 CHARACTER
+Contact 7749 CHARACTER
+CustNum 7731 INTEGER
+Name 7733 CHARACTER
+Phone 7750 CHARACTER
+PostalCode 7748 CHARACTER
+State 7747 CHARACTER
+: Bin 7844
+BinName 7850 CHARACTER
+BinNum 7849 INTEGER
+Itemnum 7847 INTEGER
+Qty 7848 INTEGER
+WarehouseNum 7846 INTEGER
+: Customer 7381
+Address 7386 CHARACTER
+Address2 7387 CHARACTER
+Balance 7400 DECIMAL
+City 7392 CHARACTER
+Comments 7398 CHARACTER
+Contact 7396 CHARACTER
+Country 7394 CHARACTER
+CreditLimit 7399 DECIMAL
+CustNum 7384 INTEGER
+Discount 7402 INTEGER
+EmailAddress 7405 CHARACTER
+Fax 7404 CHARACTER
+Name 7385 CHARACTER
+Phone 7395 CHARACTER
+PostalCode 7403 CHARACTER
+SalesRep 7397 CHARACTER
+State 7393 CHARACTER
+Terms 7401 CHARACTER
+: Department 7692
+DeptCode 7693 CHARACTER
+DeptName 7694 CHARACTER
+: Employee 7562
+Address 7566 CHARACTER
+Address2 7567 CHARACTER
+Birthdate 7648 DATE
+City 7568 CHARACTER
+DeptCode 7571 CHARACTER
+EmpNum 7577 INTEGER
+FirstName 7565 CHARACTER
+HomePhone 7573 CHARACTER
+LastName 7564 CHARACTER
+Position 7572 CHARACTER
+PostalCode 7570 CHARACTER
+SickDaysLeft 7576 INTEGER
+StartDate 7578 DATE
+State 7569 CHARACTER
+VacationDaysLeft 7575 INTEGER
+WorkPhone 7574 CHARACTER
+: Family 7682
+BenefitDate 7686 DATE
+Birthdate 7685 DATE
+CoveredOnBenefits 7687 LOGICAL
+EmpNum 7688 INTEGER
+Relation 7684 CHARACTER
+RelativeName 7683 CHARACTER
+: Feedback 7537
+Comments 7543 CHARACTER
+Company 7539 CHARACTER
+Contact 7538 CHARACTER
+Department 7544 CHARACTER
+EmailAddress 7540 CHARACTER
+Fax 7542 CHARACTER
+Phone 7541 CHARACTER
+Rating 7545 INTEGER
+: InventoryTrans 7858
+BinNum 7862 INTEGER
+InvTransNum 7860 INTEGER
+InvType 7866 CHARACTER
+Itemnum 7864 INTEGER
+Ordernum 7873 INTEGER
+PONum 7872 INTEGER
+Qty 7863 INTEGER
+TransDate 7865 DATE
+Transtime 7874 CHARACTER
+WarehouseNum 7861 INTEGER
+: Invoice 7362
+Adjustment 7370 DECIMAL
+Amount 7368 DECIMAL
+CustNum 7366 INTEGER
+InvoiceDate 7367 DATE
+Invoicenum 7365 INTEGER
+OrderNum 7371 INTEGER
+ShipCharge 7372 DECIMAL
+TotalPaid 7369 DECIMAL
+: Item 7424
+Allocated 7434 INTEGER
+CatDescription 7432 CHARACTER
+Category1 7437 CHARACTER
+Category2 7438 CHARACTER
+CatPage 7430 INTEGER
+ItemName 7429 CHARACTER
+Itemnum 7428 INTEGER
+Minqty 7441 INTEGER
+Onhand 7433 INTEGER
+OnOrder 7436 INTEGER
+Price 7431 DECIMAL
+ReOrder 7435 INTEGER
+Special 7439 CHARACTER
+Weight 7440 DECIMAL
+: LocalDefault 7497
+Country 7499 CHARACTER
+CurrencySymbol 7506 CHARACTER
+DateFormat 7505 CHARACTER
+LocalDefNum 7507 INTEGER
+PostalFormat 7503 CHARACTER
+PostalLabel 7502 CHARACTER
+Region1Label 7500 CHARACTER
+Region2Label 7501 CHARACTER
+TelFormat 7504 CHARACTER
+: Order 7754
+BillToID 7777 INTEGER
+Carrier 7761 CHARACTER
+Creditcard 7781 CHARACTER
+CustNum 7757 INTEGER
+Instructions 7762 CHARACTER
+OrderDate 7758 DATE
+Ordernum 7756 INTEGER
+OrderStatus 7779 CHARACTER
+PO 7763 CHARACTER
+PromiseDate 7760 DATE
+SalesRep 7776 CHARACTER
+ShipDate 7759 DATE
+ShipToID 7778 INTEGER
+Terms 7764 CHARACTER
+WarehouseNum 7780 INTEGER
+: OrderLine 7458
+Discount 7467 INTEGER
+ExtendedPrice 7468 DECIMAL
+Itemnum 7464 INTEGER
+Linenum 7463 INTEGER
+OrderLineStatus 7469 CHARACTER
+Ordernum 7462 INTEGER
+Price 7465 DECIMAL
+Qty 7466 INTEGER
+: POLine 7884
+Discount 7889 INTEGER
+ExtendedPrice 7890 DECIMAL
+Itemnum 7886 INTEGER
+Linenum 7885 INTEGER
+POLineStatus 7904 CHARACTER
+PONum 7891 INTEGER
+Price 7887 DECIMAL
+Qty 7888 INTEGER
+: PurchaseOrder 7875
+DateEntered 7878 DATE
+PONum 7877 INTEGER
+POStatus 7881 CHARACTER
+ReceiveDate 7880 DATE
+SupplierIDNum 7879 INTEGER
+: RefCall 7510
+CallDate 7523 DATE
+CallNum 7521 CHARACTER
+CustNum 7522 INTEGER
+Parent 7525 CHARACTER
+SalesRep 7524 CHARACTER
+Txt 7526 CHARACTER
+: Salesrep 7477
+MonthQuota 7488 INTEGER
+Region 7479 CHARACTER
+RepName 7478 CHARACTER
+SalesRep 7480 CHARACTER
+: ShipTo 7715
+Address 7719 CHARACTER
+Address2 7720 CHARACTER
+City 7721 CHARACTER
+Comments 7725 CHARACTER
+Contact 7718 CHARACTER
+CustNum 7716 INTEGER
+Name 7726 CHARACTER
+Phone 7724 CHARACTER
+PostalCode 7723 CHARACTER
+ShipToID 7717 INTEGER
+State 7722 CHARACTER
+: State 7491
+Region 7494 CHARACTER
+State 7492 CHARACTER
+StateName 7493 CHARACTER
+: Supplier 7793
+Address 7798 CHARACTER
+Address2 7799 CHARACTER
+City 7800 CHARACTER
+Comments 7812 CHARACTER
+Country 7808 CHARACTER
+Discount 7815 INTEGER
+LoginDate 7811 DATE
+Name 7797 CHARACTER
+Password 7810 CHARACTER
+Phone 7809 CHARACTER
+PostalCode 7814 CHARACTER
+ShipAmount 7813 INTEGER
+State 7801 CHARACTER
+SupplierIDNum 7796 INTEGER
+: SupplierItemXref 7908
+Itemnum 7910 INTEGER
+SupplierIDNum 7909 INTEGER
+: TimeSheet 7656
+AMTimeIn 7660 CHARACTER
+AMTimeOut 7661 CHARACTER
+DayRecorded 7658 DATE
+EmpNum 7657 INTEGER
+OvertimeHours 7665 DECIMAL
+PMTimeIn 7662 CHARACTER
+PMTimeOut 7663 CHARACTER
+RegularHours 7664 DECIMAL
+TypeRecorded 7659 CHARACTER
+: Vacation 7669
+EmpNum 7670 INTEGER
+EndDate 7672 DATE
+StartDate 7671 DATE
+: Warehouse 7818
+Address 7823 CHARACTER
+Address2 7824 CHARACTER
+City 7825 CHARACTER
+Country 7822 CHARACTER
+Phone 7828 CHARACTER
+PostalCode 7827 CHARACTER
+State 7826 CHARACTER
+WarehouseName 7821 CHARACTER
+WarehouseNum 7820 INTEGER
 :: dictdb 0
-: SYSATTACHTBLS 4288
-DB_LINK 4294
-LINKOWNER 4293
-OWNER 4289
-REMOWNER 4291
-REMTBL 4292
-TBL 4290
-: SYSBIGINTSTAT 6157
-COLID 6159
-RSSID 6179
-TBLID 6158
-VAL1 6160
-VAL10 6178
-VAL2 6161
-VAL3 6162
-VAL4 6163
-VAL5 6164
-VAL6 6165
-VAL7 6166
-VAL8 6176
-VAL9 6177
-: SYSCALCTABLE 4261
-FLD 4262
-: SYSCHARSTAT 6071
-COLID 6081
-RSSID 6092
-TBLID 6080
-VAL1 6082
-VAL10 6091
-VAL2 6083
-VAL3 6084
-VAL4 6085
-VAL5 6086
-VAL6 6087
-VAL7 6088
-VAL8 6089
-VAL9 6090
-: SYSCOLAUTH 4121
-COL 4035
-GRANTEE 4032
-GRANTOR 4122
-REF 4037
-SEL 4038
-TBL 4034
-TBLOWNER 4033
-UPD 4036
-: SYSCOLSTAT 5891
-COLID 5893
-COLTYPE 5894
-RSSID 5895
-TBLID 5892
-: SYSCOLUMNS 960
-CHARSET 1328
-COL 1320
-COLLATION 1329
-COLTYPE 1323
-DFLT_VALUE 1327
-ID 1319
-NULLFLAG 1326
-OWNER 1322
-SCALE 1325
-TBL 1321
-WIDTH 1324
-: SYSCOLUMNS_FULL 4417
-ARRAY_EXTENT 4434
-CHARSET 4427
-COL 4419
-COLLATION 4428
-COLTYPE 4422
-COL_LABEL 4483
-COL_LABEL_SA 4490
-COL_SUBTYPE 4429
-DESCRIPTION 4482
-DFLT_VALUE 4426
-DFLT_VALUE_SA 4485
-DISPLAY_ORDER 4433
-FIELD_RPOS 4432
-FORMAT 4431
-FORMAT_SA 4487
-HELP 4481
-HELP_SA 4489
-ID 4418
-LABEL 4430
-LABEL_SA 4486
-NULLFLAG 4425
-OWNER 4421
-SCALE 4424
-TBL 4420
-USER_MISC 4491
-VALEXP 4435
-VALMSG 4480
-VALMSG_SA 4488
-VIEW_AS 4484
-WIDTH 4423
-: SYSDATATYPES 4205
-AUTOINCR 4258
-CASESENSITIVE 4213
-CREATEPARAMS 4211
-DATATYPE 4207
-DHTYPENAME 4206
-LITERALPREFIX 4209
-LITERALSUFFIX 4210
-LOCALTYPENAME 4259
-NULLABLE 4212
-ODBCMONEY 4257
-SEARCHABLE 4214
-TYPEPRECISION 4208
-UNSIGNEDATTR 4256
-: SYSDATESTAT 6018
-COLID 6020
-RSSID 6031
-TBLID 6019
-VAL1 6021
-VAL10 6030
-VAL2 6022
-VAL3 6023
-VAL4 6024
-VAL5 6025
-VAL6 6026
-VAL7 6027
-VAL8 6028
-VAL9 6029
-: SYSDBAUTH 4102
-DBA_ACC 4104
-GRANTEE 4103
-RES_ACC 4105
-: SYSDBLINKS 4049
-DB_LINK 4051
-HOST 4054
-OWNER 4050
-PASSWORD 4053
-USERNAME 4052
-: SYSFLOATSTAT 6033
-COLID 6035
-RSSID 6054
-TBLID 6034
-VAL1 6036
-VAL10 6053
-VAL2 6037
-VAL3 6038
-VAL4 6039
-VAL5 6048
-VAL6 6049
-VAL7 6050
-VAL8 6051
-VAL9 6052
-: SYSIDXSTAT 4272
-IDXID 4274
-NLEAF 4275
-NLEVELS 4276
-RECSZ 4277
-RSSID 4278
-TBLID 4273
-: SYSINDEXES 2787
-ABBREVIATE 2804
-ACTIVE 2801
-COLNAME 2794
-desc 2803
-ID 2788
-IDXCOMPRESS 2797
-IDXMETHOD 2798
-IDXNAME 2790
-IDXORDER 2796
-IDXOWNER 2791
-IDXSEGID 2789
-IDXSEQ 2799
-IDXTYPE 2795
-INDEX_USER_MISC 2806
-IXCOL_USER_MISC 2807
-RSSID 2800
-TBL 2792
-TBLOWNER 2793
-UNSORTED 2805
-WORDIDX 2802
-: SYSINTSTAT 5934
-COLID 5936
-RSSID 5988
-TBLID 5935
-VAL1 5937
-VAL10 5987
-VAL2 5938
-VAL3 5939
-VAL4 5940
-VAL5 5941
-VAL6 5942
-VAL7 5984
-VAL8 5985
-VAL9 5986
-: SYSNCHARSTAT 6181
-COLID 6183
-RSSID 6194
-TBLID 6182
-VAL1 6184
-VAL10 6193
-VAL2 6185
-VAL3 6186
-VAL4 6187
-VAL5 6188
-VAL6 6189
-VAL7 6190
-VAL8 6191
-VAL9 6192
-: SYSNUMSTAT 5990
-COLID 5992
-RSSID 6016
-TBLID 5991
-VAL1 5993
-VAL10 6002
-VAL2 5994
-VAL3 5995
-VAL4 5996
-VAL5 5997
-VAL6 5998
-VAL7 5999
-VAL8 6000
-VAL9 6001
-: SYSNVARCHARSTAT 6196
-COLID 6198
-RSSID 6218
-TBLID 6197
-VAL1 6208
-VAL10 6217
-VAL2 6209
-VAL3 6210
-VAL4 6211
-VAL5 6212
-VAL6 6213
-VAL7 6214
-VAL8 6215
-VAL9 6216
-: SYSPROCBIN 4355
-ID 4357
-PROC_BIN 4360
-PROC_TYPE 4358
-RSSID 4356
-SEQ 4359
-: SYSPROCCOLUMNS 4306
-ARGTYPE 4321
-COL 4308
-DATATYPE 4320
-DFLT_VALUE 4325
-ID 4307
-NULLFLAG 4324
-PROC_ID 4309
-RSSID 4310
-SCALE 4323
-WIDTH 4322
-: SYSPROCEDURES 4296
-CREATOR 4299
-HAS_RESULTSET 4303
-HAS_RETURN_VAL 4304
-OWNER 4300
-PROC_ID 4297
-PROC_NAME 4298
-PROC_TYPE 4302
-RSSID 4301
-: SYSPROCTEXT 4362
-ID 4364
-PROC_TEXT 4367
-PROC_TYPE 4365
-RSSID 4363
-SEQ 4366
-: SYSREALSTAT 6094
-COLID 6096
-RSSID 6116
-TBLID 6095
-VAL1 6097
-VAL10 6115
-VAL2 6098
-VAL3 6099
-VAL4 6100
-VAL5 6101
-VAL6 6102
-VAL7 6112
-VAL8 6113
-VAL9 6114
-: SYSSMINTSTAT 5912
-COLID 5921
-RSSID 5932
-TBLID 5920
-VAL1 5922
-VAL10 5931
-VAL2 5923
-VAL3 5924
-VAL4 5925
-VAL5 5926
-VAL6 5927
-VAL7 5928
-VAL8 5929
-VAL9 5930
-: SYSSYNONYMS 4040
-ISPUBLIC 4046
-SCREATOR 4043
-SNAME 4041
-SOWNER 4042
-SREMDB 4047
-STBL 4044
-STBLOWNER 4045
-: SYSTABAUTH 4107
-ALT 4118
-DEL 4113
-EXE 4116
-GRANTEE 4109
-GRANTOR 4108
-INS 4112
-NDX 4117
-REF 4119
-SEL 4115
-TBL 4111
-TBLOWNER 4110
-UPD 4114
-: SYSTABLES 959
-CREATOR 1300
-HAS_CCNSTRS 1315
-HAS_FCNSTRS 1314
-HAS_PCNSTRS 1313
-HAS_UCNSTRS 1316
-ID 1298
-OWNER 1301
-RSSID 1318
-SEGID 1312
-TBL 1299
-TBLTYPE 1302
-TBL_STATUS 1317
-: SYSTABLES_FULL 4369
-CAN_DUMP 4399
-CAN_LOAD 4400
-CREATOR 4372
-DESCRIPTION 4391
-DUMP_NAME 4397
-FILE_LABEL 4398
-FILE_LABEL_SA 4402
-FROZEN 4396
-HAS_CCNSTRS 4386
-HAS_FCNSTRS 4385
-HAS_PCNSTRS 4384
-HAS_UCNSTRS 4387
-HIDDEN 4395
-ID 4370
-LAST_CHANGE 4394
-OWNER 4373
-PRIME_INDEX 4390
-RSSID 4389
-SEGID 4375
-TBL 4371
-TBLTYPE 4374
-TBL_STATUS 4388
-USER_MISC 4403
-VALEXP 4392
-VALMSG 4393
-VALMSG_SA 4401
-: SYSTBLSTAT 4264
-CARD 4266
-NPAGES 4267
-PAGESZ 4269
-RECSZ 4268
-RSSID 4270
-TBLID 4265
-: SYSTIMESTAT 6056
-COLID 6058
-RSSID 6069
-TBLID 6057
-VAL1 6059
-VAL10 6068
-VAL2 6060
-VAL3 6061
-VAL4 6062
-VAL5 6063
-VAL6 6064
-VAL7 6065
-VAL8 6066
-VAL9 6067
-: SYSTINYINTSTAT 6133
-COLID 6144
-RSSID 6155
-TBLID 6134
-VAL1 6145
-VAL10 6154
-VAL2 6146
-VAL3 6147
-VAL4 6148
-VAL5 6149
-VAL6 6150
-VAL7 6151
-VAL8 6152
-VAL9 6153
-: SYSTRIGCOLS 4341
-COLID 4353
-OWNER 4352
-TRIGGERNAME 4342
-: SYSTRIGGER 4327
-FIRE_4GL 4339
-OWNER 4330
-REFERS_TO_NEW 4336
-REFERS_TO_OLD 4335
-RSSID 4338
-STATEMENT_OR_ROW 4337
-TBL 4331
-TBLOWNER 4332
-TRIGGERID 4328
-TRIGGERNAME 4329
-TRIGGER_EVENT 4334
-TRIGGER_TIME 4333
-: SYSTSSTAT 6118
-COLID 6120
-RSSID 6131
-TBLID 6119
-VAL1 6121
-VAL10 6130
-VAL2 6122
-VAL3 6123
-VAL4 6124
-VAL5 6125
-VAL6 6126
-VAL7 6127
-VAL8 6128
-VAL9 6129
-: SYSVARCHARSTAT 5897
-COLID 5899
-RSSID 5910
-TBLID 5898
-VAL1 5900
-VAL10 5909
-VAL2 5901
-VAL3 5902
-VAL4 5903
-VAL5 5904
-VAL6 5905
-VAL7 5906
-VAL8 5907
-VAL9 5908
-: SYSVIEWS 961
-CREATOR 1331
-OWNER 1332
-SEQ 1333
-VIEWNAME 1330
-VIEWTEXT 1334
-: SYS_CHKCOL_USAGE 4199
-CNSTRNAME 4202
-COLNAME 4203
-OWNER 4200
-TBLNAME 4201
-: SYS_CHK_CONSTRS 4176
-CHKCLAUSE 4181
-CHKSEQ 4180
-CNSTRNAME 4179
-OWNER 4177
-TBLNAME 4178
-: SYS_KEYCOL_USAGE 4160
-CNSTRNAME 4163
-COLNAME 4164
-COLPOSITION 4165
-OWNER 4161
-TBLNAME 4162
-: SYS_REF_CONSTRS 4167
-CNSTRNAME 4170
-DELETERULE 4174
-OWNER 4168
-REFCNSTRNAME 4173
-REFOWNER 4171
-REFTBLNAME 4172
-TBLNAME 4169
-: SYS_TBL_CONSTRS 4192
-CNSTRNAME 4195
-CNSTRTYPE 4196
-IDXNAME 4197
-OWNER 4193
-TBLNAME 4194
-: _ActAILog 1479
-_AiLog-AIWWrites 2157
-_AiLog-BBuffWaits 2160
-_AiLog-BytesWritn 2159
-_AiLog-ForceWaits 2208
-_AiLog-Id 2155
-_AiLog-Misc 2211
-_AiLog-NoBufAvail 2161
-_AiLog-PartialWrt 2162
-_AiLog-RecWriten 2158
-_AiLog-TotWrites 2156
-_AiLog-Trans 2209
-_AiLog-UpTime 2210
-: _ActBILog 1478
-_BiLog-BBuffWaits 2147
-_BiLog-BIWWrites 2127
-_BiLog-BytesRead 2145
-_BiLog-BytesWrtn 2129
-_BiLog-ClstrClose 2146
-_BiLog-EBuffWaits 2148
-_BiLog-ForceWaits 2149
-_BiLog-ForceWrts 2150
-_BiLog-Id 2125
-_BiLog-Misc 2154
-_BiLog-PartialWrts 2151
-_BiLog-RecRead 2144
-_BiLog-RecWriten 2128
-_BiLog-TotalWrts 2126
-_BiLog-TotReads 2130
-_BiLog-Trans 2152
-_BiLog-UpTime 2153
-: _ActBuffer 1476
-_Buffer-APWEnq 2094
-_Buffer-Chkpts 2088
-_Buffer-Deferred 2091
-_Buffer-Flushed 2090
-_Buffer-Id 2083
-_Buffer-LogicRds 2084
-_Buffer-LogicWrts 2085
-_Buffer-LRUSkips 2092
-_Buffer-LRUWrts 2093
-_Buffer-Marked 2089
-_Buffer-Misc 2097
-_Buffer-OSRds 2086
-_Buffer-OSWrts 2087
-_Buffer-Trans 2095
-_Buffer-UpTime 2096
-: _ActIndex 1484
-_Index-Create 2344
-_Index-Delete 2345
-_Index-Find 2343
-_Index-Free 2348
-_Index-Id 2342
-_Index-Misc 2351
-_Index-Remove 2346
-_Index-Splits 2347
-_Index-Trans 2349
-_Index-UpTime 2350
-: _ActIOFile 1482
-_IOFile-BufReads 2309
-_IOFile-BufWrites 2307
-_IOFile-Extends 2305
-_IOFile-FileName 2258
-_IOFile-Id 2257
-_IOFile-Misc 2312
-_IOFile-Reads 2259
-_IOFile-Trans 2306
-_IOFile-UbufReads 2310
-_IOFile-UbufWrites 2308
-_IOFile-UpTime 2311
-_IOFile-Writes 2304
-: _ActIOType 1481
-_IOType-AiRds 2249
-_IOType-AiWrts 2253
-_IOType-BiRds 2248
-_IOType-BiWrts 2252
-_IOType-DataReads 2247
-_IOType-DataWrts 2251
-_IOType-Id 2245
-_IOType-IdxRds 2246
-_IOType-IdxWrts 2250
-_IOType-Misc 2256
-_IOType-Trans 2254
-_IOType-UpTime 2255
-: _ActLock 1480
-_Lock-CanclReq 2225
-_Lock-Downgrade 2226
-_Lock-ExclFind 2243
-_Lock-ExclLock 2218
-_Lock-ExclReq 2214
-_Lock-ExclWait 2222
-_Lock-Id 2212
-_Lock-Misc 2242
-_Lock-RecGetLock 2220
-_Lock-RecGetReq 2216
-_Lock-RecGetWait 2224
-_Lock-RedReq 2227
-_Lock-ShrFind 2244
-_Lock-ShrLock 2217
-_Lock-ShrReq 2213
-_Lock-ShrWait 2221
-_Lock-Trans 2240
-_Lock-UpgLock 2219
-_Lock-UpgReq 2215
-_Lock-UpgWait 2223
-_Lock-UpTime 2241
-: _ActOther 1486
-_Other-Commit 2381
-_Other-FlushMblk 2384
-_Other-Id 2380
-_Other-Misc 2387
-_Other-Trans 2385
-_Other-Undo 2382
-_Other-UpTime 2386
-_Other-Wait 2383
-: _ActPWs 1477
-_PW-ApwQWrites 2114
-_PW-BuffsScaned 2117
-_PW-BufsCkp 2118
-_PW-Checkpoints 2119
-_PW-CkpQWrites 2115
-_PW-DBWrites 2112
-_PW-Flushed 2121
-_PW-Id 2098
-_PW-Marked 2120
-_PW-Misc 2124
-_PW-ScanCycles 2116
-_PW-ScanWrites 2113
-_PW-TotDBWrites 2099
-_PW-Trans 2122
-_PW-UpTime 2123
-: _ActRecord 1485
-_Record-BytesCreat 2374
-_Record-BytesDel 2375
-_Record-BytesRead 2373
-_Record-BytesUpd 2376
-_Record-FragCreat 2370
-_Record-FragDel 2371
-_Record-FragRead 2369
-_Record-FragUpd 2372
-_Record-Id 2352
-_Record-Misc 2379
-_Record-RecCreat 2355
-_Record-RecDel 2368
-_Record-RecRead 2353
-_Record-RecUpd 2354
-_Record-Trans 2377
-_Record-UpTime 2378
-: _ActServer 1475
-_Server-ByteRec 2030
-_Server-ByteSent 2031
-_Server-Id 2027
-_Server-Misc 2082
-_Server-MsgRec 2028
-_Server-MsgSent 2029
-_Server-QryRec 2034
-_Server-RecRec 2032
-_Server-RecSent 2033
-_Server-TimeSlice 2035
-_Server-Trans 2080
-_Server-UpTime 2081
-: _ActSpace 1483
-_Space-AllocNewRm 2317
-_Space-BackAdd 2336
-_Space-BytesAlloc 2320
-_Space-DbExd 2314
-_Space-Examined 2321
-_Space-FromFree 2319
-_Space-FromRm 2318
-_Space-Front2Back 2337
-_Space-FrontAdd 2323
-_Space-Id 2313
-_Space-Locked 2338
-_Space-Misc 2341
-_Space-Removed 2322
-_Space-RetFree 2316
-_Space-TakeFree 2315
-_Space-Trans 2339
-_Space-UpTime 2340
-: _ActSummary 1474
-_Summary-AiWrites 2020
-_Summary-BiReads 2018
-_Summary-BiWrites 2019
-_Summary-Chkpts 2021
-_Summary-Commits 1932
-_Summary-DbAccesses 2025
-_Summary-DbReads 2016
-_Summary-DbWrites 2017
-_Summary-Flushed 2022
-_Summary-Id 1931
-_Summary-Misc 2026
-_Summary-RecCreat 1936
-_Summary-RecDel 1937
-_Summary-RecLock 1938
-_Summary-RecReads 1934
-_Summary-RecUpd 1935
-_Summary-RecWait 1939
-_Summary-TransComm 2023
-_Summary-Undos 1933
-_Summary-UpTime 2024
-: _Area 955
-_Area-attrib 1267
-_Area-block 1266
-_Area-blocksize 1269
-_Area-extents 1281
-_Area-misc 1282
-_Area-name 1264
-_Area-number 1263
-_Area-recbits 1280
-_Area-system 1268
-_Area-type 1265
-_Area-version 1262
-: _AreaExtent 956
-_Area-number 1286
-_Area-recid 1283
-_Extent-attrib 1288
-_Extent-misc 1292
-_Extent-number 1285
-_Extent-path 1291
-_Extent-size 1290
-_Extent-system 1289
-_Extent-type 1287
-_Extent-version 1284
-: _AreaStatus 1511
-_AreaStatus-Areaname 2597
-_AreaStatus-Areanum 2596
-_AreaStatus-Extents 2600
-_AreaStatus-Freenum 2602
-_AreaStatus-Hiwater 2599
-_AreaStatus-Id 2595
-_AreaStatus-Lastextent 2601
-_AreaStatus-Rmnum 2603
-_AreaStatus-Totblocks 2598
-: _Block 1487
-_Block-Area 2407
-_Block-BkupCtr 2404
-_Block-Block 2408
-_Block-ChainType 2403
-_Block-Dbkey 2401
-_Block-Id 2400
-_Block-Misc 2409
-_Block-NextDbkey 2405
-_Block-Type 2402
-_Block-Update 2406
-: _BuffStatus 1467
-_BfStatus-APWQ 1792
-_BfStatus-CKPMarked 1795
-_BfStatus-CKPQ 1793
-_BfStatus-HashSize 1776
-_BfStatus-Id 1774
-_BfStatus-LastCkpNum 1796
-_BfStatus-LRU 1778
-_BfStatus-Misc 1797
-_BfStatus-ModBuffs 1794
-_BfStatus-TotBufs 1775
-_BfStatus-UsedBuffs 1777
-: _Checkpoint 1490
-_Checkpoint-ApwQ 2451
-_Checkpoint-CptQ 2449
-_Checkpoint-Dirty 2448
-_Checkpoint-Flush 2464
-_Checkpoint-Id 2445
-_Checkpoint-Len 2447
-_Checkpoint-Misc 2465
-_Checkpoint-Scan 2450
-_Checkpoint-Time 2446
-: _Connect 1464
-_Connect-2phase 1605
-_Connect-Batch 1606
-_Connect-Device 1519
-_Connect-Disconnect 1602
-_Connect-Id 1515
-_Connect-Interrupt 1604
-_Connect-Misc 1607
-_Connect-Name 1518
-_Connect-Pid 1521
-_Connect-Resync 1603
-_Connect-semid 1601
-_Connect-SemNum 1600
-_Connect-Server 1522
-_Connect-Time 1520
-_Connect-TransId 1525
-_Connect-Type 1517
-_Connect-Usr 1516
-_Connect-Wait 1524
-_Connect-Wait1 1523
-: _Db 940
-_Db-addr 1165
-_Db-coll-name 1186
-_Db-collate 1185
-_Db-comm 1167
-_Db-local 1172
-_Db-misc1 1169
-_Db-misc2 1170
-_Db-name 1164
-_Db-res1 1173
-_Db-res2 1174
-_Db-revision 1168
-_Db-slave 1171
-_Db-type 1166
-_Db-xl-name 1184
-_Db-xlate 1175
-_User-Misc 1187
-: _DbStatus 1466
-_DbStatus-AiBlkSize 1741
-_DbStatus-BiBlkSize 1739
-_DbStatus-BiClSize 1740
-_DbStatus-BiOpen 1763
-_DbStatus-BiSize 1772
-_DbStatus-BiTrunc 1764
-_DbStatus-CacheStamp 1745
-_DbStatus-Changed 1735
-_DbStatus-ClVersMinor 1733
-_DbStatus-Codepage 1765
-_DbStatus-Collation 1766
-_DbStatus-CreateDate 1762
-_DbStatus-DbBlkSize 1712
-_DbStatus-DbVers 1731
-_DbStatus-DbVersMinor 1732
-_DbStatus-EmptyBlks 1714
-_DbStatus-fbDate 1760
-_DbStatus-FreeBlks 1715
-_DbStatus-HiWater 1738
-_DbStatus-ibDate 1761
-_DbStatus-ibSeq 1736
-_DbStatus-Id 1708
-_DbStatus-Integrity 1737
-_DbStatus-IntFlags 1711
-_DbStatus-LastOpen 1743
-_DbStatus-LastTable 1730
-_DbStatus-LastTran 1729
-_DbStatus-Misc 1773
-_DbStatus-MostLocks 1769
-_DbStatus-NumAreas 1767
-_DbStatus-NumLocks 1768
-_DbStatus-NumSems 1771
-_DbStatus-PrevOpen 1744
-_DbStatus-RMFreeBlks 1728
-_DbStatus-SharedMemVer 1770
-_DbStatus-ShmVers 1734
-_DbStatus-starttime 1742
-_DbStatus-state 1709
-_DbStatus-tainted 1710
-_DbStatus-TotalBlks 1713
-: _Field 932
-_Can-Read 1063
-_Can-Write 1064
-_Charset 1106
-_Col-label 1070
-_Col-label-SA 1105
-_Collation 1107
-_Data-Type 1045
-_Decimals 1061
-_Desc 1069
-_dtype 1046
-_Extent 1065
-_Fetch-Type 1108
-_Field-Name 1044
-_Field-Physpos 1110
-_field-rpos 1060
-_File-recid 1043
-_Fld-case 1076
-_Fld-misc1 1074
-_Fld-misc2 1075
-_Fld-res1 1077
-_Fld-res2 1078
-_Fld-stdtype 1071
-_Fld-stlen 1072
-_Fld-stoff 1073
-_For-Allocated 1098
-_For-Id 1079
-_For-Itype 1093
-_For-Maxsize 1097
-_For-Name 1091
-_For-Primary 1088
-_For-Retrieve 1095
-_For-Scale 1090
-_For-Separator 1096
-_For-Spacing 1089
-_For-Type 1092
-_For-Xpos 1094
-_Format 1058
-_Format-SA 1102
-_Help 1068
-_Help-SA 1104
-_Initial 1047
-_Initial-SA 1100
-_Label 1056
-_Label-SA 1101
-_Mandatory 1057
-_Order 1062
-_sys-field 1059
-_User-Misc 1111
-_Valexp 1066
-_Valmsg 1067
-_Valmsg-SA 1103
-_View-As 1099
-_Width 1109
-: _Field-Trig 950
-_Event 1228
-_Field-Recid 1225
-_Field-Rpos 1227
-_File-Recid 1226
-_Override 1230
-_Proc-Name 1229
-_Trig-Crc 1231
-: _File 930
-_Cache 1005
-_Can-Create 987
-_Can-Delete 990
-_Can-Dump 1026
-_Can-Load 1027
-_Can-Read 988
-_Can-Write 989
-_CRC 1002
-_Creator 1033
-_DB-lang 998
-_Db-recid 992
-_Desc 991
-_dft-pk 981
-_Dump-name 1001
-_Field-map 1032
-_Fil-misc1 995
-_Fil-misc2 996
-_Fil-res1 1003
-_Fil-res2 1004
-_File-Label 1025
-_File-Label-SA 1029
-_File-Name 978
-_File-Number 980
-_For-Cnt1 1008
-_For-Cnt2 1009
-_For-Flag 1007
-_For-Format 1012
-_For-Id 1015
-_For-Info 1013
-_For-Name 1010
-_For-Number 1024
-_For-Owner 1011
-_For-Size 1006
-_For-Type 1014
-_Frozen 1000
-_Has-Ccnstrs 1034
-_Has-Fcnstrs 1035
-_Has-Pcnstrs 1036
-_Has-Ucnstrs 1037
-_Hidden 999
-_ianum 1030
-_Last-change 997
-_numfld 986
-_numkcomp 983
-_numkey 982
-_numkfld 984
-_Owner 1038
-_Prime-Index 979
-_Rssid 1039
-_Tbl-Status 1040
-_Tbl-Type 1041
-_Template 985
-_User-Misc 1042
-_Valexp 993
-_Valmsg 994
-_Valmsg-SA 1028
-_Version 1031
-: _File-Trig 948
-_Event 1221
-_File-Recid 1220
-_Override 1223
-_Proc-Name 1222
-_Trig-Crc 1224
-: _Filelist 1472
-_FileList-BlkSize 1906
-_FileList-Extend 1904
-_FileList-Id 1902
-_FileList-LogicalSz 1905
-_FileList-Misc 1922
-_FileList-Name 1921
-_FileList-Openmode 1920
-_FileList-Size 1903
-: _Index 934
-_Active 1127
-_Desc 1131
-_File-recid 1120
-_For-Name 1132
-_For-Type 1133
-_I-misc1 1125
-_I-misc2 1126
-_I-res1 1128
-_I-res2 1129
-_ianum 1134
-_Idx-CRC 1135
-_idx-num 1124
-_Idxmethod 1137
-_Idxowner 1136
-_Index-Name 1121
-_num-comp 1123
-_Unique 1122
-_User-Misc 1138
-_Wordidx 1130
-: _Index-Field 936
-_Abbreviate 1143
-_Ascending 1142
-_Field-recid 1141
-_If-misc1 1153
-_If-misc2 1154
-_If-res1 1155
-_If-res2 1156
-_Index-recid 1139
-_Index-Seq 1140
-_Unsorted 1152
-_User-Misc 1157
-: _IndexStat 1504
-_IndexStat-blockdelete 2530
-_IndexStat-create 2515
-_IndexStat-delete 2528
-_IndexStat-id 2513
-_IndexStat-read 2514
-_IndexStat-split 2529
-: _Latch 1505
-_Latch-Busy 2539
-_Latch-Hold 2533
-_Latch-Id 2531
-_Latch-Lock 2537
-_Latch-LockedT 2540
-_Latch-LockT 2541
-_Latch-Name 2532
-_Latch-Qhold 2534
-_Latch-Spin 2538
-_Latch-Type 2535
-_Latch-Wait 2536
-_Latch-WaitT 2542
-: _License 1493
-_Lic-ActiveConns 2499
-_Lic-BatchConns 2502
-_Lic-CurrConns 2505
-_Lic-Id 2497
-_Lic-MaxActive 2500
-_Lic-MaxBatch 2503
-_Lic-MaxCurrent 2506
-_Lic-MinActive 2501
-_Lic-MinBatch 2504
-_Lic-MinCurrent 2507
-_Lic-ValidUsers 2498
-: _Lock 1491
-_Lock-Chain 2472
-_Lock-Flags 2473
-_Lock-Id 2466
-_Lock-Misc 2474
-_Lock-Name 2468
-_Lock-RecId 2471
-_Lock-Table 2470
-_Lock-Type 2469
-_Lock-Usr 2467
-: _LockReq 1489
-_LockReq-ExclFind 2443
-_LockReq-Id 2433
-_LockReq-Misc 2442
-_LockReq-Name 2435
-_LockReq-Num 2434
-_LockReq-RecLock 2436
-_LockReq-RecWait 2437
-_LockReq-SchLock 2440
-_LockReq-SchWait 2441
-_LockReq-ShrFind 2444
-_LockReq-TrnLock 2438
-_LockReq-TrnWait 2439
-: _Logging 1468
-_Logging-2PC 1835
-_Logging-2PCNickName 1836
-_Logging-2PCPriority 1837
-_Logging-AiBegin 1826
-_Logging-AiBlkSize 1833
-_Logging-AiBuffs 1832
-_Logging-AiCurrExt 1831
-_Logging-AiExtents 1830
-_Logging-AiGenNum 1829
-_Logging-AiIO 1825
-_Logging-AiJournal 1824
-_Logging-AiLogSize 1834
-_Logging-AiNew 1827
-_Logging-AiOpen 1828
-_Logging-BiBlkSize 1803
-_Logging-BiBuffs 1809
-_Logging-BiBytesFree 1807
-_Logging-BiClAge 1802
-_Logging-BiClSize 1804
-_Logging-BiExtents 1805
-_Logging-BiFullBuffs 1810
-_Logging-BiIO 1801
-_Logging-BiLogSize 1806
-_Logging-CommitDelay 1800
-_Logging-CrashProt 1799
-_Logging-Id 1798
-_Logging-LastCkp 1808
-_Logging-Misc 1838
-: _MstrBlk 1465
-_MstrBlk-aiblksize 1617
-_MstrBlk-biblksize 1615
-_MstrBlk-biopen 1704
-_MstrBlk-biprev 1706
-_MstrBlk-bistate 1696
-_MstrBlk-cfilnum 1619
-_MstrBlk-crdate 1698
-_MstrBlk-dbstate 1610
-_MstrBlk-dbvers 1609
-_MstrBlk-fbdate 1701
-_MstrBlk-hiwater 1614
-_MstrBlk-ibdate 1702
-_MstrBlk-ibseq 1697
-_MstrBlk-Id 1608
-_MstrBlk-integrity 1612
-_MstrBlk-lasttask 1618
-_MstrBlk-Misc 1707
-_MstrBlk-oppdate 1700
-_MstrBlk-oprdate 1699
-_MstrBlk-rlclsize 1616
-_MstrBlk-rltime 1705
-_MstrBlk-tainted 1611
-_MstrBlk-timestamp 1703
-_MstrBlk-totblks 1613
-: _MyConnection 1510
-_MyConn-Id 2578
-_MyConn-NumSeqBuffers 2593
-_MyConn-Pid 2592
-_MyConn-UsedSeqBuffers 2594
-_MyConn-UserId 2579
-: _Repl-Agent 1514
-_ReplAgt-AgentID 2670
-_ReplAgt-AgentName 2671
-_ReplAgt-BlocksACK 2691
-_ReplAgt-BlocksProcessed 2690
-_ReplAgt-BlocksReceived 2689
-_ReplAgt-CommStatus 2696
-_ReplAgt-ConnectTime 2672
-_ReplAgt-DBName 2673
-_ReplAgt-LastTRID 2693
-_ReplAgt-Method 2694
-_ReplAgt-NotesProcessed 2692
-_ReplAgt-Port 2688
-_ReplAgt-ReservedChar 2697
-_ReplAgt-ReservedInt 2698
-_ReplAgt-ServerHost 2674
-_ReplAgt-Status 2695
-: _Repl-AgentControl 1513
-_ReplAgtCtl-AgentID 2656
-_ReplAgtCtl-AgentName 2657
-_ReplAgtCtl-BlocksACK 2663
-_ReplAgtCtl-BlocksSent 2662
-_ReplAgtCtl-CommStatus 2667
-_ReplAgtCtl-ConnectTime 2658
-_ReplAgtCtl-LastBlockSentAt 2664
-_ReplAgtCtl-Method 2665
-_ReplAgtCtl-Port 2661
-_ReplAgtCtl-RemoteDBName 2659
-_ReplAgtCtl-RemoteHost 2660
-_ReplAgtCtl-ReservedChar 2668
-_ReplAgtCtl-ReservedInt 2669
-_ReplAgtCtl-status 2666
-: _Repl-Server 1512
-_ReplSrv-AgentCount 2605
-_ReplSrv-BlocksSent 2606
-_ReplSrv-id 2604
-_ReplSrv-LastBlockSentAt 2608
-_ReplSrv-ReservedChar 2609
-_ReplSrv-ReservedInt 2610
-_ReplSrv-StartTime 2607
-: _Resrc 1506
-_Resrc-Id 2543
-_Resrc-lock 2545
-_Resrc-Name 2544
-_Resrc-time 2547
-_Resrc-wait 2546
-: _Segments 1469
-_Segment-ByteFree 1856
-_Segment-BytesUsed 1842
-_Segment-Id 1839
-_Segment-Misc 1857
-_Segment-SegId 1840
-_Segment-SegSize 1841
-: _Sequence 952
-_Cycle-Ok 1238
-_Db-recid 1249
-_Seq-Incr 1235
-_Seq-Init 1234
-_Seq-Max 1237
-_Seq-Min 1236
-_Seq-Misc 1248
-_Seq-Name 1233
-_Seq-Num 1232
-_User-Misc 1250
-: _Servers 1470
-_Server-CurrUsers 1864
-_Server-Id 1858
-_Server-Logins 1863
-_Server-MaxUsers 1865
-_Server-Misc 1867
-_Server-Num 1859
-_Server-Pid 1860
-_Server-PortNum 1866
-_Server-Protocol 1862
-_Server-Type 1861
-: _Startup 1471
-_Startup-AiBuffs 1871
-_Startup-AiName 1869
-_Startup-APWBuffs 1897
-_Startup-APWMaxWrites 1898
-_Startup-APWQTime 1895
-_Startup-APWSTime 1896
-_Startup-BiBuffs 1872
-_Startup-BiDelay 1891
-_Startup-BiIO 1894
-_Startup-BiName 1873
-_Startup-BiTrunc 1874
-_Startup-Buffs 1870
-_Startup-CrashProt 1888
-_Startup-Directio 1900
-_Startup-Id 1868
-_Startup-LockTable 1889
-_Startup-MaxClients 1890
-_Startup-MaxServers 1892
-_Startup-MaxUsers 1893
-_Startup-Misc 1901
-_Startup-Spin 1899
-: _StatBase 1508
-_IndexBase 2570
-_StatBase-id 2568
-_TableBase 2569
-: _StorageObject 954
-_Area-number 1256
-_Db-recid 1251
-_Object-associate 1255
-_Object-associate-type 1254
-_Object-attrib 1259
-_Object-block 1257
-_Object-misc 1261
-_Object-number 1253
-_Object-root 1258
-_Object-system 1260
-_Object-type 1252
-: _Sysattachtbls 3680
-_Dblink 3686
-_Linkowner 3685
-_Owner 3681
-_Remowner 3683
-_Remtbl 3684
-_Tbl 3682
-: _Sysbigintstat 5449
-_Colid 5451
-_Rssid 5462
-_Tblid 5450
-_Val1 5452
-_Val10 5461
-_Val2 5453
-_Val3 5454
-_Val4 5455
-_Val5 5456
-_Val6 5457
-_Val7 5458
-_Val8 5459
-_Val9 5460
-: _Syscalctable 3512
-_Fld 3513
-: _Syscharstat 5230
-_Colid 5232
-_Rssid 5281
-_Tblid 5231
-_Val1 5233
-_Val10 5280
-_Val2 5234
-_Val3 5235
-_Val4 5236
-_Val5 5237
-_Val6 5238
-_Val7 5239
-_Val8 5240
-_Val9 5241
-: _Syschkcolusage 3271
-_Cnstrname 3274
-_Colname 3275
-_Owner 3272
-_Tblname 3273
-: _Syschkconstrs 3183
-_Chkclause 3188
-_Chkseq 3187
-_Cnstrname 3186
-_Owner 3184
-_Tblname 3185
-: _Syscolauth 2887
-_Col 2892
-_Grantee 2889
-_Grantor 2888
-_Ref 2894
-_Sel 2895
-_Tbl 2891
-_Tblowner 2890
-_Upd 2893
-: _Syscolstat 4844
-_Colid 4846
-_Coltype 4847
-_Rssid 4848
-_Tblid 4845
-: _Sysdatatypes 3445
-_Autoincr 3489
-_Casesensitive 3453
-_Createparams 3451
-_Datatype 3447
-_Dhtypename 3446
-_Literalprefix 3449
-_Literalsuffix 3450
-_Localtypename 3490
-_Nullable 3452
-_Odbcmoney 3488
-_Searchable 3454
-_Typeprecision 3448
-_Unsignedattr 3455
-: _Sysdatestat 5066
-_Colid 5068
-_Rssid 5079
-_Tblid 5067
-_Val1 5069
-_Val10 5078
-_Val2 5070
-_Val3 5071
-_Val4 5072
-_Val5 5073
-_Val6 5074
-_Val7 5075
-_Val8 5076
-_Val9 5077
-: _Sysdbauth 2819
-_Dbaacc 2821
-_Grantee 2820
-_Resacc 2822
-: _Sysdblinks 3052
-_Dblink 3054
-_Host 3057
-_Owner 3053
-_Pwd 3056
-_Username 3055
-: _Sysfloatstat 5156
-_Colid 5158
-_Rssid 5169
-_Tblid 5157
-_Val1 5159
-_Val10 5168
-_Val2 5160
-_Val3 5161
-_Val4 5162
-_Val5 5163
-_Val6 5164
-_Val7 5165
-_Val8 5166
-_Val9 5167
-: _Sysidxstat 3596
-_Idxid 3598
-_Nleaf 3599
-_Nlevels 3600
-_Recsz 3601
-_Rssid 3602
-_Tblid 3597
-: _Sysintstat 3041
-_Colid 3059
-_Rssid 5000
-_Tblid 3058
-_Val1 3060
-_Val10 4999
-_Val2 3069
-_Val3 4992
-_Val4 4993
-_Val5 4994
-_Val6 4995
-_Val7 4996
-_Val8 4997
-_Val9 4998
-: _Syskeycolusage 3063
-_Cnstrname 3066
-_Colname 3067
-_Colposition 3068
-_Owner 3064
-_Tblname 3065
-: _Sysncharstat 5536
-_Colid 5538
-_Rssid 5549
-_Tblid 5537
-_Val1 5539
-_Val10 5548
-_Val2 5540
-_Val3 5541
-_Val4 5542
-_Val5 5543
-_Val6 5544
-_Val7 5545
-_Val8 5546
-_Val9 5547
-: _Sysnumstat 5006
-_Colid 5008
-_Rssid 5060
-_Tblid 5007
-_Val1 5009
-_Val10 5059
-_Val2 5010
-_Val3 5011
-_Val4 5012
-_Val5 5013
-_Val6 5014
-_Val7 5056
-_Val8 5057
-_Val9 5058
-: _Sysnvarcharstat 5555
-_Colid 5557
-_Rssid 5639
-_Tblid 5556
-_Val1 5558
-_Val10 5638
-_Val2 5559
-_Val3 5560
-_Val4 5632
-_Val5 5633
-_Val6 5634
-_Val7 5635
-_Val8 5636
-_Val9 5637
-: _Sysprocbin 4011
-_Id 4013
-_Procbin 4016
-_Proctype 4014
-_Rssid 4012
-_Seq 4015
-: _Sysproccolumns 3706
-_Argtype 3812
-_Col 3808
-_Datatype 3811
-_Dfltvalue 3816
-_Id 3707
-_Nullflag 3815
-_Procid 3809
-_Rssid 3810
-_Scale 3814
-_Width 3813
-: _Sysprocedures 3692
-_Creator 3695
-_Hasresultset 3699
-_Hasreturnval 3700
-_Owner 3696
-_Procid 3693
-_Procname 3694
-_Proctype 3698
-_Rssid 3697
-: _Sysproctext 4022
-_Id 4024
-_Proctext 4027
-_Proctype 4025
-_Rssid 4023
-_Seq 4026
-: _Sysrealstat 5287
-_Colid 5289
-_Rssid 5300
-_Tblid 5288
-_Val1 5290
-_Val10 5299
-_Val2 5291
-_Val3 5292
-_Val4 5293
-_Val5 5294
-_Val6 5295
-_Val7 5296
-_Val8 5297
-_Val9 5298
-: _Sysrefconstrs 3170
-_Cnstrname 3173
-_Deleterule 3177
-_Owner 3171
-_Refcnstrname 3176
-_Refowner 3174
-_Reftblname 3175
-_Tblname 3172
-: _Syssmintstat 3883
-_Colid 3885
-_Rssid 3267
-_Tblid 3884
-_Val1 4017
-_Val10 3266
-_Val2 4018
-_Val3 4019
-_Val4 4028
-_Val5 4029
-_Val6 3591
-_Val7 3592
-_Val8 3593
-_Val9 3603
-: _Syssynonyms 2901
-_Ispublic 2907
-_Screator 2904
-_Sname 2902
-_Sowner 2903
-_Sremdb 2908
-_Stbl 2905
-_Stblowner 2906
-: _Systabauth 2828
-_Alt 2880
-_Del 2834
-_Exe 2837
-_Grantee 2830
-_Grantor 2829
-_Ins 2833
-_Ndx 2838
-_Ref 2881
-_Sel 2836
-_Tbl 2832
-_Tblowner 2831
-_Upd 2835
-: _Systblconstrs 3194
-_Cnstrname 3197
-_Cnstrtype 3264
-_Idxname 3265
-_Owner 3195
-_Tblname 3196
-: _Systblstat 3584
-_Card 3586
-_Npages 3587
-_Pagesz 3589
-_Recsz 3588
-_Rssid 3590
-_Tblid 3585
-: _Systimestat 5175
-_Colid 5177
-_Rssid 5224
-_Tblid 5176
-_Val1 5178
-_Val10 5223
-_Val2 5179
-_Val3 5216
-_Val4 5217
-_Val5 5218
-_Val6 5219
-_Val7 5220
-_Val8 5221
-_Val9 5222
-: _Systinyintstat 5392
-_Colid 5394
-_Rssid 5443
-_Tblid 5393
-_Val1 5395
-_Val10 5442
-_Val2 5396
-_Val3 5397
-_Val4 5398
-_Val5 5399
-_Val6 5400
-_Val7 5401
-_Val8 5440
-_Val9 5441
-: _Systrigcols 3879
-_Colid 3882
-_Owner 3881
-_Triggername 3880
-: _Systrigger 3822
-_Fire_4GL 3873
-_Owner 3825
-_Referstonew 3831
-_Referstoold 3830
-_Rssid 3872
-_Statementorrow 3832
-_Tbl 3826
-_Tblowner 3827
-_Triggerevent 3829
-_Triggerid 3823
-_Triggername 3824
-_Triggertime 3828
-: _Systsstat 5306
-_Colid 5308
-_Rssid 5386
-_Tblid 5307
-_Val1 5376
-_Val10 5385
-_Val2 5377
-_Val3 5378
-_Val4 5379
-_Val5 5380
-_Val6 5381
-_Val7 5382
-_Val8 5383
-_Val9 5384
-: _Sysvarcharstat 4854
-_Colid 4856
-_Rssid 3514
-_Tblid 4855
-_Val1 4857
-_Val10 3493
-_Val2 4858
-_Val3 4859
-_Val4 4860
-_Val5 4861
-_Val6 4862
-_Val7 4863
-_Val8 3491
-_Val9 3492
-: _Sysviews 958
-_Creator 1294
-_Owner 1295
-_Seq 1296
-_Viewname 1293
-_Viewtext 1297
-: _TableStat 1494
-_TableStat-create 2511
-_TableStat-delete 2512
-_TableStat-id 2508
-_TableStat-read 2509
-_TableStat-update 2510
-: _Trans 1492
-_Trans-Coord 2482
-_Trans-CoordTx 2483
-_Trans-counter 2480
-_Trans-Duration 2484
-_Trans-Flags 2477
-_Trans-Id 2475
-_Trans-Misc 2496
-_Trans-Num 2479
-_Trans-State 2476
-_Trans-txtime 2481
-_Trans-Usrnum 2478
-: _TxeLock 1507
-_Txe-Id 2560
-_Txe-Locks 2562
-_Txe-Lockss 2563
-_Txe-Time 2566
-_Txe-Type 2561
-_Txe-Wait-Time 2567
-_Txe-Waits 2564
-_Txe-Waitss 2565
-: _User 938
-_Password 1159
-_U-misc1 1161
-_U-misc2 1162
-_User-Misc 1163
-_User-Name 1160
-_Userid 1158
-: _UserIO 1488
-_UserIO-AiRead 2418
-_UserIO-AiWrite 2419
-_UserIO-BiRead 2416
-_UserIO-BiWrite 2417
-_UserIO-DbAccess 2413
-_UserIO-DbRead 2414
-_UserIO-DbWrite 2415
-_UserIO-Id 2410
-_UserIO-Misc 2432
-_UserIO-Name 2412
-_UserIO-Usr 2411
-: _UserLock 1473
-_UserLock-Chain 1928
-_UserLock-Flags 1929
-_UserLock-Id 1923
-_UserLock-Misc 1930
-_UserLock-Name 1925
-_UserLock-Recid 1926
-_UserLock-Type 1927
-_UserLock-Usr 1924
-: _UserStatus 1509
-_UserStatus-Counter 2575
-_UserStatus-ObjectId 2572
-_UserStatus-ObjectType 2573
-_UserStatus-Operation 2577
-_UserStatus-State 2574
-_UserStatus-Target 2576
-_UserStatus-UserId 2571
-: _View 942
-_Auth-Id 1188
-_Base-Tables 1190
-_Can-Create 1196
-_Can-Delete 1197
-_Can-Read 1194
-_Can-Write 1195
-_Desc 1199
-_Group-By 1192
-_Updatable 1198
-_View-Def 1193
-_View-Name 1189
-_Where-Cls 1191
-: _View-Col 944
-_Auth-Id 1200
-_Base-Col 1203
-_Can-Create 1205
-_Can-Write 1204
-_Col-Name 1202
-_Vcol-Order 1206
-_View-Name 1201
-: _View-Ref 946
-_Auth-Id 1216
-_Base-Col 1219
-_Ref-Table 1218
-_View-Name 1217
+: SYSATTACHTBLS 2761
+DB_LINK 4113 CHARACTER
+LINKOWNER 4112 CHARACTER
+OWNER 4108 CHARACTER
+REMOWNER 4110 CHARACTER
+REMTBL 4111 CHARACTER
+TBL 4109 CHARACTER
+: SYSBIGINTSTAT 2790
+ATTRIBUTE 4373 INTEGER
+COLID 4371 INTEGER
+PROPERTY 4372 INTEGER
+TBLID 4370 INTEGER
+VALUE 4374 BIGINT
+: SYSCALCTABLE 2758
+FLD 4096 INTEGER
+: SYSCHARSTAT 2786
+ATTRIBUTE 4353 INTEGER
+COLID 4344 INTEGER
+PROPERTY 4352 INTEGER
+TBLID 4343 INTEGER
+VALUE 4354 CHARACTER
+: SYSCHKCONSTR_NAME_MAP 2796
+CNSTRNAME 4449 CHARACTER
+NAME_LOC 4451 INTEGER
+OWNER 4440 CHARACTER
+SEQ 4450 INTEGER
+TBLNAME 4448 CHARACTER
+: SYSCOLAUTH 2749
+COL 3991 CHARACTER
+GRANTEE 3988 CHARACTER
+GRANTOR 3987 CHARACTER
+REF 3993 CHARACTER
+SEL 4032 CHARACTER
+TBL 3990 CHARACTER
+TBLOWNER 3989 CHARACTER
+UPD 3992 CHARACTER
+: SYSCOLSTAT 2768
+ATTRIBUTE 4298 INTEGER
+COLID 4296 INTEGER
+PROPERTY 4297 INTEGER
+TBLID 4295 INTEGER
+VALUE 4299 INTEGER
+VAL_TS 4300 TIMESTAMP
+: SYSCOLUMNS 2744
+CHARSET 3907 CHARACTER
+COL 3861 CHARACTER
+COLLATION 3908 CHARACTER
+COLTYPE 3864 CHARACTER
+DFLT_VALUE 3906 CHARACTER
+ID 3860 INTEGER
+NULLFLAG 3905 CHARACTER
+OWNER 3863 CHARACTER
+SCALE 3904 INTEGER
+TBL 3862 CHARACTER
+WIDTH 3865 INTEGER
+: SYSCOLUMNS_FULL 2767
+ARRAY_EXTENT 4242 INTEGER
+CHARSET 4235 CHARACTER
+COL 4227 CHARACTER
+COLLATION 4236 CHARACTER
+COLTYPE 4230 CHARACTER
+COL_LABEL 4247 CHARACTER
+COL_LABEL_SA 4293 CHARACTER
+COL_SUBTYPE 4237 INTEGER
+DESCRIPTION 4246 CHARACTER
+DFLT_VALUE 4234 CHARACTER
+DFLT_VALUE_SA 4288 CHARACTER
+DISPLAY_ORDER 4241 INTEGER
+FIELD_RPOS 4240 INTEGER
+FORMAT 4239 CHARACTER
+FORMAT_SA 4290 CHARACTER
+HELP 4245 CHARACTER
+HELP_SA 4292 CHARACTER
+ID 4226 INTEGER
+LABEL 4238 CHARACTER
+LABEL_SA 4289 CHARACTER
+NULLFLAG 4233 FIXCHAR
+OWNER 4229 CHARACTER
+SCALE 4232 INTEGER
+TBL 4228 CHARACTER
+USER_MISC 4294 CHARACTER
+VALEXP 4243 CHARACTER
+VALMSG 4244 CHARACTER
+VALMSG_SA 4291 CHARACTER
+VIEW_AS 4248 CHARACTER
+WIDTH 4231 INTEGER
+: SYSDATATYPES 2757
+AUTOINCR 4088 SHORT
+CASESENSITIVE 4084 SHORT
+CREATEPARAMS 4082 CHARACTER
+DATATYPE 4078 SHORT
+DHTYPENAME 4077 CHARACTER
+LITERALPREFIX 4080 CHARACTER
+LITERALSUFFIX 4081 CHARACTER
+LOCALTYPENAME 4089 CHARACTER
+NULLABLE 4083 SHORT
+ODBCMONEY 4087 SHORT
+SEARCHABLE 4085 SHORT
+TYPEPRECISION 4079 INTEGER
+UNSIGNEDATTR 4086 SHORT
+: SYSDATESTAT 2773
+ATTRIBUTE 4331 INTEGER
+COLID 4329 INTEGER
+PROPERTY 4330 INTEGER
+TBLID 4328 INTEGER
+VALUE 4332 DATE
+: SYSDBAUTH 2747
+DBA_ACC 3973 CHARACTER
+GRANTEE 3972 CHARACTER
+RES_ACC 3974 CHARACTER
+: SYSDBLINKS 2751
+DB_LINK 4041 CHARACTER
+HOST 4044 CHARACTER
+OWNER 4040 CHARACTER
+PASSWORD 4043 CHARACTER
+USERNAME 4042 CHARACTER
+: SYSFLOATSTAT 2774
+ATTRIBUTE 4336 INTEGER
+COLID 4334 INTEGER
+PROPERTY 4335 INTEGER
+TBLID 4333 INTEGER
+VALUE 4337 DOUBLE
+: SYSIDXSTAT 2760
+ATTRIBUTE 4105 INTEGER
+IDXID 4103 INTEGER
+PROPERTY 4104 INTEGER
+TBLID 4102 INTEGER
+VALUE 4106 INTEGER
+VAL_TS 4107 TIMESTAMP
+: SYSINDEXES 2746
+ABBREVIATE 3968 LOGICAL
+ACTIVE 3927 LOGICAL
+COLNAME 3920 CHARACTER
+desc 3929 CHARACTER
+ID 3914 INTEGER
+IDXCOMPRESS 3923 FIXCHAR
+IDXMETHOD 3924 CHARACTER
+IDXNAME 3916 CHARACTER
+IDXORDER 3922 FIXCHAR
+IDXOWNER 3917 CHARACTER
+IDXSEGID 3915 INTEGER
+IDXSEQ 3925 INTEGER
+IDXTYPE 3921 FIXCHAR
+INDEX_USER_MISC 3970 CHARACTER
+IXCOL_USER_MISC 3971 CHARACTER
+RSSID 3926 INTEGER
+TBL 3918 CHARACTER
+TBLOWNER 3919 CHARACTER
+UNSORTED 3969 LOGICAL
+WORDIDX 3928 INTEGER
+: SYSINTSTAT 2771
+ATTRIBUTE 4321 INTEGER
+COLID 4312 INTEGER
+PROPERTY 4320 INTEGER
+TBLID 4311 INTEGER
+VALUE 4322 INTEGER
+: SYSNCHARSTAT 2791
+ATTRIBUTE 4417 INTEGER
+COLID 4376 INTEGER
+PROPERTY 4416 INTEGER
+TBLID 4375 INTEGER
+VALUE 4418 FIXCHAR
+: SYSNUMSTAT 2772
+ATTRIBUTE 4326 INTEGER
+COLID 4324 INTEGER
+PROPERTY 4325 INTEGER
+TBLID 4323 INTEGER
+VALUE 4327 DECIMAL
+: SYSNVARCHARSTAT 2792
+ATTRIBUTE 4422 INTEGER
+COLID 4420 INTEGER
+PROPERTY 4421 INTEGER
+TBLID 4419 INTEGER
+VALUE 4423 CHARACTER
+: SYSPROCBIN 2805
+ID 4554 INTEGER
+PROC_BIN 4557 RAW
+PROC_TYPE 4555 FIXCHAR
+RSSID 4553 INTEGER
+SEQ 4556 INTEGER
+: SYSPROCCOLUMNS 2763
+ARGTYPE 4135 CHARACTER
+COL 4131 CHARACTER
+DATATYPE 4134 CHARACTER
+DFLT_VALUE 4139 CHARACTER
+ID 4130 INTEGER
+NULLFLAG 4138 FIXCHAR
+PROC_ID 4132 INTEGER
+RSSID 4133 INTEGER
+SCALE 4137 INTEGER
+WIDTH 4136 INTEGER
+: SYSPROCEDURES 2762
+CREATOR 4116 CHARACTER
+HAS_RESULTSET 4120 FIXCHAR
+HAS_RETURN_VAL 4128 FIXCHAR
+LANG 4129 INTEGER
+OWNER 4117 CHARACTER
+PROC_ID 4114 INTEGER
+PROC_NAME 4115 CHARACTER
+PROC_TYPE 4119 CHARACTER
+RSSID 4118 INTEGER
+: SYSPROCTEXT 2806
+ID 4559 INTEGER
+PROC_TEXT 4562 CHARACTER
+PROC_TYPE 4560 FIXCHAR
+RSSID 4558 INTEGER
+SEQ 4561 INTEGER
+: SYSREALSTAT 2787
+ATTRIBUTE 4358 INTEGER
+COLID 4356 INTEGER
+PROPERTY 4357 INTEGER
+TBLID 4355 INTEGER
+VALUE 4359 FLOAT
+: SYSROLES 2797
+ADMIN 4455 LOGICAL
+GRANTEE 4454 CHARACTER
+GRANTOR 4453 CHARACTER
+ROLENAME 4452 CHARACTER
+: SYSSCHEMAS 2798
+OWNER 4457 CHARACTER
+SCHEMANAME 4456 CHARACTER
+: SYSSEQAUTH 2794
+GRANTEE 4430 CHARACTER
+GRANTOR 4429 CHARACTER
+REF 4434 CHARACTER
+SEL 4435 CHARACTER
+SEQ-NAME 4432 CHARACTER
+SEQ-OWNER 4431 CHARACTER
+UPD 4433 CHARACTER
+: SYSSEQUENCES 2800
+CYCLE-OK 4468 LOGICAL
+DB-RECID 4470 RECID
+SEQ-INCR 4465 INTEGER
+SEQ-INIT 4464 INTEGER
+SEQ-MAX 4467 INTEGER
+SEQ-MIN 4466 INTEGER
+SEQ-MISC 4469 CHARACTER
+SEQ-NAME 4463 CHARACTER
+SEQ-NUM 4462 INTEGER
+SEQ-OWNER 4472 CHARACTER
+USER-MISC 4471 CHARACTER
+: SYSSMINTSTAT 2770
+ATTRIBUTE 4309 INTEGER
+COLID 4307 INTEGER
+PROPERTY 4308 INTEGER
+TBLID 4306 INTEGER
+VALUE 4310 SHORT
+: SYSSQL_PROPERTIES 2799
+ATTRIBUTE 4459 INTEGER
+PROPERTY 4458 INTEGER
+VALUE_CH 4461 CHARACTER
+VALUE_N 4460 INTEGER
+: SYSSYNONYMS 2750
+ISPUBLIC 4038 SHORT
+SCREATOR 4035 CHARACTER
+SNAME 4033 CHARACTER
+SOWNER 4034 CHARACTER
+SREMDB 4039 CHARACTER
+STBL 4036 CHARACTER
+STBLOWNER 4037 CHARACTER
+: SYSTABAUTH 2748
+ALT 3985 CHARACTER
+DEL 3980 CHARACTER
+EXE 3983 FIXCHAR
+GRANTEE 3976 CHARACTER
+GRANTOR 3975 CHARACTER
+INS 3979 CHARACTER
+NDX 3984 CHARACTER
+REF 3986 CHARACTER
+SEL 3982 CHARACTER
+TBL 3978 CHARACTER
+TBLOWNER 3977 CHARACTER
+UPD 3981 CHARACTER
+: SYSTABLES 2743
+CREATOR 3850 CHARACTER
+HAS_CCNSTRS 3856 CHARACTER
+HAS_FCNSTRS 3855 CHARACTER
+HAS_PCNSTRS 3854 CHARACTER
+HAS_UCNSTRS 3857 CHARACTER
+ID 3848 INTEGER
+OWNER 3851 CHARACTER
+RSSID 3859 INTEGER
+SEGID 3853 INTEGER
+TBL 3849 CHARACTER
+TBLTYPE 3852 CHARACTER
+TBL_STATUS 3858 CHARACTER
+: SYSTABLES_FULL 2766
+CAN_DUMP 4215 CHARACTER
+CAN_LOAD 4216 CHARACTER
+CREATOR 4196 CHARACTER
+DESCRIPTION 4207 CHARACTER
+DUMP_NAME 4213 CHARACTER
+FILE_LABEL 4214 CHARACTER
+FILE_LABEL_SA 4224 CHARACTER
+FROZEN 4212 LOGICAL
+HAS_CCNSTRS 4202 CHARACTER
+HAS_FCNSTRS 4201 CHARACTER
+HAS_PCNSTRS 4200 CHARACTER
+HAS_UCNSTRS 4203 CHARACTER
+HIDDEN 4211 LOGICAL
+ID 4194 INTEGER
+LAST_CHANGE 4210 INTEGER
+OWNER 4197 CHARACTER
+PRIME_INDEX 4206 INTEGER
+RSSID 4205 INTEGER
+SEGID 4199 INTEGER
+TBL 4195 CHARACTER
+TBLTYPE 4198 CHARACTER
+TBL_STATUS 4204 CHARACTER
+USER_MISC 4225 CHARACTER
+VALEXP 4208 CHARACTER
+VALMSG 4209 CHARACTER
+VALMSG_SA 4217 CHARACTER
+: SYSTBLSTAT 2759
+ATTRIBUTE 4099 INTEGER
+PROPERTY 4098 INTEGER
+TBLID 4097 INTEGER
+VALUE 4100 INTEGER
+VAL_TS 4101 TIMESTAMP
+: SYSTIMESTAT 2785
+ATTRIBUTE 4341 INTEGER
+COLID 4339 INTEGER
+PROPERTY 4340 INTEGER
+TBLID 4338 INTEGER
+VALUE 4342 TIME
+: SYSTINYINTSTAT 2789
+ATTRIBUTE 4368 INTEGER
+COLID 4366 INTEGER
+PROPERTY 4367 INTEGER
+TBLID 4365 INTEGER
+VALUE 4369 INTEGER
+: SYSTRIGCOLS 2765
+COLID 4193 INTEGER
+OWNER 4192 CHARACTER
+TRIGGERNAME 4152 CHARACTER
+: SYSTRIGGER 2764
+FIRE_4GL 4151 LOGICAL
+OWNER 4142 CHARACTER
+REFERS_TO_NEW 4148 FIXCHAR
+REFERS_TO_OLD 4147 FIXCHAR
+RSSID 4150 INTEGER
+STATEMENT_OR_ROW 4149 FIXCHAR
+TBL 4143 CHARACTER
+TBLOWNER 4144 CHARACTER
+TRIGGERID 4140 INTEGER
+TRIGGERNAME 4141 CHARACTER
+TRIGGER_EVENT 4146 CHARACTER
+TRIGGER_TIME 4145 CHARACTER
+: SYSTSSTAT 2788
+ATTRIBUTE 4363 INTEGER
+COLID 4361 INTEGER
+PROPERTY 4362 INTEGER
+TBLID 4360 INTEGER
+VALUE 4364 TIMESTAMP
+: SYSTSTZSTAT 2793
+ATTRIBUTE 4427 INTEGER
+COLID 4425 INTEGER
+PROPERTY 4426 INTEGER
+TBLID 4424 INTEGER
+VALUE 4428 DATETIME-TZ
+: SYSVARCHARSTAT 2769
+ATTRIBUTE 4304 INTEGER
+COLID 4302 INTEGER
+PROPERTY 4303 INTEGER
+TBLID 4301 INTEGER
+VALUE 4305 CHARACTER
+: SYSVIEWS 2745
+CREATOR 3910 CHARACTER
+OWNER 3911 CHARACTER
+SEQ 3912 INTEGER
+VIEWNAME 3909 CHARACTER
+VIEWTEXT 3913 CHARACTER
+: SYSVIEWS_NAME_MAP 2795
+NAME_LOC 4439 INTEGER
+OWNER 4436 CHARACTER
+SEQ 4438 INTEGER
+VIEWNAME 4437 CHARACTER
+: SYS_CHKCOL_USAGE 2756
+CNSTRNAME 4075 CHARACTER
+COLNAME 4076 CHARACTER
+OWNER 4073 CHARACTER
+TBLNAME 4074 CHARACTER
+: SYS_CHK_CONSTRS 2754
+CHKCLAUSE 4067 CHARACTER
+CHKSEQ 4066 INTEGER
+CNSTRNAME 4065 CHARACTER
+OWNER 4057 CHARACTER
+TBLNAME 4064 CHARACTER
+: SYS_KEYCOL_USAGE 2752
+CNSTRNAME 4047 CHARACTER
+COLNAME 4048 CHARACTER
+COLPOSITION 4049 INTEGER
+OWNER 4045 CHARACTER
+TBLNAME 4046 CHARACTER
+: SYS_REF_CONSTRS 2753
+CNSTRNAME 4052 CHARACTER
+DELETERULE 4056 CHARACTER
+OWNER 4050 CHARACTER
+REFCNSTRNAME 4055 CHARACTER
+REFOWNER 4053 CHARACTER
+REFTBLNAME 4054 CHARACTER
+TBLNAME 4051 CHARACTER
+: SYS_TBL_CONSTRS 2755
+CNSTRNAME 4070 CHARACTER
+CNSTRTYPE 4071 CHARACTER
+IDXNAME 4072 CHARACTER
+OWNER 4068 CHARACTER
+TBLNAME 4069 CHARACTER
+: _ActAILog 5460
+_AiLog-AIWWrites 5955 INTEGER
+_AiLog-BBuffWaits 5958 INTEGER
+_AiLog-BytesWritn 5957 INTEGER
+_AiLog-ForceWaits 5961 INTEGER
+_AiLog-Id 5953 INTEGER
+_AiLog-Misc 5964 INTEGER
+_AiLog-NoBufAvail 5959 INTEGER
+_AiLog-PartialWrt 5960 INTEGER
+_AiLog-RecWriten 5956 INTEGER
+_AiLog-TotWrites 5954 INTEGER
+_AiLog-Trans 5962 INTEGER
+_AiLog-UpTime 5963 INTEGER
+: _ActBILog 5459
+_BiLog-BBuffWaits 5935 INTEGER
+_BiLog-BIWWrites 5928 INTEGER
+_BiLog-BytesRead 5933 INTEGER
+_BiLog-BytesWrtn 5930 INTEGER
+_BiLog-ClstrClose 5934 INTEGER
+_BiLog-EBuffWaits 5936 INTEGER
+_BiLog-ForceWaits 5937 INTEGER
+_BiLog-ForceWrts 5938 INTEGER
+_BiLog-Id 5926 INTEGER
+_BiLog-Misc 5952 INTEGER
+_BiLog-PartialWrts 5939 INTEGER
+_BiLog-RecRead 5932 INTEGER
+_BiLog-RecWriten 5929 INTEGER
+_BiLog-TotalWrts 5927 INTEGER
+_BiLog-TotReads 5931 INTEGER
+_BiLog-Trans 5940 INTEGER
+_BiLog-UpTime 5941 INTEGER
+: _ActBuffer 5457
+_Buffer-APWEnq 5865 INTEGER
+_Buffer-Chkpts 5859 INTEGER
+_Buffer-Deferred 5862 INTEGER
+_Buffer-Flushed 5861 INTEGER
+_Buffer-Id 5812 INTEGER
+_Buffer-LogicRds 5813 INTEGER
+_Buffer-LogicWrts 5856 INTEGER
+_Buffer-LRUSkips 5863 INTEGER
+_Buffer-LRUWrts 5864 INTEGER
+_Buffer-Marked 5860 INTEGER
+_Buffer-Misc 5868 INTEGER
+_Buffer-OSRds 5857 INTEGER
+_Buffer-OSWrts 5858 INTEGER
+_Buffer-Trans 5866 INTEGER
+_Buffer-UpTime 5867 INTEGER
+: _ActIndex 5472
+_Index-Create 6091 INTEGER
+_Index-Delete 6092 INTEGER
+_Index-Find 6090 INTEGER
+_Index-Free 6095 INTEGER
+_Index-Id 6089 INTEGER
+_Index-Misc 6098 INTEGER
+_Index-Remove 6093 INTEGER
+_Index-Splits 6094 INTEGER
+_Index-Trans 6096 INTEGER
+_Index-UpTime 6097 INTEGER
+: _ActIOFile 5463
+_IOFile-BufReads 6026 INTEGER
+_IOFile-BufWrites 6024 INTEGER
+_IOFile-Extends 6022 INTEGER
+_IOFile-FileName 6019 CHARACTER
+_IOFile-Id 6018 INTEGER
+_IOFile-Misc 6029 INTEGER
+_IOFile-Reads 6020 INTEGER
+_IOFile-Trans 6023 INTEGER
+_IOFile-UbufReads 6027 INTEGER
+_IOFile-UbufWrites 6025 INTEGER
+_IOFile-UpTime 6028 INTEGER
+_IOFile-Writes 6021 INTEGER
+: _ActIOType 5462
+_IOType-AiRds 6000 INTEGER
+_IOType-AiWrts 6004 INTEGER
+_IOType-BiRds 5999 INTEGER
+_IOType-BiWrts 6003 INTEGER
+_IOType-DataReads 5998 INTEGER
+_IOType-DataWrts 6002 INTEGER
+_IOType-Id 5996 INTEGER
+_IOType-IdxRds 5997 INTEGER
+_IOType-IdxWrts 6001 INTEGER
+_IOType-Misc 6017 INTEGER
+_IOType-Trans 6005 INTEGER
+_IOType-UpTime 6016 INTEGER
+: _ActLock 5461
+_Lock-CanclReq 5988 INTEGER
+_Lock-Downgrade 5989 INTEGER
+_Lock-ExclFind 5994 INTEGER
+_Lock-ExclLock 5971 INTEGER
+_Lock-ExclReq 5967 INTEGER
+_Lock-ExclWait 5985 INTEGER
+_Lock-Id 5965 INTEGER
+_Lock-Misc 5993 INTEGER
+_Lock-RecGetLock 5973 INTEGER
+_Lock-RecGetReq 5969 INTEGER
+_Lock-RecGetWait 5987 INTEGER
+_Lock-RedReq 5990 INTEGER
+_Lock-ShrFind 5995 INTEGER
+_Lock-ShrLock 5970 INTEGER
+_Lock-ShrReq 5966 INTEGER
+_Lock-ShrWait 5984 INTEGER
+_Lock-Trans 5991 INTEGER
+_Lock-UpgLock 5972 INTEGER
+_Lock-UpgReq 5968 INTEGER
+_Lock-UpgWait 5986 INTEGER
+_Lock-UpTime 5992 INTEGER
+: _ActOther 5474
+_Other-Commit 6126 INTEGER
+_Other-FlushMblk 6129 INTEGER
+_Other-Id 6125 INTEGER
+_Other-Misc 6132 INTEGER
+_Other-Trans 6130 INTEGER
+_Other-Undo 6127 INTEGER
+_Other-UpTime 6131 INTEGER
+_Other-Wait 6128 INTEGER
+: _ActPWs 5458
+_PW-ApwQWrites 5873 INTEGER
+_PW-BuffsScaned 5876 INTEGER
+_PW-BufsCkp 5877 INTEGER
+_PW-Checkpoints 5920 INTEGER
+_PW-CkpQWrites 5874 INTEGER
+_PW-DBWrites 5871 INTEGER
+_PW-Flushed 5922 INTEGER
+_PW-Id 5869 INTEGER
+_PW-Marked 5921 INTEGER
+_PW-Misc 5925 INTEGER
+_PW-ScanCycles 5875 INTEGER
+_PW-ScanWrites 5872 INTEGER
+_PW-TotDBWrites 5870 INTEGER
+_PW-Trans 5923 INTEGER
+_PW-UpTime 5924 INTEGER
+: _ActRecord 5473
+_Record-BytesCreat 6119 INTEGER
+_Record-BytesDel 6120 INTEGER
+_Record-BytesRead 6118 INTEGER
+_Record-BytesUpd 6121 INTEGER
+_Record-FragCreat 6115 INTEGER
+_Record-FragDel 6116 INTEGER
+_Record-FragRead 6114 INTEGER
+_Record-FragUpd 6117 INTEGER
+_Record-Id 6099 INTEGER
+_Record-Misc 6124 INTEGER
+_Record-RecCreat 6112 INTEGER
+_Record-RecDel 6113 INTEGER
+_Record-RecRead 6100 INTEGER
+_Record-RecUpd 6101 INTEGER
+_Record-Trans 6122 INTEGER
+_Record-UpTime 6123 INTEGER
+: _ActServer 5456
+_Server-ByteRec 5803 INTEGER
+_Server-ByteSent 5804 INTEGER
+_Server-Id 5800 INTEGER
+_Server-Misc 5811 INTEGER
+_Server-MsgRec 5801 INTEGER
+_Server-MsgSent 5802 INTEGER
+_Server-QryRec 5807 INTEGER
+_Server-RecRec 5805 INTEGER
+_Server-RecSent 5806 INTEGER
+_Server-TimeSlice 5808 INTEGER
+_Server-Trans 5809 INTEGER
+_Server-UpTime 5810 INTEGER
+: _ActSpace 5464
+_Space-AllocNewRm 6034 INTEGER
+_Space-BackAdd 6083 INTEGER
+_Space-BytesAlloc 6037 INTEGER
+_Space-DbExd 6031 INTEGER
+_Space-Examined 6080 INTEGER
+_Space-FromFree 6036 INTEGER
+_Space-FromRm 6035 INTEGER
+_Space-Front2Back 6084 INTEGER
+_Space-FrontAdd 6082 INTEGER
+_Space-Id 6030 INTEGER
+_Space-Locked 6085 INTEGER
+_Space-Misc 6088 INTEGER
+_Space-Removed 6081 INTEGER
+_Space-RetFree 6033 INTEGER
+_Space-TakeFree 6032 INTEGER
+_Space-Trans 6086 INTEGER
+_Space-UpTime 6087 INTEGER
+: _ActSummary 5455
+_Summary-AiWrites 5793 INTEGER
+_Summary-BiReads 5781 INTEGER
+_Summary-BiWrites 5792 INTEGER
+_Summary-Chkpts 5794 INTEGER
+_Summary-Commits 5771 INTEGER
+_Summary-DbAccesses 5798 INTEGER
+_Summary-DbReads 5779 INTEGER
+_Summary-DbWrites 5780 INTEGER
+_Summary-Flushed 5795 INTEGER
+_Summary-Id 5770 INTEGER
+_Summary-Misc 5799 INTEGER
+_Summary-RecCreat 5775 INTEGER
+_Summary-RecDel 5776 INTEGER
+_Summary-RecLock 5777 INTEGER
+_Summary-RecReads 5773 INTEGER
+_Summary-RecUpd 5774 INTEGER
+_Summary-RecWait 5778 INTEGER
+_Summary-TransComm 5796 INTEGER
+_Summary-Undos 5772 INTEGER
+_Summary-UpTime 5797 INTEGER
+: _Area 2651
+_Area-attrib 3212 INTEGER
+_Area-block 3211 RECID
+_Area-blocksize 3214 INTEGER
+_Area-clustersize 3213 INTEGER
+_Area-extents 3216 INTEGER
+_Area-misc 3217 INTEGER
+_Area-name 3209 CHARACTER
+_Area-number 3208 INTEGER
+_Area-recbits 3215 INTEGER
+_Area-type 3210 INTEGER
+_Area-version 3207 INTEGER
+: _AreaExtent 2652
+_Area-number 3221 INTEGER
+_Area-recid 3218 RECID
+_Extent-attrib 3223 INTEGER
+_Extent-misc 3299 INTEGER
+_Extent-number 3220 INTEGER
+_Extent-path 3298 CHARACTER
+_Extent-size 3297 INTEGER
+_Extent-system 3296 INTEGER
+_Extent-type 3222 INTEGER
+_Extent-version 3219 INTEGER
+: _AreaStatus 5490
+_AreaStatus-Areaname 6447 CHARACTER
+_AreaStatus-Areanum 6446 INTEGER
+_AreaStatus-Extents 6450 INTEGER
+_AreaStatus-Freenum 6452 INTEGER
+_AreaStatus-Hiwater 6449 INTEGER
+_AreaStatus-Id 6445 INTEGER
+_AreaStatus-Lastextent 6451 CHARACTER
+_AreaStatus-Rmnum 6496 INTEGER
+_AreaStatus-Totblocks 6448 INTEGER
+: _Block 5475
+_Block-Area 6214 INTEGER
+_Block-BkupCtr 6211 INTEGER
+_Block-Block 6215 CHARACTER
+_Block-ChainType 6210 CHARACTER
+_Block-Dbkey 6208 INTEGER
+_Block-Id 6133 INTEGER
+_Block-Misc 6216 INTEGER
+_Block-NextDbkey 6212 INTEGER
+_Block-Type 6209 CHARACTER
+_Block-Update 6213 INTEGER
+: _BuffStatus 5448
+_BfStatus-APWQ 5638 INTEGER
+_BfStatus-CKPMarked 5641 INTEGER
+_BfStatus-CKPQ 5639 INTEGER
+_BfStatus-HashSize 5635 INTEGER
+_BfStatus-Id 5633 INTEGER
+_BfStatus-LastCkpNum 5642 INTEGER
+_BfStatus-LRU 5637 INTEGER
+_BfStatus-Misc 5643 INTEGER
+_BfStatus-ModBuffs 5640 INTEGER
+_BfStatus-TotBufs 5634 INTEGER
+_BfStatus-UsedBuffs 5636 INTEGER
+: _Checkpoint 5478
+_Checkpoint-ApwQ 6256 INTEGER
+_Checkpoint-CptQ 6254 INTEGER
+_Checkpoint-Dirty 6253 INTEGER
+_Checkpoint-Flush 6257 INTEGER
+_Checkpoint-Id 6250 INTEGER
+_Checkpoint-Len 6252 CHARACTER
+_Checkpoint-Misc 6258 INTEGER
+_Checkpoint-Scan 6255 INTEGER
+_Checkpoint-Time 6251 CHARACTER
+: _Code-Feature 5495
+_CodeFeature-ID 6562 INTEGER
+_CodeFeature-Res01 6566 CHARACTER
+_CodeFeature-Res02 6567 INTEGER
+_CodeFeature_Name 6563 CHARACTER
+_CodeFeature_Required 6565 CHARACTER
+_CodeFeature_Supported 6564 CHARACTER
+: _Codepage 2654
+_Cp-Attr 3303 RAW
+_Cp-Dbrecid 3302 RECID
+_Cp-Name 3300 CHARACTER
+_Cp-Sequence 3301 INTEGER
+: _Collation 2656
+_Coll-Cp 3306 INTEGER
+_Coll-Data 3310 RAW
+_Coll-Name 3304 CHARACTER
+_Coll-Segment 3309 INTEGER
+_Coll-Sequence 3305 INTEGER
+_Coll-Tran-Subtype 3308 INTEGER
+_Coll-Tran-Version 3307 INTEGER
+: _Connect 5445
+_Connect-2phase 5520 INTEGER
+_Connect-Batch 5521 CHARACTER
+_Connect-Device 5508 CHARACTER
+_Connect-Disconnect 5517 INTEGER
+_Connect-Id 5504 INTEGER
+_Connect-Interrupt 5519 INTEGER
+_Connect-Misc 5522 INTEGER
+_Connect-Name 5507 CHARACTER
+_Connect-Pid 5510 INTEGER
+_Connect-Resync 5518 INTEGER
+_Connect-semid 5516 INTEGER
+_Connect-SemNum 5515 INTEGER
+_Connect-Server 5511 INTEGER
+_Connect-Time 5509 CHARACTER
+_Connect-TransId 5514 INTEGER
+_Connect-Type 5506 CHARACTER
+_Connect-Usr 5505 INTEGER
+_Connect-Wait 5513 CHARACTER
+_Connect-Wait1 5512 INTEGER
+: _Database-Feature 5494
+_DBFeature-ID 6545 INTEGER
+_DBFeature-Res01 6560 CHARACTER
+_DBFeature-Res02 6561 INTEGER
+_DBFeature_Active 6548 CHARACTER
+_DBFeature_Enabled 6547 CHARACTER
+_DBFeature_Name 6546 CHARACTER
+: _Db 2636
+_Db-addr 3107 CHARACTER
+_Db-coll-name 3120 CHARACTER
+_Db-collate 3119 RAW
+_Db-comm 3109 CHARACTER
+_Db-local 3114 LOGICAL
+_Db-misc1 3111 INTEGER
+_Db-misc2 3112 CHARACTER
+_Db-name 3106 CHARACTER
+_Db-res1 3115 INTEGER
+_Db-res2 3116 CHARACTER
+_Db-revision 3110 INTEGER
+_Db-slave 3113 LOGICAL
+_Db-type 3108 CHARACTER
+_Db-xl-name 3118 CHARACTER
+_Db-xlate 3117 RAW
+_User-Misc 3121 CHARACTER
+: _DbStatus 5447
+_DbStatus-AiBlkSize 5601 INTEGER
+_DbStatus-BiBlkSize 5587 INTEGER
+_DbStatus-BiClSize 5600 INTEGER
+_DbStatus-BiOpen 5609 CHARACTER
+_DbStatus-BiSize 5618 INTEGER
+_DbStatus-BiTrunc 5610 CHARACTER
+_DbStatus-CacheStamp 5605 CHARACTER
+_DbStatus-Changed 5583 INTEGER
+_DbStatus-ClVersMinor 5581 INTEGER
+_DbStatus-Codepage 5611 CHARACTER
+_DbStatus-Collation 5612 CHARACTER
+_DbStatus-CreateDate 5608 CHARACTER
+_DbStatus-DbBlkSize 5572 INTEGER
+_DbStatus-DbVers 5579 INTEGER
+_DbStatus-DbVersMinor 5580 INTEGER
+_DbStatus-EmptyBlks 5574 INTEGER
+_DbStatus-fbDate 5606 CHARACTER
+_DbStatus-FreeBlks 5575 INTEGER
+_DbStatus-HiWater 5586 INTEGER
+_DbStatus-ibDate 5607 CHARACTER
+_DbStatus-ibSeq 5584 INTEGER
+_DbStatus-Id 5568 INTEGER
+_DbStatus-Integrity 5585 CHARACTER
+_DbStatus-IntFlags 5571 INTEGER
+_DbStatus-LastOpen 5603 CHARACTER
+_DbStatus-LastTable 5578 INTEGER
+_DbStatus-LastTran 5577 INTEGER
+_DbStatus-Misc 5632 INTEGER
+_DbStatus-MostLocks 5615 INTEGER
+_DbStatus-NumAreas 5613 INTEGER
+_DbStatus-NumLocks 5614 INTEGER
+_DbStatus-NumSems 5617 INTEGER
+_DbStatus-PrevOpen 5604 CHARACTER
+_DbStatus-RMFreeBlks 5576 INTEGER
+_DbStatus-SharedMemVer 5616 INTEGER
+_DbStatus-ShmVers 5582 INTEGER
+_DbStatus-starttime 5602 CHARACTER
+_DbStatus-state 5569 INTEGER
+_DbStatus-tainted 5570 INTEGER
+_DbStatus-TotalBlks 5573 INTEGER
+: _Field 2628
+_Attributes1 3012 INTEGER
+_Can-Read 2958 CHARACTER
+_Can-Write 2959 CHARACTER
+_Charset 2999 CHARACTER
+_Col-label 2965 CHARACTER
+_Col-label-SA 2998 CHARACTER
+_Collation 3000 CHARACTER
+_Data-Type 2948 CHARACTER
+_Decimals 2956 INTEGER
+_Desc 2964 CHARACTER
+_dtype 2949 INTEGER
+_Extent 2960 INTEGER
+_Fetch-Type 3008 CHARACTER
+_Field-Name 2947 CHARACTER
+_Field-Physpos 3010 INTEGER
+_field-rpos 2955 INTEGER
+_File-recid 2946 RECID
+_Fld-case 2977 LOGICAL
+_Fld-misc1 2969 INTEGER
+_Fld-misc2 2976 CHARACTER
+_Fld-res1 2978 INTEGER
+_Fld-res2 2979 CHARACTER
+_Fld-stdtype 2966 INTEGER
+_Fld-stlen 2967 INTEGER
+_Fld-stoff 2968 INTEGER
+_For-Allocated 2991 INTEGER
+_For-Id 2980 INTEGER
+_For-Itype 2986 INTEGER
+_For-Maxsize 2990 INTEGER
+_For-Name 2984 CHARACTER
+_For-Primary 2981 INTEGER
+_For-Retrieve 2988 LOGICAL
+_For-Scale 2983 INTEGER
+_For-Separator 2989 CHARACTER
+_For-Spacing 2982 INTEGER
+_For-Type 2985 CHARACTER
+_For-Xpos 2987 INTEGER
+_Format 2953 CHARACTER
+_Format-SA 2995 CHARACTER
+_Help 2963 CHARACTER
+_Help-SA 2997 CHARACTER
+_Initial 2950 CHARACTER
+_Initial-SA 2993 CHARACTER
+_Label 2951 CHARACTER
+_Label-SA 2994 CHARACTER
+_Last-modified 3013 DATETIME-TZ
+_Mandatory 2952 LOGICAL
+_Mod-sequence 3014 INTEGER
+_Order 2957 INTEGER
+_sys-field 2954 LOGICAL
+_User-Misc 3011 CHARACTER
+_Valexp 2961 CHARACTER
+_Valmsg 2962 CHARACTER
+_Valmsg-SA 2996 CHARACTER
+_View-As 2992 CHARACTER
+_Width 3009 INTEGER
+: _Field-Trig 2646
+_Event 3170 CHARACTER
+_Field-Recid 3159 RECID
+_Field-Rpos 3169 INTEGER
+_File-Recid 3160 RECID
+_Last-modified 3174 DATETIME-TZ
+_Mod-sequence 3175 INTEGER
+_Override 3172 LOGICAL
+_Proc-Name 3171 CHARACTER
+_Trig-Crc 3173 INTEGER
+: _File 2626
+_Cache 2900 RAW
+_Can-Create 2882 CHARACTER
+_Can-Delete 2885 CHARACTER
+_Can-Dump 2920 CHARACTER
+_Can-Load 2921 CHARACTER
+_Can-Read 2883 CHARACTER
+_Can-Write 2884 CHARACTER
+_CRC 2897 INTEGER
+_Creator 2927 CHARACTER
+_DB-lang 2893 INTEGER
+_Db-recid 2887 RECID
+_Desc 2886 CHARACTER
+_dft-pk 2876 LOGICAL
+_Dump-name 2896 CHARACTER
+_Field-map 2926 RAW
+_Fil-misc1 2890 INTEGER
+_Fil-misc2 2891 CHARACTER
+_Fil-res1 2898 INTEGER
+_Fil-res2 2899 CHARACTER
+_File-Label 2919 CHARACTER
+_File-Label-SA 2923 CHARACTER
+_File-Name 2873 CHARACTER
+_File-Number 2875 INTEGER
+_For-Cnt1 2903 INTEGER
+_For-Cnt2 2904 INTEGER
+_For-Flag 2902 INTEGER
+_For-Format 2914 CHARACTER
+_For-Id 2917 INTEGER
+_For-Info 2915 CHARACTER
+_For-Name 2905 CHARACTER
+_For-Number 2918 INTEGER
+_For-Owner 2913 CHARACTER
+_For-Size 2901 INTEGER
+_For-Type 2916 CHARACTER
+_Frozen 2895 LOGICAL
+_Has-Ccnstrs 2928 CHARACTER
+_Has-Fcnstrs 2929 CHARACTER
+_Has-Pcnstrs 2930 CHARACTER
+_Has-Ucnstrs 2931 CHARACTER
+_Hidden 2894 LOGICAL
+_ianum 2924 INTEGER
+_Last-change 2892 INTEGER
+_Last-modified 2937 DATETIME-TZ
+_Mod-sequence 2945 INTEGER
+_numfld 2881 INTEGER
+_numkcomp 2878 INTEGER
+_numkey 2877 INTEGER
+_numkfld 2879 INTEGER
+_Owner 2932 CHARACTER
+_Prime-Index 2874 RECID
+_Rssid 2933 INTEGER
+_Tbl-Status 2934 CHARACTER
+_Tbl-Type 2935 CHARACTER
+_Template 2880 RECID
+_User-Misc 2936 CHARACTER
+_Valexp 2888 CHARACTER
+_Valmsg 2889 CHARACTER
+_Valmsg-SA 2922 CHARACTER
+_Version 2925 INTEGER
+: _File-Trig 2644
+_Event 3153 CHARACTER
+_File-Recid 3152 RECID
+_Last-modified 3157 DATETIME-TZ
+_Mod-sequence 3158 INTEGER
+_Override 3155 LOGICAL
+_Proc-Name 3154 CHARACTER
+_Trig-Crc 3156 INTEGER
+: _Filelist 5453
+_FileList-BlkSize 5747 INTEGER
+_FileList-Extend 5745 INTEGER
+_FileList-Id 5743 INTEGER
+_FileList-LogicalSz 5746 INTEGER
+_FileList-Misc 5761 INTEGER
+_FileList-Name 5760 CHARACTER
+_FileList-Openmode 5748 CHARACTER
+_FileList-Size 5744 INTEGER
+: _Index 2630
+_Active 3022 LOGICAL
+_Desc 3026 CHARACTER
+_File-recid 3015 RECID
+_For-Name 3027 CHARACTER
+_For-Type 3028 CHARACTER
+_I-misc1 3020 INTEGER
+_I-misc2 3021 CHARACTER
+_I-res1 3023 INTEGER
+_I-res2 3024 CHARACTER
+_ianum 3029 INTEGER
+_Idx-CRC 3030 INTEGER
+_idx-num 3019 INTEGER
+_Idxmethod 3032 CHARACTER
+_Idxowner 3031 CHARACTER
+_Index-Name 3016 CHARACTER
+_Last-modified 3041 DATETIME-TZ
+_Mod-sequence 3042 INTEGER
+_Mode 3043 INTEGER
+_num-comp 3018 INTEGER
+_Unique 3017 LOGICAL
+_User-Misc 3040 CHARACTER
+_Word-Rules 3044 INTEGER
+_Wordidx 3025 INTEGER
+: _Index-Field 2632
+_Abbreviate 3049 LOGICAL
+_Ascending 3048 LOGICAL
+_Coll-Strength 3059 INTEGER
+_Collation 3058 CHARACTER
+_Field-recid 3047 RECID
+_If-misc1 3051 INTEGER
+_If-misc2 3052 CHARACTER
+_If-res1 3053 INTEGER
+_If-res2 3054 CHARACTER
+_Index-recid 3045 RECID
+_Index-Seq 3046 INTEGER
+_KeyValue-expr 3060 CHARACTER
+_Last-modified 3056 DATETIME-TZ
+_Mod-sequence 3057 INTEGER
+_Unsorted 3050 LOGICAL
+_User-Misc 3055 CHARACTER
+: _IndexStat 5483
+_IndexStat-blockdelete 6384 INTEGER
+_IndexStat-create 6381 INTEGER
+_IndexStat-delete 6382 INTEGER
+_IndexStat-id 6379 INTEGER
+_IndexStat-read 6380 INTEGER
+_IndexStat-split 6383 INTEGER
+: _Latch 5484
+_Latch-Busy 6403 INTEGER
+_Latch-Hold 6387 INTEGER
+_Latch-Id 6385 INTEGER
+_Latch-Lock 6401 INTEGER
+_Latch-LockedT 6404 INTEGER
+_Latch-LockT 6405 INTEGER
+_Latch-Name 6386 CHARACTER
+_Latch-Qhold 6388 INTEGER
+_Latch-Spin 6402 INTEGER
+_Latch-Type 6389 CHARACTER
+_Latch-Wait 6400 INTEGER
+_Latch-WaitT 6406 INTEGER
+: _License 5481
+_Lic-ActiveConns 6323 INTEGER
+_Lic-BatchConns 6368 INTEGER
+_Lic-CurrConns 6371 INTEGER
+_Lic-Id 6321 INTEGER
+_Lic-MaxActive 6324 INTEGER
+_Lic-MaxBatch 6369 INTEGER
+_Lic-MaxCurrent 6372 INTEGER
+_Lic-MinActive 6325 INTEGER
+_Lic-MinBatch 6370 INTEGER
+_Lic-MinCurrent 6373 INTEGER
+_Lic-ValidUsers 6322 INTEGER
+: _Lock 5479
+_Lock-Chain 6307 INTEGER
+_Lock-Flags 6308 CHARACTER
+_Lock-Id 6259 INTEGER
+_Lock-Misc 6309 INTEGER
+_Lock-Name 6261 CHARACTER
+_Lock-RecId 6306 INTEGER
+_Lock-Table 6305 INTEGER
+_Lock-Type 6304 CHARACTER
+_Lock-Usr 6260 INTEGER
+: _LockReq 5477
+_LockReq-ExclFind 6248 INTEGER
+_LockReq-Id 6228 INTEGER
+_LockReq-Misc 6247 INTEGER
+_LockReq-Name 6240 CHARACTER
+_LockReq-Num 6229 INTEGER
+_LockReq-RecLock 6241 INTEGER
+_LockReq-RecWait 6242 INTEGER
+_LockReq-SchLock 6245 INTEGER
+_LockReq-SchWait 6246 INTEGER
+_LockReq-ShrFind 6249 INTEGER
+_LockReq-TrnLock 6243 INTEGER
+_LockReq-TrnWait 6244 INTEGER
+: _Logging 5449
+_Logging-2PC 5679 CHARACTER
+_Logging-2PCNickName 5680 CHARACTER
+_Logging-2PCPriority 5681 INTEGER
+_Logging-AiBegin 5670 CHARACTER
+_Logging-AiBlkSize 5677 INTEGER
+_Logging-AiBuffs 5676 INTEGER
+_Logging-AiCurrExt 5675 INTEGER
+_Logging-AiExtents 5674 INTEGER
+_Logging-AiGenNum 5673 INTEGER
+_Logging-AiIO 5669 CHARACTER
+_Logging-AiJournal 5668 CHARACTER
+_Logging-AiLogSize 5678 INTEGER
+_Logging-AiNew 5671 CHARACTER
+_Logging-AiOpen 5672 CHARACTER
+_Logging-BiBlkSize 5649 INTEGER
+_Logging-BiBuffs 5666 INTEGER
+_Logging-BiBytesFree 5664 INTEGER
+_Logging-BiClAge 5648 INTEGER
+_Logging-BiClSize 5650 INTEGER
+_Logging-BiExtents 5651 INTEGER
+_Logging-BiFullBuffs 5667 INTEGER
+_Logging-BiIO 5647 CHARACTER
+_Logging-BiLogSize 5652 INTEGER
+_Logging-CommitDelay 5646 INTEGER
+_Logging-CrashProt 5645 INTEGER
+_Logging-Id 5644 INTEGER
+_Logging-LastCkp 5665 CHARACTER
+_Logging-Misc 5682 INTEGER
+: _MstrBlk 5446
+_MstrBlk-aiblksize 5542 INTEGER
+_MstrBlk-biblksize 5540 INTEGER
+_MstrBlk-biopen 5553 CHARACTER
+_MstrBlk-biprev 5555 CHARACTER
+_MstrBlk-bistate 5545 INTEGER
+_MstrBlk-cfilnum 5544 INTEGER
+_MstrBlk-crdate 5547 CHARACTER
+_MstrBlk-dbstate 5525 INTEGER
+_MstrBlk-dbvers 5524 INTEGER
+_MstrBlk-fbdate 5550 CHARACTER
+_MstrBlk-hiwater 5539 INTEGER
+_MstrBlk-ibdate 5551 CHARACTER
+_MstrBlk-ibseq 5546 INTEGER
+_MstrBlk-Id 5523 INTEGER
+_MstrBlk-integrity 5537 INTEGER
+_MstrBlk-lasttask 5543 INTEGER
+_MstrBlk-Misc 5556 INTEGER
+_MstrBlk-oppdate 5549 CHARACTER
+_MstrBlk-oprdate 5548 CHARACTER
+_MstrBlk-rlclsize 5541 INTEGER
+_MstrBlk-rltime 5554 CHARACTER
+_MstrBlk-tainted 5536 INTEGER
+_MstrBlk-timestamp 5552 CHARACTER
+_MstrBlk-totblks 5538 INTEGER
+: _MyConnection 5489
+_MyConn-Id 6440 INTEGER
+_MyConn-NumSeqBuffers 6443 INTEGER
+_MyConn-Pid 6442 INTEGER
+_MyConn-UsedSeqBuffers 6444 INTEGER
+_MyConn-UserId 6441 INTEGER
+: _Repl-Agent 5493
+_ReplAgt-AgentID 6529 INTEGER
+_ReplAgt-AgentName 6530 CHARACTER
+_ReplAgt-BlocksACK 6537 INTEGER
+_ReplAgt-BlocksProcessed 6536 INTEGER
+_ReplAgt-BlocksReceived 6535 INTEGER
+_ReplAgt-CommStatus 6542 INTEGER
+_ReplAgt-ConnectTime 6531 CHARACTER
+_ReplAgt-DBName 6532 CHARACTER
+_ReplAgt-LastTRID 6539 INTEGER
+_ReplAgt-Method 6540 CHARACTER
+_ReplAgt-NotesProcessed 6538 INTEGER
+_ReplAgt-Port 6534 INTEGER
+_ReplAgt-ReservedChar 6543 CHARACTER
+_ReplAgt-ReservedInt 6544 INTEGER
+_ReplAgt-ServerHost 6533 CHARACTER
+_ReplAgt-Status 6541 INTEGER
+: _Repl-AgentControl 5492
+_ReplAgtCtl-AgentID 6504 INTEGER
+_ReplAgtCtl-AgentName 6505 CHARACTER
+_ReplAgtCtl-BlocksACK 6511 INTEGER
+_ReplAgtCtl-BlocksSent 6510 INTEGER
+_ReplAgtCtl-CommStatus 6515 INTEGER
+_ReplAgtCtl-ConnectTime 6506 CHARACTER
+_ReplAgtCtl-LastBlockSentAt 6512 CHARACTER
+_ReplAgtCtl-Method 6513 CHARACTER
+_ReplAgtCtl-Port 6509 INTEGER
+_ReplAgtCtl-RemoteDBName 6507 CHARACTER
+_ReplAgtCtl-RemoteHost 6508 CHARACTER
+_ReplAgtCtl-ReservedChar 6516 CHARACTER
+_ReplAgtCtl-ReservedInt 6528 INTEGER
+_ReplAgtCtl-status 6514 INTEGER
+: _Repl-Server 5491
+_ReplSrv-AgentCount 6498 INTEGER
+_ReplSrv-BlocksSent 6499 INTEGER
+_ReplSrv-id 6497 INTEGER
+_ReplSrv-LastBlockSentAt 6501 CHARACTER
+_ReplSrv-ReservedChar 6502 CHARACTER
+_ReplSrv-ReservedInt 6503 INTEGER
+_ReplSrv-StartTime 6500 CHARACTER
+: _Resrc 5485
+_Resrc-Id 6407 INTEGER
+_Resrc-lock 6409 INTEGER
+_Resrc-Name 6408 CHARACTER
+_Resrc-time 6411 INTEGER
+_Resrc-wait 6410 INTEGER
+: _Segments 5450
+_Segment-ByteFree 5699 INTEGER
+_Segment-BytesUsed 5698 INTEGER
+_Segment-Id 5683 INTEGER
+_Segment-Misc 5700 INTEGER
+_Segment-SegId 5696 INTEGER
+_Segment-SegSize 5697 INTEGER
+: _Sequence 2648
+_Cycle-Ok 3182 LOGICAL
+_Db-recid 3184 RECID
+_Seq-Incr 3179 INTEGER
+_Seq-Init 3178 INTEGER
+_Seq-Max 3181 INTEGER
+_Seq-Min 3180 INTEGER
+_Seq-Misc 3183 CHARACTER
+_Seq-Name 3177 CHARACTER
+_Seq-Num 3176 INTEGER
+_Seq-Owner 3186 CHARACTER
+_User-Misc 3185 CHARACTER
+: _Servers 5451
+_Server-CurrUsers 5707 INTEGER
+_Server-Id 5701 INTEGER
+_Server-Logins 5706 INTEGER
+_Server-MaxUsers 5708 INTEGER
+_Server-Misc 5711 INTEGER
+_Server-Num 5702 INTEGER
+_Server-PendConn 5710 INTEGER
+_Server-Pid 5703 INTEGER
+_Server-PortNum 5709 INTEGER
+_Server-Protocol 5705 CHARACTER
+_Server-Type 5704 CHARACTER
+: _SQL_Properties 2742
+_Attribute 3845 INTEGER
+_Property 3844 INTEGER
+_Value_ch 3847 CHARACTER
+_Value_n 3846 INTEGER
+: _Startup 5452
+_Startup-AiBuffs 5715 INTEGER
+_Startup-AiName 5713 CHARACTER
+_Startup-APWBuffs 5738 INTEGER
+_Startup-APWMaxWrites 5739 INTEGER
+_Startup-APWQTime 5736 INTEGER
+_Startup-APWSTime 5737 INTEGER
+_Startup-BiBuffs 5716 INTEGER
+_Startup-BiDelay 5732 INTEGER
+_Startup-BiIO 5735 INTEGER
+_Startup-BiName 5717 CHARACTER
+_Startup-BiTrunc 5728 INTEGER
+_Startup-Buffs 5714 INTEGER
+_Startup-CrashProt 5729 INTEGER
+_Startup-Directio 5741 INTEGER
+_Startup-Id 5712 INTEGER
+_Startup-LockTable 5730 INTEGER
+_Startup-MaxClients 5731 INTEGER
+_Startup-MaxServers 5733 INTEGER
+_Startup-MaxUsers 5734 INTEGER
+_Startup-Misc 5742 INTEGER
+_Startup-Spin 5740 INTEGER
+: _StatBase 5487
+_IndexBase 6432 INTEGER
+_StatBase-id 6420 INTEGER
+_TableBase 6421 INTEGER
+: _StorageObject 2650
+_Area-number 3192 INTEGER
+_Create-Limit 3205 INTEGER
+_Db-recid 3187 RECID
+_Object-associate 3191 INTEGER
+_Object-associate-type 3190 INTEGER
+_Object-attrib 3202 INTEGER
+_Object-block 3200 RECID
+_Object-misc 3204 INTEGER
+_Object-number 3189 INTEGER
+_Object-root 3201 RECID
+_Object-system 3203 INTEGER
+_Object-type 3188 INTEGER
+_Toss-Limit 3206 INTEGER
+: _Sysattachtbls 2690
+_Dblink 3504 CHARACTER
+_Linkowner 3503 CHARACTER
+_Owner 3499 CHARACTER
+_Remowner 3501 CHARACTER
+_Remtbl 3502 CHARACTER
+_Tbl 3500 CHARACTER
+: _Sysbigintstat 2724
+_Attribute 3791 INTEGER
+_Colid 3789 INTEGER
+_Property 3790 INTEGER
+_Tblid 3788 INTEGER
+_Value 3792 BIGINT
+: _Syscalctable 2684
+_Fld 3481 INTEGER
+: _Syscharstat 2716
+_Attribute 3764 INTEGER
+_Colid 3762 INTEGER
+_Property 3763 INTEGER
+_Tblid 3761 INTEGER
+_Value 3765 CHARACTER
+: _Syschkcolusage 2680
+_Cnstrname 3466 CHARACTER
+_Colname 3467 CHARACTER
+_Owner 3464 CHARACTER
+_Tblname 3465 CHARACTER
+: _Syschkconstrs 2676
+_Chkclause 3458 CHARACTER
+_Chkseq 3457 INTEGER
+_Cnstrname 3456 CHARACTER
+_Owner 3448 CHARACTER
+_Tblname 3449 CHARACTER
+: _Syschkconstr_Name_Map 2736
+_Cnstrname 3828 CHARACTER
+_Name_loc 3830 INTEGER
+_Owner 3826 CHARACTER
+_Seq 3829 INTEGER
+_Tblname 3827 CHARACTER
+: _Syscolauth 2666
+_Col 3414 CHARACTER
+_Grantee 3411 CHARACTER
+_Grantor 3410 CHARACTER
+_Ref 3416 CHARACTER
+_Sel 3417 CHARACTER
+_Tbl 3413 CHARACTER
+_Tblowner 3412 CHARACTER
+_Upd 3415 CHARACTER
+: _Syscolstat 2700
+_Attribute 3588 INTEGER
+_Colid 3586 INTEGER
+_Property 3587 INTEGER
+_Tblid 3585 INTEGER
+_Value 3589 INTEGER
+_Val_ts 3590 TIMESTAMP
+: _Sysdatatypes 2682
+_Autoincr 3479 SHORT
+_Casesensitive 3475 SHORT
+_Createparams 3473 CHARACTER
+_Datatype 3469 SHORT
+_Dhtypename 3468 CHARACTER
+_Literalprefix 3471 CHARACTER
+_Literalsuffix 3472 CHARACTER
+_Localtypename 3480 CHARACTER
+_Nullable 3474 SHORT
+_Odbcmoney 3478 SHORT
+_Searchable 3476 SHORT
+_Typeprecision 3470 INTEGER
+_Unsignedattr 3477 SHORT
+: _Sysdatestat 2710
+_Attribute 3749 INTEGER
+_Colid 3747 INTEGER
+_Property 3748 INTEGER
+_Tblid 3746 INTEGER
+_Value 3750 DATE
+: _Sysdbauth 2662
+_Dbaacc 3396 CHARACTER
+_Grantee 3395 CHARACTER
+_Resacc 3397 CHARACTER
+: _Sysdblinks 2670
+_Dblink 3432 CHARACTER
+_Host 3435 CHARACTER
+_Owner 3431 CHARACTER
+_Pwd 3434 CHARACTER
+_Username 3433 CHARACTER
+: _Sysfloatstat 2712
+_Attribute 3754 INTEGER
+_Colid 3752 INTEGER
+_Property 3753 INTEGER
+_Tblid 3751 INTEGER
+_Value 3755 DOUBLE
+: _Sysidxstat 2688
+_Attribute 3496 INTEGER
+_Idxid 3494 INTEGER
+_Property 3495 INTEGER
+_Tblid 3493 INTEGER
+_Value 3497 INTEGER
+_Val_ts 3498 TIMESTAMP
+: _Sysintstat 2706
+_Attribute 3604 INTEGER
+_Colid 3602 INTEGER
+_Property 3603 INTEGER
+_Tblid 3601 INTEGER
+_Value 3605 INTEGER
+: _Syskeycolusage 2672
+_Cnstrname 3438 CHARACTER
+_Colname 3439 CHARACTER
+_Colposition 3440 INTEGER
+_Owner 3436 CHARACTER
+_Tblname 3437 CHARACTER
+: _Sysncharstat 2726
+_Attribute 3796 INTEGER
+_Colid 3794 INTEGER
+_Property 3795 INTEGER
+_Tblid 3793 INTEGER
+_Value 3797 FIXCHAR
+: _Sysnumstat 2708
+_Attribute 3744 INTEGER
+_Colid 3607 INTEGER
+_Property 3608 INTEGER
+_Tblid 3606 INTEGER
+_Value 3745 DECIMAL
+: _Sysnvarcharstat 2728
+_Attribute 3808 INTEGER
+_Colid 3799 INTEGER
+_Property 3800 INTEGER
+_Tblid 3798 INTEGER
+_Value 3809 CHARACTER
+: _Sysprocbin 2802
+_Id 4544 INTEGER
+_Procbin 4547 RAW
+_Proctype 4545 FIXCHAR
+_Rssid 4473 INTEGER
+_Seq 4546 INTEGER
+: _Sysproccolumns 2694
+_Argtype 3526 CHARACTER
+_Col 3522 CHARACTER
+_Datatype 3525 CHARACTER
+_Dfltvalue 3530 CHARACTER
+_Id 3521 INTEGER
+_Nullflag 3529 FIXCHAR
+_Procid 3523 INTEGER
+_Rssid 3524 INTEGER
+_Scale 3528 INTEGER
+_Width 3527 INTEGER
+: _Sysprocedures 2692
+_Creator 3507 CHARACTER
+_Hasresultset 3511 FIXCHAR
+_Hasreturnval 3512 FIXCHAR
+_Lang 3520 INTEGER
+_Owner 3508 CHARACTER
+_Procid 3505 INTEGER
+_Procname 3506 CHARACTER
+_Proctype 3510 CHARACTER
+_Rssid 3509 INTEGER
+: _Sysproctext 2804
+_Id 4549 INTEGER
+_Proctext 4552 CHARACTER
+_Proctype 4550 FIXCHAR
+_Rssid 4548 INTEGER
+_Seq 4551 INTEGER
+: _Sysrealstat 2718
+_Attribute 3776 INTEGER
+_Colid 3767 INTEGER
+_Property 3768 INTEGER
+_Tblid 3766 INTEGER
+_Value 3777 FLOAT
+: _Sysrefconstrs 2674
+_Cnstrname 3443 CHARACTER
+_Deleterule 3447 CHARACTER
+_Owner 3441 CHARACTER
+_Refcnstrname 3446 CHARACTER
+_Refowner 3444 CHARACTER
+_Reftblname 3445 CHARACTER
+_Tblname 3442 CHARACTER
+: _Sysroles 2738
+_Admin 3841 LOGICAL
+_Grantee 3840 CHARACTER
+_Grantor 3832 CHARACTER
+_Rolename 3831 CHARACTER
+: _Sysschemas 2740
+_Owner 3843 CHARACTER
+_Schemaname 3842 CHARACTER
+: _Sysseqauth 2732
+_Grantee 3816 CHARACTER
+_Grantor 3815 CHARACTER
+_Ref 3820 CHARACTER
+_Sel 3821 CHARACTER
+_Seq-Name 3818 CHARACTER
+_Seq-Owner 3817 CHARACTER
+_Upd 3819 CHARACTER
+: _Syssmintstat 2704
+_Attribute 3599 INTEGER
+_Colid 3597 INTEGER
+_Property 3598 INTEGER
+_Tblid 3596 INTEGER
+_Value 3600 SHORT
+: _Syssynonyms 2668
+_Ispublic 3429 SHORT
+_Screator 3426 CHARACTER
+_Sname 3424 CHARACTER
+_Sowner 3425 CHARACTER
+_Sremdb 3430 CHARACTER
+_Stbl 3427 CHARACTER
+_Stblowner 3428 CHARACTER
+: _Systabauth 2664
+_Alt 3408 CHARACTER
+_Del 3403 CHARACTER
+_Exe 3406 FIXCHAR
+_Grantee 3399 CHARACTER
+_Grantor 3398 CHARACTER
+_Ins 3402 CHARACTER
+_Ndx 3407 CHARACTER
+_Ref 3409 CHARACTER
+_Sel 3405 CHARACTER
+_Tbl 3401 CHARACTER
+_Tblowner 3400 CHARACTER
+_Upd 3404 CHARACTER
+: _Systblconstrs 2678
+_Cnstrname 3461 CHARACTER
+_Cnstrtype 3462 CHARACTER
+_Idxname 3463 CHARACTER
+_Owner 3459 CHARACTER
+_Tblname 3460 CHARACTER
+: _Systblstat 2686
+_Attribute 3490 INTEGER
+_Property 3489 INTEGER
+_Tblid 3488 INTEGER
+_Value 3491 INTEGER
+_Val_ts 3492 TIMESTAMP
+: _Systimestat 2714
+_Attribute 3759 INTEGER
+_Colid 3757 INTEGER
+_Property 3758 INTEGER
+_Tblid 3756 INTEGER
+_Value 3760 TIME
+: _Systinyintstat 2722
+_Attribute 3786 INTEGER
+_Colid 3784 INTEGER
+_Property 3785 INTEGER
+_Tblid 3783 INTEGER
+_Value 3787 INTEGER
+: _Systrigcols 2698
+_Colid 3584 INTEGER
+_Owner 3544 CHARACTER
+_Triggername 3543 CHARACTER
+: _Systrigger 2696
+_Fire_4GL 3542 LOGICAL
+_Owner 3533 CHARACTER
+_Referstonew 3539 FIXCHAR
+_Referstoold 3538 FIXCHAR
+_Rssid 3541 INTEGER
+_Statementorrow 3540 FIXCHAR
+_Tbl 3534 CHARACTER
+_Tblowner 3535 CHARACTER
+_Triggerevent 3537 CHARACTER
+_Triggerid 3531 INTEGER
+_Triggername 3532 CHARACTER
+_Triggertime 3536 CHARACTER
+: _Systsstat 2720
+_Attribute 3781 INTEGER
+_Colid 3779 INTEGER
+_Property 3780 INTEGER
+_Tblid 3778 INTEGER
+_Value 3782 TIMESTAMP
+: _Syststzstat 2730
+_Attribute 3813 INTEGER
+_Colid 3811 INTEGER
+_Property 3812 INTEGER
+_Tblid 3810 INTEGER
+_Value 3814 DATETIME-TZ
+: _Sysvarcharstat 2702
+_Attribute 3594 INTEGER
+_Colid 3592 INTEGER
+_Property 3593 INTEGER
+_Tblid 3591 INTEGER
+_Value 3595 CHARACTER
+: _Sysviews 2660
+_Creator 3319 CHARACTER
+_Owner 3392 CHARACTER
+_Seq 3393 INTEGER
+_Viewname 3318 CHARACTER
+_Viewtext 3394 CHARACTER
+: _Sysviews_Name_Map 2734
+_Name_loc 3825 INTEGER
+_Owner 3822 CHARACTER
+_Seq 3824 INTEGER
+_Viewname 3823 CHARACTER
+: _TableStat 5482
+_TableStat-create 6377 INTEGER
+_TableStat-delete 6378 INTEGER
+_TableStat-id 6374 INTEGER
+_TableStat-read 6375 INTEGER
+_TableStat-update 6376 INTEGER
+: _Trans 5480
+_Trans-Coord 6317 CHARACTER
+_Trans-CoordTx 6318 INTEGER
+_Trans-counter 6315 INTEGER
+_Trans-Duration 6319 INTEGER
+_Trans-Flags 6312 CHARACTER
+_Trans-Id 6310 INTEGER
+_Trans-Misc 6320 INTEGER
+_Trans-Num 6314 INTEGER
+_Trans-State 6311 CHARACTER
+_Trans-txtime 6316 CHARACTER
+_Trans-Usrnum 6313 INTEGER
+: _TxeLock 5486
+_Txe-Id 6412 INTEGER
+_Txe-Locks 6414 INTEGER
+_Txe-Lockss 6415 INTEGER
+_Txe-Time 6418 INTEGER
+_Txe-Type 6413 CHARACTER
+_Txe-Wait-Time 6419 INTEGER
+_Txe-Waits 6416 INTEGER
+_Txe-Waitss 6417 INTEGER
+: _User 2634
+_Account_expires 3085 DATETIME-TZ
+_Create_date 3084 DATETIME-TZ
+_Description 3082 CHARACTER
+_Disabled 3083 LOGICAL
+_Email 3081 CHARACTER
+_Given_name 3077 CHARACTER
+_Group_number 3076 INTEGER
+_Last_login 3088 DATETIME-TZ
+_Logins 3089 INTEGER
+_Login_failures 3092 INTEGER
+_Max_logins 3090 INTEGER
+_Max_tries 3091 INTEGER
+_Middle_initial 3078 CHARACTER
+_Password 3062 CHARACTER
+_Pwd_duration 3087 INTEGER
+_Pwd_expires 3086 DATETIME-TZ
+_Spare1 3093 INTEGER
+_Spare2 3094 INTEGER
+_Spare3 3104 CHARACTER
+_Spare4 3105 CHARACTER
+_Surname 3079 CHARACTER
+_Telephone 3080 CHARACTER
+_U-misc1 3072 INTEGER
+_U-misc2 3073 CHARACTER
+_User-Misc 3074 CHARACTER
+_User-Name 3063 CHARACTER
+_Userid 3061 CHARACTER
+_User_number 3075 INTEGER
+: _UserIO 5476
+_UserIO-AiRead 6225 INTEGER
+_UserIO-AiWrite 6226 INTEGER
+_UserIO-BiRead 6223 INTEGER
+_UserIO-BiWrite 6224 INTEGER
+_UserIO-DbAccess 6220 INTEGER
+_UserIO-DbRead 6221 INTEGER
+_UserIO-DbWrite 6222 INTEGER
+_UserIO-Id 6217 INTEGER
+_UserIO-Misc 6227 INTEGER
+_UserIO-Name 6219 CHARACTER
+_UserIO-Usr 6218 INTEGER
+: _UserLock 5454
+_UserLock-Chain 5767 INTEGER
+_UserLock-Flags 5768 CHARACTER
+_UserLock-Id 5762 INTEGER
+_UserLock-Misc 5769 INTEGER
+_UserLock-Name 5764 CHARACTER
+_UserLock-Recid 5765 INTEGER
+_UserLock-Type 5766 CHARACTER
+_UserLock-Usr 5763 INTEGER
+: _UserStatus 5488
+_UserStatus-Counter 6437 INTEGER
+_UserStatus-ObjectId 6434 INTEGER
+_UserStatus-ObjectType 6435 INTEGER
+_UserStatus-Operation 6439 CHARACTER
+_UserStatus-State 6436 INTEGER
+_UserStatus-Target 6438 INTEGER
+_UserStatus-UserId 6433 INTEGER
+: _View 2638
+_Auth-Id 3122 CHARACTER
+_Base-Tables 3124 CHARACTER
+_Can-Create 3137 CHARACTER
+_Can-Delete 3138 CHARACTER
+_Can-Read 3128 CHARACTER
+_Can-Write 3136 CHARACTER
+_Desc 3140 CHARACTER
+_Group-By 3126 CHARACTER
+_Updatable 3139 LOGICAL
+_View-Def 3127 CHARACTER
+_View-Name 3123 CHARACTER
+_Where-Cls 3125 CHARACTER
+: _View-Col 2640
+_Auth-Id 3141 CHARACTER
+_Base-Col 3144 CHARACTER
+_Can-Create 3146 CHARACTER
+_Can-Write 3145 CHARACTER
+_Col-Name 3143 CHARACTER
+_Vcol-Order 3147 INTEGER
+_View-Name 3142 CHARACTER
+: _View-Ref 2642
+_Auth-Id 3148 CHARACTER
+_Base-Col 3151 CHARACTER
+_Ref-Table 3150 CHARACTER
+_View-Name 3149 CHARACTER
+: _Word-rule 2658
+_Wr-Attr 3317 RAW
+_Wr-Cp 3313 INTEGER
+_Wr-Name 3312 CHARACTER
+_Wr-Number 3311 INTEGER
+_Wr-Segment 3316 INTEGER
+_Wr-Type 3315 INTEGER
+_Wr-Version 3314 INTEGER

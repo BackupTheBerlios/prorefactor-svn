@@ -57,7 +57,7 @@ public class PUBTest extends UnitTestBase2 {
 
 		// Test that the file timestamp checking works
 		long origTime = iBase.lastModified();
-		iBase.setLastModified(System.currentTimeMillis());
+		iBase.setLastModified(System.currentTimeMillis() + 10000);
 		assertFalse(pub.load());
 		iBase.setLastModified(origTime);
 		assertTrue(pub.load());

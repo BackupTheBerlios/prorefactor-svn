@@ -23,6 +23,8 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.prorefactor.treeparser.DataType;
+
 import com.joanju.ProparseLdr;
 
 
@@ -137,42 +139,54 @@ public class Schema {
 		tokenstream.wordChars('!', 'z');
 		Database currDatabase = null;
 		Table currTable = null;
-
 		// Determine if we want to load db and table names into proparse.dll as well.
 		boolean parserLoad = false;
 		if (parser.configGet("init").equals("false")) {
 			parserLoad = true;
 			parser.schemaClear();
 		}
-
-		while (tokenstream.nextToken() != StreamTokenizer.TT_EOF) {
-			String theString = tokenstream.sval;
-			if (theString.equals("::")) {
-				// database name
-				tokenstream.nextToken();
-				String dbname = tokenstream.sval;
-				tokenstream.nextToken(); // database number is no longer stored
-				currDatabase = new Database(dbname);
-				dbSet.add(currDatabase);
-				if (parserLoad)
-					parser.schemaAddDb(dbname.toLowerCase());
-			} else if (theString.equals(":")) {
-				// table name
-				tokenstream.nextToken();
-				String tablename = tokenstream.sval;
-				tokenstream.nextToken(); // table recid is no longer stored
-				currTable = new Table(tablename, currDatabase);
-				allTables.add(currTable);
-				if (parserLoad)
-					parser.schemaAddTable(tablename.toLowerCase());
-			} else {
-				// field name
-				String fieldname = tokenstream.sval;
-				tokenstream.nextToken(); // field recid is no longer stored
-				new Field(fieldname, currTable);
-				// Fields are not needed or used in Proparse.dll.
-			}
-		} // while
+		try {
+			while (tokenstream.nextToken() != StreamTokenizer.TT_EOF) {
+				String theString = tokenstream.sval;
+				if (theString.equals("::")) {
+					// database name
+					tokenstream.nextToken();
+					String dbname = tokenstream.sval;
+					tokenstream.nextToken(); // database number is no longer stored
+					currDatabase = new Database(dbname);
+					dbSet.add(currDatabase);
+					if (parserLoad)
+						parser.schemaAddDb(dbname.toLowerCase());
+				} else if (theString.equals(":")) {
+					// table name
+					tokenstream.nextToken();
+					String tablename = tokenstream.sval;
+					tokenstream.nextToken(); // table recid is no longer stored
+					currTable = new Table(tablename, currDatabase);
+					allTables.add(currTable);
+					if (parserLoad)
+						parser.schemaAddTable(tablename.toLowerCase());
+				} else {
+					// field name
+					String fieldname = tokenstream.sval;
+					tokenstream.nextToken(); // field recid is no longer stored
+					tokenstream.nextToken();
+					String typeName = tokenstream.sval;
+					Field field = new Field(fieldname, currTable);
+					field.setDataType(DataType.getDataType(typeName));
+					if (field.getDataType()==null)
+						throw new IOException("Unknown datatype: " + typeName);
+					// Fields are not needed or used in Proparse.dll.
+				}
+			} // while
+		} catch (Throwable e) {
+			IOException e2 = new IOException(
+					"Schema load failed. Invalid schema file? " + from + "\n"
+					+ e.toString()
+					);
+			e2.initCause(e);
+			throw e2;
+		}
 		reader.close();
 	} // loadSchema()
 

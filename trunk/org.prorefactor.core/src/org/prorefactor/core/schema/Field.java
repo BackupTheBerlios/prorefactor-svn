@@ -4,7 +4,7 @@
  * 20-Nov-2002
  * www.joanju.com
  * 
- * Copyright (c) 2002, 2004 Joanju Limited.
+ * Copyright (c) 2002, 2004-2005 Joanju (joanju.com).
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,9 @@ package org.prorefactor.core.schema;
 
 import java.util.Comparator;
 
+import org.prorefactor.treeparser.DataType;
+import org.prorefactor.treeparser.Primative;
+
 
 
 /**
@@ -22,7 +25,7 @@ import java.util.Comparator;
  * they are also created for temp and work table fields
  * defined within a 4gl compile unit.
  */
-public class Field {
+public class Field implements Primative {
 
 	/** Standard constructor.
 	 */
@@ -38,6 +41,7 @@ public class Field {
 	}
 
 	String name; // "Package" access for fast access in NAME_ORDER
+	private DataType dataType;
 	private Table table;
 	
 	/** This is a convenience class for working with a string field name, where
@@ -93,8 +97,9 @@ public class Field {
 
 
 	
+	public DataType getDataType() { return dataType; }
 	public String getName() { return name; }
 	public Table getTable() { return table; }
-	
-	
+	public void setDataType(DataType dataType) { this.dataType = dataType; }
+
 }

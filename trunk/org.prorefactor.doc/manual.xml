@@ -1416,10 +1416,7 @@ OUTPUT CLOSE.</programlisting>
       <para>Use these programs to automatically dump your Progress schema to a
       text file which can be loaded by ProRefactor. Run
       <filename>schemadump1.p</filename>, which in turn calls
-      <filename>schemadump2.p</filename>. The source for these programs may
-      also be found in your
-      <filename>eclipse/plugins/org.prorefactor.core.../4gl/api</filename>
-      directory.</para>
+      <filename>schemadump2.p</filename>.</para>
 
       <programlisting>/* schemadump1.p
 Dumps the schema for each database out to a text file
@@ -1459,7 +1456,7 @@ PUT UNFORMATTED ":: dictdb 0":U SKIP.
 FOR EACH DICTDB._file WHERE _file._tbl-type &lt;&gt; "T":U NO-LOCK BY _file._file-name:
   PUT UNFORMATTED ": ":U _file._file-name " ":U RECID(_file) SKIP.
   FOR EACH DICTDB._field OF _file NO-LOCK BY _field._field-name:
-    PUT UNFORMATTED _field._field-name " ":U RECID(_field) SKIP.
+    PUT UNFORMATTED _field._field-name " ":U RECID(_field) " ":U CAPS(_field._data-type) SKIP.
   END.
 END.
 
@@ -1471,9 +1468,9 @@ Dumps the schema for DICTDB
 */
 
 FOR EACH DICTDB._file WHERE _file._tbl-type = "T":U NO-LOCK BY _file._file-name:
-  PUT UNFORMATTED ": " _file._file-name " " RECID(_file) SKIP.
+  PUT UNFORMATTED ": ":U _file._file-name " ":U RECID(_file) SKIP.
   FOR EACH DICTDB._field OF _file NO-LOCK BY _field._field-name:
-    PUT UNFORMATTED _field._field-name " " RECID(_field) SKIP.
+    PUT UNFORMATTED _field._field-name " ":U RECID(_field) " ":U CAPS(_field._data-type) SKIP.
   END.
 END.
 </programlisting>
@@ -1583,7 +1580,14 @@ END.
 
             <listitem>
               <para>Fixed org.prorefactor.eclipse, which was not exporting any
-              run-time packages. (Needed for Prolint/Eclipse)</para>
+              run-time packages. (Needed for Prolint/Eclipse).</para>
+            </listitem>
+
+            <listitem>
+              <para>Added data-type to the schemadump programs. You must
+              re-dump your schema before using this version of ProRefactor.
+              Added data type attribute to fields and variables in the symbol
+              table.</para>
             </listitem>
           </itemizedlist>
         </listitem>

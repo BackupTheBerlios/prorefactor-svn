@@ -23,7 +23,7 @@ import org.prorefactor.core.schema.Field;
  * for schema, temp, and work table fields, and FieldBuffer
  * provides the link to the Field object.
  */
-public class FieldBuffer extends Symbol {
+public class FieldBuffer extends Symbol implements Primative {
 
 	/** When you create a FieldBuffer object, you do not set the name,
 	 * because that comes from the Field object.
@@ -54,6 +54,8 @@ public class FieldBuffer extends Symbol {
 
 	public TableBuffer getBuffer() { return buffer; }
 	
+	/** Gets the underlying Field's dataType. */
+	public DataType getDataType() { return field.getDataType(); }
 	
 	public Field getField() { return field; }
 	
@@ -81,6 +83,9 @@ public class FieldBuffer extends Symbol {
 	/** @see org.prorefactor.treeparser.Symbol#isImported() */
 	public boolean isImported() { return buffer.isImported(); }
 
+	
+	/** Sets the underlying Field's dataType. */
+	public void setDataType(DataType dataType) { field.setDataType(dataType); }
 	
 	
 	/** Invalid - do not call. Name comes from the Field. */

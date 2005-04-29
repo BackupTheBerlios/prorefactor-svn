@@ -100,7 +100,9 @@ public class ActionManager {
 				public void run() {
 					try {
 						indicator.worked(1);
-					} catch (Exception e) {}
+					} catch (Exception e) {
+						Plugin.log(e);
+					}
 				}
 			});
 		}
@@ -113,6 +115,7 @@ public class ActionManager {
 		try {
 			resArray = theContainer.members();
 		} catch (CoreException e) {
+			Plugin.log(e);
 			return;
 		}
 		for (int i = 0; i<resArray.length; i++) {
@@ -148,6 +151,7 @@ public class ActionManager {
 			refPack.loadProject(currProject);
 		} catch (Throwable e) {
 			console("Error Loading Project Settings\n" + e.toString());
+			Plugin.log(e);
 			return;
 		}
 	}
@@ -183,7 +187,9 @@ public class ActionManager {
 	public void consoleClear() {
 		try {
 			console.getDocument().replace(0, console.getDocument().getLength(), "");
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			Plugin.log(e);
+		}
 	}
 
 
@@ -217,8 +223,10 @@ public class ActionManager {
 			}
 		} catch (InvocationTargetException e) {
 			reportError(org.prorefactor.core.Util.getExceptionText(e.getTargetException()));
+			Plugin.log(e);
 		} catch (InterruptedException e) {
 			console("\n" + e.getMessage());
+			Plugin.log(e);
 		} finally {
 			if (errorMess!=null) {
 				reportError(errorMess);
@@ -368,6 +376,7 @@ public class ActionManager {
 			parser.configSet("show-proparse-directives", "true");
 		} catch (Throwable e) {
 			reportError("Error Loading Proparse\n" + e.toString());
+			Plugin.log(e);
 			return -2;
 		}
 		try {
@@ -376,6 +385,7 @@ public class ActionManager {
 			refPack.loadProject(currProject);
 		} catch (Throwable e) {
 			reportError("Error Loading Project Settings\n" + e.toString());
+			Plugin.log(e);
 			return -3;
 		}
 		try {
@@ -383,6 +393,7 @@ public class ActionManager {
 			consoleClear();
 		} catch (PartInitException e) {
 			reportError(e.getMessage());
+			Plugin.log(e);
 			return -4;
 		}
 		return 1;

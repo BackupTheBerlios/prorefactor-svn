@@ -22,35 +22,30 @@ package org.prorefactor.treeparser;
  * @see org.prorefactor.treeparser.TableBuffer
  * @see org.prorefactor.treeparser.FieldBuffer
  */
-public class Variable extends Symbol implements Value{
+public class Variable extends Symbol implements Primative, Value {
 
-	private Object value;
-	
 	public Variable(String name, SymbolScope scope) {
 		super(scope);
 		setName(name);
 	}
+
+	private DataType dataType;
+	private Object value;
+
 	
 	/** Return the name of the variable. For this subclass of
 	 * Symbol, fullName() returns the same value as getName().
 	 */
 	public String fullName() { return getName(); }
 
-
-	/**
-	 * @see org.prorefactor.treeparser.Value#setValue(java.lang.Object)
-	 */
-	public void setValue(Object value) {
-		this.value = value;
-	}
-
-
-	/**
-	 * @see org.prorefactor.treeparser.Value#getValue()
-	 */
-	public Object getValue() {
-		return value;
-	}
-
+	/** @see org.prorefactor.treeparser.Value#getValue() */
+	public Object getValue() { return value; }
 	
-} // class Variable
+	public DataType getDataType() { return dataType; }
+	
+	public void setDataType(DataType dataType) { this.dataType = dataType; }
+
+	/** @see org.prorefactor.treeparser.Value#setValue(java.lang.Object) */
+	public void setValue(Object value) { this.value = value; }
+
+}

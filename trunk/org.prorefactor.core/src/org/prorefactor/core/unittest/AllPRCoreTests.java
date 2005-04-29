@@ -32,6 +32,7 @@ public class AllPRCoreTests {
 		suite.addTest(new TestSuite(PstringT.class));
 		suite.addTest(new TestSuite(TP01Test01.class));
 		suite.addTest(new TestSuite(TP01Test02.class));
+		suite.addTest(new TestSuite(TP01Test03.class));
 		suite.addTest(new TestSuite(TP01SymbolActionTest.class));
 		suite.addTest(new TestSuite(TP01ProcessActionTest.class));
 		//$JUnit-END$

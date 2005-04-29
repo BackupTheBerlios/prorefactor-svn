@@ -1096,4 +1096,7 @@ public interface JPTreeParserTokenTypes {
 	int TRANSINITPROCEDURE = 1091;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 	int PARAM = 10878;
+	int BIGINT = 1092;
+	int TIMESTAMP = 1093;
+	int FIXCHAR = 1094;
 }
