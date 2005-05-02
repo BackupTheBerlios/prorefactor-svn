@@ -18,12 +18,13 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 
-import org.prorefactor.core.JPNav;
 import org.prorefactor.core.JPNode;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Schema;
 import org.prorefactor.core.schema.Table;
+import org.prorefactor.nodetypes.FieldRefNode;
+import org.prorefactor.nodetypes.RecordNameNode;
 import org.prorefactor.refactor.IRefactor;
 import org.prorefactor.refactor.PUB;
 import org.prorefactor.refactor.Refactor;
@@ -103,24 +104,23 @@ public class RenameSchema {
 
 	private void checkNode(JPNode node) {
 		int type = node.getType();
-		if (type == TokenTypes.Field_ref) checkNodeDuField(node);
-		else if (type == TokenTypes.RECORD_NAME) checkNodeDuTable(node);
+		if (type == TokenTypes.Field_ref) checkNodeDuField((FieldRefNode)node);
+		else if (type == TokenTypes.RECORD_NAME) checkNodeDuTable((RecordNameNode)node);
 		return;
 	}
 	
 	
 	
-	private void checkNodeDuField(JPNode node) {
-		Symbol symbol = (Symbol) node.getLink(JPNode.SYMBOL);
-		assert symbol != null;
+	private void checkNodeDuField(FieldRefNode refNode) {
+		Symbol symbol = refNode.getSymbol();
 		if (! (symbol instanceof FieldBuffer)) return;
-		FieldBuffer fieldBuff = (FieldBuffer) node.getLink(JPNode.SYMBOL);
+		FieldBuffer fieldBuff = (FieldBuffer) symbol;
 		assert fieldBuff != null;
 		TableBuffer tableBuff = fieldBuff.getBuffer();
 		String mapFieldValue = (String) schemaMap.get(fieldBuff.getField());
 		String mapTableValue = (String) schemaMap.get(tableBuff.getTable());
 		if (mapFieldValue==null && mapTableValue==null) return;
-		JPNode idNode = JPNav.findFieldRefIdNode(node);
+		JPNode idNode = refNode.getIdNode();
 		String origText = idNode.getText();
 		Field.Name oldName = new Field.Name(origText);
 		Field.Name newName = new Field.Name(origText);
@@ -143,8 +143,8 @@ public class RenameSchema {
 	
 	
 	
-	private void checkNodeDuTable(JPNode node) {
-		TableBuffer buffer = (TableBuffer) node.getLink(JPNode.SYMBOL);
+	private void checkNodeDuTable(RecordNameNode node) {
+		TableBuffer buffer = node.getTableBuffer();
 		assert buffer != null;
 		// Check that this is a "default" schema buffer - not a named buffer.
 		if (! buffer.isDefaultSchema()) return;

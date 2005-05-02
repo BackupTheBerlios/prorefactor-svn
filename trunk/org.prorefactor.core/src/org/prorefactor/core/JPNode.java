@@ -23,6 +23,8 @@ import antlr.collections.AST;
 
 import java.util.HashMap;
 
+import org.prorefactor.nodetypes.NodeFactory;
+
 
 
 /**
@@ -75,7 +77,11 @@ public class JPNode extends BaseAST implements IJPNode {
 	 */
 	public static final Integer BUFFERSCOPE = new Integer(-212);
 
-	/** A valid value for setLink() and getLink() */
+	/** A valid value for setLink() and getLink().
+	 * You should not use this directly. Only JPNodes of subtype BlockNode
+	 * will have this set, so use BlockNode.getBlock instead.
+	 * @see org.prorefactor.nodetypes.BlockNode.
+	 */
 	public static final Integer BLOCK = new Integer(-214);
 
 	static private ProparseLdr parser = ProparseLdr.getInstance();
@@ -124,7 +130,7 @@ public class JPNode extends BaseAST implements IJPNode {
 	}
 
 	private static JPNode getTree(int inHandle, TreeConfig config, JPNode parent) {
-		JPNode thisNode = new JPNode(inHandle, config);
+		JPNode thisNode = NodeFactory.create(inHandle).configure(config);
 		thisNode.parent = parent;
 		int handle = parser.getHandle();
 		if (parser.nodeFirstChildI(inHandle, handle) != 0) {
@@ -197,7 +203,8 @@ public class JPNode extends BaseAST implements IJPNode {
 
 
 
-	private void configure(TreeConfig config) {
+	private JPNode configure(TreeConfig config) {
+		if (config==null) return this;
 		if (config.disconnected) {
 			attrSet(JPNode.STATE2, parser.attrGetI(nodeHandle, IConstants.STATE2));
 			fileIndex = parser.getNodeFileIndex(nodeHandle);
@@ -211,6 +218,7 @@ public class JPNode extends BaseAST implements IJPNode {
 			column = parser.getNodeColumn(nodeHandle);
 		}
 		if (config.callback != null) config.callback.run(this);
+		return this;
 	} // configure
 
 

@@ -17,10 +17,9 @@ import java.util.Iterator;
 
 import org.prorefactor.core.ICallback;
 import org.prorefactor.core.IConstants;
-import org.prorefactor.core.JPNav;
 import org.prorefactor.core.JPNode;
 import org.prorefactor.core.PRCException;
-import org.prorefactor.core.TokenTypes;
+import org.prorefactor.nodetypes.FieldRefNode;
 import org.prorefactor.refactor.FileStuff;
 import org.prorefactor.refactor.RefactorException;
 import org.prorefactor.refactor.ScanLib;
@@ -42,21 +41,21 @@ public class QualifyFieldsRefactor {
 	private File sourceFile;
 	
 	protected class UnqualNode {
-		UnqualNode(JPNode idNode, JPNode refNode) {
+		UnqualNode(JPNode idNode, FieldRefNode refNode) {
 			this.idNode = idNode;
 			this.refNode = refNode;
 		}
 		JPNode idNode;
-		JPNode refNode;
+		FieldRefNode refNode;
 	}
 	
 
 
 	public ICallback callback = new ICallback() {
 		public Object run(Object obj) {
-			JPNode refNode = (JPNode) obj;
-			if (refNode.getType() != TokenTypes.Field_ref) return null;
-			JPNode idNode = JPNav.findFieldRefIdNode(refNode);
+			if (! (obj instanceof FieldRefNode)) return null;
+			FieldRefNode refNode = (FieldRefNode) obj;
+			JPNode idNode = refNode.getIdNode();
 			if (idNode.getFileIndex() != sourceFileIndex) return null;
 			if (refNode.attrGet(IConstants.UNQUALIFIED_FIELD) == IConstants.TRUE)
 				nodeList.add(new UnqualNode(idNode, refNode));
@@ -79,7 +78,7 @@ public class QualifyFieldsRefactor {
 			String fieldname = parser.getNodeText(handle);
 			if (fieldname.compareToIgnoreCase(uqn.idNode.getText()) != 0) continue;
 			// Can't be unqualified unless it's a Field - which must have a BufferSymbol.
-			FieldBuffer fieldBuff = (FieldBuffer) uqn.refNode.getLink(JPNode.SYMBOL);
+			FieldBuffer fieldBuff = (FieldBuffer) uqn.refNode.getSymbol();
 			assert fieldBuff != null;
 			parser.setNodeText(
 					handle

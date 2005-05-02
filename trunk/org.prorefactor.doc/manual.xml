@@ -1589,6 +1589,17 @@ END.
               Added data type attribute to fields and variables in the symbol
               table.</para>
             </listitem>
+
+            <listitem>
+              <para>Some classes and class members have been deprecated, and
+              will be removed soon. Please see the javadoc.</para>
+            </listitem>
+
+            <listitem>
+              <para>Subclassed JPNode. This allows JPNav to go away, and
+              allows us to add better functions for getting Symbols and such,
+              rather than working directly with the JPNode "links".</para>
+            </listitem>
           </itemizedlist>
         </listitem>
       </varlistentry>

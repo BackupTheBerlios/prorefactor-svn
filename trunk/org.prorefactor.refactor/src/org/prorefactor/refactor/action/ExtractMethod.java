@@ -19,9 +19,8 @@ import java.util.Map;
 
 import org.prorefactor.core.ICallback;
 import org.prorefactor.core.IConstants;
-import org.prorefactor.core.JPNav;
 import org.prorefactor.core.JPNode;
-import org.prorefactor.core.TokenTypes;
+import org.prorefactor.nodetypes.FieldRefNode;
 import org.prorefactor.refactor.FileStuff;
 import org.prorefactor.refactor.RefactorException;
 import org.prorefactor.refactor.RefactorSession;
@@ -112,13 +111,13 @@ public class ExtractMethod {
 	/** Check if a Field_ref is in the selection range.
 	 * Update our reference list if so.
 	 */
-	protected void checkFieldRef(JPNode refNode) {
-		JPNode idNode = JPNav.findFieldRefIdNode(refNode);
+	protected void checkFieldRef(FieldRefNode refNode) {
+		JPNode idNode = refNode.getIdNode();
 		if (idNode.getFileIndex() != selectionFile) return;
 		if (! org.prorefactor.core.Util.isInRange(
 			idNode.getLine(), idNode.getColumn(), selectionBegin, selectionEnd ) )
 			return;
-		Symbol symbol = (Symbol) refNode.getLink(JPNode.SYMBOL);
+		Symbol symbol = refNode.getSymbol();
 		assert symbol != null;
 		if (symbol instanceof Variable) {
 			// If the variable is scoped to the program block, parameter is not necessary.
@@ -220,8 +219,7 @@ public class ExtractMethod {
 		selectionFile = FileStuff.getFileIndex(sourceFile);
 		ICallback callback = new ICallback() {
 			public Object run(Object obj) {
-				JPNode node = (JPNode) obj;
-				if (node.getType() == TokenTypes.Field_ref) checkFieldRef(node);
+				if (obj instanceof FieldRefNode) checkFieldRef((FieldRefNode)obj);
 				return null;
 			}
 		};

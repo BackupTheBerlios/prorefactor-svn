@@ -17,12 +17,16 @@ package org.prorefactor.core;
  * Methods here are specific to Proparse's tree structure.
  * For general node navigation (firstChild, etc.) see JPNode.
  * <p>
- * I plan to subclass JPNode, for example, to FieldRefNode, which will allow
+ * The new subclass of JPNode, FieldRefNode, allows
  * this class and its members to go away entirely.
+ * @deprecated
  */
 public class JPNav {
 
-	/** Find the ID node for a Field_ref node */
+	/** Find the ID node for a Field_ref node
+	 * @deprecated
+	 * @see org.prorefactor.nodetypes.FieldRefNode#getIdNode()
+	 */
 	public static JPNode findFieldRefIdNode(JPNode refNode) {
 		JPNode idNode = refNode.findDirectChild(TokenTypes.ID);
 		assert idNode != null;

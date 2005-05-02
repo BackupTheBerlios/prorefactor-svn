@@ -23,6 +23,9 @@ import org.prorefactor.core.JPNode;
 import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Schema;
 import org.prorefactor.core.schema.Table;
+import org.prorefactor.nodetypes.BlockNode;
+import org.prorefactor.nodetypes.FieldRefNode;
+import org.prorefactor.nodetypes.RecordNameNode;
 import org.prorefactor.treeparser.Block;
 import org.prorefactor.treeparser.BufferScope;
 import org.prorefactor.treeparser.CQ;
@@ -110,9 +113,9 @@ public class TP01Support extends TP01Action {
 
 	/** Beginning of a block. */
 	public void blockBegin(AST blockAST) {
-		JPNode node = (JPNode) blockAST;
-		currentBlock = pushBlock(new Block(currentBlock, node));
-		node.setLink(JPNode.BLOCK, currentBlock);
+		BlockNode blockNode = (BlockNode) blockAST;
+		currentBlock = pushBlock(new Block(currentBlock, blockNode));
+		blockNode.setBlock(currentBlock);
 	}
 
 
@@ -135,7 +138,7 @@ public class TP01Support extends TP01Action {
 	 * making a local-scoped named buffer using that same name.
 	 */
 	protected void canFindBegin(AST canfindAST, AST recordAST) {
-		JPNode recordNode = (JPNode) recordAST;
+		RecordNameNode recordNode = (RecordNameNode) recordAST;
 		// Keep a ref to the current block...
 		Block b = currentBlock;
 		// ...create a can-find scope and block (assigns currentBlock)...
@@ -154,7 +157,7 @@ public class TP01Support extends TP01Action {
 			isDefault = true;
 		}
 		TableBuffer newBuff = currentScope.defineBuffer(isDefault ? "" : buffName, table);
-		recordNode.setLink(JPNode.SYMBOL, newBuff);
+		recordNode.setTableBuffer(newBuff);
 		currentBlock.addHiddenCursor(recordNode);
 	}
 
@@ -308,7 +311,7 @@ public class TP01Support extends TP01Action {
 	 */
 	public void field(AST refAST, AST idAST, int contextQualifier, int whichTable) {
 		JPNode idNode = (JPNode) idAST;
-		JPNode refNode = (JPNode) refAST;
+		FieldRefNode refNode = (FieldRefNode) refAST;
 		String name = idNode.getText();
 		FieldLookupResult result = null;
 
@@ -355,17 +358,17 @@ public class TP01Support extends TP01Action {
 			refNode.attrSet(IConstants.ABBREVIATED, IConstants.TRUE);
 		// Variable
 		if (result.variable != null) {
-			refNode.setLink(JPNode.SYMBOL, result.variable);
+			refNode.setSymbol(result.variable);
 			refNode.attrSet(IConstants.STORETYPE, IConstants.ST_VAR);
 			result.variable.noteReference(contextQualifier);
 		}
 		// Buffer attributes
 		if (result.bufferScope != null) {
-			refNode.setLink(JPNode.BUFFERSCOPE, result.bufferScope);
+			refNode.setBufferScope(result.bufferScope);
 		}
 		// Table field
 		if (result.field != null) {
-			refNode.setLink(JPNode.SYMBOL, result.field);
+			refNode.setSymbol(result.field);
 			result.field.noteReference(contextQualifier);
 		}
 
@@ -386,7 +389,7 @@ public class TP01Support extends TP01Action {
 		SymbolScope forwardScope = (SymbolScope) funcForwards.get(idAST.getText());
 		if (forwardScope==null) return;
 		scopeSwap(forwardScope);
-		((JPNode)funcAST).setLink(JPNode.BLOCK, currentBlock);
+		((BlockNode)funcAST).setBlock(currentBlock);
 	}
 
 
@@ -432,11 +435,11 @@ public class TP01Support extends TP01Action {
 	}
 
 	public void programRoot(AST rootAST) {
-		JPNode node = (JPNode) rootAST;
-		currentBlock = pushBlock(new Block(rootScope, node));
+		BlockNode blockNode = (BlockNode) rootAST;
+		currentBlock = pushBlock(new Block(rootScope, blockNode));
 		rootScope.setRootBlock(currentBlock);
-		node.setLink(JPNode.BLOCK, currentBlock);
-		parseUnit.setTopNode(node);
+		blockNode.setBlock(currentBlock);
+		parseUnit.setTopNode(blockNode);
 		parseUnit.setRootScope(rootScope);
 	}
 
@@ -488,8 +491,8 @@ public class TP01Support extends TP01Action {
 
 	/** Action to take at various RECORD_NAME nodes. */
 	public void recordNameNode(AST anode, int contextQualifier) {
-		JPNode node = (JPNode) anode;
-		node.attrSet(IConstants.CONTEXT_QUALIFIER, contextQualifier);
+		RecordNameNode recordNode = (RecordNameNode) anode;
+		recordNode.attrSet(IConstants.CONTEXT_QUALIFIER, contextQualifier);
 		TableBuffer buffer = null;
 		switch (contextQualifier) {
 			case CQ.INIT :
@@ -498,7 +501,7 @@ public class TP01Support extends TP01Action {
 			case CQ.REFUP :
 			case CQ.UPDATING :
 			case CQ.BUFFERSYMBOL :
-				buffer = currentScope.getBufferSymbol(node.getText());
+				buffer = currentScope.getBufferSymbol(recordNode.getText());
 				break;
 			case CQ.SYMBOL :
 				buffer = currentScope.lookupTableOrBufferSymbol(anode.getText());
@@ -513,21 +516,17 @@ public class TP01Support extends TP01Action {
 			default :
 				assert false;
 		}
-		recordNodeSymbol(node, buffer); // Does checks, sets attributes.
-		node.setLink(JPNode.SYMBOL, buffer);
+		recordNodeSymbol(recordNode, buffer); // Does checks, sets attributes.
+		recordNode.setTableBuffer(buffer);
 		switch (contextQualifier) {
 			case CQ.INIT :
 			case CQ.REF :
 			case CQ.REFUP :
 			case CQ.UPDATING :
-				node.setLink(
-					JPNode.BUFFERSCOPE
-					, currentBlock.getBufferForReference(buffer) );
+				recordNode.setBufferScope(currentBlock.getBufferForReference(buffer));
 				break;
 			case CQ.INITWEAK :
-				node.setLink(
-					JPNode.BUFFERSCOPE
-					, currentBlock.addWeakBufferScope(buffer) );
+				recordNode.setBufferScope(currentBlock.addWeakBufferScope(buffer));
 				break;
 		}
 		buffer.noteReference(contextQualifier);
@@ -536,11 +535,11 @@ public class TP01Support extends TP01Action {
 
 
 	public void scopeAdd(AST anode) {
-		JPNode node = (JPNode) anode;
+		BlockNode blockNode = (BlockNode) anode;
 		currentScope = currentScope.addScope();
-		currentBlock = pushBlock(new Block(currentScope, node));
+		currentBlock = pushBlock(new Block(currentScope, blockNode));
 		currentScope.setRootBlock(currentBlock);
-		node.setLink(JPNode.BLOCK, currentBlock);
+		blockNode.setBlock(currentBlock);
 	} // scopeAdd()
 
 
@@ -581,7 +580,7 @@ public class TP01Support extends TP01Action {
 	 * the BufferSymbol linked to it.
 	 */
 	public void strongScope(AST anode) {
-		currentBlock.addStrongBufferScope((JPNode)anode);
+		currentBlock.addStrongBufferScope((RecordNameNode)anode);
 	}
 
 

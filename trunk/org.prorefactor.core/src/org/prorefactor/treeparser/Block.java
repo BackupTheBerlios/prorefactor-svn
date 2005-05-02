@@ -25,6 +25,7 @@ import org.prorefactor.core.JPNode;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Schema;
+import org.prorefactor.nodetypes.RecordNameNode;
 
 
 
@@ -89,14 +90,13 @@ public class Block {
 	 * a CAN-FIND function. (2004.Sep:John: Maybe in triggers too? Haven't checked.)
 	 * @param node The RECORD_NAME node. Must have the BufferSymbol linked to it already.
 	 */
-	public void addHiddenCursor(JPNode node) {
-		TableBuffer symbol = (TableBuffer) node.getLink(JPNode.SYMBOL);
-		assert symbol != null;
+	public void addHiddenCursor(RecordNameNode node) {
+		TableBuffer symbol = node.getTableBuffer();
 		BufferScope buff = new BufferScope(this, symbol, BufferScope.HIDDEN_CURSOR);
 		bufferScopes.add(buff);
 		// Note the difference compared to addStrong and addWeak - we don't add
 		// BufferScope references to the enclosing blocks.
-		node.setLink(JPNode.BUFFERSCOPE, buff);
+		node.setBufferScope(buff);
 	}
 
 
@@ -108,13 +108,12 @@ public class Block {
 	 * @param node The RECORD_NAME node. It must already have
 	 * the BufferSymbol linked to it.
 	 */
-	public void addStrongBufferScope(JPNode node) {
-		TableBuffer symbol = (TableBuffer) node.getLink(JPNode.SYMBOL);
-		assert symbol != null;
+	public void addStrongBufferScope(RecordNameNode node) {
+		TableBuffer symbol = node.getTableBuffer();
 		BufferScope buff = new BufferScope(this, symbol, BufferScope.STRONG);
 		bufferScopes.add(buff);
 		addBufferScopeReferences(buff);
-		node.setLink(JPNode.BUFFERSCOPE, buff);
+		node.setBufferScope(buff);
 	} // addStrongBufferScope
 
 

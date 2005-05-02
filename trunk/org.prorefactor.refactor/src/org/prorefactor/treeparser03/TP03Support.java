@@ -39,6 +39,7 @@ import java.util.TreeSet;
 import org.prorefactor.core.CommentFinder;
 import org.prorefactor.core.IConstants;
 import org.prorefactor.core.JPNode;
+import org.prorefactor.nodetypes.FieldRefNode;
 import org.prorefactor.refactor.RefactorTarget;
 import org.prorefactor.refactor.noundo.NoundoTarget;
 import org.prorefactor.treeparser.Symbol;
@@ -177,10 +178,10 @@ public class TP03Support implements IConstants {
 	 * @param refNode The Field_ref node.
 	 * @param idNode The ID node.
 	 */
-	public void fieldRef(AST refNode, AST idNode) {
+	public void fieldRef(AST refAST, AST idNode) {
 		if (!isUpdating) return;
-		Symbol symbol = (Symbol) ((JPNode)refNode).getLink(JPNode.SYMBOL);
-		assert symbol != null;
+		FieldRefNode refNode = (FieldRefNode) refAST;
+		Symbol symbol = refNode.getSymbol();
 		NoundoTarget target = (NoundoTarget) undoTargetsMap.get(symbol);
 		if (target==null) return;
 		((Block)blockList.getFirst()).undoTargetsAssignedList.add(target);

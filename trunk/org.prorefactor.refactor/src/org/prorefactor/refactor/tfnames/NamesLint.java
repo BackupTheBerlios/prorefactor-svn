@@ -20,6 +20,8 @@ import org.prorefactor.core.PRCException;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Database;
 import org.prorefactor.core.schema.Table;
+import org.prorefactor.nodetypes.FieldRefNode;
+import org.prorefactor.nodetypes.RecordNameNode;
 import org.prorefactor.refactor.ILint;
 import org.prorefactor.treeparser.FieldBuffer;
 import org.prorefactor.treeparser.Symbol;
@@ -74,11 +76,11 @@ public class NamesLint implements ILint {
 		switch (node.getType()) {
 			case TokenTypes.Field_ref :
 				currTarget = new NamesTarget();
-				lintFieldRef(node);
+				lintFieldRef((FieldRefNode)node);
 				break;
 			case TokenTypes.RECORD_NAME :
 				currTarget = new NamesTarget();
-				lintRecordName(node);
+				lintRecordName((RecordNameNode)node);
 				break;
 		}
 	} // examineNode()
@@ -106,10 +108,9 @@ public class NamesLint implements ILint {
 
 
 
-	private void lintFieldRef(JPNode node) {
+	private void lintFieldRef(FieldRefNode node) {
 		int handle = node.getHandle();
-		Symbol symbol =  (Symbol) node.getLink(JPNode.SYMBOL);
-		assert symbol != null;
+		Symbol symbol =  node.getSymbol();
 		FieldBuffer fieldBuff = null;
 		TableBuffer tableBuff = null;
 		if (symbol instanceof FieldBuffer) { 
@@ -210,8 +211,8 @@ public class NamesLint implements ILint {
 	 * (Buffer names cannot be abbreviated, and we're not going to try to deal
 	 * with capitalization on buffer names. bCustomer might be very valid.)
 	 */
-	private void lintRecordName(JPNode node) {
-		TableBuffer tableBuff = (TableBuffer) node.getLink(JPNode.SYMBOL);
+	private void lintRecordName(RecordNameNode node) {
+		TableBuffer tableBuff = node.getTableBuffer();
 		Table table = tableBuff.getTable();
 
 		// Are we applying changes to work/temp tables?
