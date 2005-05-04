@@ -13,7 +13,9 @@ package org.prorefactor.nodetypes;
 import org.prorefactor.core.JPNode;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.treeparser.BufferScope;
+import org.prorefactor.treeparser.DataType;
 import org.prorefactor.treeparser.FieldBuffer;
+import org.prorefactor.treeparser.Primative;
 import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.Variable;
 
@@ -30,6 +32,8 @@ public class FieldRefNode extends JPNode {
 		return bufferScope;
 	}
 	
+	public DataType getDataType() { return ((Primative)getSymbol()).getDataType(); }
+
 	/** We very often need to reference the ID node for a Field_ref node.
 	 * The Field_ref node is a synthetic node - it doesn't have any text.
 	 * If we want the field/variable name, or the file/line/column, then

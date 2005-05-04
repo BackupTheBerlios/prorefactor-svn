@@ -1,15 +1,12 @@
 /**
- * SymbolScope.java
  * @author John Green
  * 6-Nov-2002
- * www.joanju.com
  * 
- * Copyright (c) 2002-2004 Joanju Limited.
+ * Copyright (c) 2002-2005 Joanju (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
  */
 
 package org.prorefactor.treeparser;
@@ -23,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.prorefactor.core.IConstants;
+import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Schema;
 import org.prorefactor.core.schema.Table;
 
@@ -39,14 +37,6 @@ import org.prorefactor.core.schema.Table;
  */
 public class SymbolScope {
 
-	/** Only Scope and derivatives may create a Scope object.
-	 * @param parentScope null if called by the SymbolScopeRoot constructor.
-	 */
-	protected SymbolScope(SymbolScope parentScope) {
-		this.parentScope = parentScope;
-		if (parentScope!=null) this.rootScope = parentScope.rootScope;
-	}
-
 	private static Schema schema = Schema.getInstance();
 
 	private ArrayList allSymbols = new ArrayList();
@@ -55,12 +45,32 @@ public class SymbolScope {
 	protected Map bufferMap = new HashMap();
 	protected Map callMap = new HashMap();
 	protected Map routineMap = new HashMap();
-	protected Map variableMap = new HashMap();
 	protected Map unnamedBuffers = new HashMap();
+	protected Map typeMap = new HashMap();
+	protected Map variableMap = new HashMap();
 	private SymbolScope parentScope;
 	protected SymbolScopeRoot rootScope;
+	
+	private static final Integer DATASET = new Integer(TokenTypes.DATASET);
+	private static final Integer DATASOURCE = new Integer(TokenTypes.DATASOURCE);
+	private static final Integer QUERY = new Integer(TokenTypes.QUERY);
+	private static final Integer STREAM = new Integer(TokenTypes.STREAM);
+
+	/** Only Scope and derivatives may create a Scope object.
+	 * @param parentScope null if called by the SymbolScopeRoot constructor.
+	 */
+	protected SymbolScope(SymbolScope parentScope) {
+		this.parentScope = parentScope;
+		if (parentScope!=null) this.rootScope = parentScope.rootScope;
+	}
+	
+	// Initialization block
+	{
+		typeMap.put(new Integer(TokenTypes.VARIABLE), variableMap);
+	}
 
 
+	
 	/** Add a Routine for call handling. */
 	public void add(Routine routine){
 		routineMap.put(routine.getName().toLowerCase(), routine);
@@ -68,8 +78,19 @@ public class SymbolScope {
 
 	
 	/** Add a Variable for names lookup. */
-	public void add(Variable fieldSymbol) {
-		variableMap.put(fieldSymbol.getName().toLowerCase(), fieldSymbol);
+	public void add(Variable var) {
+		variableMap.put(var.getName().toLowerCase(), var);
+	}
+
+	/** Add a Symbol for names lookup. */
+	public void add(Symbol symbol) {
+		Integer type = new Integer(symbol.getProgressType());
+		Map map = (Map) typeMap.get(type);
+		if (map==null) {
+			map = new HashMap();
+			typeMap.put(type, map);
+		}
+		map.put(symbol.getName().toLowerCase(), symbol);
 	}
 
 
@@ -251,6 +272,23 @@ public class SymbolScope {
 		}
 		return symbol;
 	} // lookupBuffer()
+	
+	
+	
+	public Dataset lookupDataset(String name) { return (Dataset) lookupSymbol(DATASET, name); }
+	
+	public Datasource lookupDatasource(String name) { return (Datasource) lookupSymbol(DATASOURCE, name); }
+	
+	public Query lookupQuery(String name) { return (Query) lookupSymbol(QUERY, name); }
+	
+	public Stream lookupStream(String name) { return (Stream) lookupSymbol(STREAM, name); }
+
+	
+	private Object lookupSymbol(Integer symbolType, String name) {
+		Map map = (Map) typeMap.get(symbolType);
+		if (map==null) return null;
+		return map.get(name.toLowerCase());
+	}
 
 
 
@@ -288,6 +326,13 @@ public class SymbolScope {
 		Variable var = (Variable) variableMap.get(inName.toLowerCase());
 		if (var==null && parentScope!=null) return parentScope.lookupVariable(inName);
 		return var;
+	}
+
+
+
+	/** Lookup a Widget based on TokenType (FRAME, BUTTON, etc) and the name. */
+	public Widget lookupWidget(int widgetType, String name) {
+		return (Widget) lookupSymbol(new Integer(widgetType), name);
 	}
 
 

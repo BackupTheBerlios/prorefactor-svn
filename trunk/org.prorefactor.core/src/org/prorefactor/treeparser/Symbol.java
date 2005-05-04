@@ -114,26 +114,11 @@ abstract public class Symbol {
 	 * A TableBuffer object always returns BUFFER, regardless of whether
 	 * the object is a named buffer or a default buffer.
 	 * A FieldBuffer object always returns FIELD.
-	 * @see org.prorefactor.treeparser.TableBuffer#getProgressType().
 	 */
-	public int getProgressType() {
-		// If there is no DEFINE node, then we assume inline VARIABLE def,
-		// as in "message..update x as char"
-		if (	defNode == null
-			||	defNode.getType() != TokenTypes.DEFINE
-			) return TokenTypes.VARIABLE;
-		JPNode n = defNode.firstChild();
-		int type = n.getType();
-		if (type==TokenTypes.NEW || type==TokenTypes.SHARED) {
-			type = n.nextSibling().getType();
-		}
-		return type;
-	}
-	
+	public abstract int getProgressType();
 	
 	
 	public SymbolScope getScope() { return scope; }
-
 
 	
 	/** Defined as NEW [GLOBAL] SHARED? */

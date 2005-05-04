@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 import org.prorefactor.core.IConstants;
 import org.prorefactor.core.JPNode;
+import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Schema;
 import org.prorefactor.core.schema.Table;
@@ -36,6 +37,7 @@ import org.prorefactor.treeparser.ParseUnit;
 import org.prorefactor.treeparser.Primative;
 import org.prorefactor.treeparser.Routine;
 import org.prorefactor.treeparser.Symbol;
+import org.prorefactor.treeparser.SymbolFactory;
 import org.prorefactor.treeparser.SymbolScope;
 import org.prorefactor.treeparser.SymbolScopeRoot;
 import org.prorefactor.treeparser.TableBuffer;
@@ -225,6 +227,26 @@ public class TP01Support extends TP01Action {
 
 
 
+	public Symbol defineSymbol(AST defAST, AST idAST, int symbolType) {
+		/* Some notes:
+		 * We need to create the Symbol right away, because further
+		 * actions in the grammar might need to set attributes on it.
+		 * We can't add it to the scope yet, because of statements like this:
+		 *   def var xyz like xyz.
+		 * The tree parser is responsible for calling addToScope at the end of
+		 * the statement or when it is otherwise safe to do so.
+		 */
+		JPNode defNode = (JPNode) defAST;
+		JPNode idNode = (JPNode) idAST;
+		Symbol symbol = SymbolFactory.create(symbolType, idNode.getText(), currentScope);
+		symbol.setDefOrIdNode(defNode);
+		currSymbol = symbol;
+		idNode.setLink(JPNode.SYMBOL, symbol);
+		return symbol;
+	}
+
+	
+	
 	public void defineTableField(AST idAST) {
 		JPNode idNode = (JPNode)idAST;
 		FieldBuffer fieldBuff = rootScope.defineTableField(idNode.getText(), currDefTable);
@@ -375,32 +397,39 @@ public class TP01Support extends TP01Action {
 	} // field()
 
 
+	private static DataType fieldRefDataType(AST refAST) {
+		return ((FieldRefNode)refAST).getDataType();
+	}
+
 
 	/** If this function definition did not list any parameters, but it had a
 	 * function forward declaration, then we use the block and scope from that
 	 * declaration, in case it is where the parameters were listed.
 	 */
 	protected void funcDef(AST funcAST, AST idAST) {
+		SymbolScope forwardScope = (SymbolScope) funcForwards.get(idAST.getText());
+		if (forwardScope==null) funcSymbolCreate(idAST);
 		// If there are symbols (i.e. parameters, buffer params) already defined in
 		// this function scope, then we don't do anything.
 		if (	currentScope.getVariableSet().size() > 0
 			||	currentScope.getBufferSet().size() > 0
 			) return;
-		SymbolScope forwardScope = (SymbolScope) funcForwards.get(idAST.getText());
 		if (forwardScope==null) return;
 		scopeSwap(forwardScope);
 		((BlockNode)funcAST).setBlock(currentBlock);
 	}
 
-
-	/** This is a really good example of why we need to subclass JPNode! */
-	private static DataType fieldRefDataType(AST refAST) {
-		return ((Primative)((JPNode)refAST).getLink(JPNode.SYMBOL)).getDataType();
-	}
-
-
 	protected void funcForward(AST idAST) {
 		funcForwards.put(idAST.getText(), currentScope);
+		funcSymbolCreate(idAST);
+	}
+	
+	private Routine funcSymbolCreate(AST idAST) {
+		SymbolScope definingScope = currentScope.getParentScope();
+		Routine r = new Routine(idAST.getText(), definingScope, currentScope);
+		r.setProgressType(TokenTypes.FUNCTION);
+		definingScope.add(r);
+		return r;
 	}
 
 
@@ -426,6 +455,7 @@ public class TP01Support extends TP01Action {
 		SymbolScope definingScope = currentScope;
 		scopeAdd(procNode);
 		Routine r = new Routine(idNode.getText(), definingScope, currentScope);
+		r.setProgressType(TokenTypes.PROCEDURE);
 		definingScope.add(r);
 	}
 	

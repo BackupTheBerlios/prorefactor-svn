@@ -1350,7 +1350,7 @@ decryptfunc
 
 definebrowsestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BROWSE
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(BROWSE, #def, #id)); }
 			(#(QUERY ID))? (lockhow|NOWAIT)*
 			(	#(	DISPLAY
 					(	#(	Form_item
@@ -1394,7 +1394,7 @@ definebufferstate
 
 definebuttonstate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUTTON 
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(BUTTON, #def, #id)); }
 			(	AUTOGO
 			|	AUTOENDKEY
 			|	DEFAULT
@@ -1423,7 +1423,7 @@ definebuttonstate
 
 definedatasetstate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASET
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(DATASET, #def, #id)); }
 			FOR tbl[CQ.INIT] (COMMA tbl[CQ.INIT])*
 			( data_relation ( (COMMA)? data_relation)* )?
 			state_end
@@ -1442,7 +1442,7 @@ field_mapping_phrase
 
 definedatasourcestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASOURCE
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(DATASOURCE, #def, #id)); }
 			FOR (#(QUERY ID))?
 			(source_buffer_phrase)? (COMMA source_buffer_phrase)*
 			{ action.addToScope(pop()); }
@@ -1456,7 +1456,7 @@ source_buffer_phrase
 
 defineframestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? FRAME
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(FRAME, #def, #id)); }
 			(form_item[CQ.SYMBOL])*
 			(	#(HEADER (display_item)+ )
 			|	#(BACKGROUND (display_item)+ )
@@ -1468,7 +1468,7 @@ defineframestate
 
 defineimagestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? IMAGE
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(IMAGE, #def, #id)); }
 			(	#(LIKE fld[CQ.SYMBOL] (VALIDATE)?)
 			|	imagephrase_opt 
 			|	sizephrase
@@ -1486,7 +1486,7 @@ defineimagestate
 
 definemenustate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? MENU
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(MENU, #def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
 			{ action.addToScope(pop()); }
 		)
@@ -1502,7 +1502,7 @@ menu_opt
 	;
 menu_list_item
 	:	(	#(	MENUITEM
-				id:ID { push(action.defineVariable(#id, #id)); }
+				id:ID { push(action.defineSymbol(MENUITEM, #id, #id)); }
 				(	#(ACCELERATOR expression )
 				|	color_expr
 				|	DISABLED
@@ -1515,7 +1515,7 @@ menu_list_item
 				{ action.addToScope(pop()); }
 			)
 		|	#(	SUBMENU
-				id2:ID { push(action.defineVariable(#id2, #id2)); }
+				id2:ID { push(action.defineSymbol(SUBMENU, #id2, #id2)); }
 				(DISABLED | label_constant | #(FONT expression) | color_expr)*
 				{ action.addToScope(pop()); }
 			)
@@ -1563,7 +1563,7 @@ defineparam_var
 
 definequerystate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? QUERY
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(QUERY, #def, #id)); }
 			FOR tbl[CQ.INIT] (record_fields)?
 			(COMMA tbl[CQ.INIT] (record_fields)?)*
 			( #(CACHE expression) | SCROLLING | RCODEINFORMATION)*
@@ -1574,7 +1574,7 @@ definequerystate
 
 definerectanglestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? RECTANGLE
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(RECTANGLE, #def, #id)); }
 			(	NOFILL
 			|	#(EDGECHARS expression )
 			|	#(EDGEPIXELS expression )
@@ -1592,12 +1592,12 @@ definerectanglestate
 
 definestreamstate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? STREAM id:ID state_end )
-		{ action.addToScope(action.defineVariable(#def, #id)); }
+		{ action.addToScope(action.defineSymbol(STREAM, #def, #id)); }
 	;
 
 definesubmenustate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? SUBMENU
-			id:ID { push(action.defineVariable(#def, #id)); }
+			id:ID { push(action.defineSymbol(SUBMENU, #def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
 		)
 		{ action.addToScope(pop()); }

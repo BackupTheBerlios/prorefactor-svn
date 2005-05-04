@@ -15,6 +15,7 @@ package org.prorefactor.treeparser;
 public class Routine extends Symbol {
 		
 	private SymbolScope routineScope;
+	private int progressType;
 	
 	public Routine (String name, SymbolScope definingScope, SymbolScope routineScope){
 		super(definingScope);
@@ -30,7 +31,13 @@ public class Routine extends Symbol {
 		return getName();
 	}
 
+	/** Return TokenTypes: PROCEDURE or FUNCTION. */
+	public int getProgressType() { return progressType; }
+	
 	public SymbolScope getRoutineScope(){
 		return routineScope;
 	}
+	
+	public Routine setProgressType(int t) { progressType=t; return this; }
+
 }

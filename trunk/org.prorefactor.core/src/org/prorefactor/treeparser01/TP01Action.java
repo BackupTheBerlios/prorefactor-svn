@@ -13,6 +13,7 @@
 package org.prorefactor.treeparser01;
 
 
+import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.Variable;
 
 import antlr.collections.AST;
@@ -70,7 +71,13 @@ public class TP01Action {
 	 */
 	public void defineBufferForTrigger(AST recAST) {}
 
+	
+	/** Called by the tree parser to define anything other than
+	 * buffers, temp/work tables, and variables/parameters.
+	 */
+	public Symbol defineSymbol(AST defAST, AST idAST, int symbolType) { return null; }
 
+	
 	/** Called by the tree parser at a temp or work table field definition. */
 	public void defineTableField(AST idNode) {}
 
