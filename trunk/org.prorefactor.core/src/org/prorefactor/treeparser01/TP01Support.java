@@ -99,7 +99,7 @@ public class TP01Support extends TP01Action {
 
 	
 	public void addToScope(Object o) {
-		currentScope.add((Variable)o);
+		currentScope.add((Symbol)o);
 	}
 
 	
@@ -227,7 +227,7 @@ public class TP01Support extends TP01Action {
 
 
 
-	public Symbol defineSymbol(AST defAST, AST idAST, int symbolType) {
+	public Symbol defineSymbol(int symbolType, AST defAST, AST idAST) {
 		/* Some notes:
 		 * We need to create the Symbol right away, because further
 		 * actions in the grammar might need to set attributes on it.

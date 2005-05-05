@@ -75,7 +75,7 @@ public class TP01Action {
 	/** Called by the tree parser to define anything other than
 	 * buffers, temp/work tables, and variables/parameters.
 	 */
-	public Symbol defineSymbol(AST defAST, AST idAST, int symbolType) { return null; }
+	public Symbol defineSymbol(int symbolType, AST defAST, AST idAST) { return null; }
 
 	
 	/** Called by the tree parser at a temp or work table field definition. */

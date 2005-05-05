@@ -15,6 +15,7 @@ package org.prorefactor.refactor.unittest;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.unittest.UnitTestBase2;
 import org.prorefactor.refactor.PUB;
 import org.prorefactor.refactor.RefactorSession;
@@ -72,6 +73,18 @@ public class PUBTest extends UnitTestBase2 {
 		assertTrue(fields.size() == 1);
 		assertTrue(fields.get(0).toString().equals("name"));
 
+		// Test the import table.
+		PUB.SymbolRef [] imports = pub.getImportTable();
+		PUB.SymbolRef imp = imports[0];
+		assertTrue(imp.progressType == TokenTypes.VARIABLE);
+		assertTrue(imp.symbolName.equals("sharedChar"));
+		
+		// Test the export table.
+		PUB.SymbolRef [] exports = pub.getExportTable();
+		PUB.SymbolRef exp = exports[0];
+		assertTrue(exp.progressType == TokenTypes.FRAME);
+		assertTrue(exp.symbolName.equals("myFrame"));
+		
 	}
 
 }

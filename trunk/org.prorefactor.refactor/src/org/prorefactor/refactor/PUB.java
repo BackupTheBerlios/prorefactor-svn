@@ -4,7 +4,7 @@
  * Sep 1, 2004
  * www.joanju.com
  *
- * Copyright (C) 2004 Joanju Limited.
+ * Copyright (C) 2004-2005 Joanju Limited.
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,6 +26,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeMap;
 
 import org.prorefactor.core.IConstants;
@@ -33,7 +34,7 @@ import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Table;
 import org.prorefactor.refactor.source.CompileUnit;
 import org.prorefactor.treeparser.FieldBuffer;
-import org.prorefactor.treeparser.SymbolScopeRoot;
+import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.TableBuffer;
 
 import com.joanju.ProparseLdr;
@@ -54,7 +55,7 @@ public class PUB {
 		pubFile = new File(refpack.getProRefactorProjectDir() + "/pubs/" + relPath + ".pub");
 	}
 	
-	public static final int LAYOUT_VERSION = 1;
+	public static final int LAYOUT_VERSION = 2;
 
 	/** loadTo(PUBFILE_TIMESTAMP) - just check if the binary exists and
 	 * check that it is newer than the compile unit file. Does not read anything
@@ -76,24 +77,42 @@ public class PUB {
 	/** loadTo(END) - all binary file segments will be loaded. */
 	public static final int END = 100;
 
+	private ArrayList exportList;
 	private ArrayList fileList;
+	private ArrayList importList;
 	private File cuFile;
 	private File pubFile;
 	private ProparseLdr parser = ProparseLdr.getInstance();
 	private RefactorSession refpack = RefactorSession.getInstance();
 	private TreeMap tableMap;
+
+	/** A record of symbol type and name, for import/export tables. */
+	public class SymbolRef {
+		SymbolRef(int progressType, String symbolName) {
+			this.progressType = progressType;
+			this.symbolName = symbolName;
+		}
+		/** The TokenType, ex: TokenTypes.VARIABLE */
+		public int progressType;
+		/** The symbol name (Symbol.fullName), with caseAsDefined. */
+		public String symbolName;
+	}
 	
 	private class TableRef {
 		TableRef(String name) { this.name = name; }
 		String name;
 		TreeMap fieldMap = new TreeMap();
 	}
+
+	
 	
 	/** It's possible, maybe even sensible, to reuse a PUB object.
 	 * This method clears out old lists in preparation for reloading or rebuilding.
 	 */
 	private void _refresh() {
+		exportList = new ArrayList();
 		fileList = new ArrayList();
+		importList = new ArrayList();
 		tableMap = new TreeMap();
 	}
 
@@ -115,7 +134,10 @@ public class PUB {
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		writeVersion(out);
 		writeFileIndex(out);
-		writeSchemaSegment(out, cu.getRootScope());
+		ArrayList allSymbols = cu.getRootScope().getAllSymbols();
+		writeSchemaSegment(out, allSymbols);
+		writeImportSegment(out, allSymbols);
+		writeExportSegment(out, allSymbols);
 		out.close();
 		return cu;
 	}
@@ -153,6 +175,17 @@ public class PUB {
 	}
 	
 	
+	
+	/** Get the array of exported symbols, in no particular order.
+	 * Currently just for DEF NEW [GLOBAL] SHARED symbols.
+	 */
+	public SymbolRef [] getExportTable() {
+		SymbolRef [] ret = new SymbolRef[exportList.size()];
+		exportList.toArray(ret);
+		return ret;
+	}
+	
+	
 
 	/** Get the array of file names. The file at index zero is always the compile unit.
 	 * The others are include files. The array index position corresponds to JPNode.getFileIndex().
@@ -166,6 +199,17 @@ public class PUB {
 	
 	
 	
+	/** Get the array of imported symbols, in no particular order.
+	 * Currently just for DEF SHARED symbols.
+	 */
+	public SymbolRef [] getImportTable() {
+		SymbolRef [] ret = new SymbolRef[importList.size()];
+		importList.toArray(ret);
+		return ret;
+	}
+	
+	
+
 	private ObjectInputStream getObjectInputStream() {
 		try {
 			InputStream fileIn = new BufferedInputStream(new FileInputStream(pubFile));
@@ -205,6 +249,10 @@ public class PUB {
 			if (lastSegmentToLoad==PUB.HEADER) return true;
 			readSchema(inStream);
 			if (lastSegmentToLoad==PUB.SCHEMA) return true;
+			readImportSegment(inStream);
+			if (lastSegmentToLoad==PUB.IMPORTS) return true;
+			readExportSegment(inStream);
+			if (lastSegmentToLoad==PUB.EXPORTS) return true;
 		} catch (IOException e1) {
 			return false;
 		} finally {
@@ -214,6 +262,16 @@ public class PUB {
 	}
 	
 	
+	
+	private void readExportSegment(ObjectInputStream in) throws IOException {
+		for (;;) {
+			SymbolRef symbolRef = new SymbolRef(in.readInt(), in.readUTF());
+			if (symbolRef.progressType == -1) break;
+			exportList.add(symbolRef);
+		}
+	}
+	
+
 	
 	private void readFileIndex(ObjectInputStream in) throws IOException {
 		int index;
@@ -227,6 +285,16 @@ public class PUB {
 	}
 	
 	
+	
+	private void readImportSegment(ObjectInputStream in) throws IOException {
+		for (;;) {
+			SymbolRef symbolRef = new SymbolRef(in.readInt(), in.readUTF());
+			if (symbolRef.progressType == -1) break;
+			importList.add(symbolRef);
+		}
+	}
+	
+
 	
 	private void readSchema(ObjectInputStream in) throws IOException {
 		for (;;) {
@@ -266,6 +334,20 @@ public class PUB {
 	
 	
 	
+	private void writeExportSegment(ObjectOutputStream out, List allSymbols) throws IOException {
+		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
+			Symbol symbol = (Symbol) it.next();
+			if (symbol.isExported()) {
+				out.writeInt(symbol.getProgressType());
+				out.writeUTF(symbol.fullName()); // We write caseAsDefined
+			}
+		}
+		out.writeInt(-1);
+		out.writeUTF("");
+	}
+	
+	
+	
 	private void writeFileIndex(ObjectOutputStream out) throws IOException {
 		String [] files = parser.getFilenameArray();
 		for (int i = 0; i < files.length; i++) {
@@ -278,8 +360,21 @@ public class PUB {
 	
 	
 	
-	private void writeSchemaSegment(ObjectOutputStream out, SymbolScopeRoot rootScope) throws IOException {
-		ArrayList allSymbols = rootScope.getAllSymbols();
+	private void writeImportSegment(ObjectOutputStream out, List allSymbols) throws IOException {
+		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
+			Symbol symbol = (Symbol) it.next();
+			if (symbol.isImported()) {
+				out.writeInt(symbol.getProgressType());
+				out.writeUTF(symbol.fullName()); // We write caseAsDefined
+			}
+		}
+		out.writeInt(-1);
+		out.writeUTF("");
+	}
+	
+	
+	
+	private void writeSchemaSegment(ObjectOutputStream out, List allSymbols) throws IOException {
 		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
 			Object obj = it.next();
 			if (obj instanceof TableBuffer) {

@@ -10322,7 +10322,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(BROWSE, def, id));
 		}
 		{
 		if (_t==null) _t=ASTNULL;
@@ -10991,7 +10991,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(BUTTON, def, id));
 		}
 		{
 		_loop813:
@@ -11426,7 +11426,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(DATASET, def, id));
 		}
 		AST tmp729_AST_in = (AST)_t;
 		match(_t,FOR);
@@ -11584,7 +11584,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(DATASOURCE, def, id));
 		}
 		AST tmp737_AST_in = (AST)_t;
 		match(_t,FOR);
@@ -11732,7 +11732,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(FRAME, def, id));
 		}
 		{
 		_loop857:
@@ -11955,7 +11955,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(IMAGE, def, id));
 		}
 		{
 		_loop880:
@@ -12178,7 +12178,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(MENU, def, id));
 		}
 		{
 		_loop888:
@@ -12732,7 +12732,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(QUERY, def, id));
 		}
 		AST tmp797_AST_in = (AST)_t;
 		match(_t,FOR);
@@ -12924,7 +12924,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(RECTANGLE, def, id));
 		}
 		{
 		_loop973:
@@ -13135,7 +13135,7 @@ public TreeParser01() {
 		_t = __t976;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			action.addToScope(action.defineVariable(def, id));
+			action.addToScope(action.defineSymbol(STREAM, def, id));
 		}
 		_retTree = _t;
 	}
@@ -13210,7 +13210,7 @@ public TreeParser01() {
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			push(action.defineVariable(def, id));
+			push(action.defineSymbol(SUBMENU, def, id));
 		}
 		{
 		_loop986:
@@ -44070,7 +44070,7 @@ public TreeParser01() {
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				push(action.defineVariable(id, id));
+				push(action.defineSymbol(MENUITEM, id, id));
 			}
 			{
 			_loop902:
@@ -44181,7 +44181,7 @@ public TreeParser01() {
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
-				push(action.defineVariable(id2, id2));
+				push(action.defineSymbol(SUBMENU, id2, id2));
 			}
 			{
 			_loop907:
