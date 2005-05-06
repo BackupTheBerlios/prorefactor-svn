@@ -13,9 +13,6 @@
       <library name="hsqldb/hsqldb.jar">
          <export name="*"/>
       </library>
-      <library name="hibernate/commons-collections-2.1.1.jar">
-         <export name="*"/>
-      </library>
       <library name="hibernate/commons-lang-1.0.1.jar">
          <export name="*"/>
       </library>
@@ -43,7 +40,13 @@
       <library name="hibernate/xml-apis.jar">
          <export name="*"/>
       </library>
-      <library name="jakarta/commons-io-1.0/commons-io-1.0.jar">
+      <library name="prorefactor.lib.jar">
+         <export name="*"/>
+      </library>
+      <library name="jakarta/commons-collections/commons-collections.jar">
+         <export name="*"/>
+      </library>
+      <library name="jakarta/commons-io/commons-io.jar">
          <export name="*"/>
       </library>
    </runtime>
