@@ -1,29 +1,26 @@
-/**
- * JPNode
- * @author John Green
- * October, 2002
- * www.joanju.com
+/** Created: October, 2002
+ * Authors: John Green
  * 
- * Copyright (c) 2002-2004 Joanju Limited.
+ * Copyright (c) 2002-2005 Joanju (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
  */
 
 package org.prorefactor.core;
 
 
-import com.joanju.ProparseLdr;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.prorefactor.nodetypes.NodeFactory;
 
 import antlr.BaseAST;
 import antlr.Token;
 import antlr.collections.AST;
 
-import java.util.HashMap;
-
-import org.prorefactor.nodetypes.NodeFactory;
+import com.joanju.ProparseLdr;
 
 
 
@@ -37,6 +34,8 @@ import org.prorefactor.nodetypes.NodeFactory;
  */
 public class JPNode extends BaseAST implements IJPNode {
 
+	/** For creating from persistent storage */
+	public JPNode() { }
 
 	public JPNode(int handle) {
 		nodeHandle = handle;
@@ -62,12 +61,11 @@ public class JPNode extends BaseAST implements IJPNode {
 	/** Just an Integer object for the int IConstants.CONTEXT_QUALIFIER */
 	public static final Integer CONTEXT_QUALIFIER = new Integer(IConstants.CONTEXT_QUALIFIER);
 
+	
 	/** A valid value for setLink() and getLink() */
 	public static final Integer SYMBOL = new Integer(-210);
-
 	/** A valid value for setLink() and getLink() */
 	public static final Integer TETNode = new Integer(-211);
-
 	/** A valid value for setLink() and getLink().
 	 * Link to a BufferScope object, set by tp01 for RECORD_NAME nodes
 	 * and for Field_ref nodes for Field (not for Variable).
@@ -76,14 +74,16 @@ public class JPNode extends BaseAST implements IJPNode {
 	 * @see #BUFFERSYMBOL
 	 */
 	public static final Integer BUFFERSCOPE = new Integer(-212);
-
 	/** A valid value for setLink() and getLink().
 	 * You should not use this directly. Only JPNodes of subtype BlockNode
 	 * will have this set, so use BlockNode.getBlock instead.
 	 * @see org.prorefactor.nodetypes.BlockNode.
 	 */
 	public static final Integer BLOCK = new Integer(-214);
+	/** A valid value for setLink() and getLink() */
+	private static final Integer COMMENTS = new Integer(-215);
 
+	
 	static private ProparseLdr parser = ProparseLdr.getInstance();
 
 	private int column = -1;
@@ -114,6 +114,11 @@ public class JPNode extends BaseAST implements IJPNode {
 		 * Note that if "disconnected", this flag is meaningless.
 		 */
 		public boolean storePosition = false;
+		/** Store the comments?
+		 * By default, a "disconnected" tree does not store comments.
+		 * @see JPNode#getComments().
+		 */
+		public boolean storeComments = false;
 	} // class TreeConfig
 
 
@@ -148,9 +153,9 @@ public class JPNode extends BaseAST implements IJPNode {
 
 
 	//// Member funcs
-
-
-
+	
+	
+	
 	/** Get an attribute from proparse if connected, from JPNode if disconnected */
 	public int attrGet(int key) {
 		if (nodeHandle!=0) return parser.attrGetI(nodeHandle, key);
@@ -211,6 +216,8 @@ public class JPNode extends BaseAST implements IJPNode {
 			filename = config.filenames[fileIndex];
 			line = parser.getNodeLine(nodeHandle);
 			column = parser.getNodeColumn(nodeHandle);
+			if (config.storeComments) setComments(getComments());
+			// And, the final step in making this node "disconnected"...
 			nodeHandle = 0;
 		} else if (config.storePosition) {  // storePosition is meaningless if disconnected
 			fileIndex = parser.getNodeFileIndex(nodeHandle);
@@ -261,22 +268,58 @@ public class JPNode extends BaseAST implements IJPNode {
 	/**
 	 * First Natural Child is found by repeating firstChild() until a natural node is found.
 	 * If the start node is a natural node, then it is returned.
-	 * The test for "natural" node is line number. Synthetic node line numbers == 0.
 	 * Note: This is very different than Prolint's "NextNaturalNode" in lintsuper.p.
+	 * @see TokenTypes#isNatural(int)
 	 */
 	public JPNode firstNaturalChild() {
-		if (getLine()>0) return this;
-		for (JPNode n = (JPNode)getFirstChild(); n!=null; n = (JPNode)n.getFirstChild()) {
-			if (n.getLine()>0) return n;
+		if (TokenTypes.isNatural(getType())) return this;
+		for (JPNode n = firstChild(); n!=null; n = n.firstChild()) {
+			if (TokenTypes.isNatural(n.getType())) return n;
 		}
 		return null;
-	} // firstNaturalChild()
+	}
 
 
 
 	public int getColumn() {
 		if (column == -1) return parser.getNodeColumn(nodeHandle);
 		return column;
+	}
+	
+	
+	
+	/** Get the comments that precede this node.
+	 * Gets the comments from Proparse if "connected", otherwise gets
+	 * the comments stored within this node object.
+	 * CAUTION: We want to know if line breaks exist between comments and nodes,
+	 * and if they exist between consecutive comments. To preserve that information,
+	 * the String returned here may have "\n" in front of the first comment,
+	 * may have "\n" separating comments, and may have "\n" appended to the
+	 * last comment. We do not preserve the number of newlines, nor do we
+	 * preserve any other whitespace.
+	 * @return null if no comments.
+	 */
+	public String getComments() {
+		if (nodeHandle==0) return (String) getLink(COMMENTS);
+		StringBuffer buff = new StringBuffer();
+		boolean newline = false;
+		for (	int isAvail = parser.hiddenGetFirst(nodeHandle)
+			;	isAvail>0
+			;	isAvail=parser.hiddenGetNext()
+			) {
+			if (	parser.hiddenGetType().equals("WS")
+				&&	parser.hiddenGetText().indexOf('\n') > -1
+				)
+				newline = true;
+			if (parser.hiddenGetType().equals("COMMENT")) {
+				if (newline) buff.append("\n");
+				buff.append(parser.hiddenGetText());
+			}
+		}
+		if (buff.length()==0) return null;
+		// Trailine newline(s)?
+		if (newline) buff.append("\n");
+		return buff.toString();
 	}
 
 
@@ -332,15 +375,34 @@ public class JPNode extends BaseAST implements IJPNode {
 	public int getState2() {
 		return attrGet(JPNode.STATE2);
 	}
+	
+	
+	/** Every JPNode subtype has its own index. Used for persistent storage. */
+	public int getSubtypeIndex() { return 1; }
 
 
 
 	private void initMap() {
 		if (attrMap==null) attrMap = new HashMap();
 	}
-
-
-
+	
+	
+	
+	/** Is this a natural node (from real source text)?
+	 * If not, then it is a synthetic node, added just for tree structure.
+	 * @see TokenTypes#isNatural(int)
+	 */
+	public boolean isNatural() { return TokenTypes.isNatural(type); }
+	
+	
+	
+	/** Does this node have the Proparse STATEHEAD attribute? */
+	public boolean isStateHead() {
+		return attrGet(IConstants.STATEHEAD) == IConstants.TRUE;
+	}
+	
+	
+	
 	/** Return the last immediate child (no grandchildren). */
 	public JPNode lastChild() {
 		JPNode ret = firstChild();
@@ -384,7 +446,37 @@ public class JPNode extends BaseAST implements IJPNode {
 		}
 		throw new AssertionError("JPNode.prevNode() failed - corrupt tree?");
 	}
+	
+	
+	
+	/** Get an array of all descendant nodes (including this node) of a given type.
+	 * Same idea as Proparse's "query" functions.
+	 */
+	public JPNode [] query(int type) {
+		ArrayList list = new ArrayList();
+		if (this.type == type) list.add(this);
+		queryHelper(this.firstChild(), type, list);
+		JPNode [] ret = new JPNode[list.size()];
+		list.toArray(ret);
+		return ret;
+	}
+	private static void queryHelper(JPNode node, int type, ArrayList list) {
+		if (node==null) return;
+		if (node.type == type) list.add(node);
+		queryHelper(node.firstChild(), type, list);
+		queryHelper(node.nextSibling(), type, list);
+	}
 
+
+
+	/** Set the comments preceding this node.
+	 * CAUTION: Does not change any values in Proparse. Only use this
+	 * if the JPNode tree is "disconnected", because getComments returns
+	 * the comments from the "hidden tokens" in Proparse in "connected" mode.
+	 */
+	public void setComments(String comments) { setLink(COMMENTS, comments); }
+
+	
 
 	/** @see #getLink(Integer) */
 	public void setLink(Integer key, Object value) {
@@ -394,9 +486,9 @@ public class JPNode extends BaseAST implements IJPNode {
 
 
 
-	private void setParentInChildren() {
-		for (AST child = getFirstChild(); child!=null; child = child.getNextSibling()) {
-			((JPNode)child).parent = this;
+	public void setParentInChildren() {
+		for (JPNode child = firstChild(); child!=null; child = child.nextSibling()) {
+			child.parent = this;
 		}
 	}
 

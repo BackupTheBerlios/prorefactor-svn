@@ -17,6 +17,7 @@
    <requires>
       <import plugin="org.junit" export="true"/>
       <import plugin="org.prorefactor.antlr" export="true"/>
+      <import plugin="org.prorefactor.lib" export="true"/>
    </requires>
 
 </plugin>

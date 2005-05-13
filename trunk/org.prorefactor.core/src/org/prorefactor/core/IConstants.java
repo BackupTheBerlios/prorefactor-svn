@@ -106,5 +106,8 @@ public interface IConstants {
 	/** A scanner token which is scheduled to be cut from the token list */
 	public int TO_BE_CUT = 11010;
 
+	
+	// Joanju uses 49000+ for scratch and otherwise non-persistent attributes.
+
 
 } // interface IConstants

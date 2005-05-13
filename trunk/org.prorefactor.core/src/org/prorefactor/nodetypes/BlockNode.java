@@ -16,6 +16,9 @@ import org.prorefactor.treeparser.Block;
 
 public class BlockNode extends JPNode {
 
+	/** For creating from persistent storage */
+	public BlockNode() { super(); }
+
 	public BlockNode(int handle) { super(handle); }
 	public BlockNode(int handle, TreeConfig config) { super(handle, config); }
 	public BlockNode(int file, int line, int column) { super(file, line, column); }
@@ -25,6 +28,10 @@ public class BlockNode extends JPNode {
 		assert block != null;
 		return block;
 	}
+
+	/** Every JPNode subtype has its own index. Used for persistent storage. */
+	public int getSubtypeIndex() { return 2; }
+
 	public void setBlock(Block block) {
 		setLink(JPNode.BLOCK, block);
 	}

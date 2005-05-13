@@ -4,7 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="hibernate/cglib-full-2.0.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="hsqldb/hsqldb.jar"/>
-	<classpathentry exported="true" kind="lib" path="hibernate/commons-lang-1.0.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="hibernate/commons-logging-1.0.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="hibernate/dom4j-1.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="hibernate/ehcache-0.9.jar"/>
@@ -15,5 +14,6 @@
 	<classpathentry exported="true" kind="lib" path="hibernate/xml-apis.jar"/>
 	<classpathentry exported="true" sourcepath="jakarta/commons-collections/src.zip" kind="lib" path="jakarta/commons-collections/commons-collections.jar"/>
 	<classpathentry exported="true" sourcepath="jakarta/commons-io/src.zip" kind="lib" path="jakarta/commons-io/commons-io.jar"/>
+	<classpathentry exported="true" sourcepath="jakarta/commons-lang/src.zip" kind="lib" path="jakarta/commons-lang/commons-lang.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

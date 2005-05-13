@@ -13,9 +13,6 @@
       <library name="hsqldb/hsqldb.jar">
          <export name="*"/>
       </library>
-      <library name="hibernate/commons-lang-1.0.1.jar">
-         <export name="*"/>
-      </library>
       <library name="hibernate/commons-logging-1.0.4.jar">
          <export name="*"/>
       </library>
@@ -47,6 +44,9 @@
          <export name="*"/>
       </library>
       <library name="jakarta/commons-io/commons-io.jar">
+         <export name="*"/>
+      </library>
+      <library name="jakarta/commons-lang/commons-lang.jar">
          <export name="*"/>
       </library>
    </runtime>

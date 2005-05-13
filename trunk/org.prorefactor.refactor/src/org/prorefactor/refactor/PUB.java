@@ -29,9 +29,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
+import org.apache.commons.collections.bidimap.DualHashBidiMap;
 import org.prorefactor.core.IConstants;
+import org.prorefactor.core.JPNode;
+import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Table;
+import org.prorefactor.nodetypes.NodeFactory;
+import org.prorefactor.nodetypes.ProparseDirectiveNode;
 import org.prorefactor.refactor.source.CompileUnit;
 import org.prorefactor.treeparser.FieldBuffer;
 import org.prorefactor.treeparser.Symbol;
@@ -55,7 +60,7 @@ public class PUB {
 		pubFile = new File(refpack.getProRefactorProjectDir() + "/pubs/" + relPath + ".pub");
 	}
 	
-	public static final int LAYOUT_VERSION = 2;
+	public static final int LAYOUT_VERSION = 3;
 
 	/** loadTo(PUBFILE_TIMESTAMP) - just check if the binary exists and
 	 * check that it is newer than the compile unit file. Does not read anything
@@ -72,18 +77,28 @@ public class PUB {
 	public static final int IMPORTS = 30;
 	/** loadTo(EXPORTS) - new shared vars and public functions and procedures */
 	public static final int EXPORTS = 40;
-	/** loadTo(AST) - minimal node data for a functional syntax tree */
+	/** loadTo(AST) - just loads the node types - you almost certainly need STRINGS as well. */
 	public static final int AST = 50;
+	/** loadTo(STRINGS) - load the strings into the syntax tree. */
+	public static final int STRINGS = 60;
 	/** loadTo(END) - all binary file segments will be loaded. */
 	public static final int END = 100;
+	
+	/** Scratch JPNode attributes for storing string index. */
+	private static final int NODETEXT = 49001;
+	/** Scratch JPNode attributes for storing string index. */
+	private static final int NODECOMMENTS = 49002;
 
 	private ArrayList exportList;
 	private ArrayList fileList;
 	private ArrayList importList;
+	private DualHashBidiMap stringTable;
 	private File cuFile;
 	private File pubFile;
+	private JPNode tree;
 	private ProparseLdr parser = ProparseLdr.getInstance();
 	private RefactorSession refpack = RefactorSession.getInstance();
+	private String [] stringArray;
 	private TreeMap tableMap;
 
 	/** A record of symbol type and name, for import/export tables. */
@@ -114,6 +129,11 @@ public class PUB {
 		fileList = new ArrayList();
 		importList = new ArrayList();
 		tableMap = new TreeMap();
+		stringTable = new DualHashBidiMap();
+		/* String index zero is not used.
+		 * This allows us to use 0 from JPNode.attrGet() to indicate "no string value present".
+		 */
+		stringIndex("");
 	}
 
 
@@ -138,6 +158,9 @@ public class PUB {
 		writeSchemaSegment(out, allSymbols);
 		writeImportSegment(out, allSymbols);
 		writeExportSegment(out, allSymbols);
+		tree = cu.getTopNode();
+		writeTree(out, tree);
+		writeStrings(out);
 		out.close();
 		return cu;
 	}
@@ -223,6 +246,11 @@ public class PUB {
 	}
 	
 	
+	
+	/** Return the JPNode syntax tree that was loaded with load() */
+	public JPNode getTree() { return tree; }
+	
+	
 
 	/** Same as loadTo(PUB.END) */
 	public boolean load() { return loadTo(END); }
@@ -253,6 +281,10 @@ public class PUB {
 			if (lastSegmentToLoad==PUB.IMPORTS) return true;
 			readExportSegment(inStream);
 			if (lastSegmentToLoad==PUB.EXPORTS) return true;
+			tree = readTree(inStream);
+			if (lastSegmentToLoad==PUB.AST) return true;
+			readStrings(inStream);
+			setStrings(tree);
 		} catch (IOException e1) {
 			return false;
 		} finally {
@@ -312,10 +344,65 @@ public class PUB {
 	
 	
 	
+	private void readStrings(ObjectInputStream in) throws IOException {
+		int size = in.readInt();
+		stringArray = new String[size];
+		for(int i = 0; i < size; i++) {
+			stringArray[i] = in.readUTF();
+		}
+	}
+	
+	
+	
+	private JPNode readTree(ObjectInputStream in) throws IOException {
+		int nodeClass = in.readInt();
+		if (nodeClass == -1) return null;
+		JPNode node = NodeFactory.createByIndex(nodeClass);
+		node.setType(in.readInt());
+		int key;
+		int value;
+		for (	key=in.readInt(), value=in.readInt()
+			;	key != -1
+			;	key=in.readInt(), value=in.readInt()
+			) {
+			node.attrSet(key, value);
+		}
+		node.setFirstChild(readTree(in));
+		node.setParentInChildren();
+		node.setNextSibling(readTree(in));
+		return node;
+	}
+	
+	
+	
 	/** Read the version, return false if the PUB file is out of date, true otherwise. */
 	private boolean readVersion(ObjectInputStream in) throws IOException {
 		if (in.readInt() != LAYOUT_VERSION) return false;
 		return true;
+	}
+	
+	
+	
+	private void setStrings(JPNode node) {
+		if (node==null) return;
+		int index;
+		if ((index=node.attrGet(NODETEXT)) > 0) node.setText(stringArray[index]);
+		if ((index=node.attrGet(NODECOMMENTS)) > 0) node.setComments(stringArray[index]);
+		if ((index=node.attrGet(IConstants.PROPARSEDIRECTIVE)) > 0)
+			((ProparseDirectiveNode)node).setDirectiveText(stringArray[index]);
+		setStrings(node.firstChild());
+		setStrings(node.nextSibling());
+	}
+	
+	
+	
+	private int stringIndex(String s) {
+		Integer index = (Integer) stringTable.getKey(s);
+		if (index==null) {
+			index = new Integer(stringTable.size()); // index is 0 if this is the first entry...
+			stringTable.put(index, s);
+		}
+		return index.intValue();
 	}
 	
 	
@@ -374,6 +461,52 @@ public class PUB {
 	
 	
 	
+	private void writeTree(ObjectOutputStream out, JPNode node) throws IOException {
+		out.writeInt(node.getSubtypeIndex());
+		out.writeInt(node.getType());
+		if ( ! TokenTypes.isKeyword(node.getType()) ) {
+			out.writeInt(NODETEXT);
+			out.writeInt(stringIndex(node.getText()));
+		}
+		String comments = node.getComments();
+		if (comments != null) {
+			out.writeInt(NODECOMMENTS);
+			out.writeInt(stringIndex(comments));
+		}
+		if (node.attrGet(IConstants.STATEHEAD) == IConstants.TRUE) {
+			out.writeInt(IConstants.STATEHEAD);
+			out.writeInt(IConstants.TRUE);
+			out.writeInt(IConstants.STATE2);
+			out.writeInt(node.getState2());
+		}
+		int attrVal;
+		if ( (attrVal = node.attrGet(IConstants.STORETYPE)) > 0 ) {
+			out.writeInt(IConstants.STORETYPE);
+			out.writeInt(attrVal);
+		}
+		if (node instanceof ProparseDirectiveNode) {
+			out.writeInt(IConstants.PROPARSEDIRECTIVE);
+			out.writeInt(stringIndex(((ProparseDirectiveNode)node).getDirectiveText()));
+		}
+		if ( (attrVal = node.attrGet(IConstants.OPERATOR)) > 0 ) {
+			out.writeInt(IConstants.OPERATOR);
+			out.writeInt(attrVal);
+		}
+		if ( (attrVal = node.attrGet(IConstants.INLINE_VAR_DEF)) > 0 ) {
+			out.writeInt(IConstants.INLINE_VAR_DEF);
+			out.writeInt(attrVal);
+		}
+		out.writeInt(-1);
+		out.writeInt(-1); // Terminate the attribute key/value pairs.
+		JPNode next;
+		if ( (next = node.firstChild()) != null ) writeTree(out, next);
+		else out.writeInt(-1);
+		if ( (next = node.nextSibling()) != null ) writeTree(out, next);
+		else out.writeInt(-1);
+	}
+	
+	
+	
 	private void writeSchemaSegment(ObjectOutputStream out, List allSymbols) throws IOException {
 		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
 			Object obj = it.next();
@@ -410,6 +543,16 @@ public class PUB {
 		tableRef = new TableRef(name);
 		tableMap.put(lowerName, tableRef);
 		return tableRef;
+	}
+	
+	
+	
+	private void writeStrings(ObjectOutputStream out) throws IOException {
+		int size = stringTable.size();
+		out.writeInt(size);
+		for(int i = 0; i < size; i++) {
+			out.writeUTF((String) stringTable.get(new Integer(i)));
+		}
 	}
 
 

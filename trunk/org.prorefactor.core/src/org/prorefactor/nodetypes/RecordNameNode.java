@@ -17,6 +17,9 @@ import org.prorefactor.treeparser.TableBuffer;
 
 public class RecordNameNode extends JPNode {
 
+	/** For creating from persistent storage */
+	public RecordNameNode() { super(); }
+
 	public RecordNameNode(int handle) { super(handle); }
 	public RecordNameNode(int handle, TreeConfig config) { super(handle, config); }
 	public RecordNameNode(int file, int line, int column) { super(file, line, column); }
@@ -27,6 +30,9 @@ public class RecordNameNode extends JPNode {
 		return bufferScope;
 	}
 	
+	/** Every JPNode subtype has its own index. Used for persistent storage. */
+	public int getSubtypeIndex() { return 4; }
+
 	public TableBuffer getTableBuffer() {
 		TableBuffer buffer = (TableBuffer) getLink(JPNode.SYMBOL);
 		assert buffer != null;

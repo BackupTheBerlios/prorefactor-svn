@@ -15,6 +15,7 @@ package org.prorefactor.refactor.unittest;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.prorefactor.core.JPNode;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.unittest.UnitTestBase2;
 import org.prorefactor.refactor.PUB;
@@ -84,6 +85,17 @@ public class PUBTest extends UnitTestBase2 {
 		PUB.SymbolRef exp = exports[0];
 		assertTrue(exp.progressType == TokenTypes.FRAME);
 		assertTrue(exp.symbolName.equals("myFrame"));
+		
+		// Test that there are comments in front of the first real node
+		JPNode topNode = pub.getTree();
+		assertTrue(topNode.firstNaturalChild().getComments().length() > 2);
+		
+		// Test that the ID nodes have text.
+		JPNode [] idNodes = topNode.query(TokenTypes.ID);
+		for (int i = 0; i < idNodes.length; i++) {
+			JPNode node = idNodes[i];
+			assertTrue(node.getText().length() > 0);
+		}
 		
 	}
 

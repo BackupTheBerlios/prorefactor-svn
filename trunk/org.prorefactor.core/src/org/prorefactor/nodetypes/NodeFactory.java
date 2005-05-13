@@ -43,6 +43,8 @@ public final class NodeFactory {
 			return new FieldRefNode(handle);
 		case TokenTypes.RECORD_NAME:
 			return new RecordNameNode(handle);
+		case TokenTypes.PROPARSEDIRECTIVE:
+			return new ProparseDirectiveNode(handle);
 		case TokenTypes.DO:
 		case TokenTypes.FOR:
 		case TokenTypes.REPEAT:
@@ -71,6 +73,23 @@ public final class NodeFactory {
 			}
 		default:
 			return new JPNode(handle);
+		}
+	}
+	
+	public static JPNode createByIndex(int index) {
+		switch (index) {
+		case 1:
+			return new JPNode();
+		case 2:
+			return new BlockNode();
+		case 3:
+			return new FieldRefNode();
+		case 4:
+			return new RecordNameNode();
+		case 5:
+			return new ProparseDirectiveNode();
+		default:
+			throw new IllegalArgumentException();
 		}
 	}
 
