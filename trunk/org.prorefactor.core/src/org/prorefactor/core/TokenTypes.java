@@ -43,7 +43,7 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 		info.isNatural = true;
 		allTokens[1087] = info;
 
-		assignKeywordsText();
+		assignDefaultText();
 	}
 	
 	private static TokenInfo getInfo(int tokenType) {
@@ -57,9 +57,9 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 	/** For integer token types that represent a keyword in the
 	 * syntax, this returns the full keyword text/name.
 	 * @return null if invalid token type or is not a keyword according to Proparse.
-	 * @see #isKeyword(int)
+	 * @see #hasDefaultText(int)
 	 */
-	public static String getKeywordText(int tokenType) {
+	public static String getDefaultText(int tokenType) {
 		TokenInfo info = getInfo(tokenType);
 		if (info==null) return null;
 		return info.keywordText;
@@ -94,7 +94,7 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 	 * a keyword type, ID is not.
 	 * See Proparse's node attribute documentation for NODE_TYPE_KEYWORD.
 	 */
-	public static boolean isKeyword(int tokenType) {
+	public static boolean hasDefaultText(int tokenType) {
 		TokenInfo info = getInfo(tokenType);
 		if (info==null) return false;
 		return (info.keywordText != null);
@@ -106,7 +106,36 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 	}
 
 	
-	private static void assignKeywordsText() {
+	private static void assignDefaultText() {
+
+		// Operators and punctuation
+		allTokens[SLASH].keywordText = "/";
+		allTokens[LEXCOLON].keywordText = ":";
+		allTokens[OBJCOLON].keywordText = ":";
+		allTokens[LEXAT].keywordText = "@";
+		allTokens[LEFTBRACE].keywordText = "[";
+		allTokens[RIGHTBRACE].keywordText = "]";
+		allTokens[CARET].keywordText = "^";
+		allTokens[COMMA].keywordText = ",";
+		allTokens[EXCLAMATION].keywordText = "!";
+		allTokens[EQUAL].keywordText = "=";
+		allTokens[LEFTPAREN].keywordText = "(";
+		allTokens[RIGHTPAREN].keywordText = ")";
+		allTokens[SEMI].keywordText = ";";
+		allTokens[STAR].keywordText = "*";
+		allTokens[UNKNOWNVALUE].keywordText = "?";
+		allTokens[BACKTICK].keywordText = "`";
+		allTokens[NAMEDOT].keywordText = ".";
+		allTokens[PERIOD].keywordText = ".";
+		allTokens[GTOREQUAL].keywordText = ">=";
+		allTokens[RIGHTANGLE].keywordText = ">";
+		allTokens[GTORLT].keywordText = "<>";
+		allTokens[LTOREQUAL].keywordText = "<=";
+		allTokens[LEFTANGLE].keywordText = "<";
+		allTokens[PLUS].keywordText = "+";
+		allTokens[MINUS].keywordText = "-";
+
+		// Keywords
 		allTokens[AACBIT].keywordText = "_CBIT";
 		allTokens[AACONTROL].keywordText = "_CONTROL";
 		allTokens[AALIST].keywordText = "_LIST";

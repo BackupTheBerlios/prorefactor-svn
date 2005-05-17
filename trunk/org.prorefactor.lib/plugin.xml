@@ -49,6 +49,9 @@
       <library name="jakarta/commons-lang/commons-lang.jar">
          <export name="*"/>
       </library>
+      <library name="stringtemplate/stringtemplate.jar">
+         <export name="*"/>
+      </library>
    </runtime>
 
 </plugin>

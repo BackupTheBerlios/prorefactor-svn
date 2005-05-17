@@ -464,7 +464,7 @@ public class PUB {
 	private void writeTree(ObjectOutputStream out, JPNode node) throws IOException {
 		out.writeInt(node.getSubtypeIndex());
 		out.writeInt(node.getType());
-		if ( ! TokenTypes.isKeyword(node.getType()) ) {
+		if ( ! TokenTypes.hasDefaultText(node.getType()) ) {
 			out.writeInt(NODETEXT);
 			out.writeInt(stringIndex(node.getText()));
 		}

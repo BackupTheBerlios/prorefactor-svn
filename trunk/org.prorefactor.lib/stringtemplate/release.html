@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<body bgcolor=#FFFFFF text=#000000>
+<title>StringTemplate 2.1 Release Notes</title>
+</HEAD>
+<BODY>
+<H1>StringTemplate 2.1 Release Notes</H1>
+
+
+<P>Brought to you by that maniac that brings you
+<A HREF="http://www.antlr.org"><B> ANTLR</B></A>!
+
+<P>Terence Parr <BR>
+University of San Francisco <BR>
+<TT>parrt@cs.usfca.edu</TT> <BR>
+<em>Copyright 2003-2005</em> <BR>
+<A HREF="http://www.stringtemplate.org"><B>http://www.stringtemplate.org</B></A> <BR>
+(StringTemplate released under BSD License)
+
+<P>Version 2.1, January 22, 2005
+
+<P>2.1 is a bug fix and small feature enhancement release.  2.1 should be
+a drop-in replacement for those using <TT>StringTemplate</TT> for websites.
+Some newline handling differences exist, particularly for
+those using the group file format.  (If you are generating code not
+html, you will note some newlines are missing that used to be there;
+see the use of <TT>&lt;\n&gt;</TT> below).
+<H2>Enhancements</H2>
+
+<UL>
+<LI>Added 
+
+<FONT SIZE=2><PRE>
+/** Specify a StringTemplateWriter implementing class to use for
+ *  filtering output
+ */
+public void setStringTemplateWriter(Class c) {
+	userSpecifiedWriter = c;
+}
+</PRE></FONT>
+
+
+and made StringTemplate.toString() sensitive to it.
+</LI>
+<LI>added support for nonlocal file encodings; added property
+fileCharEncoding.  The template loading routines are now sensitive to
+this property. Defaults to the file.encoding system property.
+</LI>
+<LI>updated testing harness to be same as ANTLR 3.0's which is more
+sophisticated.
+</LI>
+<LI>addressed whitespace at begin/end of template .st file issue.
+Decided to let it continue to strip all front/back whitespace and then
+make you add it directly.  This is a simple rule and can be made to do
+what you want.  It is consistent with the strip newline before &gt;&gt;
+rule too.
+</LI>
+<LI>newlines ignored before &lt;else&gt; and &lt;endif&gt;.  Rule is: kill a single
+newline after &lt;if&gt;, &lt;&lt;, &lt;else&gt;, and &lt;endif&gt; (but for &lt;endif&gt; only if
+it's on a line by itself) . Kill newlines before &lt;else&gt; and &lt;endif&gt;
+and &gt;&gt;.  the newline immediately preceding &gt;&gt; in a template group file
+is tossed out just like the newline right after the &lt;&lt;
+</LI>
+<LI>added &lt;n&gt;, &lt;r&gt;, &lt;t&gt;, &lt; &gt; (space char)
+</LI>
+<LI>added $!...!$ and &lt;!...!&gt; comments (version 2.1b3)
+</LI>
+<LI>allow HashMap, Hashtable precisely but not Map in attribute.property lookup
+</LI>
+<LI>Attribute <TT>attributes$</TT> is a text string when lint mode is on that
+recursively dumps out types, properties, etc... (no values)
+</LI>
+<LI>Templates track their embedded instances; can ask for embedded
+</LI>
+<LI>added isXXX accessor properties so x.special invokes x.getSpecial
+then x.isSpecial if not successful.
+</LI>
+<LI>Empty output for a single attribute expression one a line by itself gets no newline (i.e., you don't get a blank line).
+</LI>
+
+</UL>
+<H2>Bug Fixes</H2>
+
+<UL>
+<LI>bug in st.attribute...if no attributes table, got null ptr exception
+</LI>
+<LI>fixed n refs in TestStringTemplate unit tests to be portable newline reference.
+</LI>
+<LI>STG.templateIsDefinedInThisGroup -&gt; isDefinedInThisGroup
+</LI>
+<LI>added isDefined(name) that checks whole hierarchy
+</LI>
+<LI>trap all antlr generated errors now and send to listener.
+</LI>
+<LI>Made null indirect template generate nothing; used to generate
+null-ptr exception.
+</LI>
+
+</UL>
+</BODY>
+</HTML>
