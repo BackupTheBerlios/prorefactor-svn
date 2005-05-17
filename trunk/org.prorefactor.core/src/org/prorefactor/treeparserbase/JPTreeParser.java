@@ -1,10 +1,9 @@
-// $ANTLR 2.7.4: "JPTreeParser.g" -> "JPTreeParser.java"$
+// $ANTLR 2.7.5 (20050128): "JPTreeParser.g" -> "JPTreeParser.java"$
 
 	package org.prorefactor.treeparserbase;
 
 	import org.prorefactor.core.IJPNode;
-import org.prorefactor.treeparser.IJPTreeParser;
-
+	import org.prorefactor.treeparser.IJPTreeParser;
 
 import antlr.TreeParser;
 import antlr.Token;

@@ -1,10 +1,9 @@
-// $ANTLR 2.7.4: "treeparser03.g" -> "TreeParser03.java"$
+// $ANTLR 2.7.5 (20050128): "treeparser03.g" -> "TreeParser03.java"$
 
 	package org.prorefactor.treeparser03;
 
 	import org.prorefactor.core.IJPNode;
-import org.prorefactor.treeparser.IJPTreeParser;
-
+	import org.prorefactor.treeparser.IJPTreeParser;
 
 public interface TreeParser03TokenTypes {
 	int EOF = 1;
@@ -1094,6 +1093,10 @@ public interface TreeParser03TokenTypes {
 	int SYMMETRICENCRYPTIONKEY = 1089;
 	int SYMMETRICSUPPORT = 1090;
 	int TRANSINITPROCEDURE = 1091;
+	int BIGINT = 1092;
+	int TIMESTAMP = 1093;
+	int FIXCHAR = 1094;
+	int Last_Token_Number = 1095;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 	int PARAM = 10878;
 }

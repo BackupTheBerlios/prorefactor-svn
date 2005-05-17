@@ -1177,43 +1177,43 @@ display bInvoice except totalAmount.</programlisting>
     </section>
 
     <section>
-      <title>Building Tree Parsers</title>
+      <title>Building the Tree Parsers</title>
+
+      <para>There are a few tree parsers which come within their own packages
+      in ProRefactor, each serving its own purpose. You can use any of these
+      as examples for your own tree parser, but a copy of the
+      <literal>treeparserbase</literal> package should normally be your
+      starting point. The <literal>treeparser01</literal> package gives plenty
+      of examples of how to add action code to the tree parser.</para>
+
+      <para>Antlr is a parser-generator which reads a <filename>.g</filename>
+      grammar file in order to generate the Java source code for the tree
+      parser.</para>
 
       <para>We use Ant to do the build, but Ant has to be able to find Antlr.
       Choose <guilabel>Window &gt; Preferences &gt; Ant &gt; Runtime &gt;
-      Classpath</guilabel>. Select <guilabel>Global Entries</guilabel>. Add
-      the <filename>bin</filename> directory of your antlr project if you are
-      working with the Subversion repository source, or add the
-      <filename>plugins/org.prorefactor.antlr/antlr.jar</filename> file
-      otherwise. Ignore the warning about <quote>tools.jar</quote>.</para>
+      Classpath</guilabel>. Select <guilabel>Global Entries</guilabel>. Click
+      <guibutton>Add Jars...</guibutton>, and select
+      <filename>org.prorefactor.antlr/antlr.jar</filename> file. Click
+      <guibutton>Add Variable...</guibutton> and enter <literal>
+      ${workspace_loc:/org.prorefactor.core/bin/}</literal>. This is required
+      because there is additional post-processing which must be done after
+      Antlr has generated the source for the tree parser. You can close this
+      Preferences window now.</para>
 
-      <para>There is additional post-processing which must be done after Antlr
-      has generated the source for the tree parser. Because of this, a little
-      bit of careful configuration of the launch configuration for
-      <filename>build.xml</filename> is required. If you look at the source
-      for <filename>build.xml</filename> (for example, look at the package
-      <literal>org.prorefactor.treeparserbase</literal>), you will see that
-      after Antlr is launched, a <classname>PostProcessor</classname> class is
-      called. The Java/Ant session must have that
-      <classname>PostProcessor</classname> in its class path.</para>
+      <para>In the package which contains the tree parser, select the
+      <filename>build.xml</filename> file. Right-click, and choose
+      <guimenuitem>Run &gt; Ant Build...</guimenuitem> to get the properties
+      dialog.</para>
 
-      <para>Select the <filename>build.xml</filename> file, right-click,
-      choose <guimenuitem>Run &gt; Ant Build...</guimenuitem> to get the
-      properties dialog.</para>
-
-      <para>In the <guilabel>Classpath</guilabel> tab, choose the
-      <guibutton>Add Folders...</guibutton> button, and add the
-      <filename>org.prorefactor.core/bin</filename> folder.</para>
+      <para>Choose the <guilabel>Refresh</guilabel> tab, and enable the
+      automatic refresh of the containing folder. Now when you choose
+      <guimenuitem>Run &gt; Ant Build</guimenuitem>, the refresh and
+      re-compile will be done automatically.</para>
 
       <para>Leave the JRE set to launch a separate JRE. Running from the same
       JRE as the workspace does not set up the class path correctly for our
       needs.</para>
-
-      <para>Also in the same properties dialog, choose the
-      <guilabel>Refresh</guilabel> tab, and enable the automatic refresh of
-      the containing folder. Now when you choose <guimenuitem>Run &gt; Ant
-      Build</guimenuitem>, the refresh and re-compile will be done
-      automatically.</para>
     </section>
 
     <section>
