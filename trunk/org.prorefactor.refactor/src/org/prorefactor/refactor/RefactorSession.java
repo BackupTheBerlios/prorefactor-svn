@@ -28,6 +28,7 @@ import com.joanju.ProparseLdr;
  */
 public class RefactorSession {
 
+	private long timeStamp;
 	private ApplicationSettings appSettings = null;
 	private String projectName = null;
 	private ProgressProjectSettings progressSettings = null;
@@ -163,7 +164,10 @@ public class RefactorSession {
 	public void loadProject(String projectName) throws Exception {
 		if (projectName==null || projectName.length()==0)
 			throw new Exception("No project selected");
-		if (this.projectName!=null && this.projectName.equals(projectName)) return;
+		if (	this.projectName!=null
+			&&	this.projectName.equals(projectName)
+			&&	schemaFileIsCurrent()
+			) return;
 		try {appSettings.loadSettings();} catch (FileNotFoundException e) {}
 		progressSettings = new ProgressProjectSettings(getProgressSettingsFilename(projectName));
 		try {progressSettings.loadSettings();} catch (FileNotFoundException e) {}
@@ -175,6 +179,7 @@ public class RefactorSession {
 		try {proparseSettings.loadSettings();} catch (FileNotFoundException e) {}
 		configureProparse();
 		this.projectName = projectName;
+		timeStamp = System.currentTimeMillis();
 	}
 
 
@@ -185,6 +190,13 @@ public class RefactorSession {
 	}
 
 
+	/** Check that the schema file has not been modified since load. */
+	private boolean schemaFileIsCurrent() {
+		assert (proparseSettings != null);
+		File schemaFile = new File(proparseSettings.schemaFile);
+		if (! schemaFile.exists()) return true; // scratch projects might have no schema
+		return (schemaFile.lastModified() < timeStamp);
+	}
 
 
 } // class

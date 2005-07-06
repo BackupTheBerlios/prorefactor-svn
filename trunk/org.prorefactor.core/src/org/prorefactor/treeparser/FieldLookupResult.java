@@ -20,5 +20,6 @@ public class FieldLookupResult {
 	public boolean isUnqualified = false;
 	public BufferScope bufferScope = null;
 	public Variable variable = null;
+	public FieldLevelWidget fieldLevelWidget = null;
 	public FieldBuffer field = null;
 }

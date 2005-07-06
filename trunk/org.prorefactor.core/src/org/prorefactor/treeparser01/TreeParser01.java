@@ -42770,16 +42770,16 @@ public TreeParser01() {
 	public final void triggerphrase(AST _t) throws RecognitionException {
 		
 		AST triggerphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
-		AST t = null;
+		AST on = null;
 		
 		AST __t2285 = _t;
-		t = _t==ASTNULL ? null :(AST)_t;
+		AST tmp3035_AST_in = (AST)_t;
 		match(_t,TRIGGERS);
 		_t = _t.getFirstChild();
 		block_colon(_t);
 		_t = _retTree;
 		AST __t2286 = _t;
-		AST tmp3035_AST_in = (AST)_t;
+		AST tmp3036_AST_in = (AST)_t;
 		match(_t,Code_block);
 		_t = _t.getFirstChild();
 		{
@@ -42788,9 +42788,12 @@ public TreeParser01() {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==ON)) {
 				AST __t2288 = _t;
-				AST tmp3036_AST_in = (AST)_t;
+				on = _t==ASTNULL ? null :(AST)_t;
 				match(_t,ON);
 				_t = _t.getFirstChild();
+				if ( inputState.guessing==0 ) {
+					action.scopeAdd(on);
+				}
 				eventlist(_t);
 				_t = _retTree;
 				{
@@ -43050,14 +43053,8 @@ public TreeParser01() {
 				case BLOCK_LABEL:
 				case COPYLOB:
 				{
-					if ( inputState.guessing==0 ) {
-						action.scopeAdd(t);
-					}
 					blockorstate(_t);
 					_t = _retTree;
-					if ( inputState.guessing==0 ) {
-						action.scopeClose(t);
-					}
 					break;
 				}
 				default:
@@ -43065,6 +43062,9 @@ public TreeParser01() {
 					throw new NoViableAltException(_t);
 				}
 				}
+				}
+				if ( inputState.guessing==0 ) {
+					action.scopeClose(on);
 				}
 				_t = __t2288;
 				_t = _t.getNextSibling();

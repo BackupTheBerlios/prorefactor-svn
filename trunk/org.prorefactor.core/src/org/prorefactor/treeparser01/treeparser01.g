@@ -3287,12 +3287,12 @@ transactionmodeautomaticstate
 	;
 
 triggerphrase
-	:	#(	t:TRIGGERS block_colon
+	:	#(	TRIGGERS block_colon
 			#(	Code_block
-				(	#(ON eventlist (ANYWHERE)?
-						(	PERSISTENT runstate
-						|	{action.scopeAdd(#t);} blockorstate {action.scopeClose(#t);}
-						) 
+				(	#(	on:ON {action.scopeAdd(#on);}
+						eventlist (ANYWHERE)?
+						(PERSISTENT runstate | blockorstate)
+						{action.scopeClose(#on);}
 					) 
 				)*
 			)

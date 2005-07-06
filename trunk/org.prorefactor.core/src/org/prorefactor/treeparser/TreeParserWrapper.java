@@ -129,8 +129,8 @@ public class TreeParserWrapper {
 	public static void run2(IJPTreeParser tp, JPNode theAST) throws PRCException {
 		try {
 			tp.program(theAST);
-		} catch (antlr.RecognitionException e) {
-			String s = new String(e.getMessage());
+		} catch (Throwable e) {
+			String s = e.getMessage();
 			JPNode leftOff = (JPNode) tp.get_retTree();
 			if (leftOff != null) {
 				int theNode = leftOff.getHandle();
@@ -154,8 +154,6 @@ public class TreeParserWrapper {
 				s += " -> No return node. Error on line one?";
 			}
 			throw new PRCException(s, e);
-		} catch (Throwable e) {
-			throw new PRCException(e.getMessage(), e);
 		}
 	} // run2
 

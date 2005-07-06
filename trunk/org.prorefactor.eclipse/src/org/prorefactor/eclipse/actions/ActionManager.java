@@ -127,7 +127,7 @@ public class ActionManager {
 	
 	protected void addFile(IFile theFile) {
 		String extension = theFile.getFileExtension();
-		if (extension!=null && (extension.equals("p") || extension.equals("w")))
+		if (extension!=null && (extension.equalsIgnoreCase("p") || extension.equalsIgnoreCase("w")))
 			fileList.add(theFile);
 	}
 

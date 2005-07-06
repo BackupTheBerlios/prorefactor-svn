@@ -49,7 +49,6 @@ public final class NodeFactory {
 		case TokenTypes.FOR:
 		case TokenTypes.REPEAT:
 		case TokenTypes.FUNCTION:
-		case TokenTypes.ON:
 		case TokenTypes.PROCEDURE:
 			// We check that these are statement heads, whether the keyword is reserved or not.
 			if (parser.attrGetI(handle, IConstants.STATEHEAD) != 0 )
@@ -61,15 +60,16 @@ public final class NodeFactory {
 			// CANFIND is reserved, and only used in the syntax for the CAN-FIND function.
 			// It is a "block" because it has special buffer/index-cursor handling.
 			return new BlockNode(handle);
-		case TokenTypes.TRIGGERS:
+		case TokenTypes.ON:
 			{
+				if (parser.attrGetI(handle, IConstants.STATEHEAD) != 0 )
+					return new BlockNode(handle);
 				int temp = parser.getHandle();
 				int childType = parser.nodeFirstChildI(handle, temp);
 				parser.releaseHandle(temp);
-				if (childType == TokenTypes.Code_block)
+				if (childType == TokenTypes.Event_list)
 					return new BlockNode(handle);
-				else
-					return new JPNode(handle);
+				return new JPNode(handle);
 			}
 		default:
 			return new JPNode(handle);

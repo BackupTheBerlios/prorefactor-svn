@@ -297,9 +297,11 @@ public class Block {
 		int lastDot = name.lastIndexOf('.');
 		// Variable or unqualified field
 		if (lastDot == -1) {
-			// Variables come first.
+			// Variables and FieldLevelWidgets come first.
 			result.variable = symbolScope.lookupVariable(name);
 			if (result.variable != null) return result;
+			result.fieldLevelWidget = symbolScope.lookupFieldLevelWidget(name);
+			if (result.fieldLevelWidget!=null) return result;
 			// Lookup unqualified field by buffers in nearest scopes.
 			result = lookupUnqualifiedField(name);
 			// Lookup unqualified field by any table.

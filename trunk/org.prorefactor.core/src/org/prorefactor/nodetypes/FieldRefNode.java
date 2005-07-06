@@ -15,6 +15,7 @@ import org.prorefactor.core.TokenTypes;
 import org.prorefactor.treeparser.BufferScope;
 import org.prorefactor.treeparser.DataType;
 import org.prorefactor.treeparser.FieldBuffer;
+import org.prorefactor.treeparser.FieldLevelWidget;
 import org.prorefactor.treeparser.Primative;
 import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.Variable;
@@ -66,6 +67,10 @@ public class FieldRefNode extends JPNode {
 	}
 	
 	public void setSymbol(FieldBuffer symbol) {
+		assert symbol!=null;
+		setLink(JPNode.SYMBOL, symbol);
+	}
+	public void setSymbol(FieldLevelWidget symbol) {
 		assert symbol!=null;
 		setLink(JPNode.SYMBOL, symbol);
 	}

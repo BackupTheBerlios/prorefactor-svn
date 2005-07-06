@@ -44,6 +44,7 @@ public class SymbolScope {
 	private Block rootBlock;
 	protected Map bufferMap = new HashMap();
 	protected Map callMap = new HashMap();
+	protected Map fieldLevelWidgetMap = new HashMap();
 	protected Map routineMap = new HashMap();
 	protected Map unnamedBuffers = new HashMap();
 	protected Map typeMap = new HashMap();
@@ -70,13 +71,15 @@ public class SymbolScope {
 	}
 
 
+	/** Add a FieldLevelWidget for names lookup. */
+	public void add(FieldLevelWidget widget) {
+	}
 	
 	/** Add a Routine for call handling. */
 	public void add(Routine routine){
 		routineMap.put(routine.getName().toLowerCase(), routine);
 	}
 
-	
 	/** Add a Variable for names lookup. */
 	public void add(Variable var) {
 		variableMap.put(var.getName().toLowerCase(), var);
@@ -84,13 +87,17 @@ public class SymbolScope {
 
 	/** Add a Symbol for names lookup. */
 	public void add(Symbol symbol) {
-		Integer type = new Integer(symbol.getProgressType());
-		Map map = (Map) typeMap.get(type);
-		if (map==null) {
-			map = new HashMap();
-			typeMap.put(type, map);
+		if (symbol instanceof FieldLevelWidget) {
+			fieldLevelWidgetMap.put(symbol.getName().toLowerCase(), symbol);
+		} else {
+			Integer type = new Integer(symbol.getProgressType());
+			Map map = (Map) typeMap.get(type);
+			if (map==null) {
+				map = new HashMap();
+				typeMap.put(type, map);
+			}
+			map.put(symbol.getName().toLowerCase(), symbol);
 		}
-		map.put(symbol.getName().toLowerCase(), symbol);
 	}
 
 
@@ -282,12 +289,20 @@ public class SymbolScope {
 	public Query lookupQuery(String name) { return (Query) lookupSymbol(QUERY, name); }
 	
 	public Stream lookupStream(String name) { return (Stream) lookupSymbol(STREAM, name); }
-
 	
 	private Object lookupSymbol(Integer symbolType, String name) {
 		Map map = (Map) typeMap.get(symbolType);
 		if (map==null) return null;
 		return map.get(name.toLowerCase());
+	}
+
+
+	
+	/** Lookup a FieldLevelWidget in this scope or an enclosing scope. */
+	public FieldLevelWidget lookupFieldLevelWidget(String inName) {
+		FieldLevelWidget wid = (FieldLevelWidget) fieldLevelWidgetMap.get(inName.toLowerCase());
+		if (wid==null && parentScope!=null) return parentScope.lookupFieldLevelWidget(inName);
+		return wid;
 	}
 
 

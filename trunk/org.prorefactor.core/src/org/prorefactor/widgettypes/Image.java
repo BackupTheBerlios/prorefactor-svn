@@ -10,11 +10,11 @@
 package org.prorefactor.widgettypes;
 
 import org.prorefactor.core.TokenTypes;
+import org.prorefactor.treeparser.FieldLevelWidget;
 import org.prorefactor.treeparser.SymbolScope;
-import org.prorefactor.treeparser.Widget;
 
 
-public class Image extends Widget {
+public class Image extends FieldLevelWidget {
 
 	public Image(String name, SymbolScope scope) { super(name, scope); }
 

@@ -18,6 +18,8 @@ package org.prorefactor.core;
 /**
  * Constants commonly used when working with Proparse.
  * See Proparse documentation, "Node Attributes Reference".
+ * Joanju uses 49000-49999 for scratch and otherwise non-persistent attributes.
+ * Attributes 50000+ are reserved for non-Joanju use.
  */
 public interface IConstants {
 
@@ -107,7 +109,8 @@ public interface IConstants {
 	public int TO_BE_CUT = 11010;
 
 	
-	// Joanju uses 49000+ for scratch and otherwise non-persistent attributes.
+	// Joanju uses 49000-49999 for scratch and otherwise non-persistent attributes.
+	// Attributes 50000+ are reserved for non-Joanju use.
 
 
 } // interface IConstants

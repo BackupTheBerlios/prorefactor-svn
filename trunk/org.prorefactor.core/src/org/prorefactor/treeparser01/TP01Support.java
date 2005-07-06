@@ -384,6 +384,12 @@ public class TP01Support extends TP01Action {
 			refNode.attrSet(IConstants.STORETYPE, IConstants.ST_VAR);
 			result.variable.noteReference(contextQualifier);
 		}
+		// FieldLevelWidget
+		if (result.fieldLevelWidget != null) {
+			refNode.setSymbol(result.fieldLevelWidget);
+			refNode.attrSet(IConstants.STORETYPE, IConstants.ST_VAR);
+			result.fieldLevelWidget.noteReference(contextQualifier);
+		}
 		// Buffer attributes
 		if (result.bufferScope != null) {
 			refNode.setBufferScope(result.bufferScope);
