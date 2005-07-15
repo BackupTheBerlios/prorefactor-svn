@@ -83,7 +83,7 @@
             name="ProRefactor Environment"
             class="org.prorefactor.eclipse.properties.ProgressSettings"
             nameFilter="*"
-            id="org.prorefactor.properties.proparseSettings">
+            id="org.prorefactor.properties.prorefactorEnvironment">
          <filter
                name="nature"
                value="org.prorefactor.eclipse.ProRefactorNature">
