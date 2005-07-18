@@ -13,8 +13,12 @@
 package org.prorefactor.treeparser01;
 
 
+import org.prorefactor.core.JPNode;
+import org.prorefactor.core.TokenTypes;
 import org.prorefactor.treeparser.Symbol;
+import org.prorefactor.treeparser.SymbolFactory;
 import org.prorefactor.treeparser.Variable;
+import org.prorefactor.widgettypes.Frame;
 
 import antlr.collections.AST;
 
@@ -132,6 +136,17 @@ public class TP01Action {
 	 * filenameorvalue: ... expression ... production
 	 */
 	public void fnvExpression(AST exp) {}
+
+	
+	/** A DEFINE FRAME statement is different than a frame ref. The DEFINE FRAME statement will
+	 * always add the frame to the scope (possibly "hiding" a frame symbol that is defined at
+	 * an outer scope).
+	 * A frame reference will call this function if the frame does not already exist.
+	 */
+	public void frameDef(AST defAST, AST idAST) {}
+	
+	
+	public void frameRef(AST idAST) {}
 
 		
 	/** Called by the tree parser if a FUNCTION statement is found to be any

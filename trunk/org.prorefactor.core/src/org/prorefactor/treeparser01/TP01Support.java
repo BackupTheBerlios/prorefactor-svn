@@ -42,6 +42,7 @@ import org.prorefactor.treeparser.SymbolScope;
 import org.prorefactor.treeparser.SymbolScopeRoot;
 import org.prorefactor.treeparser.TableBuffer;
 import org.prorefactor.treeparser.Variable;
+import org.prorefactor.widgettypes.Frame;
 
 import antlr.collections.AST;
 
@@ -407,7 +408,31 @@ public class TP01Support extends TP01Action {
 		return ((FieldRefNode)refAST).getDataType();
 	}
 
+	
+	/** A DEFINE FRAME statement is different than a frame ref. The DEFINE FRAME statement will
+	 * always add the frame to the scope (possibly "hiding" a frame symbol that is defined at
+	 * an outer scope).
+	 * A frame reference will call this function if the frame does not already exist.
+	 */
+	public void frameDef(AST defAST, AST idAST) {
+		JPNode defNode = (JPNode) defAST;
+		JPNode idNode = (JPNode) idAST;
+		Frame frame = (Frame) SymbolFactory.create(TokenTypes.FRAME, idNode.getText(), currentScope);
+		frame.setDefOrIdNode(defNode);
+		currSymbol = frame;
+		idNode.setLink(JPNode.SYMBOL, frame);
+		addToScope(frame);
+	}
+	
+	
+	public void frameRef(AST idAST) {
+		JPNode idNode = (JPNode) idAST;
+		Frame frame = (Frame) currentScope.lookupWidget(TokenTypes.FRAME, idNode.getText());
+		if (frame==null) frameDef(null, idAST);
+		else idNode.setLink(JPNode.SYMBOL, frame);
+	}
 
+	
 	/** If this function definition did not list any parameters, but it had a
 	 * function forward declaration, then we use the block and scope from that
 	 * declaration, in case it is where the parameters were listed.

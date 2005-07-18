@@ -543,12 +543,12 @@ widattr
 			(NORETURNVALUE)?
 			s_widget
 			(OBJCOLON . (array_subscript)? (method_param_list)? )+
-			(#(IN_KW (MENU|FRAME|BROWSE|SUBMENU|BUFFER) ID ))? (AS .)?
+			(#(IN_KW widname))? (AS .)?
 		)
 	;
 
 gwidget
-	:	#(Widget_ref s_widget (#(IN_KW (MENU|FRAME|BROWSE|SUBMENU|BUFFER) ID ))? )
+	:	#(Widget_ref s_widget (#(IN_KW widname))? )
 	;
 
 widgetlist
@@ -563,7 +563,7 @@ widname
 	:	systemhandlename
 	|	DATASET ID
 	|	DATASOURCE ID
-	|	FRAME ID
+	|	FRAME f:ID { action.frameRef(#f); }
 	|	MENU ID
 	|	SUBMENU ID
 	|	MENUITEM ID
@@ -585,15 +585,15 @@ tbl[int contextQualifier]
 // referenced table. fld2 indicates that this must be a field of the *previous*
 // referenced table.
 fld[int contextQualifier]
-	:	#(ref:Field_ref (INPUT)? (#(FRAME ID) | #(BROWSE ID))? id:ID (array_subscript)? )
+	:	#(ref:Field_ref (INPUT)? (frame_ref | #(BROWSE ID))? id:ID (array_subscript)? )
 		{action.field(#ref, #id, contextQualifier, 0);}
 	;
 fld1[int contextQualifier]
-	:	#(ref:Field_ref (INPUT)? (#(FRAME ID) | #(BROWSE ID))? id:ID (array_subscript)? )
+	:	#(ref:Field_ref (INPUT)? (frame_ref | #(BROWSE ID))? id:ID (array_subscript)? )
 		{action.field(#ref, #id, contextQualifier, 1);}
 	;
 fld2[int contextQualifier]
-	:	#(ref:Field_ref (INPUT)? (#(FRAME ID) | #(BROWSE ID))? id:ID (array_subscript)? )
+	:	#(ref:Field_ref (INPUT)? (frame_ref | #(BROWSE ID))? id:ID (array_subscript)? )
 		{action.field(#ref, #id, contextQualifier, 2);}
 	;
 
@@ -949,7 +949,7 @@ chrfunc
 	;
 
 clearstate
-	:	#(CLEAR (#(FRAME ID))? (ALL)? (NOPAUSE)? state_end )
+	:	#(CLEAR (frame_ref)? (ALL)? (NOPAUSE)? state_end )
 	;
 
 closequerystate
@@ -1456,13 +1456,12 @@ source_buffer_phrase
 
 defineframestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? FRAME
-			id:ID { push(action.defineSymbol(FRAME, #def, #id)); }
+			id:ID { action.frameDef(#def, #id); }
 			(form_item[CQ.SYMBOL])*
 			(	#(HEADER (display_item)+ )
 			|	#(BACKGROUND (display_item)+ )
 			)?
 			(#(EXCEPT (fld1[CQ.SYMBOL])*))?  (framephrase)?  state_end
-			{ action.addToScope(pop()); }
 		)
 	;
 
@@ -1932,6 +1931,10 @@ formatphrase
 		)
 	;
 
+frame_ref
+	:	#(FRAME f:ID) { action.frameRef(#f); }
+	;
+
 framephrase
 	:	#(	WITH
 			(	#(ACCUM (expression)? )
@@ -1945,7 +1948,7 @@ framephrase
 			|	FITLASTCOLUMN
 			|	#(FONT expression )
 			|	FONTBASEDLAYOUT
-			|	#(FRAME ID)
+			|	frame_ref
 			|	#(LABELFONT expression )
 			|	#(LABELDCOLOR expression )
 			|	#(LABELFGCOLOR expression )
