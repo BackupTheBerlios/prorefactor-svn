@@ -1,10 +1,10 @@
 <HTML>
 <HEAD>
 <body bgcolor=#FFFFFF text=#000000>
-<title>StringTemplate 2.1 Release Notes</title>
+<title>StringTemplate 2.2 Release Notes</title>
 </HEAD>
 <BODY>
-<H1>StringTemplate 2.1 Release Notes</H1>
+<H1>StringTemplate 2.2 Release Notes</H1>
 
 
 <P>Brought to you by that maniac that brings you
@@ -17,85 +17,200 @@ University of San Francisco <BR>
 <A HREF="http://www.stringtemplate.org"><B>http://www.stringtemplate.org</B></A> <BR>
 (StringTemplate released under BSD License)
 
-<P>Version 2.1, January 22, 2005
+<P>Version 2.2, July ??, 2005
 
-<P>2.1 is a bug fix and small feature enhancement release.  2.1 should be
-a drop-in replacement for those using <TT>StringTemplate</TT> for websites.
-Some newline handling differences exist, particularly for
-those using the group file format.  (If you are generating code not
-html, you will note some newlines are missing that used to be there;
-see the use of <TT>&lt;\n&gt;</TT> below).
+<P>2.2 fixes a few bugs, but mainly 2.2 adds lots of great new features.
+2.The features were added in response to my needs building ANTLR v3's
+2.code generator and from feedback by StringTemplate users.
+
+<P>2.2 should be a drop-in replacement for those using <TT>StringTemplate</TT>
+for websites and code generation with a few minor potential
+incompatibilities.
 <H2>Enhancements</H2>
 
 <UL>
-<LI>Added 
+<LI>You can define arguments for anonymous templates now, which is much
+nicer that using <TT>it</TT> all the time:
 
 <FONT SIZE=2><PRE>
-/** Specify a StringTemplateWriter implementing class to use for
- *  filtering output
- */
-public void setStringTemplateWriter(Class c) {
-	userSpecifiedWriter = c;
-}
+$names:{n| &lt;b&gt;$n$&lt;/b&gt;&lt;br&gt;}; separator=","$
 </PRE></FONT>
 
 
-and made StringTemplate.toString() sensitive to it.
 </LI>
-<LI>added support for nonlocal file encodings; added property
-fileCharEncoding.  The template loading routines are now sensitive to
-this property. Defaults to the file.encoding system property.
+<LI>added parallel attribute iteration where you can apply a template to
+multiple lists of values; works for anonymous templates only:
+
+<FONT SIZE=2><PRE>
+{$names,phones:{n,p | $n$: $p$}$}
+</PRE></FONT>
+
+
+An error is generated if you have too many args for the number of
+parallel lists.  Iteration proceeds while at least one of the
+attributes (<TT>names</TT> or <TT>phones</TT>, in this case) has values.
 </LI>
-<LI>updated testing harness to be same as ANTLR 3.0's which is more
-sophisticated.
+<LI>added '<TT>+</TT>' cat operator for multi-valued attributes, yielding
+single, longer multi-valued attribute.  <TT>$mine+yours$</TT> is a new list
+with both elements; all of <TT>mine</TT> first then all of <TT>yours</TT>.
 </LI>
-<LI>addressed whitespace at begin/end of template .st file issue.
-Decided to let it continue to strip all front/back whitespace and then
-make you add it directly.  This is a simple rule and can be made to do
-what you want.  It is consistent with the strip newline before &gt;&gt;
-rule too.
+<LI>any template invocation assumes sole formal argument name if just
+one formal argument defined in target template.  For example, if you
+do <TT>$bold(name)$</TT> and <TT>bold</TT> has one formal argument, then it gets the
+value of name.  This works also for template application:
+
+<FONT SIZE=2><PRE>
+test(names) ::= "&lt;names:bold(),italics()&gt;"
+bold(x) ::= "*&lt;x&gt;*"
+italics(y) ::= "_&lt;y&gt;_"
+</PRE></FONT>
+
+
+<B>Note</B>: The binding of a value to the name of a sole formal argument is
+done dynamically so that indirect template invocation and lazy
+evaluation stuff works properly.  For example <TT>(templateName)(value)</TT>
+should work for different templates with differently-named (but sole)
+formal arguments.  See unit test
+testInvokeIndirectTemplateWithSingleFormalArgs().
 </LI>
-<LI>newlines ignored before &lt;else&gt; and &lt;endif&gt;.  Rule is: kill a single
-newline after &lt;if&gt;, &lt;&lt;, &lt;else&gt;, and &lt;endif&gt; (but for &lt;endif&gt; only if
-it's on a line by itself) . Kill newlines before &lt;else&gt; and &lt;endif&gt;
-and &gt;&gt;.  the newline immediately preceding &gt;&gt; in a template group file
-is tossed out just like the newline right after the &lt;&lt;
+<LI>Added operators to get first, rest, last attribute elements; e.g.,
+<TT>first(users)</TT> yields the first value of <TT>users</TT>.  <TT>rest(users)</TT>
+returns all elements of <TT>users</TT> except the first; it returns nothing
+if <TT>users</TT> is single-valued.  This introduces a function-like syntax,
+which necessitated the "<em>assign to sole formal arg</em>" functionality
+above that supports things like <TT>bold(name)</TT>.  You can combine
+operations to say things like <TT>first(rest(names))</TT> to get second
+element.  Can say <TT>first(mine+yours)</TT> to get the first of a combine
+list.  These operators work on any iterable object.  [<em>backward
+incompatible if you used first,last,tail as an attribute or template
+name</em>]
 </LI>
-<LI>added &lt;n&gt;, &lt;r&gt;, &lt;t&gt;, &lt; &gt; (space char)
+<LI>Added maps to StringTemplate groups.  For example,
+
+<FONT SIZE=2><PRE>
+typeInitMap ::= ["int"="0", "float"="0.0", default="null"]
+</PRE></FONT>
+
+
+then within a template you can refer to them <TT>&lt;typeInitMap.int&gt;</TT>,
+which returns "0".  Those strings are actually templates, but I can't
+really think of a use for that just yet. ;) If your type name is an
+attribute not a constant like int, then use
+<TT>&lt;typeInitMap.(typeName)&gt;</TT>.  The maps are defined in the group's scope
+and are visible if no attribute hides them.  For example, if you
+define a formal argument called <TT>typeInitMap</TT> in template <TT>foo</TT> then
+<TT>foo</TT> cannot see the map defined in the group (though you could pass
+it in, which would be the point).  If a name is not an attribute and
+it's not in the group's maps table, then the super group is consulted
+etc...  You may not redefine a map and it may not have the same name
+as a template in that group.  The <TT>default</TT> value is used if you use a
+key as a property that doesn't exist.  For example <TT>&lt;typeInitMap.foo&gt;</TT>
+returns "<TT>null</TT>".
 </LI>
-<LI>added $!...!$ and &lt;!...!&gt; comments (version 2.1b3)
+<LI>Added renderers per template and group.  Templates are inherited
+from super group.  New Interface <TT>AttributeRenderer</TT> defines how an
+object is rendered to String.  Here is a renderer that display <TT>Date</TT>
+objects that renders <TT>Calendar</TT> date objects tersely.
+
+<FONT SIZE=2><PRE>
+public class DateRenderer implements AttributeRenderer {
+	public String toString(Object o) {
+		SimpleDateFormat f = new SimpleDateFormat("yyyy.MM.dd");
+		return f.format(((Calendar)o).getTime());
+	}
+}
+...
+StringTemplate st =new StringTemplate(
+		"date: &lt;created&gt;",
+		AngleBracketTemplateLexer.class);
+st.setAttribute("created", new GregorianCalendar(2005, 07-1, 05));
+st.registerRenderer(GregorianCalendar.class, new DateRenderer());
+String expecting = "date: 2005.07.05";
+</PRE></FONT>
+
+
+You can set the renderer for a class either at the group level or the
+individual template level.  Thanks to Anton Keks for his suggestion and sample
+implementation.
 </LI>
-<LI>allow HashMap, Hashtable precisely but not Map in attribute.property lookup
+<LI>literal arguments are now templates not just strings. :)
+  You can even use <TT>&lt;&lt;...&gt;&gt;</TT> literals as argument now.
+  From the bug list:
+
+<FONT SIZE=2><PRE>
+Template inclusion expressions won't accept a nested template
+as an argument.  I'd like to be able to write &lt;foo(bar={...})&gt;, which
+would mean the same thing as &lt;foo(bar="":{...})&gt;.
+</PRE></FONT>
+
+
+Now you can do <TT>&lt;foo(bar="&lt;firstName&gt; &lt;lastName&gt;")&gt;</TT>.
 </LI>
-<LI>Attribute <TT>attributes$</TT> is a text string when lint mode is on that
-recursively dumps out types, properties, etc... (no values)
+<LI>added default values for formal arguments like
+
+<FONT SIZE=2><PRE>
+bold(x="empty") ::= ...
+</PRE></FONT>
+
+
+Note: because of lazy evaluation semantics, default value templates may refer
+to argument values.  Everything is evaluated after arg values are set.
+This works for invoked templates and templates you create with code.
 </LI>
-<LI>Templates track their embedded instances; can ask for embedded
+<LI>when calling another template, y, with formal arguments from within
+a template, x, none of the
+  x parameters are visible to y because the formal parameters force you to
+  define values.  This prevents surprises and makes it easy to ensure a
+  a value is empty unless you specifically set it for that template.  The
+  problem is that you need to factor templates sometimes and want to refine
+  behavior with a subclass or just invoke another shared template but
+  <TT>&lt;y()&gt;</TT> erases all of x's parameters.  Now, use <TT>&lt;y(...)&gt;</TT> as a
+  syntax to indicate y should inherit all values.  <TT>&lt;y(name="foo", ...)&gt;</TT>
+  would set one arg, but the others are inherited whereas 
+  <TT>&lt;y(name="foo")&gt;</TT> only has <TT>name</TT> set; others are empty. You can set
+manually with
+  <TT>StringTemplate.setPassThroughAttributes()</TT>.
 </LI>
-<LI>added isXXX accessor properties so x.special invokes x.getSpecial
-then x.isSpecial if not successful.
+<LI>When a property or argument is not found, you get a better error.  I show the
+template context (nested tree of templates); e.g.,
+
+<FONT SIZE=2><PRE>
+no such attribute: decisionNumber in template context
+ [outputFile lexer cyclicDFA cyclicDFAState cyclicDFAEdge lookaheadTest]
+</PRE></FONT>
+
+
 </LI>
-<LI>Empty output for a single attribute expression one a line by itself gets no newline (i.e., you don't get a blank line).
+<LI>added ability to use indirect property names.  <TT>$user.(propName)$</TT>
+evaluates <TT>(propName)</TT> to find the name of the property and then looks
+it up in user object whereas <TT>$user.foo$</TT> looks for literally property
+<TT>foo</TT> in <TT>user</TT> object.
 </LI>
 
 </UL>
 <H2>Bug Fixes</H2>
 
 <UL>
-<LI>bug in st.attribute...if no attributes table, got null ptr exception
+<LI>When you invoke foo(x=y), x must be an attribute of foo (well if you
+have formal args defined that is) and y is evaluated within the
+context of the surrounding template; more precisely, it's evaluated in
+the context of the actual template invocation (which can have
+predefined attributes like <TT>attr</TT>, <TT>it</TT>, and <TT>i</TT>).  It's weird, but
+<TT>foo(x=x)</TT> also makes sense.  See new unit test
+<TT>testArgEvaluationContext()</TT>.  This was not working before, though I
+thought it was!
 </LI>
-<LI>fixed n refs in TestStringTemplate unit tests to be portable newline reference.
+<LI>Collections, Maps, and Iterators that are non-null but have no elements
+  return false in conditionals; e.g., $if(users)$ is false if users is
+  an empty list.
 </LI>
-<LI>STG.templateIsDefinedInThisGroup -&gt; isDefinedInThisGroup
+<LI>To define an empty template, you had to write &lt;&lt;&gt;&gt;; "" didn't work.
 </LI>
-<LI>added isDefined(name) that checks whole hierarchy
-</LI>
-<LI>trap all antlr generated errors now and send to listener.
-</LI>
-<LI>Made null indirect template generate nothing; used to generate
-null-ptr exception.
+<LI>Previous release (2.1) notes forgot to mention that I added field access
+to public object fields now instead of via just accessors.
 </LI>
 
 </UL>
-</BODY>
+
+<P></BODY>
 </HTML>
