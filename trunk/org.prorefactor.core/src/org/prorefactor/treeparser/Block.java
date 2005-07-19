@@ -253,6 +253,10 @@ public class Block {
 
 
 
+	public SymbolScope getSymbolScope() { return symbolScope; }
+
+
+
 	/** Is a buffer scoped to this or any parent of this block. */
 	public boolean isBufferLocal(BufferScope buff) {
 		for (Block block = this; block.parent!=null; block = block.parent) {

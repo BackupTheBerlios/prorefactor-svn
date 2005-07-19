@@ -18,11 +18,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.prorefactor.core.IConstants;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Schema;
 import org.prorefactor.core.schema.Table;
+import org.prorefactor.widgettypes.Frame;
 
 
 
@@ -73,6 +75,7 @@ public class SymbolScope {
 
 	/** Add a FieldLevelWidget for names lookup. */
 	public void add(FieldLevelWidget widget) {
+		fieldLevelWidgetMap.put(widget.getName().toLowerCase(), widget);
 	}
 	
 	/** Add a Routine for call handling. */
@@ -87,17 +90,13 @@ public class SymbolScope {
 
 	/** Add a Symbol for names lookup. */
 	public void add(Symbol symbol) {
-		if (symbol instanceof FieldLevelWidget) {
-			fieldLevelWidgetMap.put(symbol.getName().toLowerCase(), symbol);
-		} else {
-			Integer type = new Integer(symbol.getProgressType());
-			Map map = (Map) typeMap.get(type);
-			if (map==null) {
-				map = new HashMap();
-				typeMap.put(type, map);
-			}
-			map.put(symbol.getName().toLowerCase(), symbol);
+		Integer type = new Integer(symbol.getProgressType());
+		Map map = (Map) typeMap.get(type);
+		if (map==null) {
+			map = new HashMap();
+			typeMap.put(type, map);
 		}
+		map.put(symbol.getName().toLowerCase(), symbol);
 	}
 
 
@@ -157,6 +156,18 @@ public class SymbolScope {
 	
 	
 	
+	/** Get a list of this scope's symbols which match a given class */
+	public <T extends Symbol> ArrayList<T> getAllSymbols(Class<T> klass) {
+		ArrayList<T> ret = new ArrayList<T>();
+		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
+			Object element = it.next();
+			if (klass.isInstance(element)) ret.add((T)element);
+		}
+		return ret;
+	}
+	
+	
+	
 	/** Get a list of this scope's symbols, and all symbols of all descendant scopes. */
 	public ArrayList getAllSymbolsDeep() {
 		ArrayList ret = new ArrayList(allSymbols);
@@ -206,8 +217,7 @@ public class SymbolScope {
 		return ret;
 	}
 
-	
-	
+
 	public SymbolScope getParentScope() { return parentScope; }
 
 
