@@ -456,7 +456,7 @@ parameterlist_noroot
 	;
 parameter
 	:	#(BUFFER tbl[CQ.INIT])
-	|	#(PARAM expression EQUAL expression )
+	|	#(PARAMETER expression EQUAL expression )
 	|	#(OUTPUT parameter_arg )
 	|	#(INPUTOUTPUT parameter_arg )
 	|	#(INPUT parameter_arg )

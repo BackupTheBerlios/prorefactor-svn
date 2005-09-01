@@ -73,6 +73,7 @@ public class SymbolScope {
 	}
 
 
+	
 	/** Add a FieldLevelWidget for names lookup. */
 	public void add(FieldLevelWidget widget) {
 		fieldLevelWidgetMap.put(widget.getName().toLowerCase(), widget);
@@ -90,17 +91,25 @@ public class SymbolScope {
 
 	/** Add a Symbol for names lookup. */
 	public void add(Symbol symbol) {
-		Integer type = new Integer(symbol.getProgressType());
-		Map map = (Map) typeMap.get(type);
-		if (map==null) {
-			map = new HashMap();
-			typeMap.put(type, map);
+		if (symbol instanceof FieldLevelWidget) {
+			add((FieldLevelWidget)symbol);
+		} else if(symbol instanceof Variable) {
+			add((Variable)symbol);
+		} else if(symbol instanceof Routine) {
+			add((Routine)symbol);
+		} else {
+			Integer type = new Integer(symbol.getProgressType());
+			Map map = (Map) typeMap.get(type);
+			if (map==null) {
+				map = new HashMap();
+				typeMap.put(type, map);
+			}
+			map.put(symbol.getName().toLowerCase(), symbol);
 		}
-		map.put(symbol.getName().toLowerCase(), symbol);
 	}
 
 
-
+	
 	/** Add a new scope to this scope. */
 	public SymbolScope addScope() {
 		SymbolScope newScope = new SymbolScope(this);

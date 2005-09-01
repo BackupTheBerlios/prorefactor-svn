@@ -1101,5 +1101,4 @@ public interface TreeParser01TokenTypes {
 	int FIXCHAR = 1094;
 	int Last_Token_Number = 1095;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
-	int PARAM = 10878;
 }

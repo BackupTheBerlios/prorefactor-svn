@@ -417,7 +417,7 @@ functioncall
 
 parameter
 	:	#(BUFFER (record_name | ID FOR record_name ) )
-	|	#(PARAM expression EQUAL expression )
+	|	#(PARAMETER expression EQUAL expression )
 	|	#(OUTPUT {tpSupport.updating(true);} parameter_arg {tpSupport.updating(false);} )
 	|	#(INPUTOUTPUT {tpSupport.updating(true);} parameter_arg {tpSupport.updating(false);} )
 	|	#(INPUT parameter_arg )
