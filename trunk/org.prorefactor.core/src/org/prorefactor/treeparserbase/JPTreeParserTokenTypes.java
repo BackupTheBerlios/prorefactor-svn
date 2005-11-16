@@ -1096,6 +1096,7 @@ public interface JPTreeParserTokenTypes {
 	int BIGINT = 1092;
 	int TIMESTAMP = 1093;
 	int FIXCHAR = 1094;
-	int Last_Token_Number = 1095;
+	int DOT_COMMENT = 1095;
+	int Last_Token_Number = 1096;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 }

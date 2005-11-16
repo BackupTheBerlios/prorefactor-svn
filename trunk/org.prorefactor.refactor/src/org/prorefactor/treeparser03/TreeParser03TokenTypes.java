@@ -1,4 +1,4 @@
-// $ANTLR 2.7.5 (20050128): "treeparser03.g" -> "TreeParser03.java"$
+// $ANTLR 2.7.5 (20050128): "expandedtreeparser03.g" -> "TreeParser03.java"$
 
 	package org.prorefactor.treeparser03;
 
@@ -1096,6 +1096,7 @@ public interface TreeParser03TokenTypes {
 	int BIGINT = 1092;
 	int TIMESTAMP = 1093;
 	int FIXCHAR = 1094;
-	int Last_Token_Number = 1095;
+	int DOT_COMMENT = 1095;
+	int Last_Token_Number = 1096;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 }

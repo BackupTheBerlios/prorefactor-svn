@@ -1,4 +1,4 @@
-// $ANTLR 2.7.5 (20050128): "treeparser01.g" -> "TreeParser01.java"$
+// $ANTLR 2.7.5 (20050128): "expandedtreeparser01.g" -> "TreeParser01.java"$
 
 	package org.prorefactor.treeparser01;
 
@@ -1099,6 +1099,7 @@ public interface TreeParser01TokenTypes {
 	int BIGINT = 1092;
 	int TIMESTAMP = 1093;
 	int FIXCHAR = 1094;
-	int Last_Token_Number = 1095;
+	int DOT_COMMENT = 1095;
+	int Last_Token_Number = 1096;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 }

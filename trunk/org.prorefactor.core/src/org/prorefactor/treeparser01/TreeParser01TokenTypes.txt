@@ -1,4 +1,4 @@
-// $ANTLR 2.7.5 (20050128): treeparser01.g -> TreeParser01TokenTypes.txt$
+// $ANTLR 2.7.5 (20050128): expandedtreeparser01.g -> TreeParser01TokenTypes.txt$
 TreeParser01    // output token vocab name
 LEXDATE=4
 NAMEDOT=5
@@ -1088,5 +1088,6 @@ TRANSINITPROCEDURE=1091
 BIGINT=1092
 TIMESTAMP=1093
 FIXCHAR=1094
-Last_Token_Number=1095
+DOT_COMMENT=1095
+Last_Token_Number=1096
 SYMMETRICENCRYPTIONALGORITHM=10877
