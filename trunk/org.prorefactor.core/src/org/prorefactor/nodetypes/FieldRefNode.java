@@ -26,7 +26,6 @@ public class FieldRefNode extends JPNode {
 	/** For creating from persistent storage */
 	public FieldRefNode() { super(); }
 
-	public FieldRefNode(int handle) { super(handle); }
 	public FieldRefNode(int handle, TreeConfig config) { super(handle, config); }
 	public FieldRefNode(int file, int line, int column) { super(file, line, column); }
 

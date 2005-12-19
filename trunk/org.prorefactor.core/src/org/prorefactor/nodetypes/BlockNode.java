@@ -19,7 +19,6 @@ public class BlockNode extends JPNode {
 	/** For creating from persistent storage */
 	public BlockNode() { super(); }
 
-	public BlockNode(int handle) { super(handle); }
 	public BlockNode(int handle, TreeConfig config) { super(handle, config); }
 	public BlockNode(int file, int line, int column) { super(file, line, column); }
 

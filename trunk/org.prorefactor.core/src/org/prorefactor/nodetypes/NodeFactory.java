@@ -40,11 +40,11 @@ public final class NodeFactory {
 	public static JPNode create(int handle) {
 		switch (parser.getNodeTypeI(handle)) {
 		case TokenTypes.Field_ref:
-			return new FieldRefNode(handle);
+			return new FieldRefNode(handle, JPNode.nullConfig);
 		case TokenTypes.RECORD_NAME:
-			return new RecordNameNode(handle);
+			return new RecordNameNode(handle, JPNode.nullConfig);
 		case TokenTypes.PROPARSEDIRECTIVE:
-			return new ProparseDirectiveNode(handle);
+			return new ProparseDirectiveNode(handle, JPNode.nullConfig);
 		case TokenTypes.DO:
 		case TokenTypes.FOR:
 		case TokenTypes.REPEAT:
@@ -52,27 +52,27 @@ public final class NodeFactory {
 		case TokenTypes.PROCEDURE:
 			// We check that these are statement heads, whether the keyword is reserved or not.
 			if (parser.attrGetI(handle, IConstants.STATEHEAD) != 0 )
-				return new BlockNode(handle);
+				return new BlockNode(handle, JPNode.nullConfig);
 			else
-				return new JPNode(handle);
+				return new JPNode(handle, JPNode.nullConfig);
 		case TokenTypes.Program_root:
 		case TokenTypes.CANFIND:
 			// CANFIND is reserved, and only used in the syntax for the CAN-FIND function.
 			// It is a "block" because it has special buffer/index-cursor handling.
-			return new BlockNode(handle);
+			return new BlockNode(handle, JPNode.nullConfig);
 		case TokenTypes.ON:
 			{
 				if (parser.attrGetI(handle, IConstants.STATEHEAD) != 0 )
-					return new BlockNode(handle);
+					return new BlockNode(handle, JPNode.nullConfig);
 				int temp = parser.getHandle();
 				int childType = parser.nodeFirstChildI(handle, temp);
 				parser.releaseHandle(temp);
 				if (childType == TokenTypes.Event_list)
-					return new BlockNode(handle);
-				return new JPNode(handle);
+					return new BlockNode(handle, JPNode.nullConfig);
+				return new JPNode(handle, JPNode.nullConfig);
 			}
 		default:
-			return new JPNode(handle);
+			return new JPNode(handle, JPNode.nullConfig);
 		}
 	}
 	

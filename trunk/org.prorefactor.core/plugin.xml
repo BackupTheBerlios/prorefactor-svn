@@ -10,7 +10,6 @@
    <runtime>
       <library name="core.jar">
          <export name="*"/>
-         <packages prefixes="org.prorefactor,com.joanju"/>
       </library>
    </runtime>
 

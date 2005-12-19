@@ -20,7 +20,6 @@ public class RecordNameNode extends JPNode {
 	/** For creating from persistent storage */
 	public RecordNameNode() { super(); }
 
-	public RecordNameNode(int handle) { super(handle); }
 	public RecordNameNode(int handle, TreeConfig config) { super(handle, config); }
 	public RecordNameNode(int file, int line, int column) { super(file, line, column); }
 

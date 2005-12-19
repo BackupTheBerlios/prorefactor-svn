@@ -36,10 +36,26 @@ public class JPNode extends BaseAST implements IJPNode {
 
 	/** For creating from persistent storage */
 	public JPNode() { }
+	
+	public static final TreeConfig nullConfig = null;
 
-	public JPNode(int handle) {
-		nodeHandle = handle;
-		setType(parser.getNodeTypeI(nodeHandle));
+	
+	/** Create an node with a given token type.
+	 * Used extensively by Antlr auto-generated tree constructors.
+	 */
+	public JPNode(int type) {
+		this.type = type;
+	}
+
+	/** If this AST is constructed from another, then create with link to the original. */
+	public JPNode(int type, JPNode original) {
+		this.type = type;
+		setLink(ORIGINAL, original);
+	}
+	
+	public JPNode(int type, String text) {
+		this.type = type;
+		this.text = text;
 	}
 
 	public JPNode(int handle, TreeConfig config) {
@@ -54,7 +70,7 @@ public class JPNode extends BaseAST implements IJPNode {
 		this.line = line;
 		this.column = column;
 	}
-
+	
 	/** Just an Integer object for the int IConstants.STATE2 */
 	public static final Integer STATE2 = new Integer(IConstants.STATE2);
 
@@ -82,6 +98,10 @@ public class JPNode extends BaseAST implements IJPNode {
 	public static final Integer BLOCK = new Integer(-214);
 	/** A valid value for setLink() and getLink() */
 	private static final Integer COMMENTS = new Integer(-215);
+	/** A valid value for setLink() and getLink().
+	 * If this AST was constructed from another, then this is the link to the original.
+	 */
+	private static final Integer ORIGINAL = new Integer(-216);
 
 	
 	static private ProparseLdr parser = ProparseLdr.getInstance();
@@ -363,6 +383,12 @@ public class JPNode extends BaseAST implements IJPNode {
 		return attrMap.get(key);
 	}
 
+
+	/** If this AST was constructed from another, then get the original. */
+	public JPNode getOriginal() {
+		if (attrMap==null) return null;
+		return (JPNode)attrMap.get(ORIGINAL);
+	}
 
 
 	/** Return int[3] of nodes file/line/col. */

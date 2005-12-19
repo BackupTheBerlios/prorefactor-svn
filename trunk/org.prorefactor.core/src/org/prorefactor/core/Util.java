@@ -24,6 +24,8 @@ import java.util.*;
  */
 public class Util {
 
+	/** OS specific text file line seperator - '\n' on unix, "\r\n" on Windows */
+	public static final String LINESEP = System.getProperty("line.separator");
 
 
 	/** Copy all files from one directory to another.

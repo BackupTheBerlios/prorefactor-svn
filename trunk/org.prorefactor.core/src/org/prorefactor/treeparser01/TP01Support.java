@@ -337,6 +337,13 @@ public class TP01Support extends TP01Action {
 		FieldRefNode refNode = (FieldRefNode) refAST;
 		String name = idNode.getText();
 		FieldLookupResult result = null;
+		
+		// TODO Add support for frame fields.
+		// Searching the frames for an existing INPUT field is very different than
+		// the usual field/variable lookup rules. Support for frame fields has not
+		// yet been added to ProRefactor. Rather than get an INPUT field wrong here,
+		// we skip it entirely.
+		if (refNode.firstChild().getType()==TokenTypes.INPUT) return;
 
 		refNode.attrSet(IConstants.CONTEXT_QUALIFIER, contextQualifier);
 

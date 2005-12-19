@@ -1,4 +1,11 @@
 /* TokenLister.java
+ * John Green
+ * 
+ * Copyright (c) 2002-2005 Joanju (www.joanju.com)
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 
 package org.prorefactor.core;
@@ -9,6 +16,10 @@ import java.io.*;
 import com.joanju.ProparseLdr;
 
 
+/** Lists nodes directly via Proparse's API.
+ * Prints nodes one per line, using indentation to show the tree structure.
+ * Use JPNodeLister instead if you want to print a modified JPNode AST.
+ */
 public class TokenLister {
 
 	public TokenLister(int topNode, String outfilename_) {

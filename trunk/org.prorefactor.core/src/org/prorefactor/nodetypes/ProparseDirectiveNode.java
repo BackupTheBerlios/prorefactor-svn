@@ -20,7 +20,6 @@ public class ProparseDirectiveNode extends JPNode {
 	/** For creating from persistent storage */
 	public ProparseDirectiveNode() { super(); }
 
-	public ProparseDirectiveNode(int handle) { super(handle); }
 	public ProparseDirectiveNode(int handle, TreeConfig config) { super(handle, config); }
 	public ProparseDirectiveNode(int file, int line, int column) { super(file, line, column); }
 	

@@ -5,12 +5,11 @@
    name="ProRefactor Refactorings"
    version="1.2.4"
    provider-name="ProRefactor.org"
-   class="">
+   >
 
    <runtime>
       <library name="refactor.jar">
          <export name="*"/>
-         <packages prefixes="org.prorefactor"/>
       </library>
    </runtime>
 
