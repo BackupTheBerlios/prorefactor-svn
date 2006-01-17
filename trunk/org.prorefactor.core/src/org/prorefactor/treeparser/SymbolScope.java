@@ -301,15 +301,15 @@ public class SymbolScope {
 	
 	
 	
-	public Dataset lookupDataset(String name) { return (Dataset) lookupSymbol(DATASET, name); }
+	public Dataset lookupDataset(String name) { return (Dataset) lookupSymbolLocally(DATASET, name); }
 	
-	public Datasource lookupDatasource(String name) { return (Datasource) lookupSymbol(DATASOURCE, name); }
+	public Datasource lookupDatasource(String name) { return (Datasource) lookupSymbolLocally(DATASOURCE, name); }
 	
-	public Query lookupQuery(String name) { return (Query) lookupSymbol(QUERY, name); }
+	public Query lookupQuery(String name) { return (Query) lookupSymbolLocally(QUERY, name); }
 	
-	public Stream lookupStream(String name) { return (Stream) lookupSymbol(STREAM, name); }
+	public Stream lookupStream(String name) { return (Stream) lookupSymbolLocally(STREAM, name); }
 	
-	private Object lookupSymbol(Integer symbolType, String name) {
+	private Object lookupSymbolLocally(Integer symbolType, String name) {
 		Map map = (Map) typeMap.get(symbolType);
 		if (map==null) return null;
 		return map.get(name.toLowerCase());
@@ -364,9 +364,11 @@ public class SymbolScope {
 
 
 
-	/** Lookup a Widget based on TokenType (FRAME, BUTTON, etc) and the name. */
+	/** Lookup a Widget based on TokenType (FRAME, BUTTON, etc) and the name in this scope or enclosing scope. */
 	public Widget lookupWidget(int widgetType, String name) {
-		return (Widget) lookupSymbol(new Integer(widgetType), name);
+		Widget ret = (Widget) lookupSymbolLocally(new Integer(widgetType), name);
+		if (ret==null && parentScope!=null) return parentScope.lookupWidget(widgetType, name);
+		return ret;
 	}
 
 
