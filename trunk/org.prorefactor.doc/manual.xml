@@ -7,7 +7,7 @@
 
     <date>2006</date>
 
-    <pubdate>January 2006, ProRefactor version 1.2.4</pubdate>
+    <pubdate>February 2006, ProRefactor version 1.3.0</pubdate>
 
     <author>
       <firstname>John</firstname>
@@ -1564,12 +1564,15 @@ END.
 
     <variablelist>
       <varlistentry>
-        <term>Version 1.2.4</term>
+        <term>Version 1.3.0</term>
 
         <listitem>
           <itemizedlist>
             <listitem>
-              <para>No feature enhancements - just internal changes.</para>
+              <para>IMPORTANT: Added data-type to the schemadump programs. You
+              must re-dump your schema before using this version of
+              ProRefactor. Added data type attribute to fields and variables
+              in the symbol table.</para>
             </listitem>
 
             <listitem>
@@ -1584,13 +1587,6 @@ END.
             </listitem>
 
             <listitem>
-              <para>Added data-type to the schemadump programs. You must
-              re-dump your schema before using this version of ProRefactor.
-              Added data type attribute to fields and variables in the symbol
-              table.</para>
-            </listitem>
-
-            <listitem>
               <para>Some classes and class members have been deprecated, and
               will be removed soon. Please see the javadoc.</para>
             </listitem>
@@ -1602,9 +1598,22 @@ END.
             </listitem>
 
             <listitem>
-              <para>Field and variable names referenced by the INPUT function
-              are no longer refactored. This is a (hopefully temporary)
-              workaround for a recently found bug.</para>
+              <para>Added support for frame scopes and the lookup of field
+              frames. This was a large task, requiring a lot of changes and
+              additions. With this, was able to fix a bug where the fields
+              referenced by the INPUT function were not being looked up
+              properly. They should have been looked up through the stack of
+              fields in frames, rather than through the usual field/variable
+              lookup methods. Thanks Bruce Craigie for the INPUT function bug
+              report.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixed bug in tree parser. The "storetype" was not being
+              set for field nodes. As a result, the "table and field names"
+              refactoring was missing some changes, depending on which
+              refactoring options were set. Thanks Bruce Craigie for this bug
+              report.</para>
             </listitem>
           </itemizedlist>
         </listitem>

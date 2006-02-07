@@ -119,8 +119,8 @@ public class NamesLint implements ILint {
 		}
 
 		// Are we applying changes to work/temp tables?
-		if (	! settings.workTempTables
-			&&	node.attrGet(IConstants.STORETYPE) != IConstants.ST_DBTABLE
+		if (	(! settings.workTempTables)
+			&&	(node.attrGet(IConstants.STORETYPE) != IConstants.ST_DBTABLE)
 			) return;
 
 		currTarget.abbreviated = needsAbbrevFix(node);

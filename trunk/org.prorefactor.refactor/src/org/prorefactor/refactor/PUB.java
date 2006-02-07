@@ -60,7 +60,7 @@ public class PUB {
 		pubFile = new File(refpack.getProRefactorProjectDir() + "/pubs/" + relPath + ".pub");
 	}
 	
-	public static final int LAYOUT_VERSION = 3;
+	public static final int LAYOUT_VERSION = 4;
 
 	/** loadTo(PUBFILE_TIMESTAMP) - just check if the binary exists and
 	 * check that it is newer than the compile unit file. Does not read anything

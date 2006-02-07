@@ -435,6 +435,7 @@ public class TP01Support extends TP01Action {
 		// Table field
 		if (result.field != null) {
 			refNode.setSymbol(result.field);
+			refNode.attrSet(IConstants.STORETYPE, result.field.getField().getTable().getStoretype());
 			result.field.noteReference(contextQualifier);
 		}
 
