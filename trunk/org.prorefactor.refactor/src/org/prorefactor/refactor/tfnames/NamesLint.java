@@ -109,12 +109,6 @@ public class NamesLint implements ILint {
 
 
 	private void lintFieldRef(FieldRefNode node) {
-		// TODO Add support for frame fields.
-		// ProRefactor does not yet support frame fields or the INPUT function.
-		// We skip any frame field referenced with the INPUT function, because
-		// TreeParser01 does not (yet) fill in any information for it. (Dec.2005)
-		if (node.firstChild().getType()==TokenTypes.INPUT) return;
-
 		int handle = node.getHandle();
 		Symbol symbol =  node.getSymbol();
 		FieldBuffer fieldBuff = null;

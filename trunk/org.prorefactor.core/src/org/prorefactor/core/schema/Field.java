@@ -87,10 +87,8 @@ public class Field implements Primative {
 	
 
 	/** Comparator for sorting by name. */
-	static final Comparator NAME_ORDER = new Comparator() {
-		public int compare(Object o1, Object o2) {
-			Field f1 = (Field) o1;
-			Field f2 = (Field) o2;
+	static final Comparator<Field> NAME_ORDER = new Comparator<Field>() {
+		public int compare(Field f1, Field f2) {
 			return f1.name.compareToIgnoreCase(f2.name);
 		}
 	};

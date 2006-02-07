@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
-   id="org.prorefactor.eclipse"
-   name="ProRefactor Eclipse plug-in"
-   version="1.2.3"
-   provider-name="ProRefactor.org"
-   class="org.prorefactor.eclipse.Plugin">
-
-   <runtime>
-      <library name="eclipse.jar">
-         <export name="*"/>
-         <packages prefixes="org.prorefactor"/>
-      </library>
-   </runtime>
-
-   <requires>
-      <import plugin="org.eclipse.jface.text" export="true"/>
-      <import plugin="org.eclipse.ui.workbench.texteditor" export="true"/>
-      <import plugin="org.eclipse.ui.editors" export="true"/>
-      <import plugin="org.eclipse.core.resources" export="true"/>
-      <import plugin="org.eclipse.ui" export="true"/>
-      <import plugin="org.prorefactor.refactor" export="true"/>
-      <import plugin="org.prorefactor.core" export="true"/>
-      <import plugin="org.eclipse.search" export="true"/>
-      <import plugin="org.eclipse.compare" export="true"/>
-      <import plugin="org.eclipse.ui.ide" export="true"/>
-      <import plugin="org.eclipse.ui.console" export="true"/>
-      <import plugin="org.eclipse.core.runtime" export="true"/>
-   </requires>
+<plugin>
 
    <extension
          point="org.eclipse.ui.preferencePages">
@@ -220,11 +193,18 @@
                id="org.prorefactor.actions.writexml">
          </action>
          <action
+               label="Write .&amp;tokens file"
+               class="org.prorefactor.eclipse.actions.TokenListerAction"
+               tooltip="Write Proparse node structure"
+               menubarPath="org.prorefactor.MainMenu/prorefactor.toolDevel/separator1"
+               id="org.prorefactor.actions.writetokens">
+         </action>
+         <action
                label="Write .&amp;listing file"
                class="org.prorefactor.eclipse.actions.ListingAction"
                tooltip="Write Proparse preprocess listing file"
                menubarPath="org.prorefactor.MainMenu/prorefactor.toolDevel/separator1"
-               id="org.prorefactor.actions.writexml">
+               id="org.prorefactor.actions.writelisting">
          </action>
          <action
                label="&amp;Scan Lister"
@@ -397,6 +377,13 @@
                tooltip="Write XML"
                menubarPath="org.prorefactor.popup.NavMenu/navpopup.toolDevel/separator1"
                id="org.prorefactor.popup.NavMenu.writexml">
+         </action>
+         <action
+               label="Write .&amp;tokens file"
+               class="org.prorefactor.eclipse.actions.TokenListerAction"
+               tooltip="Write Proparse node structure"
+               menubarPath="org.prorefactor.popup.NavMenu/navpopup.toolDevel/separator1"
+               id="org.prorefactor.actions.writetokens">
          </action>
          <action
                label="Write .&amp;listing file"

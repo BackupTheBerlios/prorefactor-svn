@@ -5,9 +5,9 @@
   <bookinfo>
     <title>ProRefactor</title>
 
-    <date>2005</date>
+    <date>2006</date>
 
-    <pubdate>April 2005, ProRefactor version 1.2.4</pubdate>
+    <pubdate>January 2006, ProRefactor version 1.2.4</pubdate>
 
     <author>
       <firstname>John</firstname>
@@ -16,7 +16,7 @@
     </author>
 
     <copyright>
-      <year>2004-2005</year>
+      <year>2004-2006</year>
 
       <holder>Joanju and other ProRefactor.org Contributors</holder>
     </copyright>
@@ -1599,6 +1599,12 @@ END.
               <para>Subclassed JPNode. This allows JPNav to go away, and
               allows us to add better functions for getting Symbols and such,
               rather than working directly with the JPNode "links".</para>
+            </listitem>
+
+            <listitem>
+              <para>Field and variable names referenced by the INPUT function
+              are no longer refactored. This is a (hopefully temporary)
+              workaround for a recently found bug.</para>
             </listitem>
           </itemizedlist>
         </listitem>

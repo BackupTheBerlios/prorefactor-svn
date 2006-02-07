@@ -749,15 +749,6 @@ systemhandlename
 	|	SOURCEPROCEDURE | TARGETPROCEDURE | TEXTCURSOR | THISPROCEDURE | WEBCONTEXT
 	;
 
-widgettype
-	:	BROWSE | BUFFER | BUTTON | COMBOBOX | CONTROLFRAME | DIALOGBOX
-	|	EDITOR | FIELD | FILLIN | FRAME | IMAGE | MENU
-	| 	MENUITEM | QUERY | RADIOSET | RECTANGLE | SELECTIONLIST 
-	|	SLIDER | SOCKET | SUBMENU | TEMPTABLE | TEXT | TOGGLEBOX | WINDOW
-	|	XDOCUMENT | XNODEREF
-	;
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                   begin PROGRESS syntax features, in alphabetical order

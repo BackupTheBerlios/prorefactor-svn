@@ -4,7 +4,7 @@
  * 20-Nov-2002
  * www.joanju.com
  * 
- * Copyright (c) 2002, 2004 Joanju Limited.
+ * Copyright (c) 2002,2004,2006 Joanju Software (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -49,7 +49,7 @@ public class Table {
 	private int storetype = IConstants.ST_DBTABLE;
 	String name; // package access
 	private Database database;
-	private TreeSet fieldSet = new TreeSet(Field.NAME_ORDER);
+	private TreeSet<Field> fieldSet = new TreeSet<Field>(Field.NAME_ORDER);
 
 	/** This is a convenience class for working with a string table name, where
 	 * there may or may not be a database qualifier in the name.
@@ -84,10 +84,8 @@ public class Table {
 	
 
 	/** Comparator for sorting by name. */
-	public static final Comparator NAME_ORDER = new Comparator() {
-		public int compare(Object o1, Object o2) {
-			Table t1 = (Table) o1;
-			Table t2 = (Table) o2;
+	public static final Comparator<Table> NAME_ORDER = new Comparator<Table>() {
+		public int compare(Table t1, Table t2) {
 			return t1.name.compareToIgnoreCase(t2.name);
 		}
 	};
@@ -102,7 +100,7 @@ public class Table {
 
 
 	public Database getDatabase() { return database; }
-	public TreeSet getFieldSet() { return fieldSet; }
+	public TreeSet<Field> getFieldSet() { return fieldSet; }
 	public String getName() { return name; }
 	public int getStoretype() { return storetype; }
 
@@ -113,13 +111,13 @@ public class Table {
 	 * We do not test for uniqueness. We leave that job to the compiler.
 	 * This function expects an unqualified field name (no name dots).
 	 */
-	public Field lookupField(String name) {
-		java.util.SortedSet fieldTailSet = fieldSet.tailSet(new Field(name));
+	public Field lookupField(String lookupName) {
+		java.util.SortedSet<Field> fieldTailSet = fieldSet.tailSet(new Field(lookupName));
 		if (fieldTailSet.size() == 0)
 			return null;
-		Field field = (Field)(fieldTailSet.first());
+		Field field = (fieldTailSet.first());
 		if (	field == null
-			||	! field.getName().toLowerCase().startsWith(name.toLowerCase())
+			||	! field.getName().toLowerCase().startsWith(lookupName.toLowerCase())
 			)
 			return null;
 		return field;

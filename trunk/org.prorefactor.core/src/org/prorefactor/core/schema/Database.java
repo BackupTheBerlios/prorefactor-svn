@@ -4,7 +4,7 @@
  * 20-Nov-2002
  * www.joanju.com
  * 
- * Copyright (c) 2002, 2004 Joanju Limited.
+ * Copyright (c) 2002, 2004, 2006 Joanju Software (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,7 +29,7 @@ public class Database {
 	}
 
 	private String name;
-	private TreeSet tableSet = new TreeSet(Table.NAME_ORDER);
+	private TreeSet<Table> tableSet = new TreeSet<Table>(Table.NAME_ORDER);
 	
 	/** Comparator for sorting by name. */
 	public static final Comparator NAME_ORDER = new Comparator() {
@@ -46,7 +46,7 @@ public class Database {
 
 	public String getName() { return name; }
 
-	public TreeSet getTableSet() { return tableSet; }
+	public TreeSet<Table> getTableSet() { return tableSet; }
 
 	public void setName(String name) { this.name = name; }
 

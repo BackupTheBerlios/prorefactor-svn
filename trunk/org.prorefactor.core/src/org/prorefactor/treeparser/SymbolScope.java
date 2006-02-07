@@ -2,7 +2,7 @@
  * @author John Green
  * 6-Nov-2002
  * 
- * Copyright (c) 2002-2005 Joanju (www.joanju.com)
+ * Copyright (c) 2002-2006 Joanju (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,13 +18,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.prorefactor.core.IConstants;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Schema;
 import org.prorefactor.core.schema.Table;
-import org.prorefactor.widgettypes.Frame;
+import org.prorefactor.widgettypes.FieldLevelWidgetI;
 
 
 
@@ -41,17 +40,20 @@ public class SymbolScope {
 
 	private static Schema schema = Schema.getInstance();
 
-	private ArrayList allSymbols = new ArrayList();
-	private ArrayList childScopes = new ArrayList();
+	private ArrayList<Symbol> allSymbols = new ArrayList<Symbol>();
+	private ArrayList<SymbolScope> childScopes = new ArrayList<SymbolScope>();
 	private Block rootBlock;
-	protected Map bufferMap = new HashMap();
-	protected Map callMap = new HashMap();
-	protected Map fieldLevelWidgetMap = new HashMap();
-	protected Map routineMap = new HashMap();
-	protected Map unnamedBuffers = new HashMap();
-	protected Map typeMap = new HashMap();
-	protected Map variableMap = new HashMap();
+	protected Map<String, TableBuffer> bufferMap = new HashMap<String, TableBuffer>();
+	protected Map<String, Call> callMap = new HashMap<String, Call>();
+	protected Map<String, FieldLevelWidgetI> fieldLevelWidgetMap = new HashMap<String, FieldLevelWidgetI>();
+	protected Map<String, Routine> routineMap = new HashMap<String, Routine>();
+	protected Map<Table, TableBuffer> unnamedBuffers = new HashMap<Table, TableBuffer>();
+	protected Map<Integer, Map> typeMap = new HashMap<Integer, Map>();
+	protected Map<String, Variable> variableMap = new HashMap<String, Variable>();
+
+	/** The parentScope is null if this is the program root scope. */
 	private SymbolScope parentScope;
+
 	protected SymbolScopeRoot rootScope;
 	
 	private static final Integer DATASET = new Integer(TokenTypes.DATASET);
@@ -75,7 +77,7 @@ public class SymbolScope {
 
 	
 	/** Add a FieldLevelWidget for names lookup. */
-	public void add(FieldLevelWidget widget) {
+	public void add(FieldLevelWidgetI widget) {
 		fieldLevelWidgetMap.put(widget.getName().toLowerCase(), widget);
 	}
 	
@@ -91,17 +93,17 @@ public class SymbolScope {
 
 	/** Add a Symbol for names lookup. */
 	public void add(Symbol symbol) {
-		if (symbol instanceof FieldLevelWidget) {
-			add((FieldLevelWidget)symbol);
+		if (symbol instanceof FieldLevelWidgetI) {
+			add((FieldLevelWidgetI)symbol);
 		} else if(symbol instanceof Variable) {
 			add((Variable)symbol);
 		} else if(symbol instanceof Routine) {
 			add((Routine)symbol);
 		} else {
 			Integer type = new Integer(symbol.getProgressType());
-			Map map = (Map) typeMap.get(type);
+			Map<String, Symbol> map = typeMap.get(type);
 			if (map==null) {
-				map = new HashMap();
+				map = new HashMap<String, Symbol>();
 				typeMap.put(type, map);
 			}
 			map.put(symbol.getName().toLowerCase(), symbol);
@@ -161,16 +163,15 @@ public class SymbolScope {
 	
 	
 	/** Get a *copy* of the list of all symbols in this scope */
-	public ArrayList getAllSymbols() { return new ArrayList(allSymbols); }
+	public ArrayList<Symbol> getAllSymbols() { return new ArrayList<Symbol>(allSymbols); }
 	
 	
 	
 	/** Get a list of this scope's symbols which match a given class */
 	public <T extends Symbol> ArrayList<T> getAllSymbols(Class<T> klass) {
 		ArrayList<T> ret = new ArrayList<T>();
-		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
-			Object element = it.next();
-			if (klass.isInstance(element)) ret.add((T)element);
+		for (Symbol s : allSymbols) {
+			if (klass.isInstance(s)) ret.add((T)s);
 		}
 		return ret;
 	}
@@ -178,11 +179,10 @@ public class SymbolScope {
 	
 	
 	/** Get a list of this scope's symbols, and all symbols of all descendant scopes. */
-	public ArrayList getAllSymbolsDeep() {
-		ArrayList ret = new ArrayList(allSymbols);
-		for (Iterator it = childScopes.iterator(); it.hasNext();) {
-			SymbolScope child = (SymbolScope) it.next();
-			ret.add(child.getAllSymbolsDeep());
+	public ArrayList<Symbol> getAllSymbolsDeep() {
+		ArrayList<Symbol> ret = new ArrayList<Symbol>(allSymbols);
+		for (SymbolScope child : childScopes) {
+			ret.addAll(child.getAllSymbolsDeep());
 		}
 		return ret;
 	}
@@ -209,17 +209,16 @@ public class SymbolScope {
 	
 	
 	/** Get a *copy* of the list of child scopes */
-	public ArrayList getChildScopes() {
-		return new ArrayList(childScopes);
+	public ArrayList<SymbolScope> getChildScopes() {
+		return new ArrayList<SymbolScope>(childScopes);
 	}
 	
 	
 	
 	/** Get a list of all child scopes, and their child scopes, etc */
-	public ArrayList getChildScopesDeep() {
-		ArrayList ret = new ArrayList();
-		for (Iterator it = childScopes.iterator(); it.hasNext();) {
-			SymbolScope child = (SymbolScope) it.next();
+	public ArrayList<SymbolScope> getChildScopesDeep() {
+		ArrayList<SymbolScope> ret = new ArrayList<SymbolScope>();
+		for (SymbolScope child : childScopes) {
 			ret.add(child);
 			ret.addAll(child.getChildScopesDeep());
 		}
@@ -245,7 +244,7 @@ public class SymbolScope {
 		// the root scope.
 		SymbolScope nextScope = this;
 		while (nextScope!=null) {
-			TableBuffer buffer = (TableBuffer) nextScope.unnamedBuffers.get(table);
+			TableBuffer buffer = nextScope.unnamedBuffers.get(table);
 			if (buffer!=null) return buffer;
 			nextScope = nextScope.parentScope;
 		}
@@ -265,6 +264,21 @@ public class SymbolScope {
 	public boolean hasRoutine(String name){
 		return routineMap.containsKey(name.toLowerCase());
 	}
+	
+	
+	
+	/** Is this scope active in the input scope?
+	 * In other words, is this scope the input scope,
+	 * or any of the parents of the input scope?
+	 */
+	public boolean isActiveIn(SymbolScope theScope) {
+		while (theScope!=null) {
+			if (this == theScope) return true;
+			theScope = theScope.parentScope;
+		}
+		return false;
+	}
+
 	
 	
 	/**
@@ -287,7 +301,7 @@ public class SymbolScope {
 			dbPart = parts[0];
 			bufferPart = parts[1];
 		}
-		TableBuffer symbol = (TableBuffer) bufferMap.get(bufferPart.toLowerCase());
+		TableBuffer symbol = bufferMap.get(bufferPart.toLowerCase());
 		if (	symbol==null
 			||	(	dbPart.length()!=0
 				&& ! dbPart.equalsIgnoreCase(symbol.getTable().getDatabase().getName())
@@ -309,17 +323,17 @@ public class SymbolScope {
 	
 	public Stream lookupStream(String name) { return (Stream) lookupSymbolLocally(STREAM, name); }
 	
-	private Object lookupSymbolLocally(Integer symbolType, String name) {
-		Map map = (Map) typeMap.get(symbolType);
+	public Symbol lookupSymbolLocally(Integer symbolType, String name) {
+		Map map = typeMap.get(symbolType);
 		if (map==null) return null;
-		return map.get(name.toLowerCase());
+		return (Symbol) map.get(name.toLowerCase());
 	}
 
 
 	
 	/** Lookup a FieldLevelWidget in this scope or an enclosing scope. */
-	public FieldLevelWidget lookupFieldLevelWidget(String inName) {
-		FieldLevelWidget wid = (FieldLevelWidget) fieldLevelWidgetMap.get(inName.toLowerCase());
+	public FieldLevelWidgetI lookupFieldLevelWidget(String inName) {
+		FieldLevelWidgetI wid = fieldLevelWidgetMap.get(inName.toLowerCase());
 		if (wid==null && parentScope!=null) return parentScope.lookupFieldLevelWidget(inName);
 		return wid;
 	}
@@ -343,7 +357,7 @@ public class SymbolScope {
 
 
 	public TableBuffer lookupTempTable(String name) {
-		TableBuffer buff = (TableBuffer) bufferMap.get(name.toLowerCase());
+		TableBuffer buff = bufferMap.get(name.toLowerCase());
 		if (buff != null) return buff;
 		if (parentScope==null) return null;
 		return parentScope.lookupTempTable(name);
@@ -357,7 +371,7 @@ public class SymbolScope {
 	 * @return A Variable, or null if not found.
 	 */
 	public Variable lookupVariable(String inName) {
-		Variable var = (Variable) variableMap.get(inName.toLowerCase());
+		Variable var = variableMap.get(inName.toLowerCase());
 		if (var==null && parentScope!=null) return parentScope.lookupVariable(inName);
 		return var;
 	}
@@ -389,7 +403,7 @@ public class SymbolScope {
 	 * this SymbolScope. Caution: changes to the Collection
 	 * will affect the internal list in the SymbolScope.
 	 */
-	public Collection getCallList() {
+	public Collection<Call> getCallList() {
 		// TODO - change signature to Map to allow key search.
 		return callMap.values();
 	}
@@ -400,7 +414,7 @@ public class SymbolScope {
 	 * @return
 	 */
 	public Routine lookupRoutine(String name) {
-		Routine routine = (Routine) routineMap.get(name.toLowerCase());
+		Routine routine = routineMap.get(name.toLowerCase());
 		return routine;
 	}
 

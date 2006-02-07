@@ -10,11 +10,11 @@
 package org.prorefactor.widgettypes;
 
 import org.prorefactor.core.TokenTypes;
-import org.prorefactor.treeparser.FieldLevelWidget;
+import org.prorefactor.treeparser.FieldContainer;
 import org.prorefactor.treeparser.SymbolScope;
 
 
-public class Browse extends FieldLevelWidget {
+public class Browse extends FieldContainer implements FieldLevelWidgetI {
 
 	public Browse(String name, SymbolScope scope) { super(name, scope); }
 

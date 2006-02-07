@@ -41,7 +41,7 @@ public class TableBuffer extends Symbol {
 	}
 
 	private boolean isDefault = false;
-	private HashMap fieldBuffers = new HashMap();
+	private HashMap<Field, FieldBuffer> fieldBuffers = new HashMap<Field, FieldBuffer>();
 	private Table table = Schema.nullTable;
 
 	
@@ -79,7 +79,7 @@ public class TableBuffer extends Symbol {
 	/** Get or create a FieldBuffer for a Field. */
 	public FieldBuffer getFieldBuffer(Field field) {
 		assert field.getTable() == this.table;
-		FieldBuffer ret = (FieldBuffer) fieldBuffers.get(field);
+		FieldBuffer ret = fieldBuffers.get(field);
 		if (ret!=null) return ret;
 		ret = new FieldBuffer(this.getScope(), this, field);
 		fieldBuffers.put(field, ret);

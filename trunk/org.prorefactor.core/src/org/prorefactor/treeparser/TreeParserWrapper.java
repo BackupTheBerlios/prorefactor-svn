@@ -109,7 +109,7 @@ public class TreeParserWrapper {
 						done = true;
 				}
 			} else {
-				s += " -> No return node. Error on line one?";
+				s += unknownError(theAST);
 			}
 			return s;
 		} catch (Throwable e) {
@@ -151,12 +151,19 @@ public class TreeParserWrapper {
 						done = true;
 				}
 			} else {
-				s += " -> No return node. Error on line one?";
+				s += unknownError(theAST);
 			}
 			throw new PRCException(s, e);
 		}
 	} // run2
 
+	
+	private static String unknownError(JPNode theAST) {
+		
+		JPNode firstNatural = theAST.firstNaturalChild();
+		return " -> No return node. Error on line one? "
+			+ (firstNatural==null ? "" : firstNatural.getFilename());
+	}
 
 
 

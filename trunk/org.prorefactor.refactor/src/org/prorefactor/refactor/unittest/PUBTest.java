@@ -91,9 +91,7 @@ public class PUBTest extends UnitTestBase2 {
 		assertTrue(topNode.firstNaturalChild().getComments().length() > 2);
 		
 		// Test that the ID nodes have text.
-		JPNode [] idNodes = topNode.query(TokenTypes.ID);
-		for (int i = 0; i < idNodes.length; i++) {
-			JPNode node = idNodes[i];
+		for (JPNode node : topNode.query(TokenTypes.ID)) {
 			assertTrue(node.getText().length() > 0);
 		}
 		

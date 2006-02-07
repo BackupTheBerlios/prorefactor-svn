@@ -15,6 +15,7 @@ package org.prorefactor.treeparser;
 
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Field;
+import org.prorefactor.core.schema.Schema;
 
 
 
@@ -37,7 +38,32 @@ public class FieldBuffer extends Symbol implements Primative {
 
 	Field field;
 	TableBuffer buffer;
+
 	
+	
+	/** Could this FieldBuffer be referenced by the input name?
+	 * Input Field.Name must already be all lowercase.
+	 * Deals with abbreviations, unqualified table/database, and db aliases.
+	 */
+	public boolean canMatch(Field.Name input) {
+		// Assert that the input name is already lowercase.
+		assert input.generateName().toLowerCase().equals(input.generateName());
+		Field.Name self = new Field.Name(this.fullName().toLowerCase());
+		if (input.db!=null) {
+			Schema schema = Schema.getInstance();
+			if (this.buffer.getTable().getDatabase() != schema.lookupDatabase(input.db)) return false;
+		}
+		if (input.table!=null) {
+			if (buffer.isDefaultSchema()) {
+				if (! self.table.startsWith(input.table)) return false;
+			} else {
+				// Temp/work/buffer names can't be abbreviated.
+				if (! self.table.equals(input.table)) return false;
+			}
+		}
+		if (! self.field.startsWith(input.field)) return false;
+		return true;
+	}
 	
 	
 	/** Get "database.buffer.field" for schema fields, or

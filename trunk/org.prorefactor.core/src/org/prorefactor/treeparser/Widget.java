@@ -16,14 +16,16 @@ package org.prorefactor.treeparser;
  * syntaxes which implicitly define a widget.
  * This includes FRAMEs, WINDOWs, MENUs, etc.
  */
-public abstract class Widget extends Symbol {
+public abstract class Widget extends Symbol implements WidgetI {
 
 	public Widget(String name, SymbolScope scope) {
 		super(scope);
 		setName(name);
 	}
 
-	/** For this subclass of Symbol, fullName() returns the same value as getName(). */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.WidgetI#fullName()
+	 */
 	public String fullName() { return getName(); }
 
 }

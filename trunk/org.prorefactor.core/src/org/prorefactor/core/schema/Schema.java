@@ -192,11 +192,8 @@ public class Schema {
 
 
 
-	/**
-	 * Lookup Database, with alias checks.
-	 * Uses lookupDatabase2().
-	 */
-	private Database lookupDatabase(String inName) {
+	/** Lookup Database, with alias checks. */
+	public Database lookupDatabase(String inName) {
 		Database db = lookupDatabase2(inName);
 		if (db != null)
 			return db;

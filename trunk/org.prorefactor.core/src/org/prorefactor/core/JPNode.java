@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.prorefactor.nodetypes.NodeFactory;
+import org.prorefactor.treeparser.FieldContainer;
+import org.prorefactor.treeparser.Symbol;
 
 import antlr.BaseAST;
 import antlr.Token;
@@ -102,6 +104,10 @@ public class JPNode extends BaseAST implements IJPNode {
 	 * If this AST was constructed from another, then this is the link to the original.
 	 */
 	private static final Integer ORIGINAL = new Integer(-216);
+	/** A valid value for setLink() and getLink().
+	 * @see #getFieldContainer().
+	 */
+	private static final Integer FIELD_CONTAINER = new Integer(-217);
 
 	
 	static private ProparseLdr parser = ProparseLdr.getInstance();
@@ -344,6 +350,15 @@ public class JPNode extends BaseAST implements IJPNode {
 
 
 
+	/** Get the FieldContainer (Frame or Browse) for a statement head node or an INPUT node in a Field_ref.
+	 * This value is set by TreeParser01.
+	 * Only statements with the [WITH FRAME | WITH BROWSE] option have this value set.
+	 * Is also available on the INPUT node for #(Field_ref INPUT ...).
+	 */
+	public FieldContainer getFieldContainer() { return (FieldContainer) getLink(FIELD_CONTAINER); }
+
+
+
 	public int getFileIndex() {
 		if (fileIndex == -1) return parser.getNodeFileIndex(nodeHandle);
 		return fileIndex;
@@ -355,9 +370,9 @@ public class JPNode extends BaseAST implements IJPNode {
 		if (filename==null) return parser.getNodeFilename(nodeHandle);
 		return filename;
 	}
-
-
-
+	
+	
+	
 	public int getHandle() {
 		return nodeHandle;
 	}
@@ -405,6 +420,10 @@ public class JPNode extends BaseAST implements IJPNode {
 	
 	/** Every JPNode subtype has its own index. Used for persistent storage. */
 	public int getSubtypeIndex() { return 1; }
+	
+	
+	/** Certain nodes will have a link to a Symbol, set by TreeParser01. */
+	public Symbol getSymbol() { return (Symbol) getLink(SYMBOL); }
 
 
 
@@ -478,15 +497,13 @@ public class JPNode extends BaseAST implements IJPNode {
 	/** Get an array of all descendant nodes (including this node) of a given type.
 	 * Same idea as Proparse's "query" functions.
 	 */
-	public JPNode [] query(int type) {
-		ArrayList list = new ArrayList();
-		if (this.type == type) list.add(this);
-		queryHelper(this.firstChild(), type, list);
-		JPNode [] ret = new JPNode[list.size()];
-		list.toArray(ret);
-		return ret;
+	public ArrayList<JPNode> query(int findType) {
+		ArrayList<JPNode> list = new ArrayList<JPNode>();
+		if (this.type == findType) list.add(this);
+		queryHelper(this.firstChild(), findType, list);
+		return list;
 	}
-	private static void queryHelper(JPNode node, int type, ArrayList list) {
+	private static void queryHelper(JPNode node, int type, ArrayList<JPNode> list) {
 		if (node==null) return;
 		if (node.type == type) list.add(node);
 		queryHelper(node.firstChild(), type, list);
@@ -504,6 +521,11 @@ public class JPNode extends BaseAST implements IJPNode {
 
 	
 
+	/** @see #getFieldContainer() */
+	public void setFieldContainer(FieldContainer fieldContainer) { setLink(FIELD_CONTAINER, fieldContainer); }
+
+	
+	
 	/** @see #getLink(Integer) */
 	public void setLink(Integer key, Object value) {
 		if (attrMap==null) initMap(); 

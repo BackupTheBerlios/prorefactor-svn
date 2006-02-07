@@ -8,7 +8,7 @@ name resolution, scoping, etc.
 To find actions taken within this grammar, search for "action.",
 which is the tree parser action object.
 
-Copyright (C) 2001-2005 Joanju (www.joanju.com)
+Copyright (C) 2001-2006 Joanju (www.joanju.com)
 All rights reserved. This program and the accompanying materials 
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -253,7 +253,7 @@ widname
 	|	MENU ID
 	|	SUBMENU ID
 	|	MENUITEM ID
-	|	BROWSE ID
+	|	BROWSE b:ID  { action.browseRef(#b); }
 	|	QUERY ID
 	|	TEMPTABLE ID
 	|	BUFFER ID
@@ -271,15 +271,18 @@ tbl[int contextQualifier]
 // referenced table. fld2 indicates that this must be a field of the *previous*
 // referenced table.
 fld[int contextQualifier]
-	:	#(ref:Field_ref (INPUT)? (frame_ref | #(BROWSE ID))? id:ID (array_subscript)? )
+	:	#(ref:Field_ref (INPUT)? (frame_ref|browse_ref)? id:ID (array_subscript)? )
+		// Note that sequence is important. This must be called after the full Field_ref branch has
+		// been walked, because any frame or browse ID must be resolved before trying to resolve Field_ref.
+		// (For example, this is required for resolving if the INPUT function was used.)
 		{action.field(#ref, #id, contextQualifier, 0);}
 	;
 fld1[int contextQualifier]
-	:	#(ref:Field_ref (INPUT)? (frame_ref | #(BROWSE ID))? id:ID (array_subscript)? )
+	:	#(ref:Field_ref (INPUT)? (frame_ref|browse_ref)? id:ID (array_subscript)? )
 		{action.field(#ref, #id, contextQualifier, 1);}
 	;
 fld2[int contextQualifier]
-	:	#(ref:Field_ref (INPUT)? (frame_ref | #(BROWSE ID))? id:ID (array_subscript)? )
+	:	#(ref:Field_ref (INPUT)? (frame_ref|browse_ref)? id:ID (array_subscript)? )
 		{action.field(#ref, #id, contextQualifier, 2);}
 	;
 
@@ -311,16 +314,16 @@ aggregate_opt
 	// It appears that the compiler treats COUNT, MAX, TOTAL, etc as new variables.
 	// TODO: To get an accurrate datatype for things like MAXIMUM, we would have to work out
 	// the datatype of the expression being accumulated.
-	:	#(id1:AVERAGE (label_constant)? {action.addToScope(action.defineVariable(#id1, #id1, DECIMAL));} )
-	|	#(id2:COUNT (label_constant)? {action.addToScope(action.defineVariable(#id2, #id2, INTEGER));} )
-	|	#(id3:MAXIMUM (label_constant)? {action.addToScope(action.defineVariable(#id3, #id3, DECIMAL));} )
-	|	#(id4:MINIMUM (label_constant)? {action.addToScope(action.defineVariable(#id4, #id4, DECIMAL));} )
-	|	#(id5:TOTAL (label_constant)? {action.addToScope(action.defineVariable(#id5, #id5, DECIMAL));} )
-	|	#(id6:SUBAVERAGE (label_constant)? {action.addToScope(action.defineVariable(#id6, #id6, DECIMAL));} )
-	|	#(id7:SUBCOUNT (label_constant)? {action.addToScope(action.defineVariable(#id7, #id7, DECIMAL));} )
-	|	#(id8:SUBMAXIMUM (label_constant)? {action.addToScope(action.defineVariable(#id8, #id8, DECIMAL));} )
-	|	#(id9:SUBMINIMUM (label_constant)? {action.addToScope(action.defineVariable(#id9, #id9, DECIMAL));} )
-	|	#(id10:SUBTOTAL (label_constant)? {action.addToScope(action.defineVariable(#id10, #id10, DECIMAL));} )
+	:	#(id1:AVERAGE (label_constant)? {action.addToSymbolScope(action.defineVariable(#id1, #id1, DECIMAL));} )
+	|	#(id2:COUNT (label_constant)? {action.addToSymbolScope(action.defineVariable(#id2, #id2, INTEGER));} )
+	|	#(id3:MAXIMUM (label_constant)? {action.addToSymbolScope(action.defineVariable(#id3, #id3, DECIMAL));} )
+	|	#(id4:MINIMUM (label_constant)? {action.addToSymbolScope(action.defineVariable(#id4, #id4, DECIMAL));} )
+	|	#(id5:TOTAL (label_constant)? {action.addToSymbolScope(action.defineVariable(#id5, #id5, DECIMAL));} )
+	|	#(id6:SUBAVERAGE (label_constant)? {action.addToSymbolScope(action.defineVariable(#id6, #id6, DECIMAL));} )
+	|	#(id7:SUBCOUNT (label_constant)? {action.addToSymbolScope(action.defineVariable(#id7, #id7, DECIMAL));} )
+	|	#(id8:SUBMAXIMUM (label_constant)? {action.addToSymbolScope(action.defineVariable(#id8, #id8, DECIMAL));} )
+	|	#(id9:SUBMINIMUM (label_constant)? {action.addToSymbolScope(action.defineVariable(#id9, #id9, DECIMAL));} )
+	|	#(id10:SUBTOTAL (label_constant)? {action.addToSymbolScope(action.defineVariable(#id10, #id10, DECIMAL));} )
 	;
 
 assignment_list
@@ -341,6 +344,10 @@ assign_equal
 
 referencepoint
 	:	fld[CQ.SYMBOL] ((PLUS|MINUS) expression)?
+	;
+
+browse_ref
+	:	#(BROWSE i:ID) { action.frameRef(#i); }
 	;
 
 buffercomparestate
@@ -393,8 +400,8 @@ canfindfunc
  
 
 choosestate
-	:	#(	CHOOSE (ROW|FIELD)
-			( #(Form_item fld[CQ.UPDATING] (#(HELP constant))? ) )+
+	:	#(	head:CHOOSE (ROW|FIELD)  { action.frameInitializingStatement(#head); }
+			( #(fi:Form_item fld[CQ.UPDATING] {action.formItem(#fi);} (#(HELP constant))? ) )+
 			(	AUTORETURN 
 			|	#(COLOR anyorvalue) 
 			|	goonphrase
@@ -403,12 +410,12 @@ choosestate
 			|	#(PAUSE expression)
 			)*
 			(framephrase)?
-			state_end
+			state_end  { action.frameStatementEnd(); }
 		)
 	;
 
 clearstate
-	:	#(CLEAR (frame_ref)? (ALL)? (NOPAUSE)? state_end )
+	:	#(c:CLEAR (frame_ref)? (ALL)? (NOPAUSE)? state_end {action.clearState(#c);} )
 	;
 
 closestoredprocedurestate
@@ -421,12 +428,16 @@ closestoredprocedurestate
 	;
 
 colorstate
-	:	#(	COLOR
+	:	#(	head:COLOR  { action.frameInitializingStatement(#head); }
 			(	( #(DISPLAY anyorvalue) | #(PROMPT anyorvalue) )
 				( #(DISPLAY anyorvalue) | #(PROMPT anyorvalue) )?
 			)?
-			(#(Form_item fld[CQ.SYMBOL] (formatphrase)? ))*
-			(framephrase)? state_end
+			(	#(	fi:Form_item fld[CQ.SYMBOL]
+					// formItem() must be called after fld[], but before formatphrase.
+					{action.formItem(#fi);}  (formatphrase)?
+				)
+			)*
+			(framephrase)? state_end  { action.frameStatementEnd(); }
 		)
 	;
 
@@ -550,21 +561,23 @@ dderequeststate
 
 definebrowsestate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BROWSE
-			id:ID { push(action.defineSymbol(BROWSE, #def, #id)); }
+			id:ID { push(action.defineBrowse(#def, #id)); }
 			(#(QUERY ID))? (lockhow|NOWAIT)*
 			(	#(	DISPLAY
-					(	#(	Form_item
+					(	#(	fi1:Form_item
 							(	(tbl[CQ.INIT])=> tbl[CQ.INIT]
 							|	expression (columnformat)?
 							|	spacephrase
 							)
+							// Note for DISPLAY, formItem() is called *after* any potential format '@' phrase.
+							{ action.formItem(#fi1); }
 						)
 					)*
 					(#(EXCEPT (fld1[CQ.SYMBOL])*))?
 				)
 				(	#(	ENABLE
 						(	#(ALL (#(EXCEPT (fld[CQ.SYMBOL])*))? )
-						|	(	#(	Form_item fld[CQ.SYMBOL]
+						|	(	#(	fi2:Form_item fld[CQ.SYMBOL]  { action.formItem(#fi2); }
 									(	#(HELP constant)
 									|	#(VALIDATE funargs)
 									|	AUTORETURN
@@ -580,7 +593,7 @@ definebrowsestate
 			(tooltip_expr)?
 			(#(CONTEXTHELPID expression))?
 			state_end
-			{ action.addToScope(pop()); }
+			{ action.addToSymbolScope(pop()); }
 		)
 	;
 
@@ -617,7 +630,7 @@ definebuttonstate
 			)*
 			(triggerphrase)?
 			state_end
-			{ action.addToScope(pop()); }
+			{ action.addToSymbolScope(pop()); }
 		)
 	;
 
@@ -627,7 +640,7 @@ definedatasetstate
 			FOR tbl[CQ.INIT] (COMMA tbl[CQ.INIT])*
 			( data_relation ( (COMMA)? data_relation)* )?
 			state_end
-			{ action.addToScope(pop()); }
+			{ action.addToSymbolScope(pop()); }
 		)
 	;
 data_relation
@@ -645,7 +658,7 @@ definedatasourcestate
 			id:ID { push(action.defineSymbol(DATASOURCE, #def, #id)); }
 			FOR (#(QUERY ID))?
 			(source_buffer_phrase)? (COMMA source_buffer_phrase)*
-			{ action.addToScope(pop()); }
+			{ action.addToSymbolScope(pop()); }
 		)
 	;
 source_buffer_phrase
@@ -661,7 +674,8 @@ defineframestate
 			(	#(HEADER (display_item)+ )
 			|	#(BACKGROUND (display_item)+ )
 			)?
-			(#(EXCEPT (fld1[CQ.SYMBOL])*))?  (framephrase)?  state_end
+			(#(EXCEPT (fld1[CQ.SYMBOL])*))?  (framephrase)?  state_end  { action.frameStatementEnd(); }
+			// Frames are automatically and immediately added to the SymbolScope. No need to do it here.
 		)
 	;
 
@@ -679,7 +693,7 @@ defineimagestate
 			)*
 			(triggerphrase)?
 			state_end
-			{ action.addToScope(pop()); }
+			{ action.addToSymbolScope(pop()); }
 		)
 	;
 
@@ -687,7 +701,7 @@ definemenustate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? MENU
 			id:ID { push(action.defineSymbol(MENU, #def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
-			{ action.addToScope(pop()); }
+			{ action.addToSymbolScope(pop()); }
 		)
 	;
 menu_opt
@@ -711,12 +725,12 @@ menu_list_item
 				|	TOGGLEBOX
 				)*
 				(triggerphrase)? 
-				{ action.addToScope(pop()); }
+				{ action.addToSymbolScope(pop()); }
 			)
 		|	#(	SUBMENU
 				id2:ID { push(action.defineSymbol(SUBMENU, #id2, #id2)); }
 				(DISABLED | label_constant | #(FONT expression) | color_expr)*
-				{ action.addToScope(pop()); }
+				{ action.addToSymbolScope(pop()); }
 			)
 		|	#(RULE (#(FONT expression) | color_expr)* )
 		|	SKIP
@@ -733,13 +747,13 @@ defineparameterstate
 			|	(INPUT|OUTPUT|INPUTOUTPUT|RETURN) PARAMETER
 				(	TABLE FOR tbl[CQ.TEMPTABLESYMBOL] (APPEND)?
 				|	TABLEHANDLE (FOR)? id:ID (APPEND)?
-					{ action.addToScope(action.defineVariable(#def, #id, HANDLE)); }
+					{ action.addToSymbolScope(action.defineVariable(#def, #id, HANDLE)); }
 				|	DATASET FOR ID (APPEND|BYVALUE)*
 				|	DATASETHANDLE id3:ID (BYVALUE)?
-					{ action.addToScope(action.defineVariable(#def, #id3, HANDLE)); }
+					{ action.addToSymbolScope(action.defineVariable(#def, #id3, HANDLE)); }
 				|	id2:ID { push(action.defineVariable(#def, #id2)); }
 					defineparam_var (triggerphrase)?
-					{ action.addToScope(pop()); }
+					{ action.addToSymbolScope(pop()); }
 				)
 			)
 			state_end
@@ -768,7 +782,7 @@ definequerystate
 			( #(CACHE expression) | SCROLLING | RCODEINFORMATION)*
 			state_end
 		)
-		{ action.addToScope(pop()); }
+		{ action.addToSymbolScope(pop()); }
 	;
 
 definerectanglestate
@@ -786,12 +800,12 @@ definerectanglestate
 			(triggerphrase)?
 			state_end
 		)
-		{ action.addToScope(pop()); }
+		{ action.addToSymbolScope(pop()); }
 	;
 
 definestreamstate
 	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? STREAM id:ID state_end )
-		{ action.addToScope(action.defineSymbol(STREAM, #def, #id)); }
+		{ action.addToSymbolScope(action.defineSymbol(STREAM, #def, #id)); }
 	;
 
 definesubmenustate
@@ -799,7 +813,7 @@ definesubmenustate
 			id:ID { push(action.defineSymbol(SUBMENU, #def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
 		)
-		{ action.addToScope(pop()); }
+		{ action.addToSymbolScope(pop()); }
 	;
    
 definetemptablestate
@@ -846,7 +860,7 @@ definevariablestate
 			id:ID { push(action.defineVariable(#def, #id)); }
 			(fieldoption)* (triggerphrase)? state_end
 		)
-		{ action.addToScope(pop()); }
+		{ action.addToSymbolScope(pop()); }
 	;
 
 deletestate
@@ -854,7 +868,10 @@ deletestate
 	;
 
 disablestate
-	:	#(DISABLE (UNLESSHIDDEN)? (#(ALL (#(EXCEPT (fld[CQ.SYMBOL])*))?) | (form_item[CQ.SYMBOL])+)? (framephrase)? state_end )
+	:	#(	head:DISABLE  { action.frameInitializingStatement(#head); }
+			(UNLESSHIDDEN)? (#(ALL (#(EXCEPT (fld[CQ.SYMBOL])*))?) | (form_item[CQ.SYMBOL])+)? (framephrase)?
+			state_end  { action.frameStatementEnd(); }
+		)
 	;
 
 disabletriggersstate
@@ -866,18 +883,51 @@ disconnectstate
 	;
 
 displaystate
-	:	#(	DISPLAY (stream_name)? (UNLESSHIDDEN)? (display_item)*
+	:	#(	head:DISPLAY  { action.frameInitializingStatement(#head); }
+			(stream_name)? (UNLESSHIDDEN)? (displaystate_item)*
 			(#(EXCEPT (fld1[CQ.SYMBOL])*))? (#(IN_KW WINDOW expression))?
 			(display_with)*
 			(NOERROR_KW)?
-			state_end
+			state_end  { action.frameStatementEnd(); }
+		)
+	;
+displaystate_item
+	:	#(	fi:Form_item
+			(	skipphrase
+			|	spacephrase
+			|	(expression|ID) (aggregatephrase|formatphrase)*
+				// Note for the DISPLAY statement, formItem() is called *after* any potential formatphrase '@' phrase.
+				{ action.formItem(#fi); }
+			)
+		)
+	;
+
+display_item
+// In TP01, this is used by lots of statements, but not actually by the DISPLAY statement. See displaystate_item above.
+	:	#(	fi:Form_item
+			(	skipphrase
+			|	spacephrase
+			|	(expression|ID)
+				// For everything except DISPLAY, the call to formItem() must happen *before* formatphrase (but after fld[]).
+				{action.formItem(#fi);}  (aggregatephrase|formatphrase)*
+			)
 		)
 	;
 
 dostate
-	:	#(	d:DO {action.blockBegin(#d);}
-			(block_for)? (block_preselect)? (block_opt)* block_colon
+	:	#(	d:DO
+			{	action.blockBegin(#d);
+				action.frameBlockCheck(#d);
+			}
+			(block_for)? (block_preselect)? (block_opt)* block_colon {action.frameStatementEnd();}
 			code_block block_end {action.blockEnd();}
+		)
+	;
+
+downstate
+	:	#(	head:DOWN  { action.frameInitializingStatement(#head); }
+			((stream_name (expression)?) | (expression (stream_name)?))? (framephrase)?
+			state_end  { action.frameStatementEnd(); }
 		)
 	;
 
@@ -886,7 +936,10 @@ emptytemptablestate
 	;
 
 enablestate
-	:	#(ENABLE (UNLESSHIDDEN)? (#(ALL (#(EXCEPT (fld[CQ.SYMBOL])*))?) | (form_item[CQ.SYMBOL])+)? (#(IN_KW WINDOW expression))? (framephrase)? state_end )
+	:	#(	head:ENABLE  { action.frameInitializingStatement(#head); }
+			(UNLESSHIDDEN)? (#(ALL (#(EXCEPT (fld[CQ.SYMBOL])*))?) | (form_item[CQ.SYMBOL])+)?
+			(#(IN_KW WINDOW expression))? (framephrase)? state_end  { action.frameStatementEnd(); }
+		)
 	;
 
 exportstate
@@ -929,8 +982,11 @@ fixcodepage_pseudfn
 	;
 
 forstate
-	:	#(	f:FOR {action.blockBegin(#f);}
-			for_record_spec[CQ.INITWEAK] (block_opt)* block_colon
+	:	#(	f:FOR 
+			{	action.blockBegin(#f); 
+				action.frameBlockCheck(#f);
+			}
+			for_record_spec[CQ.INITWEAK] (block_opt)* block_colon {action.frameStatementEnd();}
 			code_block block_end {action.blockEnd();}
 		)
 	;
@@ -953,28 +1009,29 @@ form_item[int contextQualifier]
 {	int tblQualifier = contextQualifier;
 	if (contextQualifier==CQ.SYMBOL) tblQualifier = CQ.BUFFERSYMBOL;
 }
-	:	#(	Form_item
-			(	tbl[tblQualifier]
+	:	#(	fi:Form_item
+			(	tbl[tblQualifier]  {action.formItem(#fi);}
 			|	#(TEXT LEFTPAREN (form_item[contextQualifier])* RIGHTPAREN )
 			|	constant (formatphrase)?
 			|	spacephrase
 			|	skipphrase
 			|	CARET
-			|	fld[contextQualifier] (aggregatephrase|formatphrase)*
+			|	// formItem() must be called after fld[], but before formatphrase.
+				fld[contextQualifier] {action.formItem(#fi);} (aggregatephrase|formatphrase)*
 			|	assign_equal
 			)
 		)
 	;
 
 formstate
-	:	#(	FORMAT
+	:	#(	head:FORMAT  { action.frameInitializingStatement(#head); }
 			(form_item[CQ.SYMBOL])*
 			(	#(HEADER (display_item)+ )
 			|	#(BACKGROUND (display_item)+ )
 			)?
 			(#(EXCEPT (fld1[CQ.SYMBOL])*))?
 			(framephrase)?
-			state_end
+			state_end  { action.frameStatementEnd(); }
 		)
 	;
 
@@ -1089,11 +1146,11 @@ function_param
 function_param_arg
 	:	(TABLE)=> TABLE (FOR)? tbl[CQ.TEMPTABLESYMBOL] (APPEND)?
 	|	(TABLEHANDLE)=> TABLEHANDLE (FOR)? id2:ID (APPEND)?
-		{ action.addToScope(action.defineVariable(#id2, #id2, HANDLE)); }
+		{ action.addToSymbolScope(action.defineVariable(#id2, #id2, HANDLE)); }
 	|	// ID AS is optional - you are allowed to list just the datatype.
 		(id:ID as:AS)? datatype_var (extentphrase)?
 		{	if (#id != null) {
-				action.addToScope(action.defineVariable(#id, #id));
+				action.addToSymbolScope(action.defineVariable(#id, #id));
 				action.defAs(#as);
 			}
 		}
@@ -1114,7 +1171,10 @@ importstate
 	;
 
 insertstate
-	:	#(INSERT tbl[CQ.UPDATING] (#(EXCEPT (fld1[CQ.SYMBOL])*))? (#(USING (ROWID|RECID) expression))? (framephrase)? (NOERROR_KW)? state_end )
+	:	#(	head:INSERT  { action.frameInitializingStatement(#head); }
+			tbl[CQ.UPDATING] (#(EXCEPT (fld1[CQ.SYMBOL])*))? (#(USING (ROWID|RECID) expression))?
+			(framephrase)? (NOERROR_KW)? state_end  { action.frameStatementEnd(); }
+		)
 	;
 
 ldbnamefunc
@@ -1124,7 +1184,7 @@ ldbnamefunc
 messagestate
 	:	#(	MESSAGE
 			( #(COLOR anyorvalue) )?
-			( #(Form_item (skipphrase | expression) ) )*
+			( #(Form_item (skipphrase | expression) ) )* // No call to formItem() for MESSAGE.
 			(	#(	VIEWAS ALERTBOX
 					(MESSAGE|QUESTION|INFORMATION|ERROR|WARNING)?
 					(BUTTONS (YESNO|YESNOCANCEL|OK|OKCANCEL|RETRYCANCEL) )?
@@ -1139,6 +1199,7 @@ messagestate
 	;
 
 nextpromptstate
+// Note that NEXT-PROMPT would not initialize a frame, add fields to a frame, etc.
 	:	#(NEXTPROMPT fld[CQ.SYMBOL] (framephrase)? state_end )
 	;
 
@@ -1161,7 +1222,7 @@ onstate
 					(	OLD (VALUE)?
 						id:ID { push(action.defineVariable(#id, #id, #fld)); }
 						(options{greedy=true;}:defineparam_var)?
-						{ action.addToScope(pop()); }
+						{ action.addToSymbolScope(pop()); }
 					)?
 		 		)
 				(OVERRIDE)?
@@ -1226,9 +1287,11 @@ procedurestate
 	;
 
 promptforstate
-	:	#(	PROMPTFOR (stream_name)? (UNLESSHIDDEN)? (form_item[CQ.SYMBOL])*
-			(goonphrase)?  (#(EXCEPT (fld1[CQ.SYMBOL])*))?  (#(IN_KW WINDOW expression))?  (framephrase)?  (editingphrase)?
-			state_end
+	:	#(	head:PROMPTFOR  { action.frameInitializingStatement(#head); }
+			(stream_name)? (UNLESSHIDDEN)? (form_item[CQ.SYMBOL])*
+			(goonphrase)?  (#(EXCEPT (fld1[CQ.SYMBOL])*))?  (#(IN_KW WINDOW expression))?
+			(framephrase)?  { action.frameStatementEnd(); }
+			(editingphrase)? state_end
 		)
 	;
 
@@ -1261,8 +1324,11 @@ releasestate
 	;
 
 repeatstate
-	:	#(	r:REPEAT {action.blockBegin(#r);}
-			(block_for)? (block_preselect)? (block_opt)* block_colon
+	:	#(	r:REPEAT
+			{	action.blockBegin(#r);
+				action.frameBlockCheck(#r);
+			}
+			(block_for)? (block_preselect)? (block_opt)* block_colon {action.frameStatementEnd();}
 			code_block block_end {action.blockEnd();}
 		)
 	;
@@ -1286,12 +1352,20 @@ runstate
 		)
 	;
 
+scrollstate
+	:	#(	head:SCROLL  { action.frameInitializingStatement(#head); }
+			(FROMCURRENT)? (UP)? (DOWN)? (framephrase)?
+			state_end  { action.frameStatementEnd(); }
+		)
+	;
+
 setstate
-	:	#(	SET
+	:	#(	head:SET  { action.frameInitializingStatement(#head); }
 			(stream_name)? (UNLESSHIDDEN)?
 			(form_item[CQ.UPDATING])*
-			(goonphrase)?  (#(EXCEPT (fld1[CQ.SYMBOL])*))?  (#(IN_KW WINDOW expression))?  (framephrase)?  (editingphrase)?  (NOERROR_KW)?
-			state_end
+			(goonphrase)?  (#(EXCEPT (fld1[CQ.SYMBOL])*))?  (#(IN_KW WINDOW expression))?
+			(framephrase)?  { action.frameStatementEnd(); }
+			(editingphrase)? (NOERROR_KW)? state_end  
 		)
 	;
 
@@ -1382,7 +1456,7 @@ triggerprocedurestate
 				|	#(	NEW (VALUE)?
 						id:ID { push(action.defineVariable(#id, #id)); }
 						defineparam_var
-						{ action.addToScope(pop()); }
+						{ action.addToSymbolScope(pop()); }
 					)
 					
 				)? 
@@ -1390,7 +1464,7 @@ triggerprocedurestate
 						id2:ID { push(action.defineVariable(#id2, #id2)); }
 						defineparam_var
 					)
-					{ action.addToScope(pop()); }
+					{ action.addToSymbolScope(pop()); }
 				)?
 			)
 			state_end
@@ -1398,7 +1472,17 @@ triggerprocedurestate
 	;
 
 underlinestate
-	:	#(UNDERLINE (stream_name)? (#(Form_item fld[CQ.SYMBOL] (formatphrase)? ))* (framephrase)? state_end )
+	:	#(	head:UNDERLINE  { action.frameInitializingStatement(#head); }
+			(stream_name)? (#(fi:Form_item fld[CQ.SYMBOL] {action.formItem(#fi);} (formatphrase)? ))* (framephrase)?
+			state_end  { action.frameStatementEnd(); }
+		)
+	;
+
+upstate
+	:	#(	head:UP  { action.frameInitializingStatement(#head); }
+			(options{greedy=true;}:stream_name)? (expression)? (stream_name)? (framephrase)?
+			state_end  { action.frameStatementEnd(); }
+		)
 	;
 
 updatestatement
@@ -1407,21 +1491,23 @@ updatestatement
 	;
 
 updatestate
-	:	#(	UPDATE
+	:	#(	head:UPDATE  { action.frameInitializingStatement(#head); }
 			(UNLESSHIDDEN)?	
 			(form_item[CQ.REFUP])*
 			(goonphrase)?
 			(#(EXCEPT (fld1[CQ.SYMBOL])*))?
 			(#(IN_KW WINDOW expression))?
-			(framephrase)?
-			(editingphrase)?
-			(NOERROR_KW)?
-			state_end
+			(framephrase)?  { action.frameStatementEnd(); }
+			(editingphrase)? (NOERROR_KW)? state_end
 		)
 	;
 
 validatestate
 	:	#(VALIDATE tbl[CQ.REF] (NOERROR_KW)? state_end )
+	;
+
+viewstate
+	:	#(v:VIEW (stream_name)? (gwidget)* (#(IN_KW WINDOW expression))? state_end {action.viewState(#v);} )
 	;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1495,6 +1581,15 @@ insertintostate
 
 revokestate
 	: 	#(REVOKE (grant_rev_opt) ON (tbl[CQ.SCHEMATABLESYMBOL]|ID) grant_rev_to state_end )
+	;
+
+selectstate
+// selectstate_AST_in is the name of the input node within the Antlr generated code.
+// Hopefully Antlr won't change how that works.  :-/  I don't know if there's a "proper" way
+// of getting the next or input token for Antlr generated tree parsers.
+	: 	{ action.frameInitializingStatement(selectstate_AST_in); }
+		selectstatea state_end
+		{ action.frameStatementEnd(); }
 	;
 
 selectstatea

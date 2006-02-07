@@ -13,12 +13,9 @@
 package org.prorefactor.treeparser01;
 
 
-import org.prorefactor.core.JPNode;
-import org.prorefactor.core.TokenTypes;
 import org.prorefactor.treeparser.Symbol;
-import org.prorefactor.treeparser.SymbolFactory;
 import org.prorefactor.treeparser.Variable;
-import org.prorefactor.widgettypes.Frame;
+import org.prorefactor.widgettypes.Browse;
 
 import antlr.collections.AST;
 
@@ -34,75 +31,86 @@ public class TP01Action {
 	/** Called by the tree parser at the end of a DEFINE statement, passing
 	 * in the new Variable object which is expected now to be added to the current scope.
 	 */
-	public void addToScope(Object o) {}
+	protected void addToSymbolScope(Object o) {}
 
 
 	/** Beginning of a block. */
-	public void blockBegin(AST blockAST) {}
+	protected void blockBegin(AST blockAST) {}
 
 
 	/** End of a block. */
-	public void blockEnd() {}
+	protected void blockEnd() {}
 
 
+	/** The ID node in a BROWSE ID pair. */
+	protected void browseRef(AST idAST) {}
+
+	
 	/** The tree parser calls this at the start of a can-find,
 	 * because it needs to have its own buffer and buffer scope.
 	 */
-	protected void canFindBegin(AST canfindAST, AST recordAST) {
-	}
+	protected void canFindBegin(AST canfindAST, AST recordAST) {}
 
 
 	/** Called by the tree parser at the end of a can-find. */
 	protected void canFindEnd(AST canfindAST) {}
 	
 	
+	/** Called at the end of a CLEAR statement. */
+	protected void clearState(AST headAST) {}
+	
+	
 	/** The tree parser calls this at an AS node */
-	public void defAs(AST asAST) {}
+	protected void defAs(AST asAST) {}
 
 	
 	/** The tree parser calls this at a LIKE node */
-	public void defLike(AST likeAST) {}
+	protected void defLike(AST likeAST) {}
 	
 	
 	/** Define a buffer. If the buffer is initialized at the same time it is
 	 * defined (as in a buffer parameter), then parameter init should be true.
 	 */
-	public void defineBuffer(AST defAST, AST idAST, AST recAST, boolean init) {}
+	protected void defineBuffer(AST defAST, AST idAST, AST recAST, boolean init) {}
 
 	
+	/** Called at the start of a DEFINE BROWSE statement. */
+	protected Browse defineBrowse(AST defAST, AST idAST) {return null;}
+	
+
 	/** Define an unnamed buffer which is scoped (symbol and buffer) to the trigger scope/block.
 	 * @param anode The RECORD_NAME node. Must already have the Table symbol linked to it.
 	 */
-	public void defineBufferForTrigger(AST recAST) {}
+	protected void defineBufferForTrigger(AST recAST) {}
 
 	
 	/** Called by the tree parser to define anything other than
 	 * buffers, temp/work tables, and variables/parameters.
 	 */
-	public Symbol defineSymbol(int symbolType, AST defAST, AST idAST) { return null; }
+	protected Symbol defineSymbol(int symbolType, AST defAST, AST idAST) { return null; }
 
 	
 	/** Called by the tree parser at a temp or work table field definition. */
-	public void defineTableField(AST idNode) {}
+	protected void defineTableField(AST idNode) {}
 
 	
 	/** Called by the tree parser if a LIKE node is encountered in a temp/work table definition. */
-	public void defineTableLike(AST recNode) {}
+	protected void defineTableLike(AST recNode) {}
 
 
 	/** Called by the tree parser when a temp-table is defined. */
-	public void defineTemptable(AST defAST, AST idNode) {}
+	protected void defineTemptable(AST defAST, AST idNode) {}
 
 	
 	/** Called by the tree parser when a variable is defined. */
-	public Variable defineVariable(AST defAST, AST idNode) {return null;}
+	protected Variable defineVariable(AST defAST, AST idNode) {return null;}
 	/** Some syntaxes imply a data type without LIKE/AS. */
-	public Variable defineVariable(AST defAST, AST idAST, int dataType) {return null;}
+	protected Variable defineVariable(AST defAST, AST idAST, int dataType) {return null;}
 	/** Some syntaxes have an implicit LIKE. */
-	public Variable defineVariable(AST defAST, AST idAST, AST likeAST) {return null;}
+	protected Variable defineVariable(AST defAST, AST idAST, AST likeAST) {return null;}
 	
 	/** Called by the tree parser when a work-table is defined. */
-	public void defineWorktable(AST defAST, AST idNode) {}
+	protected void defineWorktable(AST defAST, AST idNode) {}
 
 	
 	/** Process a Field_ref node.
@@ -113,7 +121,7 @@ public class TP01Action {
 	 * @param whichTable For name resolution - which table must this be a field of?
 	 * Input 0 for any table, 1 for the lastTableReferenced, 2 for the prevTableReferenced.
 	 */
-	public void field(AST refAST, AST idAST, int contextQualifier, int whichTable) {}
+	protected void field(AST refAST, AST idAST, int contextQualifier, int whichTable) {}
 
 
 	/** Called by the tree parser in a function definition immediately
@@ -128,27 +136,35 @@ public class TP01Action {
 	 * Action taken in:
 	 * filenameorvalue: FILENAME  production
 	 */
-	public void fnvFilename(AST fn) {}
+	protected void fnvFilename(AST fn) {}
 
 
 	/**
 	 * Action taken in:
 	 * filenameorvalue: ... expression ... production
 	 */
-	public void fnvExpression(AST exp) {}
+	protected void fnvExpression(AST exp) {}
 
 	
-	/** A DEFINE FRAME statement is different than a frame ref. The DEFINE FRAME statement will
-	 * always add the frame to the scope (possibly "hiding" a frame symbol that is defined at
-	 * an outer scope).
-	 * A frame reference will call this function if the frame does not already exist.
-	 */
-	public void frameDef(AST defAST, AST idAST) {}
-	
-	
-	public void frameRef(AST idAST) {}
+	/** Called from Form_item node */
+	protected void formItem(AST ast) {}
 
-		
+	/** Called from DO|REPEAT|FOR blocks. */
+	protected void frameBlockCheck(AST ast) {}
+
+	/** Called at tree parser DEFINE FRAME statement. */
+	protected void frameDef(AST defAST, AST idAST) {}
+	
+	/** This is called at the beginning of a frame affecting statement, with the statement head node. */
+	protected void frameInitializingStatement(AST ast) {}
+	
+	/** This is called at the end of a frame affecting statement. */
+	protected void frameStatementEnd() {}
+
+	/** Called for the ID node in a #(FRAME ID) pair. */
+	protected void frameRef(AST idAST) {}
+
+	
 	/** Called by the tree parser if a FUNCTION statement is found to be any
 	 * sort of a function FORWARD, IN, or MAP TO.
 	 * @param idAST The ID node (name of the function).
@@ -158,45 +174,45 @@ public class TP01Action {
 	/** Called by the tree parser at the beginning 
 	 * of a PROCEDURESTATE rule.
 	 */
-	public void procedureBegin(AST p, AST id){}
+	protected void procedureBegin(AST p, AST id){}
 
 	/** Called by the tree parser at the end
 	 * of a PROCEDURESTATE rule.
 	 */
-	public void procedureEnd(AST p){}
+	protected void procedureEnd(AST p){}
 	
 
 	/** Called by the tree parser right off the bat, at the Program_root node */
-	public void programRoot(AST rootAST) {}
+	protected void programRoot(AST rootAST) {}
 	
 	
 	/** Action to take at RECORD_NAME nodes. */
-	public void recordNameNode(AST anode, int contextQualifier) {}
+	protected void recordNameNode(AST anode, int contextQualifier) {}
 
 
 	/** Action to take at the start of RUNSTATE. */
-	public void runBegin(AST t){}
+	protected void runBegin(AST t){}
 
 	/** Action to take at the end of RUNSTATE. */
-	public void runEnd(AST node){}
+	protected void runEnd(AST node){}
 	
 	/** Action to take in a RUNSTATE of the form
 	 * run <p> in <handle expression>.
 	 * @param hn - the node for <handle expression>.
 	 */ 
-	public void runInHandle(AST hn){}
+	protected void runInHandle(AST hn){}
 	
 	/** Action to take in RUNSTATE of the form
 	 * run <p> persistent set <handle>.
 	 * @param fld - the field node for <handle>.
 	 */
-	public void runPersistentSet(AST fld){}
+	protected void runPersistentSet(AST fld){}
 	
 	/** Called by the tree parser where a symbol scope needs to be added,
 	 * in other words, in functions, procedures, and triggers.
 	 * @param anode The function, procedure, triggers, or on node.
 	 */
-	public void scopeAdd(AST anode) {}
+	protected void scopeAdd(AST anode) {}
 
 
 	/** Called by the tree parser immediately after the end of a function,
@@ -211,7 +227,10 @@ public class TP01Action {
 	 * @param anode Is the RECORD_NAME node. It must already have
 	 * the BufferSymbol linked to it.
 	 */
-	public void strongScope(AST anode) {}
+	protected void strongScope(AST anode) {}
+	
+	/** Called with the VIEW statement head, after the VIEW branch has been traversed. */
+	protected void viewState(AST headAST) {}
 
 
 }

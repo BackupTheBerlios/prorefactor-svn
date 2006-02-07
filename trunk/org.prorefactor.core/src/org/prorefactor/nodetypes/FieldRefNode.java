@@ -15,10 +15,10 @@ import org.prorefactor.core.TokenTypes;
 import org.prorefactor.treeparser.BufferScope;
 import org.prorefactor.treeparser.DataType;
 import org.prorefactor.treeparser.FieldBuffer;
-import org.prorefactor.treeparser.FieldLevelWidget;
 import org.prorefactor.treeparser.Primative;
 import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.Variable;
+import org.prorefactor.widgettypes.FieldLevelWidgetI;
 
 
 public class FieldRefNode extends JPNode {
@@ -69,7 +69,7 @@ public class FieldRefNode extends JPNode {
 		assert symbol!=null;
 		setLink(JPNode.SYMBOL, symbol);
 	}
-	public void setSymbol(FieldLevelWidget symbol) {
+	public void setSymbol(FieldLevelWidgetI symbol) {
 		assert symbol!=null;
 		setLink(JPNode.SYMBOL, symbol);
 	}

@@ -4,7 +4,7 @@
  * 19-Nov-2002
  * www.joanju.com
  * 
- * Copyright (c) 2002-2004 Joanju Limited.
+ * Copyright (c) 2002-2006 Joanju Limited.
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -42,7 +42,7 @@ import org.prorefactor.treeparser.SymbolScope;
 import org.prorefactor.treeparser.SymbolScopeRoot;
 import org.prorefactor.treeparser.TableBuffer;
 import org.prorefactor.treeparser.Variable;
-import org.prorefactor.widgettypes.Frame;
+import org.prorefactor.widgettypes.Browse;
 
 import antlr.collections.AST;
 
@@ -68,10 +68,11 @@ public class TP01Support extends TP01Action {
 	 * scope into a non-root block... which we need to make current again
 	 * once done inside the scope.
 	 */
-	private ArrayList blockStack = new ArrayList();
+	private ArrayList<Block> blockStack = new ArrayList<Block>();
 
 	private Block currentBlock;
-	private HashMap funcForwards = new HashMap();
+	private FrameStack frameStack = new FrameStack();
+	private HashMap<String, SymbolScope> funcForwards = new HashMap<String, SymbolScope>();
 	private ParseUnit parseUnit = new ParseUnit();
 	private Schema schema = Schema.getInstance();
 
@@ -99,7 +100,8 @@ public class TP01Support extends TP01Action {
 	///// Methods /////
 
 	
-	public void addToScope(Object o) {
+	/** Called at the *end* of the statement that defines the symbol. */
+	public void addToSymbolScope(Object o) {
 		currentScope.add((Symbol)o);
 	}
 
@@ -128,8 +130,13 @@ public class TP01Support extends TP01Action {
 		currentBlock = popBlock();
 	}
 
+	
+	/** The ID node in a BROWSE ID pair. */
+	protected void browseRef(AST idAST) {
+		frameStack.browseRefNode((JPNode)idAST, currentScope);
+	}
 
-
+	
 	/** A CAN-FIND needs to have its own buffer and buffer scope,
 	 * because CAN-FIND(x where x.y = z) does *not* cause a buffer
 	 * reference to be created for x within the surrounding block.
@@ -169,11 +176,18 @@ public class TP01Support extends TP01Action {
 	protected void canFindEnd(AST canfindAST) {
 		scopeClose(canfindAST);
 	}
+
 	
+	protected void clearState(AST headAST) {
+		JPNode headNode = (JPNode)headAST;
+		JPNode firstChild = headNode.firstChild();
+		if (firstChild.getType()==TokenTypes.FRAME)
+			frameStack.simpleFrameInitStatement(headNode, firstChild.nextNode(), currentBlock);
+	}
 	
 	
 	/** The tree parser calls this at an AS node */
-	public void defAs(AST asAST) {
+	protected void defAs(AST asAST) {
 		JPNode asNode = (JPNode)asAST;
 		currSymbol.setAsNode(asNode);
 		((Primative)currSymbol).setDataType(DataType.getDataType(asNode.nextNode().getType()));
@@ -186,7 +200,7 @@ public class TP01Support extends TP01Action {
 	
 	
 	/** The tree parser calls this at a LIKE node */
-	public void defLike(AST likeAST) {
+	protected void defLike(AST likeAST) {
 		JPNode likeNode = (JPNode)likeAST;
 		currSymbol.setLikeNode(likeNode);
 		((Primative)currSymbol).setDataType(fieldRefDataType(likeNode.nextNode()));
@@ -198,10 +212,18 @@ public class TP01Support extends TP01Action {
 	
 	
 	
+	/** Called at the start of a DEFINE BROWSE statement. */
+	protected Browse defineBrowse(AST defAST, AST idAST) {
+		Browse browse = (Browse) defineSymbol(TokenTypes.BROWSE, defAST, idAST);
+		frameStack.nodeOfDefineBrowse(browse);
+		return browse;
+	}
+	
+
 	/** Define a buffer. If the buffer is initialized at the same time it is
 	 * defined (as in a buffer parameter), then parameter init should be true.
 	 */
-	public void defineBuffer(AST defAST, AST idAST, AST tableAST, boolean init) {
+	protected void defineBuffer(AST defAST, AST idAST, AST tableAST, boolean init) {
 		JPNode idNode = (JPNode) idAST;
 		Table table = astTableLink(tableAST);
 		TableBuffer bufSymbol = currentScope.defineBuffer(idNode.getText(), table);
@@ -212,23 +234,23 @@ public class TP01Support extends TP01Action {
 			BufferScope bufScope = currentBlock.getBufferForReference(bufSymbol);
 			idNode.setLink(JPNode.BUFFERSCOPE, bufScope);
 		}
-	} // defineBuffer()
+	}
 
 
 
 	/** Define an unnamed buffer which is scoped (symbol and buffer) to the trigger scope/block.
 	 * @param anode The RECORD_NAME node. Must already have the Table symbol linked to it.
 	 */
-	public void defineBufferForTrigger(AST tableAST) {
+	protected void defineBufferForTrigger(AST tableAST) {
 		Table table = astTableLink(tableAST);
 		TableBuffer bufSymbol = currentScope.defineBuffer("", table);
 		currentBlock.getBufferForReference(bufSymbol); // Create the BufferScope
 		currSymbol = bufSymbol;
-	} // defineTriggerBuffer(AST anode)
+	}
 
 
 
-	public Symbol defineSymbol(int symbolType, AST defAST, AST idAST) {
+	protected Symbol defineSymbol(int symbolType, AST defAST, AST idAST) {
 		/* Some notes:
 		 * We need to create the Symbol right away, because further
 		 * actions in the grammar might need to set attributes on it.
@@ -248,7 +270,7 @@ public class TP01Support extends TP01Action {
 
 	
 	
-	public void defineTableField(AST idAST) {
+	protected void defineTableField(AST idAST) {
 		JPNode idNode = (JPNode)idAST;
 		FieldBuffer fieldBuff = rootScope.defineTableField(idNode.getText(), currDefTable);
 		currSymbol = fieldBuff;
@@ -258,7 +280,7 @@ public class TP01Support extends TP01Action {
 
 
 
-	public void defineTableLike(AST tableAST) {
+	protected void defineTableLike(AST tableAST) {
 		// Get table for "LIKE table"
 		Table table = astTableLink(tableAST);
 		// For each field in "table", create a field def in currDefTable
@@ -272,7 +294,7 @@ public class TP01Support extends TP01Action {
 	
 	
 	
-	private void defineTable(JPNode defNode, JPNode idNode, int storeType) {
+	protected void defineTable(JPNode defNode, JPNode idNode, int storeType) {
 		TableBuffer buffer = rootScope.defineTable(idNode.getText(), storeType);
 		buffer.setDefOrIdNode(defNode);
 		currSymbol = buffer;
@@ -282,13 +304,13 @@ public class TP01Support extends TP01Action {
 
 
 
-	public void defineTemptable(AST defAST, AST idAST) {
+	protected void defineTemptable(AST defAST, AST idAST) {
 		defineTable((JPNode)defAST, (JPNode)idAST, IConstants.ST_TTABLE);
 	}
 
 
 
-	public Variable defineVariable(AST defAST, AST idAST) {
+	protected Variable defineVariable(AST defAST, AST idAST) {
 		/* Some notes:
 		 * We need to create the Variable Symbol right away, because further
 		 * actions in the grammar might need to set attributes on it.
@@ -305,12 +327,12 @@ public class TP01Support extends TP01Action {
 		idNode.setLink(JPNode.SYMBOL, variable);
 		return variable;
 	}
-	public Variable defineVariable(AST defAST, AST idAST, int dataType) {
+	protected Variable defineVariable(AST defAST, AST idAST, int dataType) {
 		Variable v = defineVariable(defAST, idAST);
 		((Variable)currSymbol).setDataType(DataType.getDataType(dataType));
 		return v;
 	}
-	public Variable defineVariable(AST defAST, AST idAST, AST likeAST) {
+	protected Variable defineVariable(AST defAST, AST idAST, AST likeAST) {
 		Variable v = defineVariable(defAST, idAST);
 		((Variable)currSymbol).setDataType(fieldRefDataType(likeAST));
 		return v;
@@ -318,7 +340,7 @@ public class TP01Support extends TP01Action {
 
 
 
-	public void defineWorktable(AST defAST, AST idAST) {
+	protected void defineWorktable(AST defAST, AST idAST) {
 		defineTable((JPNode)defAST, (JPNode)idAST, IConstants.ST_WTABLE);
 	}
 
@@ -332,28 +354,36 @@ public class TP01Support extends TP01Action {
 	 * @param whichTable For name resolution - which table must this be a field of?
 	 * Input 0 for any table, 1 for the lastTableReferenced, 2 for the prevTableReferenced.
 	 */
-	public void field(AST refAST, AST idAST, int contextQualifier, int whichTable) {
+	protected void field(AST refAST, AST idAST, int contextQualifier, int whichTable) {
 		JPNode idNode = (JPNode) idAST;
 		FieldRefNode refNode = (FieldRefNode) refAST;
 		String name = idNode.getText();
 		FieldLookupResult result = null;
 		
-		// TODO Add support for frame fields.
-		// Searching the frames for an existing INPUT field is very different than
-		// the usual field/variable lookup rules. Support for frame fields has not
-		// yet been added to ProRefactor. Rather than get an INPUT field wrong here,
-		// we skip it entirely.
-		if (refNode.firstChild().getType()==TokenTypes.INPUT) return;
-
 		refNode.attrSet(IConstants.CONTEXT_QUALIFIER, contextQualifier);
 
 		// Check if this is a Field_ref being "inline defined"
 		// If so, we define it right now.
 		if (refNode.attrGet(IConstants.INLINE_VAR_DEF) == 1)
-			addToScope(defineVariable(idAST, idAST));
+			addToSymbolScope(defineVariable(idAST, idAST));
 
-		// Lookup the field, with special handling for FIELDS/USING/EXCEPT phrases	
-		if (whichTable == 0) {
+		if (	refNode.firstChild().getType()==TokenTypes.INPUT
+			&&	// I've seen at least one instance of "INPUT objHandle:attribute" in code,
+				// which for some reason compiled clean. As far as I'm aware, the INPUT was
+				// meaningless, and the compiler probably should have complained about it.
+				// At any rate, the handle:attribute isn't an input field, and we don't want
+				// to try to look up the handle using frame field rules.
+				(	refNode.nextSibling()==null
+				||	refNode.nextSibling().getType() != TokenTypes.OBJCOLON
+				)
+			) {
+			// Searching the frames for an existing INPUT field is very different than
+			// the usual field/variable lookup rules. It is done based on what is in
+			// the referenced FRAME or BROWSE, or what is found in the frames most
+			// recently referenced list.
+			result = frameStack.inputFieldLookup(refNode, currentScope);
+		} else if (whichTable == 0) {
+			// Lookup the field, with special handling for FIELDS/USING/EXCEPT phrases	
 			boolean getBufferScope = (contextQualifier != CQ.SYMBOL);
 			result = currentBlock.lookupField(name, getBufferScope);
 		} else {
@@ -414,38 +444,45 @@ public class TP01Support extends TP01Action {
 	private static DataType fieldRefDataType(AST refAST) {
 		return ((FieldRefNode)refAST).getDataType();
 	}
+	
 
-	
-	/** A DEFINE FRAME statement is different than a frame ref. The DEFINE FRAME statement will
-	 * always add the frame to the scope (possibly "hiding" a frame symbol that is defined at
-	 * an outer scope).
-	 * A frame reference will call this function if the frame does not already exist.
-	 */
-	public void frameDef(AST defAST, AST idAST) {
-		JPNode defNode = (JPNode) defAST;
-		JPNode idNode = (JPNode) idAST;
-		Frame frame = (Frame) SymbolFactory.create(TokenTypes.FRAME, idNode.getText(), currentScope);
-		frame.setDefOrIdNode(defNode);
-		currSymbol = frame;
-		idNode.setLink(JPNode.SYMBOL, frame);
-		addToScope(frame);
-	}
-	
-	
-	public void frameRef(AST idAST) {
-		JPNode idNode = (JPNode) idAST;
-		Frame frame = (Frame) currentScope.lookupWidget(TokenTypes.FRAME, idNode.getText());
-		if (frame==null) frameDef(null, idAST);
-		else idNode.setLink(JPNode.SYMBOL, frame);
+	/** Called from Form_item node */
+	protected void formItem(AST ast) {
+		frameStack.formItem((JPNode)ast);
 	}
 
+	/** Called from DO|REPEAT|FOR blocks. */
+	protected void frameBlockCheck(AST ast) {
+		frameStack.nodeOfBlock((JPNode)ast, currentBlock);
+	}
+
+	/** Called at tree parser DEFINE FRAME statement. */
+	protected void frameDef(AST defAST, AST idAST) {
+		frameStack.nodeOfDefineFrame((JPNode)defAST, (JPNode)idAST, currentScope);
+	}
+	
+	/** This is called at the beginning of a frame affecting statement, with the statement head node. */
+	protected void frameInitializingStatement(AST ast) {
+		frameStack.nodeOfInitializingStatement((JPNode)ast, currentBlock);
+	}
+	
+	/** This is called at the end of a frame affecting statement. */
+	protected void frameStatementEnd() {
+		frameStack.statementEnd(); 
+	}
+
+	protected void frameRef(AST idAST) {
+		frameStack.frameRefNode((JPNode)idAST, currentScope);
+	}
+
+	
 	
 	/** If this function definition did not list any parameters, but it had a
 	 * function forward declaration, then we use the block and scope from that
 	 * declaration, in case it is where the parameters were listed.
 	 */
 	protected void funcDef(AST funcAST, AST idAST) {
-		SymbolScope forwardScope = (SymbolScope) funcForwards.get(idAST.getText());
+		SymbolScope forwardScope = funcForwards.get(idAST.getText());
 		if (forwardScope==null) funcSymbolCreate(idAST);
 		// If there are symbols (i.e. parameters, buffer params) already defined in
 		// this function scope, then we don't do anything.
@@ -471,10 +508,14 @@ public class TP01Support extends TP01Action {
 	}
 
 
+	
+	public SymbolScope getCurrentScope(){ return currentScope; }
 
 	public ParseUnit getParseUnit() { return parseUnit; }
 
-
+	public SymbolScopeRoot getRootScope(){ return rootScope; }
+	
+	
 	
 	// Shortcut to JPNode.getHandle()
 	protected int h(AST node) {
@@ -485,11 +526,11 @@ public class TP01Support extends TP01Action {
 
 	protected Block popBlock() {
 		blockStack.remove(blockStack.size()-1);
-		return (Block) blockStack.get(blockStack.size()-1);
+		return blockStack.get(blockStack.size()-1);
 	}
 
 
-	public void procedureBegin(AST procNode, AST idNode){
+	protected void procedureBegin(AST procNode, AST idNode){
 		SymbolScope definingScope = currentScope;
 		scopeAdd(procNode);
 		Routine r = new Routine(idNode.getText(), definingScope, currentScope);
@@ -498,11 +539,11 @@ public class TP01Support extends TP01Action {
 	}
 	
 	
-	public void procedureEnd(AST node){
+	protected void procedureEnd(AST node){
 		scopeClose(node);
 	}
 
-	public void programRoot(AST rootAST) {
+	protected void programRoot(AST rootAST) {
 		BlockNode blockNode = (BlockNode) rootAST;
 		currentBlock = pushBlock(new Block(rootScope, blockNode));
 		rootScope.setRootBlock(currentBlock);
@@ -558,7 +599,7 @@ public class TP01Support extends TP01Action {
 
 
 	/** Action to take at various RECORD_NAME nodes. */
-	public void recordNameNode(AST anode, int contextQualifier) {
+	protected void recordNameNode(AST anode, int contextQualifier) {
 		RecordNameNode recordNode = (RecordNameNode) anode;
 		recordNode.attrSet(IConstants.CONTEXT_QUALIFIER, contextQualifier);
 		TableBuffer buffer = null;
@@ -602,7 +643,7 @@ public class TP01Support extends TP01Action {
 	
 
 
-	public void scopeAdd(AST anode) {
+	protected void scopeAdd(AST anode) {
 		BlockNode blockNode = (BlockNode) anode;
 		currentScope = currentScope.addScope();
 		currentBlock = pushBlock(new Block(currentScope, blockNode));
@@ -647,21 +688,24 @@ public class TP01Support extends TP01Action {
 	 * @param anode Is the RECORD_NAME node. It must already have
 	 * the BufferSymbol linked to it.
 	 */
-	public void strongScope(AST anode) {
+	protected void strongScope(AST anode) {
 		currentBlock.addStrongBufferScope((RecordNameNode)anode);
 	}
-
-
-
-	public SymbolScopeRoot getRootScope(){
-		return rootScope;
-	}
-	
-	public SymbolScope getCurrentScope(){
-		return currentScope;
-	}
 	
 
+	/** Called at the end of a VIEW statement. */
+	protected void viewState(AST headAST) {
+		// The VIEW statement grammar uses gwidget, so we have to do some
+		// special searching for FRAME to initialize.
+		JPNode headNode = (JPNode)headAST;
+		for (JPNode frameNode : headNode.query(TokenTypes.FRAME)) {
+			int parentType = frameNode.parent().getType();
+			if (parentType==TokenTypes.Widget_ref || parentType==TokenTypes.IN_KW) {
+				frameStack.simpleFrameInitStatement(headNode, frameNode.nextNode(), currentBlock);
+				return;
+			}
+		}
+	}
 
 
-} // class TP01Support
+}

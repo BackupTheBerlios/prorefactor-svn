@@ -15,6 +15,7 @@
 package org.prorefactor.treeparser;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -26,6 +27,7 @@ import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Schema;
 import org.prorefactor.nodetypes.RecordNameNode;
+import org.prorefactor.widgettypes.Frame;
 
 
 
@@ -57,7 +59,9 @@ public class Block {
 	
 	private static Schema schema = Schema.getInstance();
 
+	private ArrayList<Frame> frames = new ArrayList<Frame>();
 	private Block parent;
+	private Frame defaultFrame = null;
 	private JPNode blockStatementNode;
 	private Set bufferScopes = new HashSet();
 
@@ -81,6 +85,22 @@ public class Block {
 		if (parent!=null && bufferScope.getSymbol().getScope().getRootBlock() != this) {
 			parent.addBufferScopeReferences(bufferScope);
 		}
+	}
+	
+	
+	
+	/** Called by Frame.setFrameScopeBlock() - not intended to be called by any client code.
+	 * This should only be called by the Frame object itself.
+	 * Adds a frame to this or the appropriate parent block.
+	 * Returns the scoping block.
+	 * Frames are scoped to FOR and REPEAT blocks, or else to a symbol scoping block.
+	 * They may also be scoped with a DO WITH FRAME block, but that is handled elsewhere.
+	 */
+	public Block addFrame(Frame frame) {
+		if (canScopeFrame()) {
+			frames.add(frame);
+			return this;
+		} else return parent.addFrame(frame);
 	}
 	
 	
@@ -150,6 +170,18 @@ public class Block {
 		if (symbol.getScope().getRootBlock() == this) return true;
 		return false;
 	} // canScopeBufferReference
+
+
+
+	/** Can a frame be scoped to this block? */
+	private boolean canScopeFrame() {
+		switch (blockStatementNode.getType()) {
+			case TokenTypes.REPEAT :
+			case TokenTypes.FOR :
+				return true;
+		}
+		return isRootBlock();
+	}
 
 
 
@@ -239,7 +271,21 @@ public class Block {
 		}
 		return raiseBuff;
 	} // getBufferScopeSub
-
+	
+	
+	
+	/** From the nearest frame scoping block, get the default (possibly unnamed) frame if it exists.
+	 * Returns null if no default frame has been established yet.
+	 */
+	public Frame getDefaultFrame() {
+		if (defaultFrame!=null) return defaultFrame;
+		if (!canScopeFrame()) return parent.getDefaultFrame();
+		return null;
+	}
+	
+	
+	/** Get a copy of the list of frames scoped to this block. */
+	public ArrayList<Frame> getFrames() { return new ArrayList<Frame>(frames); }
 
 
 	/** Get the node for this block. Returns a node of one of these types:
@@ -401,8 +447,33 @@ public class Block {
 
 
 
-	public void setParent(Block parent) { this.parent = parent; }
+	/** Explicitly set the default frame for this block.
+	 * This should only be called by the Frame object itself.
+	 * This is especially important to be called for DO WITH FRAME statements
+	 * because DO blocks do not normally scope frames. This should also be
+	 * called for REPEAT WITH FRAME and FOR WITH FRAME blocks.
+	 */
+	public void setDefaultFrameExplicit(Frame frame) {
+		this.defaultFrame = frame;
+		frames.add(frame);
+	}
 
+
+	/** In the nearest frame scoping block, set the default implicit (unnamed) frame.
+	 * This should only be called by the Frame object itself.
+	 * Returns the Block that scopes the frame.
+	 */
+	public Block setDefaultFrameImplicit(Frame frame) {
+		if (canScopeFrame()) {
+			this.defaultFrame = frame;
+			frames.add(frame);
+			return this;
+		} else
+			return parent.setDefaultFrameImplicit(frame);
+	}
+
+
+	public void setParent(Block parent) { this.parent = parent; }
 
 
 }

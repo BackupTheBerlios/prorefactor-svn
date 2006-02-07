@@ -14,7 +14,6 @@
 
 package org.prorefactor.treeparser;
 
-import java.util.Comparator;
 
 import org.prorefactor.core.JPNode;
 import org.prorefactor.core.TokenTypes;
@@ -24,7 +23,7 @@ import org.prorefactor.core.TokenTypes;
 /** Base class for any type of symbol which needs to be
  * kept track of when parsing a 4gl compile unit's AST.
  */
-abstract public class Symbol {
+abstract public class Symbol implements SymbolI {
 	
 	Symbol(SymbolScope scope) {
 		this.scope = scope;
@@ -51,40 +50,39 @@ abstract public class Symbol {
 	/** Stores the full name, original (mixed) case as in definition. */	
 	private String name;
 	
-	/** Comparator for sorting by name. */
-	public static final Comparator NAME_ORDER = new Comparator() {
-		public int compare(Object o1, Object o2) {
-			Symbol s1 = (Symbol) o1;
-			Symbol s2 = (Symbol) o2;
-			return s1.getName().compareToIgnoreCase(s2.getName());
-		}
-	};
-
-	
-	
-	/** Get the "full" name for this symbol. This is expected to be overridden
-	 * in subclasses. For example, we might expect "database.buffer.field" to
-	 * be the return for a field buffer.
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#fullName()
 	 */
 	public abstract String fullName();
 	
 	
 
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getAllRefsCount()
+	 */
 	public int getAllRefsCount() { return allRefsCount; }
 
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getNumReads()
+	 */
 	public int getNumReads() { return numReads; }
 	
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getNumWrites()
+	 */
 	public int getNumWrites() { return numWrites; }
 
 
 	
-	/** If this was defined AS something, then we have an AS node */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getAsNode()
+	 */
 	public JPNode getAsNode() { return asNode; }
 
 	
 	
-	/** If this symbol was defined directly by a DEFINE syntax,
-	 * then this returns the DEFINE node, otherwise null.
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getDefineNode()
 	 */
 	public JPNode getDefineNode() {
 		if (defNode!=null && defNode.getType()==TokenTypes.DEFINE) return defNode;
@@ -93,8 +91,8 @@ abstract public class Symbol {
 	
 
 
-	/** If this symbol was defined with syntax other than a direct DEFINE,
-	 * then this returns the ID node, otherwise null.
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getIndirectDefineIdNode()
 	 */
 	public JPNode getIndirectDefineIdNode() {
 		if (defNode!=null && defNode.getType()==TokenTypes.ID) return defNode;
@@ -103,25 +101,33 @@ abstract public class Symbol {
 
 	
 	
-	/** If this was defined LIKE something, then we have a LIKE node */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getLikeNode()
+	 */
 	public JPNode getLikeNode() { return likeNode; }
 
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getName()
+	 */
 	public String getName() { return name; }
 
 	
 	
-	/** From TokenTypes: VARIABLE, FRAME, MENU, MENUITEM, etc.
-	 * A TableBuffer object always returns BUFFER, regardless of whether
-	 * the object is a named buffer or a default buffer.
-	 * A FieldBuffer object always returns FIELD.
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getProgressType()
 	 */
 	public abstract int getProgressType();
 	
 	
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#getScope()
+	 */
 	public SymbolScope getScope() { return scope; }
 
 	
-	/** Defined as NEW [GLOBAL] SHARED? */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#isExported()
+	 */
 	public boolean isExported() {
 		// If there is no DEFINE node (inline var def), then it is not NEW..SHARED.
 		if (	defNode == null
@@ -133,7 +139,9 @@ abstract public class Symbol {
 
 	
 	
-	/** Defined as SHARED? */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#isImported()
+	 */
 	public boolean isImported() { 
 		// If there is no DEFINE node (inline var def), then it is not SHARED.
 		if (	defNode == null
@@ -145,7 +153,9 @@ abstract public class Symbol {
 	
 	
 	
-	/** Take note of a symbol reference (read, write, reference by name). */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#noteReference(int)
+	 */
 	public void noteReference(int contextQualifier) {
 		allRefsCount++;
 		if (CQ.isRead(contextQualifier)) numReads++;
@@ -154,24 +164,30 @@ abstract public class Symbol {
 	
 	
 	
-	/** @see #getAsNode() */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#setAsNode(org.prorefactor.core.JPNode)
+	 */
 	public void setAsNode(JPNode asNode) { this.asNode = asNode; }
 
 	
 	
-	/** We store the DEFINE node if available and sensible.
-	 * If defined in a syntax where there is no DEFINE node briefly
-	 * preceeding the ID node, then we store the ID node.
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#setDefOrIdNode(org.prorefactor.core.JPNode)
 	 */
 	public void setDefOrIdNode(JPNode node) { defNode = node; }
 
 
 
-	/** @see #getLikeNode() */
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#setLikeNode(org.prorefactor.core.JPNode)
+	 */
 	public void setLikeNode(JPNode likeNode) { this.likeNode = likeNode; }
 
 
 
+	/* (non-Javadoc)
+	 * @see org.prorefactor.treeparser.SymbolI#setName(java.lang.String)
+	 */
 	public void setName(String name) { this.name = name; }
 
 
