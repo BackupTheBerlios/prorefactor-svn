@@ -991,79 +991,27 @@ display bInvoice except totalAmount.</programlisting>
 
       <orderedlist>
         <listitem>
-          <para>If you don't want to pollute your existing workspace, start
-          Eclipse with an empty workspace (use: <option>-data
-          <replaceable>new_workspace_location</replaceable></option> on the
-          command line).</para>
-        </listitem>
-
-        <listitem>
-          <para>We make use of the Java version 1.4 <literal>assert</literal>
-          statement. In <guimenuitem>Window &gt; Preferences &gt; Java &gt;
-          Compiler &gt; Compliance</guimenuitem>, set source and class
-          compatibility to version 1.4. While in Java preferences, also go to
-          <guilabel>Installed JREs</guilabel>, and edit your default JRE. Add
-          <option>-ea -Xss2M</option> to the default VM args. This enables
-          assertions, and sets the stack size to be large enough for
-          recursively descending large syntax trees.</para>
+          <para>In <guimenuitem>Window &gt; Preferences &gt; Java &gt;
+          Compiler</guimenuitem>, set the compliance level to 5.0. While in
+          Java preferences, also go to <guilabel>Installed JREs</guilabel>,
+          and edit your default JRE. Add <option>-ea -Xss2M</option> to the
+          default VM args. This enables assertions, and sets the stack size to
+          be large enough for recursively descending large syntax
+          trees.</para>
         </listitem>
 
         <listitem>
           <para>Switch to the Java perspective.</para>
         </listitem>
-
-        <listitem>
-          <para>Choose <guimenuitem>File &gt; Import... &gt; External Plug-ins
-          and Fragments</guimenuitem>.</para>
-        </listitem>
-
-        <listitem>
-          <para>All of the defaults should be fine for the first page. You
-          want to import from the target platform, all plug-ins and fragments,
-          binary projects with linked content. Click
-          <guibutton>Next</guibutton>.</para>
-        </listitem>
-
-        <listitem>
-          <para>On the <guilabel>Selection</guilabel> page add all
-          <literal>org.eclipse</literal> and the <literal>org.junit</literal>
-          plug-ins. Do not select the <literal>org.prorefactor.*</literal>
-          plug-ins. We will come back to those.</para>
-        </listitem>
-
-        <listitem>
-          <para>Click <guibutton>Finish</guibutton>. The plug-ins will be
-          imported into binary projects and their build class paths
-          initialized. You can now browse and search the full Eclipse
-          source.</para>
-        </listitem>
-
-        <listitem>
-          <para>Switch to the Package Explorer view. Most of the time, you
-          don't want to see the binary projects. Select
-          <guimenuitem>Filters</guimenuitem> from the Package Explorer view
-          pull-down menu. Select <guilabel>Binary plug-in and feature
-          projects</guilabel> in the subsequent dialog. If you started Eclipse
-          in a clean workspace, the Package Explorer will be empty after you
-          invoke the filter because you haven't created any source plug-in
-          projects yet.</para>
-        </listitem>
-
-        <listitem>
-          <para>One thing to keep in mind when you install a new version of
-          Eclipse (or ProRefactor.org plug-ins): Do not forget to re-import
-          the plug-ins. To do so, click the <guibutton>Existing Binary
-          Projects</guibutton> button on the import wizard's plug-in selection
-          page. This will replace your existing binary projects with the code
-          for the new versions.</para>
-        </listitem>
       </orderedlist>
 
       <para>You now have two choices for importing ProRefactor source. If you
-      want read-only access to ProRefactor, then follow the steps under <link
+      want to use the latest released version of ProRefactor as a library or
+      framework, then follow the steps under <link
       linkend="sec_import_source">"Option One"</link>, below. If you want
-      access to the version control repository, then follow the steps under
-      <link linkend="sec_checkout_source">"Option Two"</link>, below.</para>
+      access to the version control repository for the very latest source code
+      "as it happens", then follow the steps under <link
+      linkend="sec_checkout_source">"Option Two"</link>, below.</para>
     </section>
 
     <section id="sec_import_source">
@@ -1079,32 +1027,15 @@ display bInvoice except totalAmount.</programlisting>
         </listitem>
 
         <listitem>
-          <para>This time, you want to import the projects with source
-          folders, rather than just a binary with linked content.</para>
+          <para>Choose <guilabel>The target platform</guilabel>,
+          <guilabel>Select from all plug-ins</guilabel>, and
+          <guilabel>Projects with source folders</guilabel>. Click
+          <guibutton>Next</guibutton>.</para>
         </listitem>
 
         <listitem>
           <para>Select the <literal>org.prorefactor.*</literal> plug-ins, and
           click <guibutton>Finish</guibutton>.</para>
-        </listitem>
-
-        <listitem>
-          <para>If you started from a clean workspace, the only projects
-          visible in the Package Explorer should now be the ProRefactor.org
-          projects which contain source code. You can browse and search the
-          source in those projects.</para>
-        </listitem>
-
-        <listitem>
-          <para>In <guimenuitem>Window &gt; Preferences &gt; Java &gt;
-          Compiler &gt; Installed JRE</guimenuitem>s, edit your default JRE.
-          Add
-          <option>-Djava.library.path=<replaceable>/your/path</replaceable></option>
-          to the default VM args, where
-          <filename><replaceable>/your/path</replaceable></filename> is the
-          <filename>org.prorefactor.core</filename> plug-in directory (which
-          is where <filename>proparse.dll</filename> and
-          <filename>proparse_jni.dll</filename> can be found).</para>
         </listitem>
       </orderedlist>
     </section>
@@ -1140,23 +1071,32 @@ display bInvoice except totalAmount.</programlisting>
       <para>From the Eclipse menu, choose <guimenuitem>File &gt; Import...
       &gt; Existing Project into Workspace</guimenuitem> for each of the
       <literal>org.prorefactor</literal> project directories in the following
-      order: <literal>antlr</literal>, <literal>lib</literal>,
-      <literal>core</literal>, <literal>refactor</literal>,
-      <literal>eclipse</literal>, <literal>javadoc</literal>,
-      <literal>doc</literal>, <literal>feature</literal>,
-      <literal>update</literal>. Eclipse will automatically build (compile)
-      each project as you import it.</para>
+      order: <literal>lib</literal>, <literal>core</literal>,
+      <literal>refactor</literal>, <literal>eclipse</literal>, and then the
+      rest. Eclipse will automatically build (compile) each project as you
+      import it.</para>
+    </section>
 
-      <para>In <guilabel>Window &gt; Preferences &gt; Java &gt; Installed
-      JREs</guilabel>, edit your default JRE. Add:
+    <section>
+      <title>Assigning java.library.path</title>
+
+      <para>In order for <filename>proparse.dll</filename> and
+      <filename>proparse_jni.dll</filename> to be found, they must be in the
+      Java library path. Those two DLLs are found in the
+      <literal>org.prorefactor.core</literal> project directory. Select that
+      project, and choose <guilabel>Properties &gt; Info</guilabel> and copy
+      the project location (full path). In <guilabel>Window &gt; Preferences
+      &gt; Java &gt; Installed JREs</guilabel>, edit your default JRE. Add:
       <option>-Djava.library.path=<replaceable>/your/path</replaceable></option>
       to the default VM args, where <replaceable>/your/path</replaceable> is
-      your <filename>org.prorefactor.core</filename> project directory, where
-      <filename>proparse.dll</filename> and
-      <filename>proparse_jni.dll</filename> can be found.</para>
+      your <filename>org.prorefactor.core</filename> project directory.</para>
+    </section>
 
-      <para>Now you can run the regression tests. You can navigate to the
-      following two source files, and run them as JUnit tests:</para>
+    <section>
+      <title>Unit Tests and Run-time Workbench</title>
+
+      <para>Now you can run the unit tests. You can navigate to the following
+      two source files, and run them as JUnit tests:</para>
 
       <itemizedlist>
         <listitem>
@@ -1169,7 +1109,7 @@ display bInvoice except totalAmount.</programlisting>
       </itemizedlist>
 
       <para>To launch the Run-time Workbench, choose <guimenuitem>Run &gt; Run
-      As &gt; Run-time Workbench</guimenuitem>. From the Run-time Workbench,
+      As &gt; Eclipse Application</guimenuitem>. From the Run-time Workbench,
       you should be able to select the ProRefactor perspective, create test
       projects, and launch the ProRefactor menu actions. This is where you
       would test any changes or additions that you make to ProRefactor or your
