@@ -7,5 +7,11 @@
 		<topic href="sec_output_directory.html"
 			label="Output Directory wizard page" />
 	</context>
+	<context id="substituteRefactoring">
+		<description>SUBSTITUTE Refactoring</description>
+		<topic href="sec_substitute_refactoring.html"
+			label="Substitute Refactoring" />
+	</context>
+	
 
 </contexts>

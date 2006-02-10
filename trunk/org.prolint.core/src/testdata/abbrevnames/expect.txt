@@ -1,0 +1,3 @@
+abbrevname abbrevnames/displaypostal.i 1 9 abbrevname: postal is abbreviated
+abbrevname abbrevnames/customer.p 1 12 abbrevname: cust is abbreviated
+abbrevname abbrevnames/billto.p 1 12 abbrevname: bill is abbreviated

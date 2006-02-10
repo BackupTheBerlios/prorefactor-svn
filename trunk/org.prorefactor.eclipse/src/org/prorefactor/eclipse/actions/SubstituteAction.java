@@ -1,7 +1,7 @@
 /* Created 2003
  * John Green
  *
- * Copyright (C) 2003 Joanju Limited
+ * Copyright (C) 2003, 2006 Joanju Limited
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,10 +16,14 @@ import java.util.TreeSet;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
+import org.eclipse.ui.PlatformUI;
+import org.prorefactor.eclipse.wizards.RefactorWizard;
+import org.prorefactor.eclipse.wizards.TextPage;
 import org.prorefactor.refactor.substitute.SubstituteLint;
 import org.prorefactor.refactor.substitute.SubstituteTarget;
 import org.prorefactor.refactor.substitute.SubstituteWrap;
@@ -37,13 +41,21 @@ import com.joanju.ProparseLdr;
 public class SubstituteAction
 	implements IWorkbenchWindowActionDelegate, IViewActionDelegate, IProRefactorAction {
 
+	public SubstituteAction() { }
+
+	static {
+		zzHelpText();
+	}
+
+	private static String HELP_TEXT;
+	private static final String TITLE = "SUBSTITUTE Refactoring";
+	private static final String CONTEXT_HELP_ID = "org.prorefactor.doc.substituteRefactoring";
+
 	private ISelection currISelection = null;
 	private ActionManager manager = null;
 	private ProparseLdr parser = null;
 	private TreeSet targetSet = null;
 	private IWorkbenchWindow window;
-
-	public SubstituteAction() { }
 
 	/**
 	 * We can use this method to dispose of any system
@@ -56,8 +68,8 @@ public class SubstituteAction
 	public void init(IViewPart view) {
 		this.window = view.getSite().getWorkbenchWindow();
 	}
-	public void init(IWorkbenchWindow window) {
-		this.window = window;
+	public void init(IWorkbenchWindow windowIn) {
+		this.window = windowIn;
 	}
 
 	public RefactorResult processFile(int topNode) {
@@ -109,6 +121,22 @@ public class SubstituteAction
 		manager = new ActionManager(window, this);
 		if (manager.setup(currISelection) < 1) return;
 		if (parser==null) parser = ProparseLdr.getInstance();
+
+		// Create and run the wizard
+		RefactorWizard wizard = new RefactorWizard();
+		TextPage textPage = new TextPage("text_page");
+		textPage.setTitle(TITLE);
+		wizard.setHelpAvailable(true);
+		wizard.addPage(textPage);
+		WizardDialog dialog = new WizardDialog(window.getShell(), wizard);
+		// Create the dialog, to set a size, before filling the Text page with text.
+		// Otherwise, the Text page will force the dialog to the full screen width.
+		dialog.create();
+		textPage.setText(HELP_TEXT);
+		textPage.setHelpContext(CONTEXT_HELP_ID);
+		dialog.open();
+		if (!wizard.didFinish()) return;
+
 		manager.doRun();
 	}
 
@@ -116,4 +144,17 @@ public class SubstituteAction
 		if (iselection instanceof IStructuredSelection) currISelection = iselection;
 	}
 
+	
+	static void zzHelpText() {
+		HELP_TEXT = 
+			"This refactoring replaces string concatenations with the SUBSTITUTE function.\n\n"
+			+ "For example:\n"
+			+ "\t\"File: \" + filename:SCREEN-VALUE + \" was not found.\n"
+			+ "should be replaced with:\n"
+			+ "\tSUBSTITUTE(\"File: &1 was not found.\", filename:SCREEN-VALUE)\n\n"
+			+ "Press the Help button for documentation on this topic."
+			;
+	}
+
+	
 }

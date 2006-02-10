@@ -16,6 +16,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.ui.PlatformUI;
 
 
 /** A wizard page which displays a read-only edit widget full of text.
@@ -36,6 +37,7 @@ public class TextPage extends WizardPage {
 	}
 
 	private String displayText = "";
+	private String helpContext = null;
 	private Text text;
 
 
@@ -61,6 +63,19 @@ public class TextPage extends WizardPage {
 		text.setText(displayText);
 	}
 
+	
+	@Override
+	public void performHelp() {
+		if (helpContext!=null) PlatformUI.getWorkbench().getHelpSystem().displayHelp(helpContext);
+	}
+	
+	
+	public void setHelpContext(String helpContext) {
+		this.helpContext = helpContext;
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(getControl(), helpContext);
+	}
+
+	
 	public void setText(String theText) {
 		displayText = theText;
 		text.setText(displayText);

@@ -1,16 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
-<html>
-<head>
-<title>About</title>
-<meta http-equiv=Content-Type content="text/html; charset=ISO-8859-1">
-</head>
-<body lang="EN-US">
-<h2>About This Content</h2>
 
-<pre>
 SOFTWARE RIGHTS
 
-ANTLR 1989-2004 Developed by Terence Parr
+ANTLR 1989-2005 Developed by Terence Parr
 Partially supported by University of San Francisco & jGuru.com
 
 We reserve no legal rights to the ANTLR--it is fully in the
@@ -38,8 +29,3 @@ The primary ANTLR guy:
 Terence Parr
 parrt@cs.usfca.edu
 parrt@antlr.org
-</pre>
- 
-
-</body>
-</html>

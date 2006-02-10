@@ -97,11 +97,12 @@ public class ReviewChangesDialog {
 
 
 
-	void createShell(Display display) {
+	void createShell(Display displayIn) {
 
 		GridData griddata;
 
-		shell = new Shell(display, SWT.TITLE | SWT.RESIZE | SWT.APPLICATION_MODAL);
+		shell = new Shell(displayIn, SWT.TITLE | SWT.RESIZE | SWT.APPLICATION_MODAL);
+		shell.setLayout(new GridLayout(1, false));
 
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
@@ -113,9 +114,9 @@ public class ReviewChangesDialog {
 		griddata.horizontalSpan = 2;
 		sashForm.setLayoutData(griddata);
 		
-		font = new Font(display, "Courier New", 9, SWT.NORMAL);
+		font = new Font(displayIn, "Courier New", 9, SWT.NORMAL);
 
-		highlightColor = new Color(display, 255, 255, 0);
+		highlightColor = new Color(displayIn, 255, 255, 0);
 
 		// The two text widgets
 		text1 = createText(sashForm);
@@ -199,17 +200,17 @@ public class ReviewChangesDialog {
 		});
 
 		// Window dressing - the icon
-		windowIcon = new Image(display,
+		windowIcon = new Image(displayIn,
 			getClass().getClassLoader().getResourceAsStream("icons/joanju.gif"));
 
 		// Shell settings
-		int useWidth = (display.getClientArea().width * 4) / 5;
+		int useWidth = (displayIn.getClientArea().width * 4) / 5;
 		shell.setSize(useWidth, 700);
 		// Use a fixed position.
 		// It's annoying to have Windows pop it up in a different spot every time.
 		shell.setLocation(85, 60);
 		shell.setText(windowTitle + " - " + filename1);
-		shell.setLayout(gridLayout);
+		// shell.setLayout(gridLayout);
 		shell.setImage(windowIcon);
 		shell.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {

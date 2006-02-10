@@ -10,6 +10,11 @@
  */
 package org.prorefactor.refactor.util;
 
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.DefaultLineTracker;
+import org.eclipse.jface.text.ILineTracker;
+import org.eclipse.jface.text.IRegion;
+
 
 /*******************************************************************************
  * Copyright (c) 2000, 2003 IBM Corporation and others.
@@ -21,11 +26,6 @@ package org.prorefactor.refactor.util;
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.DefaultLineTracker;
-import org.eclipse.jface.text.ILineTracker;
-import org.eclipse.jface.text.IRegion;
 
 /**
  * Helper class to provide String manipulation functions not available in standard JDK.

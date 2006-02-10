@@ -97,9 +97,9 @@
             </separator>
          </menu>
          <action
-               label="&amp;SUBSTITUTE Refactoring"
+               label="&amp;SUBSTITUTE (from string concatenation) Refactoring..."
                class="org.prorefactor.eclipse.actions.SubstituteAction"
-               tooltip="SUBSTITUTE Refactor"
+               tooltip="SUBSTITUTE (from string concatenation) Refactor"
                menubarPath="org.prorefactor.MainMenu/separator1"
                id="org.prorefactor.actions.substitute">
          </action>
@@ -326,9 +326,9 @@
             </separator>
          </menu>
          <action
-               label="&amp;SUBSTITUTE Refactoring"
+               label="&amp;SUBSTITUTE (from string concatenation) Refactoring..."
                class="org.prorefactor.eclipse.actions.SubstituteAction"
-               tooltip="SUBSTITUTE Refactor"
+               tooltip="SUBSTITUTE (from string concatenation) Refactor"
                menubarPath="org.prorefactor.popup.NavMenu/separator1"
                id="org.prorefactor.popup.NavMenu.substitute">
          </action>
@@ -453,7 +453,8 @@
          point="org.eclipse.help.contexts">
       <contexts
             file="helpcontexts.xml"
-            plugin="org.prorefactor.doc"/>
+            plugin="org.prorefactor.doc">
+      </contexts>
    </extension>
 
 </plugin>

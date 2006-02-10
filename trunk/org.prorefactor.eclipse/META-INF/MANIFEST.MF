@@ -1,27 +1,28 @@
 Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
 Bundle-Name: ProRefactor
-Bundle-SymbolicName: org.prorefactor.eclipse; singleton=true
-Bundle-Version: 1.2.4
+Bundle-SymbolicName: org.prorefactor.eclipse; singleton:=true
+Bundle-Version: 1.3.0
 Bundle-ClassPath: eclipse.jar
 Bundle-Activator: org.prorefactor.eclipse.Plugin
 Bundle-Vendor: ProRefactor.org
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.jface.text;reprovide=true,
- org.eclipse.ui.workbench.texteditor;reprovide=true,
- org.eclipse.ui.editors;reprovide=true,
- org.eclipse.core.resources;reprovide=true,
- org.eclipse.ui;reprovide=true,
- org.prorefactor.refactor;reprovide=true,
- org.prorefactor.core;reprovide=true,
- org.eclipse.search;reprovide=true,
- org.eclipse.compare;reprovide=true,
- org.eclipse.ui.ide;reprovide=true,
- org.eclipse.ui.console;reprovide=true,
- org.eclipse.core.runtime;reprovide=true,
- org.prorefactor.doc,
- org.eclipse.help
+Require-Bundle: org.eclipse.ui;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport,
+ org.eclipse.help;visibility:=reexport,
+ org.eclipse.jface;visibility:=reexport,
+ org.eclipse.jface.text;visibility:=reexport,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.text;visibility:=reexport,
+ org.eclipse.ui.workbench.texteditor;visibility:=reexport,
+ org.eclipse.compare;visibility:=reexport,
+ org.eclipse.ui.workbench;visibility:=reexport,
+ org.eclipse.ui.console;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport,
+ org.prorefactor.core;visibility:=reexport,
+ org.prorefactor.refactor;visibility:=reexport
 Eclipse-AutoStart: true
-Provide-Package: org.prorefactor.eclipse,
+Export-Package: org.prorefactor.eclipse,
  org.prorefactor.eclipse.actions,
  org.prorefactor.eclipse.dialogs,
  org.prorefactor.eclipse.messages,

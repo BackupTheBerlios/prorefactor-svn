@@ -2,8 +2,7 @@
 ======================================================================
  *SOFTWARE RIGHTS*
 
- ANTLR 1989-2004 Developed by Terence Parr
- Partially supported by University of San Francisco & jGuru.com
+ ANTLR 1989-2005 Developed by Terence Parr @ University of San Francisco
 
  We reserve no legal rights to the ANTLR--it is fully in the
  public domain. An individual or company may do whatever
@@ -96,7 +95,7 @@ UPGRADING?
 
  See
 
-   http://www.antlr.org/blog/CHANGES-2.7.5.txt
+   http://www.antlr.org/blog/CHANGES-2.7.6.txt
 
  for a description of features new in this version. There are no
  incompatibilties known to a previous 2.7.x installation. If you found
@@ -213,12 +212,12 @@ WANNA KNOW ABOUT ANTLR's HISTORY?
  Upon starting his Ph.D. at Purdue in the Fall of 1990, Terence Parr
  began the second total rewrite of ANTLR. The method by which grammars
  may be practically analyzed to generate LL(k) lookahead information 
- was discovered in August of 1990 just before Terence’s return to 
+ was discovered in August of 1990 just before Terence's return to 
  Purdue. Version 1.00 incorporated this algorithm and included the AST
  mechanism, lexical classes, error classes, and automatic error 
  recovery; code quality and portability were higher. In February of 
  1992 1.00 was released via an article in SIGPLAN Notices. Peter Dahl,
- then Ph.D. candidate, and Professor Matt O’Keefe (both at the 
+ then Ph.D. candidate, and Professor Matt O'Keefe (both at the 
  University of Minnesota) tested this version extensively. Dana 
  Hoggatt (Micro Data Base Systems, Inc.) tested 1.00 heavily. 
 
@@ -358,5 +357,12 @@ WANNA KNOW ABOUT ANTLR's HISTORY?
 
   * A MSI based installer has been contributed by Wolfgang Haefelinger. 
 
+ 2.7.6 release xmas 2005 was mainly a bug fix release.
+
+  * Scott Stanchfield added file/line information for Java target and
+    cleaned up a bunch of classloader stuff.
+
+  * Added stuff to support Prashant Deva's cool ANTLRStudio.
+    
 ======================================================================
              README.txt - last update December 18th, 2004

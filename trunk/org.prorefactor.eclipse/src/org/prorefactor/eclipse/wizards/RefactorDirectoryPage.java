@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.help.WorkbenchHelp;
+import org.eclipse.ui.PlatformUI;
 
 
 public class RefactorDirectoryPage extends WizardPage {
@@ -58,7 +58,7 @@ public class RefactorDirectoryPage extends WizardPage {
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NULL);
 		composite.setFont(parent.getFont());
-		WorkbenchHelp.setHelp(composite, CONTEXT_HELP_ID);
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(composite, CONTEXT_HELP_ID);
 
 		initializeDialogUnits(parent);
 

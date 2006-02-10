@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension
+         id="org.prolint.popup"
+         name="Prolint Popup Menus"
+         point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+            targetID="org.eclipse.ui.views.ResourceNavigator"
+            id="org.prolint.popup.navigator">
+         <menu
+               label="Pro&amp;lint"
+               path="additions"
+               id="org.prolint.popup.navigator.menu1">
+            <separator name="separator1"/>
+         </menu>
+         <action
+               label="&amp;Clear Prolint Markers"
+               class="org.prolint.eclipse.ClearMarkersAction"
+               menubarPath="org.prolint.popup.navigator.menu1/separator1"
+               id="org.prolint.popup.navigator.clearMarkers"/>
+         <action
+               label="&amp;Lint"
+               class="org.prolint.eclipse.LintAction"
+               menubarPath="org.prolint.popup.navigator.menu1/separator1"
+               id="org.prolint.popup.navigator.lint"/>
+      </viewerContribution>
+   </extension>
+   <extension
+         id="prolintmarker"
+         name="Prolint Problem Marker"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
+      <attribute name="prolintmarker.column"/>
+      <attribute name="prolintmarker.ruleid"/>
+      <super type="org.eclipse.core.resources.textmarker"/>
+   </extension>
+
+</plugin>

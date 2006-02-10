@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Prolint/Eclipse Core
+Bundle-SymbolicName: org.prolint; singleton:=true
+Bundle-Version: 0.1.3
+Bundle-ClassPath: core.jar,hibernate2.jar
+Bundle-Activator: org.prolint.eclipse.Plugin
+Bundle-Vendor: Prolint.org
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.ui;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport,
+ org.prorefactor.lib;visibility:=reexport,
+ org.prorefactor.core;visibility:=reexport,
+ org.prorefactor.refactor;visibility:=reexport,
+ org.prorefactor.eclipse;visibility:=reexport
+Eclipse-AutoStart: true
+Export-Package: org.prolint.core,
+ org.prolint.eclipse,
+ org.prolint.rules,
+ org.prolint.unittest

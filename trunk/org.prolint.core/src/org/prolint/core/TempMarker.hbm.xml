@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping >
+
+	<class name="org.prolint.core.TempMarker" table="TempMarker">
+
+		<id name="id" column="id" type="long">
+			<generator class="native"/>
+		</id>
+
+		<property name="fileIndex" type="int">
+			<column name="fileIndex" index="tmk1" unique-key="tmk1"/>
+		</property>
+		<property name="line" type="int">
+			<column name="line" index="tmk1" unique-key="tmk1" />
+		</property>
+		<property name="column" type="int">
+			<column name="column" index="tmk1" unique-key="tmk1" />
+		</property>
+		<property name="ruleIndex" type="int">
+			<column name="ruleIndex" index="tmk1" unique-key="tmk1" />
+		</property>
+		<property name="message" type="string" column="message" />
+		<property name="numchars" type="int" column="numchars" />
+		
+	</class>
+	
+</hibernate-mapping>

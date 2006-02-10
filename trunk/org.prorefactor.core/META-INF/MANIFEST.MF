@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ProRefactor Core
+Bundle-SymbolicName: org.prorefactor.core
+Bundle-Version: 1.3.0
+Bundle-ClassPath: core.jar
+Bundle-Vendor: ProRefactor.org
+Bundle-Localization: plugin
+Export-Package: com.joanju,
+ org.prorefactor.core,
+ org.prorefactor.core.fun,
+ org.prorefactor.core.schema,
+ org.prorefactor.core.unittest,
+ org.prorefactor.nodetypes,
+ org.prorefactor.treeparser,
+ org.prorefactor.treeparser01,
+ org.prorefactor.treeparserbase,
+ org.prorefactor.widgettypes
+Require-Bundle: org.prorefactor.lib;visibility:=reexport
