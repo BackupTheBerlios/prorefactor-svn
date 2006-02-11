@@ -1062,19 +1062,13 @@ display bInvoice except totalAmount.</programlisting>
 
       <programlisting>svn checkout svn://svn.berlios.de/prorefactor/trunk</programlisting>
 
-      <para>This will create several directories named
-      <filename>org.prorefactor.*</filename>.</para>
-
-      <para>Once you have checked the source out from the repository, you are
-      ready to load that source into Eclipse projects.</para>
+      <para>This will create a directory named <filename>trunk</filename> and
+      several directories named <filename>org.prorefactor.*</filename>.</para>
 
       <para>From the Eclipse menu, choose <guimenuitem>File &gt; Import...
-      &gt; Existing Project into Workspace</guimenuitem> for each of the
-      <literal>org.prorefactor</literal> project directories in the following
-      order: <literal>lib</literal>, <literal>core</literal>,
-      <literal>refactor</literal>, <literal>eclipse</literal>, and then the
-      rest. Eclipse will automatically build (compile) each project as you
-      import it.</para>
+      &gt; Existing Project into Workspace</guimenuitem>. Browse to select
+      <filename>trunk</filename> as the root directory, and then Eclipse will
+      allow you to import all of the projects at once.</para>
     </section>
 
     <section>
@@ -1568,6 +1562,12 @@ END.
               not yet decided if the two should be part of the same project.
               Prolint/Eclipse is in early development, and not yet generally
               useful for real work.</para>
+            </listitem>
+
+            <listitem>
+              <para>The instructions for "Extending ProRefactor" are now much
+              simpler. The same applies for extending Prolint/Eclipse. No
+              excuses. :)</para>
             </listitem>
           </itemizedlist>
         </listitem>
