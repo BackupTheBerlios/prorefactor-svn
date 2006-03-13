@@ -1128,7 +1128,7 @@ display bInvoice except totalAmount.</programlisting>
       Choose <guilabel>Window &gt; Preferences &gt; Ant &gt; Runtime &gt;
       Classpath</guilabel>. Select <guilabel>Global Entries</guilabel>. Click
       <guibutton>Add Jars...</guibutton>, and select
-      <filename>org.prorefactor.antlr/antlr.jar</filename> file. Click
+      <filename>org.prorefactor.lib/antlr/antlr.jar</filename> file. Click
       <guibutton>Add Variable...</guibutton> and enter <literal>
       ${workspace_loc:/org.prorefactor.core/bin/}</literal>. This is required
       because there is additional post-processing which must be done after
