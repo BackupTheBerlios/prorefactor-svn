@@ -50,6 +50,9 @@ public final class NodeFactory {
 		case TokenTypes.REPEAT:
 		case TokenTypes.FUNCTION:
 		case TokenTypes.PROCEDURE:
+		case TokenTypes.CONSTRUCTOR:
+		case TokenTypes.DESTRUCTOR:
+		case TokenTypes.METHOD:
 			// We check that these are statement heads, whether the keyword is reserved or not.
 			if (parser.attrGetI(handle, IConstants.STATEHEAD) != 0 )
 				return new BlockNode(handle, JPNode.nullConfig);

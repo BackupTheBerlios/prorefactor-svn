@@ -155,7 +155,9 @@ block_preselect
 functioncall
 	:	#(ACCUMULATE accum_what (#(BY expression (DESCENDING)?))? expression )
 	|	#(ADDINTERVAL LEFTPAREN expression COMMA expression COMMA expression RIGHTPAREN )
+	|	#(AUDITENABLED LEFTPAREN (expression)? RIGHTPAREN )
 	|	canfindfunc // has extra "action." support handling in this tree parser.
+	|	#(CAST LEFTPAREN field COMMA TYPE_NAME RIGHTPAREN )
 	|	currentvaluefunc // is also a pseudfn.
 	|	dynamiccurrentvaluefunc // is also a pseudfn.
 	|	#(DYNAMICFUNCTION LEFTPAREN expression (#(IN_KW expression))? (COMMA parameter)* RIGHTPAREN (NOERROR_KW)? )
@@ -168,11 +170,11 @@ functioncall
 	|	#(FRAMELINE (LEFTPAREN ID RIGHTPAREN)? )
 	|	#(FRAMEROW (LEFTPAREN ID RIGHTPAREN)? )
 	|	#(GETCODEPAGES (funargs)? )
+	|	#(GUID LEFTPAREN (expression)? RIGHTPAREN )
 	|	#(IF expression THEN expression ELSE expression )
 	|	ldbnamefunc 
 	|	lengthfunc // is also a pseudfn.
 	|	#(LINECOUNTER (LEFTPAREN ID RIGHTPAREN)? )
-	|	#(LOADPICTURE (funargs)? )
 	|	#(MTIME LEFTPAREN (expression)? RIGHTPAREN )
 	|	nextvaluefunc // is also a pseudfn.
 		// ENTERED and NOTENTERED are only dealt with as part of an expression term. See: exprt.
@@ -203,12 +205,14 @@ parameter
 	|	#(INPUT parameter_arg )
 	;
 parameter_arg
-	:	TABLEHANDLE fld[CQ.INIT] (APPEND)?
-	|	TABLE (FOR)? tbl[CQ.TEMPTABLESYMBOL] (APPEND)?
-	|	DATASET ID (APPEND)? (BYVALUE|BYREFERENCE)?
-	|	DATASETHANDLE ID (APPEND)? (BYVALUE|BYREFERENCE)?
-	|	ID AS datatype_var
-	|	expression
+	:	(	TABLEHANDLE fld[CQ.INIT] parameter_dataset_options
+		|	TABLE (FOR)? tbl[CQ.TEMPTABLESYMBOL] parameter_dataset_options
+		|	DATASET ID parameter_dataset_options
+		|	DATASETHANDLE ID parameter_dataset_options
+		|	ID AS (	CLASS TYPE_NAME | datatype_com | datatype_var )
+		|	expression (AS datatype_com)?
+		)
+		(BYPOINTER|BYVARIANTPOINTER)?
 	;
 
 filenameorvalue 
@@ -217,14 +221,19 @@ filenameorvalue
 	;
 
 exprt
-	:	constant
-	|	#(USER_FUNC parameterlist_noroot )
-	|	functioncall
-	|	systemhandlename
+	:	#(LEFTPAREN expression RIGHTPAREN )
+	|	constant
 	|	widattr
+	|	#(USER_FUNC parameterlist_noroot )
+	|	#(LOCAL_METHOD_REF parameterlist_noroot )
+	|	( #(NEW TYPE_NAME) )=> #(NEW TYPE_NAME parameterlist )
+	|	// SUPER is amibiguous between functioncall and systemhandlename
+		(	options{generateAmbigWarnings=false;}
+		:	functioncall
+		|	systemhandlename
+		)
 	|	fld[CQ.REF]
 	|	#(Entered_func fld[CQ.SYMBOL] (NOT)? ENTERED )
-	|	#(LEFTPAREN expression RIGHTPAREN )
 	|	tbl[CQ.REF] // for DISPLAY buffername, etc.
 	;
 
@@ -284,21 +293,6 @@ fld1[int contextQualifier]
 fld2[int contextQualifier]
 	:	#(ref:Field_ref (INPUT)? (frame_ref|browse_ref)? id:ID (array_subscript)? )
 		{action.field(#ref, #id, contextQualifier, 2);}
-	;
-
-array_subscript
-	:	#(Array_subscript LEFTBRACE expression (FOR expression)? RIGHTBRACE )
-	;
-
-method_param_list
-	:	#(Method_param_list LEFTPAREN (method_parameter)? (COMMA (method_parameter)?)* RIGHTPAREN )
-	;
-method_parameter
-	:	#(	Method_parameter
-			(OUTPUT | INPUTOUTPUT)?
-			expression (AS datatype_com)?
-			(BYPOINTER|BYVARIANTPOINTER)?
-		)
 	;
 
 
@@ -463,8 +457,21 @@ columnformat
 		)
 	;
 
+constructorstate
+	:	#(	c:CONSTRUCTOR
+			{action.scopeAdd(#c);}
+			(PUBLIC|PROTECTED) TYPE_NAME function_params
+			block_colon code_block #(END (CONSTRUCTOR)? ) state_end
+			{action.scopeClose(#c);}
+		)
+	;
+	
 createstate
 	:	#(CREATE tbl[CQ.UPDATING] (#(USING (ROWID|RECID) expression))? (NOERROR_KW)? state_end )
+	;
+
+create_whatever_args
+	:	fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)?
 	;
 
 createautomationobjectstate
@@ -483,40 +490,12 @@ createbufferstate
 		)
 	;
 
-createcallstate
-	:	#(CREATE CALL fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
-createdatasetstate
-	:	#(CREATE DATASET fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
-createdatasourcestate
-	:	#(CREATE DATASOURCE fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
-createquerystate
-	:	#(CREATE QUERY fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
-createsaxreaderstate
-	:	#(CREATE SAXREADER fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
 createserverstate
 	:	#(CREATE SERVER fld[CQ.UPDATING] (assign_opt)? state_end )
 	;
 
 createserversocketstate
 	:	#(CREATE SERVERSOCKET fld[CQ.UPDATING] (NOERROR_KW)? state_end )
-	;
-
-createsoapheaderstate
-	:	#(CREATE SOAPHEADER fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
-createsoapheaderentryrefstate
-	:	#(CREATE SOAPHEADERENTRYREF fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
 	;
 
 createsocketstate
@@ -539,14 +518,6 @@ createwidgetstate
 		)
 	;
 
-createxdocumentstate
-	:	#(CREATE XDOCUMENT fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
-createxnoderefstate
-	:	#(CREATE XNODEREF fld[CQ.UPDATING] (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
-	;
-
 ddegetstate
 	:	#(DDE GET expression TARGET fld[CQ.UPDATING] ITEM expression (#(TIME expression))? (NOERROR_KW)? state_end )
 	;
@@ -560,7 +531,7 @@ dderequeststate
 	;
 
 definebrowsestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BROWSE
+	:	#(	def:DEFINE (def_shared)? (def_visib)? BROWSE
 			id:ID { push(action.defineBrowse(#def, #id)); }
 			(#(QUERY ID))? (lockhow|NOWAIT)*
 			(	#(	DISPLAY
@@ -598,15 +569,17 @@ definebrowsestate
 	;
 
 definebufferstate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUFFER id:ID
-			FOR rec:tbl[CQ.SYMBOL]
+	:	#(	def:DEFINE (def_shared)? (def_visib)? BUFFER id:ID
+			FOR (TEMPTABLE)? rec:tbl[CQ.SYMBOL]
 			{ action.defineBuffer(#def, #id, #rec, false); }
-			(PRESELECT)? (label_constant)? (#(FIELDS (fld1[CQ.SYMBOL])* ))? state_end
+			(PRESELECT)? (label_constant)?
+			(namespace_uri)? (namespace_prefix)?
+			(#(FIELDS (fld1[CQ.SYMBOL])* ))? state_end
 		)
 	;
 
 definebuttonstate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUTTON 
+	:	#(	def:DEFINE (def_shared)? (def_visib)? BUTTON 
 			id:ID { push(action.defineSymbol(BUTTON, #def, #id)); }
 			(	AUTOGO
 			|	AUTOENDKEY
@@ -635,8 +608,9 @@ definebuttonstate
 	;
 
 definedatasetstate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASET
+	:	#(	def:DEFINE (def_shared)? (def_visib)? DATASET
 			id:ID { push(action.defineSymbol(DATASET, #def, #id)); }
+			(namespace_uri)? (namespace_prefix)? (REFERENCEONLY)?
 			FOR tbl[CQ.INIT] (COMMA tbl[CQ.INIT])*
 			( data_relation ( (COMMA)? data_relation)* )?
 			state_end
@@ -654,10 +628,11 @@ field_mapping_phrase
 	;
 
 definedatasourcestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASOURCE
+	:	#(	def:DEFINE (def_shared)? (def_visib)? DATASOURCE
 			id:ID { push(action.defineSymbol(DATASOURCE, #def, #id)); }
 			FOR (#(QUERY ID))?
 			(source_buffer_phrase)? (COMMA source_buffer_phrase)*
+			state_end
 			{ action.addToSymbolScope(pop()); }
 		)
 	;
@@ -668,7 +643,7 @@ source_buffer_phrase
 	;
 
 defineframestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? FRAME
+	:	#(	def:DEFINE (def_shared)? (def_visib)? FRAME
 			id:ID { action.frameDef(#def, #id); }
 			(form_item[CQ.SYMBOL])*
 			(	#(HEADER (display_item)+ )
@@ -680,7 +655,7 @@ defineframestate
 	;
 
 defineimagestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? IMAGE
+	:	#(	def:DEFINE (def_shared)? (def_visib)? IMAGE
 			id:ID { push(action.defineSymbol(IMAGE, #def, #id)); }
 			(	#(LIKE fld[CQ.SYMBOL] (VALIDATE)?)
 			|	imagephrase_opt 
@@ -698,7 +673,7 @@ defineimagestate
 	;
 
 definemenustate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? MENU
+	:	#(	def:DEFINE (def_shared)? (def_visib)? MENU
 			id:ID { push(action.defineSymbol(MENU, #def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
 			{ action.addToSymbolScope(pop()); }
@@ -740,16 +715,17 @@ menu_list_item
 	;
 
 defineparameterstate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)?
+	:	#(	def:DEFINE (def_shared)? (def_visib)?
 			(	PARAMETER BUFFER bid:ID FOR brec:tbl[CQ.SYMBOL]
 				{action.defineBuffer(#def, #bid, #brec, true);}
 				(PRESELECT)? (label_constant)? (#(FIELDS (fld1[CQ.SYMBOL])* ))?
 			|	(INPUT|OUTPUT|INPUTOUTPUT|RETURN) PARAMETER
-				(	TABLE FOR tbl[CQ.TEMPTABLESYMBOL] (APPEND)?
-				|	TABLEHANDLE (FOR)? id:ID (APPEND)?
+				(	TABLE FOR tbl[CQ.TEMPTABLESYMBOL] (APPEND|BIND)*
+				|	TABLEHANDLE (FOR)? id:ID (APPEND|BIND)*
 					{ action.addToSymbolScope(action.defineVariable(#def, #id, HANDLE)); }
-				|	DATASET FOR ID (APPEND|BYVALUE)*
-				|	DATASETHANDLE id3:ID (BYVALUE)?
+				|	DATASET FOR ds:ID (APPEND|BYVALUE|BIND)*
+					{ action.addToSymbolScope(action.defineSymbol(DATASET, #ds, #ds)); }
+				|	DATASETHANDLE id3:ID (APPEND|BYVALUE|BIND)*
 					{ action.addToSymbolScope(action.defineVariable(#def, #id3, HANDLE)); }
 				|	id2:ID { push(action.defineVariable(#def, #id2)); }
 					defineparam_var (triggerphrase)?
@@ -762,6 +738,7 @@ defineparameterstate
 defineparam_var
 	:	(	#(	as:AS
 				(	(HANDLE (TO)? datatype_dll)=> HANDLE (TO)? datatype_dll
+				|	CLASS TYPE_NAME
 				|	datatype_param
 				)
 			)
@@ -775,7 +752,7 @@ defineparam_var
 	;
 
 definequerystate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? QUERY
+	:	#(	def:DEFINE (def_shared)? (def_visib)? QUERY
 			id:ID { push(action.defineSymbol(QUERY, #def, #id)); }
 			FOR tbl[CQ.INIT] (record_fields)?
 			(COMMA tbl[CQ.INIT] (record_fields)?)*
@@ -786,7 +763,7 @@ definequerystate
 	;
 
 definerectanglestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? RECTANGLE
+	:	#(	def:DEFINE (def_shared)? (def_visib)? RECTANGLE
 			id:ID { push(action.defineSymbol(RECTANGLE, #def, #id)); }
 			(	NOFILL
 			|	#(EDGECHARS expression )
@@ -804,12 +781,12 @@ definerectanglestate
 	;
 
 definestreamstate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? STREAM id:ID state_end )
+	:	#(	def:DEFINE (def_shared)? (def_visib)? STREAM id:ID state_end )
 		{ action.addToSymbolScope(action.defineSymbol(STREAM, #def, #id)); }
 	;
 
 definesubmenustate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? SUBMENU
+	:	#(	def:DEFINE (def_shared)? (def_visib)? SUBMENU
 			id:ID { push(action.defineSymbol(SUBMENU, #def, #id)); }
 			(menu_opt)* (menu_list_item)* state_end
 		)
@@ -817,9 +794,11 @@ definesubmenustate
 	;
    
 definetemptablestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? TEMPTABLE id:ID
+	:	#(	def:DEFINE (def_shared)? (def_visib)? TEMPTABLE id:ID
 			{	action.defineTemptable(#def, #id); }
 			(UNDO|NOUNDO)?
+			(namespace_uri)? (namespace_prefix)?
+			(REFERENCEONLY)?
 			(def_table_like)?
 			(label_constant)?
 			(	#(	BEFORETABLE bt:ID
@@ -849,14 +828,14 @@ def_table_field
 	;
    
 defineworktablestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? WORKTABLE id:ID
+	:	#(	def:DEFINE (def_shared)? (def_visib)? WORKTABLE id:ID
 			{	action.defineWorktable(#def, #id); }
 			(NOUNDO)? (def_table_like)? (label_constant)? (def_table_field)* state_end
 		)
 	;
 
 definevariablestate
-	:	#(	def:DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? VARIABLE
+	:	#(	def:DEFINE (def_shared)? (def_visib)? VARIABLE
 			id:ID { push(action.defineVariable(#def, #id)); }
 			(fieldoption)* (triggerphrase)? state_end
 		)
@@ -867,6 +846,15 @@ deletestate
 	:	#(DELETE_KW tbl[CQ.UPDATING] (#(VALIDATE funargs))? (NOERROR_KW)? state_end )
 	;
 
+destructorstate
+	:	#(	d:DESTRUCTOR 
+			{action.scopeAdd(#d);}
+			PUBLIC TYPE_NAME LEFTPAREN RIGHTPAREN block_colon
+			code_block #(END (DESTRUCTOR)? ) state_end
+			{action.scopeClose(#d);}
+		)
+	;
+	
 disablestate
 	:	#(	head:DISABLE  { action.frameInitializingStatement(#head); }
 			(UNLESSHIDDEN)? (#(ALL (#(EXCEPT (fld[CQ.SYMBOL])*))?) | (form_item[CQ.SYMBOL])+)? (framephrase)?
@@ -947,7 +935,12 @@ exportstate
 	;
 
 fieldoption
-	:	#(as:AS datatype_field )  {action.defAs(#as);}
+	:	#(as:AS
+			(	CLASS TYPE_NAME
+			|	datatype_field
+			)
+		)
+		{action.defAs(#as);}
 	|	casesens_or_not
 	|	color_expr
 	|	#(COLUMNCODEPAGE expression )
@@ -965,6 +958,8 @@ fieldoption
 	|	NOUNDO
 	|	viewasphrase
 	|	TTCODEPAGE
+	|	xml_data_type
+	|	xml_node_type
 	;
 
 findstate
@@ -1015,6 +1010,7 @@ form_item[int contextQualifier]
 			|	constant (formatphrase)?
 			|	spacephrase
 			|	skipphrase
+			|	widget_id
 			|	CARET
 			|	// formItem() must be called after fld[], but before formatphrase.
 				fld[contextQualifier] {action.formItem(#fi);} (aggregatephrase|formatphrase)*
@@ -1070,7 +1066,7 @@ frame_ref
 
 framephrase
 	:	#(	WITH
-			(	#(ACCUM (expression)? )
+			(	#(ACCUMULATE (expression)? )
 			|	ATTRSPACE | NOATTRSPACE
 			|	#(CANCELBUTTON fld[CQ.SYMBOL] )
 			|	CENTERED 
@@ -1115,6 +1111,7 @@ framephrase
 			|	#(With_columns expression COLUMNS )
 			|	#(With_down expression DOWN )
 			|	DOWN
+			|	widget_id
 			|	WITH
 			)*
 		)
@@ -1123,8 +1120,10 @@ framephrase
 functionstate
 	:	#(	f:FUNCTION id:ID
 			{	action.scopeAdd(#f); }	
-			(RETURNS|RETURN)? datatype_var (PRIVATE)?
-			( #(Parameter_list LEFTPAREN (function_param)? (COMMA function_param)* RIGHTPAREN ) )?
+			(RETURNS|RETURN)?
+			( CLASS TYPE_NAME | datatype_var ) 
+			(PRIVATE)?
+			( function_params )?
 			(	FORWARDS (LEXCOLON|PERIOD|EOF) {action.funcForward(#id);}
 			|	(IN_KW SUPER)=> IN_KW SUPER (LEXCOLON|PERIOD|EOF)  {action.funcForward(#id);}
 			|	(MAP (TO)? ID)? IN_KW expression (LEXCOLON|PERIOD|EOF)  {action.funcForward(#id);}
@@ -1144,18 +1143,21 @@ function_param
 	|	#(INPUTOUTPUT function_param_arg )
 	;
 function_param_arg
-	:	(TABLE)=> TABLE (FOR)? tbl[CQ.TEMPTABLESYMBOL] (APPEND)?
-	|	(TABLEHANDLE)=> TABLEHANDLE (FOR)? id2:ID (APPEND)?
+	:	TABLE (FOR)? tbl[CQ.TEMPTABLESYMBOL] (APPEND)? (BIND)?
+	|	TABLEHANDLE (FOR)? id2:ID (APPEND)? (BIND)?
 		{ action.addToSymbolScope(action.defineVariable(#id2, #id2, HANDLE)); }
+	|	DATASET ds:ID (APPEND)? (BIND)?
+		{ action.addToSymbolScope(action.defineSymbol(DATASET, #ds, #ds)); }
+	|	DATASETHANDLE dsh:ID (APPEND)? (BIND)?
+		{ action.addToSymbolScope(action.defineVariable(#dsh, #dsh, HANDLE)); }
 	|	// ID AS is optional - you are allowed to list just the datatype.
-		(id:ID as:AS)? datatype_var (extentphrase)?
+		(id:ID as:AS)? (CLASS TYPE_NAME | datatype_var) (extentphrase)?
 		{	if (#id != null) {
 				action.addToSymbolScope(action.defineVariable(#id, #id));
 				action.defAs(#as);
 			}
 		}
 	;
-
 getkeyvaluestate
 	:	#(GETKEYVALUE SECTION expression KEY (DEFAULT|expression) VALUE fld[CQ.UPDATING] state_end )
 	;
@@ -1195,6 +1197,29 @@ messagestate
 			)*
 			( #(IN_KW WINDOW expression) )?
 			state_end
+		)
+	;
+
+methodstate
+	:	#(	m:METHOD (PRIVATE|PROTECTED|PUBLIC) (OVERRIDE)? (FINAL)?
+			(	VOID
+			|	CLASS TYPE_NAME
+			|	datatype_var
+			)
+			id:ID
+			{	// Create the scope before calling methodDef.
+				action.scopeAdd(#m);
+				action.methodDef(#id);
+			}
+			function_params
+			(	// Ambiguous on PERIOD, since a block_colon may be a period, and we may also
+				// be at the end of the method declaration for an INTERFACE.
+				// We predicate on the next node being Code_block.
+				// (Upper/lowercase matters. Node: Code_block. Rule/branch: code_block.)
+				(block_colon Code_block)=> block_colon code_block #(END (METHOD)? ) state_end
+			|	state_end
+			)
+			{action.scopeClose(#m);}
 		)
 	;
 

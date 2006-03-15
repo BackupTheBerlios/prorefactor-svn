@@ -4,7 +4,7 @@ JPTreeParser.g - Primary tree parser.
 
 Joanju Proparse Syntax Tree Structure Specification
 
-Copyright (c) 2001-2005 Joanju Limited.
+Copyright (c) 2001-2006 Joanju Software.
 All rights reserved. This program and the accompanying materials 
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -152,13 +152,15 @@ statement
 	|						callstate
 	|						casestate
 	|						choosestate
+	|						classstate
 	|						clearstate
 	|	{state2(_t, 0)}?			closestate			// SQL
 	|	{state2(_t, QUERY)}?			closequerystate
 	|	{state2(_t, STOREDPROCEDURE)}?	closestoredprocedurestate
 	|						colorstate
 	|						compilestate
-	|						connectstate  
+	|						connectstate
+	|						constructorstate
 	|						copylobstate
 	|	{state2(_t, 0)}?			createstate
 	|	{state2(_t, ALIAS)}?			createaliasstate
@@ -166,12 +168,14 @@ statement
 	|	{state2(_t, BROWSE)}?			createbrowsestate
 	|	{state2(_t, BUFFER)}?			createbufferstate
 	|	{state2(_t, CALL)}?			createcallstate
+	|	{state2(_t, CLIENTPRINCIPAL)}? createclientprincipalstate
 	|	{state2(_t, DATABASE)}?		createdatabasestate
 	|	{state2(_t, DATASET)}?			createdatasetstate
 	|	{state2(_t, DATASOURCE)}?		createdatasourcestate
 	|	{state2(_t, INDEX)}?			createindexstate		// SQL
 	|	{state2(_t, QUERY)}?			createquerystate   
 	|	{state2(_t, SAXREADER)}?		createsaxreaderstate
+	|	{state2(_t, SAXWRITER)}?		createsaxwriterstate
 	|	{state2(_t, SERVER)}?			createserverstate
 	|	{state2(_t, SERVERSOCKET)}?		createserversocketstate
 	|	{state2(_t, SOAPHEADER)}?		createsoapheaderstate
@@ -216,6 +220,7 @@ statement
 	|	{state2(_t, PROCEDURE)}?		deleteprocedurestate
 	|	{state2(_t, WIDGET)}?			deletewidgetstate
 	|	{state2(_t, WIDGETPOOL)}?		deletewidgetpoolstate
+	|						destructorstate
 	|	{state2(_t, 0)}?			disablestate
 	|	{state2(_t, TRIGGERS)}?		disabletriggersstate
 	|						disconnectstate
@@ -247,9 +252,11 @@ statement
 	|	{state2(_t, THROUGH)}?		inputoutputthroughstate
 	|	{state2(_t, INTO)}?			insertintostate			// SQL
 	|	{state2(_t, 0)}?			insertstate
+	|						interfacestate
 	|						leavestate
 	|						loadstate  
 	|						messagestate
+	|						methodstate
 	|						nextstate
 	|						nextpromptstate
 	|						onstate  
@@ -365,7 +372,9 @@ pseudfn
 functioncall
 	:	#(ACCUMULATE accum_what (#(BY expression (DESCENDING)?))? expression )
 	|	#(ADDINTERVAL LEFTPAREN expression COMMA expression COMMA expression RIGHTPAREN )
+	|	#(AUDITENABLED LEFTPAREN (expression)? RIGHTPAREN )
 	|	#(CANFIND LEFTPAREN (findwhich)? recordphrase RIGHTPAREN )
+	|	#(CAST LEFTPAREN field COMMA TYPE_NAME RIGHTPAREN )
 	|	currentvaluefunc // is also a pseudfn.
 	|	dynamiccurrentvaluefunc // is also a pseudfn.
 	|	#(DYNAMICFUNCTION LEFTPAREN expression (#(IN_KW expression))? (COMMA parameter)* RIGHTPAREN (NOERROR_KW)? )
@@ -378,11 +387,11 @@ functioncall
 	|	#(FRAMELINE (LEFTPAREN ID RIGHTPAREN)? )
 	|	#(FRAMEROW (LEFTPAREN ID RIGHTPAREN)? )
 	|	#(GETCODEPAGES (funargs)? )
+	|	#(GUID LEFTPAREN (expression)? RIGHTPAREN )
 	|	#(IF expression THEN expression ELSE expression )
 	|	ldbnamefunc 
 	|	lengthfunc // is also a pseudfn.
 	|	#(LINECOUNTER (LEFTPAREN ID RIGHTPAREN)? )
-	|	#(LOADPICTURE (funargs)? )
 	|	#(MTIME LEFTPAREN (expression)? RIGHTPAREN )
 	|	nextvaluefunc // is also a pseudfn.
 		// ENTERED and NOTENTERED are only dealt with as part of an expression term. See: exprt.
@@ -455,6 +464,8 @@ argfunc
 	|	#(GETSIZE funargs )
 	|	#(GETSTRING funargs )
 	|	#(GETUNSIGNEDSHORT funargs )
+	|	#(HEXDECODE funargs )
+	|	#(HEXENCODE funargs )
 	|	#(INDEX funargs )
 	|	#(INTEGER funargs )
 	|	#(INTERVAL funargs )
@@ -477,6 +488,7 @@ argfunc
 	|	#(LISTQUERYATTRS funargs )
 	|	#(LISTSETATTRS funargs )
 	|	#(LISTWIDGETS funargs )
+	|	#(LOADPICTURE funargs )
 	|	#(LOG funargs )
 	|	#(LOGICAL funargs )
 	|	#(LOOKUP funargs )
@@ -501,6 +513,7 @@ argfunc
 	|	#(ROUND funargs )
 	|	#(SDBNAME funargs )
 	|	#(SEARCH funargs )
+	|	#(SETDBCLIENT funargs )
 	|	#(SETUSERID funargs )
 	|	#(SHA1DIGEST funargs )
 	|	#(SQRT funargs )
@@ -510,8 +523,10 @@ argfunc
 	|	#(TOROWID funargs )
 	|	#(TRIM funargs )
 	|	#(TRUNCATE funargs )
+	|	#(TYPEOF funargs )
 	|	#(VALIDEVENT funargs )
 	|	#(VALIDHANDLE funargs )
+	|	#(VALIDOBJECT funargs )
 	|	#(WEEKDAY funargs )
 	|	#(WIDGETHANDLE funargs )
 	|	#(YEAR funargs )
@@ -551,6 +566,7 @@ noargfunc
 	|	FRAMEVALUE
 	|	GENERATEPBESALT
 	|	GENERATERANDOMKEY
+	|	GENERATEUUID
 	|	GATEWAYS
 	|	GOPENDING
 	|	ISATTRSPACE
@@ -587,12 +603,17 @@ parameter
 	|	#(INPUT parameter_arg )
 	;
 parameter_arg
-	:	TABLEHANDLE field (APPEND)?
-	|	TABLE (FOR)? RECORD_NAME (APPEND)?
-	|	DATASET ID (APPEND)? (BYVALUE|BYREFERENCE)?
-	|	DATASETHANDLE ID (APPEND)? (BYVALUE|BYREFERENCE)?
-	|	ID AS (datatype_var)
-	|	expression
+	:	(	TABLEHANDLE field parameter_dataset_options
+		|	TABLE (FOR)? RECORD_NAME parameter_dataset_options
+		|	DATASET ID parameter_dataset_options
+		|	DATASETHANDLE ID parameter_dataset_options
+		|	ID AS (	CLASS TYPE_NAME | datatype_com | datatype_var )
+		|	expression (AS datatype_com)?
+		)
+		(BYPOINTER|BYVARIANTPOINTER)?
+	;
+parameter_dataset_options
+	: (APPEND)? (BYVALUE|BYREFERENCE|BIND)?
 	;
 
 parameterlist
@@ -615,15 +636,13 @@ anyorvalue
 	|	TYPELESS_TOKEN
 	;
 filenameorvalue
-	:	#(VALUE LEFTPAREN expression RIGHTPAREN )
-	|	FILENAME
+	:	valueexpression | FILENAME
 	;
 valueexpression
 	:	#(VALUE LEFTPAREN expression RIGHTPAREN )
 	;
 expressionorvalue
-	:	#(VALUE LEFTPAREN expression RIGHTPAREN )
-	|	expression
+	:	valueexpression | expression
 	;
 
 findwhich
@@ -659,14 +678,19 @@ expression
 	;
 
 exprt
-	:	constant
-	|	#(USER_FUNC parameterlist_noroot )
-	|	functioncall
-	|	systemhandlename
+	:	#(LEFTPAREN expression RIGHTPAREN )
+	|	constant
 	|	widattr
+	|	#(USER_FUNC parameterlist_noroot )
+	|	#(LOCAL_METHOD_REF parameterlist_noroot )
+	|	( #(NEW TYPE_NAME) )=> #(NEW TYPE_NAME parameterlist )
+	|	// SUPER is amibiguous between functioncall and systemhandlename
+		(	options{generateAmbigWarnings=false;}
+		:	functioncall
+		|	systemhandlename
+		)
 	|	field
 	|	#(Entered_func field (NOT)? ENTERED )
-	|	#(LEFTPAREN expression RIGHTPAREN )
 	|	RECORD_NAME // for DISPLAY buffername, etc.
 	;
 
@@ -717,14 +741,7 @@ array_subscript
 	;
 
 method_param_list
-	:	#(Method_param_list LEFTPAREN (method_parameter)? (COMMA (method_parameter)?)* RIGHTPAREN )
-	;
-method_parameter
-	:	#(	Method_parameter
-			(OUTPUT|INPUTOUTPUT)?
-			expression (AS datatype_com)?
-			(BYPOINTER|BYVARIANTPOINTER)?
-		)
+	:	#(Method_param_list LEFTPAREN (parameter)? (COMMA (parameter)?)* RIGHTPAREN )
 	;
 
 constant
@@ -742,11 +759,11 @@ constant
 	;
 
 systemhandlename
-	:	AAMEMORY | ACTIVEWINDOW | CLIPBOARD | CODEBASELOCATOR | COLORTABLE | COMPILER 
+	:	AAMEMORY | ACTIVEWINDOW | AUDITCONTROL | AUDITPOLICY | CLIPBOARD | CODEBASELOCATOR | COLORTABLE | COMPILER 
 	|	COMSELF | CURRENTWINDOW | DEBUGGER | DEFAULTWINDOW
 	|	ERRORSTATUS | FILEINFORMATION | FOCUS | FONTTABLE | LASTEVENT | LOGMANAGER
 	|	MOUSE | PROFILER | RCODEINFORMATION | SECURITYPOLICY | SELF | SESSION
-	|	SOURCEPROCEDURE | TARGETPROCEDURE | TEXTCURSOR | THISPROCEDURE | WEBCONTEXT
+	|	SOURCEPROCEDURE | SUPER | TARGETPROCEDURE | TEXTCURSOR | THISOBJECT | THISPROCEDURE | WEBCONTEXT
 	;
 
 
@@ -759,15 +776,14 @@ systemhandlename
 
 
 aatracestatement
-	:	#(	AATRACE						// statehead, Node attribute state2=...
-			(	(stream_name)?
-				(	(TO|FROM|THROUGH) io_phrase	//		""
-				|	CLOSE				//		"CLOSE"
+	:	#(	AATRACE
+			(	OFF state_end
+			|	#(ON (AALIST)? ) state_end
+			|	(stream_name)?
+				(	(TO|FROM|THROUGH) io_phrase state_end
+				|	CLOSE state_end
 				)
-			|	OFF					//		"OFF"
-			|	#(ON (AALIST)? )			//		"ON"
 			)
-			state_end
 		)
 	;
 
@@ -885,7 +901,7 @@ buffercopystate
 	;
 
 callstate
-	:	#(CALL anyorvalue (expressionorvalue)* state_end )
+	:	#(CALL filenameorvalue (expressionorvalue)* state_end )
 	;
 
 casesens_or_not
@@ -920,6 +936,18 @@ choosestate
 			|	#(PAUSE expression)
 			)*
 			(framephrase)?
+			state_end
+		)
+	;
+
+classstate
+	:	#(	CLASS TYPE_NAME
+			( #(INHERITS TYPE_NAME) )?
+			( #(IMPLEMENTS TYPE_NAME (COMMA TYPE_NAME)* ) )?
+			( FINAL )?
+			block_colon
+			code_block
+			#(END (CLASS)? )
 			state_end
 		)
 	;
@@ -1048,7 +1076,13 @@ compile_append
 connectstate
 	:	#(CONNECT (NOERROR_KW|DDE|filenameorvalue)* state_end )
 	;
-
+	
+constructorstate
+	:	#(	CONSTRUCTOR (PUBLIC|PROTECTED) TYPE_NAME function_params
+			block_colon code_block #(END (CONSTRUCTOR)? ) state_end
+		)
+	;
+	
 convertphrase
 	:	#(	CONVERT 
 			( #(SOURCE (BASE64 | CODEPAGE expression (BASE64)?) ) )?
@@ -1074,6 +1108,10 @@ createstate
 	:	#(CREATE RECORD_NAME (#(USING (ROWID|RECID) expression))? (NOERROR_KW)? state_end )
 	;
 
+create_whatever_args
+	:	field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)?
+	;
+
 createaliasstate
 	:	#(CREATE ALIAS anyorvalue FOR DATABASE anyorvalue (NOERROR_KW)? state_end )
 	;
@@ -1095,27 +1133,38 @@ createbufferstate
 	;
 
 createcallstate
-	:	#(CREATE CALL field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE CALL create_whatever_args state_end )
+	;
+
+createclientprincipalstate
+	:	#(CREATE CLIENTPRINCIPAL create_whatever_args state_end )
 	;
 
 createdatabasestate
-	:	#(CREATE DATABASE expression (#(FROM expression ))? (REPLACE)? (NOERROR_KW)? state_end )
+	:	#(	CREATE DATABASE expression 
+			( #(FROM expression (NEWINSTANCE)? ) )?
+			(REPLACE)? (NOERROR_KW)? state_end
+		)
 	;
 
 createdatasetstate
-	:	#(CREATE DATASET field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE DATASET create_whatever_args state_end )
 	;
 
 createdatasourcestate
-	:	#(CREATE DATASOURCE field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE DATASOURCE create_whatever_args state_end )
 	;
 
 createquerystate
-	:	#(CREATE QUERY field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE QUERY create_whatever_args state_end )
 	;
 
 createsaxreaderstate
-	:	#(CREATE SAXREADER field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE SAXREADER create_whatever_args state_end )
+	;
+
+createsaxwriterstate
+	:	#(CREATE SAXWRITER create_whatever_args state_end )
 	;
 
 createserverstate
@@ -1127,11 +1176,11 @@ createserversocketstate
 	;
 
 createsoapheaderstate
-	:	#(CREATE SOAPHEADER field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE SOAPHEADER create_whatever_args state_end )
 	;
 
 createsoapheaderentryrefstate
-	:	#(CREATE SOAPHEADERENTRYREF field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE SOAPHEADERENTRYREF create_whatever_args state_end )
 	;
 
 createsocketstate
@@ -1159,11 +1208,11 @@ createwidgetpoolstate
 	;
 
 createxdocumentstate
-	:	#(CREATE XDOCUMENT field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE XDOCUMENT create_whatever_args state_end )
 	;
 
 createxnoderefstate
-	:	#(CREATE XNODEREF field (#(IN_KW WIDGETPOOL expression))? (NOERROR_KW)? state_end )
+	:	#(CREATE XNODEREF create_whatever_args state_end )
 	;
 
 currentvaluefunc
@@ -1183,17 +1232,17 @@ datatype_dll_native
 	;
 
 datatype_field
-	:	datatype_var | BLOB | CLOB
+	:	BLOB | CLOB | datatype_var
 	;
 
 datatype_param
-	:	datatype_var | datatype_dll_native
+	:	datatype_dll_native | datatype_var
 	;
 
 datatype_var
 	:	CHARACTER | COMHANDLE | DATE | DATETIME | DATETIMETZ
 		| DECIMAL | HANDLE | INTEGER | LOGICAL | LONGCHAR | MEMPTR
-		| RAW | RECID | ROWID | WIDGETHANDLE
+		| RAW | RECID | ROWID | TYPE_NAME | WIDGETHANDLE
 	;
 
 ddeadvisestate
@@ -1224,8 +1273,17 @@ ddeterminatestate
 	:	#(DDE TERMINATE expression (NOERROR_KW)? state_end )
 	;
 
+def_shared
+	:	SHARED
+	|	#(NEW (GLOBAL)? SHARED )
+	;
+
+def_visib
+	:	( PRIVATE | PROTECTED | PUBLIC )
+	;
+
 definebrowsestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BROWSE ID
+	:	#(	DEFINE (def_shared)? (def_visib)? BROWSE ID
 			(#(QUERY ID))? (lockhow|NOWAIT)*
 			(	#(	DISPLAY
 					(	#(	Form_item
@@ -1259,13 +1317,14 @@ definebrowsestate
 	;
 
 definebufferstate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUFFER ID
-			FOR RECORD_NAME (PRESELECT)? (label_constant)? (#(FIELDS (field)* ))? state_end
+	:	#(	DEFINE (def_shared)? (def_visib)? BUFFER ID
+			FOR (TEMPTABLE)? RECORD_NAME (PRESELECT)? (label_constant)? (namespace_uri)? (namespace_prefix)?
+			(#(FIELDS (field)* ))? state_end
 		)
 	;
 
 definebuttonstate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? BUTTON ID
+	:	#(	DEFINE (def_shared)? (def_visib)? BUTTON ID
 			(	AUTOGO
 			|	AUTOENDKEY
 			|	DEFAULT
@@ -1292,7 +1351,7 @@ definebuttonstate
 	;
 
 definedatasetstate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASET ID
+	:	#(	DEFINE (def_shared)? (def_visib)? DATASET ID (namespace_uri)? (namespace_prefix)? (REFERENCEONLY)?
 			FOR RECORD_NAME (COMMA RECORD_NAME)*
 			( data_relation ( (COMMA)? data_relation)* )?
 			state_end
@@ -1308,9 +1367,10 @@ field_mapping_phrase
 	;
 
 definedatasourcestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? DATASOURCE ID
+	:	#(	DEFINE (def_shared)? (def_visib)? DATASOURCE ID
 			FOR (#(QUERY ID))?
 			(source_buffer_phrase)? (COMMA source_buffer_phrase)*
+			state_end
 		)
 	;
 source_buffer_phrase
@@ -1318,7 +1378,7 @@ source_buffer_phrase
 	;
 
 defineframestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? FRAME ID
+	:	#(	DEFINE (def_shared)? (def_visib)? FRAME ID
 			(form_item)*
 			(	#(HEADER (display_item)+ )
 			|	#(BACKGROUND (display_item)+ )
@@ -1328,7 +1388,7 @@ defineframestate
 	;
 
 defineimagestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? IMAGE ID
+	:	#(	DEFINE (def_shared)? (def_visib)? IMAGE ID
 			(	#(LIKE field (VALIDATE)?)
 			|	imagephrase_opt 
 			|	sizephrase
@@ -1344,7 +1404,7 @@ defineimagestate
 	;
 
 definemenustate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? MENU ID
+	:	#(	DEFINE (def_shared)? (def_visib)? MENU ID
 			(menu_opt)* (menu_list_item)* state_end
 		)
 	;
@@ -1378,13 +1438,13 @@ menu_list_item
 	;
 
 defineparameterstate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)?
+	:	#(	DEFINE (def_shared)? (def_visib)?
 			(	PARAMETER BUFFER ID FOR RECORD_NAME (PRESELECT)? (label_constant)? (#(FIELDS (field)* ))?
 			|	(INPUT|OUTPUT|INPUTOUTPUT|RETURN) PARAMETER
-				(	TABLE FOR RECORD_NAME (APPEND)?
-				|	TABLEHANDLE (FOR)? ID (APPEND)?
-				|	DATASET FOR ID (APPEND|BYVALUE)*
-				|	DATASETHANDLE ID (BYVALUE)?
+				(	TABLE FOR RECORD_NAME (APPEND|BIND)*
+				|	TABLEHANDLE (FOR)? ID (APPEND|BIND)*
+				|	DATASET FOR ID (APPEND|BYVALUE|BIND)*
+				|	DATASETHANDLE ID (APPEND|BYVALUE|BIND)*
 				|	ID defineparam_var (triggerphrase)?
 				)
 			)
@@ -1394,6 +1454,7 @@ defineparameterstate
 defineparam_var
 	:	(	#(	AS
 				(	(HANDLE (TO)? datatype_dll)=> HANDLE (TO)? datatype_dll
+				|	CLASS TYPE_NAME
 				|	datatype_param
 				)
 			)
@@ -1405,7 +1466,7 @@ defineparam_var
 	;
 
 definequerystate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? QUERY ID
+	:	#(	DEFINE (def_shared)? (def_visib)? QUERY ID
 			FOR RECORD_NAME (record_fields)?
 			(COMMA RECORD_NAME (record_fields)?)*
 			( #(CACHE expression) | SCROLLING | RCODEINFORMATION)*
@@ -1414,7 +1475,7 @@ definequerystate
 	;
 
 definerectanglestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? RECTANGLE ID
+	:	#(	DEFINE (def_shared)? (def_visib)? RECTANGLE ID
 			(	NOFILL
 			|	#(EDGECHARS expression )
 			|	#(EDGEPIXELS expression )
@@ -1430,19 +1491,20 @@ definerectanglestate
 	;
 
 definestreamstate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? STREAM ID state_end
-		)
+	:	#(	DEFINE (def_shared)? (def_visib)? STREAM ID state_end )
 	;
 
 definesubmenustate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? SUBMENU ID
+	:	#(	DEFINE (def_shared)? (def_visib)? SUBMENU ID
 			(menu_opt)* (menu_list_item)* state_end
 		)
 	;
    
 definetemptablestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? TEMPTABLE ID
+	:	#(	DEFINE (def_shared)? (def_visib)? TEMPTABLE ID
 			(UNDO|NOUNDO)?
+			(namespace_uri)? (namespace_prefix)?
+			(REFERENCEONLY)?
 			(def_table_like)?
 			(label_constant)?
 			(#(BEFORETABLE ID))?
@@ -1465,13 +1527,13 @@ def_table_field
 	;
    
 defineworktablestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? WORKTABLE ID
+	:	#(	DEFINE (def_shared)? (def_visib)? WORKTABLE ID
 			(NOUNDO)? (def_table_like)? (label_constant)? (def_table_field)* state_end
 		)
 	;
 
 definevariablestate
-	:	#(	DEFINE (#(NEW (GLOBAL)? SHARED ) | SHARED)? VARIABLE ID
+	:	#(	DEFINE (def_shared)? (def_visib)? VARIABLE ID
 			(fieldoption)* (triggerphrase)? state_end
 		)
 	;
@@ -1499,7 +1561,13 @@ deletewidgetstate
 deletewidgetpoolstate
 	:	#(DELETE_KW WIDGETPOOL (expression)? (NOERROR_KW)? state_end )
 	;
-
+	
+destructorstate
+	:	#(	DESTRUCTOR PUBLIC TYPE_NAME LEFTPAREN RIGHTPAREN block_colon
+			code_block #(END (DESTRUCTOR)? ) state_end
+		)
+	;
+	
 dictionarystate
 	:	#(DICTIONARY state_end )
 	;
@@ -1594,7 +1662,11 @@ extentphrase
 	;
 
 fieldoption
-	:	#(AS datatype_field )
+	:	#(	AS
+			(	CLASS TYPE_NAME
+			|	datatype_field
+			)
+		)
 	|	casesens_or_not
 	|	color_expr
 	|	#(COLUMNCODEPAGE expression )
@@ -1612,6 +1684,8 @@ fieldoption
 	|	NOUNDO
 	|	viewasphrase
 	|	TTCODEPAGE
+	|	xml_data_type
+	|	xml_node_type
 	;
 
 fillinphrase
@@ -1636,6 +1710,7 @@ form_item
 			|	constant (formatphrase)?
 			|	spacephrase
 			|	skipphrase
+			|	widget_id
 			|	CARET
 			|	field (aggregatephrase|formatphrase)*
 			|	assign_equal
@@ -1679,14 +1754,15 @@ formatphrase
 			|	NOTABSTOP 
 			|	#(VALIDATE funargs)
 			|	#(WHEN expression)
-			|	viewasphrase 
+			|	viewasphrase
+			|	widget_id
 			)+
 		)
 	;
 
 framephrase
 	:	#(	WITH
-			(	#(ACCUM (expression)? )
+			(	#(ACCUMULATE (expression)? )
 			|	ATTRSPACE | NOATTRSPACE
 			|	#(CANCELBUTTON field )
 			|	CENTERED 
@@ -1731,6 +1807,7 @@ framephrase
 			|	#(With_columns expression COLUMNS )
 			|	#(With_down expression DOWN )
 			|	DOWN
+			|	widget_id
 			|	WITH
 			)*
 		)
@@ -1738,8 +1815,10 @@ framephrase
 
 functionstate
 	:	#(	FUNCTION ID
-			(RETURNS|RETURN)? datatype_var (PRIVATE)?
-			( #(Parameter_list LEFTPAREN (function_param)? (COMMA function_param)* RIGHTPAREN ) )?
+			(RETURNS|RETURN)?
+			( CLASS TYPE_NAME | datatype_var ) 
+			(PRIVATE)?
+			( function_params )?
 			(	FORWARDS (LEXCOLON|PERIOD|EOF)
 			|	(IN_KW SUPER)=> IN_KW SUPER (LEXCOLON|PERIOD|EOF)
 			|	(MAP (TO)? ID)? IN_KW expression (LEXCOLON|PERIOD|EOF)
@@ -1751,6 +1830,9 @@ functionstate
 			)
 		)
 	;
+function_params
+	:	#(Parameter_list LEFTPAREN (function_param)? (COMMA function_param)* RIGHTPAREN )
+	;
 function_param
 	:	#(BUFFER (ID)? FOR RECORD_NAME (PRESELECT)? )
 	|	#(INPUT function_param_arg )
@@ -1758,9 +1840,10 @@ function_param
 	|	#(INPUTOUTPUT function_param_arg )
 	;
 function_param_arg
-	:	TABLE (FOR)? RECORD_NAME (APPEND)?
-	|	TABLEHANDLE (FOR)? ID (APPEND)?
-	|	(ID AS)? datatype_var (extentphrase)?
+	:	TABLE (FOR)? RECORD_NAME (APPEND)? (BIND)?
+	|	TABLEHANDLE (FOR)? ID (APPEND)? (BIND)?
+	|	(DATASET|DATASETHANDLE) ID (APPEND)? (BIND)?
+	|	(ID AS)? (CLASS TYPE_NAME | datatype_var) (extentphrase)?
 	;
 
 getstate
@@ -1844,7 +1927,11 @@ inputoutputthroughstate
 insertstate
 	:	#(INSERT RECORD_NAME (#(EXCEPT (field)*))? (#(USING (ROWID|RECID) expression))? (framephrase)? (NOERROR_KW)? state_end )
 	;
-
+	
+interfacestate
+	:	#(INTERFACE TYPE_NAME block_colon code_block #(END (INTERFACE)?) state_end )
+	;
+	
 io_phrase
 	:	(	#(OSDIR LEFTPAREN expression RIGHTPAREN (NOATTRLIST)? )
 		|	#(PRINTER  (.)? )
@@ -1919,6 +2006,31 @@ messagestate
 			( #(IN_KW WINDOW expression) )?
 			state_end
 		)
+	;
+
+methodstate
+	:	#(	METHOD (PRIVATE|PROTECTED|PUBLIC) (OVERRIDE)? (FINAL)?
+			(	VOID
+			|	CLASS TYPE_NAME
+			|	datatype_var
+			)
+			ID
+			function_params
+			(	// Ambiguous on PERIOD, since a block_colon may be a period, and we may also
+				// be at the end of the method declaration for an INTERFACE.
+				// We predicate on the next node being Code_block.
+				// (Upper/lowercase matters. Node: Code_block. Rule/branch: code_block.)
+				(block_colon Code_block)=> block_colon code_block #(END (METHOD)? ) state_end
+			|	state_end
+			)
+		)
+	;
+
+namespace_prefix
+	:	#(NAMESPACEPREFIX constant )
+	;
+namespace_uri
+	:	#(NAMESPACEURI constant )
 	;
 
 nextstate
@@ -2576,6 +2688,10 @@ waitforstate
 		)
 	;
 
+widget_id: #(WIDGETID expression ) ;
+
+xml_data_type: #(XMLDATATYPE constant ) ;
+xml_node_type: #(XMLNODETYPE constant ) ;
 
 
 

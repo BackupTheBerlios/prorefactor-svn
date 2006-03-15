@@ -1,4 +1,4 @@
-// $ANTLR 2.7.5 (20050128): "expandedtreeparser01.g" -> "TreeParser01.java"$
+// $ANTLR 2.7.6 (2005-12-22): "expandedtreeparser01.g" -> "TreeParser01.java"$
 
 	package org.prorefactor.treeparser01;
 
@@ -1100,6 +1100,40 @@ public interface TreeParser01TokenTypes {
 	int TIMESTAMP = 1093;
 	int FIXCHAR = 1094;
 	int DOT_COMMENT = 1095;
-	int Last_Token_Number = 1096;
+	int AUDITCONTROL = 1096;
+	int AUDITENABLED = 1097;
+	int AUDITPOLICY = 1098;
+	int BIND = 1099;
+	int CAST = 1100;
+	int CLASS = 1101;
+	int CLIENTPRINCIPAL = 1102;
+	int CONSTRUCTOR = 1103;
+	int FINAL = 1104;
+	int GENERATEUUID = 1105;
+	int GUID = 1106;
+	int HEXDECODE = 1107;
+	int HEXENCODE = 1108;
+	int IMPLEMENTS = 1109;
+	int INHERITS = 1110;
+	int INTERFACE = 1111;
+	int METHOD = 1112;
+	int NAMESPACEPREFIX = 1113;
+	int NAMESPACEURI = 1114;
+	int NEWINSTANCE = 1115;
+	int PROTECTED = 1116;
+	int REFERENCEONLY = 1117;
+	int SAXWRITER = 1118;
+	int SETDBCLIENT = 1119;
+	int THISOBJECT = 1120;
+	int TYPEOF = 1121;
+	int VALIDOBJECT = 1122;
+	int XMLDATATYPE = 1123;
+	int XMLNODETYPE = 1124;
+	int TYPE_NAME = 1125;
+	int WIDGETID = 1126;
+	int DESTRUCTOR = 1127;
+	int VOID = 1128;
+	int LOCAL_METHOD_REF = 1129;
+	int Last_Token_Number = 1130;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 }

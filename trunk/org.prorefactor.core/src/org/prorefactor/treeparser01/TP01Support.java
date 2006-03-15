@@ -524,6 +524,13 @@ public class TP01Support extends TP01Action {
 	}
 
 
+	protected void methodDef(AST idAST) {
+		SymbolScope definingScope = currentScope.getParentScope();
+		Routine r = new Routine(idAST.getText(), definingScope, currentScope);
+		r.setProgressType(TokenTypes.METHOD);
+		definingScope.add(r);
+	}
+
 
 	protected Block popBlock() {
 		blockStack.remove(blockStack.size()-1);

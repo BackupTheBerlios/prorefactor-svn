@@ -123,21 +123,11 @@ public class TP01Action {
 	 */
 	protected void field(AST refAST, AST idAST, int contextQualifier, int whichTable) {}
 
-
-	/** Called by the tree parser in a function definition immediately
-	 * before the code block begins.
-	 * @param funcAST The FUNCTION node.
-	 * @param idAST The ID node (the function name).
-	 */
-	protected void funcDef(AST funcAST, AST idAST) {}
-
-
 	/**
 	 * Action taken in:
 	 * filenameorvalue: FILENAME  production
 	 */
 	protected void fnvFilename(AST fn) {}
-
 
 	/**
 	 * Action taken in:
@@ -164,12 +154,21 @@ public class TP01Action {
 	/** Called for the ID node in a #(FRAME ID) pair. */
 	protected void frameRef(AST idAST) {}
 
+	/** Called by the tree parser in a function definition immediately
+	 * before the code block begins.
+	 * @param funcAST The FUNCTION node.
+	 * @param idAST The ID node (the function name).
+	 */
+	protected void funcDef(AST funcAST, AST idAST) {}
 	
 	/** Called by the tree parser if a FUNCTION statement is found to be any
 	 * sort of a function FORWARD, IN, or MAP TO.
 	 * @param idAST The ID node (name of the function).
 	 */
 	protected void funcForward(AST idAST) {}
+	
+	/** Called by the tree parser at METHOD statement, after method's scope has been created. */
+	protected void methodDef(AST idAST) {}
 
 	/** Called by the tree parser at the beginning 
 	 * of a PROCEDURESTATE rule.

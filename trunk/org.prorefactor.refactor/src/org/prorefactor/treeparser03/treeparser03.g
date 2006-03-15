@@ -9,7 +9,7 @@ examination, it calls TP03Support.
 To find actions taken within this grammar, search for "tpSupport",
 which is the tree parser support object.
 
-Copyright (c) 2003-2005 Joanju Limited.
+Copyright (c) 2003-2006 Joanju Limited.
 All rights reserved. This program and the accompanying materials 
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -132,15 +132,6 @@ field
 		{tpSupport.fieldRef(#ref, #id);}
 	;
 
-method_parameter
-	:	#(	Method_parameter
-			(OUTPUT {tpSupport.updating(true);} | INPUTOUTPUT {tpSupport.updating(true);} )?
-			expression (AS datatype_com)?
-			{tpSupport.updating(false);}
-			(BYPOINTER|BYVARIANTPOINTER)?
-		)
-	;
-
 assignment_list
 	:	RECORD_NAME (#(EXCEPT (field)*))?
 	|	(	assign_equal (#(WHEN expression))?
@@ -160,16 +151,15 @@ assign_equal
 	;
 
 defineparameterstate
-	:	#(	def:DEFINE
-			(#(NEW (GLOBAL)? SHARED ) | SHARED)?
+	:	#(	def:DEFINE (def_shared)? (def_visib)?
 			(	PARAMETER BUFFER
 				ID FOR RECORD_NAME
 				(PRESELECT)? (label_constant)? (#(FIELDS (field)* ))?
 			|	(INPUT|OUTPUT|INPUTOUTPUT|RETURN) PARAMETER
-				(	TABLE FOR RECORD_NAME (APPEND)?
-				|	TABLEHANDLE (FOR)? id:ID (APPEND)?
-				|	DATASET FOR ID (APPEND|BYVALUE)*
-				|	DATASETHANDLE ID (BYVALUE)?
+				(	TABLE FOR RECORD_NAME (APPEND|BIND)*
+				|	TABLEHANDLE (FOR)? id:ID (APPEND|BIND)*
+				|	DATASET FOR ID (APPEND|BYVALUE|BIND)*
+				|	DATASETHANDLE ID (APPEND|BYVALUE|BIND)*
 				|	vid:ID {tpSupport.define(#def, #vid);}
 					defineparam_var (triggerphrase)?
 				)
@@ -181,6 +171,7 @@ defineparameterstate
 defineparam_var
 	:	(	#(	AS
 				(	(HANDLE (TO)? datatype_dll)=> HANDLE (TO)? datatype_dll
+				|	CLASS TYPE_NAME
 				|	datatype_param
 				)
 			)
@@ -192,10 +183,11 @@ defineparam_var
 	;
 
 definetemptablestate
-	:	#(	def:DEFINE
-			(#(NEW (GLOBAL)? SHARED ) | SHARED)? TEMPTABLE id:ID
+	:	#(	def:DEFINE (def_shared)? (def_visib)? TEMPTABLE id:ID
 			{tpSupport.define(#def, #id);}
 			( UNDO {tpSupport.undo();} | NOUNDO {tpSupport.noundo();} )?
+			(namespace_uri)? (namespace_prefix)?
+			(REFERENCEONLY)?
 			(def_table_like)?
 			(label_constant)?
 			(#(BEFORETABLE ID))?
@@ -211,8 +203,7 @@ definetemptablestate
 	;
 
 defineworktablestate
-	:	#(	def:DEFINE
-			(#(NEW (GLOBAL)? SHARED ) | SHARED)? WORKTABLE id:ID
+	:	#(	def:DEFINE (def_shared)? (def_visib)? WORKTABLE id:ID
 			{tpSupport.define(#def, #id);}
 			(NOUNDO {tpSupport.noundo();} )?
 			(def_table_like)? (label_constant)? (def_table_field)* state_end
@@ -221,8 +212,7 @@ defineworktablestate
 	;
 
 definevariablestate
-	:	#(	def:DEFINE
-			(#(NEW (GLOBAL)? SHARED ) | SHARED)? VARIABLE id:ID
+	:	#(	def:DEFINE (def_shared)? (def_visib)? VARIABLE id:ID
 			{tpSupport.define(#def, #id);}
 			(fieldoption)* (triggerphrase)? state_end
 			{tpSupport.defineEnd();}
@@ -237,7 +227,11 @@ dostate
 	;
 
 fieldoption
-	:	#(AS datatype_field )
+	:	#(	AS
+			(	CLASS TYPE_NAME
+			|	datatype_field
+			)
+		)
 	|	casesens_or_not
 	|	color_expr
 	|	#(COLUMNCODEPAGE expression )
@@ -255,6 +249,8 @@ fieldoption
 	|	NOUNDO {tpSupport.noundo();}
 	|	viewasphrase
 	|	TTCODEPAGE
+	|	xml_data_type
+	|	xml_node_type
 	;
 
 forstate

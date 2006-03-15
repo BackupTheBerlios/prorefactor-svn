@@ -1,7 +1,7 @@
 /* Created on Apr 20, 2005
  * Authors: John Green
  * 
- * Copyright (C) 2005 Joanju (joanju.com).
+ * Copyright (C) 2005-2006 Joanju (joanju.com).
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,13 +32,14 @@ public class DataType {
 	private Integer tokenType;
 	private String progressName;
 
-	private static HashMap nameMap = new HashMap();
-	private static HashMap tokenTypeMap = new HashMap();
+	private static HashMap<String, DataType> nameMap = new HashMap<String, DataType>();
+	private static HashMap<Integer, DataType> tokenTypeMap = new HashMap<Integer, DataType>();
 	
 	public static final DataType BIGINT = new DataType(TokenTypes.BIGINT, "BIGINT");
 	public static final DataType BLOB = new DataType(TokenTypes.BLOB, "BLOB");
 	public static final DataType BYTE = new DataType(TokenTypes.BYTE, "BYTE");
 	public static final DataType CHARACTER = new DataType(TokenTypes.CHARACTER, "CHARACTER");
+	public static final DataType CLASS = new DataType(TokenTypes.CLASS, "CLASS");
 	public static final DataType CLOB = new DataType(TokenTypes.CLOB, "CLOB");
 	public static final DataType COMHANDLE = new DataType(TokenTypes.COMHANDLE, "COM-HANDLE");
 	public static final DataType DATE = new DataType(TokenTypes.DATE, "DATE");
@@ -61,6 +62,7 @@ public class DataType {
 	public static final DataType SHORT = new DataType(TokenTypes.SHORT, "SHORT");
 	public static final DataType TIME = new DataType(TokenTypes.TIME, "TIME");
 	public static final DataType TIMESTAMP = new DataType(TokenTypes.TIMESTAMP, "TIMESTAMP");
+	public static final DataType TYPE_NAME = CLASS;
 	public static final DataType UNSIGNEDSHORT = new DataType(TokenTypes.UNSIGNEDSHORT, "UNSIGNED-SHORT");
 	public static final DataType WIDGETHANDLE = new DataType(TokenTypes.WIDGETHANDLE, "WIDGET-HANDLE");
 
@@ -69,7 +71,7 @@ public class DataType {
 	 * a check with assert or throw might be appropriate.
 	 */
 	public static DataType getDataType(int tokenType) { 
-		return (DataType) tokenTypeMap.get(new Integer(tokenType));
+		return tokenTypeMap.get(new Integer(tokenType));
 	}
 
 	/** Get the DataType object for a String "progress data type name", ex: "COM-HANDLE".
@@ -78,7 +80,7 @@ public class DataType {
 	 * a check with assert or throw might be appropriate.
 	 */
 	public static DataType getDataType(String progressCapsName) { 
-		return (DataType) nameMap.get(progressCapsName);
+		return nameMap.get(progressCapsName);
 	}
 
 	/** The progress name for the data type is all caps, ex: "COM-HANDLE" */ 
