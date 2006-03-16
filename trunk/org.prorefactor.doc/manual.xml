@@ -1090,15 +1090,11 @@ display bInvoice except totalAmount.</programlisting>
       <title>Unit Tests and Run-time Workbench</title>
 
       <para>Now you can run the unit tests. You can navigate to the following
-      two source files, and run them as JUnit tests:</para>
+      source file, and run it as a JUnit test:</para>
 
       <itemizedlist>
         <listitem>
-          <para><filename>org.prorefactor.core.unittest.AllPRCoreTests.java</filename></para>
-        </listitem>
-
-        <listitem>
-          <para><filename>org.prorefactor.refactor.unittest.AllRefactorTests.java</filename></para>
+          <para><filename>org.prorefactor.core.unittest.AllProRefactorTests.java</filename></para>
         </listitem>
       </itemizedlist>
 
