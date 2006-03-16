@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.runtime;visibility:=reexport,
  org.prorefactor.lib;visibility:=reexport,
  org.prorefactor.core;visibility:=reexport,
- org.prorefactor.refactor;visibility:=reexport,
  org.prorefactor.eclipse;visibility:=reexport
 Eclipse-AutoStart: true
 Export-Package: org.prolint.core,
