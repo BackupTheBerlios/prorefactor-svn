@@ -3,14 +3,19 @@
  * @author Peter Dalbadie
  * 21-Sep-2004
  * 
+ * Copyright (C) 2004-2006 Joanju and others.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 
 package org.prorefactor.treeparser;
 
 /**
  * Represents the definition of a Routine.
- * Use as an entry in the symbol table.
- *
+ * Is a Symbol - used as an entry in the symbol table.
+ * A Routine is a PROCEDURE, FUNCTION, or METHOD.
  */
 public class Routine extends Symbol {
 		
@@ -24,19 +29,13 @@ public class Routine extends Symbol {
 	}
 
 
-	/**
-	 * @see org.prorefactor.treeparser.Symbol#fullName()
-	 */
-	public String fullName() {
-		return getName();
-	}
+	/** @see org.prorefactor.treeparser.Symbol#fullName() */
+	public String fullName() { return getName(); }
 
-	/** Return TokenTypes: PROCEDURE or FUNCTION. */
+	/** Return TokenTypes: PROCEDURE, FUNCTION, or METHOD. */
 	public int getProgressType() { return progressType; }
 	
-	public SymbolScope getRoutineScope(){
-		return routineScope;
-	}
+	public SymbolScope getRoutineScope(){ return routineScope; }
 	
 	public Routine setProgressType(int t) { progressType=t; return this; }
 

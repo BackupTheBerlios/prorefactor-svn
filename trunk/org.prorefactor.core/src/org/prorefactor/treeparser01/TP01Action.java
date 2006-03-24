@@ -56,6 +56,10 @@ public class TP01Action {
 	protected void canFindEnd(AST canfindAST) {}
 	
 	
+	/** Called by the tree parser at the CLASS node. */
+	protected void classState(AST classAST) {}
+	
+	
 	/** Called at the end of a CLEAR statement. */
 	protected void clearState(AST headAST) {}
 	

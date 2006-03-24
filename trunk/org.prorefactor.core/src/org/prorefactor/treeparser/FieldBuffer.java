@@ -80,6 +80,11 @@ public class FieldBuffer extends Symbol implements Primative {
 
 	public TableBuffer getBuffer() { return buffer; }
 	
+	/** Gets the underlying Field's className (or null if not a class).
+	 * @see Primative#getClassName()
+	 */
+	public String getClassName() { return field.getClassName(); }
+	
 	/** Gets the underlying Field's dataType. */
 	public DataType getDataType() { return field.getDataType(); }
 	
@@ -110,8 +115,12 @@ public class FieldBuffer extends Symbol implements Primative {
 	public boolean isImported() { return buffer.isImported(); }
 
 	
+	/** Sets the underlying Field's className. */
+	public Primative setClassName(String className) { field.setClassName(className); return this; }
+	
+	
 	/** Sets the underlying Field's dataType. */
-	public void setDataType(DataType dataType) { field.setDataType(dataType); }
+	public Primative setDataType(DataType dataType) { field.setDataType(dataType); return this; }
 	
 	
 	/** Invalid - do not call. Name comes from the Field. */

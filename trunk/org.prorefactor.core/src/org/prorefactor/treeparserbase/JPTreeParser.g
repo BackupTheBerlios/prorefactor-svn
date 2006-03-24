@@ -102,6 +102,7 @@ blockorstate
 		|	PROPARSEDIRECTIVE
 		|	PERIOD
 		|	DOT_COMMENT
+		|	#(ANNOTATION (.)* )
 		)
 	;
 
@@ -2009,7 +2010,7 @@ messagestate
 	;
 
 methodstate
-	:	#(	METHOD (PRIVATE|PROTECTED|PUBLIC) (OVERRIDE)? (FINAL)?
+	:	#(	METHOD (PRIVATE|PROTECTED|PUBLIC|OVERRIDE|FINAL)*
 			(	VOID
 			|	CLASS TYPE_NAME
 			|	datatype_var

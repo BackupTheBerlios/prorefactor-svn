@@ -14,7 +14,13 @@ package org.prorefactor.treeparser;
  */
 public interface Primative {
 
+	/** The name of the CLASS that this variable was defined for.
+	 * This is more interesting than getDataType, which returns CLASS.
+	 * Returns null if this variable was not defined for a CLASS.
+	 */
+	public String getClassName();
 	public DataType getDataType();
-	public void setDataType(DataType dataType);
+	public Primative setClassName(String className);
+	public Primative setDataType(DataType dataType);
 
 }

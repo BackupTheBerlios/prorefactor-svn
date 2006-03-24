@@ -1131,6 +1131,7 @@ public interface JPTreeParserTokenTypes {
 	int DESTRUCTOR = 1127;
 	int VOID = 1128;
 	int LOCAL_METHOD_REF = 1129;
-	int Last_Token_Number = 1130;
+	int ANNOTATION = 1130;
+	int Last_Token_Number = 1131;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 }

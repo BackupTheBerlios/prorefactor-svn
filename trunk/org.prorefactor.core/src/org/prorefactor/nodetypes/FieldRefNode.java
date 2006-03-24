@@ -35,6 +35,7 @@ public class FieldRefNode extends JPNode {
 		return bufferScope;
 	}
 	
+	public String getClassName() { return ((Primative)getSymbol()).getClassName(); }
 	public DataType getDataType() { return ((Primative)getSymbol()).getDataType(); }
 
 	/** We very often need to reference the ID node for a Field_ref node.

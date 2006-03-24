@@ -15,7 +15,6 @@ package org.prorefactor.treeparser;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -51,8 +50,7 @@ public class SymbolScope {
 	protected Map<Integer, Map> typeMap = new HashMap<Integer, Map>();
 	protected Map<String, Variable> variableMap = new HashMap<String, Variable>();
 
-	/** The parentScope is null if this is the program root scope. */
-	private SymbolScope parentScope;
+	protected SymbolScope parentScope;
 
 	protected SymbolScopeRoot rootScope;
 	
@@ -92,6 +90,7 @@ public class SymbolScope {
 	}
 
 	/** Add a Symbol for names lookup. */
+	@SuppressWarnings("unchecked")
 	public void add(Symbol symbol) {
 		if (symbol instanceof FieldLevelWidgetI) {
 			add((FieldLevelWidgetI)symbol);
@@ -147,8 +146,10 @@ public class SymbolScope {
 
 
 
-	/** Get the integer "depth" of the scope, with the program root scope
-	 * being zero. Functions and procedures will always be depth one, and trigger
+	/** Get the integer "depth" of the scope.
+	 * Zero might be either the unit (program/class) scope, or if this is a class
+	 * which inherits from super classes, then zero would be the top of the inheritance chain.
+	 * Functions and procedures will always be depth: (unitDepth + 1), and trigger
 	 * scopes can be nested, so they will always be one or greater. I use this
 	 * function for unit testing - I want to be able to examine the scope of a
 	 * symbol, and make sure that the symbol belongs to the scope that I expect.
@@ -168,6 +169,7 @@ public class SymbolScope {
 	
 	
 	/** Get a list of this scope's symbols which match a given class */
+	@SuppressWarnings("unchecked")
 	public <T extends Symbol> ArrayList<T> getAllSymbols(Class<T> klass) {
 		ArrayList<T> ret = new ArrayList<T>();
 		for (Symbol s : allSymbols) {
@@ -352,7 +354,7 @@ public class SymbolScope {
 		if (table!=null) return getUnnamedBuffer(table);
 		if (parentScope==null) return null;
 		return parentScope.lookupTableOrBufferSymbol(inName);
-	} // lookupTableSchemaFirst()
+	}
 
 
 

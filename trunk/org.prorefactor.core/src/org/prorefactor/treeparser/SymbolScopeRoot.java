@@ -4,7 +4,7 @@
  * 6-Nov-2002
  * www.joanju.com
  * 
- * Copyright (c) 2002-2004 Joanju Limited.
+ * Copyright (c) 2002-2006 Joanju Software.
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,7 +15,6 @@
 package org.prorefactor.treeparser;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,7 +27,8 @@ import org.prorefactor.core.schema.Table;
 
 /**
  * A ScopeRoot object is created for each compile unit, and
- * it represents the program (topmost) scope.
+ * it represents the program (topmost) scope. For classes, it is the class
+ * scope, but it may also have a super class scope by way of inheritance.
  */
 public class SymbolScopeRoot extends SymbolScope {
 
@@ -36,9 +36,18 @@ public class SymbolScopeRoot extends SymbolScope {
 		super(null);
 		this.rootScope = this;
 	}
+	
+	private String className = null;
 
-	private Set tableSet = new HashSet();
+	private Set<Table> tableSet = new HashSet<Table>();
 
+	
+	
+	/** Assign a super (inherited) class scope to this class scope. */
+	public void assignSuper(SymbolScopeRoot superScope) {
+		assert parentScope == null;
+		parentScope = superScope;
+	}
 
 
 	/** Define a temp or work table.
@@ -68,7 +77,12 @@ public class SymbolScopeRoot extends SymbolScope {
 		return fieldBuff;
 	}
 
-	
+
+	/** Valid only if the parse unit is a CLASS.
+	 * Returns null otherwise. 
+	 */
+	public String getClassName() { return className; }
+
 	
 	public TableBuffer getLocalTableBuffer(Table table) {
 		assert table.getStoretype() != IConstants.ST_DBTABLE;
@@ -85,13 +99,12 @@ public class SymbolScopeRoot extends SymbolScope {
 	 */
 	protected Field lookupUnqualifiedField(String name) {
 		Field field;
-		for (Iterator it = tableSet.iterator(); it.hasNext();) {
-			Table table = (Table) it.next();
+		for (Table table : tableSet) {
 			field = table.lookupField(name);
 			if (field!=null) return field;
 		}
 		return null;
-	} // lookupUnqualifiedField()
+	}
 
 
 
@@ -104,5 +117,7 @@ public class SymbolScopeRoot extends SymbolScope {
 	}
 
 
+	public void setClassName(String s) { className=s; }
 
-} // class
+
+}

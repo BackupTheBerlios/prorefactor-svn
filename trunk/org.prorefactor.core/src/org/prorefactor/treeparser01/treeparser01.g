@@ -408,6 +408,19 @@ choosestate
 		)
 	;
 
+classstate
+	:	#(	c:CLASS {action.classState(#c);}
+			TYPE_NAME
+			( #(INHERITS TYPE_NAME) )?
+			( #(IMPLEMENTS TYPE_NAME (COMMA TYPE_NAME)* ) )?
+			( FINAL )?
+			block_colon
+			code_block
+			#(END (CLASS)? )
+			state_end
+		)
+	;
+
 clearstate
 	:	#(c:CLEAR (frame_ref)? (ALL)? (NOPAUSE)? state_end {action.clearState(#c);} )
 	;
@@ -1201,7 +1214,7 @@ messagestate
 	;
 
 methodstate
-	:	#(	m:METHOD (PRIVATE|PROTECTED|PUBLIC) (OVERRIDE)? (FINAL)?
+	:	#(	m:METHOD (PRIVATE|PROTECTED|PUBLIC|OVERRIDE|FINAL)*
 			(	VOID
 			|	CLASS TYPE_NAME
 			|	datatype_var

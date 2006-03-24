@@ -42,6 +42,7 @@ public class Field implements Primative {
 
 	String name; // "Package" access for fast access in NAME_ORDER
 	private DataType dataType;
+	private String className = null;
 	private Table table;
 	
 	/** This is a convenience class for working with a string field name, where
@@ -95,9 +96,12 @@ public class Field implements Primative {
 
 
 	
+	/** @see Primative#getClassName() */
+	public String getClassName() { return className; }
 	public DataType getDataType() { return dataType; }
 	public String getName() { return name; }
 	public Table getTable() { return table; }
-	public void setDataType(DataType dataType) { this.dataType = dataType; }
+	public Primative setClassName(String s) { this.className = s; return this; }
+	public Primative setDataType(DataType dataType) { this.dataType = dataType; return this; }
 
 }

@@ -110,6 +110,7 @@ blockorstate
 		|	pd:PROPARSEDIRECTIVE {tpSupport.proparsedirective(#pd);}
 		|	PERIOD {tpSupport.statementEnd();}
 		|	DOT_COMMENT
+		|	#(ANNOTATION (.)* )
 		)
 	;
 

@@ -27,26 +27,30 @@ public class Variable extends Symbol implements Primative, Value {
 
 	private DataType dataType;
 	private Object value;
+	private String className = null;
 
-	
+
+
 	/** Return the name of the variable. For this subclass of
 	 * Symbol, fullName() returns the same value as getName().
 	 */
 	public String fullName() { return getName(); }
 
-	/** @see org.prorefactor.treeparser.Value#getValue() */
-	public Object getValue() { return value; }
+	/** @see Primative#getClassName() */
+	public String getClassName() { return className; }
 	
 	public DataType getDataType() { return dataType; }
 	
-	public void setDataType(DataType dataType) { this.dataType = dataType; }
+	/** @see org.prorefactor.treeparser.Value#getValue() */
+	public Object getValue() { return value; }
+	
+	/** Returns TokenTypes.VARIABLE. */
+	@Override
+	public int getProgressType() { return TokenTypes.VARIABLE; }
 
-	/** Returns TokenTypes.VARIABLE.
-	 * @see org.prorefactor.treeparser.Symbol#getProgressType()
-	 */
-	public int getProgressType() {
-		return TokenTypes.VARIABLE;
-	}
+	public Primative setDataType(DataType dataType) { this.dataType = dataType; return this; }
+
+	public Primative setClassName(String s) { this.className = s; return this; }
 
 	/** @see org.prorefactor.treeparser.Value#setValue(java.lang.Object) */
 	public void setValue(Object value) { this.value = value; }

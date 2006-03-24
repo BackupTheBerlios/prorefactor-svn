@@ -176,6 +176,14 @@ public class TP01Support extends TP01Action {
 	protected void canFindEnd(AST canfindAST) {
 		scopeClose(canfindAST);
 	}
+	
+	
+	protected void classState(AST classAST) {
+		JPNode classNode = (JPNode) classAST;
+		JPNode idNode = classNode.firstChild();
+		rootScope.setClassName(idNode.getText());
+	}
+
 
 	
 	protected void clearState(AST headAST) {
@@ -190,9 +198,17 @@ public class TP01Support extends TP01Action {
 	protected void defAs(AST asAST) {
 		JPNode asNode = (JPNode)asAST;
 		currSymbol.setAsNode(asNode);
-		((Primative)currSymbol).setDataType(DataType.getDataType(asNode.nextNode().getType()));
+		Primative primative = (Primative) currSymbol;
+		JPNode typeNode = asNode.nextNode();
+		if (typeNode.getType()==TokenTypes.CLASS) typeNode = typeNode.nextNode();
+		if (typeNode.getType()==TokenTypes.TYPE_NAME) {
+			primative.setDataType(DataType.getDataType(TokenTypes.CLASS));
+			primative.setClassName(typeNode.getText());
+		} else {
+			primative.setDataType(DataType.getDataType(typeNode.getType()));
+		}
 		assert
-			((Primative)currSymbol).getDataType() != null
+			primative.getDataType() != null
 			: "Failed to set datatype at " + asNode.getFilename() + " line " + asNode.getLine()
 			;
 	}
@@ -203,9 +219,12 @@ public class TP01Support extends TP01Action {
 	protected void defLike(AST likeAST) {
 		JPNode likeNode = (JPNode)likeAST;
 		currSymbol.setLikeNode(likeNode);
-		((Primative)currSymbol).setDataType(fieldRefDataType(likeNode.nextNode()));
+		FieldRefNode likeRefNode = (FieldRefNode) likeNode.nextNode();
+		Primative primative = (Primative) currSymbol;
+		primative.setDataType(likeRefNode.getDataType());
+		primative.setClassName(likeRefNode.getClassName());
 		assert
-			((Primative)currSymbol).getDataType() != null
+			primative.getDataType() != null
 			: "Failed to set datatype at " + likeNode.getFilename() + " line " + likeNode.getLine()
 			;
 	}
@@ -328,13 +347,16 @@ public class TP01Support extends TP01Action {
 		return variable;
 	}
 	protected Variable defineVariable(AST defAST, AST idAST, int dataType) {
+		assert dataType != TokenTypes.CLASS;
 		Variable v = defineVariable(defAST, idAST);
-		((Variable)currSymbol).setDataType(DataType.getDataType(dataType));
+		v.setDataType(DataType.getDataType(dataType));
 		return v;
 	}
 	protected Variable defineVariable(AST defAST, AST idAST, AST likeAST) {
 		Variable v = defineVariable(defAST, idAST);
-		((Variable)currSymbol).setDataType(fieldRefDataType(likeAST));
+		FieldRefNode likeRefNode = (FieldRefNode) likeAST;
+		v.setDataType(likeRefNode.getDataType());
+		v.setClassName(likeRefNode.getClassName());
 		return v;
 	}
 
@@ -441,11 +463,6 @@ public class TP01Support extends TP01Action {
 
 	} // field()
 
-
-	private static DataType fieldRefDataType(AST refAST) {
-		return ((FieldRefNode)refAST).getDataType();
-	}
-	
 
 	/** Called from Form_item node */
 	protected void formItem(AST ast) {
