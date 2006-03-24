@@ -4,7 +4,7 @@
  * Sep 1, 2004
  * www.joanju.com
  *
- * Copyright (C) 2004-2005 Joanju Limited.
+ * Copyright (C) 2004-2006 Joanju Software.
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -89,9 +89,9 @@ public class PUB {
 	/** Scratch JPNode attributes for storing string index. */
 	private static final int NODECOMMENTS = 49002;
 
-	private ArrayList exportList;
-	private ArrayList fileList;
-	private ArrayList importList;
+	private ArrayList<SymbolRef> exportList;
+	private ArrayList<String> fileList;
+	private ArrayList<SymbolRef> importList;
 	private DualHashBidiMap stringTable;
 	private File cuFile;
 	private File pubFile;
@@ -99,7 +99,7 @@ public class PUB {
 	private ProparseLdr parser = ProparseLdr.getInstance();
 	private RefactorSession refpack = RefactorSession.getInstance();
 	private String [] stringArray;
-	private TreeMap tableMap;
+	private TreeMap<String, TableRef> tableMap;
 
 	/** A record of symbol type and name, for import/export tables. */
 	public class SymbolRef {
@@ -116,7 +116,7 @@ public class PUB {
 	private class TableRef {
 		TableRef(String name) { this.name = name; }
 		String name;
-		TreeMap fieldMap = new TreeMap();
+		TreeMap<String, String> fieldMap = new TreeMap<String, String>();
 	}
 
 	
@@ -125,10 +125,10 @@ public class PUB {
 	 * This method clears out old lists in preparation for reloading or rebuilding.
 	 */
 	private void _refresh() {
-		exportList = new ArrayList();
-		fileList = new ArrayList();
-		importList = new ArrayList();
-		tableMap = new TreeMap();
+		exportList = new ArrayList<SymbolRef>();
+		fileList = new ArrayList<String>();
+		importList = new ArrayList<SymbolRef>();
+		tableMap = new TreeMap<String, TableRef>();
 		stringTable = new DualHashBidiMap();
 		/* String index zero is not used.
 		 * This allows us to use 0 from JPNode.attrGet() to indicate "no string value present".
@@ -174,6 +174,7 @@ public class PUB {
 	 * to look up the table objects.
 	 * @param c
 	 */
+	@SuppressWarnings("unchecked")
 	public void copySchemaTableLowercaseNamesInto(Collection c) {
 		c.addAll(tableMap.keySet());
 	}
@@ -188,11 +189,11 @@ public class PUB {
 	 * @param fromTableName Your table name. Case insenstitive. Must be of the format
 	 * "database.table".
 	 */
+	@SuppressWarnings("unchecked")
 	public void copySchemaFieldLowercaseNamesInto(Collection c, String fromTableName) {
-		TableRef tableRef = (TableRef) tableMap.get(fromTableName.toLowerCase());
+		TableRef tableRef = tableMap.get(fromTableName.toLowerCase());
 		if (tableRef==null) return;
-		for (Iterator it = tableRef.fieldMap.keySet().iterator(); it.hasNext();) {
-			String fieldName = (String) it.next();
+		for (String fieldName : tableRef.fieldMap.keySet()) {
 			c.add(fieldName);
 		}
 	}
@@ -409,8 +410,7 @@ public class PUB {
 	
 	private boolean testTimeStamps() {
 		long pubTime = pubFile.lastModified();
-		for (Iterator it = fileList.iterator(); it.hasNext();) {
-			String filename = (String) it.next();
+		for (String filename : fileList) {
 			if (filename==null || filename.length()==0) continue;
 			File file = FileStuff.findFile(filename);
 			if (file==null) return false;
@@ -524,11 +524,9 @@ public class PUB {
 				tableRef.fieldMap.put(field.getName().toLowerCase(), field.getName());
 			}
 		}
-		for (Iterator it = tableMap.values().iterator(); it.hasNext();) {
-			TableRef tableRef = (TableRef) it.next();
+		for (TableRef tableRef : tableMap.values()) {
 			out.writeUTF(tableRef.name);
-			for (Iterator it2 = tableRef.fieldMap.values().iterator(); it2.hasNext();) {
-				String fieldName = (String) it2.next();
+			for (String fieldName : tableRef.fieldMap.values()) {
 				out.writeUTF(fieldName);
 			}
 			out.writeUTF(""); // terminate the list of fields in the table
@@ -538,7 +536,7 @@ public class PUB {
 	private TableRef writeSchema_addTable(Table table) {
 		String name = table.getDatabase().getName() + "." + table.getName();
 		String lowerName = name.toLowerCase();
-		TableRef tableRef = (TableRef) tableMap.get(lowerName);
+		TableRef tableRef = tableMap.get(lowerName);
 		if (tableRef != null) return tableRef;
 		tableRef = new TableRef(name);
 		tableMap.put(lowerName, tableRef);
