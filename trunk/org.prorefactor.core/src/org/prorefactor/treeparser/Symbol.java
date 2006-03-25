@@ -85,7 +85,7 @@ abstract public class Symbol implements SymbolI {
 	 * @see org.prorefactor.treeparser.SymbolI#getDefineNode()
 	 */
 	public JPNode getDefineNode() {
-		if (defNode!=null && defNode.getType()==TokenTypes.DEFINE) return defNode;
+		if (defNode!=null && defNode.getType()!=TokenTypes.ID) return defNode;
 		return null;
 	}
 	
@@ -125,23 +125,32 @@ abstract public class Symbol implements SymbolI {
 	public SymbolScope getScope() { return scope; }
 
 	
-	/* (non-Javadoc)
-	 * @see org.prorefactor.treeparser.SymbolI#isExported()
-	 */
+	/* @see SymbolI#isExported() */
 	public boolean isExported() {
-		// If there is no DEFINE node (inline var def), then it is not NEW..SHARED.
-		if (	defNode == null
-			||	defNode.getType() != TokenTypes.DEFINE
-			) return false;
-		if (defNode.firstChild().getType() == TokenTypes.NEW) return true;
+		SymbolScopeRoot unitScope = scope.getRootScope();
+		// If this is not at the unit (root) scope, then it cannot be visible.
+		if (scope!=unitScope) return false;
+		if (unitScope.getClassName()!=null) {
+			// For class members, only elements declared PUBLIC|PROTECTED are visible.
+			return	(	defNode.findDirectChild(TokenTypes.PUBLIC)!=null
+					||	defNode.findDirectChild(TokenTypes.PROTECTED)!=null
+					);
+		}
+		// If there is no DEFINE node (inline var def), then it is not visible.
+		if (defNode == null) return false;
+		switch (defNode.getType()) {
+			case TokenTypes.DEFINE:
+				return defNode.firstChild().getType() == TokenTypes.NEW;
+			case TokenTypes.FUNCTION:
+			case TokenTypes.PROCEDURE:
+				return defNode.findDirectChild(TokenTypes.PRIVATE) == null;
+		}
 		return false;
 	}
 
 	
 	
-	/* (non-Javadoc)
-	 * @see org.prorefactor.treeparser.SymbolI#isImported()
-	 */
+	/* @see SymbolI#isImported() */
 	public boolean isImported() { 
 		// If there is no DEFINE node (inline var def), then it is not SHARED.
 		if (	defNode == null

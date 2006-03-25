@@ -57,7 +57,9 @@ public interface SymbolI {
 
 	public abstract SymbolScope getScope();
 
-	/** Defined as NEW [GLOBAL] SHARED? */
+	/** Is the symbol newly defined here and visible to other compile units?
+	 * This includes PROTECTED members visible to subclasses.
+	 */
 	public abstract boolean isExported();
 
 	/** Defined as SHARED? */
@@ -69,7 +71,7 @@ public interface SymbolI {
 	/** @see #getAsNode() */
 	public abstract void setAsNode(JPNode asNode);
 
-	/** We store the DEFINE node if available and sensible.
+	/** We store the DEFINE|FUNCTION|METHOD|PROCEDURE node if available and sensible.
 	 * If defined in a syntax where there is no DEFINE node briefly
 	 * preceeding the ID node, then we store the ID node.
 	 */

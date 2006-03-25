@@ -518,9 +518,11 @@ public class TP01Support extends TP01Action {
 	}
 	
 	private Routine funcSymbolCreate(AST idAST) {
+		JPNode idNode = (JPNode) idAST;
 		SymbolScope definingScope = currentScope.getParentScope();
 		Routine r = new Routine(idAST.getText(), definingScope, currentScope);
 		r.setProgressType(TokenTypes.FUNCTION);
+		r.setDefOrIdNode(idNode.parent());
 		definingScope.add(r);
 		return r;
 	}
@@ -542,9 +544,11 @@ public class TP01Support extends TP01Action {
 
 
 	protected void methodDef(AST idAST) {
+		JPNode idNode = (JPNode) idAST;
 		SymbolScope definingScope = currentScope.getParentScope();
 		Routine r = new Routine(idAST.getText(), definingScope, currentScope);
 		r.setProgressType(TokenTypes.METHOD);
+		r.setDefOrIdNode(idNode.parent());
 		definingScope.add(r);
 	}
 
@@ -555,11 +559,12 @@ public class TP01Support extends TP01Action {
 	}
 
 
-	protected void procedureBegin(AST procNode, AST idNode){
+	protected void procedureBegin(AST procAST, AST idAST){
 		SymbolScope definingScope = currentScope;
-		scopeAdd(procNode);
-		Routine r = new Routine(idNode.getText(), definingScope, currentScope);
+		scopeAdd(procAST);
+		Routine r = new Routine(idAST.getText(), definingScope, currentScope);
 		r.setProgressType(TokenTypes.PROCEDURE);
+		r.setDefOrIdNode((JPNode)procAST);
 		definingScope.add(r);
 	}
 	

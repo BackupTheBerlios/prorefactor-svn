@@ -39,7 +39,11 @@ import org.prorefactor.nodetypes.NodeFactory;
 import org.prorefactor.nodetypes.ProparseDirectiveNode;
 import org.prorefactor.refactor.source.CompileUnit;
 import org.prorefactor.treeparser.FieldBuffer;
+import org.prorefactor.treeparser.Primative;
 import org.prorefactor.treeparser.Symbol;
+import org.prorefactor.treeparser.SymbolI;
+import org.prorefactor.treeparser.SymbolScopeRoot;
+import org.prorefactor.treeparser.SymbolScopeSuper;
 import org.prorefactor.treeparser.TableBuffer;
 
 import com.joanju.ProparseLdr;
@@ -60,30 +64,47 @@ public class PUB {
 		pubFile = new File(refpack.getProRefactorProjectDir() + "/pubs/" + relPath + ".pub");
 	}
 	
-	public static final int LAYOUT_VERSION = 4;
+	public static final int LAYOUT_VERSION = 5;
+
 
 	/** loadTo(PUBFILE_TIMESTAMP) - just check if the binary exists and
 	 * check that it is newer than the compile unit file. Does not read anything
 	 * from the binary.
 	 */
 	public static final int PUBFILE_TIMESTAMP = 5;
+
 	/** loadTo(FILES) - the index of include files referenced by this parse unit. */
 	public static final int FILES = 10;
-	/** loadTo(HEADER) - the segments necessary for checking if the binary is up to date or not. */
+
+	/** loadTo(HEADER)
+	 * Gets all the segments necessary for checking if the binary is up to date or not.
+	 * Also for classes, gets class name and the name of the inherited class if any.
+	 */
 	public static final int HEADER = 15;
+
 	/** loadTo(SCHEMA) - the schema tables and fields referenced by this parse unit. */
 	public static final int SCHEMA = 20;
-	/** loadTo(IMPORTS) - the references to external procedures, funtions, and shared vars */
+
+	/** loadTo(IMPORTS)
+	 * @see SymbolI#isImported()
+	 */
 	public static final int IMPORTS = 30;
-	/** loadTo(EXPORTS) - new shared vars and public functions and procedures */
+
+	/** loadTo(EXPORTS)
+	 * @see SymbolI#isExported()
+	 */
 	public static final int EXPORTS = 40;
+
 	/** loadTo(AST) - just loads the node types - you almost certainly need STRINGS as well. */
 	public static final int AST = 50;
+
 	/** loadTo(STRINGS) - load the strings into the syntax tree. */
 	public static final int STRINGS = 60;
+
 	/** loadTo(END) - all binary file segments will be loaded. */
 	public static final int END = 100;
 	
+
 	/** Scratch JPNode attributes for storing string index. */
 	private static final int NODETEXT = 49001;
 	/** Scratch JPNode attributes for storing string index. */
@@ -98,6 +119,8 @@ public class PUB {
 	private JPNode tree;
 	private ProparseLdr parser = ProparseLdr.getInstance();
 	private RefactorSession refpack = RefactorSession.getInstance();
+	private String className;
+	private String superClassName;
 	private String [] stringArray;
 	private TreeMap<String, TableRef> tableMap;
 
@@ -111,6 +134,8 @@ public class PUB {
 		public int progressType;
 		/** The symbol name (Symbol.fullName), with caseAsDefined. */
 		public String symbolName;
+		/** If is a CLASS object ref, then the class name, null otherwise. */
+		public String className;
 	}
 	
 	private class TableRef {
@@ -154,10 +179,11 @@ public class PUB {
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		writeVersion(out);
 		writeFileIndex(out);
-		ArrayList allSymbols = cu.getRootScope().getAllSymbols();
-		writeSchemaSegment(out, allSymbols);
-		writeImportSegment(out, allSymbols);
-		writeExportSegment(out, allSymbols);
+		writeHeader(out, cu.getRootScope());
+		ArrayList rootSymbols = cu.getRootScope().getAllSymbols();
+		writeSchemaSegment(out, rootSymbols);
+		writeImportSegment(out, rootSymbols);
+		writeExportSegment(out, rootSymbols);
 		tree = cu.getTopNode();
 		writeTree(out, tree);
 		writeStrings(out);
@@ -197,6 +223,10 @@ public class PUB {
 			c.add(fieldName);
 		}
 	}
+	
+
+	
+	public String getClassName() { return className; }
 	
 	
 	
@@ -248,6 +278,10 @@ public class PUB {
 	
 	
 	
+	public String getSuperClassName() { return superClassName; }
+	
+	
+	
 	/** Return the JPNode syntax tree that was loaded with load() */
 	public JPNode getTree() { return tree; }
 	
@@ -275,6 +309,7 @@ public class PUB {
 			readFileIndex(inStream);
 			if (! testTimeStamps()) return false;
 			if (lastSegmentToLoad==PUB.FILES) return true;
+			readHeader(inStream);
 			if (lastSegmentToLoad==PUB.HEADER) return true;
 			readSchema(inStream);
 			if (lastSegmentToLoad==PUB.SCHEMA) return true;
@@ -298,8 +333,8 @@ public class PUB {
 	
 	private void readExportSegment(ObjectInputStream in) throws IOException {
 		for (;;) {
-			SymbolRef symbolRef = new SymbolRef(in.readInt(), in.readUTF());
-			if (symbolRef.progressType == -1) break;
+			SymbolRef symbolRef = readSymbol(in);
+			if (symbolRef==null) break;
 			exportList.add(symbolRef);
 		}
 	}
@@ -319,10 +354,17 @@ public class PUB {
 	
 	
 	
+	private void readHeader(ObjectInputStream in) throws IOException {
+		className = in.readUTF(); if (className.length()==0) className = null;
+		superClassName = in.readUTF(); if (superClassName.length()==0) superClassName = null;
+	}
+	
+	
+	
 	private void readImportSegment(ObjectInputStream in) throws IOException {
 		for (;;) {
-			SymbolRef symbolRef = new SymbolRef(in.readInt(), in.readUTF());
-			if (symbolRef.progressType == -1) break;
+			SymbolRef symbolRef = readSymbol(in);
+			if (symbolRef==null) break;
 			importList.add(symbolRef);
 		}
 	}
@@ -351,6 +393,15 @@ public class PUB {
 		for(int i = 0; i < size; i++) {
 			stringArray[i] = in.readUTF();
 		}
+	}
+	
+	
+	
+	private SymbolRef readSymbol(ObjectInputStream in) throws IOException {
+		SymbolRef symbolRef = new SymbolRef(in.readInt(), in.readUTF());
+		if (symbolRef.progressType == -1) return null;
+		if (symbolRef.progressType == TokenTypes.CLASS) symbolRef.className = in.readUTF();
+		return symbolRef;
 	}
 	
 	
@@ -421,13 +472,10 @@ public class PUB {
 	
 	
 	
-	private void writeExportSegment(ObjectOutputStream out, List allSymbols) throws IOException {
-		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
+	private void writeExportSegment(ObjectOutputStream out, List rootSymbols) throws IOException {
+		for (Iterator it = rootSymbols.iterator(); it.hasNext();) {
 			Symbol symbol = (Symbol) it.next();
-			if (symbol.isExported()) {
-				out.writeInt(symbol.getProgressType());
-				out.writeUTF(symbol.fullName()); // We write caseAsDefined
-			}
+			if (symbol.isExported()) writeSymbol(out, symbol); 
 		}
 		out.writeInt(-1);
 		out.writeUTF("");
@@ -447,16 +495,31 @@ public class PUB {
 	
 	
 	
-	private void writeImportSegment(ObjectOutputStream out, List allSymbols) throws IOException {
-		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
+	private void writeHeader(ObjectOutputStream out, SymbolScopeRoot unitScope) throws IOException {
+		String s = unitScope.getClassName();
+		if (s!=null) out.writeUTF(s); else out.writeUTF("");
+		SymbolScopeSuper superScope = (SymbolScopeSuper) unitScope.getParentScope();
+		if (superScope!=null) out.writeUTF(superScope.getClassName()); else out.writeUTF("");
+	}
+	
+	
+	
+	private void writeImportSegment(ObjectOutputStream out, List rootSymbols) throws IOException {
+		for (Iterator it = rootSymbols.iterator(); it.hasNext();) {
 			Symbol symbol = (Symbol) it.next();
-			if (symbol.isImported()) {
-				out.writeInt(symbol.getProgressType());
-				out.writeUTF(symbol.fullName()); // We write caseAsDefined
-			}
+			if (symbol.isImported()) writeSymbol(out, symbol);
 		}
 		out.writeInt(-1);
 		out.writeUTF("");
+	}
+	
+	
+	
+	private void writeSymbol(ObjectOutputStream out, Symbol symbol) throws IOException {
+		int progressType = symbol.getProgressType();
+		out.writeInt(progressType);
+		out.writeUTF(symbol.fullName()); // We write caseAsDefined
+		if (progressType==TokenTypes.CLASS) out.writeUTF(((Primative)symbol).getClassName());
 	}
 	
 	
@@ -507,8 +570,8 @@ public class PUB {
 	
 	
 	
-	private void writeSchemaSegment(ObjectOutputStream out, List allSymbols) throws IOException {
-		for (Iterator it = allSymbols.iterator(); it.hasNext();) {
+	private void writeSchemaSegment(ObjectOutputStream out, List rootSymbols) throws IOException {
+		for (Iterator it = rootSymbols.iterator(); it.hasNext();) {
 			Object obj = it.next();
 			if (obj instanceof TableBuffer) {
 				Table table = ((TableBuffer)obj).getTable();
