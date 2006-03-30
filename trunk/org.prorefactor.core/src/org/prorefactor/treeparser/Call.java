@@ -106,7 +106,7 @@ public class Call extends SemanticRecord {
 	public boolean equals(Object other){
 		if (other.getClass() == this.getClass()){
 			Call otherCall = (Call) other;
-			return id().equals(otherCall.id());
+			return id().equalsIgnoreCase(otherCall.id());
 		} else return false;
 	}
 

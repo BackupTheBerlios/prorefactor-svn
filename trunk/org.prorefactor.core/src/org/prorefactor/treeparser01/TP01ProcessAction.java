@@ -38,32 +38,24 @@ import antlr.collections.AST;
  */
 public class TP01ProcessAction extends TP01Action {
 
-
-	SymbolScope currentScope;
-	SymbolScopeRoot rootScope;
-	TableBuffer lastTableReferenced;
-	TableBuffer prevTableReferenced;
-	TableBuffer currDefTable;
-
-	private ErrorList errorList;
-
-	private Call wipCall;
-	private Expression wipExpression;
-	private JPNode wipFieldNode;
-	
-	public TP01ProcessAction(){	// initialization
-		rootScope = new SymbolScopeRoot();
-		currentScope = rootScope;
-		errorList = new ErrorList();
-		// See programRoot() for initiazation of the root Block.
-	}
-
 	public TP01ProcessAction(SymbolScopeRoot rootScope){
 		this.rootScope = rootScope;
 		currentScope = rootScope;
 		errorList = new ErrorList();
 	}
 	
+	SymbolScope currentScope;
+	SymbolScopeRoot rootScope;
+	TableBuffer lastTableReferenced;
+	TableBuffer prevTableReferenced;
+	TableBuffer currDefTable;
+
+	private Call wipCall;
+	private ErrorList errorList;
+	private Expression wipExpression;
+	private JPNode wipFieldNode;
+	
+
 	/**
 	 * Get the RunHandle value in "run <proc> in <handle>." Where <handle>
 	 * is a handle valued Expression; then save the RunHandle value
