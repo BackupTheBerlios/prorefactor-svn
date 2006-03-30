@@ -7,7 +7,7 @@
 
     <date>2006</date>
 
-    <pubdate>February 2006, ProRefactor version 1.3.0</pubdate>
+    <pubdate>March 2006, ProRefactor version 1.4.0</pubdate>
 
     <author>
       <firstname>John</firstname>
@@ -18,7 +18,7 @@
     <copyright>
       <year>2004-2006</year>
 
-      <holder>Joanju and other ProRefactor.org Contributors</holder>
+      <holder>Joanju Software and other ProRefactor.org Contributors</holder>
     </copyright>
 
     <legalnotice>
@@ -439,9 +439,9 @@
       units in those projects.</para>
 
       <note>
-        <para>ProRefactor considers <filename>.p</filename> and
-        <filename>.w</filename> files to be compile units. This may be
-        configurable in future versions.</para>
+        <para>ProRefactor considers <filename>.p</filename>,
+        <filename>.w</filename>, and <filename>.cls</filename> files to be
+        compile units. This may be configurable in future versions.</para>
       </note>
 
       <para>ProRefactor stores information about your compile units, and it
@@ -1493,6 +1493,24 @@ END.
     <title>Release Notes</title>
 
     <variablelist>
+      <varlistentry>
+        <term>Version 1.4.0</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Added support for class inheritance, 10.1 syntax, .cls
+              files, Proparse 3.0.</para>
+            </listitem>
+
+            <listitem>
+              <para>Internal: Merged sub-project "refactor" into sub-project
+              "core", due to inter-dependencies.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term>Version 1.3.0</term>
 

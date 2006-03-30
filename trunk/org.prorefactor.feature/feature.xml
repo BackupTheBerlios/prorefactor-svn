@@ -2,7 +2,7 @@
 <feature
       id="org.prorefactor"
       label="org.prorefactor"
-      version="1.3.0"
+      version="1.4.0"
       provider-name="ProRefactor.org"
       plugin="org.prorefactor.eclipse">
 
@@ -48,6 +48,10 @@ ProRefactor.org repository and made available as downloadable
 archives.
    </license>
 
+   <url>
+      <update label="ProRefactor.org" url="http://prorefactor.org/update/"/>
+   </url>
+
    <requires>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui.workbench.texteditor"/>
@@ -65,42 +69,36 @@ archives.
          id="org.prorefactor.core"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="1.4.0"/>
 
    <plugin
          id="org.prorefactor.eclipse"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="1.4.0"/>
 
    <plugin
          id="org.prorefactor.javadoc"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.prorefactor.refactor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
+         version="1.4.0"/>
 
    <plugin
          id="org.prorefactor.doc"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="1.4.0"/>
 
    <plugin
          id="org.prorefactor.lib"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="1.4.0"/>
 
    <plugin
          id="org.prolint"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.1.3"/>
 
 </feature>

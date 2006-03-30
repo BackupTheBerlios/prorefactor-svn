@@ -7,7 +7,7 @@
 	           author="true"
 	           version="true"
 	           use="true"
-	           classpath="../org.prorefactor.antlr/bin;../org.prorefactor.core/bin;../org.prorefactor.refactor/bin;../org.prorefactor.eclipse/bin;"
+	           classpath="../org.prorefactor.antlr/bin;../org.prorefactor.core/bin;../org.prorefactor.eclipse/bin;"
 	           windowtitle="ProRefactor">
 	    <fileset dir="../org.prorefactor.core/src" defaultexcludes="yes">
 	      <include name="**/*.java"/>
@@ -15,17 +15,11 @@
 	      <exclude name="org/prorefactor/treeparser01/TreeParser01**"/>
 	      <exclude name="org/prorefactor/treeparser02/TreeParser02**"/>
 	    </fileset>
-	    <fileset dir="../org.prorefactor.refactor/src" defaultexcludes="yes">
-	      <include name="**/*.java"/>
-	      <exclude name="org/prorefactor/treeparser03/TreeParser03**"/>
-	      <exclude name="org/prorefactor/refactor/tp04/TP04.java"/>
-	      <exclude name="org/prorefactor/refactor/tp04/TP04TokenTypes.java"/>
-	    </fileset>
 	    <fileset dir="../org.prorefactor.eclipse/src" defaultexcludes="yes">
 	      <include name="**/*.java"/>
 	    </fileset>
-	    <doctitle><![CDATA[<h1>ProRefactor 1.3.0</h1>]]></doctitle>
-	    <bottom><![CDATA[<i>Copyright &#169; 2002-2006 Joanju and others. All Rights Reserved.</i>]]></bottom>
+	    <doctitle><![CDATA[<h1>ProRefactor 1.4.0</h1>]]></doctitle>
+	    <bottom><![CDATA[<i>Copyright &#169; 2002-2006 Joanju Software and others. All Rights Reserved.</i>]]></bottom>
 	    <tag name="todo" scope="all" description="To do:" />
 	  </javadoc>
       <zip zipfile="doc.zip" basedir="javadoc" filesonly="false" whenempty="skip" update="false"/>
