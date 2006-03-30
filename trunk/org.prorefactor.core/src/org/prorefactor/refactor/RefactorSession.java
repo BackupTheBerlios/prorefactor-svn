@@ -2,7 +2,7 @@
  * Created on Sep 30, 2003
  * John Green
  *
- * Copyright (C) 2003 Joanju Limited
+ * Copyright (C) 2003,2006 Joanju Software
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -30,6 +30,7 @@ public class RefactorSession {
 
 	private long timeStamp;
 	private ApplicationSettings appSettings = null;
+	private IDE ide = new IDEDefault(this);
 	private String projectName = null;
 	private ProgressProjectSettings progressSettings = null;
 	private ProparseLdr parser = null;
@@ -57,6 +58,7 @@ public class RefactorSession {
 
 	public static final String LISTING_FILE = "prorefactor/temp/listingfile.txt";
 	public static final String MESSAGES_FILE = "prorefactor/refactor.messages";
+	private static final String PROJECTS_DIR = "prorefactor/projects/";
 	public static final String ROLLBACK_DIR = "prorefactor/rollback";
 
 	private File rollbackDir = new File(ROLLBACK_DIR);
@@ -107,6 +109,8 @@ public class RefactorSession {
 	public static String getAppSettingsFilename() {
 		return "prorefactor/settings/application.properties";
 	}
+	
+	public IDE getIDE() { return ide; }
 
 	/** Get a string for the indent for the current project.
 	 * Returns a tab or some number of spaces (ex: "   ").
@@ -128,7 +132,7 @@ public class RefactorSession {
 	}
 
 	public static String getProgressSettingsFilename(String projectName) {
-		return "prorefactor/projects/" + projectName + "/progress.properties";
+		return PROJECTS_DIR + projectName + "/progress.properties";
 	}
 
 	/** Returns the name of the currently loaded project */
@@ -142,12 +146,11 @@ public class RefactorSession {
 	}
 
 	public static String getProparseSettingsFilename(String projectName) {
-		return "prorefactor/projects/" + projectName + "/proparse.properties";
+		return PROJECTS_DIR + projectName + "/proparse.properties";
 	}
 
-	public String getProRefactorProjectDir() {
-		return "prorefactor/projects/" + projectName;
-	}
+	public String getProRefactorProjectDir() {return PROJECTS_DIR + projectName;}
+	public String getProRefactorProjectDir(String inputProjectName) {return PROJECTS_DIR + inputProjectName;}
 
 	public File getRollbackDir() { return rollbackDir; }
 
@@ -197,6 +200,9 @@ public class RefactorSession {
 		if (! schemaFile.exists()) return true; // scratch projects might have no schema
 		return (schemaFile.lastModified() < timeStamp);
 	}
+	
+	
+	public RefactorSession setIDE(IDE ide) { this.ide = ide; return this; }
 
 
-} // class
+}

@@ -13,6 +13,7 @@
 package org.prorefactor.treeparser01;
 
 
+import org.prorefactor.treeparser.ParseUnit;
 import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.Variable;
 import org.prorefactor.widgettypes.Browse;
@@ -26,8 +27,11 @@ import antlr.collections.AST;
  * TP01Support is the default implementation.
  */
 public class TP01Action {
+
+	protected ParseUnit parseUnit = new ParseUnit(null);
+
 	
-	
+
 	/** Called by the tree parser at the end of a DEFINE statement, passing
 	 * in the new Variable object which is expected now to be added to the current scope.
 	 */
@@ -171,6 +175,8 @@ public class TP01Action {
 	 */
 	protected void funcForward(AST idAST) {}
 	
+	public ParseUnit getParseUnit() { return parseUnit; }
+
 	/** Called by the tree parser at METHOD statement, after method's scope has been created. */
 	protected void methodDef(AST idAST) {}
 
@@ -184,11 +190,15 @@ public class TP01Action {
 	 */
 	protected void procedureEnd(AST p){}
 	
-
+	
 	/** Called by the tree parser right off the bat, at the Program_root node */
 	protected void programRoot(AST rootAST) {}
 	
 	
+	/** Called by the tree parser at the end of the program, after Program_tail. */
+	protected void programTail() {}
+	
+
 	/** Action to take at RECORD_NAME nodes. */
 	protected void recordNameNode(AST anode, int contextQualifier) {}
 
@@ -225,6 +235,14 @@ public class TP01Action {
 	protected void scopeClose(AST scopeRootNode) {}
 	
 	
+	/** It would be unusual to already have a ParseUnit before calling
+	 * TP01, since TP01 is usually the first tree parser and it (by default)
+	 * creates its own ParseUnit. However, after instantiating TP01, you can
+	 * assign your own ParseUnit before executing the tree parse.
+	 */
+	public void setParseUnit(ParseUnit parseUnit) { this.parseUnit = parseUnit; }
+
+	
 	/** Create a "strong" buffer scope.
 	 * This is called within a DO FOR or REPEAT FOR statement.
 	 * @param anode Is the RECORD_NAME node. It must already have
@@ -232,6 +250,7 @@ public class TP01Action {
 	 */
 	protected void strongScope(AST anode) {}
 	
+
 	/** Called with the VIEW statement head, after the VIEW branch has been traversed. */
 	protected void viewState(AST headAST) {}
 

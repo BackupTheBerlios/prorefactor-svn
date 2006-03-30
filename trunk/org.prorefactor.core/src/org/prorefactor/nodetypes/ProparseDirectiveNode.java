@@ -28,7 +28,7 @@ public class ProparseDirectiveNode extends JPNode {
 	/** Get the directive text. Might return empty, but should not return null. */
 	public String getDirectiveText() {
 		if (getHandle()!=0)
-			return ProparseLdr.getInstance().attrGetS(getHandle(), "PROPARSEDIRECTIVE");
+			return ProparseLdr.getInstance().attrGetS(getHandle(), "proparsedirective");
 		else
 			return directiveText;
 	}

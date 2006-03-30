@@ -10,8 +10,6 @@
  */
 package org.prorefactor.refactor;
 
-import com.joanju.ProparseLdr;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.prorefactor.refactor.messages.Message;
+
+import com.joanju.ProparseLdr;
 
 
 /**
@@ -62,6 +62,15 @@ public class FileStuff {
 		}
 		return null;
 	} // findFile
+	
+	
+	
+	/** Find a class file on Proparse's propath, from the "package.classname".
+	 * @return null if not found.
+	 */
+	public static File findFileForClassName(String className) {
+		return findFile(className.replace('.', '/') + ".cls");
+	}
 
 
 

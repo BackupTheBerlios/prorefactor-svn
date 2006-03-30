@@ -49,7 +49,14 @@ abstract public class Symbol implements SymbolI {
 
 	/** Stores the full name, original (mixed) case as in definition. */	
 	private String name;
+
 	
+	/** Generate a bare-bones copy of this symbol.
+	 * Requires the scope to attach it to as the argument.
+	 */
+	public abstract Symbol copyBare(SymbolScope scope);
+
+
 	/* (non-Javadoc)
 	 * @see org.prorefactor.treeparser.SymbolI#fullName()
 	 */
@@ -127,11 +134,18 @@ abstract public class Symbol implements SymbolI {
 	
 	/* @see SymbolI#isExported() */
 	public boolean isExported() {
+		// If the symbol belongs to a SymbolScopeSuper, then not only has it already
+		// been determined that the symbol is exported, but also the rest of this
+		// method would just not work because there is never any AST linked to any
+		// of the symbols in a SymbolScopeSuper.
+		if (this.scope instanceof SymbolScopeSuper) return true;
 		SymbolScopeRoot unitScope = scope.getRootScope();
 		// If this is not at the unit (root) scope, then it cannot be visible.
 		if (scope!=unitScope) return false;
 		if (unitScope.getClassName()!=null) {
 			// For class members, only elements declared PUBLIC|PROTECTED are visible.
+			// Unnamed buffers don't have a DEFINE node.
+			if (defNode==null) return false;
 			return	(	defNode.findDirectChild(TokenTypes.PUBLIC)!=null
 					||	defNode.findDirectChild(TokenTypes.PROTECTED)!=null
 					);

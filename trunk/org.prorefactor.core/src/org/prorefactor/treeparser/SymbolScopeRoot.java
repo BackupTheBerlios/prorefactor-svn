@@ -14,9 +14,8 @@
 
 package org.prorefactor.treeparser;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.prorefactor.core.IConstants;
 import org.prorefactor.core.schema.Field;
@@ -39,7 +38,7 @@ public class SymbolScopeRoot extends SymbolScope {
 	
 	private String className = null;
 
-	private Set<Table> tableSet = new HashSet<Table>();
+	private Map<String, Table> tableMap = new HashMap<String, Table>();
 
 	
 	
@@ -57,7 +56,7 @@ public class SymbolScopeRoot extends SymbolScope {
 	 */
 	public TableBuffer defineTable(String name, int type) {
 		Table table = new Table(name, type);
-		tableSet.add(table);
+		tableMap.put(name.toLowerCase(), table);
 		// Pass empty string for name for default buffer.
 		TableBuffer bufferSymbol = new TableBuffer("", this, table);
 		// The default buffer for a temp/work table is not "unnamed" the way
@@ -76,6 +75,12 @@ public class SymbolScopeRoot extends SymbolScope {
 		FieldBuffer fieldBuff = new FieldBuffer(this, buffer, field);
 		return fieldBuff;
 	}
+	
+	
+	/** Generate "bare" symbols and SymbolScopeSuper from this scope's PUBLIC|PROTECTED members. */
+	public SymbolScopeSuper generateSymbolScopeSuper() {
+		return new SymbolScopeSuper(this);
+	}
 
 
 	/** Valid only if the parse unit is a CLASS.
@@ -88,6 +93,18 @@ public class SymbolScopeRoot extends SymbolScope {
 		assert table.getStoretype() != IConstants.ST_DBTABLE;
 		return (TableBuffer) bufferMap.get(table.getName().toLowerCase());
 	}
+	
+	
+	
+	/** Lookup a temp or work table definition in this scope.
+	 * Unlike most other lookup functions, this one has nothing to do with
+	 * 4gl semantics, buffers, scopes, etc. This just looks up the raw Table
+	 * definition for a temp or work table.
+	 * @return null if not found
+	 */
+	public Table lookupTableDefinition(String name) {
+		return tableMap.get(name.toLowerCase());
+	}
 
 
 
@@ -99,7 +116,7 @@ public class SymbolScopeRoot extends SymbolScope {
 	 */
 	protected Field lookupUnqualifiedField(String name) {
 		Field field;
-		for (Table table : tableSet) {
+		for (Table table : tableMap.values()) {
 			field = table.lookupField(name);
 			if (field!=null) return field;
 		}

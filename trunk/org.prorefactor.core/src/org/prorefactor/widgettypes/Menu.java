@@ -10,6 +10,7 @@
 package org.prorefactor.widgettypes;
 
 import org.prorefactor.core.TokenTypes;
+import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.SymbolScope;
 import org.prorefactor.treeparser.Widget;
 
@@ -17,6 +18,11 @@ import org.prorefactor.treeparser.Widget;
 public class Menu extends Widget {
 
 	public Menu(String name, SymbolScope scope) { super(name, scope); }
+
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		return new Menu(getName(), scope);
+	}
 
 	/** Returns TokenTypes.MENU. */
 	public int getProgressType() { return TokenTypes.MENU; }

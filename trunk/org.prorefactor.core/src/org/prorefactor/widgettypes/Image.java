@@ -10,6 +10,7 @@
 package org.prorefactor.widgettypes;
 
 import org.prorefactor.core.TokenTypes;
+import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.SymbolScope;
 import org.prorefactor.treeparser.Widget;
 
@@ -17,6 +18,11 @@ import org.prorefactor.treeparser.Widget;
 public class Image extends Widget implements FieldLevelWidgetI {
 
 	public Image(String name, SymbolScope scope) { super(name, scope); }
+
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		return new Image(getName(), scope);
+	}
 
 	/** Returns TokenTypes.IMAGE. */
 	public int getProgressType() { return TokenTypes.IMAGE; }

@@ -8,7 +8,7 @@ name resolution, scoping, etc.
 To find actions taken within this grammar, search for "action.",
 which is the tree parser action object.
 
-Copyright (C) 2001-2006 Joanju (www.joanju.com)
+Copyright (C) 2001-2006 Joanju Software (www.joanju.com)
 All rights reserved. This program and the accompanying materials 
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -82,20 +82,9 @@ options {
 		if (action==null) action = new TP01Support();
 	}
 
-	/** Get the action object. getActionObject and getTpSupport are identical.
-	 * @deprecated
-	 */
-	public TP01Action getTpSupport() { return action; }
 	/** Get the action object. getActionObject and getTpSupport are identical. */
 	public TP01Action getActionObject() { return action; }
 
-	/** Set the action object.
-	 * By default, the support object is a new TP01Support,
-	 * but you can configure this to be any TP01Action object.
-	 * setTpSupport and setActionObject are identical.
-	 * @deprecated
-	 */
-	public void setTpSupport(TP01Action action) { this.action = action; }
 	/** Set the action object.
 	 * By default, the support object is a new TP01Support,
 	 * but you can configure this to be any TP01Action object.
@@ -127,6 +116,7 @@ program
 	:	#(	p:Program_root {action.programRoot(#p);}
 			(blockorstate)*
 			Program_tail
+			{action.programTail();}
 		)
 	;
 
@@ -656,7 +646,12 @@ source_buffer_phrase
 	;
 
 defineframestate
-	:	#(	def:DEFINE (def_shared)? (def_visib)? FRAME
+	:	#(	def:DEFINE (def_shared)?
+			// Note that frames cannot be inherited. If that ever changes, then things will get tricky
+			// when creating the symbol tables for inheritance caching. See Frame.copyBare(), and the
+			// attributes of Frame that it does not deal with.
+			(PRIVATE)?  // important: see note above.
+			FRAME
 			id:ID { action.frameDef(#def, #id); }
 			(form_item[CQ.SYMBOL])*
 			(	#(HEADER (display_item)+ )

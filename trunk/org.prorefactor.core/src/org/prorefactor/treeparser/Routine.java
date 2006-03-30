@@ -28,6 +28,12 @@ public class Routine extends Symbol {
 		this.routineScope = routineScope;
 	}
 
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		Routine ret = new Routine(getName(), scope, scope);
+		ret.progressType = this.progressType;
+		return ret;
+	}
 
 	/** @see org.prorefactor.treeparser.Symbol#fullName() */
 	public String fullName() { return getName(); }

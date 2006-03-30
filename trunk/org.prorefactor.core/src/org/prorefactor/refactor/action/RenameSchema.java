@@ -31,8 +31,8 @@ import org.prorefactor.refactor.Refactor;
 import org.prorefactor.refactor.RefactorException;
 import org.prorefactor.refactor.RefactorTarget;
 import org.prorefactor.refactor.TempDirWrap;
-import org.prorefactor.refactor.source.CompileUnit;
 import org.prorefactor.treeparser.FieldBuffer;
+import org.prorefactor.treeparser.ParseUnit;
 import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.TableBuffer;
 
@@ -164,8 +164,8 @@ public class RenameSchema {
 		// of checking the PUB file for matching tables. Change this once the xref
 		// index is available.
 		PUB pub = new PUB(relPath, compileFile.getCanonicalPath());
-		CompileUnit cu = null;
-		if (! pub.loadTo(PUB.SCHEMA)) cu = pub.build();
+		ParseUnit pu = null;
+		if (! pub.loadTo(PUB.SCHEMA)) pu = pub.build();
 		boolean containsChanges = false;
 		ArrayList tableNames = new ArrayList();
 		pub.copySchemaTableLowercaseNamesInto(tableNames);
@@ -180,7 +180,7 @@ public class RenameSchema {
 		}
 		Object [] ret = new Object[2];
 		ret[0] = new Boolean(containsChanges);
-		ret[1] = cu;
+		ret[1] = pu;
 		return ret;
 	}
 
@@ -223,12 +223,12 @@ public class RenameSchema {
 		Object [] pubRet = checkPUB(relPath, compileFile);
 		Boolean requiresChanges = (Boolean) pubRet[0];
 		if (! requiresChanges.booleanValue()) return 0;
-		CompileUnit cu = (CompileUnit) pubRet[1];
-		if (cu==null) {
-			cu = new CompileUnit(compileFile, null, CompileUnit.DEFAULT);
-			cu.treeParser01();
+		ParseUnit pu = (ParseUnit) pubRet[1];
+		if (pu==null) {
+			pu = new ParseUnit(compileFile);
+			pu.treeParser01();
 		}
-		walkTree(cu.getTopNode());
+		walkTree(pu.getTopNode());
 		if (targetSet.size()==0) return 0;
 		TempDirWrap wrapper = new TempDirWrap(outDir);
 		wrapper.run(targetSet, changer);

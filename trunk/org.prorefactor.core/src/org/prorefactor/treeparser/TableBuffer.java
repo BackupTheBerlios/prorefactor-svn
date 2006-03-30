@@ -52,6 +52,24 @@ public class TableBuffer extends Symbol {
 	
 	
 	
+	/** For temp/work table, also adds Table definition to the scope if it doesn't already exist. */
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		Table t;
+		if (this.table.getStoretype()==IConstants.ST_DBTABLE) {
+			t = this.table;
+		} else {
+			// Make sure temp/work table definition exists in target root scope.
+			SymbolScopeRoot rootScope = scope.getRootScope();
+			t = rootScope.lookupTableDefinition(table.getName());
+			if (t==null) t = table.copyBare(rootScope);
+		}
+		String useName = this.isDefault ? "" : super.getName();
+		return new TableBuffer(useName, scope, t);
+	}
+
+
+
 	/** Get the "database.buffer" name for schema buffers,
 	 * get "buffer" for temp/work table buffers.
 	 */
@@ -115,4 +133,4 @@ public class TableBuffer extends Symbol {
 
 
 
-} // class
+}

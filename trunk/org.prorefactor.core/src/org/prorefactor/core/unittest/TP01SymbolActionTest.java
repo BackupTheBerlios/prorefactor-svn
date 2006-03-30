@@ -46,7 +46,7 @@ public class TP01SymbolActionTest extends TestCase {
 		parser = ProparseLdr.getInstance();
 		walkAction = new TP01Support();
 		walker = new TreeParser01();
-		walker.setTpSupport(walkAction);
+		walker.setActionObject(walkAction);
 	}
 
 //	/**

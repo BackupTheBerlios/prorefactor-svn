@@ -21,6 +21,11 @@ public class Datasource extends Symbol {
 		setName(name);
 	}
 
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		return new Datasource(getName(), scope);
+	}
+
 	/** For this subclass of Symbol, fullName() returns the same value as getName(). */
 	public String fullName() { return getName(); }
 

@@ -10,6 +10,7 @@
 package org.prorefactor.widgettypes;
 
 import org.prorefactor.core.TokenTypes;
+import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.SymbolScope;
 import org.prorefactor.treeparser.Widget;
 
@@ -17,6 +18,11 @@ import org.prorefactor.treeparser.Widget;
 public class Rectangle extends Widget implements FieldLevelWidgetI {
 
 	public Rectangle(String name, SymbolScope scope) { super(name, scope); }
+
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		return new Rectangle(getName(), scope);
+	}
 
 	/** Returns TokenTypes.RECTANGLE. */
 	public int getProgressType() { return TokenTypes.RECTANGLE; }

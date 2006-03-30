@@ -1,7 +1,7 @@
 /* Created 2003
  * John Green
  *
- * Copyright (C) 2003-2004 Joanju Limited
+ * Copyright (C) 2003-2006 Joanju Software
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -44,6 +44,7 @@ import org.prorefactor.core.ICallback;
 import org.prorefactor.eclipse.Plugin;
 import org.prorefactor.eclipse.messages.ParserMessages;
 import org.prorefactor.refactor.RefactorSession;
+import org.prorefactor.treeparser.SymbolScopeSuper;
 
 import com.joanju.ProparseLdr;
 
@@ -67,7 +68,7 @@ public class ActionManager {
 	public boolean doTheParse = true;
 	private String errorMess = null;
 	/** A list of IFile *.p and *.w objects, generated from the selected resources */
-	protected ArrayList fileList = null;
+	protected ArrayList<IFile> fileList = null;
 	private ProparseLdr parser = null;
 	private boolean parseErrors = false;
 	public ParserMessages parserMessages;
@@ -209,7 +210,6 @@ public class ActionManager {
 		parserMessages = new ParserMessages(); 
 		try {
 			op = new IRunnableWithProgress() {
-				public ActionManager outerclass = null;
 				public void run(IProgressMonitor monitor) throws InterruptedException {
 						run2(monitor, currIter);
 				}
@@ -278,7 +278,7 @@ public class ActionManager {
 	
 	
 	protected void loadSelectionList(ISelection iselection) {
-		fileList = new ArrayList();
+		fileList = new ArrayList<IFile>();
 		if (iselection==null) return;
 		IStructuredSelection selection = (IStructuredSelection) iselection;
 		if (selection.isEmpty()) return;
@@ -333,6 +333,15 @@ public class ActionManager {
 		while (it.hasNext()) {
 			if (monitor.isCanceled()) throw new InterruptedException("Canceled"); 
 			currResource = (IResource) it.next();
+			if (workDone==0) {
+				// Clear the super class inheritance cache for both Proparse and ProRefactor.
+				SymbolScopeSuper.cache.clear();
+				parser.configSet("multi-parse", "false");
+			} else if (workDone==1) {
+				// Proparse's cache is cleared when the first parse is done. Now we enable the cache
+				// for the rest of this run.
+				parser.configSet("multi-parse", "true");
+			}
 			workDone += 1;
 			checkForProjectChange(currResource);
 			if (preParse!=null) preParse.run(currResource);
@@ -362,7 +371,7 @@ public class ActionManager {
 	public int setup(ISelection iselection) {
 		loadSelectionList(iselection);
 		if (fileList!=null && ! fileList.isEmpty()) {
-			currResource = (IResource) fileList.get(0);
+			currResource = fileList.get(0);
 		} else { 
 			// Try to get the IFile from the current editor.
 			IEditorPart textEditor = Plugin.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
@@ -386,8 +395,9 @@ public class ActionManager {
 		}
 		try {
 			refPack = RefactorSession.getInstance();
-			currProject = ((IResource)fileList.get(0)).getProject().getName();
+			currProject = fileList.get(0).getProject().getName();
 			refPack.loadProject(currProject);
+			refPack.setIDE(Plugin.getIDEGateway());
 		} catch (Throwable e) {
 			reportError("Error Loading Project Settings\n" + e.toString());
 			Plugin.log(e);

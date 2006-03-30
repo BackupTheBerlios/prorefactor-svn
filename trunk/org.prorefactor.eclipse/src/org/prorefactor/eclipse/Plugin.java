@@ -46,6 +46,8 @@ public class Plugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static Plugin plugin;
 	
+	private ProRefactorIDEGateway ideGateway = null;
+	
 	// What's the proper way for getting this?
 	private static String ID = "org.prorefactor.eclipse";
 
@@ -91,6 +93,11 @@ public class Plugin extends AbstractUIPlugin {
 	/** Returns the shared instance. */
 	public static Plugin getDefault() { return plugin; }
 
+	
+	public static ProRefactorIDEGateway getIDEGateway() {
+		if (plugin.ideGateway==null) plugin.ideGateway = new ProRefactorIDEGateway();
+		return plugin.ideGateway;
+	}
 
 
 	public SelectionManager getSelectionManager() { return selectionManager; }

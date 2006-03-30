@@ -30,6 +30,13 @@ public class Variable extends Symbol implements Primative, Value {
 	private String className = null;
 
 
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		Variable v = new Variable(getName(), scope);
+		v.className = this.className;
+		v.dataType = this.dataType;
+		return v;
+	}
 
 	/** Return the name of the variable. For this subclass of
 	 * Symbol, fullName() returns the same value as getName().

@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.TreeSet;
 
 import org.prorefactor.core.IConstants;
+import org.prorefactor.treeparser.SymbolScopeRoot;
 
 
 
@@ -89,6 +90,25 @@ public class Table {
 			return t1.name.compareToIgnoreCase(t2.name);
 		}
 	};
+	
+	
+	
+	/** Create a bare minimum copy of a Table definition.
+	 * No-op if the table already exists in the requested scope.
+	 * Copies all of the field definitions as well.
+	 * @param scope The scope that this table is to be added to.
+	 * @return The newly created table, or the existing one from the scope if
+	 * it has previously been defined.
+	 */
+	public Table copyBare(SymbolScopeRoot scope) {
+		Table t = scope.lookupTableDefinition(this.name);
+		if (t!=null) return t;
+		t = new Table(this.name, this.storetype);
+		for (Field field : this.fieldSet) {
+			field.copyBare(t);
+		}
+		return t;
+	}
 
 
 

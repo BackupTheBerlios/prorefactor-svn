@@ -14,6 +14,7 @@
 package org.prorefactor.treeparser01;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,6 +28,10 @@ import org.prorefactor.core.schema.Table;
 import org.prorefactor.nodetypes.BlockNode;
 import org.prorefactor.nodetypes.FieldRefNode;
 import org.prorefactor.nodetypes.RecordNameNode;
+import org.prorefactor.refactor.FileStuff;
+import org.prorefactor.refactor.PUB;
+import org.prorefactor.refactor.RefactorException;
+import org.prorefactor.refactor.RefactorSession;
 import org.prorefactor.treeparser.Block;
 import org.prorefactor.treeparser.BufferScope;
 import org.prorefactor.treeparser.CQ;
@@ -40,11 +45,14 @@ import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.SymbolFactory;
 import org.prorefactor.treeparser.SymbolScope;
 import org.prorefactor.treeparser.SymbolScopeRoot;
+import org.prorefactor.treeparser.SymbolScopeSuper;
 import org.prorefactor.treeparser.TableBuffer;
 import org.prorefactor.treeparser.Variable;
 import org.prorefactor.widgettypes.Browse;
 
 import antlr.collections.AST;
+
+import com.joanju.ProparseLdr;
 
 
 
@@ -73,7 +81,6 @@ public class TP01Support extends TP01Action {
 	private Block currentBlock;
 	private FrameStack frameStack = new FrameStack();
 	private HashMap<String, SymbolScope> funcForwards = new HashMap<String, SymbolScope>();
-	private ParseUnit parseUnit = new ParseUnit();
 	private Schema schema = Schema.getInstance();
 
 	/** The symbol last, or currently being, defined.
@@ -182,6 +189,59 @@ public class TP01Support extends TP01Action {
 		JPNode classNode = (JPNode) classAST;
 		JPNode idNode = classNode.firstChild();
 		rootScope.setClassName(idNode.getText());
+		if (idNode.nextSibling().getType()==TokenTypes.INHERITS)
+			classStateInherits(classNode, idNode.nextSibling().firstChild());
+	}
+	private void classStateInherits(JPNode classNode, JPNode inheritsTypeNode) {
+		String className = inheritsTypeNode.getText();
+		SymbolScopeSuper cachedCopy = SymbolScopeSuper.cache.get(className.toLowerCase());
+		if (cachedCopy==null) cachedCopy = classStateSuper(classNode, className);
+		// Whether we got it from the cache or created it new, we put it back in the cache.
+		// Putting a cached copy back into the cache just moves it up in the MRU list.
+		SymbolScopeSuper.cache.put(className.toLowerCase(), cachedCopy);
+		// We take a copy of the cached superScope, because the tree parser messes with
+		// the attributes of the symbols, and we don't want to mess with the symbols that
+		// are in the super scopes in the cache.
+		rootScope.assignSuper(cachedCopy.generateSymbolScopeSuper());
+	}
+	private SymbolScopeSuper classStateSuper(JPNode classNode, String className) {
+		// Notes: It's possible we might want to change the logic here some day.
+		// If the PUB file ever stores enough symbol information that we could get
+		// the inheritance information straight from the PUB, then we might want to
+		// go straight to that (if up to date), ignoring what's in Proparse.
+		// I don't know if there would be any performance or memory advantage one
+		// way or the other, since reading from disk is slower, but building the
+		// whole JPNode tree takes more memory.
+		File file = FileStuff.findFileForClassName(className);
+		if (! file.exists()) throw new Error("Could not find source on PROPATH for class: " + className);
+		RefactorSession refpack = RefactorSession.getInstance();
+		String [] projFile = refpack.getIDE().getProjectRelativePath(file);
+		if (projFile==null) throw new Error("Could not find IDE project/file for class: " + className);
+		PUB pub = new PUB(projFile[0], projFile[1], FileStuff.fullpath(file));
+		boolean pubIsCurrent = pub.loadTo(PUB.HEADER);
+		ParseUnit pu = new ParseUnit(file);
+		pu.setPUB(pub);
+		int superClassHandle = classNode.attrGet(IConstants.SUPER_CLASS_HANDLE);
+		try {
+			if (superClassHandle > 0) {
+				classStateSuperProparse(pu, superClassHandle);
+			} else {
+				if (!pubIsCurrent) throw new Error("Internal error: No tree from PUB or Proparse, for class: " + className);
+				pub.load();
+				pu.setTopNode(pub.getTree());
+				pu.treeParser01();
+			}
+		} catch (Exception e) { throw new Error(e); }
+		return pu.getRootScope().generateSymbolScopeSuper();
+	}
+	private void classStateSuperProparse(ParseUnit pu, int superClassHandle) throws RefactorException {
+		assert superClassHandle > 0;
+		ProparseLdr parser = ProparseLdr.getInstance();
+		int superRootHandle = parser.getHandle();
+		parser.nodeParent(superClassHandle, superRootHandle);
+		assert parser.getNodeTypeI(superRootHandle) == TokenTypes.Program_root;
+		pu.setTopNode(JPNode.getTree(superRootHandle));
+		pu.treeParser01();
 	}
 
 
@@ -531,8 +591,6 @@ public class TP01Support extends TP01Action {
 	
 	public SymbolScope getCurrentScope(){ return currentScope; }
 
-	public ParseUnit getParseUnit() { return parseUnit; }
-
 	public SymbolScopeRoot getRootScope(){ return rootScope; }
 	
 	
@@ -580,6 +638,19 @@ public class TP01Support extends TP01Action {
 		blockNode.setBlock(currentBlock);
 		parseUnit.setTopNode(blockNode);
 		parseUnit.setRootScope(rootScope);
+	}
+	
+	
+	
+	protected void programTail() {
+		// Because the tree parser depends on PUB files for getting inheritance information
+		// from super classes, the tree parser is responsible for keeping the PUB files up
+		// to date.
+		try {
+			PUB pub = parseUnit.getPUB();
+			if (! pub.isChecked()) pub.loadTo(PUB.HEADER);
+			if (! pub.isCurrent()) pub.build(this);
+		} catch (Exception e) { throw new Error(e); }
 	}
 
 
@@ -704,15 +775,6 @@ public class TP01Support extends TP01Action {
 
 
 
-	/** It would be unusual to already have a ParseUnit before calling
-	 * TP01, since TP01 is usually the first tree parser and it (by default)
-	 * creates its own ParseUnit. However, after instantiating TP01, you can
-	 * assign your own ParseUnit before executing the tree parse.
-	 */
-	public void setParseUnit(ParseUnit parseUnit) { this.parseUnit = parseUnit; }
-
-	
-	
 	/** Create a "strong" buffer scope.
 	 * This is called within a DO FOR or REPEAT FOR statement.
 	 * @param anode Is the RECORD_NAME node. It must already have

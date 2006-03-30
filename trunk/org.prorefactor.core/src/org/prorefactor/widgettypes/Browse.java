@@ -11,12 +11,18 @@ package org.prorefactor.widgettypes;
 
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.treeparser.FieldContainer;
+import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.SymbolScope;
 
 
 public class Browse extends FieldContainer implements FieldLevelWidgetI {
 
 	public Browse(String name, SymbolScope scope) { super(name, scope); }
+
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		return new Browse(getName(), scope);
+	}
 
 	/** Returns TokenTypes.BROWSE. */
 	public int getProgressType() { return TokenTypes.BROWSE; }

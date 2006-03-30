@@ -13,6 +13,7 @@ package org.prorefactor.widgettypes;
 import org.prorefactor.core.TokenTypes;
 import org.prorefactor.treeparser.Block;
 import org.prorefactor.treeparser.FieldContainer;
+import org.prorefactor.treeparser.Symbol;
 import org.prorefactor.treeparser.SymbolScope;
 
 
@@ -26,6 +27,16 @@ public class Frame extends FieldContainer {
 
 	private boolean initialized = false;
 	private Block frameScopeBlock = null;
+
+	
+
+	@Override
+	public Symbol copyBare(SymbolScope scope) {
+		// Frames cannot be inherited, so we don't have to worry about the other frame attributes.
+		return new Frame(getName(), scope);
+	}
+
+	
 	public Block getFrameScopeBlock() { return frameScopeBlock; }
 
 	

@@ -10,13 +10,14 @@ package org.prorefactor.core.unittest;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import junit.framework.TestCase;
+
 import org.prorefactor.core.JPNode;
 import org.prorefactor.treeparser.Call;
 import org.prorefactor.treeparser01.TP01ProcessAction;
 import org.prorefactor.treeparser01.TP01Support;
 import org.prorefactor.treeparser01.TreeParser01;
 
-import junit.framework.TestCase;
 import antlr.RecognitionException;
 
 import com.joanju.ProparseLdr;
@@ -26,7 +27,6 @@ import com.joanju.ProparseLdr;
  *
  */
 public class TP01ProcessActionTest extends TestCase {
-	private Config config = null;
 	private ProparseLdr parser = null;
 	private TP01Support symbolAction;
 	private TP01ProcessAction processAction;
@@ -49,7 +49,6 @@ public class TP01ProcessActionTest extends TestCase {
 	}
 	
 	public void setUp(){
-		config = Config.getInstance();
 		parser = ProparseLdr.getInstance();
 		symbolAction = new TP01Support();
 		processAction = new TP01ProcessAction(symbolAction.getRootScope());
@@ -68,10 +67,10 @@ public class TP01ProcessActionTest extends TestCase {
 			
 			JPNode ast = getTree();
 			
-			treeWalker.setTpSupport(symbolAction);
+			treeWalker.setActionObject(symbolAction);
 			treeWalker.program(ast);
 
-			treeWalker.setTpSupport(processAction);
+			treeWalker.setActionObject(processAction);
 			treeWalker.program(ast);
 			
 
@@ -136,10 +135,10 @@ public class TP01ProcessActionTest extends TestCase {
 			
 			JPNode ast = getTree();
 
-			treeWalker.setTpSupport(symbolAction);
+			treeWalker.setActionObject(symbolAction);
 			treeWalker.program(ast);
 
-			treeWalker.setTpSupport(processAction);
+			treeWalker.setActionObject(processAction);
 			treeWalker.program(ast);
 
 			assertTrue(processAction.getErrorList().size() == 0);

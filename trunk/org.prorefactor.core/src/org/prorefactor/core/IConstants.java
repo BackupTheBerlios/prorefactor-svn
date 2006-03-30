@@ -75,7 +75,16 @@ public interface IConstants {
 	/** See Proparse documentation, "Node Attributes Reference". */
 	public int INLINE_VAR_DEF = 2000;
 
+	
+	
+	//
+	// From version 1.3
+	//
+	
+	/** See Proparse documentation, "Node Attributes Reference". */
+	public int SUPER_CLASS_HANDLE = 2100;
 
+	
 
 	//
 	// From TreeParser01

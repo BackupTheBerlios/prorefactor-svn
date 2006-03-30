@@ -20,12 +20,24 @@ import org.prorefactor.util.Cache;
 /** Contains skeleton symbols for purposes of inheritance.
  * Since these are cached indefinately, they never have references
  * to syntax tree nodes or child scopes.
+ * Is always generated either from a SymbolScopeRoot, or else from
+ * another SymbolScopeSuper when a copy is being made.
  */
 public class SymbolScopeSuper extends SymbolScopeRoot {
 
-	public SymbolScopeSuper(String className) {
+	/** Constructor is "package" visibility.
+	 * Should only be called from the SymbolScopeRoot, or from another
+	 * SymbolScopeSuper in the case where a copy is being made.
+	 */
+	SymbolScopeSuper(SymbolScopeRoot fromScope) {
 		super();
-		setClassName(className);
+		setClassName(fromScope.getClassName());
+		gatherInheritableMembers(fromScope);
+		if (fromScope.parentScope!=null) {
+			// Logic error if not instanceof SymbolScopeSuper
+			SymbolScopeSuper fromSuper = (SymbolScopeSuper) fromScope.parentScope;
+			this.parentScope = fromSuper.generateSymbolScopeSuper();
+		}
 	}
 	
 	/** TreeParser01 stores and looks up SymbolScopeSuper objects in this cache, which
@@ -47,6 +59,21 @@ public class SymbolScopeSuper extends SymbolScopeRoot {
 		assert false;
 		return null;
 	}
+	
+	
+	
+	private void gatherInheritableMembers(SymbolScopeRoot fromScope) {
+		for (Symbol symbol : fromScope.getAllSymbols()) {
+			// FieldBuffers are not part of the language syntax, and they are not copied.
+			// They are created on the fly as needed by the tree parser.
+			if (symbol instanceof FieldBuffer) continue;
+			if (symbol.isExported()) {
+				Symbol copy = symbol.copyBare(this);
+				add(copy);
+			}
+		}
+	}
+
 	
 	
 }
