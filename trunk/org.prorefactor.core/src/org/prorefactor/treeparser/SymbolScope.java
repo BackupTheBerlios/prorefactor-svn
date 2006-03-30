@@ -13,7 +13,6 @@ package org.prorefactor.treeparser;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -389,26 +388,15 @@ public class SymbolScope {
 
 
 
+	public void registerCall(Call call) { callMap.put(call.id(), call); }
+
+
 	public void setRootBlock(Block block) { rootBlock = block; }
 
 
-	/**
-	 * @param call
-	 */
-	public void registerCall(Call call) {
-		callMap.put(call.id(), call);
-	}
 
-
-	/**
-	 * @return a Collection view of the calls registered in
-	 * this SymbolScope. Caution: changes to the Collection
-	 * will affect the internal list in the SymbolScope.
-	 */
-	public Collection<Call> getCallList() {
-		// TODO - change signature to Map to allow key search.
-		return callMap.values();
-	}
+	/** Get the call map. */
+	public Map<String, Call> getCallMap() { return callMap; }
 
 
 	/**

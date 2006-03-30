@@ -3,13 +3,18 @@
  * @author Peter Dalbadie
  * 21-Sep-2004
  * 
+ * Copyright (c) 2004,2006 ProRefactor.org.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 
 
 package org.prorefactor.treeparser01;
 
 
-import java.util.Collection;
+import java.util.Map;
 
 import org.prorefactor.core.JPNode;
 import org.prorefactor.treeparser.Call;
@@ -203,13 +208,10 @@ public class TP01ProcessAction extends TP01Action {
 	public void exprtSystemHandleName(AST sysHandleName) {
 	}
 
-	/**
-	 * @return a Collection containing all the Call objects
-	 * registered in the currentScope.
-	 */
-	public Collection getCallList() {
-		return currentScope.getCallList();
-	}
+
+	/** @return the Map of Call objects registered in the currentScope. */
+	public Map<String, Call> getCallList() { return currentScope.getCallMap(); }
+
 
 	/**
 	 * @return

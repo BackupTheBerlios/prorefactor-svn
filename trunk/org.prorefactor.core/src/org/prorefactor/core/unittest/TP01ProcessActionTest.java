@@ -3,12 +3,17 @@
  * @author Peter Dalbadie
  * 21-Sep-2004
  * 
+ * Copyright (c) 2004,2006 ProRefactor.org.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 
 package org.prorefactor.core.unittest;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -90,29 +95,29 @@ public class TP01ProcessActionTest extends TestCase {
 			Call getCompileListCall = new Call(externalName,getCompileList.getName());
 			
 			// Create expected result set for root scope: enable-ui, user-action, disable-ui.
-			ArrayList expectedRootCalls = new ArrayList();
+			ArrayList<Call> expectedRootCalls = new ArrayList<Call>();
 			expectedRootCalls.add(disableUiCall);
 			expectedRootCalls.add(enableUiCall);
 			expectedRootCalls.add(userActionCall);
 			
 
 			// Get actual calls found in code and test against expected.
-			Collection actualRootCalls = processAction.getRootScope().getCallList();
-			assertTrue(actualRootCalls.containsAll(expectedRootCalls));
-			assertTrue(! actualRootCalls.contains(setStateCall));			
-			assertTrue(! actualRootCalls.contains(getCompileListCall));			
+			Map<String, Call> actualRootCalls = processAction.getRootScope().getCallMap();
+			assertTrue(actualRootCalls.values().containsAll(expectedRootCalls));
+			assertTrue(! actualRootCalls.values().contains(setStateCall));			
+			assertTrue(! actualRootCalls.values().contains(getCompileListCall));			
 			
 			// Internal proc enable-ui calls: setState.
-			Collection actualEnableUiCalls = enableUi.getRoutineScope().getCallList();
-			assertTrue(actualEnableUiCalls.contains(setStateCall));
+			Map<String, Call> actualEnableUiCalls = enableUi.getRoutineScope().getCallMap();
+			assertTrue(actualEnableUiCalls.values().contains(setStateCall));
 			
 			// Internal proc user-action calls: get-compile-list.
-			Collection actualUserActionCalls = userAction.getRoutineScope().getCallList();
-			assertTrue(actualUserActionCalls.contains(getCompileListCall));
+			Map<String, Call> actualUserActionCalls = userAction.getRoutineScope().getCallMap();
+			assertTrue(actualUserActionCalls.values().contains(getCompileListCall));
 			
 			// Internal proc get-compile-list calls: setState x 3.
-			Collection actualGetCompileListCalls = getCompileList.getRoutineScope().getCallList();
-			assertTrue(actualGetCompileListCalls.contains(setStateCall));
+			Map<String, Call> actualGetCompileListCalls = getCompileList.getRoutineScope().getCallMap();
+			assertTrue(actualGetCompileListCalls.values().contains(setStateCall));
 						
 		} catch (RecognitionException e) {
 			e.printStackTrace();
@@ -155,23 +160,23 @@ public class TP01ProcessActionTest extends TestCase {
 			Call test01InternalCall = new Call(externalName,test01.getName());
 			
 			// Expected root procedure calls.
-			ArrayList expectedRootCalls = new ArrayList();
+			ArrayList<Call> expectedRootCalls = new ArrayList<Call>();
 			expectedRootCalls.add(persistentProcCall);
 			expectedRootCalls.add(test01InHandleCall);
 			expectedRootCalls.add(test01InternalCall);
 
 			// Expected calls in procedure test_01
-			ArrayList expectedTest01Calls = new ArrayList();
+			ArrayList<Call> expectedTest01Calls = new ArrayList<Call>();
 			expectedTest01Calls.add(test02InHandleCall);
 			
 			// Test actual root calls agains expected root calls.
-			Collection actualRootCalls = processAction.getCallList();
-			assertTrue(actualRootCalls.containsAll(expectedRootCalls));
-			assertTrue(! actualRootCalls.contains(test02InHandleCall));			
+			Map<String, Call> actualRootCalls = processAction.getCallList();
+			assertTrue(actualRootCalls.values().containsAll(expectedRootCalls));
+			assertTrue(! actualRootCalls.values().contains(test02InHandleCall));			
 
 			// Test actual calls in test_01 against expected calls.
-			Collection actualTest01Calls = test01.getRoutineScope().getCallList();
-			assertTrue(actualTest01Calls.containsAll(expectedTest01Calls));
+			Map<String, Call> actualTest01Calls = test01.getRoutineScope().getCallMap();
+			assertTrue(actualTest01Calls.values().containsAll(expectedTest01Calls));
 			
 		} catch (RecognitionException e) {
 			e.printStackTrace();

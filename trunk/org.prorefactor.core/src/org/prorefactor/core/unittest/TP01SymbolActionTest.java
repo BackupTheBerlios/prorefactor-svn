@@ -3,6 +3,11 @@
  * @author Peter Dalbadie
  * 21-Sep-2004
  * 
+ * Copyright (c) 2004,2006 ProRefactor.org.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 
 package org.prorefactor.core.unittest;
@@ -22,7 +27,6 @@ import com.joanju.ProparseLdr;
  *
  */
 public class TP01SymbolActionTest extends TestCase {
-	private Config config = null;
 	private ProparseLdr parser = null;
 	private TP01Support walkAction;
 	private TreeParser01 walker;
@@ -42,7 +46,6 @@ public class TP01SymbolActionTest extends TestCase {
 	}
 	
 	public void setUp(){
-		config = Config.getInstance();
 		parser = ProparseLdr.getInstance();
 		walkAction = new TP01Support();
 		walker = new TreeParser01();

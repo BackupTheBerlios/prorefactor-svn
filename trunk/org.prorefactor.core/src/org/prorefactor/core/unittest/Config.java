@@ -3,6 +3,11 @@
  * @author Peter Dalbadie
  * 21-Sep-2004
  * 
+ * Copyright (c) 2004,2006 ProRefactor.org.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 
 package org.prorefactor.core.unittest;
@@ -46,7 +51,7 @@ public class Config {
 		parser.configSet("proversion", getEnvProperty("proversion"));
 		parser.configSet("window-system", getEnvProperty("window_system"));
 	
-		// dbAliases();
+		dbAliases();
 		
 		parser.configSet("init","true");
 	}
@@ -54,10 +59,9 @@ public class Config {
 	/**
 	 * @return
 	 */
-	private void dbAliases() {
+	private static void dbAliases() {
 		parser.schemaAliasDelete(""); // deletes all
 		String [] alias = getEnvProperty("database_aliases").split(",");
-		
 		for (int i = 0; i < alias.length - 1; i = i + 2) {
 			parser.schemaAliasCreate(alias[i], alias[i+1]);
 		}
