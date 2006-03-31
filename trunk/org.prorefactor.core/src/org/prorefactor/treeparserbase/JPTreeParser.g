@@ -607,7 +607,7 @@ parameter_arg
 	:	(	TABLEHANDLE field parameter_dataset_options
 		|	TABLE (FOR)? RECORD_NAME parameter_dataset_options
 		|	DATASET ID parameter_dataset_options
-		|	DATASETHANDLE ID parameter_dataset_options
+		|	DATASETHANDLE field parameter_dataset_options
 		|	ID AS (	CLASS TYPE_NAME | datatype_com | datatype_var )
 		|	expression (AS datatype_com)?
 		)

@@ -198,7 +198,7 @@ parameter_arg
 	:	(	TABLEHANDLE fld[CQ.INIT] parameter_dataset_options
 		|	TABLE (FOR)? tbl[CQ.TEMPTABLESYMBOL] parameter_dataset_options
 		|	DATASET ID parameter_dataset_options
-		|	DATASETHANDLE ID parameter_dataset_options
+		|	DATASETHANDLE fld[CQ.INIT] parameter_dataset_options
 		|	ID AS (	CLASS TYPE_NAME | datatype_com | datatype_var )
 		|	expression (AS datatype_com)?
 		)
