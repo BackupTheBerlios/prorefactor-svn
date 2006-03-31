@@ -20,6 +20,7 @@ import org.prorefactor.refactor.FileStuff;
 import org.prorefactor.refactor.PUB;
 import org.prorefactor.refactor.RefactorException;
 import org.prorefactor.refactor.RefactorSession;
+import org.prorefactor.treeparser01.TP01Action;
 import org.prorefactor.treeparser01.TreeParser01;
 
 import com.joanju.ProparseLdr;
@@ -133,13 +134,25 @@ public class ParseUnit {
 	}
 
 	
-	/** Run TreeParser01. This takes care of calling parse() first, if that
-	 * has not already been done.
+	/** Run TreeParser01.
+	 * Takes care of calling parse() first, if that has not already been done.
 	 */
 	public void treeParser01() throws RefactorException {
 		if (this.getTopNode()==null) parse();
 		TreeParser01 tp = new TreeParser01();
 		tp.getActionObject().setParseUnit(this);
+		treeParser(tp);
+	}
+
+	
+	/** Run TreeParser01 with any TP01Action object.
+	 * Takes care of calling parse() first, if that has not already been done.
+	 */
+	public void treeParser01(TP01Action action) throws RefactorException {
+		if (this.getTopNode()==null) parse();
+		TreeParser01 tp = new TreeParser01();
+		tp.setActionObject(action);
+		action.setParseUnit(this);
 		treeParser(tp);
 	}
 
