@@ -1132,6 +1132,7 @@ public interface TreeParser03TokenTypes {
 	int VOID = 1128;
 	int LOCAL_METHOD_REF = 1129;
 	int ANNOTATION = 1130;
-	int Last_Token_Number = 1131;
+	int DOUBLECOLON = 1131;
+	int Last_Token_Number = 1132;
 	int SYMMETRICENCRYPTIONALGORITHM = 10877;
 }

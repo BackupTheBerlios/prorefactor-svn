@@ -698,9 +698,13 @@ exprt
 widattr
 	:	#(	Widget_ref
 			(NORETURNVALUE)?
-			s_widget
-			(OBJCOLON . (array_subscript)? (method_param_list)? )+
-			(#(IN_KW (MENU|FRAME|BROWSE|SUBMENU|BUFFER) ID ))? (AS .)?
+			(	(widname)=> widname
+			|	exprt
+			)
+			(	(OBJCOLON . (array_subscript)? (method_param_list)? )+
+				(#(IN_KW (MENU|FRAME|BROWSE|SUBMENU|BUFFER) ID ))? (AS .)?
+			|	DOUBLECOLON ID (DOUBLECOLON ID)?
+			)
 		)
 	;
 
@@ -713,13 +717,14 @@ widgetlist
 	;
 
 s_widget
-	:	widname	| (FIELD)? field
+	:	widname	| field
 	;
 
 widname
 	:	systemhandlename
 	|	DATASET ID
 	|	DATASOURCE ID
+	|	FIELD field
 	|	FRAME ID
 	|	MENU ID
 	|	SUBMENU ID

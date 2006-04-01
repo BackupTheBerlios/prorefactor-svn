@@ -227,27 +227,15 @@ exprt
 	|	tbl[CQ.REF] // for DISPLAY buffername, etc.
 	;
 
-widattr
-	:	#(	Widget_ref
-			(NORETURNVALUE)?
-			s_widget
-			(OBJCOLON . (array_subscript)? (method_param_list)? )+
-			(#(IN_KW widname))? (AS .)?
-		)
-	;
-
-gwidget
-	:	#(Widget_ref s_widget (#(IN_KW widname))? )
-	;
-
 s_widget
-	:	widname	| (FIELD)? fld[CQ.REF]
+	:	widname	| fld[CQ.REF]
 	;
 
 widname
 	:	systemhandlename
 	|	DATASET ID
 	|	DATASOURCE ID
+	|	FIELD fld[CQ.REF]
 	|	FRAME f:ID { action.frameRef(#f); }
 	|	MENU ID
 	|	SUBMENU ID
