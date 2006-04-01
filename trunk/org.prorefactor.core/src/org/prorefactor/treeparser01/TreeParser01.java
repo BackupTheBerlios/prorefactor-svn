@@ -252,7 +252,7 @@ public TreeParser01() {
 		}
 		case Expr_statement:
 		{
-			AST __t1369 = _t;
+			AST __t1374 = _t;
 			AST tmp2_AST_in = (AST)_t;
 			match(_t,Expr_statement);
 			_t = _t.getFirstChild();
@@ -281,7 +281,7 @@ public TreeParser01() {
 			}
 			state_end(_t);
 			_t = _retTree;
-			_t = __t1369;
+			_t = __t1374;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -308,12 +308,12 @@ public TreeParser01() {
 		}
 		case ANNOTATION:
 		{
-			AST __t1371 = _t;
+			AST __t1376 = _t;
 			AST tmp7_AST_in = (AST)_t;
 			match(_t,ANNOTATION);
 			_t = _t.getFirstChild();
 			{
-			_loop1373:
+			_loop1378:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if (((_t.getType() >= LEXDATE && _t.getType() <= SYMMETRICENCRYPTIONALGORITHM))) {
@@ -322,12 +322,12 @@ public TreeParser01() {
 					_t = _t.getNextSibling();
 				}
 				else {
-					break _loop1373;
+					break _loop1378;
 				}
 				
 			} while (true);
 			}
-			_t = __t1371;
+			_t = __t1376;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -598,7 +598,7 @@ public TreeParser01() {
 		AST ref = null;
 		AST id = null;
 		
-		AST __t102 = _t;
+		AST __t107 = _t;
 		ref = _t==ASTNULL ? null :(AST)_t;
 		match(_t,Field_ref);
 		_t = _t.getFirstChild();
@@ -671,7 +671,7 @@ public TreeParser01() {
 		}
 		}
 		}
-		_t = __t102;
+		_t = __t107;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.field(ref, id, contextQualifier, 0);
@@ -687,77 +687,9 @@ public TreeParser01() {
 		switch ( _t.getType()) {
 		case OR:
 		{
-			AST __t1553 = _t;
+			AST __t1558 = _t;
 			AST tmp24_AST_in = (AST)_t;
 			match(_t,OR);
-			_t = _t.getFirstChild();
-			expression(_t);
-			_t = _retTree;
-			expression(_t);
-			_t = _retTree;
-			_t = __t1553;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case AND:
-		{
-			AST __t1554 = _t;
-			AST tmp25_AST_in = (AST)_t;
-			match(_t,AND);
-			_t = _t.getFirstChild();
-			expression(_t);
-			_t = _retTree;
-			expression(_t);
-			_t = _retTree;
-			_t = __t1554;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case NOT:
-		{
-			AST __t1555 = _t;
-			AST tmp26_AST_in = (AST)_t;
-			match(_t,NOT);
-			_t = _t.getFirstChild();
-			expression(_t);
-			_t = _retTree;
-			_t = __t1555;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case MATCHES:
-		{
-			AST __t1556 = _t;
-			AST tmp27_AST_in = (AST)_t;
-			match(_t,MATCHES);
-			_t = _t.getFirstChild();
-			expression(_t);
-			_t = _retTree;
-			expression(_t);
-			_t = _retTree;
-			_t = __t1556;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case BEGINS:
-		{
-			AST __t1557 = _t;
-			AST tmp28_AST_in = (AST)_t;
-			match(_t,BEGINS);
-			_t = _t.getFirstChild();
-			expression(_t);
-			_t = _retTree;
-			expression(_t);
-			_t = _retTree;
-			_t = __t1557;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case CONTAINS:
-		{
-			AST __t1558 = _t;
-			AST tmp29_AST_in = (AST)_t;
-			match(_t,CONTAINS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -767,11 +699,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case EQ:
+		case AND:
 		{
 			AST __t1559 = _t;
-			AST tmp30_AST_in = (AST)_t;
-			match(_t,EQ);
+			AST tmp25_AST_in = (AST)_t;
+			match(_t,AND);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -781,25 +713,23 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case NE:
+		case NOT:
 		{
 			AST __t1560 = _t;
-			AST tmp31_AST_in = (AST)_t;
-			match(_t,NE);
+			AST tmp26_AST_in = (AST)_t;
+			match(_t,NOT);
 			_t = _t.getFirstChild();
-			expression(_t);
-			_t = _retTree;
 			expression(_t);
 			_t = _retTree;
 			_t = __t1560;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GTHAN:
+		case MATCHES:
 		{
 			AST __t1561 = _t;
-			AST tmp32_AST_in = (AST)_t;
-			match(_t,GTHAN);
+			AST tmp27_AST_in = (AST)_t;
+			match(_t,MATCHES);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -809,11 +739,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GE:
+		case BEGINS:
 		{
 			AST __t1562 = _t;
-			AST tmp33_AST_in = (AST)_t;
-			match(_t,GE);
+			AST tmp28_AST_in = (AST)_t;
+			match(_t,BEGINS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -823,11 +753,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LTHAN:
+		case CONTAINS:
 		{
 			AST __t1563 = _t;
-			AST tmp34_AST_in = (AST)_t;
-			match(_t,LTHAN);
+			AST tmp29_AST_in = (AST)_t;
+			match(_t,CONTAINS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -837,11 +767,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LE:
+		case EQ:
 		{
 			AST __t1564 = _t;
-			AST tmp35_AST_in = (AST)_t;
-			match(_t,LE);
+			AST tmp30_AST_in = (AST)_t;
+			match(_t,EQ);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -851,11 +781,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PLUS:
+		case NE:
 		{
 			AST __t1565 = _t;
-			AST tmp36_AST_in = (AST)_t;
-			match(_t,PLUS);
+			AST tmp31_AST_in = (AST)_t;
+			match(_t,NE);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -865,11 +795,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MINUS:
+		case GTHAN:
 		{
 			AST __t1566 = _t;
-			AST tmp37_AST_in = (AST)_t;
-			match(_t,MINUS);
+			AST tmp32_AST_in = (AST)_t;
+			match(_t,GTHAN);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -879,11 +809,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MULTIPLY:
+		case GE:
 		{
 			AST __t1567 = _t;
-			AST tmp38_AST_in = (AST)_t;
-			match(_t,MULTIPLY);
+			AST tmp33_AST_in = (AST)_t;
+			match(_t,GE);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -893,11 +823,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DIVIDE:
+		case LTHAN:
 		{
 			AST __t1568 = _t;
-			AST tmp39_AST_in = (AST)_t;
-			match(_t,DIVIDE);
+			AST tmp34_AST_in = (AST)_t;
+			match(_t,LTHAN);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -907,11 +837,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MODULO:
+		case LE:
 		{
 			AST __t1569 = _t;
-			AST tmp40_AST_in = (AST)_t;
-			match(_t,MODULO);
+			AST tmp35_AST_in = (AST)_t;
+			match(_t,LE);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
@@ -921,27 +851,97 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case UNARY_MINUS:
+		case PLUS:
 		{
 			AST __t1570 = _t;
-			AST tmp41_AST_in = (AST)_t;
-			match(_t,UNARY_MINUS);
+			AST tmp36_AST_in = (AST)_t;
+			match(_t,PLUS);
 			_t = _t.getFirstChild();
-			exprt(_t);
+			expression(_t);
+			_t = _retTree;
+			expression(_t);
 			_t = _retTree;
 			_t = __t1570;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case UNARY_PLUS:
+		case MINUS:
 		{
 			AST __t1571 = _t;
+			AST tmp37_AST_in = (AST)_t;
+			match(_t,MINUS);
+			_t = _t.getFirstChild();
+			expression(_t);
+			_t = _retTree;
+			expression(_t);
+			_t = _retTree;
+			_t = __t1571;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case MULTIPLY:
+		{
+			AST __t1572 = _t;
+			AST tmp38_AST_in = (AST)_t;
+			match(_t,MULTIPLY);
+			_t = _t.getFirstChild();
+			expression(_t);
+			_t = _retTree;
+			expression(_t);
+			_t = _retTree;
+			_t = __t1572;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case DIVIDE:
+		{
+			AST __t1573 = _t;
+			AST tmp39_AST_in = (AST)_t;
+			match(_t,DIVIDE);
+			_t = _t.getFirstChild();
+			expression(_t);
+			_t = _retTree;
+			expression(_t);
+			_t = _retTree;
+			_t = __t1573;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case MODULO:
+		{
+			AST __t1574 = _t;
+			AST tmp40_AST_in = (AST)_t;
+			match(_t,MODULO);
+			_t = _t.getFirstChild();
+			expression(_t);
+			_t = _retTree;
+			expression(_t);
+			_t = _retTree;
+			_t = __t1574;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case UNARY_MINUS:
+		{
+			AST __t1575 = _t;
+			AST tmp41_AST_in = (AST)_t;
+			match(_t,UNARY_MINUS);
+			_t = _t.getFirstChild();
+			exprt(_t);
+			_t = _retTree;
+			_t = __t1575;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case UNARY_PLUS:
+		{
+			AST __t1576 = _t;
 			AST tmp42_AST_in = (AST)_t;
 			match(_t,UNARY_PLUS);
 			_t = _t.getFirstChild();
 			exprt(_t);
 			_t = _retTree;
-			_t = __t1571;
+			_t = __t1576;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -1780,18 +1780,18 @@ public TreeParser01() {
 		
 		AST framephrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t817 = _t;
+		AST __t822 = _t;
 		AST tmp133_AST_in = (AST)_t;
 		match(_t,WITH);
 		_t = _t.getFirstChild();
 		{
-		_loop846:
+		_loop851:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case ACCUMULATE:
 			{
-				AST __t819 = _t;
+				AST __t824 = _t;
 				AST tmp134_AST_in = (AST)_t;
 				match(_t,ACCUMULATE);
 				_t = _t.getFirstChild();
@@ -1808,7 +1808,7 @@ public TreeParser01() {
 				}
 				
 				}
-				_t = __t819;
+				_t = __t824;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -1828,13 +1828,13 @@ public TreeParser01() {
 			}
 			case CANCELBUTTON:
 			{
-				AST __t821 = _t;
+				AST __t826 = _t;
 				AST tmp137_AST_in = (AST)_t;
 				match(_t,CANCELBUTTON);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
 				_t = _retTree;
-				_t = __t821;
+				_t = __t826;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -1847,13 +1847,13 @@ public TreeParser01() {
 			}
 			case COLUMN:
 			{
-				AST __t822 = _t;
+				AST __t827 = _t;
 				AST tmp139_AST_in = (AST)_t;
 				match(_t,COLUMN);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t822;
+				_t = __t827;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -1875,13 +1875,13 @@ public TreeParser01() {
 			}
 			case DEFAULTBUTTON:
 			{
-				AST __t823 = _t;
+				AST __t828 = _t;
 				AST tmp142_AST_in = (AST)_t;
 				match(_t,DEFAULTBUTTON);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
 				_t = _retTree;
-				_t = __t823;
+				_t = __t828;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -1901,13 +1901,13 @@ public TreeParser01() {
 			}
 			case FONT:
 			{
-				AST __t824 = _t;
+				AST __t829 = _t;
 				AST tmp145_AST_in = (AST)_t;
 				match(_t,FONT);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t824;
+				_t = __t829;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -1926,49 +1926,49 @@ public TreeParser01() {
 			}
 			case LABELFONT:
 			{
-				AST __t825 = _t;
+				AST __t830 = _t;
 				AST tmp147_AST_in = (AST)_t;
 				match(_t,LABELFONT);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t825;
+				_t = __t830;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LABELDCOLOR:
 			{
-				AST __t826 = _t;
+				AST __t831 = _t;
 				AST tmp148_AST_in = (AST)_t;
 				match(_t,LABELDCOLOR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t826;
+				_t = __t831;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LABELFGCOLOR:
 			{
-				AST __t827 = _t;
+				AST __t832 = _t;
 				AST tmp149_AST_in = (AST)_t;
 				match(_t,LABELFGCOLOR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t827;
+				_t = __t832;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LABELBGCOLOR:
 			{
-				AST __t828 = _t;
+				AST __t833 = _t;
 				AST tmp150_AST_in = (AST)_t;
 				match(_t,LABELBGCOLOR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t828;
+				_t = __t833;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -2030,25 +2030,25 @@ public TreeParser01() {
 			}
 			case ROWHEIGHTCHARS:
 			{
-				AST __t829 = _t;
+				AST __t834 = _t;
 				AST tmp159_AST_in = (AST)_t;
 				match(_t,ROWHEIGHTCHARS);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t829;
+				_t = __t834;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case ROWHEIGHTPIXELS:
 			{
-				AST __t830 = _t;
+				AST __t835 = _t;
 				AST tmp160_AST_in = (AST)_t;
 				match(_t,ROWHEIGHTPIXELS);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t830;
+				_t = __t835;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -2173,25 +2173,25 @@ public TreeParser01() {
 			}
 			case RETAIN:
 			{
-				AST __t831 = _t;
+				AST __t836 = _t;
 				AST tmp178_AST_in = (AST)_t;
 				match(_t,RETAIN);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t831;
+				_t = __t836;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case ROW:
 			{
-				AST __t832 = _t;
+				AST __t837 = _t;
 				AST tmp179_AST_in = (AST)_t;
 				match(_t,ROW);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t832;
+				_t = __t837;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -2211,13 +2211,13 @@ public TreeParser01() {
 			}
 			case SCROLL:
 			{
-				AST __t833 = _t;
+				AST __t838 = _t;
 				AST tmp182_AST_in = (AST)_t;
 				match(_t,SCROLL);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t833;
+				_t = __t838;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -2291,7 +2291,7 @@ public TreeParser01() {
 			}
 			case VIEWAS:
 			{
-				AST __t834 = _t;
+				AST __t839 = _t;
 				AST tmp191_AST_in = (AST)_t;
 				match(_t,VIEWAS);
 				_t = _t.getFirstChild();
@@ -2300,7 +2300,7 @@ public TreeParser01() {
 				switch ( _t.getType()) {
 				case DIALOGBOX:
 				{
-					AST __t836 = _t;
+					AST __t841 = _t;
 					AST tmp192_AST_in = (AST)_t;
 					match(_t,DIALOGBOX);
 					_t = _t.getFirstChild();
@@ -2337,7 +2337,7 @@ public TreeParser01() {
 					}
 					}
 					}
-					_t = __t836;
+					_t = __t841;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -2357,7 +2357,7 @@ public TreeParser01() {
 				}
 				case TOOLBAR:
 				{
-					AST __t839 = _t;
+					AST __t844 = _t;
 					AST tmp196_AST_in = (AST)_t;
 					match(_t,TOOLBAR);
 					_t = _t.getFirstChild();
@@ -2418,7 +2418,7 @@ public TreeParser01() {
 					}
 					}
 					}
-					_t = __t839;
+					_t = __t844;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -2428,25 +2428,25 @@ public TreeParser01() {
 				}
 				}
 				}
-				_t = __t834;
+				_t = __t839;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case WIDTH:
 			{
-				AST __t842 = _t;
+				AST __t847 = _t;
 				AST tmp202_AST_in = (AST)_t;
 				match(_t,WIDTH);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t842;
+				_t = __t847;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IN_KW:
 			{
-				AST __t843 = _t;
+				AST __t848 = _t;
 				AST tmp203_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getFirstChild();
@@ -2455,7 +2455,7 @@ public TreeParser01() {
 				_t = _t.getNextSibling();
 				expression(_t);
 				_t = _retTree;
-				_t = __t843;
+				_t = __t848;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -2491,7 +2491,7 @@ public TreeParser01() {
 			}
 			case With_columns:
 			{
-				AST __t844 = _t;
+				AST __t849 = _t;
 				AST tmp205_AST_in = (AST)_t;
 				match(_t,With_columns);
 				_t = _t.getFirstChild();
@@ -2500,13 +2500,13 @@ public TreeParser01() {
 				AST tmp206_AST_in = (AST)_t;
 				match(_t,COLUMNS);
 				_t = _t.getNextSibling();
-				_t = __t844;
+				_t = __t849;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case With_down:
 			{
-				AST __t845 = _t;
+				AST __t850 = _t;
 				AST tmp207_AST_in = (AST)_t;
 				match(_t,With_down);
 				_t = _t.getFirstChild();
@@ -2515,7 +2515,7 @@ public TreeParser01() {
 				AST tmp208_AST_in = (AST)_t;
 				match(_t,DOWN);
 				_t = _t.getNextSibling();
-				_t = __t845;
+				_t = __t850;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -2541,12 +2541,12 @@ public TreeParser01() {
 			}
 			default:
 			{
-				break _loop846;
+				break _loop851;
 			}
 			}
 		} while (true);
 		}
-		_t = __t817;
+		_t = __t822;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -2633,7 +2633,7 @@ public TreeParser01() {
 		}
 		}
 		}
-		AST __t768 = _t;
+		AST __t773 = _t;
 		rp1 = _t==ASTNULL ? null :(AST)_t;
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
@@ -2642,10 +2642,10 @@ public TreeParser01() {
 		}
 		recordphrase(_t);
 		_t = _retTree;
-		_t = __t768;
+		_t = __t773;
 		_t = _t.getNextSibling();
 		{
-		_loop772:
+		_loop777:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
@@ -2676,7 +2676,7 @@ public TreeParser01() {
 				}
 				}
 				}
-				AST __t771 = _t;
+				AST __t776 = _t;
 				rp2 = _t==ASTNULL ? null :(AST)_t;
 				match(_t,RECORD_NAME);
 				_t = _t.getFirstChild();
@@ -2685,11 +2685,11 @@ public TreeParser01() {
 				}
 				recordphrase(_t);
 				_t = _retTree;
-				_t = __t771;
+				_t = __t776;
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop772;
+				break _loop777;
 			}
 			
 		} while (true);
@@ -3835,7 +3835,7 @@ public TreeParser01() {
 		AST cf = null;
 		AST r = null;
 		
-		AST __t196 = _t;
+		AST __t201 = _t;
 		cf = _t==ASTNULL ? null :(AST)_t;
 		match(_t,CANFIND);
 		_t = _t.getFirstChild();
@@ -3866,7 +3866,7 @@ public TreeParser01() {
 		}
 		}
 		}
-		AST __t198 = _t;
+		AST __t203 = _t;
 		r = _t==ASTNULL ? null :(AST)_t;
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
@@ -3880,12 +3880,12 @@ public TreeParser01() {
 		if ( inputState.guessing==0 ) {
 			action.canFindEnd(cf);
 		}
-		_t = __t198;
+		_t = __t203;
 		_t = _t.getNextSibling();
 		AST tmp302_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
-		_t = __t196;
+		_t = __t201;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -4150,7 +4150,7 @@ public TreeParser01() {
 		expression(_t);
 		_t = _retTree;
 		{
-		_loop1544:
+		_loop1549:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
@@ -4161,7 +4161,7 @@ public TreeParser01() {
 				_t = _retTree;
 			}
 			else {
-				break _loop1544;
+				break _loop1549;
 			}
 			
 		} while (true);
@@ -4176,7 +4176,7 @@ public TreeParser01() {
 		
 		AST ldbnamefunc_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t914 = _t;
+		AST __t919 = _t;
 		AST tmp327_AST_in = (AST)_t;
 		match(_t,LDBNAME);
 		_t = _t.getFirstChild();
@@ -4186,13 +4186,13 @@ public TreeParser01() {
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==BUFFER)) {
-			AST __t916 = _t;
+			AST __t921 = _t;
 			AST tmp329_AST_in = (AST)_t;
 			match(_t,BUFFER);
 			_t = _t.getFirstChild();
 			tbl(_t,CQ.BUFFERSYMBOL);
 			_t = _retTree;
-			_t = __t916;
+			_t = __t921;
 			_t = _t.getNextSibling();
 		}
 		else if ((_tokenSet_3.member(_t.getType()))) {
@@ -4207,7 +4207,7 @@ public TreeParser01() {
 		AST tmp330_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
-		_t = __t914;
+		_t = __t919;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -4301,13 +4301,13 @@ public TreeParser01() {
 		
 		AST parameterlist_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1533 = _t;
+		AST __t1538 = _t;
 		AST tmp340_AST_in = (AST)_t;
 		match(_t,Parameter_list);
 		_t = _t.getFirstChild();
 		parameterlist_noroot(_t);
 		_t = _retTree;
-		_t = __t1533;
+		_t = __t1538;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -4320,37 +4320,37 @@ public TreeParser01() {
 		switch ( _t.getType()) {
 		case AVG:
 		{
-			AST __t1354 = _t;
+			AST __t1359 = _t;
 			AST tmp341_AST_in = (AST)_t;
 			match(_t,AVG);
 			_t = _t.getFirstChild();
 			sqlaggregatefunc_arg(_t);
 			_t = _retTree;
-			_t = __t1354;
+			_t = __t1359;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case COUNT:
 		{
-			AST __t1355 = _t;
+			AST __t1360 = _t;
 			AST tmp342_AST_in = (AST)_t;
 			match(_t,COUNT);
 			_t = _t.getFirstChild();
 			sqlaggregatefunc_arg(_t);
 			_t = _retTree;
-			_t = __t1355;
+			_t = __t1360;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUM:
 		{
-			AST __t1356 = _t;
+			AST __t1361 = _t;
 			AST tmp343_AST_in = (AST)_t;
 			match(_t,SUM);
 			_t = _t.getFirstChild();
 			sqlaggregatefunc_arg(_t);
 			_t = _retTree;
-			_t = __t1356;
+			_t = __t1361;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -4370,69 +4370,9 @@ public TreeParser01() {
 		switch ( _t.getType()) {
 		case AACBIT:
 		{
-			AST __t1396 = _t;
+			AST __t1401 = _t;
 			AST tmp344_AST_in = (AST)_t;
 			match(_t,AACBIT);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1396;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case AAMSG:
-		{
-			AST __t1397 = _t;
-			AST tmp345_AST_in = (AST)_t;
-			match(_t,AAMSG);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1397;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case ABSOLUTE:
-		{
-			AST __t1398 = _t;
-			AST tmp346_AST_in = (AST)_t;
-			match(_t,ABSOLUTE);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1398;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case ALIAS:
-		{
-			AST __t1399 = _t;
-			AST tmp347_AST_in = (AST)_t;
-			match(_t,ALIAS);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1399;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case ASC:
-		{
-			AST __t1400 = _t;
-			AST tmp348_AST_in = (AST)_t;
-			match(_t,ASC);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1400;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case BASE64DECODE:
-		{
-			AST __t1401 = _t;
-			AST tmp349_AST_in = (AST)_t;
-			match(_t,BASE64DECODE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4440,11 +4380,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case BASE64ENCODE:
+		case AAMSG:
 		{
 			AST __t1402 = _t;
-			AST tmp350_AST_in = (AST)_t;
-			match(_t,BASE64ENCODE);
+			AST tmp345_AST_in = (AST)_t;
+			match(_t,AAMSG);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4452,11 +4392,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CANDO:
+		case ABSOLUTE:
 		{
 			AST __t1403 = _t;
-			AST tmp351_AST_in = (AST)_t;
-			match(_t,CANDO);
+			AST tmp346_AST_in = (AST)_t;
+			match(_t,ABSOLUTE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4464,11 +4404,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CANQUERY:
+		case ALIAS:
 		{
 			AST __t1404 = _t;
-			AST tmp352_AST_in = (AST)_t;
-			match(_t,CANQUERY);
+			AST tmp347_AST_in = (AST)_t;
+			match(_t,ALIAS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4476,11 +4416,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CANSET:
+		case ASC:
 		{
 			AST __t1405 = _t;
-			AST tmp353_AST_in = (AST)_t;
-			match(_t,CANSET);
+			AST tmp348_AST_in = (AST)_t;
+			match(_t,ASC);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4488,11 +4428,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CAPS:
+		case BASE64DECODE:
 		{
 			AST __t1406 = _t;
-			AST tmp354_AST_in = (AST)_t;
-			match(_t,CAPS);
+			AST tmp349_AST_in = (AST)_t;
+			match(_t,BASE64DECODE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4500,11 +4440,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CHR:
+		case BASE64ENCODE:
 		{
 			AST __t1407 = _t;
-			AST tmp355_AST_in = (AST)_t;
-			match(_t,CHR);
+			AST tmp350_AST_in = (AST)_t;
+			match(_t,BASE64ENCODE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4512,11 +4452,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CODEPAGECONVERT:
+		case CANDO:
 		{
 			AST __t1408 = _t;
-			AST tmp356_AST_in = (AST)_t;
-			match(_t,CODEPAGECONVERT);
+			AST tmp351_AST_in = (AST)_t;
+			match(_t,CANDO);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4524,11 +4464,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case COLLATE:
+		case CANQUERY:
 		{
 			AST __t1409 = _t;
-			AST tmp357_AST_in = (AST)_t;
-			match(_t,COLLATE);
+			AST tmp352_AST_in = (AST)_t;
+			match(_t,CANQUERY);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4536,11 +4476,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case COMPARE:
+		case CANSET:
 		{
 			AST __t1410 = _t;
-			AST tmp358_AST_in = (AST)_t;
-			match(_t,COMPARE);
+			AST tmp353_AST_in = (AST)_t;
+			match(_t,CANSET);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4548,11 +4488,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CONNECTED:
+		case CAPS:
 		{
 			AST __t1411 = _t;
-			AST tmp359_AST_in = (AST)_t;
-			match(_t,CONNECTED);
+			AST tmp354_AST_in = (AST)_t;
+			match(_t,CAPS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4560,11 +4500,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case COUNTOF:
+		case CHR:
 		{
 			AST __t1412 = _t;
-			AST tmp360_AST_in = (AST)_t;
-			match(_t,COUNTOF);
+			AST tmp355_AST_in = (AST)_t;
+			match(_t,CHR);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4572,11 +4512,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case CURRENTRESULTROW:
+		case CODEPAGECONVERT:
 		{
 			AST __t1413 = _t;
-			AST tmp361_AST_in = (AST)_t;
-			match(_t,CURRENTRESULTROW);
+			AST tmp356_AST_in = (AST)_t;
+			match(_t,CODEPAGECONVERT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4584,11 +4524,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DATE:
+		case COLLATE:
 		{
 			AST __t1414 = _t;
-			AST tmp362_AST_in = (AST)_t;
-			match(_t,DATE);
+			AST tmp357_AST_in = (AST)_t;
+			match(_t,COLLATE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4596,11 +4536,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DATETIME:
+		case COMPARE:
 		{
 			AST __t1415 = _t;
-			AST tmp363_AST_in = (AST)_t;
-			match(_t,DATETIME);
+			AST tmp358_AST_in = (AST)_t;
+			match(_t,COMPARE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4608,11 +4548,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DATETIMETZ:
+		case CONNECTED:
 		{
 			AST __t1416 = _t;
-			AST tmp364_AST_in = (AST)_t;
-			match(_t,DATETIMETZ);
+			AST tmp359_AST_in = (AST)_t;
+			match(_t,CONNECTED);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4620,11 +4560,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DAY:
+		case COUNTOF:
 		{
 			AST __t1417 = _t;
-			AST tmp365_AST_in = (AST)_t;
-			match(_t,DAY);
+			AST tmp360_AST_in = (AST)_t;
+			match(_t,COUNTOF);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4632,11 +4572,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DBCODEPAGE:
+		case CURRENTRESULTROW:
 		{
 			AST __t1418 = _t;
-			AST tmp366_AST_in = (AST)_t;
-			match(_t,DBCODEPAGE);
+			AST tmp361_AST_in = (AST)_t;
+			match(_t,CURRENTRESULTROW);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4644,11 +4584,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DBCOLLATION:
+		case DATE:
 		{
 			AST __t1419 = _t;
-			AST tmp367_AST_in = (AST)_t;
-			match(_t,DBCOLLATION);
+			AST tmp362_AST_in = (AST)_t;
+			match(_t,DATE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4656,11 +4596,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DBPARAM:
+		case DATETIME:
 		{
 			AST __t1420 = _t;
-			AST tmp368_AST_in = (AST)_t;
-			match(_t,DBPARAM);
+			AST tmp363_AST_in = (AST)_t;
+			match(_t,DATETIME);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4668,11 +4608,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DBRESTRICTIONS:
+		case DATETIMETZ:
 		{
 			AST __t1421 = _t;
-			AST tmp369_AST_in = (AST)_t;
-			match(_t,DBRESTRICTIONS);
+			AST tmp364_AST_in = (AST)_t;
+			match(_t,DATETIMETZ);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4680,11 +4620,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DBTASKID:
+		case DAY:
 		{
 			AST __t1422 = _t;
-			AST tmp370_AST_in = (AST)_t;
-			match(_t,DBTASKID);
+			AST tmp365_AST_in = (AST)_t;
+			match(_t,DAY);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4692,11 +4632,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DBTYPE:
+		case DBCODEPAGE:
 		{
 			AST __t1423 = _t;
-			AST tmp371_AST_in = (AST)_t;
-			match(_t,DBTYPE);
+			AST tmp366_AST_in = (AST)_t;
+			match(_t,DBCODEPAGE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4704,11 +4644,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DBVERSION:
+		case DBCOLLATION:
 		{
 			AST __t1424 = _t;
-			AST tmp372_AST_in = (AST)_t;
-			match(_t,DBVERSION);
+			AST tmp367_AST_in = (AST)_t;
+			match(_t,DBCOLLATION);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4716,11 +4656,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DECIMAL:
+		case DBPARAM:
 		{
 			AST __t1425 = _t;
-			AST tmp373_AST_in = (AST)_t;
-			match(_t,DECIMAL);
+			AST tmp368_AST_in = (AST)_t;
+			match(_t,DBPARAM);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4728,11 +4668,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DECRYPT:
+		case DBRESTRICTIONS:
 		{
 			AST __t1426 = _t;
-			AST tmp374_AST_in = (AST)_t;
-			match(_t,DECRYPT);
+			AST tmp369_AST_in = (AST)_t;
+			match(_t,DBRESTRICTIONS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4740,11 +4680,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case DYNAMICNEXTVALUE:
+		case DBTASKID:
 		{
 			AST __t1427 = _t;
-			AST tmp375_AST_in = (AST)_t;
-			match(_t,DYNAMICNEXTVALUE);
+			AST tmp370_AST_in = (AST)_t;
+			match(_t,DBTASKID);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4752,11 +4692,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ENCODE:
+		case DBTYPE:
 		{
 			AST __t1428 = _t;
-			AST tmp376_AST_in = (AST)_t;
-			match(_t,ENCODE);
+			AST tmp371_AST_in = (AST)_t;
+			match(_t,DBTYPE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4764,11 +4704,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ENCRYPT:
+		case DBVERSION:
 		{
 			AST __t1429 = _t;
-			AST tmp377_AST_in = (AST)_t;
-			match(_t,ENCRYPT);
+			AST tmp372_AST_in = (AST)_t;
+			match(_t,DBVERSION);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4776,11 +4716,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case EXP:
+		case DECIMAL:
 		{
 			AST __t1430 = _t;
-			AST tmp378_AST_in = (AST)_t;
-			match(_t,EXP);
+			AST tmp373_AST_in = (AST)_t;
+			match(_t,DECIMAL);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4788,11 +4728,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case FILL:
+		case DECRYPT:
 		{
 			AST __t1431 = _t;
-			AST tmp379_AST_in = (AST)_t;
-			match(_t,FILL);
+			AST tmp374_AST_in = (AST)_t;
+			match(_t,DECRYPT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4800,11 +4740,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case FIRST:
+		case DYNAMICNEXTVALUE:
 		{
 			AST __t1432 = _t;
-			AST tmp380_AST_in = (AST)_t;
-			match(_t,FIRST);
+			AST tmp375_AST_in = (AST)_t;
+			match(_t,DYNAMICNEXTVALUE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4812,11 +4752,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case FIRSTOF:
+		case ENCODE:
 		{
 			AST __t1433 = _t;
-			AST tmp381_AST_in = (AST)_t;
-			match(_t,FIRSTOF);
+			AST tmp376_AST_in = (AST)_t;
+			match(_t,ENCODE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4824,11 +4764,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GENERATEPBEKEY:
+		case ENCRYPT:
 		{
 			AST __t1434 = _t;
-			AST tmp382_AST_in = (AST)_t;
-			match(_t,GENERATEPBEKEY);
+			AST tmp377_AST_in = (AST)_t;
+			match(_t,ENCRYPT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4836,11 +4776,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETBITS:
+		case EXP:
 		{
 			AST __t1435 = _t;
-			AST tmp383_AST_in = (AST)_t;
-			match(_t,GETBITS);
+			AST tmp378_AST_in = (AST)_t;
+			match(_t,EXP);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4848,11 +4788,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETBYTE:
+		case FILL:
 		{
 			AST __t1436 = _t;
-			AST tmp384_AST_in = (AST)_t;
-			match(_t,GETBYTE);
+			AST tmp379_AST_in = (AST)_t;
+			match(_t,FILL);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4860,11 +4800,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETBYTEORDER:
+		case FIRST:
 		{
 			AST __t1437 = _t;
-			AST tmp385_AST_in = (AST)_t;
-			match(_t,GETBYTEORDER);
+			AST tmp380_AST_in = (AST)_t;
+			match(_t,FIRST);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4872,11 +4812,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETBYTES:
+		case FIRSTOF:
 		{
 			AST __t1438 = _t;
-			AST tmp386_AST_in = (AST)_t;
-			match(_t,GETBYTES);
+			AST tmp381_AST_in = (AST)_t;
+			match(_t,FIRSTOF);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4884,11 +4824,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETCOLLATIONS:
+		case GENERATEPBEKEY:
 		{
 			AST __t1439 = _t;
-			AST tmp387_AST_in = (AST)_t;
-			match(_t,GETCOLLATIONS);
+			AST tmp382_AST_in = (AST)_t;
+			match(_t,GENERATEPBEKEY);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4896,11 +4836,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETDOUBLE:
+		case GETBITS:
 		{
 			AST __t1440 = _t;
-			AST tmp388_AST_in = (AST)_t;
-			match(_t,GETDOUBLE);
+			AST tmp383_AST_in = (AST)_t;
+			match(_t,GETBITS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4908,11 +4848,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETFLOAT:
+		case GETBYTE:
 		{
 			AST __t1441 = _t;
-			AST tmp389_AST_in = (AST)_t;
-			match(_t,GETFLOAT);
+			AST tmp384_AST_in = (AST)_t;
+			match(_t,GETBYTE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4920,11 +4860,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETLICENSE:
+		case GETBYTEORDER:
 		{
 			AST __t1442 = _t;
-			AST tmp390_AST_in = (AST)_t;
-			match(_t,GETLICENSE);
+			AST tmp385_AST_in = (AST)_t;
+			match(_t,GETBYTEORDER);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4932,11 +4872,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETLONG:
+		case GETBYTES:
 		{
 			AST __t1443 = _t;
-			AST tmp391_AST_in = (AST)_t;
-			match(_t,GETLONG);
+			AST tmp386_AST_in = (AST)_t;
+			match(_t,GETBYTES);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4944,11 +4884,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETPOINTERVALUE:
+		case GETCOLLATIONS:
 		{
 			AST __t1444 = _t;
-			AST tmp392_AST_in = (AST)_t;
-			match(_t,GETPOINTERVALUE);
+			AST tmp387_AST_in = (AST)_t;
+			match(_t,GETCOLLATIONS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4956,11 +4896,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETSHORT:
+		case GETDOUBLE:
 		{
 			AST __t1445 = _t;
-			AST tmp393_AST_in = (AST)_t;
-			match(_t,GETSHORT);
+			AST tmp388_AST_in = (AST)_t;
+			match(_t,GETDOUBLE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4968,11 +4908,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETSIZE:
+		case GETFLOAT:
 		{
 			AST __t1446 = _t;
-			AST tmp394_AST_in = (AST)_t;
-			match(_t,GETSIZE);
+			AST tmp389_AST_in = (AST)_t;
+			match(_t,GETFLOAT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4980,11 +4920,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETSTRING:
+		case GETLICENSE:
 		{
 			AST __t1447 = _t;
-			AST tmp395_AST_in = (AST)_t;
-			match(_t,GETSTRING);
+			AST tmp390_AST_in = (AST)_t;
+			match(_t,GETLICENSE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -4992,11 +4932,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case GETUNSIGNEDSHORT:
+		case GETLONG:
 		{
 			AST __t1448 = _t;
-			AST tmp396_AST_in = (AST)_t;
-			match(_t,GETUNSIGNEDSHORT);
+			AST tmp391_AST_in = (AST)_t;
+			match(_t,GETLONG);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5004,11 +4944,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case HEXDECODE:
+		case GETPOINTERVALUE:
 		{
 			AST __t1449 = _t;
-			AST tmp397_AST_in = (AST)_t;
-			match(_t,HEXDECODE);
+			AST tmp392_AST_in = (AST)_t;
+			match(_t,GETPOINTERVALUE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5016,11 +4956,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case HEXENCODE:
+		case GETSHORT:
 		{
 			AST __t1450 = _t;
-			AST tmp398_AST_in = (AST)_t;
-			match(_t,HEXENCODE);
+			AST tmp393_AST_in = (AST)_t;
+			match(_t,GETSHORT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5028,11 +4968,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case INDEX:
+		case GETSIZE:
 		{
 			AST __t1451 = _t;
-			AST tmp399_AST_in = (AST)_t;
-			match(_t,INDEX);
+			AST tmp394_AST_in = (AST)_t;
+			match(_t,GETSIZE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5040,11 +4980,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case INTEGER:
+		case GETSTRING:
 		{
 			AST __t1452 = _t;
-			AST tmp400_AST_in = (AST)_t;
-			match(_t,INTEGER);
+			AST tmp395_AST_in = (AST)_t;
+			match(_t,GETSTRING);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5052,11 +4992,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case INTERVAL:
+		case GETUNSIGNEDSHORT:
 		{
 			AST __t1453 = _t;
-			AST tmp401_AST_in = (AST)_t;
-			match(_t,INTERVAL);
+			AST tmp396_AST_in = (AST)_t;
+			match(_t,GETUNSIGNEDSHORT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5064,11 +5004,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ISCODEPAGEFIXED:
+		case HEXDECODE:
 		{
 			AST __t1454 = _t;
-			AST tmp402_AST_in = (AST)_t;
-			match(_t,ISCODEPAGEFIXED);
+			AST tmp397_AST_in = (AST)_t;
+			match(_t,HEXDECODE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5076,11 +5016,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ISCOLUMNCODEPAGE:
+		case HEXENCODE:
 		{
 			AST __t1455 = _t;
-			AST tmp403_AST_in = (AST)_t;
-			match(_t,ISCOLUMNCODEPAGE);
+			AST tmp398_AST_in = (AST)_t;
+			match(_t,HEXENCODE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5088,11 +5028,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ISLEADBYTE:
+		case INDEX:
 		{
 			AST __t1456 = _t;
-			AST tmp404_AST_in = (AST)_t;
-			match(_t,ISLEADBYTE);
+			AST tmp399_AST_in = (AST)_t;
+			match(_t,INDEX);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5100,11 +5040,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ISODATE:
+		case INTEGER:
 		{
 			AST __t1457 = _t;
-			AST tmp405_AST_in = (AST)_t;
-			match(_t,ISODATE);
+			AST tmp400_AST_in = (AST)_t;
+			match(_t,INTEGER);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5112,11 +5052,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case KBLABEL:
+		case INTERVAL:
 		{
 			AST __t1458 = _t;
-			AST tmp406_AST_in = (AST)_t;
-			match(_t,KBLABEL);
+			AST tmp401_AST_in = (AST)_t;
+			match(_t,INTERVAL);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5124,11 +5064,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case KEYCODE:
+		case ISCODEPAGEFIXED:
 		{
 			AST __t1459 = _t;
-			AST tmp407_AST_in = (AST)_t;
-			match(_t,KEYCODE);
+			AST tmp402_AST_in = (AST)_t;
+			match(_t,ISCODEPAGEFIXED);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5136,11 +5076,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case KEYFUNCTION:
+		case ISCOLUMNCODEPAGE:
 		{
 			AST __t1460 = _t;
-			AST tmp408_AST_in = (AST)_t;
-			match(_t,KEYFUNCTION);
+			AST tmp403_AST_in = (AST)_t;
+			match(_t,ISCOLUMNCODEPAGE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5148,11 +5088,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case KEYLABEL:
+		case ISLEADBYTE:
 		{
 			AST __t1461 = _t;
-			AST tmp409_AST_in = (AST)_t;
-			match(_t,KEYLABEL);
+			AST tmp404_AST_in = (AST)_t;
+			match(_t,ISLEADBYTE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5160,11 +5100,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case KEYWORD:
+		case ISODATE:
 		{
 			AST __t1462 = _t;
-			AST tmp410_AST_in = (AST)_t;
-			match(_t,KEYWORD);
+			AST tmp405_AST_in = (AST)_t;
+			match(_t,ISODATE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5172,11 +5112,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case KEYWORDALL:
+		case KBLABEL:
 		{
 			AST __t1463 = _t;
-			AST tmp411_AST_in = (AST)_t;
-			match(_t,KEYWORDALL);
+			AST tmp406_AST_in = (AST)_t;
+			match(_t,KBLABEL);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5184,11 +5124,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LAST:
+		case KEYCODE:
 		{
 			AST __t1464 = _t;
-			AST tmp412_AST_in = (AST)_t;
-			match(_t,LAST);
+			AST tmp407_AST_in = (AST)_t;
+			match(_t,KEYCODE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5196,11 +5136,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LASTOF:
+		case KEYFUNCTION:
 		{
 			AST __t1465 = _t;
-			AST tmp413_AST_in = (AST)_t;
-			match(_t,LASTOF);
+			AST tmp408_AST_in = (AST)_t;
+			match(_t,KEYFUNCTION);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5208,11 +5148,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LC:
+		case KEYLABEL:
 		{
 			AST __t1466 = _t;
-			AST tmp414_AST_in = (AST)_t;
-			match(_t,LC);
+			AST tmp409_AST_in = (AST)_t;
+			match(_t,KEYLABEL);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5220,11 +5160,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LEFTTRIM:
+		case KEYWORD:
 		{
 			AST __t1467 = _t;
-			AST tmp415_AST_in = (AST)_t;
-			match(_t,LEFTTRIM);
+			AST tmp410_AST_in = (AST)_t;
+			match(_t,KEYWORD);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5232,11 +5172,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LIBRARY:
+		case KEYWORDALL:
 		{
 			AST __t1468 = _t;
-			AST tmp416_AST_in = (AST)_t;
-			match(_t,LIBRARY);
+			AST tmp411_AST_in = (AST)_t;
+			match(_t,KEYWORDALL);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5244,11 +5184,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LISTEVENTS:
+		case LAST:
 		{
 			AST __t1469 = _t;
-			AST tmp417_AST_in = (AST)_t;
-			match(_t,LISTEVENTS);
+			AST tmp412_AST_in = (AST)_t;
+			match(_t,LAST);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5256,11 +5196,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LISTQUERYATTRS:
+		case LASTOF:
 		{
 			AST __t1470 = _t;
-			AST tmp418_AST_in = (AST)_t;
-			match(_t,LISTQUERYATTRS);
+			AST tmp413_AST_in = (AST)_t;
+			match(_t,LASTOF);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5268,11 +5208,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LISTSETATTRS:
+		case LC:
 		{
 			AST __t1471 = _t;
-			AST tmp419_AST_in = (AST)_t;
-			match(_t,LISTSETATTRS);
+			AST tmp414_AST_in = (AST)_t;
+			match(_t,LC);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5280,11 +5220,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LISTWIDGETS:
+		case LEFTTRIM:
 		{
 			AST __t1472 = _t;
-			AST tmp420_AST_in = (AST)_t;
-			match(_t,LISTWIDGETS);
+			AST tmp415_AST_in = (AST)_t;
+			match(_t,LEFTTRIM);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5292,11 +5232,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LOADPICTURE:
+		case LIBRARY:
 		{
 			AST __t1473 = _t;
-			AST tmp421_AST_in = (AST)_t;
-			match(_t,LOADPICTURE);
+			AST tmp416_AST_in = (AST)_t;
+			match(_t,LIBRARY);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5304,11 +5244,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LOG:
+		case LISTEVENTS:
 		{
 			AST __t1474 = _t;
-			AST tmp422_AST_in = (AST)_t;
-			match(_t,LOG);
+			AST tmp417_AST_in = (AST)_t;
+			match(_t,LISTEVENTS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5316,11 +5256,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LOGICAL:
+		case LISTQUERYATTRS:
 		{
 			AST __t1475 = _t;
-			AST tmp423_AST_in = (AST)_t;
-			match(_t,LOGICAL);
+			AST tmp418_AST_in = (AST)_t;
+			match(_t,LISTQUERYATTRS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5328,11 +5268,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case LOOKUP:
+		case LISTSETATTRS:
 		{
 			AST __t1476 = _t;
-			AST tmp424_AST_in = (AST)_t;
-			match(_t,LOOKUP);
+			AST tmp419_AST_in = (AST)_t;
+			match(_t,LISTSETATTRS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5340,11 +5280,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MAXIMUM:
+		case LISTWIDGETS:
 		{
 			AST __t1477 = _t;
-			AST tmp425_AST_in = (AST)_t;
-			match(_t,MAXIMUM);
+			AST tmp420_AST_in = (AST)_t;
+			match(_t,LISTWIDGETS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5352,11 +5292,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MD5DIGEST:
+		case LOADPICTURE:
 		{
 			AST __t1478 = _t;
-			AST tmp426_AST_in = (AST)_t;
-			match(_t,MD5DIGEST);
+			AST tmp421_AST_in = (AST)_t;
+			match(_t,LOADPICTURE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5364,11 +5304,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MEMBER:
+		case LOG:
 		{
 			AST __t1479 = _t;
-			AST tmp427_AST_in = (AST)_t;
-			match(_t,MEMBER);
+			AST tmp422_AST_in = (AST)_t;
+			match(_t,LOG);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5376,11 +5316,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MINIMUM:
+		case LOGICAL:
 		{
 			AST __t1480 = _t;
-			AST tmp428_AST_in = (AST)_t;
-			match(_t,MINIMUM);
+			AST tmp423_AST_in = (AST)_t;
+			match(_t,LOGICAL);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5388,11 +5328,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case MONTH:
+		case LOOKUP:
 		{
 			AST __t1481 = _t;
-			AST tmp429_AST_in = (AST)_t;
-			match(_t,MONTH);
+			AST tmp424_AST_in = (AST)_t;
+			match(_t,LOOKUP);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5400,11 +5340,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case NORMALIZE:
+		case MAXIMUM:
 		{
 			AST __t1482 = _t;
-			AST tmp430_AST_in = (AST)_t;
-			match(_t,NORMALIZE);
+			AST tmp425_AST_in = (AST)_t;
+			match(_t,MAXIMUM);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5412,11 +5352,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case NUMENTRIES:
+		case MD5DIGEST:
 		{
 			AST __t1483 = _t;
-			AST tmp431_AST_in = (AST)_t;
-			match(_t,NUMENTRIES);
+			AST tmp426_AST_in = (AST)_t;
+			match(_t,MD5DIGEST);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5424,11 +5364,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case NUMRESULTS:
+		case MEMBER:
 		{
 			AST __t1484 = _t;
-			AST tmp432_AST_in = (AST)_t;
-			match(_t,NUMRESULTS);
+			AST tmp427_AST_in = (AST)_t;
+			match(_t,MEMBER);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5436,11 +5376,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case OSGETENV:
+		case MINIMUM:
 		{
 			AST __t1485 = _t;
-			AST tmp433_AST_in = (AST)_t;
-			match(_t,OSGETENV);
+			AST tmp428_AST_in = (AST)_t;
+			match(_t,MINIMUM);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5448,11 +5388,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PDBNAME:
+		case MONTH:
 		{
 			AST __t1486 = _t;
-			AST tmp434_AST_in = (AST)_t;
-			match(_t,PDBNAME);
+			AST tmp429_AST_in = (AST)_t;
+			match(_t,MONTH);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5460,11 +5400,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PROGRAMNAME:
+		case NORMALIZE:
 		{
 			AST __t1487 = _t;
-			AST tmp435_AST_in = (AST)_t;
-			match(_t,PROGRAMNAME);
+			AST tmp430_AST_in = (AST)_t;
+			match(_t,NORMALIZE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5472,11 +5412,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case QUERYOFFEND:
+		case NUMENTRIES:
 		{
 			AST __t1488 = _t;
-			AST tmp436_AST_in = (AST)_t;
-			match(_t,QUERYOFFEND);
+			AST tmp431_AST_in = (AST)_t;
+			match(_t,NUMENTRIES);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5484,11 +5424,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case QUOTER:
+		case NUMRESULTS:
 		{
 			AST __t1489 = _t;
-			AST tmp437_AST_in = (AST)_t;
-			match(_t,QUOTER);
+			AST tmp432_AST_in = (AST)_t;
+			match(_t,NUMRESULTS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5496,11 +5436,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case RINDEX:
+		case OSGETENV:
 		{
 			AST __t1490 = _t;
-			AST tmp438_AST_in = (AST)_t;
-			match(_t,RINDEX);
+			AST tmp433_AST_in = (AST)_t;
+			match(_t,OSGETENV);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5508,11 +5448,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case RANDOM:
+		case PDBNAME:
 		{
 			AST __t1491 = _t;
-			AST tmp439_AST_in = (AST)_t;
-			match(_t,RANDOM);
+			AST tmp434_AST_in = (AST)_t;
+			match(_t,PDBNAME);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5520,11 +5460,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case REPLACE:
+		case PROGRAMNAME:
 		{
 			AST __t1492 = _t;
-			AST tmp440_AST_in = (AST)_t;
-			match(_t,REPLACE);
+			AST tmp435_AST_in = (AST)_t;
+			match(_t,PROGRAMNAME);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5532,11 +5472,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case RGBVALUE:
+		case QUERYOFFEND:
 		{
 			AST __t1493 = _t;
-			AST tmp441_AST_in = (AST)_t;
-			match(_t,RGBVALUE);
+			AST tmp436_AST_in = (AST)_t;
+			match(_t,QUERYOFFEND);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5544,11 +5484,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case RIGHTTRIM:
+		case QUOTER:
 		{
 			AST __t1494 = _t;
-			AST tmp442_AST_in = (AST)_t;
-			match(_t,RIGHTTRIM);
+			AST tmp437_AST_in = (AST)_t;
+			match(_t,QUOTER);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5556,11 +5496,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ROUND:
+		case RINDEX:
 		{
 			AST __t1495 = _t;
-			AST tmp443_AST_in = (AST)_t;
-			match(_t,ROUND);
+			AST tmp438_AST_in = (AST)_t;
+			match(_t,RINDEX);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5568,11 +5508,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SDBNAME:
+		case RANDOM:
 		{
 			AST __t1496 = _t;
-			AST tmp444_AST_in = (AST)_t;
-			match(_t,SDBNAME);
+			AST tmp439_AST_in = (AST)_t;
+			match(_t,RANDOM);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5580,11 +5520,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SEARCH:
+		case REPLACE:
 		{
 			AST __t1497 = _t;
-			AST tmp445_AST_in = (AST)_t;
-			match(_t,SEARCH);
+			AST tmp440_AST_in = (AST)_t;
+			match(_t,REPLACE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5592,11 +5532,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SETDBCLIENT:
+		case RGBVALUE:
 		{
 			AST __t1498 = _t;
-			AST tmp446_AST_in = (AST)_t;
-			match(_t,SETDBCLIENT);
+			AST tmp441_AST_in = (AST)_t;
+			match(_t,RGBVALUE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5604,11 +5544,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SETUSERID:
+		case RIGHTTRIM:
 		{
 			AST __t1499 = _t;
-			AST tmp447_AST_in = (AST)_t;
-			match(_t,SETUSERID);
+			AST tmp442_AST_in = (AST)_t;
+			match(_t,RIGHTTRIM);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5616,11 +5556,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SHA1DIGEST:
+		case ROUND:
 		{
 			AST __t1500 = _t;
-			AST tmp448_AST_in = (AST)_t;
-			match(_t,SHA1DIGEST);
+			AST tmp443_AST_in = (AST)_t;
+			match(_t,ROUND);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5628,11 +5568,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SQRT:
+		case SDBNAME:
 		{
 			AST __t1501 = _t;
-			AST tmp449_AST_in = (AST)_t;
-			match(_t,SQRT);
+			AST tmp444_AST_in = (AST)_t;
+			match(_t,SDBNAME);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5640,11 +5580,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SSLSERVERNAME:
+		case SEARCH:
 		{
 			AST __t1502 = _t;
-			AST tmp450_AST_in = (AST)_t;
-			match(_t,SSLSERVERNAME);
+			AST tmp445_AST_in = (AST)_t;
+			match(_t,SEARCH);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5652,11 +5592,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case STRING:
+		case SETDBCLIENT:
 		{
 			AST __t1503 = _t;
-			AST tmp451_AST_in = (AST)_t;
-			match(_t,STRING);
+			AST tmp446_AST_in = (AST)_t;
+			match(_t,SETDBCLIENT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5664,11 +5604,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SUBSTITUTE:
+		case SETUSERID:
 		{
 			AST __t1504 = _t;
-			AST tmp452_AST_in = (AST)_t;
-			match(_t,SUBSTITUTE);
+			AST tmp447_AST_in = (AST)_t;
+			match(_t,SETUSERID);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5676,11 +5616,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case TOROWID:
+		case SHA1DIGEST:
 		{
 			AST __t1505 = _t;
-			AST tmp453_AST_in = (AST)_t;
-			match(_t,TOROWID);
+			AST tmp448_AST_in = (AST)_t;
+			match(_t,SHA1DIGEST);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5688,11 +5628,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case TRIM:
+		case SQRT:
 		{
 			AST __t1506 = _t;
-			AST tmp454_AST_in = (AST)_t;
-			match(_t,TRIM);
+			AST tmp449_AST_in = (AST)_t;
+			match(_t,SQRT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5700,11 +5640,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case TRUNCATE:
+		case SSLSERVERNAME:
 		{
 			AST __t1507 = _t;
-			AST tmp455_AST_in = (AST)_t;
-			match(_t,TRUNCATE);
+			AST tmp450_AST_in = (AST)_t;
+			match(_t,SSLSERVERNAME);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5712,11 +5652,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case TYPEOF:
+		case STRING:
 		{
 			AST __t1508 = _t;
-			AST tmp456_AST_in = (AST)_t;
-			match(_t,TYPEOF);
+			AST tmp451_AST_in = (AST)_t;
+			match(_t,STRING);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5724,11 +5664,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case VALIDEVENT:
+		case SUBSTITUTE:
 		{
 			AST __t1509 = _t;
-			AST tmp457_AST_in = (AST)_t;
-			match(_t,VALIDEVENT);
+			AST tmp452_AST_in = (AST)_t;
+			match(_t,SUBSTITUTE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5736,11 +5676,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case VALIDHANDLE:
+		case TOROWID:
 		{
 			AST __t1510 = _t;
-			AST tmp458_AST_in = (AST)_t;
-			match(_t,VALIDHANDLE);
+			AST tmp453_AST_in = (AST)_t;
+			match(_t,TOROWID);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5748,11 +5688,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case VALIDOBJECT:
+		case TRIM:
 		{
 			AST __t1511 = _t;
-			AST tmp459_AST_in = (AST)_t;
-			match(_t,VALIDOBJECT);
+			AST tmp454_AST_in = (AST)_t;
+			match(_t,TRIM);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5760,11 +5700,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case WEEKDAY:
+		case TRUNCATE:
 		{
 			AST __t1512 = _t;
-			AST tmp460_AST_in = (AST)_t;
-			match(_t,WEEKDAY);
+			AST tmp455_AST_in = (AST)_t;
+			match(_t,TRUNCATE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5772,11 +5712,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case WIDGETHANDLE:
+		case TYPEOF:
 		{
 			AST __t1513 = _t;
-			AST tmp461_AST_in = (AST)_t;
-			match(_t,WIDGETHANDLE);
+			AST tmp456_AST_in = (AST)_t;
+			match(_t,TYPEOF);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -5784,15 +5724,75 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case YEAR:
+		case VALIDEVENT:
 		{
 			AST __t1514 = _t;
+			AST tmp457_AST_in = (AST)_t;
+			match(_t,VALIDEVENT);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1514;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case VALIDHANDLE:
+		{
+			AST __t1515 = _t;
+			AST tmp458_AST_in = (AST)_t;
+			match(_t,VALIDHANDLE);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1515;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case VALIDOBJECT:
+		{
+			AST __t1516 = _t;
+			AST tmp459_AST_in = (AST)_t;
+			match(_t,VALIDOBJECT);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1516;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case WEEKDAY:
+		{
+			AST __t1517 = _t;
+			AST tmp460_AST_in = (AST)_t;
+			match(_t,WEEKDAY);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1517;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case WIDGETHANDLE:
+		{
+			AST __t1518 = _t;
+			AST tmp461_AST_in = (AST)_t;
+			match(_t,WIDGETHANDLE);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1518;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case YEAR:
+		{
+			AST __t1519 = _t;
 			AST tmp462_AST_in = (AST)_t;
 			match(_t,YEAR);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
-			_t = __t1514;
+			_t = __t1519;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -6113,69 +6113,9 @@ public TreeParser01() {
 		switch ( _t.getType()) {
 		case AMBIGUOUS:
 		{
-			AST __t1516 = _t;
+			AST __t1521 = _t;
 			AST tmp504_AST_in = (AST)_t;
 			match(_t,AMBIGUOUS);
-			_t = _t.getFirstChild();
-			recordfunargs(_t);
-			_t = _retTree;
-			_t = __t1516;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case AVAILABLE:
-		{
-			AST __t1517 = _t;
-			AST tmp505_AST_in = (AST)_t;
-			match(_t,AVAILABLE);
-			_t = _t.getFirstChild();
-			recordfunargs(_t);
-			_t = _retTree;
-			_t = __t1517;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case CURRENTCHANGED:
-		{
-			AST __t1518 = _t;
-			AST tmp506_AST_in = (AST)_t;
-			match(_t,CURRENTCHANGED);
-			_t = _t.getFirstChild();
-			recordfunargs(_t);
-			_t = _retTree;
-			_t = __t1518;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case DATASOURCEMODIFIED:
-		{
-			AST __t1519 = _t;
-			AST tmp507_AST_in = (AST)_t;
-			match(_t,DATASOURCEMODIFIED);
-			_t = _t.getFirstChild();
-			recordfunargs(_t);
-			_t = _retTree;
-			_t = __t1519;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case ERROR:
-		{
-			AST __t1520 = _t;
-			AST tmp508_AST_in = (AST)_t;
-			match(_t,ERROR);
-			_t = _t.getFirstChild();
-			recordfunargs(_t);
-			_t = _retTree;
-			_t = __t1520;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case LOCKED:
-		{
-			AST __t1521 = _t;
-			AST tmp509_AST_in = (AST)_t;
-			match(_t,LOCKED);
 			_t = _t.getFirstChild();
 			recordfunargs(_t);
 			_t = _retTree;
@@ -6183,11 +6123,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case NEW:
+		case AVAILABLE:
 		{
 			AST __t1522 = _t;
-			AST tmp510_AST_in = (AST)_t;
-			match(_t,NEW);
+			AST tmp505_AST_in = (AST)_t;
+			match(_t,AVAILABLE);
 			_t = _t.getFirstChild();
 			recordfunargs(_t);
 			_t = _retTree;
@@ -6195,11 +6135,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case RECID:
+		case CURRENTCHANGED:
 		{
 			AST __t1523 = _t;
-			AST tmp511_AST_in = (AST)_t;
-			match(_t,RECID);
+			AST tmp506_AST_in = (AST)_t;
+			match(_t,CURRENTCHANGED);
 			_t = _t.getFirstChild();
 			recordfunargs(_t);
 			_t = _retTree;
@@ -6207,11 +6147,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case RECORDLENGTH:
+		case DATASOURCEMODIFIED:
 		{
 			AST __t1524 = _t;
-			AST tmp512_AST_in = (AST)_t;
-			match(_t,RECORDLENGTH);
+			AST tmp507_AST_in = (AST)_t;
+			match(_t,DATASOURCEMODIFIED);
 			_t = _t.getFirstChild();
 			recordfunargs(_t);
 			_t = _retTree;
@@ -6219,11 +6159,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case REJECTED:
+		case ERROR:
 		{
 			AST __t1525 = _t;
-			AST tmp513_AST_in = (AST)_t;
-			match(_t,REJECTED);
+			AST tmp508_AST_in = (AST)_t;
+			match(_t,ERROR);
 			_t = _t.getFirstChild();
 			recordfunargs(_t);
 			_t = _retTree;
@@ -6231,11 +6171,11 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ROWID:
+		case LOCKED:
 		{
 			AST __t1526 = _t;
-			AST tmp514_AST_in = (AST)_t;
-			match(_t,ROWID);
+			AST tmp509_AST_in = (AST)_t;
+			match(_t,LOCKED);
 			_t = _t.getFirstChild();
 			recordfunargs(_t);
 			_t = _retTree;
@@ -6243,15 +6183,75 @@ public TreeParser01() {
 			_t = _t.getNextSibling();
 			break;
 		}
-		case ROWSTATE:
+		case NEW:
 		{
 			AST __t1527 = _t;
+			AST tmp510_AST_in = (AST)_t;
+			match(_t,NEW);
+			_t = _t.getFirstChild();
+			recordfunargs(_t);
+			_t = _retTree;
+			_t = __t1527;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case RECID:
+		{
+			AST __t1528 = _t;
+			AST tmp511_AST_in = (AST)_t;
+			match(_t,RECID);
+			_t = _t.getFirstChild();
+			recordfunargs(_t);
+			_t = _retTree;
+			_t = __t1528;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case RECORDLENGTH:
+		{
+			AST __t1529 = _t;
+			AST tmp512_AST_in = (AST)_t;
+			match(_t,RECORDLENGTH);
+			_t = _t.getFirstChild();
+			recordfunargs(_t);
+			_t = _retTree;
+			_t = __t1529;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case REJECTED:
+		{
+			AST __t1530 = _t;
+			AST tmp513_AST_in = (AST)_t;
+			match(_t,REJECTED);
+			_t = _t.getFirstChild();
+			recordfunargs(_t);
+			_t = _retTree;
+			_t = __t1530;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case ROWID:
+		{
+			AST __t1531 = _t;
+			AST tmp514_AST_in = (AST)_t;
+			match(_t,ROWID);
+			_t = _t.getFirstChild();
+			recordfunargs(_t);
+			_t = _retTree;
+			_t = __t1531;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case ROWSTATE:
+		{
+			AST __t1532 = _t;
 			AST tmp515_AST_in = (AST)_t;
 			match(_t,ROWSTATE);
 			_t = _t.getFirstChild();
 			recordfunargs(_t);
 			_t = _retTree;
-			_t = __t1527;
+			_t = __t1532;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -7005,7 +7005,7 @@ inputState.guessing--;
 		
 		AST widattr_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1573 = _t;
+		AST __t1578 = _t;
 		AST tmp571_AST_in = (AST)_t;
 		match(_t,Widget_ref);
 		_t = _t.getFirstChild();
@@ -7024,11 +7024,11 @@ inputState.guessing--;
 		
 		}
 		{
-		boolean synPredMatched1577 = false;
+		boolean synPredMatched1582 = false;
 		if (_t==null) _t=ASTNULL;
 		if (((_tokenSet_8.member(_t.getType())))) {
-			AST __t1577 = _t;
-			synPredMatched1577 = true;
+			AST __t1582 = _t;
+			synPredMatched1582 = true;
 			inputState.guessing++;
 			try {
 				{
@@ -7037,12 +7037,12 @@ inputState.guessing--;
 				}
 			}
 			catch (RecognitionException pe) {
-				synPredMatched1577 = false;
+				synPredMatched1582 = false;
 			}
-			_t = __t1577;
+			_t = __t1582;
 inputState.guessing--;
 		}
-		if ( synPredMatched1577 ) {
+		if ( synPredMatched1582 ) {
 			widname(_t);
 			_t = _retTree;
 		}
@@ -7061,8 +7061,8 @@ inputState.guessing--;
 		case OBJCOLON:
 		{
 			{
-			int _cnt1582=0;
-			_loop1582:
+			int _cnt1587=0;
+			_loop1587:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==OBJCOLON)) {
@@ -7119,10 +7119,10 @@ inputState.guessing--;
 					}
 				}
 				else {
-					if ( _cnt1582>=1 ) { break _loop1582; } else {throw new NoViableAltException(_t);}
+					if ( _cnt1587>=1 ) { break _loop1587; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt1582++;
+				_cnt1587++;
 			} while (true);
 			}
 			{
@@ -7130,7 +7130,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case IN_KW:
 			{
-				AST __t1584 = _t;
+				AST __t1589 = _t;
 				AST tmp575_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getFirstChild();
@@ -7181,7 +7181,7 @@ inputState.guessing--;
 				AST tmp581_AST_in = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
-				_t = __t1584;
+				_t = __t1589;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -7260,7 +7260,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t1573;
+		_t = __t1578;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -7297,7 +7297,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1537:
+		_loop1542:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
@@ -7308,7 +7308,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop1537;
+				break _loop1542;
 			}
 			
 		} while (true);
@@ -7550,6 +7550,111 @@ inputState.guessing--;
 		_retTree = _t;
 	}
 	
+	public final void gwidget(AST _t) throws RecognitionException {
+		
+		AST gwidget_AST_in = (_t == ASTNULL) ? null : (AST)_t;
+		AST f = null;
+		AST b = null;
+		
+		AST __t99 = _t;
+		AST tmp622_AST_in = (AST)_t;
+		match(_t,Widget_ref);
+		_t = _t.getFirstChild();
+		s_widget(_t);
+		_t = _retTree;
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case IN_KW:
+		{
+			AST __t101 = _t;
+			AST tmp623_AST_in = (AST)_t;
+			match(_t,IN_KW);
+			_t = _t.getFirstChild();
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case MENU:
+			{
+				AST tmp624_AST_in = (AST)_t;
+				match(_t,MENU);
+				_t = _t.getNextSibling();
+				AST tmp625_AST_in = (AST)_t;
+				match(_t,ID);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case FRAME:
+			{
+				AST tmp626_AST_in = (AST)_t;
+				match(_t,FRAME);
+				_t = _t.getNextSibling();
+				f = (AST)_t;
+				match(_t,ID);
+				_t = _t.getNextSibling();
+				if ( inputState.guessing==0 ) {
+					action.frameRef(f);
+				}
+				break;
+			}
+			case BROWSE:
+			{
+				AST tmp627_AST_in = (AST)_t;
+				match(_t,BROWSE);
+				_t = _t.getNextSibling();
+				b = (AST)_t;
+				match(_t,ID);
+				_t = _t.getNextSibling();
+				if ( inputState.guessing==0 ) {
+					action.browseRef(b);
+				}
+				break;
+			}
+			case SUBMENU:
+			{
+				AST tmp628_AST_in = (AST)_t;
+				match(_t,SUBMENU);
+				_t = _t.getNextSibling();
+				AST tmp629_AST_in = (AST)_t;
+				match(_t,ID);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case BUFFER:
+			{
+				AST tmp630_AST_in = (AST)_t;
+				match(_t,BUFFER);
+				_t = _t.getNextSibling();
+				AST tmp631_AST_in = (AST)_t;
+				match(_t,ID);
+				_t = _t.getNextSibling();
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			_t = __t101;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case 3:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		_t = __t99;
+		_t = _t.getNextSibling();
+		_retTree = _t;
+	}
+	
 	public final void s_widget(AST _t) throws RecognitionException {
 		
 		AST s_widget_AST_in = (_t == ASTNULL) ? null : (AST)_t;
@@ -7666,27 +7771,27 @@ inputState.guessing--;
 		}
 		case DATASET:
 		{
-			AST tmp622_AST_in = (AST)_t;
+			AST tmp632_AST_in = (AST)_t;
 			match(_t,DATASET);
 			_t = _t.getNextSibling();
-			AST tmp623_AST_in = (AST)_t;
+			AST tmp633_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DATASOURCE:
 		{
-			AST tmp624_AST_in = (AST)_t;
+			AST tmp634_AST_in = (AST)_t;
 			match(_t,DATASOURCE);
 			_t = _t.getNextSibling();
-			AST tmp625_AST_in = (AST)_t;
+			AST tmp635_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FIELD:
 		{
-			AST tmp626_AST_in = (AST)_t;
+			AST tmp636_AST_in = (AST)_t;
 			match(_t,FIELD);
 			_t = _t.getNextSibling();
 			fld(_t,CQ.REF);
@@ -7695,7 +7800,7 @@ inputState.guessing--;
 		}
 		case FRAME:
 		{
-			AST tmp627_AST_in = (AST)_t;
+			AST tmp637_AST_in = (AST)_t;
 			match(_t,FRAME);
 			_t = _t.getNextSibling();
 			f = (AST)_t;
@@ -7708,37 +7813,37 @@ inputState.guessing--;
 		}
 		case MENU:
 		{
-			AST tmp628_AST_in = (AST)_t;
+			AST tmp638_AST_in = (AST)_t;
 			match(_t,MENU);
 			_t = _t.getNextSibling();
-			AST tmp629_AST_in = (AST)_t;
+			AST tmp639_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBMENU:
 		{
-			AST tmp630_AST_in = (AST)_t;
+			AST tmp640_AST_in = (AST)_t;
 			match(_t,SUBMENU);
 			_t = _t.getNextSibling();
-			AST tmp631_AST_in = (AST)_t;
+			AST tmp641_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MENUITEM:
 		{
-			AST tmp632_AST_in = (AST)_t;
+			AST tmp642_AST_in = (AST)_t;
 			match(_t,MENUITEM);
 			_t = _t.getNextSibling();
-			AST tmp633_AST_in = (AST)_t;
+			AST tmp643_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case BROWSE:
 		{
-			AST tmp634_AST_in = (AST)_t;
+			AST tmp644_AST_in = (AST)_t;
 			match(_t,BROWSE);
 			_t = _t.getNextSibling();
 			b = (AST)_t;
@@ -7751,60 +7856,60 @@ inputState.guessing--;
 		}
 		case QUERY:
 		{
-			AST tmp635_AST_in = (AST)_t;
+			AST tmp645_AST_in = (AST)_t;
 			match(_t,QUERY);
 			_t = _t.getNextSibling();
-			AST tmp636_AST_in = (AST)_t;
+			AST tmp646_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TEMPTABLE:
 		{
-			AST tmp637_AST_in = (AST)_t;
+			AST tmp647_AST_in = (AST)_t;
 			match(_t,TEMPTABLE);
 			_t = _t.getNextSibling();
-			AST tmp638_AST_in = (AST)_t;
+			AST tmp648_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case BUFFER:
 		{
-			AST tmp639_AST_in = (AST)_t;
+			AST tmp649_AST_in = (AST)_t;
 			match(_t,BUFFER);
 			_t = _t.getNextSibling();
-			AST tmp640_AST_in = (AST)_t;
+			AST tmp650_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case XDOCUMENT:
 		{
-			AST tmp641_AST_in = (AST)_t;
+			AST tmp651_AST_in = (AST)_t;
 			match(_t,XDOCUMENT);
 			_t = _t.getNextSibling();
-			AST tmp642_AST_in = (AST)_t;
+			AST tmp652_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case XNODEREF:
 		{
-			AST tmp643_AST_in = (AST)_t;
+			AST tmp653_AST_in = (AST)_t;
 			match(_t,XNODEREF);
 			_t = _t.getNextSibling();
-			AST tmp644_AST_in = (AST)_t;
+			AST tmp654_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SOCKET:
 		{
-			AST tmp645_AST_in = (AST)_t;
+			AST tmp655_AST_in = (AST)_t;
 			match(_t,SOCKET);
 			_t = _t.getNextSibling();
-			AST tmp646_AST_in = (AST)_t;
+			AST tmp656_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
@@ -7822,14 +7927,14 @@ inputState.guessing--;
 		AST frame_ref_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST f = null;
 		
-		AST __t815 = _t;
-		AST tmp647_AST_in = (AST)_t;
+		AST __t820 = _t;
+		AST tmp657_AST_in = (AST)_t;
 		match(_t,FRAME);
 		_t = _t.getFirstChild();
 		f = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
-		_t = __t815;
+		_t = __t820;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.frameRef(f);
@@ -7842,14 +7947,14 @@ inputState.guessing--;
 		AST browse_ref_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST i = null;
 		
-		AST __t156 = _t;
-		AST tmp648_AST_in = (AST)_t;
+		AST __t161 = _t;
+		AST tmp658_AST_in = (AST)_t;
 		match(_t,BROWSE);
 		_t = _t.getFirstChild();
 		i = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
-		_t = __t156;
+		_t = __t161;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.frameRef(i);
@@ -7862,10 +7967,10 @@ inputState.guessing--;
 		AST array_subscript_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1604 = _t;
-		AST tmp649_AST_in = (AST)_t;
+		AST tmp659_AST_in = (AST)_t;
 		match(_t,Array_subscript);
 		_t = _t.getFirstChild();
-		AST tmp650_AST_in = (AST)_t;
+		AST tmp660_AST_in = (AST)_t;
 		match(_t,LEFTBRACE);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -7875,7 +7980,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FOR:
 		{
-			AST tmp651_AST_in = (AST)_t;
+			AST tmp661_AST_in = (AST)_t;
 			match(_t,FOR);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -7892,7 +7997,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp652_AST_in = (AST)_t;
+		AST tmp662_AST_in = (AST)_t;
 		match(_t,RIGHTBRACE);
 		_t = _t.getNextSibling();
 		_t = __t1604;
@@ -7908,95 +8013,6 @@ inputState.guessing--;
 		AST ref = null;
 		AST id = null;
 		
-		AST __t107 = _t;
-		ref = _t==ASTNULL ? null :(AST)_t;
-		match(_t,Field_ref);
-		_t = _t.getFirstChild();
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case INPUT:
-		{
-			AST tmp653_AST_in = (AST)_t;
-			match(_t,INPUT);
-			_t = _t.getNextSibling();
-			break;
-		}
-		case BROWSE:
-		case FRAME:
-		case ID:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case FRAME:
-		{
-			frame_ref(_t);
-			_t = _retTree;
-			break;
-		}
-		case BROWSE:
-		{
-			browse_ref(_t);
-			_t = _retTree;
-			break;
-		}
-		case ID:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		id = (AST)_t;
-		match(_t,ID);
-		_t = _t.getNextSibling();
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case Array_subscript:
-		{
-			array_subscript(_t);
-			_t = _retTree;
-			break;
-		}
-		case 3:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		_t = __t107;
-		_t = _t.getNextSibling();
-		if ( inputState.guessing==0 ) {
-			action.field(ref, id, contextQualifier, 1);
-		}
-		_retTree = _t;
-	}
-	
-	public final void fld2(AST _t,
-		int contextQualifier
-	) throws RecognitionException {
-		
-		AST fld2_AST_in = (_t == ASTNULL) ? null : (AST)_t;
-		AST ref = null;
-		AST id = null;
-		
 		AST __t112 = _t;
 		ref = _t==ASTNULL ? null :(AST)_t;
 		match(_t,Field_ref);
@@ -8006,7 +8022,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case INPUT:
 		{
-			AST tmp654_AST_in = (AST)_t;
+			AST tmp663_AST_in = (AST)_t;
 			match(_t,INPUT);
 			_t = _t.getNextSibling();
 			break;
@@ -8073,6 +8089,95 @@ inputState.guessing--;
 		_t = __t112;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
+			action.field(ref, id, contextQualifier, 1);
+		}
+		_retTree = _t;
+	}
+	
+	public final void fld2(AST _t,
+		int contextQualifier
+	) throws RecognitionException {
+		
+		AST fld2_AST_in = (_t == ASTNULL) ? null : (AST)_t;
+		AST ref = null;
+		AST id = null;
+		
+		AST __t117 = _t;
+		ref = _t==ASTNULL ? null :(AST)_t;
+		match(_t,Field_ref);
+		_t = _t.getFirstChild();
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case INPUT:
+		{
+			AST tmp664_AST_in = (AST)_t;
+			match(_t,INPUT);
+			_t = _t.getNextSibling();
+			break;
+		}
+		case BROWSE:
+		case FRAME:
+		case ID:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case FRAME:
+		{
+			frame_ref(_t);
+			_t = _retTree;
+			break;
+		}
+		case BROWSE:
+		{
+			browse_ref(_t);
+			_t = _retTree;
+			break;
+		}
+		case ID:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		id = (AST)_t;
+		match(_t,ID);
+		_t = _t.getNextSibling();
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case Array_subscript:
+		{
+			array_subscript(_t);
+			_t = _retTree;
+			break;
+		}
+		case 3:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		_t = __t117;
+		_t = _t.getNextSibling();
+		if ( inputState.guessing==0 ) {
 			action.field(ref, id, contextQualifier, 2);
 		}
 		_retTree = _t;
@@ -8096,7 +8201,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case AVERAGE:
 		{
-			AST __t117 = _t;
+			AST __t122 = _t;
 			id1 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,AVERAGE);
 			_t = _t.getFirstChild();
@@ -8123,13 +8228,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id1, id1, DECIMAL));
 			}
-			_t = __t117;
+			_t = __t122;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case COUNT:
 		{
-			AST __t119 = _t;
+			AST __t124 = _t;
 			id2 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,COUNT);
 			_t = _t.getFirstChild();
@@ -8156,13 +8261,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id2, id2, INTEGER));
 			}
-			_t = __t119;
+			_t = __t124;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MAXIMUM:
 		{
-			AST __t121 = _t;
+			AST __t126 = _t;
 			id3 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,MAXIMUM);
 			_t = _t.getFirstChild();
@@ -8189,13 +8294,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id3, id3, DECIMAL));
 			}
-			_t = __t121;
+			_t = __t126;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MINIMUM:
 		{
-			AST __t123 = _t;
+			AST __t128 = _t;
 			id4 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,MINIMUM);
 			_t = _t.getFirstChild();
@@ -8222,13 +8327,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id4, id4, DECIMAL));
 			}
-			_t = __t123;
+			_t = __t128;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TOTAL:
 		{
-			AST __t125 = _t;
+			AST __t130 = _t;
 			id5 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,TOTAL);
 			_t = _t.getFirstChild();
@@ -8255,13 +8360,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id5, id5, DECIMAL));
 			}
-			_t = __t125;
+			_t = __t130;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBAVERAGE:
 		{
-			AST __t127 = _t;
+			AST __t132 = _t;
 			id6 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,SUBAVERAGE);
 			_t = _t.getFirstChild();
@@ -8288,13 +8393,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id6, id6, DECIMAL));
 			}
-			_t = __t127;
+			_t = __t132;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBCOUNT:
 		{
-			AST __t129 = _t;
+			AST __t134 = _t;
 			id7 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,SUBCOUNT);
 			_t = _t.getFirstChild();
@@ -8321,13 +8426,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id7, id7, DECIMAL));
 			}
-			_t = __t129;
+			_t = __t134;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBMAXIMUM:
 		{
-			AST __t131 = _t;
+			AST __t136 = _t;
 			id8 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,SUBMAXIMUM);
 			_t = _t.getFirstChild();
@@ -8354,13 +8459,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id8, id8, DECIMAL));
 			}
-			_t = __t131;
+			_t = __t136;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBMINIMUM:
 		{
-			AST __t133 = _t;
+			AST __t138 = _t;
 			id9 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,SUBMINIMUM);
 			_t = _t.getFirstChild();
@@ -8387,13 +8492,13 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id9, id9, DECIMAL));
 			}
-			_t = __t133;
+			_t = __t138;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBTOTAL:
 		{
-			AST __t135 = _t;
+			AST __t140 = _t;
 			id10 = _t==ASTNULL ? null :(AST)_t;
 			match(_t,SUBTOTAL);
 			_t = _t.getFirstChild();
@@ -8420,7 +8525,7 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(action.defineVariable(id10, id10, DECIMAL));
 			}
-			_t = __t135;
+			_t = __t140;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -8441,7 +8546,7 @@ inputState.guessing--;
 		case COLUMNLABEL:
 		{
 			AST __t2019 = _t;
-			AST tmp655_AST_in = (AST)_t;
+			AST tmp665_AST_in = (AST)_t;
 			match(_t,COLUMNLABEL);
 			_t = _t.getFirstChild();
 			constant(_t);
@@ -8451,7 +8556,7 @@ inputState.guessing--;
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp656_AST_in = (AST)_t;
+					AST tmp666_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					constant(_t);
@@ -8470,7 +8575,7 @@ inputState.guessing--;
 		case LABEL:
 		{
 			AST __t2022 = _t;
-			AST tmp657_AST_in = (AST)_t;
+			AST tmp667_AST_in = (AST)_t;
 			match(_t,LABEL);
 			_t = _t.getFirstChild();
 			constant(_t);
@@ -8480,7 +8585,7 @@ inputState.guessing--;
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp658_AST_in = (AST)_t;
+					AST tmp668_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					constant(_t);
@@ -8519,12 +8624,12 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case EXCEPT:
 			{
-				AST __t139 = _t;
-				AST tmp659_AST_in = (AST)_t;
+				AST __t144 = _t;
+				AST tmp669_AST_in = (AST)_t;
 				match(_t,EXCEPT);
 				_t = _t.getFirstChild();
 				{
-				_loop141:
+				_loop146:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -8532,12 +8637,12 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						break _loop141;
+						break _loop146;
 					}
 					
 				} while (true);
 				}
-				_t = __t139;
+				_t = __t144;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -8564,7 +8669,7 @@ inputState.guessing--;
 		case Assign_from_buffer:
 		{
 			{
-			_loop148:
+			_loop153:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
@@ -8577,13 +8682,13 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case WHEN:
 					{
-						AST __t144 = _t;
-						AST tmp660_AST_in = (AST)_t;
+						AST __t149 = _t;
+						AST tmp670_AST_in = (AST)_t;
 						match(_t,WHEN);
 						_t = _t.getFirstChild();
 						expression(_t);
 						_t = _retTree;
-						_t = __t144;
+						_t = __t149;
 						_t = _t.getNextSibling();
 						break;
 					}
@@ -8606,26 +8711,26 @@ inputState.guessing--;
 				}
 				case Assign_from_buffer:
 				{
-					AST __t145 = _t;
-					AST tmp661_AST_in = (AST)_t;
+					AST __t150 = _t;
+					AST tmp671_AST_in = (AST)_t;
 					match(_t,Assign_from_buffer);
 					_t = _t.getFirstChild();
 					fld(_t,CQ.UPDATING);
 					_t = _retTree;
-					_t = __t145;
+					_t = __t150;
 					_t = _t.getNextSibling();
 					{
 					if (_t==null) _t=ASTNULL;
 					switch ( _t.getType()) {
 					case WHEN:
 					{
-						AST __t147 = _t;
-						AST tmp662_AST_in = (AST)_t;
+						AST __t152 = _t;
+						AST tmp672_AST_in = (AST)_t;
 						match(_t,WHEN);
 						_t = _t.getFirstChild();
 						expression(_t);
 						_t = _retTree;
-						_t = __t147;
+						_t = __t152;
 						_t = _t.getNextSibling();
 						break;
 					}
@@ -8648,7 +8753,7 @@ inputState.guessing--;
 				}
 				default:
 				{
-					break _loop148;
+					break _loop153;
 				}
 				}
 			} while (true);
@@ -8667,8 +8772,8 @@ inputState.guessing--;
 		
 		AST assign_equal_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t150 = _t;
-		AST tmp663_AST_in = (AST)_t;
+		AST __t155 = _t;
+		AST tmp673_AST_in = (AST)_t;
 		match(_t,EQUAL);
 		_t = _t.getFirstChild();
 		{
@@ -8763,7 +8868,7 @@ inputState.guessing--;
 		}
 		expression(_t);
 		_t = _retTree;
-		_t = __t150;
+		_t = __t155;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -8776,69 +8881,9 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FIXCODEPAGE:
 		{
-			AST __t1381 = _t;
-			AST tmp664_AST_in = (AST)_t;
-			match(_t,FIXCODEPAGE);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1381;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case OVERLAY:
-		{
-			AST __t1382 = _t;
-			AST tmp665_AST_in = (AST)_t;
-			match(_t,OVERLAY);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1382;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case PUTBITS:
-		{
-			AST __t1383 = _t;
-			AST tmp666_AST_in = (AST)_t;
-			match(_t,PUTBITS);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1383;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case PUTBYTE:
-		{
-			AST __t1384 = _t;
-			AST tmp667_AST_in = (AST)_t;
-			match(_t,PUTBYTE);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1384;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case PUTBYTES:
-		{
-			AST __t1385 = _t;
-			AST tmp668_AST_in = (AST)_t;
-			match(_t,PUTBYTES);
-			_t = _t.getFirstChild();
-			funargs(_t);
-			_t = _retTree;
-			_t = __t1385;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case PUTDOUBLE:
-		{
 			AST __t1386 = _t;
-			AST tmp669_AST_in = (AST)_t;
-			match(_t,PUTDOUBLE);
+			AST tmp674_AST_in = (AST)_t;
+			match(_t,FIXCODEPAGE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8846,11 +8891,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PUTFLOAT:
+		case OVERLAY:
 		{
 			AST __t1387 = _t;
-			AST tmp670_AST_in = (AST)_t;
-			match(_t,PUTFLOAT);
+			AST tmp675_AST_in = (AST)_t;
+			match(_t,OVERLAY);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8858,11 +8903,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PUTLONG:
+		case PUTBITS:
 		{
 			AST __t1388 = _t;
-			AST tmp671_AST_in = (AST)_t;
-			match(_t,PUTLONG);
+			AST tmp676_AST_in = (AST)_t;
+			match(_t,PUTBITS);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8870,11 +8915,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PUTSHORT:
+		case PUTBYTE:
 		{
 			AST __t1389 = _t;
-			AST tmp672_AST_in = (AST)_t;
-			match(_t,PUTSHORT);
+			AST tmp677_AST_in = (AST)_t;
+			match(_t,PUTBYTE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8882,11 +8927,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PUTSTRING:
+		case PUTBYTES:
 		{
 			AST __t1390 = _t;
-			AST tmp673_AST_in = (AST)_t;
-			match(_t,PUTSTRING);
+			AST tmp678_AST_in = (AST)_t;
+			match(_t,PUTBYTES);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8894,11 +8939,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case PUTUNSIGNEDSHORT:
+		case PUTDOUBLE:
 		{
 			AST __t1391 = _t;
-			AST tmp674_AST_in = (AST)_t;
-			match(_t,PUTUNSIGNEDSHORT);
+			AST tmp679_AST_in = (AST)_t;
+			match(_t,PUTDOUBLE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8906,11 +8951,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SETBYTEORDER:
+		case PUTFLOAT:
 		{
 			AST __t1392 = _t;
-			AST tmp675_AST_in = (AST)_t;
-			match(_t,SETBYTEORDER);
+			AST tmp680_AST_in = (AST)_t;
+			match(_t,PUTFLOAT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8918,11 +8963,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SETPOINTERVALUE:
+		case PUTLONG:
 		{
 			AST __t1393 = _t;
-			AST tmp676_AST_in = (AST)_t;
-			match(_t,SETPOINTERVALUE);
+			AST tmp681_AST_in = (AST)_t;
+			match(_t,PUTLONG);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8930,11 +8975,11 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
-		case SETSIZE:
+		case PUTSHORT:
 		{
 			AST __t1394 = _t;
-			AST tmp677_AST_in = (AST)_t;
-			match(_t,SETSIZE);
+			AST tmp682_AST_in = (AST)_t;
+			match(_t,PUTSHORT);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
@@ -8942,9 +8987,69 @@ inputState.guessing--;
 			_t = _t.getNextSibling();
 			break;
 		}
+		case PUTSTRING:
+		{
+			AST __t1395 = _t;
+			AST tmp683_AST_in = (AST)_t;
+			match(_t,PUTSTRING);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1395;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case PUTUNSIGNEDSHORT:
+		{
+			AST __t1396 = _t;
+			AST tmp684_AST_in = (AST)_t;
+			match(_t,PUTUNSIGNEDSHORT);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1396;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case SETBYTEORDER:
+		{
+			AST __t1397 = _t;
+			AST tmp685_AST_in = (AST)_t;
+			match(_t,SETBYTEORDER);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1397;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case SETPOINTERVALUE:
+		{
+			AST __t1398 = _t;
+			AST tmp686_AST_in = (AST)_t;
+			match(_t,SETPOINTERVALUE);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1398;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case SETSIZE:
+		{
+			AST __t1399 = _t;
+			AST tmp687_AST_in = (AST)_t;
+			match(_t,SETSIZE);
+			_t = _t.getFirstChild();
+			funargs(_t);
+			_t = _retTree;
+			_t = __t1399;
+			_t = _t.getNextSibling();
+			break;
+		}
 		case AAMSG:
 		{
-			AST tmp678_AST_in = (AST)_t;
+			AST tmp688_AST_in = (AST)_t;
 			match(_t,AAMSG);
 			_t = _t.getNextSibling();
 			break;
@@ -8957,7 +9062,7 @@ inputState.guessing--;
 		}
 		case CURRENTWINDOW:
 		{
-			AST tmp679_AST_in = (AST)_t;
+			AST tmp689_AST_in = (AST)_t;
 			match(_t,CURRENTWINDOW);
 			_t = _t.getNextSibling();
 			break;
@@ -9006,322 +9111,322 @@ inputState.guessing--;
 		}
 		case PAGESIZE_KW:
 		{
-			AST tmp680_AST_in = (AST)_t;
+			AST tmp690_AST_in = (AST)_t;
 			match(_t,PAGESIZE_KW);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case LINECOUNTER:
 		{
-			AST tmp681_AST_in = (AST)_t;
+			AST tmp691_AST_in = (AST)_t;
 			match(_t,LINECOUNTER);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PAGENUMBER:
 		{
-			AST tmp682_AST_in = (AST)_t;
+			AST tmp692_AST_in = (AST)_t;
 			match(_t,PAGENUMBER);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMECOL:
 		{
-			AST tmp683_AST_in = (AST)_t;
+			AST tmp693_AST_in = (AST)_t;
 			match(_t,FRAMECOL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMEDOWN:
 		{
-			AST tmp684_AST_in = (AST)_t;
+			AST tmp694_AST_in = (AST)_t;
 			match(_t,FRAMEDOWN);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMELINE:
 		{
-			AST tmp685_AST_in = (AST)_t;
+			AST tmp695_AST_in = (AST)_t;
 			match(_t,FRAMELINE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMEROW:
 		{
-			AST tmp686_AST_in = (AST)_t;
+			AST tmp696_AST_in = (AST)_t;
 			match(_t,FRAMEROW);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case USERID:
 		{
-			AST tmp687_AST_in = (AST)_t;
+			AST tmp697_AST_in = (AST)_t;
 			match(_t,USERID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case ETIME_KW:
 		{
-			AST tmp688_AST_in = (AST)_t;
+			AST tmp698_AST_in = (AST)_t;
 			match(_t,ETIME_KW);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DBNAME:
 		{
-			AST tmp689_AST_in = (AST)_t;
+			AST tmp699_AST_in = (AST)_t;
 			match(_t,DBNAME);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TIME:
 		{
-			AST tmp690_AST_in = (AST)_t;
+			AST tmp700_AST_in = (AST)_t;
 			match(_t,TIME);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case OPSYS:
 		{
-			AST tmp691_AST_in = (AST)_t;
+			AST tmp701_AST_in = (AST)_t;
 			match(_t,OPSYS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case RETRY:
 		{
-			AST tmp692_AST_in = (AST)_t;
+			AST tmp702_AST_in = (AST)_t;
 			match(_t,RETRY);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case AASERIAL:
 		{
-			AST tmp693_AST_in = (AST)_t;
+			AST tmp703_AST_in = (AST)_t;
 			match(_t,AASERIAL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case AACONTROL:
 		{
-			AST tmp694_AST_in = (AST)_t;
+			AST tmp704_AST_in = (AST)_t;
 			match(_t,AACONTROL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MESSAGELINES:
 		{
-			AST tmp695_AST_in = (AST)_t;
+			AST tmp705_AST_in = (AST)_t;
 			match(_t,MESSAGELINES);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TERMINAL:
 		{
-			AST tmp696_AST_in = (AST)_t;
+			AST tmp706_AST_in = (AST)_t;
 			match(_t,TERMINAL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROPATH:
 		{
-			AST tmp697_AST_in = (AST)_t;
+			AST tmp707_AST_in = (AST)_t;
 			match(_t,PROPATH);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case CURRENTLANGUAGE:
 		{
-			AST tmp698_AST_in = (AST)_t;
+			AST tmp708_AST_in = (AST)_t;
 			match(_t,CURRENTLANGUAGE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROMSGS:
 		{
-			AST tmp699_AST_in = (AST)_t;
+			AST tmp709_AST_in = (AST)_t;
 			match(_t,PROMSGS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SCREENLINES:
 		{
-			AST tmp700_AST_in = (AST)_t;
+			AST tmp710_AST_in = (AST)_t;
 			match(_t,SCREENLINES);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case LASTKEY:
 		{
-			AST tmp701_AST_in = (AST)_t;
+			AST tmp711_AST_in = (AST)_t;
 			match(_t,LASTKEY);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMEFIELD:
 		{
-			AST tmp702_AST_in = (AST)_t;
+			AST tmp712_AST_in = (AST)_t;
 			match(_t,FRAMEFIELD);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMEFILE:
 		{
-			AST tmp703_AST_in = (AST)_t;
+			AST tmp713_AST_in = (AST)_t;
 			match(_t,FRAMEFILE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMEVALUE:
 		{
-			AST tmp704_AST_in = (AST)_t;
+			AST tmp714_AST_in = (AST)_t;
 			match(_t,FRAMEVALUE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case GOPENDING:
 		{
-			AST tmp705_AST_in = (AST)_t;
+			AST tmp715_AST_in = (AST)_t;
 			match(_t,GOPENDING);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROGRESS:
 		{
-			AST tmp706_AST_in = (AST)_t;
+			AST tmp716_AST_in = (AST)_t;
 			match(_t,PROGRESS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMEINDEX:
 		{
-			AST tmp707_AST_in = (AST)_t;
+			AST tmp717_AST_in = (AST)_t;
 			match(_t,FRAMEINDEX);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMEDB:
 		{
-			AST tmp708_AST_in = (AST)_t;
+			AST tmp718_AST_in = (AST)_t;
 			match(_t,FRAMEDB);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAMENAME:
 		{
-			AST tmp709_AST_in = (AST)_t;
+			AST tmp719_AST_in = (AST)_t;
 			match(_t,FRAMENAME);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DATASERVERS:
 		{
-			AST tmp710_AST_in = (AST)_t;
+			AST tmp720_AST_in = (AST)_t;
 			match(_t,DATASERVERS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case NUMDBS:
 		{
-			AST tmp711_AST_in = (AST)_t;
+			AST tmp721_AST_in = (AST)_t;
 			match(_t,NUMDBS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case NUMALIASES:
 		{
-			AST tmp712_AST_in = (AST)_t;
+			AST tmp722_AST_in = (AST)_t;
 			match(_t,NUMALIASES);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case ISATTRSPACE:
 		{
-			AST tmp713_AST_in = (AST)_t;
+			AST tmp723_AST_in = (AST)_t;
 			match(_t,ISATTRSPACE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROCSTATUS:
 		{
-			AST tmp714_AST_in = (AST)_t;
+			AST tmp724_AST_in = (AST)_t;
 			match(_t,PROCSTATUS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROCHANDLE:
 		{
-			AST tmp715_AST_in = (AST)_t;
+			AST tmp725_AST_in = (AST)_t;
 			match(_t,PROCHANDLE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case CURSOR:
 		{
-			AST tmp716_AST_in = (AST)_t;
+			AST tmp726_AST_in = (AST)_t;
 			match(_t,CURSOR);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case OSERROR:
 		{
-			AST tmp717_AST_in = (AST)_t;
+			AST tmp727_AST_in = (AST)_t;
 			match(_t,OSERROR);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case RETURNVALUE:
 		{
-			AST tmp718_AST_in = (AST)_t;
+			AST tmp728_AST_in = (AST)_t;
 			match(_t,RETURNVALUE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case OSDRIVES:
 		{
-			AST tmp719_AST_in = (AST)_t;
+			AST tmp729_AST_in = (AST)_t;
 			match(_t,OSDRIVES);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROVERSION:
 		{
-			AST tmp720_AST_in = (AST)_t;
+			AST tmp730_AST_in = (AST)_t;
 			match(_t,PROVERSION);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TRANSACTION:
 		{
-			AST tmp721_AST_in = (AST)_t;
+			AST tmp731_AST_in = (AST)_t;
 			match(_t,TRANSACTION);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MACHINECLASS:
 		{
-			AST tmp722_AST_in = (AST)_t;
+			AST tmp732_AST_in = (AST)_t;
 			match(_t,MACHINECLASS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case AAPCONTROL:
 		{
-			AST tmp723_AST_in = (AST)_t;
+			AST tmp733_AST_in = (AST)_t;
 			match(_t,AAPCONTROL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case GETCODEPAGES:
 		{
-			AST tmp724_AST_in = (AST)_t;
+			AST tmp734_AST_in = (AST)_t;
 			match(_t,GETCODEPAGES);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case COMSELF:
 		{
-			AST tmp725_AST_in = (AST)_t;
+			AST tmp735_AST_in = (AST)_t;
 			match(_t,COMSELF);
 			_t = _t.getNextSibling();
 			break;
@@ -9351,14 +9456,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case PLUS:
 			{
-				AST tmp726_AST_in = (AST)_t;
+				AST tmp736_AST_in = (AST)_t;
 				match(_t,PLUS);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MINUS:
 			{
-				AST tmp727_AST_in = (AST)_t;
+				AST tmp737_AST_in = (AST)_t;
 				match(_t,MINUS);
 				_t = _t.getNextSibling();
 				break;
@@ -9390,8 +9495,8 @@ inputState.guessing--;
 		
 		AST buffercomparestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t158 = _t;
-		AST tmp728_AST_in = (AST)_t;
+		AST __t163 = _t;
+		AST tmp738_AST_in = (AST)_t;
 		match(_t,BUFFERCOMPARE);
 		_t = _t.getFirstChild();
 		tbl(_t,CQ.REF);
@@ -9401,12 +9506,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t160 = _t;
-			AST tmp729_AST_in = (AST)_t;
+			AST __t165 = _t;
+			AST tmp739_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop162:
+			_loop167:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -9414,24 +9519,24 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop162;
+					break _loop167;
 				}
 				
 			} while (true);
 			}
-			_t = __t160;
+			_t = __t165;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case USING:
 		{
-			AST __t163 = _t;
-			AST tmp730_AST_in = (AST)_t;
+			AST __t168 = _t;
+			AST tmp740_AST_in = (AST)_t;
 			match(_t,USING);
 			_t = _t.getFirstChild();
 			{
-			int _cnt165=0;
-			_loop165:
+			int _cnt170=0;
+			_loop170:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -9439,13 +9544,13 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt165>=1 ) { break _loop165; } else {throw new NoViableAltException(_t);}
+					if ( _cnt170>=1 ) { break _loop170; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt165++;
+				_cnt170++;
 			} while (true);
 			}
-			_t = __t163;
+			_t = __t168;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -9459,7 +9564,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp731_AST_in = (AST)_t;
+		AST tmp741_AST_in = (AST)_t;
 		match(_t,TO);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.REF);
@@ -9469,14 +9574,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CASESENSITIVE:
 		{
-			AST tmp732_AST_in = (AST)_t;
+			AST tmp742_AST_in = (AST)_t;
 			match(_t,CASESENSITIVE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case BINARY:
 		{
-			AST tmp733_AST_in = (AST)_t;
+			AST tmp743_AST_in = (AST)_t;
 			match(_t,BINARY);
 			_t = _t.getNextSibling();
 			break;
@@ -9502,8 +9607,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case SAVE:
 		{
-			AST __t168 = _t;
-			AST tmp734_AST_in = (AST)_t;
+			AST __t173 = _t;
+			AST tmp744_AST_in = (AST)_t;
 			match(_t,SAVE);
 			_t = _t.getFirstChild();
 			{
@@ -9511,14 +9616,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case RESULT:
 			{
-				AST __t170 = _t;
-				AST tmp735_AST_in = (AST)_t;
+				AST __t175 = _t;
+				AST tmp745_AST_in = (AST)_t;
 				match(_t,RESULT);
 				_t = _t.getFirstChild();
-				AST tmp736_AST_in = (AST)_t;
+				AST tmp746_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getNextSibling();
-				_t = __t170;
+				_t = __t175;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -9534,7 +9639,7 @@ inputState.guessing--;
 			}
 			fld(_t,CQ.UPDATING);
 			_t = _retTree;
-			_t = __t168;
+			_t = __t173;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -9558,7 +9663,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXPLICIT:
 		{
-			AST tmp737_AST_in = (AST)_t;
+			AST tmp747_AST_in = (AST)_t;
 			match(_t,EXPLICIT);
 			_t = _t.getNextSibling();
 			break;
@@ -9582,7 +9687,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case COMPARES:
 		{
-			AST tmp738_AST_in = (AST)_t;
+			AST tmp748_AST_in = (AST)_t;
 			match(_t,COMPARES);
 			_t = _t.getNextSibling();
 			{
@@ -9590,7 +9695,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOERROR_KW:
 			{
-				AST tmp739_AST_in = (AST)_t;
+				AST tmp749_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
@@ -9608,39 +9713,39 @@ inputState.guessing--;
 			}
 			block_colon(_t);
 			_t = _retTree;
-			AST __t174 = _t;
-			AST tmp740_AST_in = (AST)_t;
+			AST __t179 = _t;
+			AST tmp750_AST_in = (AST)_t;
 			match(_t,Code_block);
 			_t = _t.getFirstChild();
 			{
-			_loop177:
+			_loop182:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==WHEN)) {
-					AST __t176 = _t;
-					AST tmp741_AST_in = (AST)_t;
+					AST __t181 = _t;
+					AST tmp751_AST_in = (AST)_t;
 					match(_t,WHEN);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					AST tmp742_AST_in = (AST)_t;
+					AST tmp752_AST_in = (AST)_t;
 					match(_t,THEN);
 					_t = _t.getNextSibling();
 					blockorstate(_t);
 					_t = _retTree;
-					_t = __t176;
+					_t = __t181;
 					_t = _t.getNextSibling();
 				}
 				else {
-					break _loop177;
+					break _loop182;
 				}
 				
 			} while (true);
 			}
-			_t = __t174;
+			_t = __t179;
 			_t = _t.getNextSibling();
-			AST __t178 = _t;
-			AST tmp743_AST_in = (AST)_t;
+			AST __t183 = _t;
+			AST tmp753_AST_in = (AST)_t;
 			match(_t,END);
 			_t = _t.getFirstChild();
 			{
@@ -9648,7 +9753,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case COMPARES:
 			{
-				AST tmp744_AST_in = (AST)_t;
+				AST tmp754_AST_in = (AST)_t;
 				match(_t,COMPARES);
 				_t = _t.getNextSibling();
 				break;
@@ -9663,7 +9768,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t178;
+			_t = __t183;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -9685,7 +9790,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOLOBS:
 		{
-			AST tmp745_AST_in = (AST)_t;
+			AST tmp755_AST_in = (AST)_t;
 			match(_t,NOLOBS);
 			_t = _t.getNextSibling();
 			break;
@@ -9707,7 +9812,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp746_AST_in = (AST)_t;
+			AST tmp756_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -9725,7 +9830,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t158;
+		_t = __t163;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -9738,14 +9843,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case LEXCOLON:
 		{
-			AST tmp747_AST_in = (AST)_t;
+			AST tmp757_AST_in = (AST)_t;
 			match(_t,LEXCOLON);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PERIOD:
 		{
-			AST tmp748_AST_in = (AST)_t;
+			AST tmp758_AST_in = (AST)_t;
 			match(_t,PERIOD);
 			_t = _t.getNextSibling();
 			break;
@@ -9766,14 +9871,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PERIOD:
 		{
-			AST tmp749_AST_in = (AST)_t;
+			AST tmp759_AST_in = (AST)_t;
 			match(_t,PERIOD);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case EOF:
 		{
-			AST tmp750_AST_in = (AST)_t;
+			AST tmp760_AST_in = (AST)_t;
 			match(_t,Token.EOF_TYPE);
 			_t = _t.getNextSibling();
 			break;
@@ -9790,8 +9895,8 @@ inputState.guessing--;
 		
 		AST buffercopystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t183 = _t;
-		AST tmp751_AST_in = (AST)_t;
+		AST __t188 = _t;
+		AST tmp761_AST_in = (AST)_t;
 		match(_t,BUFFERCOPY);
 		_t = _t.getFirstChild();
 		tbl(_t,CQ.REF);
@@ -9801,12 +9906,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t185 = _t;
-			AST tmp752_AST_in = (AST)_t;
+			AST __t190 = _t;
+			AST tmp762_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop187:
+			_loop192:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -9814,24 +9919,24 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop187;
+					break _loop192;
 				}
 				
 			} while (true);
 			}
-			_t = __t185;
+			_t = __t190;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case USING:
 		{
-			AST __t188 = _t;
-			AST tmp753_AST_in = (AST)_t;
+			AST __t193 = _t;
+			AST tmp763_AST_in = (AST)_t;
 			match(_t,USING);
 			_t = _t.getFirstChild();
 			{
-			int _cnt190=0;
-			_loop190:
+			int _cnt195=0;
+			_loop195:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -9839,13 +9944,13 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt190>=1 ) { break _loop190; } else {throw new NoViableAltException(_t);}
+					if ( _cnt195>=1 ) { break _loop195; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt190++;
+				_cnt195++;
 			} while (true);
 			}
-			_t = __t188;
+			_t = __t193;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -9859,7 +9964,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp754_AST_in = (AST)_t;
+		AST tmp764_AST_in = (AST)_t;
 		match(_t,TO);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.UPDATING);
@@ -9869,13 +9974,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ASSIGN:
 		{
-			AST __t192 = _t;
-			AST tmp755_AST_in = (AST)_t;
+			AST __t197 = _t;
+			AST tmp765_AST_in = (AST)_t;
 			match(_t,ASSIGN);
 			_t = _t.getFirstChild();
 			assignment_list(_t);
 			_t = _retTree;
-			_t = __t192;
+			_t = __t197;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -9897,7 +10002,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOLOBS:
 		{
-			AST tmp756_AST_in = (AST)_t;
+			AST tmp766_AST_in = (AST)_t;
 			match(_t,NOLOBS);
 			_t = _t.getNextSibling();
 			break;
@@ -9919,7 +10024,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp757_AST_in = (AST)_t;
+			AST tmp767_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -9937,7 +10042,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t183;
+		_t = __t188;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -9950,42 +10055,42 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CURRENT:
 		{
-			AST tmp758_AST_in = (AST)_t;
+			AST tmp768_AST_in = (AST)_t;
 			match(_t,CURRENT);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case EACH:
 		{
-			AST tmp759_AST_in = (AST)_t;
+			AST tmp769_AST_in = (AST)_t;
 			match(_t,EACH);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FIRST:
 		{
-			AST tmp760_AST_in = (AST)_t;
+			AST tmp770_AST_in = (AST)_t;
 			match(_t,FIRST);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case LAST:
 		{
-			AST tmp761_AST_in = (AST)_t;
+			AST tmp771_AST_in = (AST)_t;
 			match(_t,LAST);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case NEXT:
 		{
-			AST tmp762_AST_in = (AST)_t;
+			AST tmp772_AST_in = (AST)_t;
 			match(_t,NEXT);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PREV:
 		{
-			AST tmp763_AST_in = (AST)_t;
+			AST tmp773_AST_in = (AST)_t;
 			match(_t,PREV);
 			_t = _t.getNextSibling();
 			break;
@@ -10076,7 +10181,7 @@ inputState.guessing--;
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==TODAY)) {
-			AST tmp764_AST_in = (AST)_t;
+			AST tmp774_AST_in = (AST)_t;
 			match(_t,TODAY);
 			_t = _t.getNextSibling();
 		}
@@ -10092,46 +10197,46 @@ inputState.guessing--;
 		
 		}
 		{
-		_loop1056:
+		_loop1061:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case LEFT:
 			{
-				AST __t1048 = _t;
-				AST tmp765_AST_in = (AST)_t;
+				AST __t1053 = _t;
+				AST tmp775_AST_in = (AST)_t;
 				match(_t,LEFT);
 				_t = _t.getFirstChild();
-				AST tmp766_AST_in = (AST)_t;
+				AST tmp776_AST_in = (AST)_t;
 				match(_t,OUTERJOIN);
 				_t = _t.getNextSibling();
-				_t = __t1048;
+				_t = __t1053;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case OUTERJOIN:
 			{
-				AST tmp767_AST_in = (AST)_t;
+				AST tmp777_AST_in = (AST)_t;
 				match(_t,OUTERJOIN);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case OF:
 			{
-				AST __t1049 = _t;
-				AST tmp768_AST_in = (AST)_t;
+				AST __t1054 = _t;
+				AST tmp778_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getFirstChild();
 				tbl(_t,CQ.REF);
 				_t = _retTree;
-				_t = __t1049;
+				_t = __t1054;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case WHERE:
 			{
-				AST __t1050 = _t;
-				AST tmp769_AST_in = (AST)_t;
+				AST __t1055 = _t;
+				AST tmp779_AST_in = (AST)_t;
 				match(_t,WHERE);
 				_t = _t.getFirstChild();
 				{
@@ -10147,49 +10252,49 @@ inputState.guessing--;
 				}
 				
 				}
-				_t = __t1050;
+				_t = __t1055;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case USEINDEX:
 			{
-				AST __t1052 = _t;
-				AST tmp770_AST_in = (AST)_t;
+				AST __t1057 = _t;
+				AST tmp780_AST_in = (AST)_t;
 				match(_t,USEINDEX);
 				_t = _t.getFirstChild();
-				AST tmp771_AST_in = (AST)_t;
+				AST tmp781_AST_in = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
-				_t = __t1052;
+				_t = __t1057;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case USING:
 			{
-				AST __t1053 = _t;
-				AST tmp772_AST_in = (AST)_t;
+				AST __t1058 = _t;
+				AST tmp782_AST_in = (AST)_t;
 				match(_t,USING);
 				_t = _t.getFirstChild();
 				fld1(_t,CQ.SYMBOL);
 				_t = _retTree;
 				{
-				_loop1055:
+				_loop1060:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==AND)) {
-						AST tmp773_AST_in = (AST)_t;
+						AST tmp783_AST_in = (AST)_t;
 						match(_t,AND);
 						_t = _t.getNextSibling();
 						fld1(_t,CQ.SYMBOL);
 						_t = _retTree;
 					}
 					else {
-						break _loop1055;
+						break _loop1060;
 					}
 					
 				} while (true);
 				}
-				_t = __t1053;
+				_t = __t1058;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -10203,28 +10308,28 @@ inputState.guessing--;
 			}
 			case NOWAIT:
 			{
-				AST tmp774_AST_in = (AST)_t;
+				AST tmp784_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOPREFETCH:
 			{
-				AST tmp775_AST_in = (AST)_t;
+				AST tmp785_AST_in = (AST)_t;
 				match(_t,NOPREFETCH);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOERROR_KW:
 			{
-				AST tmp776_AST_in = (AST)_t;
+				AST tmp786_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop1056;
+				break _loop1061;
 			}
 			}
 		} while (true);
@@ -10238,7 +10343,7 @@ inputState.guessing--;
 		AST head = null;
 		AST fi = null;
 		
-		AST __t200 = _t;
+		AST __t205 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,CHOOSE);
 		_t = _t.getFirstChild();
@@ -10247,14 +10352,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ROW:
 		{
-			AST tmp777_AST_in = (AST)_t;
+			AST tmp787_AST_in = (AST)_t;
 			match(_t,ROW);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FIELD:
 		{
-			AST tmp778_AST_in = (AST)_t;
+			AST tmp788_AST_in = (AST)_t;
 			match(_t,FIELD);
 			_t = _t.getNextSibling();
 			break;
@@ -10269,12 +10374,12 @@ inputState.guessing--;
 			action.frameInitializingStatement(head);
 		}
 		{
-		int _cnt206=0;
-		_loop206:
+		int _cnt211=0;
+		_loop211:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
-				AST __t203 = _t;
+				AST __t208 = _t;
 				fi = _t==ASTNULL ? null :(AST)_t;
 				match(_t,Form_item);
 				_t = _t.getFirstChild();
@@ -10288,13 +10393,13 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case HELP:
 				{
-					AST __t205 = _t;
-					AST tmp779_AST_in = (AST)_t;
+					AST __t210 = _t;
+					AST tmp789_AST_in = (AST)_t;
 					match(_t,HELP);
 					_t = _t.getFirstChild();
 					constant(_t);
 					_t = _retTree;
-					_t = __t205;
+					_t = __t210;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -10308,37 +10413,37 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t203;
+				_t = __t208;
 				_t = _t.getNextSibling();
 			}
 			else {
-				if ( _cnt206>=1 ) { break _loop206; } else {throw new NoViableAltException(_t);}
+				if ( _cnt211>=1 ) { break _loop211; } else {throw new NoViableAltException(_t);}
 			}
 			
-			_cnt206++;
+			_cnt211++;
 		} while (true);
 		}
 		{
-		_loop211:
+		_loop216:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case AUTORETURN:
 			{
-				AST tmp780_AST_in = (AST)_t;
+				AST tmp790_AST_in = (AST)_t;
 				match(_t,AUTORETURN);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case COLOR:
 			{
-				AST __t208 = _t;
-				AST tmp781_AST_in = (AST)_t;
+				AST __t213 = _t;
+				AST tmp791_AST_in = (AST)_t;
 				match(_t,COLOR);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
 				_t = _retTree;
-				_t = __t208;
+				_t = __t213;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -10350,38 +10455,38 @@ inputState.guessing--;
 			}
 			case KEYS:
 			{
-				AST __t209 = _t;
-				AST tmp782_AST_in = (AST)_t;
+				AST __t214 = _t;
+				AST tmp792_AST_in = (AST)_t;
 				match(_t,KEYS);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.UPDATING);
 				_t = _retTree;
-				_t = __t209;
+				_t = __t214;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOERROR_KW:
 			{
-				AST tmp783_AST_in = (AST)_t;
+				AST tmp793_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case PAUSE:
 			{
-				AST __t210 = _t;
-				AST tmp784_AST_in = (AST)_t;
+				AST __t215 = _t;
+				AST tmp794_AST_in = (AST)_t;
 				match(_t,PAUSE);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t210;
+				_t = __t215;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop211;
+				break _loop216;
 			}
 			}
 		} while (true);
@@ -10411,7 +10516,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t200;
+		_t = __t205;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -10424,25 +10529,25 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case VALUE:
 		{
-			AST __t1546 = _t;
-			AST tmp785_AST_in = (AST)_t;
+			AST __t1551 = _t;
+			AST tmp795_AST_in = (AST)_t;
 			match(_t,VALUE);
 			_t = _t.getFirstChild();
-			AST tmp786_AST_in = (AST)_t;
+			AST tmp796_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			AST tmp787_AST_in = (AST)_t;
+			AST tmp797_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
-			_t = __t1546;
+			_t = __t1551;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TYPELESS_TOKEN:
 		{
-			AST tmp788_AST_in = (AST)_t;
+			AST tmp798_AST_in = (AST)_t;
 			match(_t,TYPELESS_TOKEN);
 			_t = _t.getNextSibling();
 			break;
@@ -10460,10 +10565,10 @@ inputState.guessing--;
 		AST goonphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1939 = _t;
-		AST tmp789_AST_in = (AST)_t;
+		AST tmp799_AST_in = (AST)_t;
 		match(_t,GOON);
 		_t = _t.getFirstChild();
-		AST tmp790_AST_in = (AST)_t;
+		AST tmp800_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		goon_elem(_t);
@@ -10476,7 +10581,7 @@ inputState.guessing--;
 				{
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp791_AST_in = (AST)_t;
+					AST tmp801_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 				}
@@ -10496,7 +10601,7 @@ inputState.guessing--;
 			
 		} while (true);
 		}
-		AST tmp792_AST_in = (AST)_t;
+		AST tmp802_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		_t = __t1939;
@@ -10509,14 +10614,14 @@ inputState.guessing--;
 		AST classstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST c = null;
 		
-		AST __t214 = _t;
+		AST __t219 = _t;
 		c = _t==ASTNULL ? null :(AST)_t;
 		match(_t,CLASS);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
 			action.classState(c);
 		}
-		AST tmp793_AST_in = (AST)_t;
+		AST tmp803_AST_in = (AST)_t;
 		match(_t,TYPE_NAME);
 		_t = _t.getNextSibling();
 		{
@@ -10524,14 +10629,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case INHERITS:
 		{
-			AST __t216 = _t;
-			AST tmp794_AST_in = (AST)_t;
+			AST __t221 = _t;
+			AST tmp804_AST_in = (AST)_t;
 			match(_t,INHERITS);
 			_t = _t.getFirstChild();
-			AST tmp795_AST_in = (AST)_t;
+			AST tmp805_AST_in = (AST)_t;
 			match(_t,TYPE_NAME);
 			_t = _t.getNextSibling();
-			_t = __t216;
+			_t = __t221;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -10553,32 +10658,32 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IMPLEMENTS:
 		{
-			AST __t218 = _t;
-			AST tmp796_AST_in = (AST)_t;
+			AST __t223 = _t;
+			AST tmp806_AST_in = (AST)_t;
 			match(_t,IMPLEMENTS);
 			_t = _t.getFirstChild();
-			AST tmp797_AST_in = (AST)_t;
+			AST tmp807_AST_in = (AST)_t;
 			match(_t,TYPE_NAME);
 			_t = _t.getNextSibling();
 			{
-			_loop220:
+			_loop225:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp798_AST_in = (AST)_t;
+					AST tmp808_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
-					AST tmp799_AST_in = (AST)_t;
+					AST tmp809_AST_in = (AST)_t;
 					match(_t,TYPE_NAME);
 					_t = _t.getNextSibling();
 				}
 				else {
-					break _loop220;
+					break _loop225;
 				}
 				
 			} while (true);
 			}
-			_t = __t218;
+			_t = __t223;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -10599,7 +10704,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FINAL:
 		{
-			AST tmp800_AST_in = (AST)_t;
+			AST tmp810_AST_in = (AST)_t;
 			match(_t,FINAL);
 			_t = _t.getNextSibling();
 			break;
@@ -10619,8 +10724,8 @@ inputState.guessing--;
 		_t = _retTree;
 		code_block(_t);
 		_t = _retTree;
-		AST __t222 = _t;
-		AST tmp801_AST_in = (AST)_t;
+		AST __t227 = _t;
+		AST tmp811_AST_in = (AST)_t;
 		match(_t,END);
 		_t = _t.getFirstChild();
 		{
@@ -10628,7 +10733,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CLASS:
 		{
-			AST tmp802_AST_in = (AST)_t;
+			AST tmp812_AST_in = (AST)_t;
 			match(_t,CLASS);
 			_t = _t.getNextSibling();
 			break;
@@ -10643,11 +10748,11 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t222;
+		_t = __t227;
 		_t = _t.getNextSibling();
 		state_end(_t);
 		_t = _retTree;
-		_t = __t214;
+		_t = __t219;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -10656,12 +10761,12 @@ inputState.guessing--;
 		
 		AST code_block_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1364 = _t;
-		AST tmp803_AST_in = (AST)_t;
+		AST __t1369 = _t;
+		AST tmp813_AST_in = (AST)_t;
 		match(_t,Code_block);
 		_t = _t.getFirstChild();
 		{
-		_loop1366:
+		_loop1371:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_0.member(_t.getType()))) {
@@ -10669,12 +10774,12 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop1366;
+				break _loop1371;
 			}
 			
 		} while (true);
 		}
-		_t = __t1364;
+		_t = __t1369;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -10684,7 +10789,7 @@ inputState.guessing--;
 		AST clearstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST c = null;
 		
-		AST __t225 = _t;
+		AST __t230 = _t;
 		c = _t==ASTNULL ? null :(AST)_t;
 		match(_t,CLEAR);
 		_t = _t.getFirstChild();
@@ -10715,7 +10820,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ALL:
 		{
-			AST tmp804_AST_in = (AST)_t;
+			AST tmp814_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getNextSibling();
 			break;
@@ -10737,7 +10842,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOPAUSE:
 		{
-			AST tmp805_AST_in = (AST)_t;
+			AST tmp815_AST_in = (AST)_t;
 			match(_t,NOPAUSE);
 			_t = _t.getNextSibling();
 			break;
@@ -10758,7 +10863,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.clearState(c);
 		}
-		_t = __t225;
+		_t = __t230;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -10767,14 +10872,14 @@ inputState.guessing--;
 		
 		AST closestoredprocedurestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t230 = _t;
-		AST tmp806_AST_in = (AST)_t;
+		AST __t235 = _t;
+		AST tmp816_AST_in = (AST)_t;
 		match(_t,CLOSE);
 		_t = _t.getFirstChild();
-		AST tmp807_AST_in = (AST)_t;
+		AST tmp817_AST_in = (AST)_t;
 		match(_t,STOREDPROCEDURE);
 		_t = _t.getNextSibling();
-		AST tmp808_AST_in = (AST)_t;
+		AST tmp818_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		{
@@ -10782,16 +10887,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EQUAL:
 		{
-			AST __t232 = _t;
-			AST tmp809_AST_in = (AST)_t;
+			AST __t237 = _t;
+			AST tmp819_AST_in = (AST)_t;
 			match(_t,EQUAL);
 			_t = _t.getFirstChild();
 			fld(_t,CQ.REF);
 			_t = _retTree;
-			AST tmp810_AST_in = (AST)_t;
+			AST tmp820_AST_in = (AST)_t;
 			match(_t,PROCSTATUS);
 			_t = _t.getNextSibling();
-			_t = __t232;
+			_t = __t237;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -10812,19 +10917,19 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case WHERE:
 		{
-			AST __t234 = _t;
-			AST tmp811_AST_in = (AST)_t;
+			AST __t239 = _t;
+			AST tmp821_AST_in = (AST)_t;
 			match(_t,WHERE);
 			_t = _t.getFirstChild();
-			AST tmp812_AST_in = (AST)_t;
+			AST tmp822_AST_in = (AST)_t;
 			match(_t,PROCHANDLE);
 			_t = _t.getNextSibling();
-			AST tmp813_AST_in = (AST)_t;
+			AST tmp823_AST_in = (AST)_t;
 			match(_t,EQ);
 			_t = _t.getNextSibling();
 			fld(_t,CQ.REF);
 			_t = _retTree;
-			_t = __t234;
+			_t = __t239;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -10841,7 +10946,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t230;
+		_t = __t235;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -10852,7 +10957,7 @@ inputState.guessing--;
 		AST head = null;
 		AST fi = null;
 		
-		AST __t236 = _t;
+		AST __t241 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,COLOR);
 		_t = _t.getFirstChild();
@@ -10870,25 +10975,25 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case DISPLAY:
 			{
-				AST __t239 = _t;
-				AST tmp814_AST_in = (AST)_t;
+				AST __t244 = _t;
+				AST tmp824_AST_in = (AST)_t;
 				match(_t,DISPLAY);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
 				_t = _retTree;
-				_t = __t239;
+				_t = __t244;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case PROMPT:
 			{
-				AST __t240 = _t;
-				AST tmp815_AST_in = (AST)_t;
+				AST __t245 = _t;
+				AST tmp825_AST_in = (AST)_t;
 				match(_t,PROMPT);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
 				_t = _retTree;
-				_t = __t240;
+				_t = __t245;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -10903,25 +11008,25 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case DISPLAY:
 			{
-				AST __t242 = _t;
-				AST tmp816_AST_in = (AST)_t;
+				AST __t247 = _t;
+				AST tmp826_AST_in = (AST)_t;
 				match(_t,DISPLAY);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
 				_t = _retTree;
-				_t = __t242;
+				_t = __t247;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case PROMPT:
 			{
-				AST __t243 = _t;
-				AST tmp817_AST_in = (AST)_t;
+				AST __t248 = _t;
+				AST tmp827_AST_in = (AST)_t;
 				match(_t,PROMPT);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
 				_t = _retTree;
-				_t = __t243;
+				_t = __t248;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -10954,11 +11059,11 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop247:
+		_loop252:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
-				AST __t245 = _t;
+				AST __t250 = _t;
 				fi = _t==ASTNULL ? null :(AST)_t;
 				match(_t,Form_item);
 				_t = _t.getFirstChild();
@@ -10986,11 +11091,11 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t245;
+				_t = __t250;
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop247;
+				break _loop252;
 			}
 			
 		} while (true);
@@ -11020,7 +11125,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t236;
+		_t = __t241;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -11029,25 +11134,25 @@ inputState.guessing--;
 		
 		AST formatphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t799 = _t;
-		AST tmp818_AST_in = (AST)_t;
+		AST __t804 = _t;
+		AST tmp828_AST_in = (AST)_t;
 		match(_t,Format_phrase);
 		_t = _t.getFirstChild();
 		{
-		int _cnt813=0;
-		_loop813:
+		int _cnt818=0;
+		_loop818:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case AS:
 			{
-				AST __t801 = _t;
-				AST tmp819_AST_in = (AST)_t;
+				AST __t806 = _t;
+				AST tmp829_AST_in = (AST)_t;
 				match(_t,AS);
 				_t = _t.getFirstChild();
 				datatype_var(_t);
 				_t = _retTree;
-				_t = __t801;
+				_t = __t806;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -11059,21 +11164,21 @@ inputState.guessing--;
 			}
 			case ATTRSPACE:
 			{
-				AST tmp820_AST_in = (AST)_t;
+				AST tmp830_AST_in = (AST)_t;
 				match(_t,ATTRSPACE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOATTRSPACE:
 			{
-				AST tmp821_AST_in = (AST)_t;
+				AST tmp831_AST_in = (AST)_t;
 				match(_t,NOATTRSPACE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case AUTORETURN:
 			{
-				AST tmp822_AST_in = (AST)_t;
+				AST tmp832_AST_in = (AST)_t;
 				match(_t,AUTORETURN);
 				_t = _t.getNextSibling();
 				break;
@@ -11089,94 +11194,94 @@ inputState.guessing--;
 			}
 			case CONTEXTHELPID:
 			{
-				AST __t802 = _t;
-				AST tmp823_AST_in = (AST)_t;
+				AST __t807 = _t;
+				AST tmp833_AST_in = (AST)_t;
 				match(_t,CONTEXTHELPID);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t802;
+				_t = __t807;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case BLANK:
 			{
-				AST tmp824_AST_in = (AST)_t;
+				AST tmp834_AST_in = (AST)_t;
 				match(_t,BLANK);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case COLON:
 			{
-				AST __t803 = _t;
-				AST tmp825_AST_in = (AST)_t;
+				AST __t808 = _t;
+				AST tmp835_AST_in = (AST)_t;
 				match(_t,COLON);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t803;
+				_t = __t808;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case TO:
 			{
-				AST __t804 = _t;
-				AST tmp826_AST_in = (AST)_t;
+				AST __t809 = _t;
+				AST tmp836_AST_in = (AST)_t;
 				match(_t,TO);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t804;
+				_t = __t809;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DEBLANK:
 			{
-				AST tmp827_AST_in = (AST)_t;
+				AST tmp837_AST_in = (AST)_t;
 				match(_t,DEBLANK);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DISABLEAUTOZAP:
 			{
-				AST tmp828_AST_in = (AST)_t;
+				AST tmp838_AST_in = (AST)_t;
 				match(_t,DISABLEAUTOZAP);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FONT:
 			{
-				AST __t805 = _t;
-				AST tmp829_AST_in = (AST)_t;
+				AST __t810 = _t;
+				AST tmp839_AST_in = (AST)_t;
 				match(_t,FONT);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t805;
+				_t = __t810;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FORMAT:
 			{
-				AST __t806 = _t;
-				AST tmp830_AST_in = (AST)_t;
+				AST __t811 = _t;
+				AST tmp840_AST_in = (AST)_t;
 				match(_t,FORMAT);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t806;
+				_t = __t811;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case HELP:
 			{
-				AST __t807 = _t;
-				AST tmp831_AST_in = (AST)_t;
+				AST __t812 = _t;
+				AST tmp841_AST_in = (AST)_t;
 				match(_t,HELP);
 				_t = _t.getFirstChild();
 				constant(_t);
 				_t = _retTree;
-				_t = __t807;
+				_t = __t812;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -11189,8 +11294,8 @@ inputState.guessing--;
 			}
 			case LEXAT:
 			{
-				AST __t808 = _t;
-				AST tmp832_AST_in = (AST)_t;
+				AST __t813 = _t;
+				AST tmp842_AST_in = (AST)_t;
 				match(_t,LEXAT);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
@@ -11214,57 +11319,57 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t808;
+				_t = __t813;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LIKE:
 			{
-				AST __t810 = _t;
-				AST tmp833_AST_in = (AST)_t;
+				AST __t815 = _t;
+				AST tmp843_AST_in = (AST)_t;
 				match(_t,LIKE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
 				_t = _retTree;
-				_t = __t810;
+				_t = __t815;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOLABELS:
 			{
-				AST tmp834_AST_in = (AST)_t;
+				AST tmp844_AST_in = (AST)_t;
 				match(_t,NOLABELS);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOTABSTOP:
 			{
-				AST tmp835_AST_in = (AST)_t;
+				AST tmp845_AST_in = (AST)_t;
 				match(_t,NOTABSTOP);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case VALIDATE:
 			{
-				AST __t811 = _t;
-				AST tmp836_AST_in = (AST)_t;
+				AST __t816 = _t;
+				AST tmp846_AST_in = (AST)_t;
 				match(_t,VALIDATE);
 				_t = _t.getFirstChild();
 				funargs(_t);
 				_t = _retTree;
-				_t = __t811;
+				_t = __t816;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case WHEN:
 			{
-				AST __t812 = _t;
-				AST tmp837_AST_in = (AST)_t;
+				AST __t817 = _t;
+				AST tmp847_AST_in = (AST)_t;
 				match(_t,WHEN);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t812;
+				_t = __t817;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -11276,13 +11381,13 @@ inputState.guessing--;
 			}
 			default:
 			{
-				if ( _cnt813>=1 ) { break _loop813; } else {throw new NoViableAltException(_t);}
+				if ( _cnt818>=1 ) { break _loop818; } else {throw new NoViableAltException(_t);}
 			}
 			}
-			_cnt813++;
+			_cnt818++;
 		} while (true);
 		}
-		_t = __t799;
+		_t = __t804;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -11291,25 +11396,25 @@ inputState.guessing--;
 		
 		AST columnformat_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t250 = _t;
-		AST tmp838_AST_in = (AST)_t;
+		AST __t255 = _t;
+		AST tmp848_AST_in = (AST)_t;
 		match(_t,Format_phrase);
 		_t = _t.getFirstChild();
 		{
-		int _cnt267=0;
-		_loop267:
+		int _cnt272=0;
+		_loop272:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case FORMAT:
 			{
-				AST __t252 = _t;
-				AST tmp839_AST_in = (AST)_t;
+				AST __t257 = _t;
+				AST tmp849_AST_in = (AST)_t;
 				match(_t,FORMAT);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t252;
+				_t = __t257;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -11322,76 +11427,16 @@ inputState.guessing--;
 			}
 			case NOLABELS:
 			{
-				AST tmp840_AST_in = (AST)_t;
+				AST tmp850_AST_in = (AST)_t;
 				match(_t,NOLABELS);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case COLUMNFONT:
 			{
-				AST __t253 = _t;
-				AST tmp841_AST_in = (AST)_t;
-				match(_t,COLUMNFONT);
-				_t = _t.getFirstChild();
-				expression(_t);
-				_t = _retTree;
-				_t = __t253;
-				_t = _t.getNextSibling();
-				break;
-			}
-			case COLUMNDCOLOR:
-			{
-				AST __t254 = _t;
-				AST tmp842_AST_in = (AST)_t;
-				match(_t,COLUMNDCOLOR);
-				_t = _t.getFirstChild();
-				expression(_t);
-				_t = _retTree;
-				_t = __t254;
-				_t = _t.getNextSibling();
-				break;
-			}
-			case COLUMNBGCOLOR:
-			{
-				AST __t255 = _t;
-				AST tmp843_AST_in = (AST)_t;
-				match(_t,COLUMNBGCOLOR);
-				_t = _t.getFirstChild();
-				expression(_t);
-				_t = _retTree;
-				_t = __t255;
-				_t = _t.getNextSibling();
-				break;
-			}
-			case COLUMNFGCOLOR:
-			{
-				AST __t256 = _t;
-				AST tmp844_AST_in = (AST)_t;
-				match(_t,COLUMNFGCOLOR);
-				_t = _t.getFirstChild();
-				expression(_t);
-				_t = _retTree;
-				_t = __t256;
-				_t = _t.getNextSibling();
-				break;
-			}
-			case COLUMNPFCOLOR:
-			{
-				AST __t257 = _t;
-				AST tmp845_AST_in = (AST)_t;
-				match(_t,COLUMNPFCOLOR);
-				_t = _t.getFirstChild();
-				expression(_t);
-				_t = _retTree;
-				_t = __t257;
-				_t = _t.getNextSibling();
-				break;
-			}
-			case LABELFONT:
-			{
 				AST __t258 = _t;
-				AST tmp846_AST_in = (AST)_t;
-				match(_t,LABELFONT);
+				AST tmp851_AST_in = (AST)_t;
+				match(_t,COLUMNFONT);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
@@ -11399,11 +11444,11 @@ inputState.guessing--;
 				_t = _t.getNextSibling();
 				break;
 			}
-			case LABELDCOLOR:
+			case COLUMNDCOLOR:
 			{
 				AST __t259 = _t;
-				AST tmp847_AST_in = (AST)_t;
-				match(_t,LABELDCOLOR);
+				AST tmp852_AST_in = (AST)_t;
+				match(_t,COLUMNDCOLOR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
@@ -11411,11 +11456,11 @@ inputState.guessing--;
 				_t = _t.getNextSibling();
 				break;
 			}
-			case LABELBGCOLOR:
+			case COLUMNBGCOLOR:
 			{
 				AST __t260 = _t;
-				AST tmp848_AST_in = (AST)_t;
-				match(_t,LABELBGCOLOR);
+				AST tmp853_AST_in = (AST)_t;
+				match(_t,COLUMNBGCOLOR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
@@ -11423,11 +11468,11 @@ inputState.guessing--;
 				_t = _t.getNextSibling();
 				break;
 			}
-			case LABELFGCOLOR:
+			case COLUMNFGCOLOR:
 			{
 				AST __t261 = _t;
-				AST tmp849_AST_in = (AST)_t;
-				match(_t,LABELFGCOLOR);
+				AST tmp854_AST_in = (AST)_t;
+				match(_t,COLUMNFGCOLOR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
@@ -11435,10 +11480,70 @@ inputState.guessing--;
 				_t = _t.getNextSibling();
 				break;
 			}
-			case LEXAT:
+			case COLUMNPFCOLOR:
 			{
 				AST __t262 = _t;
-				AST tmp850_AST_in = (AST)_t;
+				AST tmp855_AST_in = (AST)_t;
+				match(_t,COLUMNPFCOLOR);
+				_t = _t.getFirstChild();
+				expression(_t);
+				_t = _retTree;
+				_t = __t262;
+				_t = _t.getNextSibling();
+				break;
+			}
+			case LABELFONT:
+			{
+				AST __t263 = _t;
+				AST tmp856_AST_in = (AST)_t;
+				match(_t,LABELFONT);
+				_t = _t.getFirstChild();
+				expression(_t);
+				_t = _retTree;
+				_t = __t263;
+				_t = _t.getNextSibling();
+				break;
+			}
+			case LABELDCOLOR:
+			{
+				AST __t264 = _t;
+				AST tmp857_AST_in = (AST)_t;
+				match(_t,LABELDCOLOR);
+				_t = _t.getFirstChild();
+				expression(_t);
+				_t = _retTree;
+				_t = __t264;
+				_t = _t.getNextSibling();
+				break;
+			}
+			case LABELBGCOLOR:
+			{
+				AST __t265 = _t;
+				AST tmp858_AST_in = (AST)_t;
+				match(_t,LABELBGCOLOR);
+				_t = _t.getFirstChild();
+				expression(_t);
+				_t = _retTree;
+				_t = __t265;
+				_t = _t.getNextSibling();
+				break;
+			}
+			case LABELFGCOLOR:
+			{
+				AST __t266 = _t;
+				AST tmp859_AST_in = (AST)_t;
+				match(_t,LABELFGCOLOR);
+				_t = _t.getFirstChild();
+				expression(_t);
+				_t = _retTree;
+				_t = __t266;
+				_t = _t.getNextSibling();
+				break;
+			}
+			case LEXAT:
+			{
+				AST __t267 = _t;
+				AST tmp860_AST_in = (AST)_t;
 				match(_t,LEXAT);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
@@ -11462,58 +11567,58 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t262;
+				_t = __t267;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case WIDTH:
 			{
-				AST __t264 = _t;
-				AST tmp851_AST_in = (AST)_t;
+				AST __t269 = _t;
+				AST tmp861_AST_in = (AST)_t;
 				match(_t,WIDTH);
 				_t = _t.getFirstChild();
-				AST tmp852_AST_in = (AST)_t;
+				AST tmp862_AST_in = (AST)_t;
 				match(_t,NUMBER);
 				_t = _t.getNextSibling();
-				_t = __t264;
+				_t = __t269;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case WIDTHPIXELS:
 			{
-				AST __t265 = _t;
-				AST tmp853_AST_in = (AST)_t;
+				AST __t270 = _t;
+				AST tmp863_AST_in = (AST)_t;
 				match(_t,WIDTHPIXELS);
 				_t = _t.getFirstChild();
-				AST tmp854_AST_in = (AST)_t;
+				AST tmp864_AST_in = (AST)_t;
 				match(_t,NUMBER);
 				_t = _t.getNextSibling();
-				_t = __t265;
+				_t = __t270;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case WIDTHCHARS:
 			{
-				AST __t266 = _t;
-				AST tmp855_AST_in = (AST)_t;
+				AST __t271 = _t;
+				AST tmp865_AST_in = (AST)_t;
 				match(_t,WIDTHCHARS);
 				_t = _t.getFirstChild();
-				AST tmp856_AST_in = (AST)_t;
+				AST tmp866_AST_in = (AST)_t;
 				match(_t,NUMBER);
 				_t = _t.getNextSibling();
-				_t = __t266;
+				_t = __t271;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				if ( _cnt267>=1 ) { break _loop267; } else {throw new NoViableAltException(_t);}
+				if ( _cnt272>=1 ) { break _loop272; } else {throw new NoViableAltException(_t);}
 			}
 			}
-			_cnt267++;
+			_cnt272++;
 		} while (true);
 		}
-		_t = __t250;
+		_t = __t255;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -11523,7 +11628,7 @@ inputState.guessing--;
 		AST constructorstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST c = null;
 		
-		AST __t269 = _t;
+		AST __t274 = _t;
 		c = _t==ASTNULL ? null :(AST)_t;
 		match(_t,CONSTRUCTOR);
 		_t = _t.getFirstChild();
@@ -11535,14 +11640,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PUBLIC:
 		{
-			AST tmp857_AST_in = (AST)_t;
+			AST tmp867_AST_in = (AST)_t;
 			match(_t,PUBLIC);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROTECTED:
 		{
-			AST tmp858_AST_in = (AST)_t;
+			AST tmp868_AST_in = (AST)_t;
 			match(_t,PROTECTED);
 			_t = _t.getNextSibling();
 			break;
@@ -11553,7 +11658,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp859_AST_in = (AST)_t;
+		AST tmp869_AST_in = (AST)_t;
 		match(_t,TYPE_NAME);
 		_t = _t.getNextSibling();
 		function_params(_t);
@@ -11562,8 +11667,8 @@ inputState.guessing--;
 		_t = _retTree;
 		code_block(_t);
 		_t = _retTree;
-		AST __t271 = _t;
-		AST tmp860_AST_in = (AST)_t;
+		AST __t276 = _t;
+		AST tmp870_AST_in = (AST)_t;
 		match(_t,END);
 		_t = _t.getFirstChild();
 		{
@@ -11571,7 +11676,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CONSTRUCTOR:
 		{
-			AST tmp861_AST_in = (AST)_t;
+			AST tmp871_AST_in = (AST)_t;
 			match(_t,CONSTRUCTOR);
 			_t = _t.getNextSibling();
 			break;
@@ -11586,14 +11691,14 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t271;
+		_t = __t276;
 		_t = _t.getNextSibling();
 		state_end(_t);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
 			action.scopeClose(c);
 		}
-		_t = __t269;
+		_t = __t274;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -11603,10 +11708,10 @@ inputState.guessing--;
 		AST function_params_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1930 = _t;
-		AST tmp862_AST_in = (AST)_t;
+		AST tmp872_AST_in = (AST)_t;
 		match(_t,Parameter_list);
 		_t = _t.getFirstChild();
-		AST tmp863_AST_in = (AST)_t;
+		AST tmp873_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		{
@@ -11637,7 +11742,7 @@ inputState.guessing--;
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp864_AST_in = (AST)_t;
+				AST tmp874_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				function_param(_t);
@@ -11649,7 +11754,7 @@ inputState.guessing--;
 			
 		} while (true);
 		}
-		AST tmp865_AST_in = (AST)_t;
+		AST tmp875_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		_t = __t1930;
@@ -11661,8 +11766,8 @@ inputState.guessing--;
 		
 		AST createstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t274 = _t;
-		AST tmp866_AST_in = (AST)_t;
+		AST __t279 = _t;
+		AST tmp876_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
 		tbl(_t,CQ.UPDATING);
@@ -11672,8 +11777,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case USING:
 		{
-			AST __t276 = _t;
-			AST tmp867_AST_in = (AST)_t;
+			AST __t281 = _t;
+			AST tmp877_AST_in = (AST)_t;
 			match(_t,USING);
 			_t = _t.getFirstChild();
 			{
@@ -11681,14 +11786,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case ROWID:
 			{
-				AST tmp868_AST_in = (AST)_t;
+				AST tmp878_AST_in = (AST)_t;
 				match(_t,ROWID);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case RECID:
 			{
-				AST tmp869_AST_in = (AST)_t;
+				AST tmp879_AST_in = (AST)_t;
 				match(_t,RECID);
 				_t = _t.getNextSibling();
 				break;
@@ -11699,70 +11804,6 @@ inputState.guessing--;
 			}
 			}
 			}
-			expression(_t);
-			_t = _retTree;
-			_t = __t276;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case EOF:
-		case PERIOD:
-		case NOERROR_KW:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case NOERROR_KW:
-		{
-			AST tmp870_AST_in = (AST)_t;
-			match(_t,NOERROR_KW);
-			_t = _t.getNextSibling();
-			break;
-		}
-		case EOF:
-		case PERIOD:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		state_end(_t);
-		_t = _retTree;
-		_t = __t274;
-		_t = _t.getNextSibling();
-		_retTree = _t;
-	}
-	
-	public final void create_whatever_args(AST _t) throws RecognitionException {
-		
-		AST create_whatever_args_AST_in = (_t == ASTNULL) ? null : (AST)_t;
-		
-		fld(_t,CQ.UPDATING);
-		_t = _retTree;
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case IN_KW:
-		{
-			AST __t281 = _t;
-			AST tmp871_AST_in = (AST)_t;
-			match(_t,IN_KW);
-			_t = _t.getFirstChild();
-			AST tmp872_AST_in = (AST)_t;
-			match(_t,WIDGETPOOL);
-			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
 			_t = __t281;
@@ -11786,7 +11827,71 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp873_AST_in = (AST)_t;
+			AST tmp880_AST_in = (AST)_t;
+			match(_t,NOERROR_KW);
+			_t = _t.getNextSibling();
+			break;
+		}
+		case EOF:
+		case PERIOD:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		state_end(_t);
+		_t = _retTree;
+		_t = __t279;
+		_t = _t.getNextSibling();
+		_retTree = _t;
+	}
+	
+	public final void create_whatever_args(AST _t) throws RecognitionException {
+		
+		AST create_whatever_args_AST_in = (_t == ASTNULL) ? null : (AST)_t;
+		
+		fld(_t,CQ.UPDATING);
+		_t = _retTree;
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case IN_KW:
+		{
+			AST __t286 = _t;
+			AST tmp881_AST_in = (AST)_t;
+			match(_t,IN_KW);
+			_t = _t.getFirstChild();
+			AST tmp882_AST_in = (AST)_t;
+			match(_t,WIDGETPOOL);
+			_t = _t.getNextSibling();
+			expression(_t);
+			_t = _retTree;
+			_t = __t286;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case EOF:
+		case PERIOD:
+		case NOERROR_KW:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case NOERROR_KW:
+		{
+			AST tmp883_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -11809,11 +11914,11 @@ inputState.guessing--;
 		
 		AST createautomationobjectstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t284 = _t;
-		AST tmp874_AST_in = (AST)_t;
+		AST __t289 = _t;
+		AST tmp884_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp875_AST_in = (AST)_t;
+		AST tmp885_AST_in = (AST)_t;
 		match(_t,QSTRING);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
@@ -11823,8 +11928,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CONNECT:
 		{
-			AST __t286 = _t;
-			AST tmp876_AST_in = (AST)_t;
+			AST __t291 = _t;
+			AST tmp886_AST_in = (AST)_t;
 			match(_t,CONNECT);
 			_t = _t.getFirstChild();
 			{
@@ -11832,13 +11937,13 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case TO:
 			{
-				AST __t288 = _t;
-				AST tmp877_AST_in = (AST)_t;
+				AST __t293 = _t;
+				AST tmp887_AST_in = (AST)_t;
 				match(_t,TO);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t288;
+				_t = __t293;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -11852,7 +11957,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t286;
+			_t = __t291;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -11873,7 +11978,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp878_AST_in = (AST)_t;
+			AST tmp888_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -11891,7 +11996,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t284;
+		_t = __t289;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -11900,11 +12005,11 @@ inputState.guessing--;
 		
 		AST createbrowsestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t291 = _t;
-		AST tmp879_AST_in = (AST)_t;
+		AST __t296 = _t;
+		AST tmp889_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp880_AST_in = (AST)_t;
+		AST tmp890_AST_in = (AST)_t;
 		match(_t,BROWSE);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
@@ -11914,16 +12019,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t293 = _t;
-			AST tmp881_AST_in = (AST)_t;
+			AST __t298 = _t;
+			AST tmp891_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp882_AST_in = (AST)_t;
+			AST tmp892_AST_in = (AST)_t;
 			match(_t,WIDGETPOOL);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t293;
+			_t = __t298;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -11946,7 +12051,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp883_AST_in = (AST)_t;
+			AST tmp893_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -12007,7 +12112,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t291;
+		_t = __t296;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12017,7 +12122,7 @@ inputState.guessing--;
 		AST assign_opt_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1646 = _t;
-		AST tmp884_AST_in = (AST)_t;
+		AST tmp894_AST_in = (AST)_t;
 		match(_t,ASSIGN);
 		_t = _t.getFirstChild();
 		{
@@ -12027,10 +12132,10 @@ inputState.guessing--;
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==EQUAL)) {
 				AST __t1648 = _t;
-				AST tmp885_AST_in = (AST)_t;
+				AST tmp895_AST_in = (AST)_t;
 				match(_t,EQUAL);
 				_t = _t.getFirstChild();
-				AST tmp886_AST_in = (AST)_t;
+				AST tmp896_AST_in = (AST)_t;
 				if ( _t==null ) throw new MismatchedTokenException();
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -12055,22 +12160,22 @@ inputState.guessing--;
 		AST triggerphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST on = null;
 		
-		AST __t1157 = _t;
-		AST tmp887_AST_in = (AST)_t;
+		AST __t1162 = _t;
+		AST tmp897_AST_in = (AST)_t;
 		match(_t,TRIGGERS);
 		_t = _t.getFirstChild();
 		block_colon(_t);
 		_t = _retTree;
-		AST __t1158 = _t;
-		AST tmp888_AST_in = (AST)_t;
+		AST __t1163 = _t;
+		AST tmp898_AST_in = (AST)_t;
 		match(_t,Code_block);
 		_t = _t.getFirstChild();
 		{
-		_loop1163:
+		_loop1168:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==ON)) {
-				AST __t1160 = _t;
+				AST __t1165 = _t;
 				on = _t==ASTNULL ? null :(AST)_t;
 				match(_t,ON);
 				_t = _t.getFirstChild();
@@ -12084,7 +12189,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case ANYWHERE:
 				{
-					AST tmp889_AST_in = (AST)_t;
+					AST tmp899_AST_in = (AST)_t;
 					match(_t,ANYWHERE);
 					_t = _t.getNextSibling();
 					break;
@@ -12223,7 +12328,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case PERSISTENT:
 				{
-					AST tmp890_AST_in = (AST)_t;
+					AST tmp900_AST_in = (AST)_t;
 					match(_t,PERSISTENT);
 					_t = _t.getNextSibling();
 					runstate(_t);
@@ -12363,19 +12468,19 @@ inputState.guessing--;
 				if ( inputState.guessing==0 ) {
 					action.scopeClose(on);
 				}
-				_t = __t1160;
+				_t = __t1165;
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop1163;
+				break _loop1168;
 			}
 			
 		} while (true);
 		}
-		_t = __t1158;
+		_t = __t1163;
 		_t = _t.getNextSibling();
-		AST __t1164 = _t;
-		AST tmp891_AST_in = (AST)_t;
+		AST __t1169 = _t;
+		AST tmp901_AST_in = (AST)_t;
 		match(_t,END);
 		_t = _t.getFirstChild();
 		{
@@ -12383,7 +12488,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case TRIGGERS:
 		{
-			AST tmp892_AST_in = (AST)_t;
+			AST tmp902_AST_in = (AST)_t;
 			match(_t,TRIGGERS);
 			_t = _t.getNextSibling();
 			break;
@@ -12398,9 +12503,9 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t1164;
+		_t = __t1169;
 		_t = _t.getNextSibling();
-		_t = __t1157;
+		_t = __t1162;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12409,19 +12514,19 @@ inputState.guessing--;
 		
 		AST createbufferstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t298 = _t;
-		AST tmp893_AST_in = (AST)_t;
+		AST __t303 = _t;
+		AST tmp903_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp894_AST_in = (AST)_t;
+		AST tmp904_AST_in = (AST)_t;
 		match(_t,BUFFER);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
 		_t = _retTree;
-		AST tmp895_AST_in = (AST)_t;
+		AST tmp905_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
-		AST tmp896_AST_in = (AST)_t;
+		AST tmp906_AST_in = (AST)_t;
 		match(_t,TABLE);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -12431,13 +12536,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BUFFERNAME:
 		{
-			AST __t300 = _t;
-			AST tmp897_AST_in = (AST)_t;
+			AST __t305 = _t;
+			AST tmp907_AST_in = (AST)_t;
 			match(_t,BUFFERNAME);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t300;
+			_t = __t305;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -12459,16 +12564,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t302 = _t;
-			AST tmp898_AST_in = (AST)_t;
+			AST __t307 = _t;
+			AST tmp908_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp899_AST_in = (AST)_t;
+			AST tmp909_AST_in = (AST)_t;
 			match(_t,WIDGETPOOL);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t302;
+			_t = __t307;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -12489,7 +12594,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp900_AST_in = (AST)_t;
+			AST tmp910_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -12507,7 +12612,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t298;
+		_t = __t303;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12516,11 +12621,11 @@ inputState.guessing--;
 		
 		AST createserverstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t305 = _t;
-		AST tmp901_AST_in = (AST)_t;
+		AST __t310 = _t;
+		AST tmp911_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp902_AST_in = (AST)_t;
+		AST tmp912_AST_in = (AST)_t;
 		match(_t,SERVER);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
@@ -12547,7 +12652,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t305;
+		_t = __t310;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12556,11 +12661,11 @@ inputState.guessing--;
 		
 		AST createserversocketstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t308 = _t;
-		AST tmp903_AST_in = (AST)_t;
+		AST __t313 = _t;
+		AST tmp913_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp904_AST_in = (AST)_t;
+		AST tmp914_AST_in = (AST)_t;
 		match(_t,SERVERSOCKET);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
@@ -12570,7 +12675,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp905_AST_in = (AST)_t;
+			AST tmp915_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -12588,7 +12693,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t308;
+		_t = __t313;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12597,11 +12702,11 @@ inputState.guessing--;
 		
 		AST createsocketstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t311 = _t;
-		AST tmp906_AST_in = (AST)_t;
+		AST __t316 = _t;
+		AST tmp916_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp907_AST_in = (AST)_t;
+		AST tmp917_AST_in = (AST)_t;
 		match(_t,SOCKET);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
@@ -12611,7 +12716,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp908_AST_in = (AST)_t;
+			AST tmp918_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -12629,7 +12734,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t311;
+		_t = __t316;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12638,11 +12743,11 @@ inputState.guessing--;
 		
 		AST createtemptablestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t314 = _t;
-		AST tmp909_AST_in = (AST)_t;
+		AST __t319 = _t;
+		AST tmp919_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp910_AST_in = (AST)_t;
+		AST tmp920_AST_in = (AST)_t;
 		match(_t,TEMPTABLE);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
@@ -12652,16 +12757,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t316 = _t;
-			AST tmp911_AST_in = (AST)_t;
+			AST __t321 = _t;
+			AST tmp921_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp912_AST_in = (AST)_t;
+			AST tmp922_AST_in = (AST)_t;
 			match(_t,WIDGETPOOL);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t316;
+			_t = __t321;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -12682,7 +12787,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp913_AST_in = (AST)_t;
+			AST tmp923_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -12700,7 +12805,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t314;
+		_t = __t319;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12709,8 +12814,8 @@ inputState.guessing--;
 		
 		AST createwidgetstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t319 = _t;
-		AST tmp914_AST_in = (AST)_t;
+		AST __t324 = _t;
+		AST tmp924_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
 		{
@@ -12724,126 +12829,126 @@ inputState.guessing--;
 		}
 		case BUTTON:
 		{
-			AST tmp915_AST_in = (AST)_t;
+			AST tmp925_AST_in = (AST)_t;
 			match(_t,BUTTON);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case COMBOBOX:
 		{
-			AST tmp916_AST_in = (AST)_t;
+			AST tmp926_AST_in = (AST)_t;
 			match(_t,COMBOBOX);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case CONTROLFRAME:
 		{
-			AST tmp917_AST_in = (AST)_t;
+			AST tmp927_AST_in = (AST)_t;
 			match(_t,CONTROLFRAME);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DIALOGBOX:
 		{
-			AST tmp918_AST_in = (AST)_t;
+			AST tmp928_AST_in = (AST)_t;
 			match(_t,DIALOGBOX);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case EDITOR:
 		{
-			AST tmp919_AST_in = (AST)_t;
+			AST tmp929_AST_in = (AST)_t;
 			match(_t,EDITOR);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FILLIN:
 		{
-			AST tmp920_AST_in = (AST)_t;
+			AST tmp930_AST_in = (AST)_t;
 			match(_t,FILLIN);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FRAME:
 		{
-			AST tmp921_AST_in = (AST)_t;
+			AST tmp931_AST_in = (AST)_t;
 			match(_t,FRAME);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case IMAGE:
 		{
-			AST tmp922_AST_in = (AST)_t;
+			AST tmp932_AST_in = (AST)_t;
 			match(_t,IMAGE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MENU:
 		{
-			AST tmp923_AST_in = (AST)_t;
+			AST tmp933_AST_in = (AST)_t;
 			match(_t,MENU);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MENUITEM:
 		{
-			AST tmp924_AST_in = (AST)_t;
+			AST tmp934_AST_in = (AST)_t;
 			match(_t,MENUITEM);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case RADIOSET:
 		{
-			AST tmp925_AST_in = (AST)_t;
+			AST tmp935_AST_in = (AST)_t;
 			match(_t,RADIOSET);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case RECTANGLE:
 		{
-			AST tmp926_AST_in = (AST)_t;
+			AST tmp936_AST_in = (AST)_t;
 			match(_t,RECTANGLE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SELECTIONLIST:
 		{
-			AST tmp927_AST_in = (AST)_t;
+			AST tmp937_AST_in = (AST)_t;
 			match(_t,SELECTIONLIST);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SLIDER:
 		{
-			AST tmp928_AST_in = (AST)_t;
+			AST tmp938_AST_in = (AST)_t;
 			match(_t,SLIDER);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBMENU:
 		{
-			AST tmp929_AST_in = (AST)_t;
+			AST tmp939_AST_in = (AST)_t;
 			match(_t,SUBMENU);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TEXT:
 		{
-			AST tmp930_AST_in = (AST)_t;
+			AST tmp940_AST_in = (AST)_t;
 			match(_t,TEXT);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TOGGLEBOX:
 		{
-			AST tmp931_AST_in = (AST)_t;
+			AST tmp941_AST_in = (AST)_t;
 			match(_t,TOGGLEBOX);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case WINDOW:
 		{
-			AST tmp932_AST_in = (AST)_t;
+			AST tmp942_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			break;
@@ -12861,16 +12966,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t322 = _t;
-			AST tmp933_AST_in = (AST)_t;
+			AST __t327 = _t;
+			AST tmp943_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp934_AST_in = (AST)_t;
+			AST tmp944_AST_in = (AST)_t;
 			match(_t,WIDGETPOOL);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t322;
+			_t = __t327;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -12893,7 +12998,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp935_AST_in = (AST)_t;
+			AST tmp945_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -12954,7 +13059,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t319;
+		_t = __t324;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12963,19 +13068,19 @@ inputState.guessing--;
 		
 		AST valueexpression_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1548 = _t;
-		AST tmp936_AST_in = (AST)_t;
+		AST __t1553 = _t;
+		AST tmp946_AST_in = (AST)_t;
 		match(_t,VALUE);
 		_t = _t.getFirstChild();
-		AST tmp937_AST_in = (AST)_t;
+		AST tmp947_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
-		AST tmp938_AST_in = (AST)_t;
+		AST tmp948_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
-		_t = __t1548;
+		_t = __t1553;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -12984,21 +13089,21 @@ inputState.guessing--;
 		
 		AST ddegetstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t327 = _t;
-		AST tmp939_AST_in = (AST)_t;
+		AST __t332 = _t;
+		AST tmp949_AST_in = (AST)_t;
 		match(_t,DDE);
 		_t = _t.getFirstChild();
-		AST tmp940_AST_in = (AST)_t;
+		AST tmp950_AST_in = (AST)_t;
 		match(_t,GET);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
-		AST tmp941_AST_in = (AST)_t;
+		AST tmp951_AST_in = (AST)_t;
 		match(_t,TARGET);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
 		_t = _retTree;
-		AST tmp942_AST_in = (AST)_t;
+		AST tmp952_AST_in = (AST)_t;
 		match(_t,ITEM);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -13008,13 +13113,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case TIME:
 		{
-			AST __t329 = _t;
-			AST tmp943_AST_in = (AST)_t;
+			AST __t334 = _t;
+			AST tmp953_AST_in = (AST)_t;
 			match(_t,TIME);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t329;
+			_t = __t334;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -13035,63 +13140,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp944_AST_in = (AST)_t;
-			match(_t,NOERROR_KW);
-			_t = _t.getNextSibling();
-			break;
-		}
-		case EOF:
-		case PERIOD:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		state_end(_t);
-		_t = _retTree;
-		_t = __t327;
-		_t = _t.getNextSibling();
-		_retTree = _t;
-	}
-	
-	public final void ddeinitiatestate(AST _t) throws RecognitionException {
-		
-		AST ddeinitiatestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
-		
-		AST __t332 = _t;
-		AST tmp945_AST_in = (AST)_t;
-		match(_t,DDE);
-		_t = _t.getFirstChild();
-		AST tmp946_AST_in = (AST)_t;
-		match(_t,INITIATE);
-		_t = _t.getNextSibling();
-		fld(_t,CQ.UPDATING);
-		_t = _retTree;
-		AST tmp947_AST_in = (AST)_t;
-		match(_t,FRAME);
-		_t = _t.getNextSibling();
-		expression(_t);
-		_t = _retTree;
-		AST tmp948_AST_in = (AST)_t;
-		match(_t,APPLICATION);
-		_t = _t.getNextSibling();
-		expression(_t);
-		_t = _retTree;
-		AST tmp949_AST_in = (AST)_t;
-		match(_t,TOPIC);
-		_t = _t.getNextSibling();
-		expression(_t);
-		_t = _retTree;
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case NOERROR_KW:
-		{
-			AST tmp950_AST_in = (AST)_t;
+			AST tmp954_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -13114,62 +13163,40 @@ inputState.guessing--;
 		_retTree = _t;
 	}
 	
-	public final void dderequeststate(AST _t) throws RecognitionException {
+	public final void ddeinitiatestate(AST _t) throws RecognitionException {
 		
-		AST dderequeststate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
+		AST ddeinitiatestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t335 = _t;
-		AST tmp951_AST_in = (AST)_t;
+		AST __t337 = _t;
+		AST tmp955_AST_in = (AST)_t;
 		match(_t,DDE);
 		_t = _t.getFirstChild();
-		AST tmp952_AST_in = (AST)_t;
-		match(_t,REQUEST);
-		_t = _t.getNextSibling();
-		expression(_t);
-		_t = _retTree;
-		AST tmp953_AST_in = (AST)_t;
-		match(_t,TARGET);
+		AST tmp956_AST_in = (AST)_t;
+		match(_t,INITIATE);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
 		_t = _retTree;
-		AST tmp954_AST_in = (AST)_t;
-		match(_t,ITEM);
+		AST tmp957_AST_in = (AST)_t;
+		match(_t,FRAME);
+		_t = _t.getNextSibling();
+		expression(_t);
+		_t = _retTree;
+		AST tmp958_AST_in = (AST)_t;
+		match(_t,APPLICATION);
+		_t = _t.getNextSibling();
+		expression(_t);
+		_t = _retTree;
+		AST tmp959_AST_in = (AST)_t;
+		match(_t,TOPIC);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
 		{
 		if (_t==null) _t=ASTNULL;
 		switch ( _t.getType()) {
-		case TIME:
-		{
-			AST __t337 = _t;
-			AST tmp955_AST_in = (AST)_t;
-			match(_t,TIME);
-			_t = _t.getFirstChild();
-			expression(_t);
-			_t = _retTree;
-			_t = __t337;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case EOF:
-		case PERIOD:
 		case NOERROR_KW:
 		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case NOERROR_KW:
-		{
-			AST tmp956_AST_in = (AST)_t;
+			AST tmp960_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -13187,7 +13214,85 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t335;
+		_t = __t337;
+		_t = _t.getNextSibling();
+		_retTree = _t;
+	}
+	
+	public final void dderequeststate(AST _t) throws RecognitionException {
+		
+		AST dderequeststate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
+		
+		AST __t340 = _t;
+		AST tmp961_AST_in = (AST)_t;
+		match(_t,DDE);
+		_t = _t.getFirstChild();
+		AST tmp962_AST_in = (AST)_t;
+		match(_t,REQUEST);
+		_t = _t.getNextSibling();
+		expression(_t);
+		_t = _retTree;
+		AST tmp963_AST_in = (AST)_t;
+		match(_t,TARGET);
+		_t = _t.getNextSibling();
+		fld(_t,CQ.UPDATING);
+		_t = _retTree;
+		AST tmp964_AST_in = (AST)_t;
+		match(_t,ITEM);
+		_t = _t.getNextSibling();
+		expression(_t);
+		_t = _retTree;
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case TIME:
+		{
+			AST __t342 = _t;
+			AST tmp965_AST_in = (AST)_t;
+			match(_t,TIME);
+			_t = _t.getFirstChild();
+			expression(_t);
+			_t = _retTree;
+			_t = __t342;
+			_t = _t.getNextSibling();
+			break;
+		}
+		case EOF:
+		case PERIOD:
+		case NOERROR_KW:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		{
+		if (_t==null) _t=ASTNULL;
+		switch ( _t.getType()) {
+		case NOERROR_KW:
+		{
+			AST tmp966_AST_in = (AST)_t;
+			match(_t,NOERROR_KW);
+			_t = _t.getNextSibling();
+			break;
+		}
+		case EOF:
+		case PERIOD:
+		{
+			break;
+		}
+		default:
+		{
+			throw new NoViableAltException(_t);
+		}
+		}
+		}
+		state_end(_t);
+		_t = _retTree;
+		_t = __t340;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -13200,7 +13305,7 @@ inputState.guessing--;
 		AST fi1 = null;
 		AST fi2 = null;
 		
-		AST __t340 = _t;
+		AST __t345 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -13248,7 +13353,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp957_AST_in = (AST)_t;
+		AST tmp967_AST_in = (AST)_t;
 		match(_t,BROWSE);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -13262,14 +13367,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case QUERY:
 		{
-			AST __t344 = _t;
-			AST tmp958_AST_in = (AST)_t;
+			AST __t349 = _t;
+			AST tmp968_AST_in = (AST)_t;
 			match(_t,QUERY);
 			_t = _t.getFirstChild();
-			AST tmp959_AST_in = (AST)_t;
+			AST tmp969_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
-			_t = __t344;
+			_t = __t349;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -13293,7 +13398,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop346:
+		_loop351:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
@@ -13307,14 +13412,14 @@ inputState.guessing--;
 			}
 			case NOWAIT:
 			{
-				AST tmp960_AST_in = (AST)_t;
+				AST tmp970_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop346;
+				break _loop351;
 			}
 			}
 		} while (true);
@@ -13324,25 +13429,25 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case DISPLAY:
 		{
-			AST __t348 = _t;
-			AST tmp961_AST_in = (AST)_t;
+			AST __t353 = _t;
+			AST tmp971_AST_in = (AST)_t;
 			match(_t,DISPLAY);
 			_t = _t.getFirstChild();
 			{
-			_loop355:
+			_loop360:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
-					AST __t350 = _t;
+					AST __t355 = _t;
 					fi1 = _t==ASTNULL ? null :(AST)_t;
 					match(_t,Form_item);
 					_t = _t.getFirstChild();
 					{
-					boolean synPredMatched353 = false;
+					boolean synPredMatched358 = false;
 					if (_t==null) _t=ASTNULL;
 					if (((_t.getType()==RECORD_NAME))) {
-						AST __t353 = _t;
-						synPredMatched353 = true;
+						AST __t358 = _t;
+						synPredMatched358 = true;
 						inputState.guessing++;
 						try {
 							{
@@ -13351,12 +13456,12 @@ inputState.guessing--;
 							}
 						}
 						catch (RecognitionException pe) {
-							synPredMatched353 = false;
+							synPredMatched358 = false;
 						}
-						_t = __t353;
+						_t = __t358;
 inputState.guessing--;
 					}
-					if ( synPredMatched353 ) {
+					if ( synPredMatched358 ) {
 						tbl(_t,CQ.INIT);
 						_t = _retTree;
 					}
@@ -13395,11 +13500,11 @@ inputState.guessing--;
 					if ( inputState.guessing==0 ) {
 						action.formItem(fi1);
 					}
-					_t = __t350;
+					_t = __t355;
 					_t = _t.getNextSibling();
 				}
 				else {
-					break _loop355;
+					break _loop360;
 				}
 				
 			} while (true);
@@ -13409,12 +13514,12 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case EXCEPT:
 			{
-				AST __t357 = _t;
-				AST tmp962_AST_in = (AST)_t;
+				AST __t362 = _t;
+				AST tmp972_AST_in = (AST)_t;
 				match(_t,EXCEPT);
 				_t = _t.getFirstChild();
 				{
-				_loop359:
+				_loop364:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -13422,12 +13527,12 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						break _loop359;
+						break _loop364;
 					}
 					
 				} while (true);
 				}
-				_t = __t357;
+				_t = __t362;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -13441,15 +13546,15 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t348;
+			_t = __t353;
 			_t = _t.getNextSibling();
 			{
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case ENABLE:
 			{
-				AST __t361 = _t;
-				AST tmp963_AST_in = (AST)_t;
+				AST __t366 = _t;
+				AST tmp973_AST_in = (AST)_t;
 				match(_t,ENABLE);
 				_t = _t.getFirstChild();
 				{
@@ -13457,8 +13562,8 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case ALL:
 				{
-					AST __t363 = _t;
-					AST tmp964_AST_in = (AST)_t;
+					AST __t368 = _t;
+					AST tmp974_AST_in = (AST)_t;
 					match(_t,ALL);
 					_t = _t.getFirstChild();
 					{
@@ -13466,12 +13571,12 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case EXCEPT:
 					{
-						AST __t365 = _t;
-						AST tmp965_AST_in = (AST)_t;
+						AST __t370 = _t;
+						AST tmp975_AST_in = (AST)_t;
 						match(_t,EXCEPT);
 						_t = _t.getFirstChild();
 						{
-						_loop367:
+						_loop372:
 						do {
 							if (_t==null) _t=ASTNULL;
 							if ((_t.getType()==Field_ref)) {
@@ -13479,12 +13584,12 @@ inputState.guessing--;
 								_t = _retTree;
 							}
 							else {
-								break _loop367;
+								break _loop372;
 							}
 							
 						} while (true);
 						}
-						_t = __t365;
+						_t = __t370;
 						_t = _t.getNextSibling();
 						break;
 					}
@@ -13498,7 +13603,7 @@ inputState.guessing--;
 					}
 					}
 					}
-					_t = __t363;
+					_t = __t368;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -13506,11 +13611,11 @@ inputState.guessing--;
 				case Form_item:
 				{
 					{
-					_loop374:
+					_loop379:
 					do {
 						if (_t==null) _t=ASTNULL;
 						if ((_t.getType()==Form_item)) {
-							AST __t369 = _t;
+							AST __t374 = _t;
 							fi2 = _t==ASTNULL ? null :(AST)_t;
 							match(_t,Form_item);
 							_t = _t.getFirstChild();
@@ -13520,60 +13625,60 @@ inputState.guessing--;
 								action.formItem(fi2);
 							}
 							{
-							_loop373:
+							_loop378:
 							do {
 								if (_t==null) _t=ASTNULL;
 								switch ( _t.getType()) {
 								case HELP:
 								{
-									AST __t371 = _t;
-									AST tmp966_AST_in = (AST)_t;
+									AST __t376 = _t;
+									AST tmp976_AST_in = (AST)_t;
 									match(_t,HELP);
 									_t = _t.getFirstChild();
 									constant(_t);
 									_t = _retTree;
-									_t = __t371;
+									_t = __t376;
 									_t = _t.getNextSibling();
 									break;
 								}
 								case VALIDATE:
 								{
-									AST __t372 = _t;
-									AST tmp967_AST_in = (AST)_t;
+									AST __t377 = _t;
+									AST tmp977_AST_in = (AST)_t;
 									match(_t,VALIDATE);
 									_t = _t.getFirstChild();
 									funargs(_t);
 									_t = _retTree;
-									_t = __t372;
+									_t = __t377;
 									_t = _t.getNextSibling();
 									break;
 								}
 								case AUTORETURN:
 								{
-									AST tmp968_AST_in = (AST)_t;
+									AST tmp978_AST_in = (AST)_t;
 									match(_t,AUTORETURN);
 									_t = _t.getNextSibling();
 									break;
 								}
 								case DISABLEAUTOZAP:
 								{
-									AST tmp969_AST_in = (AST)_t;
+									AST tmp979_AST_in = (AST)_t;
 									match(_t,DISABLEAUTOZAP);
 									_t = _t.getNextSibling();
 									break;
 								}
 								default:
 								{
-									break _loop373;
+									break _loop378;
 								}
 								}
 							} while (true);
 							}
-							_t = __t369;
+							_t = __t374;
 							_t = _t.getNextSibling();
 						}
 						else {
-							break _loop374;
+							break _loop379;
 						}
 						
 					} while (true);
@@ -13586,7 +13691,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t361;
+				_t = __t366;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -13621,7 +13726,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop376:
+		_loop381:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==WITH)) {
@@ -13629,7 +13734,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop376;
+				break _loop381;
 			}
 			
 		} while (true);
@@ -13660,13 +13765,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CONTEXTHELPID:
 		{
-			AST __t379 = _t;
-			AST tmp970_AST_in = (AST)_t;
+			AST __t384 = _t;
+			AST tmp980_AST_in = (AST)_t;
 			match(_t,CONTEXTHELPID);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t379;
+			_t = __t384;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -13686,7 +13791,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
 		}
-		_t = __t340;
+		_t = __t345;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -13699,7 +13804,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case SHARED:
 		{
-			AST tmp971_AST_in = (AST)_t;
+			AST tmp981_AST_in = (AST)_t;
 			match(_t,SHARED);
 			_t = _t.getNextSibling();
 			break;
@@ -13707,7 +13812,7 @@ inputState.guessing--;
 		case NEW:
 		{
 			AST __t1876 = _t;
-			AST tmp972_AST_in = (AST)_t;
+			AST tmp982_AST_in = (AST)_t;
 			match(_t,NEW);
 			_t = _t.getFirstChild();
 			{
@@ -13715,7 +13820,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case GLOBAL:
 			{
-				AST tmp973_AST_in = (AST)_t;
+				AST tmp983_AST_in = (AST)_t;
 				match(_t,GLOBAL);
 				_t = _t.getNextSibling();
 				break;
@@ -13730,7 +13835,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp974_AST_in = (AST)_t;
+			AST tmp984_AST_in = (AST)_t;
 			match(_t,SHARED);
 			_t = _t.getNextSibling();
 			_t = __t1876;
@@ -13754,21 +13859,21 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PRIVATE:
 		{
-			AST tmp975_AST_in = (AST)_t;
+			AST tmp985_AST_in = (AST)_t;
 			match(_t,PRIVATE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PROTECTED:
 		{
-			AST tmp976_AST_in = (AST)_t;
+			AST tmp986_AST_in = (AST)_t;
 			match(_t,PROTECTED);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PUBLIC:
 		{
-			AST tmp977_AST_in = (AST)_t;
+			AST tmp987_AST_in = (AST)_t;
 			match(_t,PUBLIC);
 			_t = _t.getNextSibling();
 			break;
@@ -13790,21 +13895,21 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case SHARELOCK:
 		{
-			AST tmp978_AST_in = (AST)_t;
+			AST tmp988_AST_in = (AST)_t;
 			match(_t,SHARELOCK);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case EXCLUSIVELOCK:
 		{
-			AST tmp979_AST_in = (AST)_t;
+			AST tmp989_AST_in = (AST)_t;
 			match(_t,EXCLUSIVELOCK);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case NOLOCK:
 		{
-			AST tmp980_AST_in = (AST)_t;
+			AST tmp990_AST_in = (AST)_t;
 			match(_t,NOLOCK);
 			_t = _t.getNextSibling();
 			break;
@@ -13822,7 +13927,7 @@ inputState.guessing--;
 		AST spacephrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2291 = _t;
-		AST tmp981_AST_in = (AST)_t;
+		AST tmp991_AST_in = (AST)_t;
 		match(_t,SPACE);
 		_t = _t.getFirstChild();
 		{
@@ -13862,13 +13967,13 @@ inputState.guessing--;
 			try {
 				{
 				AST __t1901 = _t;
-				AST tmp982_AST_in = (AST)_t;
+				AST tmp992_AST_in = (AST)_t;
 				match(_t,WITH);
 				_t = _t.getFirstChild();
-				AST tmp983_AST_in = (AST)_t;
+				AST tmp993_AST_in = (AST)_t;
 				match(_t,BROWSE);
 				_t = _t.getNextSibling();
-				AST tmp984_AST_in = (AST)_t;
+				AST tmp994_AST_in = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
 				_t = __t1901;
@@ -13883,13 +13988,13 @@ inputState.guessing--;
 		}
 		if ( synPredMatched1902 ) {
 			AST __t1903 = _t;
-			AST tmp985_AST_in = (AST)_t;
+			AST tmp995_AST_in = (AST)_t;
 			match(_t,WITH);
 			_t = _t.getFirstChild();
-			AST tmp986_AST_in = (AST)_t;
+			AST tmp996_AST_in = (AST)_t;
 			match(_t,BROWSE);
 			_t = _t.getNextSibling();
-			AST tmp987_AST_in = (AST)_t;
+			AST tmp997_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			_t = __t1903;
@@ -13911,7 +14016,7 @@ inputState.guessing--;
 		AST tooltip_expr_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2351 = _t;
-		AST tmp988_AST_in = (AST)_t;
+		AST tmp998_AST_in = (AST)_t;
 		match(_t,TOOLTIP);
 		_t = _t.getFirstChild();
 		{
@@ -13988,7 +14093,7 @@ inputState.guessing--;
 		AST id = null;
 		AST rec = null;
 		
-		AST __t381 = _t;
+		AST __t386 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -14036,13 +14141,13 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp989_AST_in = (AST)_t;
+		AST tmp999_AST_in = (AST)_t;
 		match(_t,BUFFER);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
-		AST tmp990_AST_in = (AST)_t;
+		AST tmp1000_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		{
@@ -14050,7 +14155,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case TEMPTABLE:
 		{
-			AST tmp991_AST_in = (AST)_t;
+			AST tmp1001_AST_in = (AST)_t;
 			match(_t,TEMPTABLE);
 			_t = _t.getNextSibling();
 			break;
@@ -14076,7 +14181,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PRESELECT:
 		{
-			AST tmp992_AST_in = (AST)_t;
+			AST tmp1002_AST_in = (AST)_t;
 			match(_t,PRESELECT);
 			_t = _t.getNextSibling();
 			break;
@@ -14169,12 +14274,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FIELDS:
 		{
-			AST __t390 = _t;
-			AST tmp993_AST_in = (AST)_t;
+			AST __t395 = _t;
+			AST tmp1003_AST_in = (AST)_t;
 			match(_t,FIELDS);
 			_t = _t.getFirstChild();
 			{
-			_loop392:
+			_loop397:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -14182,12 +14287,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop392;
+					break _loop397;
 				}
 				
 			} while (true);
 			}
-			_t = __t390;
+			_t = __t395;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -14204,7 +14309,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t381;
+		_t = __t386;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -14214,7 +14319,7 @@ inputState.guessing--;
 		AST namespace_uri_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2042 = _t;
-		AST tmp994_AST_in = (AST)_t;
+		AST tmp1004_AST_in = (AST)_t;
 		match(_t,NAMESPACEURI);
 		_t = _t.getFirstChild();
 		constant(_t);
@@ -14229,7 +14334,7 @@ inputState.guessing--;
 		AST namespace_prefix_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2040 = _t;
-		AST tmp995_AST_in = (AST)_t;
+		AST tmp1005_AST_in = (AST)_t;
 		match(_t,NAMESPACEPREFIX);
 		_t = _t.getFirstChild();
 		constant(_t);
@@ -14245,7 +14350,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t394 = _t;
+		AST __t399 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -14293,7 +14398,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp996_AST_in = (AST)_t;
+		AST tmp1006_AST_in = (AST)_t;
 		match(_t,BUTTON);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -14303,27 +14408,27 @@ inputState.guessing--;
 			push(action.defineSymbol(BUTTON, def, id));
 		}
 		{
-		_loop418:
+		_loop423:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case AUTOGO:
 			{
-				AST tmp997_AST_in = (AST)_t;
+				AST tmp1007_AST_in = (AST)_t;
 				match(_t,AUTOGO);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case AUTOENDKEY:
 			{
-				AST tmp998_AST_in = (AST)_t;
+				AST tmp1008_AST_in = (AST)_t;
 				match(_t,AUTOENDKEY);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DEFAULT:
 			{
-				AST tmp999_AST_in = (AST)_t;
+				AST tmp1009_AST_in = (AST)_t;
 				match(_t,DEFAULT);
 				_t = _t.getNextSibling();
 				break;
@@ -14339,44 +14444,44 @@ inputState.guessing--;
 			}
 			case CONTEXTHELPID:
 			{
-				AST __t398 = _t;
-				AST tmp1000_AST_in = (AST)_t;
+				AST __t403 = _t;
+				AST tmp1010_AST_in = (AST)_t;
 				match(_t,CONTEXTHELPID);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t398;
+				_t = __t403;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DROPTARGET:
 			{
-				AST tmp1001_AST_in = (AST)_t;
+				AST tmp1011_AST_in = (AST)_t;
 				match(_t,DROPTARGET);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FONT:
 			{
-				AST __t399 = _t;
-				AST tmp1002_AST_in = (AST)_t;
+				AST __t404 = _t;
+				AST tmp1012_AST_in = (AST)_t;
 				match(_t,FONT);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t399;
+				_t = __t404;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IMAGEDOWN:
 			{
-				AST __t400 = _t;
-				AST tmp1003_AST_in = (AST)_t;
+				AST __t405 = _t;
+				AST tmp1013_AST_in = (AST)_t;
 				match(_t,IMAGEDOWN);
 				_t = _t.getFirstChild();
 				{
-				int _cnt402=0;
-				_loop402:
+				int _cnt407=0;
+				_loop407:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_tokenSet_12.member(_t.getType()))) {
@@ -14384,25 +14489,25 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						if ( _cnt402>=1 ) { break _loop402; } else {throw new NoViableAltException(_t);}
+						if ( _cnt407>=1 ) { break _loop407; } else {throw new NoViableAltException(_t);}
 					}
 					
-					_cnt402++;
+					_cnt407++;
 				} while (true);
 				}
-				_t = __t400;
+				_t = __t405;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IMAGE:
 			{
-				AST __t403 = _t;
-				AST tmp1004_AST_in = (AST)_t;
+				AST __t408 = _t;
+				AST tmp1014_AST_in = (AST)_t;
 				match(_t,IMAGE);
 				_t = _t.getFirstChild();
 				{
-				int _cnt405=0;
-				_loop405:
+				int _cnt410=0;
+				_loop410:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_tokenSet_12.member(_t.getType()))) {
@@ -14410,25 +14515,25 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						if ( _cnt405>=1 ) { break _loop405; } else {throw new NoViableAltException(_t);}
+						if ( _cnt410>=1 ) { break _loop410; } else {throw new NoViableAltException(_t);}
 					}
 					
-					_cnt405++;
+					_cnt410++;
 				} while (true);
 				}
-				_t = __t403;
+				_t = __t408;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IMAGEUP:
 			{
-				AST __t406 = _t;
-				AST tmp1005_AST_in = (AST)_t;
+				AST __t411 = _t;
+				AST tmp1015_AST_in = (AST)_t;
 				match(_t,IMAGEUP);
 				_t = _t.getFirstChild();
 				{
-				int _cnt408=0;
-				_loop408:
+				int _cnt413=0;
+				_loop413:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_tokenSet_12.member(_t.getType()))) {
@@ -14436,25 +14541,25 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						if ( _cnt408>=1 ) { break _loop408; } else {throw new NoViableAltException(_t);}
+						if ( _cnt413>=1 ) { break _loop413; } else {throw new NoViableAltException(_t);}
 					}
 					
-					_cnt408++;
+					_cnt413++;
 				} while (true);
 				}
-				_t = __t406;
+				_t = __t411;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IMAGEINSENSITIVE:
 			{
-				AST __t409 = _t;
-				AST tmp1006_AST_in = (AST)_t;
+				AST __t414 = _t;
+				AST tmp1016_AST_in = (AST)_t;
 				match(_t,IMAGEINSENSITIVE);
 				_t = _t.getFirstChild();
 				{
-				int _cnt411=0;
-				_loop411:
+				int _cnt416=0;
+				_loop416:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_tokenSet_12.member(_t.getType()))) {
@@ -14462,25 +14567,25 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						if ( _cnt411>=1 ) { break _loop411; } else {throw new NoViableAltException(_t);}
+						if ( _cnt416>=1 ) { break _loop416; } else {throw new NoViableAltException(_t);}
 					}
 					
-					_cnt411++;
+					_cnt416++;
 				} while (true);
 				}
-				_t = __t409;
+				_t = __t414;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MOUSEPOINTER:
 			{
-				AST __t412 = _t;
-				AST tmp1007_AST_in = (AST)_t;
+				AST __t417 = _t;
+				AST tmp1017_AST_in = (AST)_t;
 				match(_t,MOUSEPOINTER);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t412;
+				_t = __t417;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -14493,8 +14598,8 @@ inputState.guessing--;
 			}
 			case LIKE:
 			{
-				AST __t413 = _t;
-				AST tmp1008_AST_in = (AST)_t;
+				AST __t418 = _t;
+				AST tmp1018_AST_in = (AST)_t;
 				match(_t,LIKE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
@@ -14504,7 +14609,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case VALIDATE:
 				{
-					AST tmp1009_AST_in = (AST)_t;
+					AST tmp1019_AST_in = (AST)_t;
 					match(_t,VALIDATE);
 					_t = _t.getNextSibling();
 					break;
@@ -14519,21 +14624,21 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t413;
+				_t = __t418;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FLATBUTTON:
 			{
-				AST tmp1010_AST_in = (AST)_t;
+				AST tmp1020_AST_in = (AST)_t;
 				match(_t,FLATBUTTON);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOFOCUS:
 			{
-				AST __t415 = _t;
-				AST tmp1011_AST_in = (AST)_t;
+				AST __t420 = _t;
+				AST tmp1021_AST_in = (AST)_t;
 				match(_t,NOFOCUS);
 				_t = _t.getFirstChild();
 				{
@@ -14541,7 +14646,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case FLATBUTTON:
 				{
-					AST tmp1012_AST_in = (AST)_t;
+					AST tmp1022_AST_in = (AST)_t;
 					match(_t,FLATBUTTON);
 					_t = _t.getNextSibling();
 					break;
@@ -14556,13 +14661,13 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t415;
+				_t = __t420;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONVERT3DCOLORS:
 			{
-				AST tmp1013_AST_in = (AST)_t;
+				AST tmp1023_AST_in = (AST)_t;
 				match(_t,NOCONVERT3DCOLORS);
 				_t = _t.getNextSibling();
 				break;
@@ -14584,7 +14689,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case MARGINEXTRA:
 				{
-					AST tmp1014_AST_in = (AST)_t;
+					AST tmp1024_AST_in = (AST)_t;
 					match(_t,MARGINEXTRA);
 					_t = _t.getNextSibling();
 					break;
@@ -14630,7 +14735,7 @@ inputState.guessing--;
 			}
 			default:
 			{
-				break _loop418;
+				break _loop423;
 			}
 			}
 		} while (true);
@@ -14660,7 +14765,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
 		}
-		_t = __t394;
+		_t = __t399;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -14674,7 +14779,7 @@ inputState.guessing--;
 		case BGCOLOR:
 		{
 			AST __t1697 = _t;
-			AST tmp1015_AST_in = (AST)_t;
+			AST tmp1025_AST_in = (AST)_t;
 			match(_t,BGCOLOR);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -14686,7 +14791,7 @@ inputState.guessing--;
 		case DCOLOR:
 		{
 			AST __t1698 = _t;
-			AST tmp1016_AST_in = (AST)_t;
+			AST tmp1026_AST_in = (AST)_t;
 			match(_t,DCOLOR);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -14698,7 +14803,7 @@ inputState.guessing--;
 		case FGCOLOR:
 		{
 			AST __t1699 = _t;
-			AST tmp1017_AST_in = (AST)_t;
+			AST tmp1027_AST_in = (AST)_t;
 			match(_t,FGCOLOR);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -14710,7 +14815,7 @@ inputState.guessing--;
 		case PFCOLOR:
 		{
 			AST __t1700 = _t;
-			AST tmp1018_AST_in = (AST)_t;
+			AST tmp1028_AST_in = (AST)_t;
 			match(_t,PFCOLOR);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -14736,7 +14841,7 @@ inputState.guessing--;
 		case FILE:
 		{
 			AST __t1964 = _t;
-			AST tmp1019_AST_in = (AST)_t;
+			AST tmp1029_AST_in = (AST)_t;
 			match(_t,FILE);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -14748,12 +14853,12 @@ inputState.guessing--;
 		case IMAGESIZE:
 		{
 			AST __t1965 = _t;
-			AST tmp1020_AST_in = (AST)_t;
+			AST tmp1030_AST_in = (AST)_t;
 			match(_t,IMAGESIZE);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			AST tmp1021_AST_in = (AST)_t;
+			AST tmp1031_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -14765,12 +14870,12 @@ inputState.guessing--;
 		case IMAGESIZECHARS:
 		{
 			AST __t1966 = _t;
-			AST tmp1022_AST_in = (AST)_t;
+			AST tmp1032_AST_in = (AST)_t;
 			match(_t,IMAGESIZECHARS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			AST tmp1023_AST_in = (AST)_t;
+			AST tmp1033_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -14782,12 +14887,12 @@ inputState.guessing--;
 		case IMAGESIZEPIXELS:
 		{
 			AST __t1967 = _t;
-			AST tmp1024_AST_in = (AST)_t;
+			AST tmp1034_AST_in = (AST)_t;
 			match(_t,IMAGESIZEPIXELS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			AST tmp1025_AST_in = (AST)_t;
+			AST tmp1035_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -14799,7 +14904,7 @@ inputState.guessing--;
 		case FROM:
 		{
 			AST __t1968 = _t;
-			AST tmp1026_AST_in = (AST)_t;
+			AST tmp1036_AST_in = (AST)_t;
 			match(_t,FROM);
 			_t = _t.getFirstChild();
 			{
@@ -14807,7 +14912,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case X:
 			{
-				AST tmp1027_AST_in = (AST)_t;
+				AST tmp1037_AST_in = (AST)_t;
 				match(_t,X);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14816,7 +14921,7 @@ inputState.guessing--;
 			}
 			case Y:
 			{
-				AST tmp1028_AST_in = (AST)_t;
+				AST tmp1038_AST_in = (AST)_t;
 				match(_t,Y);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14825,7 +14930,7 @@ inputState.guessing--;
 			}
 			case ROW:
 			{
-				AST tmp1029_AST_in = (AST)_t;
+				AST tmp1039_AST_in = (AST)_t;
 				match(_t,ROW);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14834,7 +14939,7 @@ inputState.guessing--;
 			}
 			case COLUMN:
 			{
-				AST tmp1030_AST_in = (AST)_t;
+				AST tmp1040_AST_in = (AST)_t;
 				match(_t,COLUMN);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14852,7 +14957,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case X:
 			{
-				AST tmp1031_AST_in = (AST)_t;
+				AST tmp1041_AST_in = (AST)_t;
 				match(_t,X);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14861,7 +14966,7 @@ inputState.guessing--;
 			}
 			case Y:
 			{
-				AST tmp1032_AST_in = (AST)_t;
+				AST tmp1042_AST_in = (AST)_t;
 				match(_t,Y);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14870,7 +14975,7 @@ inputState.guessing--;
 			}
 			case ROW:
 			{
-				AST tmp1033_AST_in = (AST)_t;
+				AST tmp1043_AST_in = (AST)_t;
 				match(_t,ROW);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14879,7 +14984,7 @@ inputState.guessing--;
 			}
 			case COLUMN:
 			{
-				AST tmp1034_AST_in = (AST)_t;
+				AST tmp1044_AST_in = (AST)_t;
 				match(_t,COLUMN);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -14913,12 +15018,12 @@ inputState.guessing--;
 		case SIZE:
 		{
 			AST __t2274 = _t;
-			AST tmp1035_AST_in = (AST)_t;
+			AST tmp1045_AST_in = (AST)_t;
 			match(_t,SIZE);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			AST tmp1036_AST_in = (AST)_t;
+			AST tmp1046_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -14930,12 +15035,12 @@ inputState.guessing--;
 		case SIZECHARS:
 		{
 			AST __t2275 = _t;
-			AST tmp1037_AST_in = (AST)_t;
+			AST tmp1047_AST_in = (AST)_t;
 			match(_t,SIZECHARS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			AST tmp1038_AST_in = (AST)_t;
+			AST tmp1048_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -14947,12 +15052,12 @@ inputState.guessing--;
 		case SIZEPIXELS:
 		{
 			AST __t2276 = _t;
-			AST tmp1039_AST_in = (AST)_t;
+			AST tmp1049_AST_in = (AST)_t;
 			match(_t,SIZEPIXELS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			AST tmp1040_AST_in = (AST)_t;
+			AST tmp1050_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -14975,7 +15080,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t421 = _t;
+		AST __t426 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -15023,7 +15128,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1041_AST_in = (AST)_t;
+		AST tmp1051_AST_in = (AST)_t;
 		match(_t,DATASET);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -15078,7 +15183,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case REFERENCEONLY:
 		{
-			AST tmp1042_AST_in = (AST)_t;
+			AST tmp1052_AST_in = (AST)_t;
 			match(_t,REFERENCEONLY);
 			_t = _t.getNextSibling();
 			break;
@@ -15093,24 +15198,24 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1043_AST_in = (AST)_t;
+		AST tmp1053_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.INIT);
 		_t = _retTree;
 		{
-		_loop428:
+		_loop433:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1044_AST_in = (AST)_t;
+				AST tmp1054_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				tbl(_t,CQ.INIT);
 				_t = _retTree;
 			}
 			else {
-				break _loop428;
+				break _loop433;
 			}
 			
 		} while (true);
@@ -15123,7 +15228,7 @@ inputState.guessing--;
 			data_relation(_t);
 			_t = _retTree;
 			{
-			_loop432:
+			_loop437:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA||_t.getType()==DATARELATION)) {
@@ -15132,7 +15237,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case COMMA:
 					{
-						AST tmp1045_AST_in = (AST)_t;
+						AST tmp1055_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						break;
@@ -15151,7 +15256,7 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop432;
+					break _loop437;
 				}
 				
 			} while (true);
@@ -15174,7 +15279,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
 		}
-		_t = __t421;
+		_t = __t426;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -15183,8 +15288,8 @@ inputState.guessing--;
 		
 		AST data_relation_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t434 = _t;
-		AST tmp1046_AST_in = (AST)_t;
+		AST __t439 = _t;
+		AST tmp1056_AST_in = (AST)_t;
 		match(_t,DATARELATION);
 		_t = _t.getFirstChild();
 		{
@@ -15192,7 +15297,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ID:
 		{
-			AST tmp1047_AST_in = (AST)_t;
+			AST tmp1057_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
@@ -15207,12 +15312,12 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1048_AST_in = (AST)_t;
+		AST tmp1058_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.INIT);
 		_t = _retTree;
-		AST tmp1049_AST_in = (AST)_t;
+		AST tmp1059_AST_in = (AST)_t;
 		match(_t,COMMA);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.INIT);
@@ -15242,7 +15347,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case REPOSITION:
 		{
-			AST tmp1050_AST_in = (AST)_t;
+			AST tmp1060_AST_in = (AST)_t;
 			match(_t,REPOSITION);
 			_t = _t.getNextSibling();
 			break;
@@ -15257,7 +15362,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t434;
+		_t = __t439;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -15266,46 +15371,46 @@ inputState.guessing--;
 		
 		AST field_mapping_phrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t439 = _t;
-		AST tmp1051_AST_in = (AST)_t;
+		AST __t444 = _t;
+		AST tmp1061_AST_in = (AST)_t;
 		match(_t,RELATIONFIELDS);
 		_t = _t.getFirstChild();
-		AST tmp1052_AST_in = (AST)_t;
+		AST tmp1062_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		fld2(_t,CQ.SYMBOL);
 		_t = _retTree;
-		AST tmp1053_AST_in = (AST)_t;
+		AST tmp1063_AST_in = (AST)_t;
 		match(_t,COMMA);
 		_t = _t.getNextSibling();
 		fld1(_t,CQ.SYMBOL);
 		_t = _retTree;
 		{
-		_loop441:
+		_loop446:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1054_AST_in = (AST)_t;
+				AST tmp1064_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				fld2(_t,CQ.SYMBOL);
 				_t = _retTree;
-				AST tmp1055_AST_in = (AST)_t;
+				AST tmp1065_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				fld1(_t,CQ.SYMBOL);
 				_t = _retTree;
 			}
 			else {
-				break _loop441;
+				break _loop446;
 			}
 			
 		} while (true);
 		}
-		AST tmp1056_AST_in = (AST)_t;
+		AST tmp1066_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
-		_t = __t439;
+		_t = __t444;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -15316,7 +15421,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t443 = _t;
+		AST __t448 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -15364,7 +15469,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1057_AST_in = (AST)_t;
+		AST tmp1067_AST_in = (AST)_t;
 		match(_t,DATASOURCE);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -15373,7 +15478,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			push(action.defineSymbol(DATASOURCE, def, id));
 		}
-		AST tmp1058_AST_in = (AST)_t;
+		AST tmp1068_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		{
@@ -15381,14 +15486,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case QUERY:
 		{
-			AST __t447 = _t;
-			AST tmp1059_AST_in = (AST)_t;
+			AST __t452 = _t;
+			AST tmp1069_AST_in = (AST)_t;
 			match(_t,QUERY);
 			_t = _t.getFirstChild();
-			AST tmp1060_AST_in = (AST)_t;
+			AST tmp1070_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
-			_t = __t447;
+			_t = __t452;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -15427,18 +15532,18 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop450:
+		_loop455:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1061_AST_in = (AST)_t;
+				AST tmp1071_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				source_buffer_phrase(_t);
 				_t = _retTree;
 			}
 			else {
-				break _loop450;
+				break _loop455;
 			}
 			
 		} while (true);
@@ -15448,7 +15553,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
 		}
-		_t = __t443;
+		_t = __t448;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -15458,7 +15563,7 @@ inputState.guessing--;
 		AST source_buffer_phrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST r = null;
 		
-		AST __t452 = _t;
+		AST __t457 = _t;
 		r = _t==ASTNULL ? null :(AST)_t;
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
@@ -15470,10 +15575,10 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case KEYS:
 		{
-			AST tmp1062_AST_in = (AST)_t;
+			AST tmp1072_AST_in = (AST)_t;
 			match(_t,KEYS);
 			_t = _t.getNextSibling();
-			AST tmp1063_AST_in = (AST)_t;
+			AST tmp1073_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			{
@@ -15481,7 +15586,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case ROWID:
 			{
-				AST tmp1064_AST_in = (AST)_t;
+				AST tmp1074_AST_in = (AST)_t;
 				match(_t,ROWID);
 				_t = _t.getNextSibling();
 				break;
@@ -15491,18 +15596,18 @@ inputState.guessing--;
 				fld(_t,CQ.SYMBOL);
 				_t = _retTree;
 				{
-				_loop456:
+				_loop461:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp1065_AST_in = (AST)_t;
+						AST tmp1075_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						fld(_t,CQ.SYMBOL);
 						_t = _retTree;
 					}
 					else {
-						break _loop456;
+						break _loop461;
 					}
 					
 				} while (true);
@@ -15515,7 +15620,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1066_AST_in = (AST)_t;
+			AST tmp1076_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
 			break;
@@ -15530,7 +15635,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t452;
+		_t = __t457;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -15541,7 +15646,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t458 = _t;
+		AST __t463 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -15571,7 +15676,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PRIVATE:
 		{
-			AST tmp1067_AST_in = (AST)_t;
+			AST tmp1077_AST_in = (AST)_t;
 			match(_t,PRIVATE);
 			_t = _t.getNextSibling();
 			break;
@@ -15586,7 +15691,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1068_AST_in = (AST)_t;
+		AST tmp1078_AST_in = (AST)_t;
 		match(_t,FRAME);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -15596,7 +15701,7 @@ inputState.guessing--;
 			action.frameDef(def, id);
 		}
 		{
-		_loop462:
+		_loop467:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
@@ -15604,7 +15709,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop462;
+				break _loop467;
 			}
 			
 		} while (true);
@@ -15614,13 +15719,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case HEADER:
 		{
-			AST __t464 = _t;
-			AST tmp1069_AST_in = (AST)_t;
+			AST __t469 = _t;
+			AST tmp1079_AST_in = (AST)_t;
 			match(_t,HEADER);
 			_t = _t.getFirstChild();
 			{
-			int _cnt466=0;
-			_loop466:
+			int _cnt471=0;
+			_loop471:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
@@ -15628,25 +15733,25 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt466>=1 ) { break _loop466; } else {throw new NoViableAltException(_t);}
+					if ( _cnt471>=1 ) { break _loop471; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt466++;
+				_cnt471++;
 			} while (true);
 			}
-			_t = __t464;
+			_t = __t469;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case BACKGROUND:
 		{
-			AST __t467 = _t;
-			AST tmp1070_AST_in = (AST)_t;
+			AST __t472 = _t;
+			AST tmp1080_AST_in = (AST)_t;
 			match(_t,BACKGROUND);
 			_t = _t.getFirstChild();
 			{
-			int _cnt469=0;
-			_loop469:
+			int _cnt474=0;
+			_loop474:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
@@ -15654,13 +15759,13 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt469>=1 ) { break _loop469; } else {throw new NoViableAltException(_t);}
+					if ( _cnt474>=1 ) { break _loop474; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt469++;
+				_cnt474++;
 			} while (true);
 			}
-			_t = __t467;
+			_t = __t472;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -15682,12 +15787,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t471 = _t;
-			AST tmp1071_AST_in = (AST)_t;
+			AST __t476 = _t;
+			AST tmp1081_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop473:
+			_loop478:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -15695,12 +15800,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop473;
+					break _loop478;
 				}
 				
 			} while (true);
 			}
-			_t = __t471;
+			_t = __t476;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -15741,7 +15846,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t458;
+		_t = __t463;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -15756,7 +15861,7 @@ inputState.guessing--;
 			if (contextQualifier==CQ.SYMBOL) tblQualifier = CQ.BUFFERSYMBOL;
 		
 		
-		AST __t774 = _t;
+		AST __t779 = _t;
 		fi = _t==ASTNULL ? null :(AST)_t;
 		match(_t,Form_item);
 		_t = _t.getFirstChild();
@@ -15774,15 +15879,15 @@ inputState.guessing--;
 		}
 		case TEXT:
 		{
-			AST __t776 = _t;
-			AST tmp1072_AST_in = (AST)_t;
+			AST __t781 = _t;
+			AST tmp1082_AST_in = (AST)_t;
 			match(_t,TEXT);
 			_t = _t.getFirstChild();
-			AST tmp1073_AST_in = (AST)_t;
+			AST tmp1083_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			{
-			_loop778:
+			_loop783:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
@@ -15790,15 +15895,15 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop778;
+					break _loop783;
 				}
 				
 			} while (true);
 			}
-			AST tmp1074_AST_in = (AST)_t;
+			AST tmp1084_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
-			_t = __t776;
+			_t = __t781;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -15888,7 +15993,7 @@ inputState.guessing--;
 		}
 		case CARET:
 		{
-			AST tmp1075_AST_in = (AST)_t;
+			AST tmp1085_AST_in = (AST)_t;
 			match(_t,CARET);
 			_t = _t.getNextSibling();
 			break;
@@ -15901,7 +16006,7 @@ inputState.guessing--;
 				action.formItem(fi);
 			}
 			{
-			_loop781:
+			_loop786:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
@@ -15919,7 +16024,7 @@ inputState.guessing--;
 				}
 				default:
 				{
-					break _loop781;
+					break _loop786;
 				}
 				}
 			} while (true);
@@ -15938,7 +16043,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t774;
+		_t = __t779;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -15948,7 +16053,7 @@ inputState.guessing--;
 		AST display_item_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST fi = null;
 		
-		AST __t694 = _t;
+		AST __t699 = _t;
 		fi = _t==ASTNULL ? null :(AST)_t;
 		match(_t,Form_item);
 		_t = _t.getFirstChild();
@@ -15977,7 +16082,7 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else if ((_t.getType()==ID)) {
-					AST tmp1076_AST_in = (AST)_t;
+					AST tmp1086_AST_in = (AST)_t;
 					match(_t,ID);
 					_t = _t.getNextSibling();
 				}
@@ -15990,7 +16095,7 @@ inputState.guessing--;
 					action.formItem(fi);
 				}
 				{
-				_loop698:
+				_loop703:
 				do {
 					if (_t==null) _t=ASTNULL;
 					switch ( _t.getType()) {
@@ -16008,7 +16113,7 @@ inputState.guessing--;
 					}
 					default:
 					{
-						break _loop698;
+						break _loop703;
 					}
 					}
 				} while (true);
@@ -16019,7 +16124,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t694;
+		_t = __t699;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -16030,7 +16135,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t476 = _t;
+		AST __t481 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -16078,7 +16183,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1077_AST_in = (AST)_t;
+		AST tmp1087_AST_in = (AST)_t;
 		match(_t,IMAGE);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -16088,14 +16193,14 @@ inputState.guessing--;
 			push(action.defineSymbol(IMAGE, def, id));
 		}
 		{
-		_loop484:
+		_loop489:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case LIKE:
 			{
-				AST __t480 = _t;
-				AST tmp1078_AST_in = (AST)_t;
+				AST __t485 = _t;
+				AST tmp1088_AST_in = (AST)_t;
 				match(_t,LIKE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
@@ -16105,7 +16210,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case VALIDATE:
 				{
-					AST tmp1079_AST_in = (AST)_t;
+					AST tmp1089_AST_in = (AST)_t;
 					match(_t,VALIDATE);
 					_t = _t.getNextSibling();
 					break;
@@ -16120,7 +16225,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t480;
+				_t = __t485;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -16153,7 +16258,7 @@ inputState.guessing--;
 			}
 			case CONVERT3DCOLORS:
 			{
-				AST tmp1080_AST_in = (AST)_t;
+				AST tmp1090_AST_in = (AST)_t;
 				match(_t,CONVERT3DCOLORS);
 				_t = _t.getNextSibling();
 				break;
@@ -16166,8 +16271,8 @@ inputState.guessing--;
 			}
 			case STRETCHTOFIT:
 			{
-				AST __t482 = _t;
-				AST tmp1081_AST_in = (AST)_t;
+				AST __t487 = _t;
+				AST tmp1091_AST_in = (AST)_t;
 				match(_t,STRETCHTOFIT);
 				_t = _t.getFirstChild();
 				{
@@ -16175,7 +16280,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case RETAINSHAPE:
 				{
-					AST tmp1082_AST_in = (AST)_t;
+					AST tmp1092_AST_in = (AST)_t;
 					match(_t,RETAINSHAPE);
 					_t = _t.getNextSibling();
 					break;
@@ -16190,20 +16295,20 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t482;
+				_t = __t487;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case TRANSPARENT:
 			{
-				AST tmp1083_AST_in = (AST)_t;
+				AST tmp1093_AST_in = (AST)_t;
 				match(_t,TRANSPARENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop484;
+				break _loop489;
 			}
 			}
 		} while (true);
@@ -16233,7 +16338,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
 		}
-		_t = __t476;
+		_t = __t481;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -16244,7 +16349,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t487 = _t;
+		AST __t492 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -16292,7 +16397,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1084_AST_in = (AST)_t;
+		AST tmp1094_AST_in = (AST)_t;
 		match(_t,MENU);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -16302,7 +16407,7 @@ inputState.guessing--;
 			push(action.defineSymbol(MENU, def, id));
 		}
 		{
-		_loop491:
+		_loop496:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_14.member(_t.getType()))) {
@@ -16310,13 +16415,13 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop491;
+				break _loop496;
 			}
 			
 		} while (true);
 		}
 		{
-		_loop493:
+		_loop498:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_15.member(_t.getType()))) {
@@ -16324,7 +16429,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop493;
+				break _loop498;
 			}
 			
 		} while (true);
@@ -16334,7 +16439,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
 		}
-		_t = __t487;
+		_t = __t492;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -16356,20 +16461,20 @@ inputState.guessing--;
 		}
 		case FONT:
 		{
-			AST __t495 = _t;
-			AST tmp1085_AST_in = (AST)_t;
+			AST __t500 = _t;
+			AST tmp1095_AST_in = (AST)_t;
 			match(_t,FONT);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t495;
+			_t = __t500;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case LIKE:
 		{
-			AST __t496 = _t;
-			AST tmp1086_AST_in = (AST)_t;
+			AST __t501 = _t;
+			AST tmp1096_AST_in = (AST)_t;
 			match(_t,LIKE);
 			_t = _t.getFirstChild();
 			fld(_t,CQ.SYMBOL);
@@ -16379,7 +16484,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case VALIDATE:
 			{
-				AST tmp1087_AST_in = (AST)_t;
+				AST tmp1097_AST_in = (AST)_t;
 				match(_t,VALIDATE);
 				_t = _t.getNextSibling();
 				break;
@@ -16394,39 +16499,39 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t496;
+			_t = __t501;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case TITLE:
 		{
-			AST __t498 = _t;
-			AST tmp1088_AST_in = (AST)_t;
+			AST __t503 = _t;
+			AST tmp1098_AST_in = (AST)_t;
 			match(_t,TITLE);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t498;
+			_t = __t503;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case MENUBAR:
 		{
-			AST tmp1089_AST_in = (AST)_t;
+			AST tmp1099_AST_in = (AST)_t;
 			match(_t,MENUBAR);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PINNABLE:
 		{
-			AST tmp1090_AST_in = (AST)_t;
+			AST tmp1100_AST_in = (AST)_t;
 			match(_t,PINNABLE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBMENUHELP:
 		{
-			AST tmp1091_AST_in = (AST)_t;
+			AST tmp1101_AST_in = (AST)_t;
 			match(_t,SUBMENUHELP);
 			_t = _t.getNextSibling();
 			break;
@@ -16450,8 +16555,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case MENUITEM:
 		{
-			AST __t501 = _t;
-			AST tmp1092_AST_in = (AST)_t;
+			AST __t506 = _t;
+			AST tmp1102_AST_in = (AST)_t;
 			match(_t,MENUITEM);
 			_t = _t.getFirstChild();
 			id = (AST)_t;
@@ -16461,19 +16566,19 @@ inputState.guessing--;
 				push(action.defineSymbol(MENUITEM, id, id));
 			}
 			{
-			_loop505:
+			_loop510:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
 				case ACCELERATOR:
 				{
-					AST __t503 = _t;
-					AST tmp1093_AST_in = (AST)_t;
+					AST __t508 = _t;
+					AST tmp1103_AST_in = (AST)_t;
 					match(_t,ACCELERATOR);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t503;
+					_t = __t508;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -16488,20 +16593,20 @@ inputState.guessing--;
 				}
 				case DISABLED:
 				{
-					AST tmp1094_AST_in = (AST)_t;
+					AST tmp1104_AST_in = (AST)_t;
 					match(_t,DISABLED);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case FONT:
 				{
-					AST __t504 = _t;
-					AST tmp1095_AST_in = (AST)_t;
+					AST __t509 = _t;
+					AST tmp1105_AST_in = (AST)_t;
 					match(_t,FONT);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t504;
+					_t = __t509;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -16514,21 +16619,21 @@ inputState.guessing--;
 				}
 				case READONLY:
 				{
-					AST tmp1096_AST_in = (AST)_t;
+					AST tmp1106_AST_in = (AST)_t;
 					match(_t,READONLY);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case TOGGLEBOX:
 				{
-					AST tmp1097_AST_in = (AST)_t;
+					AST tmp1107_AST_in = (AST)_t;
 					match(_t,TOGGLEBOX);
 					_t = _t.getNextSibling();
 					break;
 				}
 				default:
 				{
-					break _loop505;
+					break _loop510;
 				}
 				}
 			} while (true);
@@ -16555,14 +16660,14 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(pop());
 			}
-			_t = __t501;
+			_t = __t506;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SUBMENU:
 		{
-			AST __t507 = _t;
-			AST tmp1098_AST_in = (AST)_t;
+			AST __t512 = _t;
+			AST tmp1108_AST_in = (AST)_t;
 			match(_t,SUBMENU);
 			_t = _t.getFirstChild();
 			id2 = (AST)_t;
@@ -16572,13 +16677,13 @@ inputState.guessing--;
 				push(action.defineSymbol(SUBMENU, id2, id2));
 			}
 			{
-			_loop510:
+			_loop515:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
 				case DISABLED:
 				{
-					AST tmp1099_AST_in = (AST)_t;
+					AST tmp1109_AST_in = (AST)_t;
 					match(_t,DISABLED);
 					_t = _t.getNextSibling();
 					break;
@@ -16592,13 +16697,13 @@ inputState.guessing--;
 				}
 				case FONT:
 				{
-					AST __t509 = _t;
-					AST tmp1100_AST_in = (AST)_t;
+					AST __t514 = _t;
+					AST tmp1110_AST_in = (AST)_t;
 					match(_t,FONT);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t509;
+					_t = __t514;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -16613,7 +16718,7 @@ inputState.guessing--;
 				}
 				default:
 				{
-					break _loop510;
+					break _loop515;
 				}
 				}
 			} while (true);
@@ -16621,30 +16726,30 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.addToSymbolScope(pop());
 			}
-			_t = __t507;
+			_t = __t512;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case RULE:
 		{
-			AST __t511 = _t;
-			AST tmp1101_AST_in = (AST)_t;
+			AST __t516 = _t;
+			AST tmp1111_AST_in = (AST)_t;
 			match(_t,RULE);
 			_t = _t.getFirstChild();
 			{
-			_loop514:
+			_loop519:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
 				case FONT:
 				{
-					AST __t513 = _t;
-					AST tmp1102_AST_in = (AST)_t;
+					AST __t518 = _t;
+					AST tmp1112_AST_in = (AST)_t;
 					match(_t,FONT);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t513;
+					_t = __t518;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -16659,18 +16764,18 @@ inputState.guessing--;
 				}
 				default:
 				{
-					break _loop514;
+					break _loop519;
 				}
 				}
 			} while (true);
 			}
-			_t = __t511;
+			_t = __t516;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SKIP:
 		{
-			AST tmp1103_AST_in = (AST)_t;
+			AST tmp1113_AST_in = (AST)_t;
 			match(_t,SKIP);
 			_t = _t.getNextSibling();
 			break;
@@ -16682,15 +16787,15 @@ inputState.guessing--;
 		}
 		}
 		{
-		boolean synPredMatched518 = false;
+		boolean synPredMatched523 = false;
 		if (_t==null) _t=ASTNULL;
 		if (((_t.getType()==PERIOD))) {
-			AST __t518 = _t;
-			synPredMatched518 = true;
+			AST __t523 = _t;
+			synPredMatched523 = true;
 			inputState.guessing++;
 			try {
 				{
-				AST tmp1104_AST_in = (AST)_t;
+				AST tmp1114_AST_in = (AST)_t;
 				match(_t,PERIOD);
 				_t = _t.getNextSibling();
 				{
@@ -16698,28 +16803,28 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case RULE:
 				{
-					AST tmp1105_AST_in = (AST)_t;
+					AST tmp1115_AST_in = (AST)_t;
 					match(_t,RULE);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case SKIP:
 				{
-					AST tmp1106_AST_in = (AST)_t;
+					AST tmp1116_AST_in = (AST)_t;
 					match(_t,SKIP);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case SUBMENU:
 				{
-					AST tmp1107_AST_in = (AST)_t;
+					AST tmp1117_AST_in = (AST)_t;
 					match(_t,SUBMENU);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case MENUITEM:
 				{
-					AST tmp1108_AST_in = (AST)_t;
+					AST tmp1118_AST_in = (AST)_t;
 					match(_t,MENUITEM);
 					_t = _t.getNextSibling();
 					break;
@@ -16733,13 +16838,13 @@ inputState.guessing--;
 				}
 			}
 			catch (RecognitionException pe) {
-				synPredMatched518 = false;
+				synPredMatched523 = false;
 			}
-			_t = __t518;
+			_t = __t523;
 inputState.guessing--;
 		}
-		if ( synPredMatched518 ) {
-			AST tmp1109_AST_in = (AST)_t;
+		if ( synPredMatched523 ) {
+			AST tmp1119_AST_in = (AST)_t;
 			match(_t,PERIOD);
 			_t = _t.getNextSibling();
 		}
@@ -16764,7 +16869,7 @@ inputState.guessing--;
 		AST id3 = null;
 		AST id2 = null;
 		
-		AST __t520 = _t;
+		AST __t525 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -16825,16 +16930,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PARAMETER:
 		{
-			AST tmp1110_AST_in = (AST)_t;
+			AST tmp1120_AST_in = (AST)_t;
 			match(_t,PARAMETER);
 			_t = _t.getNextSibling();
-			AST tmp1111_AST_in = (AST)_t;
+			AST tmp1121_AST_in = (AST)_t;
 			match(_t,BUFFER);
 			_t = _t.getNextSibling();
 			bid = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
-			AST tmp1112_AST_in = (AST)_t;
+			AST tmp1122_AST_in = (AST)_t;
 			match(_t,FOR);
 			_t = _t.getNextSibling();
 			brec = _t==ASTNULL ? null : (AST)_t;
@@ -16848,7 +16953,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case PRESELECT:
 			{
-				AST tmp1113_AST_in = (AST)_t;
+				AST tmp1123_AST_in = (AST)_t;
 				match(_t,PRESELECT);
 				_t = _t.getNextSibling();
 				break;
@@ -16894,12 +16999,12 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case FIELDS:
 			{
-				AST __t527 = _t;
-				AST tmp1114_AST_in = (AST)_t;
+				AST __t532 = _t;
+				AST tmp1124_AST_in = (AST)_t;
 				match(_t,FIELDS);
 				_t = _t.getFirstChild();
 				{
-				_loop529:
+				_loop534:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -16907,12 +17012,12 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						break _loop529;
+						break _loop534;
 					}
 					
 				} while (true);
 				}
-				_t = __t527;
+				_t = __t532;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -16939,28 +17044,28 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case INPUT:
 			{
-				AST tmp1115_AST_in = (AST)_t;
+				AST tmp1125_AST_in = (AST)_t;
 				match(_t,INPUT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case OUTPUT:
 			{
-				AST tmp1116_AST_in = (AST)_t;
+				AST tmp1126_AST_in = (AST)_t;
 				match(_t,OUTPUT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case INPUTOUTPUT:
 			{
-				AST tmp1117_AST_in = (AST)_t;
+				AST tmp1127_AST_in = (AST)_t;
 				match(_t,INPUTOUTPUT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case RETURN:
 			{
-				AST tmp1118_AST_in = (AST)_t;
+				AST tmp1128_AST_in = (AST)_t;
 				match(_t,RETURN);
 				_t = _t.getNextSibling();
 				break;
@@ -16971,7 +17076,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1119_AST_in = (AST)_t;
+			AST tmp1129_AST_in = (AST)_t;
 			match(_t,PARAMETER);
 			_t = _t.getNextSibling();
 			{
@@ -16979,36 +17084,36 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case TABLE:
 			{
-				AST tmp1120_AST_in = (AST)_t;
+				AST tmp1130_AST_in = (AST)_t;
 				match(_t,TABLE);
 				_t = _t.getNextSibling();
-				AST tmp1121_AST_in = (AST)_t;
+				AST tmp1131_AST_in = (AST)_t;
 				match(_t,FOR);
 				_t = _t.getNextSibling();
 				tbl(_t,CQ.TEMPTABLESYMBOL);
 				_t = _retTree;
 				{
-				_loop533:
+				_loop538:
 				do {
 					if (_t==null) _t=ASTNULL;
 					switch ( _t.getType()) {
 					case APPEND:
 					{
-						AST tmp1122_AST_in = (AST)_t;
+						AST tmp1132_AST_in = (AST)_t;
 						match(_t,APPEND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case BIND:
 					{
-						AST tmp1123_AST_in = (AST)_t;
+						AST tmp1133_AST_in = (AST)_t;
 						match(_t,BIND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					default:
 					{
-						break _loop533;
+						break _loop538;
 					}
 					}
 				} while (true);
@@ -17017,7 +17122,7 @@ inputState.guessing--;
 			}
 			case TABLEHANDLE:
 			{
-				AST tmp1124_AST_in = (AST)_t;
+				AST tmp1134_AST_in = (AST)_t;
 				match(_t,TABLEHANDLE);
 				_t = _t.getNextSibling();
 				{
@@ -17025,7 +17130,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case FOR:
 				{
-					AST tmp1125_AST_in = (AST)_t;
+					AST tmp1135_AST_in = (AST)_t;
 					match(_t,FOR);
 					_t = _t.getNextSibling();
 					break;
@@ -17044,27 +17149,27 @@ inputState.guessing--;
 				match(_t,ID);
 				_t = _t.getNextSibling();
 				{
-				_loop536:
+				_loop541:
 				do {
 					if (_t==null) _t=ASTNULL;
 					switch ( _t.getType()) {
 					case APPEND:
 					{
-						AST tmp1126_AST_in = (AST)_t;
+						AST tmp1136_AST_in = (AST)_t;
 						match(_t,APPEND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case BIND:
 					{
-						AST tmp1127_AST_in = (AST)_t;
+						AST tmp1137_AST_in = (AST)_t;
 						match(_t,BIND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					default:
 					{
-						break _loop536;
+						break _loop541;
 					}
 					}
 				} while (true);
@@ -17076,44 +17181,44 @@ inputState.guessing--;
 			}
 			case DATASET:
 			{
-				AST tmp1128_AST_in = (AST)_t;
+				AST tmp1138_AST_in = (AST)_t;
 				match(_t,DATASET);
 				_t = _t.getNextSibling();
-				AST tmp1129_AST_in = (AST)_t;
+				AST tmp1139_AST_in = (AST)_t;
 				match(_t,FOR);
 				_t = _t.getNextSibling();
 				ds = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
 				{
-				_loop538:
+				_loop543:
 				do {
 					if (_t==null) _t=ASTNULL;
 					switch ( _t.getType()) {
 					case APPEND:
 					{
-						AST tmp1130_AST_in = (AST)_t;
+						AST tmp1140_AST_in = (AST)_t;
 						match(_t,APPEND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case BYVALUE:
 					{
-						AST tmp1131_AST_in = (AST)_t;
+						AST tmp1141_AST_in = (AST)_t;
 						match(_t,BYVALUE);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case BIND:
 					{
-						AST tmp1132_AST_in = (AST)_t;
+						AST tmp1142_AST_in = (AST)_t;
 						match(_t,BIND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					default:
 					{
-						break _loop538;
+						break _loop543;
 					}
 					}
 				} while (true);
@@ -17125,41 +17230,41 @@ inputState.guessing--;
 			}
 			case DATASETHANDLE:
 			{
-				AST tmp1133_AST_in = (AST)_t;
+				AST tmp1143_AST_in = (AST)_t;
 				match(_t,DATASETHANDLE);
 				_t = _t.getNextSibling();
 				id3 = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
 				{
-				_loop540:
+				_loop545:
 				do {
 					if (_t==null) _t=ASTNULL;
 					switch ( _t.getType()) {
 					case APPEND:
 					{
-						AST tmp1134_AST_in = (AST)_t;
+						AST tmp1144_AST_in = (AST)_t;
 						match(_t,APPEND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case BYVALUE:
 					{
-						AST tmp1135_AST_in = (AST)_t;
+						AST tmp1145_AST_in = (AST)_t;
 						match(_t,BYVALUE);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case BIND:
 					{
-						AST tmp1136_AST_in = (AST)_t;
+						AST tmp1146_AST_in = (AST)_t;
 						match(_t,BIND);
 						_t = _t.getNextSibling();
 						break;
 					}
 					default:
 					{
-						break _loop540;
+						break _loop545;
 					}
 					}
 				} while (true);
@@ -17220,7 +17325,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t520;
+		_t = __t525;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -17234,20 +17339,20 @@ inputState.guessing--;
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==AS)) {
-			AST __t544 = _t;
+			AST __t549 = _t;
 			as = _t==ASTNULL ? null :(AST)_t;
 			match(_t,AS);
 			_t = _t.getFirstChild();
 			{
-			boolean synPredMatched548 = false;
+			boolean synPredMatched553 = false;
 			if (_t==null) _t=ASTNULL;
 			if (((_t.getType()==HANDLE))) {
-				AST __t548 = _t;
-				synPredMatched548 = true;
+				AST __t553 = _t;
+				synPredMatched553 = true;
 				inputState.guessing++;
 				try {
 					{
-					AST tmp1137_AST_in = (AST)_t;
+					AST tmp1147_AST_in = (AST)_t;
 					match(_t,HANDLE);
 					_t = _t.getNextSibling();
 					{
@@ -17255,7 +17360,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case TO:
 					{
-						AST tmp1138_AST_in = (AST)_t;
+						AST tmp1148_AST_in = (AST)_t;
 						match(_t,TO);
 						_t = _t.getNextSibling();
 						break;
@@ -17281,13 +17386,13 @@ inputState.guessing--;
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched548 = false;
+					synPredMatched553 = false;
 				}
-				_t = __t548;
+				_t = __t553;
 inputState.guessing--;
 			}
-			if ( synPredMatched548 ) {
-				AST tmp1139_AST_in = (AST)_t;
+			if ( synPredMatched553 ) {
+				AST tmp1149_AST_in = (AST)_t;
 				match(_t,HANDLE);
 				_t = _t.getNextSibling();
 				{
@@ -17295,7 +17400,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case TO:
 				{
-					AST tmp1140_AST_in = (AST)_t;
+					AST tmp1150_AST_in = (AST)_t;
 					match(_t,TO);
 					_t = _t.getNextSibling();
 					break;
@@ -17320,10 +17425,10 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else if ((_t.getType()==CLASS)) {
-				AST tmp1141_AST_in = (AST)_t;
+				AST tmp1151_AST_in = (AST)_t;
 				match(_t,CLASS);
 				_t = _t.getNextSibling();
-				AST tmp1142_AST_in = (AST)_t;
+				AST tmp1152_AST_in = (AST)_t;
 				match(_t,TYPE_NAME);
 				_t = _t.getNextSibling();
 			}
@@ -17336,7 +17441,7 @@ inputState.guessing--;
 			}
 			
 			}
-			_t = __t544;
+			_t = __t549;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
 				action.defAs(as);
@@ -17350,7 +17455,7 @@ inputState.guessing--;
 		
 		}
 		{
-		_loop555:
+		_loop560:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
@@ -17363,19 +17468,19 @@ inputState.guessing--;
 			}
 			case DECIMALS:
 			{
-				AST __t552 = _t;
-				AST tmp1143_AST_in = (AST)_t;
+				AST __t557 = _t;
+				AST tmp1153_AST_in = (AST)_t;
 				match(_t,DECIMALS);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t552;
+				_t = __t557;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LIKE:
 			{
-				AST __t553 = _t;
+				AST __t558 = _t;
 				li = _t==ASTNULL ? null :(AST)_t;
 				match(_t,LIKE);
 				_t = _t.getFirstChild();
@@ -17386,7 +17491,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case VALIDATE:
 				{
-					AST tmp1144_AST_in = (AST)_t;
+					AST tmp1154_AST_in = (AST)_t;
 					match(_t,VALIDATE);
 					_t = _t.getNextSibling();
 					break;
@@ -17401,7 +17506,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t553;
+				_t = __t558;
 				_t = _t.getNextSibling();
 				if ( inputState.guessing==0 ) {
 					action.defLike(li);
@@ -17423,7 +17528,7 @@ inputState.guessing--;
 			}
 			case NOUNDO:
 			{
-				AST tmp1145_AST_in = (AST)_t;
+				AST tmp1155_AST_in = (AST)_t;
 				match(_t,NOUNDO);
 				_t = _t.getNextSibling();
 				break;
@@ -17437,17 +17542,17 @@ inputState.guessing--;
 			default:
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==FORMAT)) {
-					AST __t551 = _t;
-					AST tmp1146_AST_in = (AST)_t;
+					AST __t556 = _t;
+					AST tmp1156_AST_in = (AST)_t;
 					match(_t,FORMAT);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t551;
+					_t = __t556;
 					_t = _t.getNextSibling();
 				}
 			else {
-				break _loop555;
+				break _loop560;
 			}
 			}
 		} while (true);
@@ -17463,7 +17568,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CHARACTER:
 		{
-			AST tmp1147_AST_in = (AST)_t;
+			AST tmp1157_AST_in = (AST)_t;
 			match(_t,CHARACTER);
 			_t = _t.getNextSibling();
 			break;
@@ -17542,13 +17647,13 @@ inputState.guessing--;
 		case Not_casesens:
 		{
 			AST __t1673 = _t;
-			AST tmp1148_AST_in = (AST)_t;
+			AST tmp1158_AST_in = (AST)_t;
 			match(_t,Not_casesens);
 			_t = _t.getFirstChild();
-			AST tmp1149_AST_in = (AST)_t;
+			AST tmp1159_AST_in = (AST)_t;
 			match(_t,NOT);
 			_t = _t.getNextSibling();
-			AST tmp1150_AST_in = (AST)_t;
+			AST tmp1160_AST_in = (AST)_t;
 			match(_t,CASESENSITIVE);
 			_t = _t.getNextSibling();
 			_t = __t1673;
@@ -17557,7 +17662,7 @@ inputState.guessing--;
 		}
 		case CASESENSITIVE:
 		{
-			AST tmp1151_AST_in = (AST)_t;
+			AST tmp1161_AST_in = (AST)_t;
 			match(_t,CASESENSITIVE);
 			_t = _t.getNextSibling();
 			break;
@@ -17575,7 +17680,7 @@ inputState.guessing--;
 		AST initial_constant_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1972 = _t;
-		AST tmp1152_AST_in = (AST)_t;
+		AST tmp1162_AST_in = (AST)_t;
 		match(_t,INITIAL);
 		_t = _t.getFirstChild();
 		{
@@ -17583,7 +17688,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case LEFTBRACE:
 		{
-			AST tmp1153_AST_in = (AST)_t;
+			AST tmp1163_AST_in = (AST)_t;
 			match(_t,LEFTBRACE);
 			_t = _t.getNextSibling();
 			{
@@ -17591,7 +17696,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case TODAY:
 			{
-				AST tmp1154_AST_in = (AST)_t;
+				AST tmp1164_AST_in = (AST)_t;
 				match(_t,TODAY);
 				_t = _t.getNextSibling();
 				break;
@@ -17654,7 +17759,7 @@ inputState.guessing--;
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1155_AST_in = (AST)_t;
+					AST tmp1165_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					{
@@ -17662,7 +17767,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case TODAY:
 					{
-						AST tmp1156_AST_in = (AST)_t;
+						AST tmp1166_AST_in = (AST)_t;
 						match(_t,TODAY);
 						_t = _t.getNextSibling();
 						break;
@@ -17727,7 +17832,7 @@ inputState.guessing--;
 				
 			} while (true);
 			}
-			AST tmp1157_AST_in = (AST)_t;
+			AST tmp1167_AST_in = (AST)_t;
 			match(_t,RIGHTBRACE);
 			_t = _t.getNextSibling();
 			break;
@@ -17781,7 +17886,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case TODAY:
 			{
-				AST tmp1158_AST_in = (AST)_t;
+				AST tmp1168_AST_in = (AST)_t;
 				match(_t,TODAY);
 				_t = _t.getNextSibling();
 				break;
@@ -17857,7 +17962,7 @@ inputState.guessing--;
 		AST extentphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1923 = _t;
-		AST tmp1159_AST_in = (AST)_t;
+		AST tmp1169_AST_in = (AST)_t;
 		match(_t,EXTENT);
 		_t = _t.getFirstChild();
 		{
@@ -17884,7 +17989,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t557 = _t;
+		AST __t562 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -17932,7 +18037,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1160_AST_in = (AST)_t;
+		AST tmp1170_AST_in = (AST)_t;
 		match(_t,QUERY);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -17941,7 +18046,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			push(action.defineSymbol(QUERY, def, id));
 		}
-		AST tmp1161_AST_in = (AST)_t;
+		AST tmp1171_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.INIT);
@@ -17972,11 +18077,11 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop563:
+		_loop568:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1162_AST_in = (AST)_t;
+				AST tmp1172_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				tbl(_t,CQ.INIT);
@@ -18008,52 +18113,52 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop563;
+				break _loop568;
 			}
 			
 		} while (true);
 		}
 		{
-		_loop566:
+		_loop571:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case CACHE:
 			{
-				AST __t565 = _t;
-				AST tmp1163_AST_in = (AST)_t;
+				AST __t570 = _t;
+				AST tmp1173_AST_in = (AST)_t;
 				match(_t,CACHE);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t565;
+				_t = __t570;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case SCROLLING:
 			{
-				AST tmp1164_AST_in = (AST)_t;
+				AST tmp1174_AST_in = (AST)_t;
 				match(_t,SCROLLING);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case RCODEINFORMATION:
 			{
-				AST tmp1165_AST_in = (AST)_t;
+				AST tmp1175_AST_in = (AST)_t;
 				match(_t,RCODEINFORMATION);
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop566;
+				break _loop571;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t557;
+		_t = __t562;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
@@ -18069,8 +18174,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FIELDS:
 		{
-			AST __t1032 = _t;
-			AST tmp1166_AST_in = (AST)_t;
+			AST __t1037 = _t;
+			AST tmp1176_AST_in = (AST)_t;
 			match(_t,FIELDS);
 			_t = _t.getFirstChild();
 			{
@@ -18078,11 +18183,11 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case LEFTPAREN:
 			{
-				AST tmp1167_AST_in = (AST)_t;
+				AST tmp1177_AST_in = (AST)_t;
 				match(_t,LEFTPAREN);
 				_t = _t.getNextSibling();
 				{
-				_loop1037:
+				_loop1042:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -18093,13 +18198,13 @@ inputState.guessing--;
 						switch ( _t.getType()) {
 						case WHEN:
 						{
-							AST __t1036 = _t;
-							AST tmp1168_AST_in = (AST)_t;
+							AST __t1041 = _t;
+							AST tmp1178_AST_in = (AST)_t;
 							match(_t,WHEN);
 							_t = _t.getFirstChild();
 							expression(_t);
 							_t = _retTree;
-							_t = __t1036;
+							_t = __t1041;
 							_t = _t.getNextSibling();
 							break;
 						}
@@ -18116,12 +18221,12 @@ inputState.guessing--;
 						}
 					}
 					else {
-						break _loop1037;
+						break _loop1042;
 					}
 					
 				} while (true);
 				}
-				AST tmp1169_AST_in = (AST)_t;
+				AST tmp1179_AST_in = (AST)_t;
 				match(_t,RIGHTPAREN);
 				_t = _t.getNextSibling();
 				break;
@@ -18136,14 +18241,14 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t1032;
+			_t = __t1037;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case EXCEPT:
 		{
-			AST __t1038 = _t;
-			AST tmp1170_AST_in = (AST)_t;
+			AST __t1043 = _t;
+			AST tmp1180_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
@@ -18151,11 +18256,11 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case LEFTPAREN:
 			{
-				AST tmp1171_AST_in = (AST)_t;
+				AST tmp1181_AST_in = (AST)_t;
 				match(_t,LEFTPAREN);
 				_t = _t.getNextSibling();
 				{
-				_loop1043:
+				_loop1048:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -18166,13 +18271,13 @@ inputState.guessing--;
 						switch ( _t.getType()) {
 						case WHEN:
 						{
-							AST __t1042 = _t;
-							AST tmp1172_AST_in = (AST)_t;
+							AST __t1047 = _t;
+							AST tmp1182_AST_in = (AST)_t;
 							match(_t,WHEN);
 							_t = _t.getFirstChild();
 							expression(_t);
 							_t = _retTree;
-							_t = __t1042;
+							_t = __t1047;
 							_t = _t.getNextSibling();
 							break;
 						}
@@ -18189,12 +18294,12 @@ inputState.guessing--;
 						}
 					}
 					else {
-						break _loop1043;
+						break _loop1048;
 					}
 					
 				} while (true);
 				}
-				AST tmp1173_AST_in = (AST)_t;
+				AST tmp1183_AST_in = (AST)_t;
 				match(_t,RIGHTPAREN);
 				_t = _t.getNextSibling();
 				break;
@@ -18209,7 +18314,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t1038;
+			_t = __t1043;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -18227,7 +18332,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t568 = _t;
+		AST __t573 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -18275,7 +18380,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1174_AST_in = (AST)_t;
+		AST tmp1184_AST_in = (AST)_t;
 		match(_t,RECTANGLE);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -18285,38 +18390,38 @@ inputState.guessing--;
 			push(action.defineSymbol(RECTANGLE, def, id));
 		}
 		{
-		_loop576:
+		_loop581:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case NOFILL:
 			{
-				AST tmp1175_AST_in = (AST)_t;
+				AST tmp1185_AST_in = (AST)_t;
 				match(_t,NOFILL);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case EDGECHARS:
 			{
-				AST __t572 = _t;
-				AST tmp1176_AST_in = (AST)_t;
+				AST __t577 = _t;
+				AST tmp1186_AST_in = (AST)_t;
 				match(_t,EDGECHARS);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t572;
+				_t = __t577;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case EDGEPIXELS:
 			{
-				AST __t573 = _t;
-				AST tmp1177_AST_in = (AST)_t;
+				AST __t578 = _t;
+				AST tmp1187_AST_in = (AST)_t;
 				match(_t,EDGEPIXELS);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t573;
+				_t = __t578;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -18331,15 +18436,15 @@ inputState.guessing--;
 			}
 			case GRAPHICEDGE:
 			{
-				AST tmp1178_AST_in = (AST)_t;
+				AST tmp1188_AST_in = (AST)_t;
 				match(_t,GRAPHICEDGE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LIKE:
 			{
-				AST __t574 = _t;
-				AST tmp1179_AST_in = (AST)_t;
+				AST __t579 = _t;
+				AST tmp1189_AST_in = (AST)_t;
 				match(_t,LIKE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
@@ -18349,7 +18454,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case VALIDATE:
 				{
-					AST tmp1180_AST_in = (AST)_t;
+					AST tmp1190_AST_in = (AST)_t;
 					match(_t,VALIDATE);
 					_t = _t.getNextSibling();
 					break;
@@ -18364,7 +18469,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t574;
+				_t = __t579;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -18384,7 +18489,7 @@ inputState.guessing--;
 			}
 			default:
 			{
-				break _loop576;
+				break _loop581;
 			}
 			}
 		} while (true);
@@ -18411,7 +18516,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t568;
+		_t = __t573;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
@@ -18425,7 +18530,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t579 = _t;
+		AST __t584 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -18473,7 +18578,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1181_AST_in = (AST)_t;
+		AST tmp1191_AST_in = (AST)_t;
 		match(_t,STREAM);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -18481,7 +18586,7 @@ inputState.guessing--;
 		_t = _t.getNextSibling();
 		state_end(_t);
 		_t = _retTree;
-		_t = __t579;
+		_t = __t584;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(action.defineSymbol(STREAM, def, id));
@@ -18495,7 +18600,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t583 = _t;
+		AST __t588 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -18543,7 +18648,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1182_AST_in = (AST)_t;
+		AST tmp1192_AST_in = (AST)_t;
 		match(_t,SUBMENU);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -18553,7 +18658,7 @@ inputState.guessing--;
 			push(action.defineSymbol(SUBMENU, def, id));
 		}
 		{
-		_loop587:
+		_loop592:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_14.member(_t.getType()))) {
@@ -18561,13 +18666,13 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop587;
+				break _loop592;
 			}
 			
 		} while (true);
 		}
 		{
-		_loop589:
+		_loop594:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_15.member(_t.getType()))) {
@@ -18575,14 +18680,14 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop589;
+				break _loop594;
 			}
 			
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t583;
+		_t = __t588;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
@@ -18597,7 +18702,7 @@ inputState.guessing--;
 		AST id = null;
 		AST bt = null;
 		
-		AST __t591 = _t;
+		AST __t596 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -18645,7 +18750,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1183_AST_in = (AST)_t;
+		AST tmp1193_AST_in = (AST)_t;
 		match(_t,TEMPTABLE);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -18659,14 +18764,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNDO:
 		{
-			AST tmp1184_AST_in = (AST)_t;
+			AST tmp1194_AST_in = (AST)_t;
 			match(_t,UNDO);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case NOUNDO:
 		{
-			AST tmp1185_AST_in = (AST)_t;
+			AST tmp1195_AST_in = (AST)_t;
 			match(_t,NOUNDO);
 			_t = _t.getNextSibling();
 			break;
@@ -18754,7 +18859,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case REFERENCEONLY:
 		{
-			AST tmp1186_AST_in = (AST)_t;
+			AST tmp1196_AST_in = (AST)_t;
 			match(_t,REFERENCEONLY);
 			_t = _t.getNextSibling();
 			break;
@@ -18833,8 +18938,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BEFORETABLE:
 		{
-			AST __t601 = _t;
-			AST tmp1187_AST_in = (AST)_t;
+			AST __t606 = _t;
+			AST tmp1197_AST_in = (AST)_t;
 			match(_t,BEFORETABLE);
 			_t = _t.getFirstChild();
 			bt = (AST)_t;
@@ -18843,7 +18948,7 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 					action.defineBuffer(bt, bt, id, false);
 			}
-			_t = __t601;
+			_t = __t606;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -18866,7 +18971,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case RCODEINFORMATION:
 		{
-			AST tmp1188_AST_in = (AST)_t;
+			AST tmp1198_AST_in = (AST)_t;
 			match(_t,RCODEINFORMATION);
 			_t = _t.getNextSibling();
 			break;
@@ -18885,7 +18990,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop604:
+		_loop609:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==FIELD)) {
@@ -18893,25 +18998,25 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop604;
+				break _loop609;
 			}
 			
 		} while (true);
 		}
 		{
-		_loop615:
+		_loop620:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==INDEX)) {
-				AST __t606 = _t;
-				AST tmp1189_AST_in = (AST)_t;
+				AST __t611 = _t;
+				AST tmp1199_AST_in = (AST)_t;
 				match(_t,INDEX);
 				_t = _t.getFirstChild();
-				AST tmp1190_AST_in = (AST)_t;
+				AST tmp1200_AST_in = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
 				{
-				_loop610:
+				_loop615:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_tokenSet_19.member(_t.getType()))) {
@@ -18920,14 +19025,14 @@ inputState.guessing--;
 						switch ( _t.getType()) {
 						case AS:
 						{
-							AST tmp1191_AST_in = (AST)_t;
+							AST tmp1201_AST_in = (AST)_t;
 							match(_t,AS);
 							_t = _t.getNextSibling();
 							break;
 						}
 						case IS:
 						{
-							AST tmp1192_AST_in = (AST)_t;
+							AST tmp1202_AST_in = (AST)_t;
 							match(_t,IS);
 							_t = _t.getNextSibling();
 							break;
@@ -18949,21 +19054,21 @@ inputState.guessing--;
 						switch ( _t.getType()) {
 						case UNIQUE:
 						{
-							AST tmp1193_AST_in = (AST)_t;
+							AST tmp1203_AST_in = (AST)_t;
 							match(_t,UNIQUE);
 							_t = _t.getNextSibling();
 							break;
 						}
 						case PRIMARY:
 						{
-							AST tmp1194_AST_in = (AST)_t;
+							AST tmp1204_AST_in = (AST)_t;
 							match(_t,PRIMARY);
 							_t = _t.getNextSibling();
 							break;
 						}
 						case WORDINDEX:
 						{
-							AST tmp1195_AST_in = (AST)_t;
+							AST tmp1205_AST_in = (AST)_t;
 							match(_t,WORDINDEX);
 							_t = _t.getNextSibling();
 							break;
@@ -18976,73 +19081,73 @@ inputState.guessing--;
 						}
 					}
 					else {
-						break _loop610;
+						break _loop615;
 					}
 					
 				} while (true);
 				}
 				{
-				int _cnt614=0;
-				_loop614:
+				int _cnt619=0;
+				_loop619:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==ID)) {
-						AST tmp1196_AST_in = (AST)_t;
+						AST tmp1206_AST_in = (AST)_t;
 						match(_t,ID);
 						_t = _t.getNextSibling();
 						{
-						_loop613:
+						_loop618:
 						do {
 							if (_t==null) _t=ASTNULL;
 							switch ( _t.getType()) {
 							case ASCENDING:
 							{
-								AST tmp1197_AST_in = (AST)_t;
+								AST tmp1207_AST_in = (AST)_t;
 								match(_t,ASCENDING);
 								_t = _t.getNextSibling();
 								break;
 							}
 							case DESCENDING:
 							{
-								AST tmp1198_AST_in = (AST)_t;
+								AST tmp1208_AST_in = (AST)_t;
 								match(_t,DESCENDING);
 								_t = _t.getNextSibling();
 								break;
 							}
 							case CASESENSITIVE:
 							{
-								AST tmp1199_AST_in = (AST)_t;
+								AST tmp1209_AST_in = (AST)_t;
 								match(_t,CASESENSITIVE);
 								_t = _t.getNextSibling();
 								break;
 							}
 							default:
 							{
-								break _loop613;
+								break _loop618;
 							}
 							}
 						} while (true);
 						}
 					}
 					else {
-						if ( _cnt614>=1 ) { break _loop614; } else {throw new NoViableAltException(_t);}
+						if ( _cnt619>=1 ) { break _loop619; } else {throw new NoViableAltException(_t);}
 					}
 					
-					_cnt614++;
+					_cnt619++;
 				} while (true);
 				}
-				_t = __t606;
+				_t = __t611;
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop615;
+				break _loop620;
 			}
 			
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t591;
+		_t = __t596;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -19052,8 +19157,8 @@ inputState.guessing--;
 		AST def_table_like_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST rec = null;
 		
-		AST __t617 = _t;
-		AST tmp1200_AST_in = (AST)_t;
+		AST __t622 = _t;
+		AST tmp1210_AST_in = (AST)_t;
 		match(_t,LIKE);
 		_t = _t.getFirstChild();
 		rec = _t==ASTNULL ? null : (AST)_t;
@@ -19064,7 +19169,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case VALIDATE:
 		{
-			AST tmp1201_AST_in = (AST)_t;
+			AST tmp1211_AST_in = (AST)_t;
 			match(_t,VALIDATE);
 			_t = _t.getNextSibling();
 			break;
@@ -19081,15 +19186,15 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop623:
+		_loop628:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==USEINDEX)) {
-				AST __t620 = _t;
-				AST tmp1202_AST_in = (AST)_t;
+				AST __t625 = _t;
+				AST tmp1212_AST_in = (AST)_t;
 				match(_t,USEINDEX);
 				_t = _t.getFirstChild();
-				AST tmp1203_AST_in = (AST)_t;
+				AST tmp1213_AST_in = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
 				{
@@ -19103,14 +19208,14 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case AS:
 					{
-						AST tmp1204_AST_in = (AST)_t;
+						AST tmp1214_AST_in = (AST)_t;
 						match(_t,AS);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case IS:
 					{
-						AST tmp1205_AST_in = (AST)_t;
+						AST tmp1215_AST_in = (AST)_t;
 						match(_t,IS);
 						_t = _t.getNextSibling();
 						break;
@@ -19121,7 +19226,7 @@ inputState.guessing--;
 					}
 					}
 					}
-					AST tmp1206_AST_in = (AST)_t;
+					AST tmp1216_AST_in = (AST)_t;
 					match(_t,PRIMARY);
 					_t = _t.getNextSibling();
 					break;
@@ -19136,16 +19241,16 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t620;
+				_t = __t625;
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop623;
+				break _loop628;
 			}
 			
 		} while (true);
 		}
-		_t = __t617;
+		_t = __t622;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.defineTableLike(rec);
@@ -19158,8 +19263,8 @@ inputState.guessing--;
 		AST def_table_field_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST id = null;
 		
-		AST __t625 = _t;
-		AST tmp1207_AST_in = (AST)_t;
+		AST __t630 = _t;
+		AST tmp1217_AST_in = (AST)_t;
 		match(_t,FIELD);
 		_t = _t.getFirstChild();
 		id = (AST)_t;
@@ -19169,7 +19274,7 @@ inputState.guessing--;
 			action.defineTableField(id);
 		}
 		{
-		_loop627:
+		_loop632:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_20.member(_t.getType()))) {
@@ -19177,12 +19282,12 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop627;
+				break _loop632;
 			}
 			
 		} while (true);
 		}
-		_t = __t625;
+		_t = __t630;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -19197,7 +19302,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case AS:
 		{
-			AST __t743 = _t;
+			AST __t748 = _t;
 			as = _t==ASTNULL ? null :(AST)_t;
 			match(_t,AS);
 			_t = _t.getFirstChild();
@@ -19206,10 +19311,10 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case CLASS:
 			{
-				AST tmp1208_AST_in = (AST)_t;
+				AST tmp1218_AST_in = (AST)_t;
 				match(_t,CLASS);
 				_t = _t.getNextSibling();
-				AST tmp1209_AST_in = (AST)_t;
+				AST tmp1219_AST_in = (AST)_t;
 				match(_t,TYPE_NAME);
 				_t = _t.getNextSibling();
 				break;
@@ -19243,7 +19348,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t743;
+			_t = __t748;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
 				action.defAs(as);
@@ -19268,43 +19373,43 @@ inputState.guessing--;
 		}
 		case COLUMNCODEPAGE:
 		{
-			AST __t745 = _t;
-			AST tmp1210_AST_in = (AST)_t;
+			AST __t750 = _t;
+			AST tmp1220_AST_in = (AST)_t;
 			match(_t,COLUMNCODEPAGE);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t745;
+			_t = __t750;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case CONTEXTHELPID:
 		{
-			AST __t746 = _t;
-			AST tmp1211_AST_in = (AST)_t;
+			AST __t751 = _t;
+			AST tmp1221_AST_in = (AST)_t;
 			match(_t,CONTEXTHELPID);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t746;
+			_t = __t751;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DECIMALS:
 		{
-			AST __t747 = _t;
-			AST tmp1212_AST_in = (AST)_t;
+			AST __t752 = _t;
+			AST tmp1222_AST_in = (AST)_t;
 			match(_t,DECIMALS);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t747;
+			_t = __t752;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DROPTARGET:
 		{
-			AST tmp1213_AST_in = (AST)_t;
+			AST tmp1223_AST_in = (AST)_t;
 			match(_t,DROPTARGET);
 			_t = _t.getNextSibling();
 			break;
@@ -19317,37 +19422,37 @@ inputState.guessing--;
 		}
 		case FONT:
 		{
-			AST __t748 = _t;
-			AST tmp1214_AST_in = (AST)_t;
+			AST __t753 = _t;
+			AST tmp1224_AST_in = (AST)_t;
 			match(_t,FONT);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t748;
+			_t = __t753;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FORMAT:
 		{
-			AST __t749 = _t;
-			AST tmp1215_AST_in = (AST)_t;
+			AST __t754 = _t;
+			AST tmp1225_AST_in = (AST)_t;
 			match(_t,FORMAT);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t749;
+			_t = __t754;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case HELP:
 		{
-			AST __t750 = _t;
-			AST tmp1216_AST_in = (AST)_t;
+			AST __t755 = _t;
+			AST tmp1226_AST_in = (AST)_t;
 			match(_t,HELP);
 			_t = _t.getFirstChild();
 			constant(_t);
 			_t = _retTree;
-			_t = __t750;
+			_t = __t755;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -19366,7 +19471,7 @@ inputState.guessing--;
 		}
 		case LIKE:
 		{
-			AST __t751 = _t;
+			AST __t756 = _t;
 			li = _t==ASTNULL ? null :(AST)_t;
 			match(_t,LIKE);
 			_t = _t.getFirstChild();
@@ -19377,7 +19482,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case VALIDATE:
 			{
-				AST tmp1217_AST_in = (AST)_t;
+				AST tmp1227_AST_in = (AST)_t;
 				match(_t,VALIDATE);
 				_t = _t.getNextSibling();
 				break;
@@ -19392,7 +19497,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t751;
+			_t = __t756;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
 				action.defLike(li);
@@ -19401,19 +19506,19 @@ inputState.guessing--;
 		}
 		case MOUSEPOINTER:
 		{
-			AST __t753 = _t;
-			AST tmp1218_AST_in = (AST)_t;
+			AST __t758 = _t;
+			AST tmp1228_AST_in = (AST)_t;
 			match(_t,MOUSEPOINTER);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			_t = __t753;
+			_t = __t758;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case NOUNDO:
 		{
-			AST tmp1219_AST_in = (AST)_t;
+			AST tmp1229_AST_in = (AST)_t;
 			match(_t,NOUNDO);
 			_t = _t.getNextSibling();
 			break;
@@ -19426,7 +19531,7 @@ inputState.guessing--;
 		}
 		case TTCODEPAGE:
 		{
-			AST tmp1220_AST_in = (AST)_t;
+			AST tmp1230_AST_in = (AST)_t;
 			match(_t,TTCODEPAGE);
 			_t = _t.getNextSibling();
 			break;
@@ -19457,7 +19562,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t629 = _t;
+		AST __t634 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -19505,7 +19610,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1221_AST_in = (AST)_t;
+		AST tmp1231_AST_in = (AST)_t;
 		match(_t,WORKTABLE);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -19519,7 +19624,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOUNDO:
 		{
-			AST tmp1222_AST_in = (AST)_t;
+			AST tmp1232_AST_in = (AST)_t;
 			match(_t,NOUNDO);
 			_t = _t.getNextSibling();
 			break;
@@ -19585,7 +19690,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop636:
+		_loop641:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==FIELD)) {
@@ -19593,14 +19698,14 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop636;
+				break _loop641;
 			}
 			
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t629;
+		_t = __t634;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -19611,7 +19716,7 @@ inputState.guessing--;
 		AST def = null;
 		AST id = null;
 		
-		AST __t638 = _t;
+		AST __t643 = _t;
 		def = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DEFINE);
 		_t = _t.getFirstChild();
@@ -19659,7 +19764,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1223_AST_in = (AST)_t;
+		AST tmp1233_AST_in = (AST)_t;
 		match(_t,VARIABLE);
 		_t = _t.getNextSibling();
 		id = (AST)_t;
@@ -19669,7 +19774,7 @@ inputState.guessing--;
 			push(action.defineVariable(def, id));
 		}
 		{
-		_loop642:
+		_loop647:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_20.member(_t.getType()))) {
@@ -19677,7 +19782,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop642;
+				break _loop647;
 			}
 			
 		} while (true);
@@ -19704,7 +19809,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t638;
+		_t = __t643;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 			action.addToSymbolScope(pop());
@@ -19716,8 +19821,8 @@ inputState.guessing--;
 		
 		AST deletestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t645 = _t;
-		AST tmp1224_AST_in = (AST)_t;
+		AST __t650 = _t;
+		AST tmp1234_AST_in = (AST)_t;
 		match(_t,DELETE_KW);
 		_t = _t.getFirstChild();
 		tbl(_t,CQ.UPDATING);
@@ -19727,13 +19832,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case VALIDATE:
 		{
-			AST __t647 = _t;
-			AST tmp1225_AST_in = (AST)_t;
+			AST __t652 = _t;
+			AST tmp1235_AST_in = (AST)_t;
 			match(_t,VALIDATE);
 			_t = _t.getFirstChild();
 			funargs(_t);
 			_t = _retTree;
-			_t = __t647;
+			_t = __t652;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -19754,7 +19859,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1226_AST_in = (AST)_t;
+			AST tmp1236_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -19772,7 +19877,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t645;
+		_t = __t650;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -19782,31 +19887,31 @@ inputState.guessing--;
 		AST destructorstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST d = null;
 		
-		AST __t650 = _t;
+		AST __t655 = _t;
 		d = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DESTRUCTOR);
 		_t = _t.getFirstChild();
 		if ( inputState.guessing==0 ) {
 			action.scopeAdd(d);
 		}
-		AST tmp1227_AST_in = (AST)_t;
+		AST tmp1237_AST_in = (AST)_t;
 		match(_t,PUBLIC);
 		_t = _t.getNextSibling();
-		AST tmp1228_AST_in = (AST)_t;
+		AST tmp1238_AST_in = (AST)_t;
 		match(_t,TYPE_NAME);
 		_t = _t.getNextSibling();
-		AST tmp1229_AST_in = (AST)_t;
+		AST tmp1239_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
-		AST tmp1230_AST_in = (AST)_t;
+		AST tmp1240_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		block_colon(_t);
 		_t = _retTree;
 		code_block(_t);
 		_t = _retTree;
-		AST __t651 = _t;
-		AST tmp1231_AST_in = (AST)_t;
+		AST __t656 = _t;
+		AST tmp1241_AST_in = (AST)_t;
 		match(_t,END);
 		_t = _t.getFirstChild();
 		{
@@ -19814,7 +19919,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case DESTRUCTOR:
 		{
-			AST tmp1232_AST_in = (AST)_t;
+			AST tmp1242_AST_in = (AST)_t;
 			match(_t,DESTRUCTOR);
 			_t = _t.getNextSibling();
 			break;
@@ -19829,14 +19934,14 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t651;
+		_t = __t656;
 		_t = _t.getNextSibling();
 		state_end(_t);
 		_t = _retTree;
 		if ( inputState.guessing==0 ) {
 			action.scopeClose(d);
 		}
-		_t = __t650;
+		_t = __t655;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -19846,7 +19951,7 @@ inputState.guessing--;
 		AST disablestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t654 = _t;
+		AST __t659 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DISABLE);
 		_t = _t.getFirstChild();
@@ -19858,7 +19963,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNLESSHIDDEN:
 		{
-			AST tmp1233_AST_in = (AST)_t;
+			AST tmp1243_AST_in = (AST)_t;
 			match(_t,UNLESSHIDDEN);
 			_t = _t.getNextSibling();
 			break;
@@ -19882,8 +19987,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ALL:
 		{
-			AST __t657 = _t;
-			AST tmp1234_AST_in = (AST)_t;
+			AST __t662 = _t;
+			AST tmp1244_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getFirstChild();
 			{
@@ -19891,12 +19996,12 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case EXCEPT:
 			{
-				AST __t659 = _t;
-				AST tmp1235_AST_in = (AST)_t;
+				AST __t664 = _t;
+				AST tmp1245_AST_in = (AST)_t;
 				match(_t,EXCEPT);
 				_t = _t.getFirstChild();
 				{
-				_loop661:
+				_loop666:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -19904,12 +20009,12 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						break _loop661;
+						break _loop666;
 					}
 					
 				} while (true);
 				}
-				_t = __t659;
+				_t = __t664;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -19923,15 +20028,15 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t657;
+			_t = __t662;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case Form_item:
 		{
 			{
-			int _cnt663=0;
-			_loop663:
+			int _cnt668=0;
+			_loop668:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
@@ -19939,10 +20044,10 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt663>=1 ) { break _loop663; } else {throw new NoViableAltException(_t);}
+					if ( _cnt668>=1 ) { break _loop668; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt663++;
+				_cnt668++;
 			} while (true);
 			}
 			break;
@@ -19984,7 +20089,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t654;
+		_t = __t659;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -19993,14 +20098,14 @@ inputState.guessing--;
 		
 		AST disabletriggersstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t666 = _t;
-		AST tmp1236_AST_in = (AST)_t;
+		AST __t671 = _t;
+		AST tmp1246_AST_in = (AST)_t;
 		match(_t,DISABLE);
 		_t = _t.getFirstChild();
-		AST tmp1237_AST_in = (AST)_t;
+		AST tmp1247_AST_in = (AST)_t;
 		match(_t,TRIGGERS);
 		_t = _t.getNextSibling();
-		AST tmp1238_AST_in = (AST)_t;
+		AST tmp1248_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		{
@@ -20008,14 +20113,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case DUMP:
 		{
-			AST tmp1239_AST_in = (AST)_t;
+			AST tmp1249_AST_in = (AST)_t;
 			match(_t,DUMP);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case LOAD:
 		{
-			AST tmp1240_AST_in = (AST)_t;
+			AST tmp1250_AST_in = (AST)_t;
 			match(_t,LOAD);
 			_t = _t.getNextSibling();
 			break;
@@ -20026,7 +20131,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1241_AST_in = (AST)_t;
+		AST tmp1251_AST_in = (AST)_t;
 		match(_t,OF);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.SYMBOL);
@@ -20036,7 +20141,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ALLOWREPLICATION:
 		{
-			AST tmp1242_AST_in = (AST)_t;
+			AST tmp1252_AST_in = (AST)_t;
 			match(_t,ALLOWREPLICATION);
 			_t = _t.getNextSibling();
 			break;
@@ -20054,7 +20159,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t666;
+		_t = __t671;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20063,8 +20168,8 @@ inputState.guessing--;
 		
 		AST disconnectstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t670 = _t;
-		AST tmp1243_AST_in = (AST)_t;
+		AST __t675 = _t;
+		AST tmp1253_AST_in = (AST)_t;
 		match(_t,DISCONNECT);
 		_t = _t.getFirstChild();
 		filenameorvalue(_t);
@@ -20074,7 +20179,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1244_AST_in = (AST)_t;
+			AST tmp1254_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -20092,7 +20197,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t670;
+		_t = __t675;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20102,7 +20207,7 @@ inputState.guessing--;
 		AST displaystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t673 = _t;
+		AST __t678 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DISPLAY);
 		_t = _t.getFirstChild();
@@ -20140,7 +20245,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNLESSHIDDEN:
 		{
-			AST tmp1245_AST_in = (AST)_t;
+			AST tmp1255_AST_in = (AST)_t;
 			match(_t,UNLESSHIDDEN);
 			_t = _t.getNextSibling();
 			break;
@@ -20162,7 +20267,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop677:
+		_loop682:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
@@ -20170,7 +20275,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop677;
+				break _loop682;
 			}
 			
 		} while (true);
@@ -20180,12 +20285,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t679 = _t;
-			AST tmp1246_AST_in = (AST)_t;
+			AST __t684 = _t;
+			AST tmp1256_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop681:
+			_loop686:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -20193,12 +20298,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop681;
+					break _loop686;
 				}
 				
 			} while (true);
 			}
-			_t = __t679;
+			_t = __t684;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -20221,16 +20326,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t683 = _t;
-			AST tmp1247_AST_in = (AST)_t;
+			AST __t688 = _t;
+			AST tmp1257_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1248_AST_in = (AST)_t;
+			AST tmp1258_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t683;
+			_t = __t688;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -20248,7 +20353,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop685:
+		_loop690:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==WITH)) {
@@ -20256,7 +20361,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop685;
+				break _loop690;
 			}
 			
 		} while (true);
@@ -20266,7 +20371,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1249_AST_in = (AST)_t;
+			AST tmp1259_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -20287,7 +20392,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t673;
+		_t = __t678;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20297,10 +20402,10 @@ inputState.guessing--;
 		AST stream_name_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2306 = _t;
-		AST tmp1250_AST_in = (AST)_t;
+		AST tmp1260_AST_in = (AST)_t;
 		match(_t,STREAM);
 		_t = _t.getFirstChild();
-		AST tmp1251_AST_in = (AST)_t;
+		AST tmp1261_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		_t = __t2306;
@@ -20313,7 +20418,7 @@ inputState.guessing--;
 		AST displaystate_item_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST fi = null;
 		
-		AST __t688 = _t;
+		AST __t693 = _t;
 		fi = _t==ASTNULL ? null :(AST)_t;
 		match(_t,Form_item);
 		_t = _t.getFirstChild();
@@ -20342,7 +20447,7 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else if ((_t.getType()==ID)) {
-					AST tmp1252_AST_in = (AST)_t;
+					AST tmp1262_AST_in = (AST)_t;
 					match(_t,ID);
 					_t = _t.getNextSibling();
 				}
@@ -20352,7 +20457,7 @@ inputState.guessing--;
 				
 				}
 				{
-				_loop692:
+				_loop697:
 				do {
 					if (_t==null) _t=ASTNULL;
 					switch ( _t.getType()) {
@@ -20370,7 +20475,7 @@ inputState.guessing--;
 					}
 					default:
 					{
-						break _loop692;
+						break _loop697;
 					}
 					}
 				} while (true);
@@ -20384,7 +20489,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t688;
+		_t = __t693;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20394,7 +20499,7 @@ inputState.guessing--;
 		AST skipphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2278 = _t;
-		AST tmp1253_AST_in = (AST)_t;
+		AST tmp1263_AST_in = (AST)_t;
 		match(_t,SKIP);
 		_t = _t.getFirstChild();
 		{
@@ -20426,10 +20531,10 @@ inputState.guessing--;
 		AST aggregatephrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1628 = _t;
-		AST tmp1254_AST_in = (AST)_t;
+		AST tmp1264_AST_in = (AST)_t;
 		match(_t,Aggregate_phrase);
 		_t = _t.getFirstChild();
-		AST tmp1255_AST_in = (AST)_t;
+		AST tmp1265_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		{
@@ -20454,7 +20559,7 @@ inputState.guessing--;
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==BY)) {
 				AST __t1632 = _t;
-				AST tmp1256_AST_in = (AST)_t;
+				AST tmp1266_AST_in = (AST)_t;
 				match(_t,BY);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -20464,7 +20569,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case DESCENDING:
 				{
-					AST tmp1257_AST_in = (AST)_t;
+					AST tmp1267_AST_in = (AST)_t;
 					match(_t,DESCENDING);
 					_t = _t.getNextSibling();
 					break;
@@ -20488,7 +20593,7 @@ inputState.guessing--;
 			
 		} while (true);
 		}
-		AST tmp1258_AST_in = (AST)_t;
+		AST tmp1268_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		_t = __t1628;
@@ -20501,7 +20606,7 @@ inputState.guessing--;
 		AST dostate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST d = null;
 		
-		AST __t700 = _t;
+		AST __t705 = _t;
 		d = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DO);
 		_t = _t.getFirstChild();
@@ -20572,7 +20677,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop704:
+		_loop709:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_22.member(_t.getType()))) {
@@ -20580,7 +20685,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop704;
+				break _loop709;
 			}
 			
 		} while (true);
@@ -20597,7 +20702,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.blockEnd();
 		}
-		_t = __t700;
+		_t = __t705;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20610,14 +20715,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EOF:
 		{
-			AST tmp1259_AST_in = (AST)_t;
+			AST tmp1269_AST_in = (AST)_t;
 			match(_t,Token.EOF_TYPE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case END:
 		{
-			AST tmp1260_AST_in = (AST)_t;
+			AST tmp1270_AST_in = (AST)_t;
 			match(_t,END);
 			_t = _t.getNextSibling();
 			state_end(_t);
@@ -20637,7 +20742,7 @@ inputState.guessing--;
 		AST downstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t706 = _t;
+		AST __t711 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,DOWN);
 		_t = _t.getFirstChild();
@@ -20733,7 +20838,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t706;
+		_t = __t711;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20742,11 +20847,11 @@ inputState.guessing--;
 		
 		AST emptytemptablestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t714 = _t;
-		AST tmp1261_AST_in = (AST)_t;
+		AST __t719 = _t;
+		AST tmp1271_AST_in = (AST)_t;
 		match(_t,EMPTY);
 		_t = _t.getFirstChild();
-		AST tmp1262_AST_in = (AST)_t;
+		AST tmp1272_AST_in = (AST)_t;
 		match(_t,TEMPTABLE);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.TEMPTABLESYMBOL);
@@ -20756,7 +20861,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1263_AST_in = (AST)_t;
+			AST tmp1273_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -20774,7 +20879,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t714;
+		_t = __t719;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20784,7 +20889,7 @@ inputState.guessing--;
 		AST enablestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t717 = _t;
+		AST __t722 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,ENABLE);
 		_t = _t.getFirstChild();
@@ -20796,7 +20901,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNLESSHIDDEN:
 		{
-			AST tmp1264_AST_in = (AST)_t;
+			AST tmp1274_AST_in = (AST)_t;
 			match(_t,UNLESSHIDDEN);
 			_t = _t.getNextSibling();
 			break;
@@ -20821,8 +20926,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ALL:
 		{
-			AST __t720 = _t;
-			AST tmp1265_AST_in = (AST)_t;
+			AST __t725 = _t;
+			AST tmp1275_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getFirstChild();
 			{
@@ -20830,12 +20935,12 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case EXCEPT:
 			{
-				AST __t722 = _t;
-				AST tmp1266_AST_in = (AST)_t;
+				AST __t727 = _t;
+				AST tmp1276_AST_in = (AST)_t;
 				match(_t,EXCEPT);
 				_t = _t.getFirstChild();
 				{
-				_loop724:
+				_loop729:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -20843,12 +20948,12 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						break _loop724;
+						break _loop729;
 					}
 					
 				} while (true);
 				}
-				_t = __t722;
+				_t = __t727;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -20862,15 +20967,15 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t720;
+			_t = __t725;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case Form_item:
 		{
 			{
-			int _cnt726=0;
-			_loop726:
+			int _cnt731=0;
+			_loop731:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
@@ -20878,10 +20983,10 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt726>=1 ) { break _loop726; } else {throw new NoViableAltException(_t);}
+					if ( _cnt731>=1 ) { break _loop731; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt726++;
+				_cnt731++;
 			} while (true);
 			}
 			break;
@@ -20904,16 +21009,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t728 = _t;
-			AST tmp1267_AST_in = (AST)_t;
+			AST __t733 = _t;
+			AST tmp1277_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1268_AST_in = (AST)_t;
+			AST tmp1278_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t728;
+			_t = __t733;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -20954,7 +21059,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t717;
+		_t = __t722;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -20963,8 +21068,8 @@ inputState.guessing--;
 		
 		AST exportstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t731 = _t;
-		AST tmp1269_AST_in = (AST)_t;
+		AST __t736 = _t;
+		AST tmp1279_AST_in = (AST)_t;
 		match(_t,EXPORT);
 		_t = _t.getFirstChild();
 		{
@@ -20996,13 +21101,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case DELIMITER:
 		{
-			AST __t734 = _t;
-			AST tmp1270_AST_in = (AST)_t;
+			AST __t739 = _t;
+			AST tmp1280_AST_in = (AST)_t;
 			match(_t,DELIMITER);
 			_t = _t.getFirstChild();
 			constant(_t);
 			_t = _retTree;
-			_t = __t734;
+			_t = __t739;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -21021,7 +21126,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop736:
+		_loop741:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
@@ -21029,7 +21134,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop736;
+				break _loop741;
 			}
 			
 		} while (true);
@@ -21039,12 +21144,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t738 = _t;
-			AST tmp1271_AST_in = (AST)_t;
+			AST __t743 = _t;
+			AST tmp1281_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop740:
+			_loop745:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -21052,12 +21157,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop740;
+					break _loop745;
 				}
 				
 			} while (true);
 			}
-			_t = __t738;
+			_t = __t743;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -21078,7 +21183,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOLOBS:
 		{
-			AST tmp1272_AST_in = (AST)_t;
+			AST tmp1282_AST_in = (AST)_t;
 			match(_t,NOLOBS);
 			_t = _t.getNextSibling();
 			break;
@@ -21096,7 +21201,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t731;
+		_t = __t736;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -21109,14 +21214,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BLOB:
 		{
-			AST tmp1273_AST_in = (AST)_t;
+			AST tmp1283_AST_in = (AST)_t;
 			match(_t,BLOB);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case CLOB:
 		{
-			AST tmp1274_AST_in = (AST)_t;
+			AST tmp1284_AST_in = (AST)_t;
 			match(_t,CLOB);
 			_t = _t.getNextSibling();
 			break;
@@ -21155,7 +21260,7 @@ inputState.guessing--;
 		AST viewasphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2384 = _t;
-		AST tmp1275_AST_in = (AST)_t;
+		AST tmp1285_AST_in = (AST)_t;
 		match(_t,VIEWAS);
 		_t = _t.getFirstChild();
 		{
@@ -21225,7 +21330,7 @@ inputState.guessing--;
 		AST xml_data_type_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2400 = _t;
-		AST tmp1276_AST_in = (AST)_t;
+		AST tmp1286_AST_in = (AST)_t;
 		match(_t,XMLDATATYPE);
 		_t = _t.getFirstChild();
 		constant(_t);
@@ -21240,7 +21345,7 @@ inputState.guessing--;
 		AST xml_node_type_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2402 = _t;
-		AST tmp1277_AST_in = (AST)_t;
+		AST tmp1287_AST_in = (AST)_t;
 		match(_t,XMLNODETYPE);
 		_t = _t.getFirstChild();
 		constant(_t);
@@ -21255,8 +21360,8 @@ inputState.guessing--;
 		AST findstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST r = null;
 		
-		AST __t755 = _t;
-		AST tmp1278_AST_in = (AST)_t;
+		AST __t760 = _t;
+		AST tmp1288_AST_in = (AST)_t;
 		match(_t,FIND);
 		_t = _t.getFirstChild();
 		{
@@ -21283,7 +21388,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST __t757 = _t;
+		AST __t762 = _t;
 		r = _t==ASTNULL ? null :(AST)_t;
 		match(_t,RECORD_NAME);
 		_t = _t.getFirstChild();
@@ -21292,44 +21397,44 @@ inputState.guessing--;
 		}
 		recordphrase(_t);
 		_t = _retTree;
-		_t = __t757;
+		_t = __t762;
 		_t = _t.getNextSibling();
 		{
-		_loop759:
+		_loop764:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case NOWAIT:
 			{
-				AST tmp1279_AST_in = (AST)_t;
+				AST tmp1289_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOPREFETCH:
 			{
-				AST tmp1280_AST_in = (AST)_t;
+				AST tmp1290_AST_in = (AST)_t;
 				match(_t,NOPREFETCH);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOERROR_KW:
 			{
-				AST tmp1281_AST_in = (AST)_t;
+				AST tmp1291_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop759;
+				break _loop764;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t755;
+		_t = __t760;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -21338,19 +21443,19 @@ inputState.guessing--;
 		
 		AST fixcodepage_pseudfn_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t761 = _t;
-		AST tmp1282_AST_in = (AST)_t;
+		AST __t766 = _t;
+		AST tmp1292_AST_in = (AST)_t;
 		match(_t,FIXCODEPAGE);
 		_t = _t.getFirstChild();
-		AST tmp1283_AST_in = (AST)_t;
+		AST tmp1293_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.SYMBOL);
 		_t = _retTree;
-		AST tmp1284_AST_in = (AST)_t;
+		AST tmp1294_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
-		_t = __t761;
+		_t = __t766;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -21360,7 +21465,7 @@ inputState.guessing--;
 		AST forstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST f = null;
 		
-		AST __t763 = _t;
+		AST __t768 = _t;
 		f = _t==ASTNULL ? null :(AST)_t;
 		match(_t,FOR);
 		_t = _t.getFirstChild();
@@ -21372,7 +21477,7 @@ inputState.guessing--;
 		for_record_spec(_t,CQ.INITWEAK);
 		_t = _retTree;
 		{
-		_loop765:
+		_loop770:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_22.member(_t.getType()))) {
@@ -21380,7 +21485,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop765;
+				break _loop770;
 			}
 			
 		} while (true);
@@ -21397,7 +21502,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.blockEnd();
 		}
-		_t = __t763;
+		_t = __t768;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -21407,7 +21512,7 @@ inputState.guessing--;
 		AST widget_id_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2398 = _t;
-		AST tmp1285_AST_in = (AST)_t;
+		AST tmp1295_AST_in = (AST)_t;
 		match(_t,WIDGETID);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -21422,7 +21527,7 @@ inputState.guessing--;
 		AST formstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t783 = _t;
+		AST __t788 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,FORMAT);
 		_t = _t.getFirstChild();
@@ -21430,7 +21535,7 @@ inputState.guessing--;
 			action.frameInitializingStatement(head);
 		}
 		{
-		_loop785:
+		_loop790:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
@@ -21438,7 +21543,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop785;
+				break _loop790;
 			}
 			
 		} while (true);
@@ -21448,13 +21553,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case HEADER:
 		{
-			AST __t787 = _t;
-			AST tmp1286_AST_in = (AST)_t;
+			AST __t792 = _t;
+			AST tmp1296_AST_in = (AST)_t;
 			match(_t,HEADER);
 			_t = _t.getFirstChild();
 			{
-			int _cnt789=0;
-			_loop789:
+			int _cnt794=0;
+			_loop794:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
@@ -21462,25 +21567,25 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt789>=1 ) { break _loop789; } else {throw new NoViableAltException(_t);}
+					if ( _cnt794>=1 ) { break _loop794; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt789++;
+				_cnt794++;
 			} while (true);
 			}
-			_t = __t787;
+			_t = __t792;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case BACKGROUND:
 		{
-			AST __t790 = _t;
-			AST tmp1287_AST_in = (AST)_t;
+			AST __t795 = _t;
+			AST tmp1297_AST_in = (AST)_t;
 			match(_t,BACKGROUND);
 			_t = _t.getFirstChild();
 			{
-			int _cnt792=0;
-			_loop792:
+			int _cnt797=0;
+			_loop797:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Form_item)) {
@@ -21488,13 +21593,13 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					if ( _cnt792>=1 ) { break _loop792; } else {throw new NoViableAltException(_t);}
+					if ( _cnt797>=1 ) { break _loop797; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt792++;
+				_cnt797++;
 			} while (true);
 			}
-			_t = __t790;
+			_t = __t795;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -21516,12 +21621,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t794 = _t;
-			AST tmp1288_AST_in = (AST)_t;
+			AST __t799 = _t;
+			AST tmp1298_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop796:
+			_loop801:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -21529,12 +21634,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop796;
+					break _loop801;
 				}
 				
 			} while (true);
 			}
-			_t = __t794;
+			_t = __t799;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -21575,7 +21680,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t783;
+		_t = __t788;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -21585,7 +21690,7 @@ inputState.guessing--;
 		AST atphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1654 = _t;
-		AST tmp1289_AST_in = (AST)_t;
+		AST tmp1299_AST_in = (AST)_t;
 		match(_t,AT);
 		_t = _t.getFirstChild();
 		{
@@ -21610,21 +21715,21 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case COLONALIGNED:
 		{
-			AST tmp1290_AST_in = (AST)_t;
+			AST tmp1300_AST_in = (AST)_t;
 			match(_t,COLONALIGNED);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case LEFTALIGNED:
 		{
-			AST tmp1291_AST_in = (AST)_t;
+			AST tmp1301_AST_in = (AST)_t;
 			match(_t,LEFTALIGNED);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case RIGHTALIGNED:
 		{
-			AST tmp1292_AST_in = (AST)_t;
+			AST tmp1302_AST_in = (AST)_t;
 			match(_t,RIGHTALIGNED);
 			_t = _t.getNextSibling();
 			break;
@@ -21676,7 +21781,7 @@ inputState.guessing--;
 		case COLOR:
 		{
 			AST __t1704 = _t;
-			AST tmp1293_AST_in = (AST)_t;
+			AST tmp1303_AST_in = (AST)_t;
 			match(_t,COLOR);
 			_t = _t.getFirstChild();
 			{
@@ -21684,7 +21789,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case DISPLAY:
 			{
-				AST tmp1294_AST_in = (AST)_t;
+				AST tmp1304_AST_in = (AST)_t;
 				match(_t,DISPLAY);
 				_t = _t.getNextSibling();
 				break;
@@ -21708,7 +21813,7 @@ inputState.guessing--;
 			case PROMPT:
 			{
 				AST __t1707 = _t;
-				AST tmp1295_AST_in = (AST)_t;
+				AST tmp1305_AST_in = (AST)_t;
 				match(_t,PROMPT);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
@@ -21744,7 +21849,7 @@ inputState.guessing--;
 		AST titlephrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2341 = _t;
-		AST tmp1296_AST_in = (AST)_t;
+		AST tmp1306_AST_in = (AST)_t;
 		match(_t,TITLE);
 		_t = _t.getFirstChild();
 		{
@@ -21764,7 +21869,7 @@ inputState.guessing--;
 			case COLOR:
 			{
 				AST __t2343 = _t;
-				AST tmp1297_AST_in = (AST)_t;
+				AST tmp1307_AST_in = (AST)_t;
 				match(_t,COLOR);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
@@ -21776,7 +21881,7 @@ inputState.guessing--;
 			case FONT:
 			{
 				AST __t2344 = _t;
-				AST tmp1298_AST_in = (AST)_t;
+				AST tmp1308_AST_in = (AST)_t;
 				match(_t,FONT);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -21805,7 +21910,7 @@ inputState.guessing--;
 		AST f = null;
 		AST id = null;
 		
-		AST __t848 = _t;
+		AST __t853 = _t;
 		f = _t==ASTNULL ? null :(AST)_t;
 		match(_t,FUNCTION);
 		_t = _t.getFirstChild();
@@ -21820,14 +21925,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case RETURNS:
 		{
-			AST tmp1299_AST_in = (AST)_t;
+			AST tmp1309_AST_in = (AST)_t;
 			match(_t,RETURNS);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case RETURN:
 		{
-			AST tmp1300_AST_in = (AST)_t;
+			AST tmp1310_AST_in = (AST)_t;
 			match(_t,RETURN);
 			_t = _t.getNextSibling();
 			break;
@@ -21863,10 +21968,10 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CLASS:
 		{
-			AST tmp1301_AST_in = (AST)_t;
+			AST tmp1311_AST_in = (AST)_t;
 			match(_t,CLASS);
 			_t = _t.getNextSibling();
-			AST tmp1302_AST_in = (AST)_t;
+			AST tmp1312_AST_in = (AST)_t;
 			match(_t,TYPE_NAME);
 			_t = _t.getNextSibling();
 			break;
@@ -21903,7 +22008,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PRIVATE:
 		{
-			AST tmp1303_AST_in = (AST)_t;
+			AST tmp1313_AST_in = (AST)_t;
 			match(_t,PRIVATE);
 			_t = _t.getNextSibling();
 			break;
@@ -21951,7 +22056,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FORWARDS:
 		{
-			AST tmp1304_AST_in = (AST)_t;
+			AST tmp1314_AST_in = (AST)_t;
 			match(_t,FORWARDS);
 			_t = _t.getNextSibling();
 			{
@@ -21959,21 +22064,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case LEXCOLON:
 			{
-				AST tmp1305_AST_in = (AST)_t;
+				AST tmp1315_AST_in = (AST)_t;
 				match(_t,LEXCOLON);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case PERIOD:
 			{
-				AST tmp1306_AST_in = (AST)_t;
+				AST tmp1316_AST_in = (AST)_t;
 				match(_t,PERIOD);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case EOF:
 			{
-				AST tmp1307_AST_in = (AST)_t;
+				AST tmp1317_AST_in = (AST)_t;
 				match(_t,Token.EOF_TYPE);
 				_t = _t.getNextSibling();
 				break;
@@ -22004,15 +22109,15 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case EOF:
 			{
-				AST tmp1308_AST_in = (AST)_t;
+				AST tmp1318_AST_in = (AST)_t;
 				match(_t,Token.EOF_TYPE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case END:
 			{
-				AST __t862 = _t;
-				AST tmp1309_AST_in = (AST)_t;
+				AST __t867 = _t;
+				AST tmp1319_AST_in = (AST)_t;
 				match(_t,END);
 				_t = _t.getFirstChild();
 				{
@@ -22020,7 +22125,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case FUNCTION:
 				{
-					AST tmp1310_AST_in = (AST)_t;
+					AST tmp1320_AST_in = (AST)_t;
 					match(_t,FUNCTION);
 					_t = _t.getNextSibling();
 					break;
@@ -22035,7 +22140,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t862;
+				_t = __t867;
 				_t = _t.getNextSibling();
 				state_end(_t);
 				_t = _retTree;
@@ -22050,33 +22155,33 @@ inputState.guessing--;
 			break;
 		}
 		default:
-			boolean synPredMatched856 = false;
+			boolean synPredMatched861 = false;
 			if (_t==null) _t=ASTNULL;
 			if (((_t.getType()==IN_KW))) {
-				AST __t856 = _t;
-				synPredMatched856 = true;
+				AST __t861 = _t;
+				synPredMatched861 = true;
 				inputState.guessing++;
 				try {
 					{
-					AST tmp1311_AST_in = (AST)_t;
+					AST tmp1321_AST_in = (AST)_t;
 					match(_t,IN_KW);
 					_t = _t.getNextSibling();
-					AST tmp1312_AST_in = (AST)_t;
+					AST tmp1322_AST_in = (AST)_t;
 					match(_t,SUPER);
 					_t = _t.getNextSibling();
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched856 = false;
+					synPredMatched861 = false;
 				}
-				_t = __t856;
+				_t = __t861;
 inputState.guessing--;
 			}
-			if ( synPredMatched856 ) {
-				AST tmp1313_AST_in = (AST)_t;
+			if ( synPredMatched861 ) {
+				AST tmp1323_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getNextSibling();
-				AST tmp1314_AST_in = (AST)_t;
+				AST tmp1324_AST_in = (AST)_t;
 				match(_t,SUPER);
 				_t = _t.getNextSibling();
 				{
@@ -22084,21 +22189,21 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case LEXCOLON:
 				{
-					AST tmp1315_AST_in = (AST)_t;
+					AST tmp1325_AST_in = (AST)_t;
 					match(_t,LEXCOLON);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case PERIOD:
 				{
-					AST tmp1316_AST_in = (AST)_t;
+					AST tmp1326_AST_in = (AST)_t;
 					match(_t,PERIOD);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case EOF:
 				{
-					AST tmp1317_AST_in = (AST)_t;
+					AST tmp1327_AST_in = (AST)_t;
 					match(_t,Token.EOF_TYPE);
 					_t = _t.getNextSibling();
 					break;
@@ -22119,7 +22224,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case MAP:
 				{
-					AST tmp1318_AST_in = (AST)_t;
+					AST tmp1328_AST_in = (AST)_t;
 					match(_t,MAP);
 					_t = _t.getNextSibling();
 					{
@@ -22127,7 +22232,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case TO:
 					{
-						AST tmp1319_AST_in = (AST)_t;
+						AST tmp1329_AST_in = (AST)_t;
 						match(_t,TO);
 						_t = _t.getNextSibling();
 						break;
@@ -22142,7 +22247,7 @@ inputState.guessing--;
 					}
 					}
 					}
-					AST tmp1320_AST_in = (AST)_t;
+					AST tmp1330_AST_in = (AST)_t;
 					match(_t,ID);
 					_t = _t.getNextSibling();
 					break;
@@ -22157,7 +22262,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				AST tmp1321_AST_in = (AST)_t;
+				AST tmp1331_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -22167,21 +22272,21 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case LEXCOLON:
 				{
-					AST tmp1322_AST_in = (AST)_t;
+					AST tmp1332_AST_in = (AST)_t;
 					match(_t,LEXCOLON);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case PERIOD:
 				{
-					AST tmp1323_AST_in = (AST)_t;
+					AST tmp1333_AST_in = (AST)_t;
 					match(_t,PERIOD);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case EOF:
 				{
-					AST tmp1324_AST_in = (AST)_t;
+					AST tmp1334_AST_in = (AST)_t;
 					match(_t,Token.EOF_TYPE);
 					_t = _t.getNextSibling();
 					break;
@@ -22201,7 +22306,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t848;
+		_t = __t853;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
 				action.scopeClose(f);
@@ -22219,8 +22324,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BUFFER:
 		{
-			AST __t865 = _t;
-			AST tmp1325_AST_in = (AST)_t;
+			AST __t870 = _t;
+			AST tmp1335_AST_in = (AST)_t;
 			match(_t,BUFFER);
 			_t = _t.getFirstChild();
 			{
@@ -22243,7 +22348,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1326_AST_in = (AST)_t;
+			AST tmp1336_AST_in = (AST)_t;
 			match(_t,FOR);
 			_t = _t.getNextSibling();
 			rec = _t==ASTNULL ? null : (AST)_t;
@@ -22254,7 +22359,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case PRESELECT:
 			{
-				AST tmp1327_AST_in = (AST)_t;
+				AST tmp1337_AST_in = (AST)_t;
 				match(_t,PRESELECT);
 				_t = _t.getNextSibling();
 				break;
@@ -22269,7 +22374,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t865;
+			_t = __t870;
 			_t = _t.getNextSibling();
 			if ( inputState.guessing==0 ) {
 				action.defineBuffer(id, id, rec, true);
@@ -22278,37 +22383,37 @@ inputState.guessing--;
 		}
 		case INPUT:
 		{
-			AST __t868 = _t;
-			AST tmp1328_AST_in = (AST)_t;
+			AST __t873 = _t;
+			AST tmp1338_AST_in = (AST)_t;
 			match(_t,INPUT);
 			_t = _t.getFirstChild();
 			function_param_arg(_t);
 			_t = _retTree;
-			_t = __t868;
+			_t = __t873;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case OUTPUT:
 		{
-			AST __t869 = _t;
-			AST tmp1329_AST_in = (AST)_t;
+			AST __t874 = _t;
+			AST tmp1339_AST_in = (AST)_t;
 			match(_t,OUTPUT);
 			_t = _t.getFirstChild();
 			function_param_arg(_t);
 			_t = _retTree;
-			_t = __t869;
+			_t = __t874;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case INPUTOUTPUT:
 		{
-			AST __t870 = _t;
-			AST tmp1330_AST_in = (AST)_t;
+			AST __t875 = _t;
+			AST tmp1340_AST_in = (AST)_t;
 			match(_t,INPUTOUTPUT);
 			_t = _t.getFirstChild();
 			function_param_arg(_t);
 			_t = _retTree;
-			_t = __t870;
+			_t = __t875;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -22333,7 +22438,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case TABLE:
 		{
-			AST tmp1331_AST_in = (AST)_t;
+			AST tmp1341_AST_in = (AST)_t;
 			match(_t,TABLE);
 			_t = _t.getNextSibling();
 			{
@@ -22341,7 +22446,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case FOR:
 			{
-				AST tmp1332_AST_in = (AST)_t;
+				AST tmp1342_AST_in = (AST)_t;
 				match(_t,FOR);
 				_t = _t.getNextSibling();
 				break;
@@ -22358,185 +22463,6 @@ inputState.guessing--;
 			}
 			tbl(_t,CQ.TEMPTABLESYMBOL);
 			_t = _retTree;
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case APPEND:
-			{
-				AST tmp1333_AST_in = (AST)_t;
-				match(_t,APPEND);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case 3:
-			case BIND:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case BIND:
-			{
-				AST tmp1334_AST_in = (AST)_t;
-				match(_t,BIND);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case 3:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			break;
-		}
-		case TABLEHANDLE:
-		{
-			AST tmp1335_AST_in = (AST)_t;
-			match(_t,TABLEHANDLE);
-			_t = _t.getNextSibling();
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case FOR:
-			{
-				AST tmp1336_AST_in = (AST)_t;
-				match(_t,FOR);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case ID:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			id2 = (AST)_t;
-			match(_t,ID);
-			_t = _t.getNextSibling();
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case APPEND:
-			{
-				AST tmp1337_AST_in = (AST)_t;
-				match(_t,APPEND);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case 3:
-			case BIND:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case BIND:
-			{
-				AST tmp1338_AST_in = (AST)_t;
-				match(_t,BIND);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case 3:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			if ( inputState.guessing==0 ) {
-				action.addToSymbolScope(action.defineVariable(id2, id2, HANDLE));
-			}
-			break;
-		}
-		case DATASET:
-		{
-			AST tmp1339_AST_in = (AST)_t;
-			match(_t,DATASET);
-			_t = _t.getNextSibling();
-			ds = (AST)_t;
-			match(_t,ID);
-			_t = _t.getNextSibling();
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case APPEND:
-			{
-				AST tmp1340_AST_in = (AST)_t;
-				match(_t,APPEND);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case 3:
-			case BIND:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case BIND:
-			{
-				AST tmp1341_AST_in = (AST)_t;
-				match(_t,BIND);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case 3:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			if ( inputState.guessing==0 ) {
-				action.addToSymbolScope(action.defineSymbol(DATASET, ds, ds));
-			}
-			break;
-		}
-		case DATASETHANDLE:
-		{
-			AST tmp1342_AST_in = (AST)_t;
-			match(_t,DATASETHANDLE);
-			_t = _t.getNextSibling();
-			dsh = (AST)_t;
-			match(_t,ID);
-			_t = _t.getNextSibling();
 			{
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
@@ -22564,6 +22490,185 @@ inputState.guessing--;
 			case BIND:
 			{
 				AST tmp1344_AST_in = (AST)_t;
+				match(_t,BIND);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case 3:
+			{
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			break;
+		}
+		case TABLEHANDLE:
+		{
+			AST tmp1345_AST_in = (AST)_t;
+			match(_t,TABLEHANDLE);
+			_t = _t.getNextSibling();
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case FOR:
+			{
+				AST tmp1346_AST_in = (AST)_t;
+				match(_t,FOR);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case ID:
+			{
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			id2 = (AST)_t;
+			match(_t,ID);
+			_t = _t.getNextSibling();
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case APPEND:
+			{
+				AST tmp1347_AST_in = (AST)_t;
+				match(_t,APPEND);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case 3:
+			case BIND:
+			{
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case BIND:
+			{
+				AST tmp1348_AST_in = (AST)_t;
+				match(_t,BIND);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case 3:
+			{
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			if ( inputState.guessing==0 ) {
+				action.addToSymbolScope(action.defineVariable(id2, id2, HANDLE));
+			}
+			break;
+		}
+		case DATASET:
+		{
+			AST tmp1349_AST_in = (AST)_t;
+			match(_t,DATASET);
+			_t = _t.getNextSibling();
+			ds = (AST)_t;
+			match(_t,ID);
+			_t = _t.getNextSibling();
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case APPEND:
+			{
+				AST tmp1350_AST_in = (AST)_t;
+				match(_t,APPEND);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case 3:
+			case BIND:
+			{
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case BIND:
+			{
+				AST tmp1351_AST_in = (AST)_t;
+				match(_t,BIND);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case 3:
+			{
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			if ( inputState.guessing==0 ) {
+				action.addToSymbolScope(action.defineSymbol(DATASET, ds, ds));
+			}
+			break;
+		}
+		case DATASETHANDLE:
+		{
+			AST tmp1352_AST_in = (AST)_t;
+			match(_t,DATASETHANDLE);
+			_t = _t.getNextSibling();
+			dsh = (AST)_t;
+			match(_t,ID);
+			_t = _t.getNextSibling();
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case APPEND:
+			{
+				AST tmp1353_AST_in = (AST)_t;
+				match(_t,APPEND);
+				_t = _t.getNextSibling();
+				break;
+			}
+			case 3:
+			case BIND:
+			{
+				break;
+			}
+			default:
+			{
+				throw new NoViableAltException(_t);
+			}
+			}
+			}
+			{
+			if (_t==null) _t=ASTNULL;
+			switch ( _t.getType()) {
+			case BIND:
+			{
+				AST tmp1354_AST_in = (AST)_t;
 				match(_t,BIND);
 				_t = _t.getNextSibling();
 				break;
@@ -22646,10 +22751,10 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case CLASS:
 			{
-				AST tmp1345_AST_in = (AST)_t;
+				AST tmp1355_AST_in = (AST)_t;
 				match(_t,CLASS);
 				_t = _t.getNextSibling();
-				AST tmp1346_AST_in = (AST)_t;
+				AST tmp1356_AST_in = (AST)_t;
 				match(_t,TYPE_NAME);
 				_t = _t.getNextSibling();
 				break;
@@ -22721,22 +22826,22 @@ inputState.guessing--;
 		
 		AST getkeyvaluestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t886 = _t;
-		AST tmp1347_AST_in = (AST)_t;
+		AST __t891 = _t;
+		AST tmp1357_AST_in = (AST)_t;
 		match(_t,GETKEYVALUE);
 		_t = _t.getFirstChild();
-		AST tmp1348_AST_in = (AST)_t;
+		AST tmp1358_AST_in = (AST)_t;
 		match(_t,SECTION);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
-		AST tmp1349_AST_in = (AST)_t;
+		AST tmp1359_AST_in = (AST)_t;
 		match(_t,KEY);
 		_t = _t.getNextSibling();
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==DEFAULT)) {
-			AST tmp1350_AST_in = (AST)_t;
+			AST tmp1360_AST_in = (AST)_t;
 			match(_t,DEFAULT);
 			_t = _t.getNextSibling();
 		}
@@ -22749,14 +22854,14 @@ inputState.guessing--;
 		}
 		
 		}
-		AST tmp1351_AST_in = (AST)_t;
+		AST tmp1361_AST_in = (AST)_t;
 		match(_t,VALUE);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
 		_t = _retTree;
 		state_end(_t);
 		_t = _retTree;
-		_t = __t886;
+		_t = __t891;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -22765,8 +22870,8 @@ inputState.guessing--;
 		
 		AST importstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t889 = _t;
-		AST tmp1352_AST_in = (AST)_t;
+		AST __t894 = _t;
+		AST tmp1362_AST_in = (AST)_t;
 		match(_t,IMPORT);
 		_t = _t.getFirstChild();
 		{
@@ -22801,19 +22906,19 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case DELIMITER:
 		{
-			AST __t892 = _t;
-			AST tmp1353_AST_in = (AST)_t;
+			AST __t897 = _t;
+			AST tmp1363_AST_in = (AST)_t;
 			match(_t,DELIMITER);
 			_t = _t.getFirstChild();
 			constant(_t);
 			_t = _retTree;
-			_t = __t892;
+			_t = __t897;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case UNFORMATTED:
 		{
-			AST tmp1354_AST_in = (AST)_t;
+			AST tmp1364_AST_in = (AST)_t;
 			match(_t,UNFORMATTED);
 			_t = _t.getNextSibling();
 			break;
@@ -22846,12 +22951,12 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case EXCEPT:
 			{
-				AST __t895 = _t;
-				AST tmp1355_AST_in = (AST)_t;
+				AST __t900 = _t;
+				AST tmp1365_AST_in = (AST)_t;
 				match(_t,EXCEPT);
 				_t = _t.getFirstChild();
 				{
-				_loop897:
+				_loop902:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==Field_ref)) {
@@ -22859,12 +22964,12 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						break _loop897;
+						break _loop902;
 					}
 					
 				} while (true);
 				}
-				_t = __t895;
+				_t = __t900;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -22887,8 +22992,8 @@ inputState.guessing--;
 		case Field_ref:
 		{
 			{
-			int _cnt899=0;
-			_loop899:
+			int _cnt904=0;
+			_loop904:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
@@ -22900,17 +23005,17 @@ inputState.guessing--;
 				}
 				case CARET:
 				{
-					AST tmp1356_AST_in = (AST)_t;
+					AST tmp1366_AST_in = (AST)_t;
 					match(_t,CARET);
 					_t = _t.getNextSibling();
 					break;
 				}
 				default:
 				{
-					if ( _cnt899>=1 ) { break _loop899; } else {throw new NoViableAltException(_t);}
+					if ( _cnt904>=1 ) { break _loop904; } else {throw new NoViableAltException(_t);}
 				}
 				}
-				_cnt899++;
+				_cnt904++;
 			} while (true);
 			}
 			break;
@@ -22933,7 +23038,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOLOBS:
 		{
-			AST tmp1357_AST_in = (AST)_t;
+			AST tmp1367_AST_in = (AST)_t;
 			match(_t,NOLOBS);
 			_t = _t.getNextSibling();
 			break;
@@ -22955,7 +23060,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1358_AST_in = (AST)_t;
+			AST tmp1368_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -22973,7 +23078,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t889;
+		_t = __t894;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -22983,7 +23088,7 @@ inputState.guessing--;
 		AST insertstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t903 = _t;
+		AST __t908 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,INSERT);
 		_t = _t.getFirstChild();
@@ -22997,12 +23102,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t905 = _t;
-			AST tmp1359_AST_in = (AST)_t;
+			AST __t910 = _t;
+			AST tmp1369_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop907:
+			_loop912:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -23010,12 +23115,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop907;
+					break _loop912;
 				}
 				
 			} while (true);
 			}
-			_t = __t905;
+			_t = __t910;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -23038,8 +23143,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case USING:
 		{
-			AST __t909 = _t;
-			AST tmp1360_AST_in = (AST)_t;
+			AST __t914 = _t;
+			AST tmp1370_AST_in = (AST)_t;
 			match(_t,USING);
 			_t = _t.getFirstChild();
 			{
@@ -23047,14 +23152,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case ROWID:
 			{
-				AST tmp1361_AST_in = (AST)_t;
+				AST tmp1371_AST_in = (AST)_t;
 				match(_t,ROWID);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case RECID:
 			{
-				AST tmp1362_AST_in = (AST)_t;
+				AST tmp1372_AST_in = (AST)_t;
 				match(_t,RECID);
 				_t = _t.getNextSibling();
 				break;
@@ -23067,7 +23172,7 @@ inputState.guessing--;
 			}
 			expression(_t);
 			_t = _retTree;
-			_t = __t909;
+			_t = __t914;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -23110,7 +23215,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1363_AST_in = (AST)_t;
+			AST tmp1373_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -23131,7 +23236,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t903;
+		_t = __t908;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -23140,8 +23245,8 @@ inputState.guessing--;
 		
 		AST messagestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t918 = _t;
-		AST tmp1364_AST_in = (AST)_t;
+		AST __t923 = _t;
+		AST tmp1374_AST_in = (AST)_t;
 		match(_t,MESSAGE);
 		_t = _t.getFirstChild();
 		{
@@ -23149,13 +23254,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case COLOR:
 		{
-			AST __t920 = _t;
-			AST tmp1365_AST_in = (AST)_t;
+			AST __t925 = _t;
+			AST tmp1375_AST_in = (AST)_t;
 			match(_t,COLOR);
 			_t = _t.getFirstChild();
 			anyorvalue(_t);
 			_t = _retTree;
-			_t = __t920;
+			_t = __t925;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -23176,12 +23281,12 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop924:
+		_loop929:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
-				AST __t922 = _t;
-				AST tmp1366_AST_in = (AST)_t;
+				AST __t927 = _t;
+				AST tmp1376_AST_in = (AST)_t;
 				match(_t,Form_item);
 				_t = _t.getFirstChild();
 				{
@@ -23199,27 +23304,27 @@ inputState.guessing--;
 				}
 				
 				}
-				_t = __t922;
+				_t = __t927;
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop924;
+				break _loop929;
 			}
 			
 		} while (true);
 		}
 		{
-		_loop936:
+		_loop941:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case VIEWAS:
 			{
-				AST __t926 = _t;
-				AST tmp1367_AST_in = (AST)_t;
+				AST __t931 = _t;
+				AST tmp1377_AST_in = (AST)_t;
 				match(_t,VIEWAS);
 				_t = _t.getFirstChild();
-				AST tmp1368_AST_in = (AST)_t;
+				AST tmp1378_AST_in = (AST)_t;
 				match(_t,ALERTBOX);
 				_t = _t.getNextSibling();
 				{
@@ -23227,35 +23332,35 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case MESSAGE:
 				{
-					AST tmp1369_AST_in = (AST)_t;
+					AST tmp1379_AST_in = (AST)_t;
 					match(_t,MESSAGE);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case QUESTION:
 				{
-					AST tmp1370_AST_in = (AST)_t;
+					AST tmp1380_AST_in = (AST)_t;
 					match(_t,QUESTION);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case INFORMATION:
 				{
-					AST tmp1371_AST_in = (AST)_t;
+					AST tmp1381_AST_in = (AST)_t;
 					match(_t,INFORMATION);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case ERROR:
 				{
-					AST tmp1372_AST_in = (AST)_t;
+					AST tmp1382_AST_in = (AST)_t;
 					match(_t,ERROR);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case WARNING:
 				{
-					AST tmp1373_AST_in = (AST)_t;
+					AST tmp1383_AST_in = (AST)_t;
 					match(_t,WARNING);
 					_t = _t.getNextSibling();
 					break;
@@ -23277,7 +23382,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case BUTTONS:
 				{
-					AST tmp1374_AST_in = (AST)_t;
+					AST tmp1384_AST_in = (AST)_t;
 					match(_t,BUTTONS);
 					_t = _t.getNextSibling();
 					{
@@ -23285,35 +23390,35 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case YESNO:
 					{
-						AST tmp1375_AST_in = (AST)_t;
+						AST tmp1385_AST_in = (AST)_t;
 						match(_t,YESNO);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case YESNOCANCEL:
 					{
-						AST tmp1376_AST_in = (AST)_t;
+						AST tmp1386_AST_in = (AST)_t;
 						match(_t,YESNOCANCEL);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case OK:
 					{
-						AST tmp1377_AST_in = (AST)_t;
+						AST tmp1387_AST_in = (AST)_t;
 						match(_t,OK);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case OKCANCEL:
 					{
-						AST tmp1378_AST_in = (AST)_t;
+						AST tmp1388_AST_in = (AST)_t;
 						match(_t,OKCANCEL);
 						_t = _t.getNextSibling();
 						break;
 					}
 					case RETRYCANCEL:
 					{
-						AST tmp1379_AST_in = (AST)_t;
+						AST tmp1389_AST_in = (AST)_t;
 						match(_t,RETRYCANCEL);
 						_t = _t.getNextSibling();
 						break;
@@ -23342,13 +23447,13 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case TITLE:
 				{
-					AST __t931 = _t;
-					AST tmp1380_AST_in = (AST)_t;
+					AST __t936 = _t;
+					AST tmp1390_AST_in = (AST)_t;
 					match(_t,TITLE);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t931;
+					_t = __t936;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -23362,14 +23467,14 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t926;
+				_t = __t931;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case SET:
 			{
-				AST __t932 = _t;
-				AST tmp1381_AST_in = (AST)_t;
+				AST __t937 = _t;
+				AST tmp1391_AST_in = (AST)_t;
 				match(_t,SET);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.UPDATING);
@@ -23393,14 +23498,14 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t932;
+				_t = __t937;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case UPDATE:
 			{
-				AST __t934 = _t;
-				AST tmp1382_AST_in = (AST)_t;
+				AST __t939 = _t;
+				AST tmp1392_AST_in = (AST)_t;
 				match(_t,UPDATE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.REFUP);
@@ -23424,13 +23529,13 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t934;
+				_t = __t939;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop936;
+				break _loop941;
 			}
 			}
 		} while (true);
@@ -23440,16 +23545,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t938 = _t;
-			AST tmp1383_AST_in = (AST)_t;
+			AST __t943 = _t;
+			AST tmp1393_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1384_AST_in = (AST)_t;
+			AST tmp1394_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t938;
+			_t = __t943;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -23466,7 +23571,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t918;
+		_t = __t923;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -23477,53 +23582,53 @@ inputState.guessing--;
 		AST m = null;
 		AST id = null;
 		
-		AST __t940 = _t;
+		AST __t945 = _t;
 		m = _t==ASTNULL ? null :(AST)_t;
 		match(_t,METHOD);
 		_t = _t.getFirstChild();
 		{
-		_loop942:
+		_loop947:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case PRIVATE:
 			{
-				AST tmp1385_AST_in = (AST)_t;
+				AST tmp1395_AST_in = (AST)_t;
 				match(_t,PRIVATE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case PROTECTED:
 			{
-				AST tmp1386_AST_in = (AST)_t;
+				AST tmp1396_AST_in = (AST)_t;
 				match(_t,PROTECTED);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case PUBLIC:
 			{
-				AST tmp1387_AST_in = (AST)_t;
+				AST tmp1397_AST_in = (AST)_t;
 				match(_t,PUBLIC);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case OVERRIDE:
 			{
-				AST tmp1388_AST_in = (AST)_t;
+				AST tmp1398_AST_in = (AST)_t;
 				match(_t,OVERRIDE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FINAL:
 			{
-				AST tmp1389_AST_in = (AST)_t;
+				AST tmp1399_AST_in = (AST)_t;
 				match(_t,FINAL);
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop942;
+				break _loop947;
 			}
 			}
 		} while (true);
@@ -23533,17 +23638,17 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case VOID:
 		{
-			AST tmp1390_AST_in = (AST)_t;
+			AST tmp1400_AST_in = (AST)_t;
 			match(_t,VOID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case CLASS:
 		{
-			AST tmp1391_AST_in = (AST)_t;
+			AST tmp1401_AST_in = (AST)_t;
 			match(_t,CLASS);
 			_t = _t.getNextSibling();
-			AST tmp1392_AST_in = (AST)_t;
+			AST tmp1402_AST_in = (AST)_t;
 			match(_t,TYPE_NAME);
 			_t = _t.getNextSibling();
 			break;
@@ -23587,34 +23692,34 @@ inputState.guessing--;
 		function_params(_t);
 		_t = _retTree;
 		{
-		boolean synPredMatched946 = false;
+		boolean synPredMatched951 = false;
 		if (_t==null) _t=ASTNULL;
 		if (((_t.getType()==PERIOD||_t.getType()==LEXCOLON))) {
-			AST __t946 = _t;
-			synPredMatched946 = true;
+			AST __t951 = _t;
+			synPredMatched951 = true;
 			inputState.guessing++;
 			try {
 				{
 				block_colon(_t);
 				_t = _retTree;
-				AST tmp1393_AST_in = (AST)_t;
+				AST tmp1403_AST_in = (AST)_t;
 				match(_t,Code_block);
 				_t = _t.getNextSibling();
 				}
 			}
 			catch (RecognitionException pe) {
-				synPredMatched946 = false;
+				synPredMatched951 = false;
 			}
-			_t = __t946;
+			_t = __t951;
 inputState.guessing--;
 		}
-		if ( synPredMatched946 ) {
+		if ( synPredMatched951 ) {
 			block_colon(_t);
 			_t = _retTree;
 			code_block(_t);
 			_t = _retTree;
-			AST __t947 = _t;
-			AST tmp1394_AST_in = (AST)_t;
+			AST __t952 = _t;
+			AST tmp1404_AST_in = (AST)_t;
 			match(_t,END);
 			_t = _t.getFirstChild();
 			{
@@ -23622,7 +23727,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case METHOD:
 			{
-				AST tmp1395_AST_in = (AST)_t;
+				AST tmp1405_AST_in = (AST)_t;
 				match(_t,METHOD);
 				_t = _t.getNextSibling();
 				break;
@@ -23637,7 +23742,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t947;
+			_t = __t952;
 			_t = _t.getNextSibling();
 			state_end(_t);
 			_t = _retTree;
@@ -23654,7 +23759,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.scopeClose(m);
 		}
-		_t = __t940;
+		_t = __t945;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -23663,8 +23768,8 @@ inputState.guessing--;
 		
 		AST nextpromptstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t950 = _t;
-		AST tmp1396_AST_in = (AST)_t;
+		AST __t955 = _t;
+		AST tmp1406_AST_in = (AST)_t;
 		match(_t,NEXTPROMPT);
 		_t = _t.getFirstChild();
 		fld(_t,CQ.SYMBOL);
@@ -23691,7 +23796,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t950;
+		_t = __t955;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -23707,7 +23812,7 @@ inputState.guessing--;
 		AST fld = null;
 		AST id = null;
 		
-		AST __t953 = _t;
+		AST __t958 = _t;
 		onNode = _t==ASTNULL ? null :(AST)_t;
 		match(_t,ON);
 		_t = _t.getFirstChild();
@@ -23715,11 +23820,11 @@ inputState.guessing--;
 			action.scopeAdd(onNode);
 		}
 		{
-		boolean synPredMatched956 = false;
+		boolean synPredMatched961 = false;
 		if (_t==null) _t=ASTNULL;
 		if (((_tokenSet_25.member(_t.getType())))) {
-			AST __t956 = _t;
-			synPredMatched956 = true;
+			AST __t961 = _t;
+			synPredMatched961 = true;
 			inputState.guessing++;
 			try {
 				{
@@ -23727,35 +23832,35 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case ASSIGN:
 				{
-					AST tmp1397_AST_in = (AST)_t;
+					AST tmp1407_AST_in = (AST)_t;
 					match(_t,ASSIGN);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case CREATE:
 				{
-					AST tmp1398_AST_in = (AST)_t;
+					AST tmp1408_AST_in = (AST)_t;
 					match(_t,CREATE);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case DELETE_KW:
 				{
-					AST tmp1399_AST_in = (AST)_t;
+					AST tmp1409_AST_in = (AST)_t;
 					match(_t,DELETE_KW);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case FIND:
 				{
-					AST tmp1400_AST_in = (AST)_t;
+					AST tmp1410_AST_in = (AST)_t;
 					match(_t,FIND);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case WRITE:
 				{
-					AST tmp1401_AST_in = (AST)_t;
+					AST tmp1411_AST_in = (AST)_t;
 					match(_t,WRITE);
 					_t = _t.getNextSibling();
 					break;
@@ -23768,12 +23873,12 @@ inputState.guessing--;
 				}
 			}
 			catch (RecognitionException pe) {
-				synPredMatched956 = false;
+				synPredMatched961 = false;
 			}
-			_t = __t956;
+			_t = __t961;
 inputState.guessing--;
 		}
-		if ( synPredMatched956 ) {
+		if ( synPredMatched961 ) {
 			{
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
@@ -23786,21 +23891,21 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case CREATE:
 				{
-					AST tmp1402_AST_in = (AST)_t;
+					AST tmp1412_AST_in = (AST)_t;
 					match(_t,CREATE);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case DELETE_KW:
 				{
-					AST tmp1403_AST_in = (AST)_t;
+					AST tmp1413_AST_in = (AST)_t;
 					match(_t,DELETE_KW);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case FIND:
 				{
-					AST tmp1404_AST_in = (AST)_t;
+					AST tmp1414_AST_in = (AST)_t;
 					match(_t,FIND);
 					_t = _t.getNextSibling();
 					break;
@@ -23811,7 +23916,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				AST tmp1405_AST_in = (AST)_t;
+				AST tmp1415_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
 				t1 = _t==ASTNULL ? null : (AST)_t;
@@ -23965,10 +24070,10 @@ inputState.guessing--;
 			}
 			case WRITE:
 			{
-				AST tmp1406_AST_in = (AST)_t;
+				AST tmp1416_AST_in = (AST)_t;
 				match(_t,WRITE);
 				_t = _t.getNextSibling();
-				AST tmp1407_AST_in = (AST)_t;
+				AST tmp1417_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
 				rec = _t==ASTNULL ? null : (AST)_t;
@@ -24123,7 +24228,7 @@ inputState.guessing--;
 				case NEW:
 				{
 					{
-					AST tmp1408_AST_in = (AST)_t;
+					AST tmp1418_AST_in = (AST)_t;
 					match(_t,NEW);
 					_t = _t.getNextSibling();
 					{
@@ -24131,7 +24236,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case BUFFER:
 					{
-						AST tmp1409_AST_in = (AST)_t;
+						AST tmp1419_AST_in = (AST)_t;
 						match(_t,BUFFER);
 						_t = _t.getNextSibling();
 						break;
@@ -24438,7 +24543,7 @@ inputState.guessing--;
 				case OLD:
 				{
 					{
-					AST tmp1410_AST_in = (AST)_t;
+					AST tmp1420_AST_in = (AST)_t;
 					match(_t,OLD);
 					_t = _t.getNextSibling();
 					{
@@ -24446,7 +24551,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case BUFFER:
 					{
-						AST tmp1411_AST_in = (AST)_t;
+						AST tmp1421_AST_in = (AST)_t;
 						match(_t,BUFFER);
 						_t = _t.getNextSibling();
 						break;
@@ -24746,10 +24851,10 @@ inputState.guessing--;
 			}
 			case ASSIGN:
 			{
-				AST tmp1412_AST_in = (AST)_t;
+				AST tmp1422_AST_in = (AST)_t;
 				match(_t,ASSIGN);
 				_t = _t.getNextSibling();
-				AST tmp1413_AST_in = (AST)_t;
+				AST tmp1423_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
 				fld = _t==ASTNULL ? null : (AST)_t;
@@ -24760,16 +24865,16 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case TABLE:
 				{
-					AST __t970 = _t;
-					AST tmp1414_AST_in = (AST)_t;
+					AST __t975 = _t;
+					AST tmp1424_AST_in = (AST)_t;
 					match(_t,TABLE);
 					_t = _t.getFirstChild();
-					AST tmp1415_AST_in = (AST)_t;
+					AST tmp1425_AST_in = (AST)_t;
 					match(_t,LABEL);
 					_t = _t.getNextSibling();
 					constant(_t);
 					_t = _retTree;
-					_t = __t970;
+					_t = __t975;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -24910,7 +25015,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case OLD:
 				{
-					AST tmp1416_AST_in = (AST)_t;
+					AST tmp1426_AST_in = (AST)_t;
 					match(_t,OLD);
 					_t = _t.getNextSibling();
 					{
@@ -24918,7 +25023,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case VALUE:
 					{
-						AST tmp1417_AST_in = (AST)_t;
+						AST tmp1427_AST_in = (AST)_t;
 						match(_t,VALUE);
 						_t = _t.getNextSibling();
 						break;
@@ -25101,7 +25206,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case OVERRIDE:
 			{
-				AST tmp1418_AST_in = (AST)_t;
+				AST tmp1428_AST_in = (AST)_t;
 				match(_t,OVERRIDE);
 				_t = _t.getNextSibling();
 				break;
@@ -25241,7 +25346,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case REVERT:
 			{
-				AST tmp1419_AST_in = (AST)_t;
+				AST tmp1429_AST_in = (AST)_t;
 				match(_t,REVERT);
 				_t = _t.getNextSibling();
 				state_end(_t);
@@ -25250,7 +25355,7 @@ inputState.guessing--;
 			}
 			case PERSISTENT:
 			{
-				AST tmp1420_AST_in = (AST)_t;
+				AST tmp1430_AST_in = (AST)_t;
 				match(_t,PERSISTENT);
 				_t = _t.getNextSibling();
 				runstate(_t);
@@ -25389,18 +25494,18 @@ inputState.guessing--;
 			}
 		}
 		else {
-			boolean synPredMatched977 = false;
+			boolean synPredMatched982 = false;
 			if (_t==null) _t=ASTNULL;
 			if ((((_t.getType() >= LEXDATE && _t.getType() <= SYMMETRICENCRYPTIONALGORITHM)))) {
-				AST __t977 = _t;
-				synPredMatched977 = true;
+				AST __t982 = _t;
+				synPredMatched982 = true;
 				inputState.guessing++;
 				try {
 					{
-					AST tmp1421_AST_in = (AST)_t;
+					AST tmp1431_AST_in = (AST)_t;
 					if ( _t==null ) throw new MismatchedTokenException();
 					_t = _t.getNextSibling();
-					AST tmp1422_AST_in = (AST)_t;
+					AST tmp1432_AST_in = (AST)_t;
 					if ( _t==null ) throw new MismatchedTokenException();
 					_t = _t.getNextSibling();
 					state_end(_t);
@@ -25408,16 +25513,16 @@ inputState.guessing--;
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched977 = false;
+					synPredMatched982 = false;
 				}
-				_t = __t977;
+				_t = __t982;
 inputState.guessing--;
 			}
-			if ( synPredMatched977 ) {
-				AST tmp1423_AST_in = (AST)_t;
+			if ( synPredMatched982 ) {
+				AST tmp1433_AST_in = (AST)_t;
 				if ( _t==null ) throw new MismatchedTokenException();
 				_t = _t.getNextSibling();
-				AST tmp1424_AST_in = (AST)_t;
+				AST tmp1434_AST_in = (AST)_t;
 				if ( _t==null ) throw new MismatchedTokenException();
 				_t = _t.getNextSibling();
 				state_end(_t);
@@ -25431,36 +25536,36 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case ANYWHERE:
 				{
-					AST tmp1425_AST_in = (AST)_t;
+					AST tmp1435_AST_in = (AST)_t;
 					match(_t,ANYWHERE);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case OF:
 				{
-					AST tmp1426_AST_in = (AST)_t;
+					AST tmp1436_AST_in = (AST)_t;
 					match(_t,OF);
 					_t = _t.getNextSibling();
 					widgetlist(_t);
 					_t = _retTree;
 					{
-					_loop980:
+					_loop985:
 					do {
 						if (_t==null) _t=ASTNULL;
 						if ((_t.getType()==OR)) {
-							AST tmp1427_AST_in = (AST)_t;
+							AST tmp1437_AST_in = (AST)_t;
 							match(_t,OR);
 							_t = _t.getNextSibling();
 							eventlist(_t);
 							_t = _retTree;
-							AST tmp1428_AST_in = (AST)_t;
+							AST tmp1438_AST_in = (AST)_t;
 							match(_t,OF);
 							_t = _t.getNextSibling();
 							widgetlist(_t);
 							_t = _retTree;
 						}
 						else {
-							break _loop980;
+							break _loop985;
 						}
 						
 					} while (true);
@@ -25470,7 +25575,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case ANYWHERE:
 					{
-						AST tmp1429_AST_in = (AST)_t;
+						AST tmp1439_AST_in = (AST)_t;
 						match(_t,ANYWHERE);
 						_t = _t.getNextSibling();
 						break;
@@ -25618,7 +25723,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case REVERT:
 				{
-					AST tmp1430_AST_in = (AST)_t;
+					AST tmp1440_AST_in = (AST)_t;
 					match(_t,REVERT);
 					_t = _t.getNextSibling();
 					state_end(_t);
@@ -25627,10 +25732,10 @@ inputState.guessing--;
 				}
 				case PERSISTENT:
 				{
-					AST tmp1431_AST_in = (AST)_t;
+					AST tmp1441_AST_in = (AST)_t;
 					match(_t,PERSISTENT);
 					_t = _t.getNextSibling();
-					AST tmp1432_AST_in = (AST)_t;
+					AST tmp1442_AST_in = (AST)_t;
 					match(_t,RUN);
 					_t = _t.getNextSibling();
 					filenameorvalue(_t);
@@ -25640,13 +25745,13 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case IN_KW:
 					{
-						AST __t984 = _t;
-						AST tmp1433_AST_in = (AST)_t;
+						AST __t989 = _t;
+						AST tmp1443_AST_in = (AST)_t;
 						match(_t,IN_KW);
 						_t = _t.getFirstChild();
 						expression(_t);
 						_t = _retTree;
-						_t = __t984;
+						_t = __t989;
 						_t = _t.getNextSibling();
 						break;
 					}
@@ -25667,17 +25772,17 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case Parameter_list:
 					{
-						AST __t986 = _t;
-						AST tmp1434_AST_in = (AST)_t;
+						AST __t991 = _t;
+						AST tmp1444_AST_in = (AST)_t;
 						match(_t,Parameter_list);
 						_t = _t.getFirstChild();
-						AST tmp1435_AST_in = (AST)_t;
+						AST tmp1445_AST_in = (AST)_t;
 						match(_t,LEFTPAREN);
 						_t = _t.getNextSibling();
 						{
 						if (_t==null) _t=ASTNULL;
 						if ((_t.getType()==INPUT)) {
-							AST tmp1436_AST_in = (AST)_t;
+							AST tmp1446_AST_in = (AST)_t;
 							match(_t,INPUT);
 							_t = _t.getNextSibling();
 						}
@@ -25691,17 +25796,17 @@ inputState.guessing--;
 						expression(_t);
 						_t = _retTree;
 						{
-						_loop990:
+						_loop995:
 						do {
 							if (_t==null) _t=ASTNULL;
 							if ((_t.getType()==COMMA)) {
-								AST tmp1437_AST_in = (AST)_t;
+								AST tmp1447_AST_in = (AST)_t;
 								match(_t,COMMA);
 								_t = _t.getNextSibling();
 								{
 								if (_t==null) _t=ASTNULL;
 								if ((_t.getType()==INPUT)) {
-									AST tmp1438_AST_in = (AST)_t;
+									AST tmp1448_AST_in = (AST)_t;
 									match(_t,INPUT);
 									_t = _t.getNextSibling();
 								}
@@ -25716,15 +25821,15 @@ inputState.guessing--;
 								_t = _retTree;
 							}
 							else {
-								break _loop990;
+								break _loop995;
 							}
 							
 						} while (true);
 						}
-						AST tmp1439_AST_in = (AST)_t;
+						AST tmp1449_AST_in = (AST)_t;
 						match(_t,RIGHTPAREN);
 						_t = _t.getNextSibling();
-						_t = __t986;
+						_t = __t991;
 						_t = _t.getNextSibling();
 						break;
 					}
@@ -25882,7 +25987,7 @@ inputState.guessing--;
 			if ( inputState.guessing==0 ) {
 				action.scopeClose(onNode);
 			}
-			_t = __t953;
+			_t = __t958;
 			_t = _t.getNextSibling();
 			_retTree = _t;
 		}
@@ -25894,7 +25999,7 @@ inputState.guessing--;
 		AST hnd = null;
 		AST hexp = null;
 		
-		AST __t1067 = _t;
+		AST __t1072 = _t;
 		r = _t==ASTNULL ? null :(AST)_t;
 		match(_t,RUN);
 		_t = _t.getFirstChild();
@@ -25908,18 +26013,18 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case LEFTANGLE:
 		{
-			AST tmp1440_AST_in = (AST)_t;
+			AST tmp1450_AST_in = (AST)_t;
 			match(_t,LEFTANGLE);
 			_t = _t.getNextSibling();
-			AST tmp1441_AST_in = (AST)_t;
+			AST tmp1451_AST_in = (AST)_t;
 			match(_t,LEFTANGLE);
 			_t = _t.getNextSibling();
 			filenameorvalue(_t);
 			_t = _retTree;
-			AST tmp1442_AST_in = (AST)_t;
+			AST tmp1452_AST_in = (AST)_t;
 			match(_t,RIGHTANGLE);
 			_t = _t.getNextSibling();
-			AST tmp1443_AST_in = (AST)_t;
+			AST tmp1453_AST_in = (AST)_t;
 			match(_t,RIGHTANGLE);
 			_t = _t.getNextSibling();
 			break;
@@ -25945,14 +26050,14 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1089:
+		_loop1094:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case PERSISTENT:
 			{
-				AST __t1070 = _t;
-				AST tmp1444_AST_in = (AST)_t;
+				AST __t1075 = _t;
+				AST tmp1454_AST_in = (AST)_t;
 				match(_t,PERSISTENT);
 				_t = _t.getFirstChild();
 				{
@@ -25960,8 +26065,8 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case SET:
 				{
-					AST __t1072 = _t;
-					AST tmp1445_AST_in = (AST)_t;
+					AST __t1077 = _t;
+					AST tmp1455_AST_in = (AST)_t;
 					match(_t,SET);
 					_t = _t.getFirstChild();
 					{
@@ -25987,7 +26092,7 @@ inputState.guessing--;
 					}
 					}
 					}
-					_t = __t1072;
+					_t = __t1077;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -26001,14 +26106,14 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t1070;
+				_t = __t1075;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case SET:
 			{
-				AST __t1074 = _t;
-				AST tmp1446_AST_in = (AST)_t;
+				AST __t1079 = _t;
+				AST tmp1456_AST_in = (AST)_t;
 				match(_t,SET);
 				_t = _t.getFirstChild();
 				{
@@ -26030,20 +26135,20 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t1074;
+				_t = __t1079;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case ON:
 			{
-				AST __t1076 = _t;
-				AST tmp1447_AST_in = (AST)_t;
+				AST __t1081 = _t;
+				AST tmp1457_AST_in = (AST)_t;
 				match(_t,ON);
 				_t = _t.getFirstChild();
 				{
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==SERVER)) {
-					AST tmp1448_AST_in = (AST)_t;
+					AST tmp1458_AST_in = (AST)_t;
 					match(_t,SERVER);
 					_t = _t.getNextSibling();
 				}
@@ -26061,7 +26166,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case TRANSACTION:
 				{
-					AST tmp1449_AST_in = (AST)_t;
+					AST tmp1459_AST_in = (AST)_t;
 					match(_t,TRANSACTION);
 					_t = _t.getNextSibling();
 					{
@@ -26069,7 +26174,7 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case DISTINCT:
 					{
-						AST tmp1450_AST_in = (AST)_t;
+						AST tmp1460_AST_in = (AST)_t;
 						match(_t,DISTINCT);
 						_t = _t.getNextSibling();
 						break;
@@ -26096,20 +26201,20 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t1076;
+				_t = __t1081;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IN_KW:
 			{
-				AST __t1080 = _t;
-				AST tmp1451_AST_in = (AST)_t;
+				AST __t1085 = _t;
+				AST tmp1461_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getFirstChild();
 				hexp = _t==ASTNULL ? null : (AST)_t;
 				expression(_t);
 				_t = _retTree;
-				_t = __t1080;
+				_t = __t1085;
 				_t = _t.getNextSibling();
 				if ( inputState.guessing==0 ) {
 					action.runInHandle(hexp);
@@ -26118,8 +26223,8 @@ inputState.guessing--;
 			}
 			case ASYNCHRONOUS:
 			{
-				AST __t1081 = _t;
-				AST tmp1452_AST_in = (AST)_t;
+				AST __t1086 = _t;
+				AST tmp1462_AST_in = (AST)_t;
 				match(_t,ASYNCHRONOUS);
 				_t = _t.getFirstChild();
 				{
@@ -26127,8 +26232,8 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case SET:
 				{
-					AST __t1083 = _t;
-					AST tmp1453_AST_in = (AST)_t;
+					AST __t1088 = _t;
+					AST tmp1463_AST_in = (AST)_t;
 					match(_t,SET);
 					_t = _t.getFirstChild();
 					{
@@ -26150,64 +26255,13 @@ inputState.guessing--;
 					}
 					}
 					}
-					_t = __t1083;
-					_t = _t.getNextSibling();
-					break;
-				}
-				case 3:
-				case EVENTPROCEDURE:
-				case IN_KW:
-				{
-					break;
-				}
-				default:
-				{
-					throw new NoViableAltException(_t);
-				}
-				}
-				}
-				{
-				if (_t==null) _t=ASTNULL;
-				switch ( _t.getType()) {
-				case EVENTPROCEDURE:
-				{
-					AST __t1086 = _t;
-					AST tmp1454_AST_in = (AST)_t;
-					match(_t,EVENTPROCEDURE);
-					_t = _t.getFirstChild();
-					expression(_t);
-					_t = _retTree;
-					_t = __t1086;
-					_t = _t.getNextSibling();
-					break;
-				}
-				case 3:
-				case IN_KW:
-				{
-					break;
-				}
-				default:
-				{
-					throw new NoViableAltException(_t);
-				}
-				}
-				}
-				{
-				if (_t==null) _t=ASTNULL;
-				switch ( _t.getType()) {
-				case IN_KW:
-				{
-					AST __t1088 = _t;
-					AST tmp1455_AST_in = (AST)_t;
-					match(_t,IN_KW);
-					_t = _t.getFirstChild();
-					expression(_t);
-					_t = _retTree;
 					_t = __t1088;
 					_t = _t.getNextSibling();
 					break;
 				}
 				case 3:
+				case EVENTPROCEDURE:
+				case IN_KW:
 				{
 					break;
 				}
@@ -26217,13 +26271,64 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t1081;
+				{
+				if (_t==null) _t=ASTNULL;
+				switch ( _t.getType()) {
+				case EVENTPROCEDURE:
+				{
+					AST __t1091 = _t;
+					AST tmp1464_AST_in = (AST)_t;
+					match(_t,EVENTPROCEDURE);
+					_t = _t.getFirstChild();
+					expression(_t);
+					_t = _retTree;
+					_t = __t1091;
+					_t = _t.getNextSibling();
+					break;
+				}
+				case 3:
+				case IN_KW:
+				{
+					break;
+				}
+				default:
+				{
+					throw new NoViableAltException(_t);
+				}
+				}
+				}
+				{
+				if (_t==null) _t=ASTNULL;
+				switch ( _t.getType()) {
+				case IN_KW:
+				{
+					AST __t1093 = _t;
+					AST tmp1465_AST_in = (AST)_t;
+					match(_t,IN_KW);
+					_t = _t.getFirstChild();
+					expression(_t);
+					_t = _retTree;
+					_t = __t1093;
+					_t = _t.getNextSibling();
+					break;
+				}
+				case 3:
+				{
+					break;
+				}
+				default:
+				{
+					throw new NoViableAltException(_t);
+				}
+				}
+				}
+				_t = __t1086;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop1089;
+				break _loop1094;
 			}
 			}
 		} while (true);
@@ -26255,13 +26360,13 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1092:
+		_loop1097:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case NOERROR_KW:
 			{
-				AST tmp1456_AST_in = (AST)_t;
+				AST tmp1466_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
@@ -26275,14 +26380,14 @@ inputState.guessing--;
 			}
 			default:
 			{
-				break _loop1092;
+				break _loop1097;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1067;
+		_t = __t1072;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -26291,32 +26396,32 @@ inputState.guessing--;
 		
 		AST eventlist_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1539 = _t;
-		AST tmp1457_AST_in = (AST)_t;
+		AST __t1544 = _t;
+		AST tmp1467_AST_in = (AST)_t;
 		match(_t,Event_list);
 		_t = _t.getFirstChild();
-		AST tmp1458_AST_in = (AST)_t;
+		AST tmp1468_AST_in = (AST)_t;
 		if ( _t==null ) throw new MismatchedTokenException();
 		_t = _t.getNextSibling();
 		{
-		_loop1541:
+		_loop1546:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1459_AST_in = (AST)_t;
+				AST tmp1469_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
-				AST tmp1460_AST_in = (AST)_t;
+				AST tmp1470_AST_in = (AST)_t;
 				if ( _t==null ) throw new MismatchedTokenException();
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop1541;
+				break _loop1546;
 			}
 			
 		} while (true);
 		}
-		_t = __t1539;
+		_t = __t1544;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -26332,7 +26437,7 @@ inputState.guessing--;
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1461_AST_in = (AST)_t;
+				AST tmp1471_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				gwidget(_t);
@@ -26351,14 +26456,14 @@ inputState.guessing--;
 		
 		AST openquerystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t992 = _t;
-		AST tmp1462_AST_in = (AST)_t;
+		AST __t997 = _t;
+		AST tmp1472_AST_in = (AST)_t;
 		match(_t,OPEN);
 		_t = _t.getFirstChild();
-		AST tmp1463_AST_in = (AST)_t;
+		AST tmp1473_AST_in = (AST)_t;
 		match(_t,QUERY);
 		_t = _t.getNextSibling();
-		AST tmp1464_AST_in = (AST)_t;
+		AST tmp1474_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		{
@@ -26366,14 +26471,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FOR:
 		{
-			AST tmp1465_AST_in = (AST)_t;
+			AST tmp1475_AST_in = (AST)_t;
 			match(_t,FOR);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PRESELECT:
 		{
-			AST tmp1466_AST_in = (AST)_t;
+			AST tmp1476_AST_in = (AST)_t;
 			match(_t,PRESELECT);
 			_t = _t.getNextSibling();
 			break;
@@ -26387,7 +26492,7 @@ inputState.guessing--;
 		for_record_spec(_t,CQ.INIT);
 		_t = _retTree;
 		{
-		_loop998:
+		_loop1003:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
@@ -26399,8 +26504,8 @@ inputState.guessing--;
 			}
 			case BY:
 			{
-				AST __t995 = _t;
-				AST tmp1467_AST_in = (AST)_t;
+				AST __t1000 = _t;
+				AST tmp1477_AST_in = (AST)_t;
 				match(_t,BY);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -26410,7 +26515,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case DESCENDING:
 				{
-					AST tmp1468_AST_in = (AST)_t;
+					AST tmp1478_AST_in = (AST)_t;
 					match(_t,DESCENDING);
 					_t = _t.getNextSibling();
 					break;
@@ -26425,7 +26530,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t995;
+				_t = __t1000;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -26437,33 +26542,33 @@ inputState.guessing--;
 			}
 			case INDEXEDREPOSITION:
 			{
-				AST tmp1469_AST_in = (AST)_t;
+				AST tmp1479_AST_in = (AST)_t;
 				match(_t,INDEXEDREPOSITION);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAXROWS:
 			{
-				AST __t997 = _t;
-				AST tmp1470_AST_in = (AST)_t;
+				AST __t1002 = _t;
+				AST tmp1480_AST_in = (AST)_t;
 				match(_t,MAXROWS);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t997;
+				_t = __t1002;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop998;
+				break _loop1003;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t992;
+		_t = __t997;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -26474,7 +26579,7 @@ inputState.guessing--;
 		AST p = null;
 		AST id = null;
 		
-		AST __t1000 = _t;
+		AST __t1005 = _t;
 		p = _t==ASTNULL ? null :(AST)_t;
 		match(_t,PROCEDURE);
 		_t = _t.getFirstChild();
@@ -26489,81 +26594,81 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXTERNAL:
 		{
-			AST __t1002 = _t;
-			AST tmp1471_AST_in = (AST)_t;
+			AST __t1007 = _t;
+			AST tmp1481_AST_in = (AST)_t;
 			match(_t,EXTERNAL);
 			_t = _t.getFirstChild();
 			constant(_t);
 			_t = _retTree;
 			{
-			_loop1005:
+			_loop1010:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
 				case CDECL_KW:
 				{
-					AST tmp1472_AST_in = (AST)_t;
+					AST tmp1482_AST_in = (AST)_t;
 					match(_t,CDECL_KW);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case PASCAL_KW:
 				{
-					AST tmp1473_AST_in = (AST)_t;
+					AST tmp1483_AST_in = (AST)_t;
 					match(_t,PASCAL_KW);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case STDCALL_KW:
 				{
-					AST tmp1474_AST_in = (AST)_t;
+					AST tmp1484_AST_in = (AST)_t;
 					match(_t,STDCALL_KW);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case ORDINAL:
 				{
-					AST __t1004 = _t;
-					AST tmp1475_AST_in = (AST)_t;
+					AST __t1009 = _t;
+					AST tmp1485_AST_in = (AST)_t;
 					match(_t,ORDINAL);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t1004;
+					_t = __t1009;
 					_t = _t.getNextSibling();
 					break;
 				}
 				case PERSISTENT:
 				{
-					AST tmp1476_AST_in = (AST)_t;
+					AST tmp1486_AST_in = (AST)_t;
 					match(_t,PERSISTENT);
 					_t = _t.getNextSibling();
 					break;
 				}
 				default:
 				{
-					break _loop1005;
+					break _loop1010;
 				}
 				}
 			} while (true);
 			}
-			_t = __t1002;
+			_t = __t1007;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case PRIVATE:
 		{
-			AST tmp1477_AST_in = (AST)_t;
+			AST tmp1487_AST_in = (AST)_t;
 			match(_t,PRIVATE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case IN_KW:
 		{
-			AST tmp1478_AST_in = (AST)_t;
+			AST tmp1488_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getNextSibling();
-			AST tmp1479_AST_in = (AST)_t;
+			AST tmp1489_AST_in = (AST)_t;
 			match(_t,SUPER);
 			_t = _t.getNextSibling();
 			break;
@@ -26588,15 +26693,15 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EOF:
 		{
-			AST tmp1480_AST_in = (AST)_t;
+			AST tmp1490_AST_in = (AST)_t;
 			match(_t,Token.EOF_TYPE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case END:
 		{
-			AST __t1007 = _t;
-			AST tmp1481_AST_in = (AST)_t;
+			AST __t1012 = _t;
+			AST tmp1491_AST_in = (AST)_t;
 			match(_t,END);
 			_t = _t.getFirstChild();
 			{
@@ -26604,7 +26709,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case PROCEDURE:
 			{
-				AST tmp1482_AST_in = (AST)_t;
+				AST tmp1492_AST_in = (AST)_t;
 				match(_t,PROCEDURE);
 				_t = _t.getNextSibling();
 				break;
@@ -26619,7 +26724,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t1007;
+			_t = __t1012;
 			_t = _t.getNextSibling();
 			state_end(_t);
 			_t = _retTree;
@@ -26634,7 +26739,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 				action.procedureEnd(p);
 		}
-		_t = __t1000;
+		_t = __t1005;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -26644,7 +26749,7 @@ inputState.guessing--;
 		AST promptforstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t1010 = _t;
+		AST __t1015 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,PROMPTFOR);
 		_t = _t.getFirstChild();
@@ -26683,7 +26788,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNLESSHIDDEN:
 		{
-			AST tmp1483_AST_in = (AST)_t;
+			AST tmp1493_AST_in = (AST)_t;
 			match(_t,UNLESSHIDDEN);
 			_t = _t.getNextSibling();
 			break;
@@ -26706,7 +26811,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1014:
+		_loop1019:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
@@ -26714,7 +26819,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop1014;
+				break _loop1019;
 			}
 			
 		} while (true);
@@ -26748,12 +26853,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t1017 = _t;
-			AST tmp1484_AST_in = (AST)_t;
+			AST __t1022 = _t;
+			AST tmp1494_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop1019:
+			_loop1024:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -26761,12 +26866,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop1019;
+					break _loop1024;
 				}
 				
 			} while (true);
 			}
-			_t = __t1017;
+			_t = __t1022;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -26789,16 +26894,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t1021 = _t;
-			AST tmp1485_AST_in = (AST)_t;
+			AST __t1026 = _t;
+			AST tmp1495_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1486_AST_in = (AST)_t;
+			AST tmp1496_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t1021;
+			_t = __t1026;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -26861,7 +26966,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1010;
+		_t = __t1015;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -26871,7 +26976,7 @@ inputState.guessing--;
 		AST editingphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1916 = _t;
-		AST tmp1487_AST_in = (AST)_t;
+		AST tmp1497_AST_in = (AST)_t;
 		match(_t,Editing_phrase);
 		_t = _t.getFirstChild();
 		{
@@ -26879,10 +26984,10 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ID:
 		{
-			AST tmp1488_AST_in = (AST)_t;
+			AST tmp1498_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
-			AST tmp1489_AST_in = (AST)_t;
+			AST tmp1499_AST_in = (AST)_t;
 			match(_t,LEXCOLON);
 			_t = _t.getNextSibling();
 			break;
@@ -26897,7 +27002,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1490_AST_in = (AST)_t;
+		AST tmp1500_AST_in = (AST)_t;
 		match(_t,EDITING);
 		_t = _t.getNextSibling();
 		block_colon(_t);
@@ -26916,7 +27021,7 @@ inputState.guessing--;
 			
 		} while (true);
 		}
-		AST tmp1491_AST_in = (AST)_t;
+		AST tmp1501_AST_in = (AST)_t;
 		match(_t,END);
 		_t = _t.getNextSibling();
 		_t = __t1916;
@@ -26928,8 +27033,8 @@ inputState.guessing--;
 		
 		AST rawtransferstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1025 = _t;
-		AST tmp1492_AST_in = (AST)_t;
+		AST __t1030 = _t;
+		AST tmp1502_AST_in = (AST)_t;
 		match(_t,RAWTRANSFER);
 		_t = _t.getFirstChild();
 		{
@@ -26937,14 +27042,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BUFFER:
 		{
-			AST tmp1493_AST_in = (AST)_t;
+			AST tmp1503_AST_in = (AST)_t;
 			match(_t,BUFFER);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FIELD:
 		{
-			AST tmp1494_AST_in = (AST)_t;
+			AST tmp1504_AST_in = (AST)_t;
 			match(_t,FIELD);
 			_t = _t.getNextSibling();
 			break;
@@ -26981,7 +27086,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1495_AST_in = (AST)_t;
+		AST tmp1505_AST_in = (AST)_t;
 		match(_t,TO);
 		_t = _t.getNextSibling();
 		{
@@ -26989,14 +27094,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BUFFER:
 		{
-			AST tmp1496_AST_in = (AST)_t;
+			AST tmp1506_AST_in = (AST)_t;
 			match(_t,BUFFER);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FIELD:
 		{
-			AST tmp1497_AST_in = (AST)_t;
+			AST tmp1507_AST_in = (AST)_t;
 			match(_t,FIELD);
 			_t = _t.getNextSibling();
 			break;
@@ -27038,7 +27143,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1498_AST_in = (AST)_t;
+			AST tmp1508_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -27056,7 +27161,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1025;
+		_t = __t1030;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27065,8 +27170,8 @@ inputState.guessing--;
 		
 		AST releasestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1058 = _t;
-		AST tmp1499_AST_in = (AST)_t;
+		AST __t1063 = _t;
+		AST tmp1509_AST_in = (AST)_t;
 		match(_t,RELEASE);
 		_t = _t.getFirstChild();
 		tbl(_t,CQ.REF);
@@ -27076,7 +27181,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1500_AST_in = (AST)_t;
+			AST tmp1510_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -27094,7 +27199,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1058;
+		_t = __t1063;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27104,7 +27209,7 @@ inputState.guessing--;
 		AST repeatstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST r = null;
 		
-		AST __t1061 = _t;
+		AST __t1066 = _t;
 		r = _t==ASTNULL ? null :(AST)_t;
 		match(_t,REPEAT);
 		_t = _t.getFirstChild();
@@ -27175,7 +27280,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1065:
+		_loop1070:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_tokenSet_22.member(_t.getType()))) {
@@ -27183,7 +27288,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop1065;
+				break _loop1070;
 			}
 			
 		} while (true);
@@ -27200,7 +27305,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.blockEnd();
 		}
-		_t = __t1061;
+		_t = __t1066;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27210,7 +27315,7 @@ inputState.guessing--;
 		AST scrollstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t1094 = _t;
+		AST __t1099 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,SCROLL);
 		_t = _t.getFirstChild();
@@ -27222,7 +27327,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case FROMCURRENT:
 		{
-			AST tmp1501_AST_in = (AST)_t;
+			AST tmp1511_AST_in = (AST)_t;
 			match(_t,FROMCURRENT);
 			_t = _t.getNextSibling();
 			break;
@@ -27246,7 +27351,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UP:
 		{
-			AST tmp1502_AST_in = (AST)_t;
+			AST tmp1512_AST_in = (AST)_t;
 			match(_t,UP);
 			_t = _t.getNextSibling();
 			break;
@@ -27269,7 +27374,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case DOWN:
 		{
-			AST tmp1503_AST_in = (AST)_t;
+			AST tmp1513_AST_in = (AST)_t;
 			match(_t,DOWN);
 			_t = _t.getNextSibling();
 			break;
@@ -27311,7 +27416,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t1094;
+		_t = __t1099;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27321,7 +27426,7 @@ inputState.guessing--;
 		AST setstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t1100 = _t;
+		AST __t1105 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,SET);
 		_t = _t.getFirstChild();
@@ -27361,7 +27466,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNLESSHIDDEN:
 		{
-			AST tmp1504_AST_in = (AST)_t;
+			AST tmp1514_AST_in = (AST)_t;
 			match(_t,UNLESSHIDDEN);
 			_t = _t.getNextSibling();
 			break;
@@ -27385,7 +27490,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1104:
+		_loop1109:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
@@ -27393,7 +27498,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop1104;
+				break _loop1109;
 			}
 			
 		} while (true);
@@ -27428,12 +27533,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t1107 = _t;
-			AST tmp1505_AST_in = (AST)_t;
+			AST __t1112 = _t;
+			AST tmp1515_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop1109:
+			_loop1114:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -27441,12 +27546,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop1109;
+					break _loop1114;
 				}
 				
 			} while (true);
 			}
-			_t = __t1107;
+			_t = __t1112;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -27470,16 +27575,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t1111 = _t;
-			AST tmp1506_AST_in = (AST)_t;
+			AST __t1116 = _t;
+			AST tmp1516_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1507_AST_in = (AST)_t;
+			AST tmp1517_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t1111;
+			_t = __t1116;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -27548,7 +27653,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1508_AST_in = (AST)_t;
+			AST tmp1518_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -27566,7 +27671,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1100;
+		_t = __t1105;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27575,11 +27680,11 @@ inputState.guessing--;
 		
 		AST systemdialogcolorstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1116 = _t;
-		AST tmp1509_AST_in = (AST)_t;
+		AST __t1121 = _t;
+		AST tmp1519_AST_in = (AST)_t;
 		match(_t,SYSTEMDIALOG);
 		_t = _t.getFirstChild();
-		AST tmp1510_AST_in = (AST)_t;
+		AST tmp1520_AST_in = (AST)_t;
 		match(_t,COLOR);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -27589,13 +27694,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UPDATE:
 		{
-			AST __t1118 = _t;
-			AST tmp1511_AST_in = (AST)_t;
+			AST __t1123 = _t;
+			AST tmp1521_AST_in = (AST)_t;
 			match(_t,UPDATE);
 			_t = _t.getFirstChild();
 			fld(_t,CQ.UPDATING);
 			_t = _retTree;
-			_t = __t1118;
+			_t = __t1123;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -27616,16 +27721,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t1120 = _t;
-			AST tmp1512_AST_in = (AST)_t;
+			AST __t1125 = _t;
+			AST tmp1522_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1513_AST_in = (AST)_t;
+			AST tmp1523_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t1120;
+			_t = __t1125;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -27642,7 +27747,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1116;
+		_t = __t1121;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27651,95 +27756,95 @@ inputState.guessing--;
 		
 		AST systemdialogfontstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1122 = _t;
-		AST tmp1514_AST_in = (AST)_t;
+		AST __t1127 = _t;
+		AST tmp1524_AST_in = (AST)_t;
 		match(_t,SYSTEMDIALOG);
 		_t = _t.getFirstChild();
-		AST tmp1515_AST_in = (AST)_t;
+		AST tmp1525_AST_in = (AST)_t;
 		match(_t,FONT);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
 		{
-		_loop1128:
+		_loop1133:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case ANSIONLY:
 			{
-				AST tmp1516_AST_in = (AST)_t;
+				AST tmp1526_AST_in = (AST)_t;
 				match(_t,ANSIONLY);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FIXEDONLY:
 			{
-				AST tmp1517_AST_in = (AST)_t;
+				AST tmp1527_AST_in = (AST)_t;
 				match(_t,FIXEDONLY);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAXSIZE:
 			{
-				AST __t1124 = _t;
-				AST tmp1518_AST_in = (AST)_t;
+				AST __t1129 = _t;
+				AST tmp1528_AST_in = (AST)_t;
 				match(_t,MAXSIZE);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1124;
+				_t = __t1129;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MINSIZE:
 			{
-				AST __t1125 = _t;
-				AST tmp1519_AST_in = (AST)_t;
+				AST __t1130 = _t;
+				AST tmp1529_AST_in = (AST)_t;
 				match(_t,MINSIZE);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1125;
+				_t = __t1130;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case UPDATE:
 			{
-				AST __t1126 = _t;
-				AST tmp1520_AST_in = (AST)_t;
+				AST __t1131 = _t;
+				AST tmp1530_AST_in = (AST)_t;
 				match(_t,UPDATE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.UPDATING);
 				_t = _retTree;
-				_t = __t1126;
+				_t = __t1131;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IN_KW:
 			{
-				AST __t1127 = _t;
-				AST tmp1521_AST_in = (AST)_t;
+				AST __t1132 = _t;
+				AST tmp1531_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getFirstChild();
-				AST tmp1522_AST_in = (AST)_t;
+				AST tmp1532_AST_in = (AST)_t;
 				match(_t,WINDOW);
 				_t = _t.getNextSibling();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1127;
+				_t = __t1132;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop1128;
+				break _loop1133;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1122;
+		_t = __t1127;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27748,61 +27853,61 @@ inputState.guessing--;
 		
 		AST systemdialoggetdirstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1130 = _t;
-		AST tmp1523_AST_in = (AST)_t;
+		AST __t1135 = _t;
+		AST tmp1533_AST_in = (AST)_t;
 		match(_t,SYSTEMDIALOG);
 		_t = _t.getFirstChild();
-		AST tmp1524_AST_in = (AST)_t;
+		AST tmp1534_AST_in = (AST)_t;
 		match(_t,GETDIR);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.REFUP);
 		_t = _retTree;
 		{
-		_loop1134:
+		_loop1139:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case INITIALDIR:
 			{
-				AST __t1132 = _t;
-				AST tmp1525_AST_in = (AST)_t;
+				AST __t1137 = _t;
+				AST tmp1535_AST_in = (AST)_t;
 				match(_t,INITIALDIR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1132;
+				_t = __t1137;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case RETURNTOSTARTDIR:
 			{
-				AST tmp1526_AST_in = (AST)_t;
+				AST tmp1536_AST_in = (AST)_t;
 				match(_t,RETURNTOSTARTDIR);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case TITLE:
 			{
-				AST __t1133 = _t;
-				AST tmp1527_AST_in = (AST)_t;
+				AST __t1138 = _t;
+				AST tmp1537_AST_in = (AST)_t;
 				match(_t,TITLE);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1133;
+				_t = __t1138;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop1134;
+				break _loop1139;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1130;
+		_t = __t1135;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -27811,24 +27916,24 @@ inputState.guessing--;
 		
 		AST systemdialoggetfilestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1136 = _t;
-		AST tmp1528_AST_in = (AST)_t;
+		AST __t1141 = _t;
+		AST tmp1538_AST_in = (AST)_t;
 		match(_t,SYSTEMDIALOG);
 		_t = _t.getFirstChild();
-		AST tmp1529_AST_in = (AST)_t;
+		AST tmp1539_AST_in = (AST)_t;
 		match(_t,GETFILE);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.REFUP);
 		_t = _retTree;
 		{
-		_loop1148:
+		_loop1153:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case FILTERS:
 			{
-				AST __t1138 = _t;
-				AST tmp1530_AST_in = (AST)_t;
+				AST __t1143 = _t;
+				AST tmp1540_AST_in = (AST)_t;
 				match(_t,FILTERS);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -27836,11 +27941,11 @@ inputState.guessing--;
 				expression(_t);
 				_t = _retTree;
 				{
-				_loop1140:
+				_loop1145:
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp1531_AST_in = (AST)_t;
+						AST tmp1541_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						expression(_t);
@@ -27849,7 +27954,7 @@ inputState.guessing--;
 						_t = _retTree;
 					}
 					else {
-						break _loop1140;
+						break _loop1145;
 					}
 					
 				} while (true);
@@ -27859,13 +27964,13 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case INITIALFILTER:
 				{
-					AST __t1142 = _t;
-					AST tmp1532_AST_in = (AST)_t;
+					AST __t1147 = _t;
+					AST tmp1542_AST_in = (AST)_t;
 					match(_t,INITIALFILTER);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t1142;
+					_t = __t1147;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -27879,125 +27984,125 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t1138;
+				_t = __t1143;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case ASKOVERWRITE:
 			{
-				AST tmp1533_AST_in = (AST)_t;
+				AST tmp1543_AST_in = (AST)_t;
 				match(_t,ASKOVERWRITE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case CREATETESTFILE:
 			{
-				AST tmp1534_AST_in = (AST)_t;
+				AST tmp1544_AST_in = (AST)_t;
 				match(_t,CREATETESTFILE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DEFAULTEXTENSION:
 			{
-				AST __t1143 = _t;
-				AST tmp1535_AST_in = (AST)_t;
+				AST __t1148 = _t;
+				AST tmp1545_AST_in = (AST)_t;
 				match(_t,DEFAULTEXTENSION);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1143;
+				_t = __t1148;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case INITIALDIR:
 			{
-				AST __t1144 = _t;
-				AST tmp1536_AST_in = (AST)_t;
+				AST __t1149 = _t;
+				AST tmp1546_AST_in = (AST)_t;
 				match(_t,INITIALDIR);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1144;
+				_t = __t1149;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MUSTEXIST:
 			{
-				AST tmp1537_AST_in = (AST)_t;
+				AST tmp1547_AST_in = (AST)_t;
 				match(_t,MUSTEXIST);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case RETURNTOSTARTDIR:
 			{
-				AST tmp1538_AST_in = (AST)_t;
+				AST tmp1548_AST_in = (AST)_t;
 				match(_t,RETURNTOSTARTDIR);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case SAVEAS:
 			{
-				AST tmp1539_AST_in = (AST)_t;
+				AST tmp1549_AST_in = (AST)_t;
 				match(_t,SAVEAS);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case TITLE:
 			{
-				AST __t1145 = _t;
-				AST tmp1540_AST_in = (AST)_t;
+				AST __t1150 = _t;
+				AST tmp1550_AST_in = (AST)_t;
 				match(_t,TITLE);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1145;
+				_t = __t1150;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case USEFILENAME:
 			{
-				AST tmp1541_AST_in = (AST)_t;
+				AST tmp1551_AST_in = (AST)_t;
 				match(_t,USEFILENAME);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case UPDATE:
 			{
-				AST __t1146 = _t;
-				AST tmp1542_AST_in = (AST)_t;
+				AST __t1151 = _t;
+				AST tmp1552_AST_in = (AST)_t;
 				match(_t,UPDATE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.UPDATING);
 				_t = _retTree;
-				_t = __t1146;
+				_t = __t1151;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IN_KW:
 			{
-				AST __t1147 = _t;
-				AST tmp1543_AST_in = (AST)_t;
+				AST __t1152 = _t;
+				AST tmp1553_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getFirstChild();
-				AST tmp1544_AST_in = (AST)_t;
+				AST tmp1554_AST_in = (AST)_t;
 				match(_t,WINDOW);
 				_t = _t.getNextSibling();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1147;
+				_t = __t1152;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop1148;
+				break _loop1153;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1136;
+		_t = __t1141;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -28006,81 +28111,81 @@ inputState.guessing--;
 		
 		AST systemdialogprintersetupstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1150 = _t;
-		AST tmp1545_AST_in = (AST)_t;
+		AST __t1155 = _t;
+		AST tmp1555_AST_in = (AST)_t;
 		match(_t,SYSTEMDIALOG);
 		_t = _t.getFirstChild();
-		AST tmp1546_AST_in = (AST)_t;
+		AST tmp1556_AST_in = (AST)_t;
 		match(_t,PRINTERSETUP);
 		_t = _t.getNextSibling();
 		{
-		_loop1155:
+		_loop1160:
 		do {
 			if (_t==null) _t=ASTNULL;
 			switch ( _t.getType()) {
 			case NUMCOPIES:
 			{
-				AST __t1152 = _t;
-				AST tmp1547_AST_in = (AST)_t;
+				AST __t1157 = _t;
+				AST tmp1557_AST_in = (AST)_t;
 				match(_t,NUMCOPIES);
 				_t = _t.getFirstChild();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1152;
+				_t = __t1157;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case UPDATE:
 			{
-				AST __t1153 = _t;
-				AST tmp1548_AST_in = (AST)_t;
+				AST __t1158 = _t;
+				AST tmp1558_AST_in = (AST)_t;
 				match(_t,UPDATE);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.UPDATING);
 				_t = _retTree;
-				_t = __t1153;
+				_t = __t1158;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LANDSCAPE:
 			{
-				AST tmp1549_AST_in = (AST)_t;
+				AST tmp1559_AST_in = (AST)_t;
 				match(_t,LANDSCAPE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case PORTRAIT:
 			{
-				AST tmp1550_AST_in = (AST)_t;
+				AST tmp1560_AST_in = (AST)_t;
 				match(_t,PORTRAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IN_KW:
 			{
-				AST __t1154 = _t;
-				AST tmp1551_AST_in = (AST)_t;
+				AST __t1159 = _t;
+				AST tmp1561_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getFirstChild();
-				AST tmp1552_AST_in = (AST)_t;
+				AST tmp1562_AST_in = (AST)_t;
 				match(_t,WINDOW);
 				_t = _t.getNextSibling();
 				expression(_t);
 				_t = _retTree;
-				_t = __t1154;
+				_t = __t1159;
 				_t = _t.getNextSibling();
 				break;
 			}
 			default:
 			{
-				break _loop1155;
+				break _loop1160;
 			}
 			}
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1150;
+		_t = __t1155;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -28095,14 +28200,14 @@ inputState.guessing--;
 		AST id = null;
 		AST id2 = null;
 		
-		AST __t1167 = _t;
-		AST tmp1553_AST_in = (AST)_t;
+		AST __t1172 = _t;
+		AST tmp1563_AST_in = (AST)_t;
 		match(_t,TRIGGER);
 		_t = _t.getFirstChild();
-		AST tmp1554_AST_in = (AST)_t;
+		AST tmp1564_AST_in = (AST)_t;
 		match(_t,PROCEDURE);
 		_t = _t.getNextSibling();
-		AST tmp1555_AST_in = (AST)_t;
+		AST tmp1565_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		{
@@ -28119,35 +28224,35 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case CREATE:
 			{
-				AST tmp1556_AST_in = (AST)_t;
+				AST tmp1566_AST_in = (AST)_t;
 				match(_t,CREATE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DELETE_KW:
 			{
-				AST tmp1557_AST_in = (AST)_t;
+				AST tmp1567_AST_in = (AST)_t;
 				match(_t,DELETE_KW);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FIND:
 			{
-				AST tmp1558_AST_in = (AST)_t;
+				AST tmp1568_AST_in = (AST)_t;
 				match(_t,FIND);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case REPLICATIONCREATE:
 			{
-				AST tmp1559_AST_in = (AST)_t;
+				AST tmp1569_AST_in = (AST)_t;
 				match(_t,REPLICATIONCREATE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case REPLICATIONDELETE:
 			{
-				AST tmp1560_AST_in = (AST)_t;
+				AST tmp1570_AST_in = (AST)_t;
 				match(_t,REPLICATIONDELETE);
 				_t = _t.getNextSibling();
 				break;
@@ -28158,7 +28263,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1561_AST_in = (AST)_t;
+			AST tmp1571_AST_in = (AST)_t;
 			match(_t,OF);
 			_t = _t.getNextSibling();
 			t1 = _t==ASTNULL ? null : (AST)_t;
@@ -28198,14 +28303,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case WRITE:
 			{
-				AST tmp1562_AST_in = (AST)_t;
+				AST tmp1572_AST_in = (AST)_t;
 				match(_t,WRITE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case REPLICATIONWRITE:
 			{
-				AST tmp1563_AST_in = (AST)_t;
+				AST tmp1573_AST_in = (AST)_t;
 				match(_t,REPLICATIONWRITE);
 				_t = _t.getNextSibling();
 				break;
@@ -28216,7 +28321,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1564_AST_in = (AST)_t;
+			AST tmp1574_AST_in = (AST)_t;
 			match(_t,OF);
 			_t = _t.getNextSibling();
 			rec = _t==ASTNULL ? null : (AST)_t;
@@ -28250,7 +28355,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NEW:
 			{
-				AST tmp1565_AST_in = (AST)_t;
+				AST tmp1575_AST_in = (AST)_t;
 				match(_t,NEW);
 				_t = _t.getNextSibling();
 				{
@@ -28258,7 +28363,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case BUFFER:
 				{
-					AST tmp1566_AST_in = (AST)_t;
+					AST tmp1576_AST_in = (AST)_t;
 					match(_t,BUFFER);
 					_t = _t.getNextSibling();
 					break;
@@ -28323,7 +28428,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case OLD:
 			{
-				AST tmp1567_AST_in = (AST)_t;
+				AST tmp1577_AST_in = (AST)_t;
 				match(_t,OLD);
 				_t = _t.getNextSibling();
 				{
@@ -28331,7 +28436,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case BUFFER:
 				{
-					AST tmp1568_AST_in = (AST)_t;
+					AST tmp1578_AST_in = (AST)_t;
 					match(_t,BUFFER);
 					_t = _t.getNextSibling();
 					break;
@@ -28390,7 +28495,7 @@ inputState.guessing--;
 		}
 		case ASSIGN:
 		{
-			AST tmp1569_AST_in = (AST)_t;
+			AST tmp1579_AST_in = (AST)_t;
 			match(_t,ASSIGN);
 			_t = _t.getNextSibling();
 			{
@@ -28398,8 +28503,8 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case OF:
 			{
-				AST __t1180 = _t;
-				AST tmp1570_AST_in = (AST)_t;
+				AST __t1185 = _t;
+				AST tmp1580_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getFirstChild();
 				fld(_t,CQ.SYMBOL);
@@ -28409,16 +28514,16 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case TABLE:
 				{
-					AST __t1182 = _t;
-					AST tmp1571_AST_in = (AST)_t;
+					AST __t1187 = _t;
+					AST tmp1581_AST_in = (AST)_t;
 					match(_t,TABLE);
 					_t = _t.getFirstChild();
-					AST tmp1572_AST_in = (AST)_t;
+					AST tmp1582_AST_in = (AST)_t;
 					match(_t,LABEL);
 					_t = _t.getNextSibling();
 					constant(_t);
 					_t = _retTree;
-					_t = __t1182;
+					_t = __t1187;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -28432,14 +28537,14 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t1180;
+				_t = __t1185;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NEW:
 			{
-				AST __t1183 = _t;
-				AST tmp1573_AST_in = (AST)_t;
+				AST __t1188 = _t;
+				AST tmp1583_AST_in = (AST)_t;
 				match(_t,NEW);
 				_t = _t.getFirstChild();
 				{
@@ -28447,7 +28552,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case VALUE:
 				{
-					AST tmp1574_AST_in = (AST)_t;
+					AST tmp1584_AST_in = (AST)_t;
 					match(_t,VALUE);
 					_t = _t.getNextSibling();
 					break;
@@ -28473,7 +28578,7 @@ inputState.guessing--;
 				if ( inputState.guessing==0 ) {
 					action.addToSymbolScope(pop());
 				}
-				_t = __t1183;
+				_t = __t1188;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -28494,8 +28599,8 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case OLD:
 			{
-				AST __t1186 = _t;
-				AST tmp1575_AST_in = (AST)_t;
+				AST __t1191 = _t;
+				AST tmp1585_AST_in = (AST)_t;
 				match(_t,OLD);
 				_t = _t.getFirstChild();
 				{
@@ -28503,7 +28608,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case VALUE:
 				{
-					AST tmp1576_AST_in = (AST)_t;
+					AST tmp1586_AST_in = (AST)_t;
 					match(_t,VALUE);
 					_t = _t.getNextSibling();
 					break;
@@ -28526,7 +28631,7 @@ inputState.guessing--;
 				}
 				defineparam_var(_t);
 				_t = _retTree;
-				_t = __t1186;
+				_t = __t1191;
 				_t = _t.getNextSibling();
 				if ( inputState.guessing==0 ) {
 					action.addToSymbolScope(pop());
@@ -28554,7 +28659,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1167;
+		_t = __t1172;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -28565,7 +28670,7 @@ inputState.guessing--;
 		AST head = null;
 		AST fi = null;
 		
-		AST __t1189 = _t;
+		AST __t1194 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,UNDERLINE);
 		_t = _t.getFirstChild();
@@ -28595,11 +28700,11 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1194:
+		_loop1199:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
-				AST __t1192 = _t;
+				AST __t1197 = _t;
 				fi = _t==ASTNULL ? null :(AST)_t;
 				match(_t,Form_item);
 				_t = _t.getFirstChild();
@@ -28627,11 +28732,11 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t1192;
+				_t = __t1197;
 				_t = _t.getNextSibling();
 			}
 			else {
-				break _loop1194;
+				break _loop1199;
 			}
 			
 		} while (true);
@@ -28661,7 +28766,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t1189;
+		_t = __t1194;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -28671,7 +28776,7 @@ inputState.guessing--;
 		AST upstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t1197 = _t;
+		AST __t1202 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,UP);
 		_t = _t.getFirstChild();
@@ -28750,7 +28855,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.frameStatementEnd();
 		}
-		_t = __t1197;
+		_t = __t1202;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -28759,34 +28864,34 @@ inputState.guessing--;
 		
 		AST updatestatement_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		boolean synPredMatched1205 = false;
+		boolean synPredMatched1210 = false;
 		if (_t==null) _t=ASTNULL;
 		if (((_t.getType()==UPDATE))) {
-			AST __t1205 = _t;
-			synPredMatched1205 = true;
+			AST __t1210 = _t;
+			synPredMatched1210 = true;
 			inputState.guessing++;
 			try {
 				{
-				AST __t1204 = _t;
-				AST tmp1577_AST_in = (AST)_t;
+				AST __t1209 = _t;
+				AST tmp1587_AST_in = (AST)_t;
 				match(_t,UPDATE);
 				_t = _t.getFirstChild();
 				tbl(_t,CQ.SYMBOL);
 				_t = _retTree;
-				AST tmp1578_AST_in = (AST)_t;
+				AST tmp1588_AST_in = (AST)_t;
 				match(_t,SET);
 				_t = _t.getNextSibling();
-				_t = __t1204;
+				_t = __t1209;
 				_t = _t.getNextSibling();
 				}
 			}
 			catch (RecognitionException pe) {
-				synPredMatched1205 = false;
+				synPredMatched1210 = false;
 			}
-			_t = __t1205;
+			_t = __t1210;
 inputState.guessing--;
 		}
-		if ( synPredMatched1205 ) {
+		if ( synPredMatched1210 ) {
 			sqlupdatestate(_t);
 			_t = _retTree;
 		}
@@ -28805,30 +28910,30 @@ inputState.guessing--;
 		
 		AST sqlupdatestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1344 = _t;
-		AST tmp1579_AST_in = (AST)_t;
+		AST __t1349 = _t;
+		AST tmp1589_AST_in = (AST)_t;
 		match(_t,UPDATE);
 		_t = _t.getFirstChild();
 		tbl(_t,CQ.SCHEMATABLESYMBOL);
 		_t = _retTree;
-		AST tmp1580_AST_in = (AST)_t;
+		AST tmp1590_AST_in = (AST)_t;
 		match(_t,SET);
 		_t = _t.getNextSibling();
 		sqlupdate_equal(_t);
 		_t = _retTree;
 		{
-		_loop1346:
+		_loop1351:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1581_AST_in = (AST)_t;
+				AST tmp1591_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				sqlupdate_equal(_t);
 				_t = _retTree;
 			}
 			else {
-				break _loop1346;
+				break _loop1351;
 			}
 			
 		} while (true);
@@ -28838,8 +28943,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case WHERE:
 		{
-			AST __t1348 = _t;
-			AST tmp1582_AST_in = (AST)_t;
+			AST __t1353 = _t;
+			AST tmp1592_AST_in = (AST)_t;
 			match(_t,WHERE);
 			_t = _t.getFirstChild();
 			{
@@ -28849,13 +28954,13 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else if ((_t.getType()==CURRENT)) {
-				AST tmp1583_AST_in = (AST)_t;
+				AST tmp1593_AST_in = (AST)_t;
 				match(_t,CURRENT);
 				_t = _t.getNextSibling();
-				AST tmp1584_AST_in = (AST)_t;
+				AST tmp1594_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
-				AST tmp1585_AST_in = (AST)_t;
+				AST tmp1595_AST_in = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
 			}
@@ -28864,7 +28969,7 @@ inputState.guessing--;
 			}
 			
 			}
-			_t = __t1348;
+			_t = __t1353;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -28881,7 +28986,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1344;
+		_t = __t1349;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -28891,7 +28996,7 @@ inputState.guessing--;
 		AST updatestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST head = null;
 		
-		AST __t1207 = _t;
+		AST __t1212 = _t;
 		head = _t==ASTNULL ? null :(AST)_t;
 		match(_t,UPDATE);
 		_t = _t.getFirstChild();
@@ -28903,7 +29008,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNLESSHIDDEN:
 		{
-			AST tmp1586_AST_in = (AST)_t;
+			AST tmp1596_AST_in = (AST)_t;
 			match(_t,UNLESSHIDDEN);
 			_t = _t.getNextSibling();
 			break;
@@ -28927,7 +29032,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1210:
+		_loop1215:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Form_item)) {
@@ -28935,7 +29040,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop1210;
+				break _loop1215;
 			}
 			
 		} while (true);
@@ -28970,12 +29075,12 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCEPT:
 		{
-			AST __t1213 = _t;
-			AST tmp1587_AST_in = (AST)_t;
+			AST __t1218 = _t;
+			AST tmp1597_AST_in = (AST)_t;
 			match(_t,EXCEPT);
 			_t = _t.getFirstChild();
 			{
-			_loop1215:
+			_loop1220:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==Field_ref)) {
@@ -28983,12 +29088,12 @@ inputState.guessing--;
 					_t = _retTree;
 				}
 				else {
-					break _loop1215;
+					break _loop1220;
 				}
 				
 			} while (true);
 			}
-			_t = __t1213;
+			_t = __t1218;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -29012,16 +29117,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t1217 = _t;
-			AST tmp1588_AST_in = (AST)_t;
+			AST __t1222 = _t;
+			AST tmp1598_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1589_AST_in = (AST)_t;
+			AST tmp1599_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t1217;
+			_t = __t1222;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -29090,7 +29195,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1590_AST_in = (AST)_t;
+			AST tmp1600_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -29108,7 +29213,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1207;
+		_t = __t1212;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -29117,8 +29222,8 @@ inputState.guessing--;
 		
 		AST validatestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1222 = _t;
-		AST tmp1591_AST_in = (AST)_t;
+		AST __t1227 = _t;
+		AST tmp1601_AST_in = (AST)_t;
 		match(_t,VALIDATE);
 		_t = _t.getFirstChild();
 		tbl(_t,CQ.REF);
@@ -29128,7 +29233,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1592_AST_in = (AST)_t;
+			AST tmp1602_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -29146,7 +29251,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1222;
+		_t = __t1227;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -29156,7 +29261,7 @@ inputState.guessing--;
 		AST viewstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		AST v = null;
 		
-		AST __t1225 = _t;
+		AST __t1230 = _t;
 		v = _t==ASTNULL ? null :(AST)_t;
 		match(_t,VIEW);
 		_t = _t.getFirstChild();
@@ -29183,7 +29288,7 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1228:
+		_loop1233:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==Widget_ref)) {
@@ -29191,7 +29296,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else {
-				break _loop1228;
+				break _loop1233;
 			}
 			
 		} while (true);
@@ -29201,16 +29306,16 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case IN_KW:
 		{
-			AST __t1230 = _t;
-			AST tmp1593_AST_in = (AST)_t;
+			AST __t1235 = _t;
+			AST tmp1603_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp1594_AST_in = (AST)_t;
+			AST tmp1604_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			_t = __t1230;
+			_t = __t1235;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -29230,92 +29335,7 @@ inputState.guessing--;
 		if ( inputState.guessing==0 ) {
 			action.viewState(v);
 		}
-		_t = __t1225;
-		_t = _t.getNextSibling();
-		_retTree = _t;
-	}
-	
-	public final void gwidget(AST _t) throws RecognitionException {
-		
-		AST gwidget_AST_in = (_t == ASTNULL) ? null : (AST)_t;
-		
-		AST __t1589 = _t;
-		AST tmp1595_AST_in = (AST)_t;
-		match(_t,Widget_ref);
-		_t = _t.getFirstChild();
-		s_widget(_t);
-		_t = _retTree;
-		{
-		if (_t==null) _t=ASTNULL;
-		switch ( _t.getType()) {
-		case IN_KW:
-		{
-			AST __t1591 = _t;
-			AST tmp1596_AST_in = (AST)_t;
-			match(_t,IN_KW);
-			_t = _t.getFirstChild();
-			{
-			if (_t==null) _t=ASTNULL;
-			switch ( _t.getType()) {
-			case MENU:
-			{
-				AST tmp1597_AST_in = (AST)_t;
-				match(_t,MENU);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case FRAME:
-			{
-				AST tmp1598_AST_in = (AST)_t;
-				match(_t,FRAME);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case BROWSE:
-			{
-				AST tmp1599_AST_in = (AST)_t;
-				match(_t,BROWSE);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case SUBMENU:
-			{
-				AST tmp1600_AST_in = (AST)_t;
-				match(_t,SUBMENU);
-				_t = _t.getNextSibling();
-				break;
-			}
-			case BUFFER:
-			{
-				AST tmp1601_AST_in = (AST)_t;
-				match(_t,BUFFER);
-				_t = _t.getNextSibling();
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(_t);
-			}
-			}
-			}
-			AST tmp1602_AST_in = (AST)_t;
-			match(_t,ID);
-			_t = _t.getNextSibling();
-			_t = __t1591;
-			_t = _t.getNextSibling();
-			break;
-		}
-		case 3:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(_t);
-		}
-		}
-		}
-		_t = __t1589;
+		_t = __t1230;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -29324,11 +29344,11 @@ inputState.guessing--;
 		
 		AST altertablestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1232 = _t;
-		AST tmp1603_AST_in = (AST)_t;
+		AST __t1237 = _t;
+		AST tmp1605_AST_in = (AST)_t;
 		match(_t,ALTER);
 		_t = _t.getFirstChild();
-		AST tmp1604_AST_in = (AST)_t;
+		AST tmp1606_AST_in = (AST)_t;
 		match(_t,TABLE);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.SCHEMATABLESYMBOL);
@@ -29338,10 +29358,10 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ADD:
 		{
-			AST tmp1605_AST_in = (AST)_t;
+			AST tmp1607_AST_in = (AST)_t;
 			match(_t,ADD);
 			_t = _t.getNextSibling();
-			AST tmp1606_AST_in = (AST)_t;
+			AST tmp1608_AST_in = (AST)_t;
 			match(_t,COLUMN);
 			_t = _t.getNextSibling();
 			sql_col_def(_t);
@@ -29350,10 +29370,10 @@ inputState.guessing--;
 		}
 		case DROP:
 		{
-			AST tmp1607_AST_in = (AST)_t;
+			AST tmp1609_AST_in = (AST)_t;
 			match(_t,DROP);
 			_t = _t.getNextSibling();
-			AST tmp1608_AST_in = (AST)_t;
+			AST tmp1610_AST_in = (AST)_t;
 			match(_t,COLUMN);
 			_t = _t.getNextSibling();
 			fld(_t,CQ.SYMBOL);
@@ -29362,28 +29382,28 @@ inputState.guessing--;
 		}
 		case ALTER:
 		{
-			AST tmp1609_AST_in = (AST)_t;
+			AST tmp1611_AST_in = (AST)_t;
 			match(_t,ALTER);
 			_t = _t.getNextSibling();
-			AST tmp1610_AST_in = (AST)_t;
+			AST tmp1612_AST_in = (AST)_t;
 			match(_t,COLUMN);
 			_t = _t.getNextSibling();
 			fld(_t,CQ.SYMBOL);
 			_t = _retTree;
 			{
-			_loop1237:
+			_loop1242:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
 				case FORMAT:
 				{
-					AST __t1235 = _t;
-					AST tmp1611_AST_in = (AST)_t;
+					AST __t1240 = _t;
+					AST tmp1613_AST_in = (AST)_t;
 					match(_t,FORMAT);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t1235;
+					_t = __t1240;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -29396,13 +29416,13 @@ inputState.guessing--;
 				}
 				case DEFAULT:
 				{
-					AST __t1236 = _t;
-					AST tmp1612_AST_in = (AST)_t;
+					AST __t1241 = _t;
+					AST tmp1614_AST_in = (AST)_t;
 					match(_t,DEFAULT);
 					_t = _t.getFirstChild();
 					expression(_t);
 					_t = _retTree;
-					_t = __t1236;
+					_t = __t1241;
 					_t = _t.getNextSibling();
 					break;
 				}
@@ -29415,7 +29435,7 @@ inputState.guessing--;
 				}
 				default:
 				{
-					break _loop1237;
+					break _loop1242;
 				}
 				}
 			} while (true);
@@ -29430,7 +29450,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1232;
+		_t = __t1237;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -29440,10 +29460,10 @@ inputState.guessing--;
 		AST sql_col_def_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2457 = _t;
-		AST tmp1613_AST_in = (AST)_t;
+		AST tmp1615_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getFirstChild();
-		AST tmp1614_AST_in = (AST)_t;
+		AST tmp1616_AST_in = (AST)_t;
 		if ( _t==null ) throw new MismatchedTokenException();
 		_t = _t.getNextSibling();
 		{
@@ -29451,7 +29471,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PRECISION:
 		{
-			AST tmp1615_AST_in = (AST)_t;
+			AST tmp1617_AST_in = (AST)_t;
 			match(_t,PRECISION);
 			_t = _t.getNextSibling();
 			break;
@@ -29479,10 +29499,10 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case LEFTPAREN:
 		{
-			AST tmp1616_AST_in = (AST)_t;
+			AST tmp1618_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
-			AST tmp1617_AST_in = (AST)_t;
+			AST tmp1619_AST_in = (AST)_t;
 			match(_t,NUMBER);
 			_t = _t.getNextSibling();
 			{
@@ -29490,10 +29510,10 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case COMMA:
 			{
-				AST tmp1618_AST_in = (AST)_t;
+				AST tmp1620_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
-				AST tmp1619_AST_in = (AST)_t;
+				AST tmp1621_AST_in = (AST)_t;
 				match(_t,NUMBER);
 				_t = _t.getNextSibling();
 				break;
@@ -29508,7 +29528,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1620_AST_in = (AST)_t;
+			AST tmp1622_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
 			break;
@@ -29536,13 +29556,13 @@ inputState.guessing--;
 		case Not_null:
 		{
 			AST __t2462 = _t;
-			AST tmp1621_AST_in = (AST)_t;
+			AST tmp1623_AST_in = (AST)_t;
 			match(_t,Not_null);
 			_t = _t.getFirstChild();
-			AST tmp1622_AST_in = (AST)_t;
+			AST tmp1624_AST_in = (AST)_t;
 			match(_t,NOT);
 			_t = _t.getNextSibling();
-			AST tmp1623_AST_in = (AST)_t;
+			AST tmp1625_AST_in = (AST)_t;
 			match(_t,NULL_KW);
 			_t = _t.getNextSibling();
 			{
@@ -29550,7 +29570,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case UNIQUE:
 			{
-				AST tmp1624_AST_in = (AST)_t;
+				AST tmp1626_AST_in = (AST)_t;
 				match(_t,UNIQUE);
 				_t = _t.getNextSibling();
 				break;
@@ -29600,7 +29620,7 @@ inputState.guessing--;
 			case DEFAULT:
 			{
 				AST __t2465 = _t;
-				AST tmp1625_AST_in = (AST)_t;
+				AST tmp1627_AST_in = (AST)_t;
 				match(_t,DEFAULT);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -29612,7 +29632,7 @@ inputState.guessing--;
 			case FORMAT:
 			{
 				AST __t2466 = _t;
-				AST tmp1626_AST_in = (AST)_t;
+				AST tmp1628_AST_in = (AST)_t;
 				match(_t,FORMAT);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -29644,8 +29664,8 @@ inputState.guessing--;
 		
 		AST createindexstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1239 = _t;
-		AST tmp1627_AST_in = (AST)_t;
+		AST __t1244 = _t;
+		AST tmp1629_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
 		{
@@ -29653,7 +29673,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNIQUE:
 		{
-			AST tmp1628_AST_in = (AST)_t;
+			AST tmp1630_AST_in = (AST)_t;
 			match(_t,UNIQUE);
 			_t = _t.getNextSibling();
 			break;
@@ -29668,51 +29688,51 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1629_AST_in = (AST)_t;
+		AST tmp1631_AST_in = (AST)_t;
 		match(_t,INDEX);
 		_t = _t.getNextSibling();
-		AST tmp1630_AST_in = (AST)_t;
+		AST tmp1632_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
-		AST tmp1631_AST_in = (AST)_t;
+		AST tmp1633_AST_in = (AST)_t;
 		match(_t,ON);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.SCHEMATABLESYMBOL);
 		_t = _retTree;
-		AST __t1241 = _t;
-		AST tmp1632_AST_in = (AST)_t;
+		AST __t1246 = _t;
+		AST tmp1634_AST_in = (AST)_t;
 		match(_t,Field_list);
 		_t = _t.getFirstChild();
-		AST tmp1633_AST_in = (AST)_t;
+		AST tmp1635_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.SYMBOL);
 		_t = _retTree;
 		{
-		_loop1243:
+		_loop1248:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1634_AST_in = (AST)_t;
+				AST tmp1636_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				fld(_t,CQ.SYMBOL);
 				_t = _retTree;
 			}
 			else {
-				break _loop1243;
+				break _loop1248;
 			}
 			
 		} while (true);
 		}
-		AST tmp1635_AST_in = (AST)_t;
+		AST tmp1637_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
-		_t = __t1241;
+		_t = __t1246;
 		_t = _t.getNextSibling();
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1239;
+		_t = __t1244;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -29721,14 +29741,14 @@ inputState.guessing--;
 		
 		AST createviewstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1245 = _t;
-		AST tmp1636_AST_in = (AST)_t;
+		AST __t1250 = _t;
+		AST tmp1638_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1637_AST_in = (AST)_t;
+		AST tmp1639_AST_in = (AST)_t;
 		match(_t,VIEW);
 		_t = _t.getNextSibling();
-		AST tmp1638_AST_in = (AST)_t;
+		AST tmp1640_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		{
@@ -29736,36 +29756,36 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case Field_list:
 		{
-			AST __t1247 = _t;
-			AST tmp1639_AST_in = (AST)_t;
+			AST __t1252 = _t;
+			AST tmp1641_AST_in = (AST)_t;
 			match(_t,Field_list);
 			_t = _t.getFirstChild();
-			AST tmp1640_AST_in = (AST)_t;
+			AST tmp1642_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			fld(_t,CQ.SYMBOL);
 			_t = _retTree;
 			{
-			_loop1249:
+			_loop1254:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1641_AST_in = (AST)_t;
+					AST tmp1643_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					fld(_t,CQ.SYMBOL);
 					_t = _retTree;
 				}
 				else {
-					break _loop1249;
+					break _loop1254;
 				}
 				
 			} while (true);
 			}
-			AST tmp1642_AST_in = (AST)_t;
+			AST tmp1644_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
-			_t = __t1247;
+			_t = __t1252;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -29779,14 +29799,14 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1643_AST_in = (AST)_t;
+		AST tmp1645_AST_in = (AST)_t;
 		match(_t,AS);
 		_t = _t.getNextSibling();
 		selectstatea(_t);
 		_t = _retTree;
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1245;
+		_t = __t1250;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -29795,8 +29815,8 @@ inputState.guessing--;
 		
 		AST selectstatea_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1299 = _t;
-		AST tmp1644_AST_in = (AST)_t;
+		AST __t1304 = _t;
+		AST tmp1646_AST_in = (AST)_t;
 		match(_t,SELECT);
 		_t = _t.getFirstChild();
 		{
@@ -29804,14 +29824,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ALL:
 		{
-			AST tmp1645_AST_in = (AST)_t;
+			AST tmp1647_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DISTINCT:
 		{
-			AST tmp1646_AST_in = (AST)_t;
+			AST tmp1648_AST_in = (AST)_t;
 			match(_t,DISTINCT);
 			_t = _t.getNextSibling();
 			break;
@@ -29832,39 +29852,39 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case STAR:
 		{
-			AST tmp1647_AST_in = (AST)_t;
+			AST tmp1649_AST_in = (AST)_t;
 			match(_t,STAR);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case Sql_select_what:
 		{
-			AST __t1302 = _t;
-			AST tmp1648_AST_in = (AST)_t;
+			AST __t1307 = _t;
+			AST tmp1650_AST_in = (AST)_t;
 			match(_t,Sql_select_what);
 			_t = _t.getFirstChild();
 			{
-			boolean synPredMatched1305 = false;
+			boolean synPredMatched1310 = false;
 			if (_t==null) _t=ASTNULL;
 			if (((_t.getType()==LEFTPAREN))) {
-				AST __t1305 = _t;
-				synPredMatched1305 = true;
+				AST __t1310 = _t;
+				synPredMatched1310 = true;
 				inputState.guessing++;
 				try {
 					{
-					AST tmp1649_AST_in = (AST)_t;
+					AST tmp1651_AST_in = (AST)_t;
 					match(_t,LEFTPAREN);
 					_t = _t.getNextSibling();
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched1305 = false;
+					synPredMatched1310 = false;
 				}
-				_t = __t1305;
+				_t = __t1310;
 inputState.guessing--;
 			}
-			if ( synPredMatched1305 ) {
-				AST tmp1650_AST_in = (AST)_t;
+			if ( synPredMatched1310 ) {
+				AST tmp1652_AST_in = (AST)_t;
 				match(_t,LEFTPAREN);
 				_t = _t.getNextSibling();
 				sqlexpression(_t);
@@ -29888,7 +29908,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				AST tmp1651_AST_in = (AST)_t;
+				AST tmp1653_AST_in = (AST)_t;
 				match(_t,RIGHTPAREN);
 				_t = _t.getNextSibling();
 				{
@@ -29942,11 +29962,11 @@ inputState.guessing--;
 			
 			}
 			{
-			_loop1311:
+			_loop1316:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1652_AST_in = (AST)_t;
+					AST tmp1654_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					sqlexpression(_t);
@@ -29973,12 +29993,12 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1311;
+					break _loop1316;
 				}
 				
 			} while (true);
 			}
-			_t = __t1302;
+			_t = __t1307;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -29993,8 +30013,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case INTO:
 		{
-			AST __t1313 = _t;
-			AST tmp1653_AST_in = (AST)_t;
+			AST __t1318 = _t;
+			AST tmp1655_AST_in = (AST)_t;
 			match(_t,INTO);
 			_t = _t.getFirstChild();
 			fld(_t,CQ.UPDATING);
@@ -30021,11 +30041,11 @@ inputState.guessing--;
 			}
 			}
 			{
-			_loop1317:
+			_loop1322:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1654_AST_in = (AST)_t;
+					AST tmp1656_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					fld(_t,CQ.UPDATING);
@@ -30053,12 +30073,12 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1317;
+					break _loop1322;
 				}
 				
 			} while (true);
 			}
-			_t = __t1313;
+			_t = __t1318;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -30072,63 +30092,63 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST __t1318 = _t;
-		AST tmp1655_AST_in = (AST)_t;
+		AST __t1323 = _t;
+		AST tmp1657_AST_in = (AST)_t;
 		match(_t,FROM);
 		_t = _t.getFirstChild();
 		select_from_spec(_t);
 		_t = _retTree;
 		{
-		_loop1320:
+		_loop1325:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1656_AST_in = (AST)_t;
+				AST tmp1658_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				select_from_spec(_t);
 				_t = _retTree;
 			}
 			else {
-				break _loop1320;
+				break _loop1325;
 			}
 			
 		} while (true);
 		}
-		_t = __t1318;
+		_t = __t1323;
 		_t = _t.getNextSibling();
 		{
 		if (_t==null) _t=ASTNULL;
 		switch ( _t.getType()) {
 		case GROUP:
 		{
-			AST __t1322 = _t;
-			AST tmp1657_AST_in = (AST)_t;
+			AST __t1327 = _t;
+			AST tmp1659_AST_in = (AST)_t;
 			match(_t,GROUP);
 			_t = _t.getFirstChild();
-			AST tmp1658_AST_in = (AST)_t;
+			AST tmp1660_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
 			{
-			_loop1324:
+			_loop1329:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1659_AST_in = (AST)_t;
+					AST tmp1661_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					expression(_t);
 					_t = _retTree;
 				}
 				else {
-					break _loop1324;
+					break _loop1329;
 				}
 				
 			} while (true);
 			}
-			_t = __t1322;
+			_t = __t1327;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -30152,13 +30172,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case HAVING:
 		{
-			AST __t1326 = _t;
-			AST tmp1660_AST_in = (AST)_t;
+			AST __t1331 = _t;
+			AST tmp1662_AST_in = (AST)_t;
 			match(_t,HAVING);
 			_t = _t.getFirstChild();
 			sqlexpression(_t);
 			_t = _retTree;
-			_t = __t1326;
+			_t = __t1331;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -30181,28 +30201,28 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ORDER:
 		{
-			AST __t1328 = _t;
-			AST tmp1661_AST_in = (AST)_t;
+			AST __t1333 = _t;
+			AST tmp1663_AST_in = (AST)_t;
 			match(_t,ORDER);
 			_t = _t.getFirstChild();
-			AST tmp1662_AST_in = (AST)_t;
+			AST tmp1664_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getNextSibling();
 			select_order_expr(_t);
 			_t = _retTree;
-			_t = __t1328;
+			_t = __t1333;
 			_t = _t.getNextSibling();
 			break;
 		}
 		case BY:
 		{
-			AST __t1329 = _t;
-			AST tmp1663_AST_in = (AST)_t;
+			AST __t1334 = _t;
+			AST tmp1665_AST_in = (AST)_t;
 			match(_t,BY);
 			_t = _t.getFirstChild();
 			select_order_expr(_t);
 			_t = _retTree;
-			_t = __t1329;
+			_t = __t1334;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -30222,46 +30242,46 @@ inputState.guessing--;
 		if (_t==null) _t=ASTNULL;
 		if (((_t.getType()==3||_t.getType()==UNION||_t.getType()==WITH))&&(_t != null)) {
 			{
-			boolean synPredMatched1334 = false;
+			boolean synPredMatched1339 = false;
 			if (_t==null) _t=ASTNULL;
 			if ((((_t.getType()==WITH))&&(_t != null))) {
-				AST __t1334 = _t;
-				synPredMatched1334 = true;
+				AST __t1339 = _t;
+				synPredMatched1339 = true;
 				inputState.guessing++;
 				try {
 					{
-					AST __t1333 = _t;
-					AST tmp1664_AST_in = (AST)_t;
+					AST __t1338 = _t;
+					AST tmp1666_AST_in = (AST)_t;
 					match(_t,WITH);
 					_t = _t.getFirstChild();
-					AST tmp1665_AST_in = (AST)_t;
+					AST tmp1667_AST_in = (AST)_t;
 					match(_t,CHECK);
 					_t = _t.getNextSibling();
-					AST tmp1666_AST_in = (AST)_t;
+					AST tmp1668_AST_in = (AST)_t;
 					match(_t,OPTION);
 					_t = _t.getNextSibling();
-					_t = __t1333;
+					_t = __t1338;
 					_t = _t.getNextSibling();
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched1334 = false;
+					synPredMatched1339 = false;
 				}
-				_t = __t1334;
+				_t = __t1339;
 inputState.guessing--;
 			}
-			if ( synPredMatched1334 ) {
-				AST __t1335 = _t;
-				AST tmp1667_AST_in = (AST)_t;
+			if ( synPredMatched1339 ) {
+				AST __t1340 = _t;
+				AST tmp1669_AST_in = (AST)_t;
 				match(_t,WITH);
 				_t = _t.getFirstChild();
-				AST tmp1668_AST_in = (AST)_t;
+				AST tmp1670_AST_in = (AST)_t;
 				match(_t,CHECK);
 				_t = _t.getNextSibling();
-				AST tmp1669_AST_in = (AST)_t;
+				AST tmp1671_AST_in = (AST)_t;
 				match(_t,OPTION);
 				_t = _t.getNextSibling();
-				_t = __t1335;
+				_t = __t1340;
 				_t = _t.getNextSibling();
 			}
 			else if ((_t.getType()==3||_t.getType()==UNION||_t.getType()==WITH)) {
@@ -30304,8 +30324,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case UNION:
 		{
-			AST __t1338 = _t;
-			AST tmp1670_AST_in = (AST)_t;
+			AST __t1343 = _t;
+			AST tmp1672_AST_in = (AST)_t;
 			match(_t,UNION);
 			_t = _t.getFirstChild();
 			{
@@ -30313,7 +30333,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case ALL:
 			{
-				AST tmp1671_AST_in = (AST)_t;
+				AST tmp1673_AST_in = (AST)_t;
 				match(_t,ALL);
 				_t = _t.getNextSibling();
 				break;
@@ -30330,7 +30350,7 @@ inputState.guessing--;
 			}
 			selectstatea(_t);
 			_t = _retTree;
-			_t = __t1338;
+			_t = __t1343;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -30344,7 +30364,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t1299;
+		_t = __t1304;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -30353,11 +30373,11 @@ inputState.guessing--;
 		
 		AST deletefromstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1251 = _t;
-		AST tmp1672_AST_in = (AST)_t;
+		AST __t1256 = _t;
+		AST tmp1674_AST_in = (AST)_t;
 		match(_t,DELETE_KW);
 		_t = _t.getFirstChild();
-		AST tmp1673_AST_in = (AST)_t;
+		AST tmp1675_AST_in = (AST)_t;
 		match(_t,FROM);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.SCHEMATABLESYMBOL);
@@ -30367,8 +30387,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case WHERE:
 		{
-			AST __t1253 = _t;
-			AST tmp1674_AST_in = (AST)_t;
+			AST __t1258 = _t;
+			AST tmp1676_AST_in = (AST)_t;
 			match(_t,WHERE);
 			_t = _t.getFirstChild();
 			{
@@ -30376,17 +30396,17 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case CURRENT:
 			{
-				AST __t1255 = _t;
-				AST tmp1675_AST_in = (AST)_t;
+				AST __t1260 = _t;
+				AST tmp1677_AST_in = (AST)_t;
 				match(_t,CURRENT);
 				_t = _t.getFirstChild();
-				AST tmp1676_AST_in = (AST)_t;
+				AST tmp1678_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
-				AST tmp1677_AST_in = (AST)_t;
+				AST tmp1679_AST_in = (AST)_t;
 				match(_t,ID);
 				_t = _t.getNextSibling();
-				_t = __t1255;
+				_t = __t1260;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -30405,7 +30425,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t1253;
+			_t = __t1258;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -30422,7 +30442,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1251;
+		_t = __t1256;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -30436,7 +30456,7 @@ inputState.guessing--;
 		case OR:
 		{
 			AST __t2469 = _t;
-			AST tmp1678_AST_in = (AST)_t;
+			AST tmp1680_AST_in = (AST)_t;
 			match(_t,OR);
 			_t = _t.getFirstChild();
 			sqlexpression(_t);
@@ -30450,7 +30470,7 @@ inputState.guessing--;
 		case AND:
 		{
 			AST __t2470 = _t;
-			AST tmp1679_AST_in = (AST)_t;
+			AST tmp1681_AST_in = (AST)_t;
 			match(_t,AND);
 			_t = _t.getFirstChild();
 			sqlexpression(_t);
@@ -30464,7 +30484,7 @@ inputState.guessing--;
 		case NOT:
 		{
 			AST __t2471 = _t;
-			AST tmp1680_AST_in = (AST)_t;
+			AST tmp1682_AST_in = (AST)_t;
 			match(_t,NOT);
 			_t = _t.getFirstChild();
 			sqlexpression(_t);
@@ -30476,7 +30496,7 @@ inputState.guessing--;
 		case MATCHES:
 		{
 			AST __t2472 = _t;
-			AST tmp1681_AST_in = (AST)_t;
+			AST tmp1683_AST_in = (AST)_t;
 			match(_t,MATCHES);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30503,7 +30523,7 @@ inputState.guessing--;
 		case BEGINS:
 		{
 			AST __t2474 = _t;
-			AST tmp1682_AST_in = (AST)_t;
+			AST tmp1684_AST_in = (AST)_t;
 			match(_t,BEGINS);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30530,7 +30550,7 @@ inputState.guessing--;
 		case CONTAINS:
 		{
 			AST __t2476 = _t;
-			AST tmp1683_AST_in = (AST)_t;
+			AST tmp1685_AST_in = (AST)_t;
 			match(_t,CONTAINS);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30557,7 +30577,7 @@ inputState.guessing--;
 		case EQ:
 		{
 			AST __t2478 = _t;
-			AST tmp1684_AST_in = (AST)_t;
+			AST tmp1686_AST_in = (AST)_t;
 			match(_t,EQ);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30584,7 +30604,7 @@ inputState.guessing--;
 		case NE:
 		{
 			AST __t2480 = _t;
-			AST tmp1685_AST_in = (AST)_t;
+			AST tmp1687_AST_in = (AST)_t;
 			match(_t,NE);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30611,7 +30631,7 @@ inputState.guessing--;
 		case GTHAN:
 		{
 			AST __t2482 = _t;
-			AST tmp1686_AST_in = (AST)_t;
+			AST tmp1688_AST_in = (AST)_t;
 			match(_t,GTHAN);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30638,7 +30658,7 @@ inputState.guessing--;
 		case GE:
 		{
 			AST __t2484 = _t;
-			AST tmp1687_AST_in = (AST)_t;
+			AST tmp1689_AST_in = (AST)_t;
 			match(_t,GE);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30665,7 +30685,7 @@ inputState.guessing--;
 		case LTHAN:
 		{
 			AST __t2486 = _t;
-			AST tmp1688_AST_in = (AST)_t;
+			AST tmp1690_AST_in = (AST)_t;
 			match(_t,LTHAN);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30692,7 +30712,7 @@ inputState.guessing--;
 		case LE:
 		{
 			AST __t2488 = _t;
-			AST tmp1689_AST_in = (AST)_t;
+			AST tmp1691_AST_in = (AST)_t;
 			match(_t,LE);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -30719,15 +30739,15 @@ inputState.guessing--;
 		case EXISTS:
 		{
 			AST __t2490 = _t;
-			AST tmp1690_AST_in = (AST)_t;
+			AST tmp1692_AST_in = (AST)_t;
 			match(_t,EXISTS);
 			_t = _t.getFirstChild();
-			AST tmp1691_AST_in = (AST)_t;
+			AST tmp1693_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			selectstatea(_t);
 			_t = _retTree;
-			AST tmp1692_AST_in = (AST)_t;
+			AST tmp1694_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
 			_t = __t2490;
@@ -30737,7 +30757,7 @@ inputState.guessing--;
 		case Sql_begins:
 		{
 			AST __t2491 = _t;
-			AST tmp1693_AST_in = (AST)_t;
+			AST tmp1695_AST_in = (AST)_t;
 			match(_t,Sql_begins);
 			_t = _t.getFirstChild();
 			{
@@ -30745,7 +30765,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOT:
 			{
-				AST tmp1694_AST_in = (AST)_t;
+				AST tmp1696_AST_in = (AST)_t;
 				match(_t,NOT);
 				_t = _t.getNextSibling();
 				break;
@@ -30760,7 +30780,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1695_AST_in = (AST)_t;
+			AST tmp1697_AST_in = (AST)_t;
 			match(_t,BEGINS);
 			_t = _t.getNextSibling();
 			sqlscalar(_t);
@@ -30772,7 +30792,7 @@ inputState.guessing--;
 		case Sql_between:
 		{
 			AST __t2493 = _t;
-			AST tmp1696_AST_in = (AST)_t;
+			AST tmp1698_AST_in = (AST)_t;
 			match(_t,Sql_between);
 			_t = _t.getFirstChild();
 			{
@@ -30780,7 +30800,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOT:
 			{
-				AST tmp1697_AST_in = (AST)_t;
+				AST tmp1699_AST_in = (AST)_t;
 				match(_t,NOT);
 				_t = _t.getNextSibling();
 				break;
@@ -30795,12 +30815,12 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1698_AST_in = (AST)_t;
+			AST tmp1700_AST_in = (AST)_t;
 			match(_t,BETWEEN);
 			_t = _t.getNextSibling();
 			sqlscalar(_t);
 			_t = _retTree;
-			AST tmp1699_AST_in = (AST)_t;
+			AST tmp1701_AST_in = (AST)_t;
 			match(_t,AND);
 			_t = _t.getNextSibling();
 			sqlscalar(_t);
@@ -30812,7 +30832,7 @@ inputState.guessing--;
 		case Sql_in:
 		{
 			AST __t2495 = _t;
-			AST tmp1700_AST_in = (AST)_t;
+			AST tmp1702_AST_in = (AST)_t;
 			match(_t,Sql_in);
 			_t = _t.getFirstChild();
 			{
@@ -30820,7 +30840,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOT:
 			{
-				AST tmp1701_AST_in = (AST)_t;
+				AST tmp1703_AST_in = (AST)_t;
 				match(_t,NOT);
 				_t = _t.getNextSibling();
 				break;
@@ -30835,10 +30855,10 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1702_AST_in = (AST)_t;
+			AST tmp1704_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getNextSibling();
-			AST tmp1703_AST_in = (AST)_t;
+			AST tmp1705_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			{
@@ -30902,7 +30922,7 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp1704_AST_in = (AST)_t;
+						AST tmp1706_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						sql_in_val(_t);
@@ -30922,7 +30942,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1705_AST_in = (AST)_t;
+			AST tmp1707_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
 			_t = __t2495;
@@ -30932,7 +30952,7 @@ inputState.guessing--;
 		case Sql_like:
 		{
 			AST __t2500 = _t;
-			AST tmp1706_AST_in = (AST)_t;
+			AST tmp1708_AST_in = (AST)_t;
 			match(_t,Sql_like);
 			_t = _t.getFirstChild();
 			{
@@ -30940,7 +30960,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOT:
 			{
-				AST tmp1707_AST_in = (AST)_t;
+				AST tmp1709_AST_in = (AST)_t;
 				match(_t,NOT);
 				_t = _t.getNextSibling();
 				break;
@@ -30955,7 +30975,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1708_AST_in = (AST)_t;
+			AST tmp1710_AST_in = (AST)_t;
 			match(_t,LIKE);
 			_t = _t.getNextSibling();
 			sqlscalar(_t);
@@ -30965,7 +30985,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case ESCAPE:
 			{
-				AST tmp1709_AST_in = (AST)_t;
+				AST tmp1711_AST_in = (AST)_t;
 				match(_t,ESCAPE);
 				_t = _t.getNextSibling();
 				sqlscalar(_t);
@@ -30989,10 +31009,10 @@ inputState.guessing--;
 		case Sql_null_test:
 		{
 			AST __t2503 = _t;
-			AST tmp1710_AST_in = (AST)_t;
+			AST tmp1712_AST_in = (AST)_t;
 			match(_t,Sql_null_test);
 			_t = _t.getFirstChild();
-			AST tmp1711_AST_in = (AST)_t;
+			AST tmp1713_AST_in = (AST)_t;
 			match(_t,IS);
 			_t = _t.getNextSibling();
 			{
@@ -31000,7 +31020,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOT:
 			{
-				AST tmp1712_AST_in = (AST)_t;
+				AST tmp1714_AST_in = (AST)_t;
 				match(_t,NOT);
 				_t = _t.getNextSibling();
 				break;
@@ -31015,7 +31035,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			AST tmp1713_AST_in = (AST)_t;
+			AST tmp1715_AST_in = (AST)_t;
 			match(_t,NULL_KW);
 			_t = _t.getNextSibling();
 			_t = __t2503;
@@ -31039,18 +31059,18 @@ inputState.guessing--;
 		
 		AST droptablestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1257 = _t;
-		AST tmp1714_AST_in = (AST)_t;
+		AST __t1262 = _t;
+		AST tmp1716_AST_in = (AST)_t;
 		match(_t,DROP);
 		_t = _t.getFirstChild();
-		AST tmp1715_AST_in = (AST)_t;
+		AST tmp1717_AST_in = (AST)_t;
 		match(_t,TABLE);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.SCHEMATABLESYMBOL);
 		_t = _retTree;
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1257;
+		_t = __t1262;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -31059,14 +31079,14 @@ inputState.guessing--;
 		
 		AST fetchstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1259 = _t;
-		AST tmp1716_AST_in = (AST)_t;
+		AST __t1264 = _t;
+		AST tmp1718_AST_in = (AST)_t;
 		match(_t,FETCH);
 		_t = _t.getFirstChild();
-		AST tmp1717_AST_in = (AST)_t;
+		AST tmp1719_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
-		AST tmp1718_AST_in = (AST)_t;
+		AST tmp1720_AST_in = (AST)_t;
 		match(_t,INTO);
 		_t = _t.getNextSibling();
 		fld(_t,CQ.UPDATING);
@@ -31094,11 +31114,11 @@ inputState.guessing--;
 		}
 		}
 		{
-		_loop1263:
+		_loop1268:
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1719_AST_in = (AST)_t;
+				AST tmp1721_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				fld(_t,CQ.UPDATING);
@@ -31127,14 +31147,14 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop1263;
+				break _loop1268;
 			}
 			
 		} while (true);
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1259;
+		_t = __t1264;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -31147,13 +31167,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case INDICATOR:
 		{
-			AST __t1265 = _t;
-			AST tmp1720_AST_in = (AST)_t;
+			AST __t1270 = _t;
+			AST tmp1722_AST_in = (AST)_t;
 			match(_t,INDICATOR);
 			_t = _t.getFirstChild();
 			fld(_t,CQ.UPDATING);
 			_t = _retTree;
-			_t = __t1265;
+			_t = __t1270;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -31175,15 +31195,15 @@ inputState.guessing--;
 		
 		AST grantstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1267 = _t;
-		AST tmp1721_AST_in = (AST)_t;
+		AST __t1272 = _t;
+		AST tmp1723_AST_in = (AST)_t;
 		match(_t,GRANT);
 		_t = _t.getFirstChild();
 		{
 		grant_rev_opt(_t);
 		_t = _retTree;
 		}
-		AST tmp1722_AST_in = (AST)_t;
+		AST tmp1724_AST_in = (AST)_t;
 		match(_t,ON);
 		_t = _t.getNextSibling();
 		{
@@ -31197,7 +31217,7 @@ inputState.guessing--;
 		}
 		case ID:
 		{
-			AST tmp1723_AST_in = (AST)_t;
+			AST tmp1725_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
@@ -31215,13 +31235,13 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case WITH:
 		{
-			AST tmp1724_AST_in = (AST)_t;
+			AST tmp1726_AST_in = (AST)_t;
 			match(_t,WITH);
 			_t = _t.getNextSibling();
-			AST tmp1725_AST_in = (AST)_t;
+			AST tmp1727_AST_in = (AST)_t;
 			match(_t,GRANT);
 			_t = _t.getNextSibling();
-			AST tmp1726_AST_in = (AST)_t;
+			AST tmp1728_AST_in = (AST)_t;
 			match(_t,OPTION);
 			_t = _t.getNextSibling();
 			break;
@@ -31239,7 +31259,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1267;
+		_t = __t1272;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -31252,8 +31272,8 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ALL:
 		{
-			AST __t1272 = _t;
-			AST tmp1727_AST_in = (AST)_t;
+			AST __t1277 = _t;
+			AST tmp1729_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getFirstChild();
 			{
@@ -31261,7 +31281,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case PRIVILEGES:
 			{
-				AST tmp1728_AST_in = (AST)_t;
+				AST tmp1730_AST_in = (AST)_t;
 				match(_t,PRIVILEGES);
 				_t = _t.getNextSibling();
 				break;
@@ -31276,7 +31296,7 @@ inputState.guessing--;
 			}
 			}
 			}
-			_t = __t1272;
+			_t = __t1277;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -31287,36 +31307,36 @@ inputState.guessing--;
 		case COMMA:
 		{
 			{
-			int _cnt1280=0;
-			_loop1280:
+			int _cnt1285=0;
+			_loop1285:
 			do {
 				if (_t==null) _t=ASTNULL;
 				switch ( _t.getType()) {
 				case SELECT:
 				{
-					AST tmp1729_AST_in = (AST)_t;
+					AST tmp1731_AST_in = (AST)_t;
 					match(_t,SELECT);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case INSERT:
 				{
-					AST tmp1730_AST_in = (AST)_t;
+					AST tmp1732_AST_in = (AST)_t;
 					match(_t,INSERT);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case DELETE_KW:
 				{
-					AST tmp1731_AST_in = (AST)_t;
+					AST tmp1733_AST_in = (AST)_t;
 					match(_t,DELETE_KW);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case UPDATE:
 				{
-					AST __t1275 = _t;
-					AST tmp1732_AST_in = (AST)_t;
+					AST __t1280 = _t;
+					AST tmp1734_AST_in = (AST)_t;
 					match(_t,UPDATE);
 					_t = _t.getFirstChild();
 					{
@@ -31324,36 +31344,36 @@ inputState.guessing--;
 					switch ( _t.getType()) {
 					case Field_list:
 					{
-						AST __t1277 = _t;
-						AST tmp1733_AST_in = (AST)_t;
+						AST __t1282 = _t;
+						AST tmp1735_AST_in = (AST)_t;
 						match(_t,Field_list);
 						_t = _t.getFirstChild();
-						AST tmp1734_AST_in = (AST)_t;
+						AST tmp1736_AST_in = (AST)_t;
 						match(_t,LEFTPAREN);
 						_t = _t.getNextSibling();
 						fld(_t,CQ.UPDATING);
 						_t = _retTree;
 						{
-						_loop1279:
+						_loop1284:
 						do {
 							if (_t==null) _t=ASTNULL;
 							if ((_t.getType()==COMMA)) {
-								AST tmp1735_AST_in = (AST)_t;
+								AST tmp1737_AST_in = (AST)_t;
 								match(_t,COMMA);
 								_t = _t.getNextSibling();
 								fld(_t,CQ.UPDATING);
 								_t = _retTree;
 							}
 							else {
-								break _loop1279;
+								break _loop1284;
 							}
 							
 						} while (true);
 						}
-						AST tmp1736_AST_in = (AST)_t;
+						AST tmp1738_AST_in = (AST)_t;
 						match(_t,RIGHTPAREN);
 						_t = _t.getNextSibling();
-						_t = __t1277;
+						_t = __t1282;
 						_t = _t.getNextSibling();
 						break;
 					}
@@ -31367,23 +31387,23 @@ inputState.guessing--;
 					}
 					}
 					}
-					_t = __t1275;
+					_t = __t1280;
 					_t = _t.getNextSibling();
 					break;
 				}
 				case COMMA:
 				{
-					AST tmp1737_AST_in = (AST)_t;
+					AST tmp1739_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					break;
 				}
 				default:
 				{
-					if ( _cnt1280>=1 ) { break _loop1280; } else {throw new NoViableAltException(_t);}
+					if ( _cnt1285>=1 ) { break _loop1285; } else {throw new NoViableAltException(_t);}
 				}
 				}
-				_cnt1280++;
+				_cnt1285++;
 			} while (true);
 			}
 			break;
@@ -31405,7 +31425,7 @@ inputState.guessing--;
 		case TO:
 		{
 			AST __t2429 = _t;
-			AST tmp1738_AST_in = (AST)_t;
+			AST tmp1740_AST_in = (AST)_t;
 			match(_t,TO);
 			_t = _t.getFirstChild();
 			{
@@ -31413,14 +31433,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case PUBLIC:
 			{
-				AST tmp1739_AST_in = (AST)_t;
+				AST tmp1741_AST_in = (AST)_t;
 				match(_t,PUBLIC);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FILENAME:
 			{
-				AST tmp1740_AST_in = (AST)_t;
+				AST tmp1742_AST_in = (AST)_t;
 				match(_t,FILENAME);
 				_t = _t.getNextSibling();
 				{
@@ -31428,10 +31448,10 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp1741_AST_in = (AST)_t;
+						AST tmp1743_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
-						AST tmp1742_AST_in = (AST)_t;
+						AST tmp1744_AST_in = (AST)_t;
 						match(_t,FILENAME);
 						_t = _t.getNextSibling();
 					}
@@ -31456,7 +31476,7 @@ inputState.guessing--;
 		case FROM:
 		{
 			AST __t2433 = _t;
-			AST tmp1743_AST_in = (AST)_t;
+			AST tmp1745_AST_in = (AST)_t;
 			match(_t,FROM);
 			_t = _t.getFirstChild();
 			{
@@ -31464,14 +31484,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case PUBLIC:
 			{
-				AST tmp1744_AST_in = (AST)_t;
+				AST tmp1746_AST_in = (AST)_t;
 				match(_t,PUBLIC);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FILENAME:
 			{
-				AST tmp1745_AST_in = (AST)_t;
+				AST tmp1747_AST_in = (AST)_t;
 				match(_t,FILENAME);
 				_t = _t.getNextSibling();
 				{
@@ -31479,10 +31499,10 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp1746_AST_in = (AST)_t;
+						AST tmp1748_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
-						AST tmp1747_AST_in = (AST)_t;
+						AST tmp1749_AST_in = (AST)_t;
 						match(_t,FILENAME);
 						_t = _t.getNextSibling();
 					}
@@ -31516,11 +31536,11 @@ inputState.guessing--;
 		
 		AST insertintostate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1282 = _t;
-		AST tmp1748_AST_in = (AST)_t;
+		AST __t1287 = _t;
+		AST tmp1750_AST_in = (AST)_t;
 		match(_t,INSERT);
 		_t = _t.getFirstChild();
-		AST tmp1749_AST_in = (AST)_t;
+		AST tmp1751_AST_in = (AST)_t;
 		match(_t,INTO);
 		_t = _t.getNextSibling();
 		tbl(_t,CQ.SCHEMATABLESYMBOL);
@@ -31530,36 +31550,36 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case Field_list:
 		{
-			AST __t1284 = _t;
-			AST tmp1750_AST_in = (AST)_t;
+			AST __t1289 = _t;
+			AST tmp1752_AST_in = (AST)_t;
 			match(_t,Field_list);
 			_t = _t.getFirstChild();
-			AST tmp1751_AST_in = (AST)_t;
+			AST tmp1753_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			fld(_t,CQ.UPDATING);
 			_t = _retTree;
 			{
-			_loop1286:
+			_loop1291:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1752_AST_in = (AST)_t;
+					AST tmp1754_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					fld(_t,CQ.UPDATING);
 					_t = _retTree;
 				}
 				else {
-					break _loop1286;
+					break _loop1291;
 				}
 				
 			} while (true);
 			}
-			AST tmp1753_AST_in = (AST)_t;
+			AST tmp1755_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
-			_t = __t1284;
+			_t = __t1289;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -31579,11 +31599,11 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case VALUES:
 		{
-			AST __t1288 = _t;
-			AST tmp1754_AST_in = (AST)_t;
+			AST __t1293 = _t;
+			AST tmp1756_AST_in = (AST)_t;
 			match(_t,VALUES);
 			_t = _t.getFirstChild();
-			AST tmp1755_AST_in = (AST)_t;
+			AST tmp1757_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			sqlexpression(_t);
@@ -31610,11 +31630,11 @@ inputState.guessing--;
 			}
 			}
 			{
-			_loop1292:
+			_loop1297:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1756_AST_in = (AST)_t;
+					AST tmp1758_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
 					sqlexpression(_t);
@@ -31642,15 +31662,15 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1292;
+					break _loop1297;
 				}
 				
 			} while (true);
 			}
-			AST tmp1757_AST_in = (AST)_t;
+			AST tmp1759_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
-			_t = __t1288;
+			_t = __t1293;
 			_t = _t.getNextSibling();
 			break;
 		}
@@ -31668,7 +31688,7 @@ inputState.guessing--;
 		}
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1282;
+		_t = __t1287;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -31677,15 +31697,15 @@ inputState.guessing--;
 		
 		AST revokestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1294 = _t;
-		AST tmp1758_AST_in = (AST)_t;
+		AST __t1299 = _t;
+		AST tmp1760_AST_in = (AST)_t;
 		match(_t,REVOKE);
 		_t = _t.getFirstChild();
 		{
 		grant_rev_opt(_t);
 		_t = _retTree;
 		}
-		AST tmp1759_AST_in = (AST)_t;
+		AST tmp1761_AST_in = (AST)_t;
 		match(_t,ON);
 		_t = _t.getNextSibling();
 		{
@@ -31699,7 +31719,7 @@ inputState.guessing--;
 		}
 		case ID:
 		{
-			AST tmp1760_AST_in = (AST)_t;
+			AST tmp1762_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
@@ -31714,7 +31734,7 @@ inputState.guessing--;
 		_t = _retTree;
 		state_end(_t);
 		_t = _retTree;
-		_t = __t1294;
+		_t = __t1299;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -31750,7 +31770,7 @@ inputState.guessing--;
 			case LEFT:
 			{
 				AST __t2441 = _t;
-				AST tmp1761_AST_in = (AST)_t;
+				AST tmp1763_AST_in = (AST)_t;
 				match(_t,LEFT);
 				_t = _t.getFirstChild();
 				{
@@ -31758,7 +31778,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case OUTER:
 				{
-					AST tmp1762_AST_in = (AST)_t;
+					AST tmp1764_AST_in = (AST)_t;
 					match(_t,OUTER);
 					_t = _t.getNextSibling();
 					break;
@@ -31773,12 +31793,12 @@ inputState.guessing--;
 				}
 				}
 				}
-				AST tmp1763_AST_in = (AST)_t;
+				AST tmp1765_AST_in = (AST)_t;
 				match(_t,JOIN);
 				_t = _t.getNextSibling();
 				select_sqltableref(_t);
 				_t = _retTree;
-				AST tmp1764_AST_in = (AST)_t;
+				AST tmp1766_AST_in = (AST)_t;
 				match(_t,ON);
 				_t = _t.getNextSibling();
 				sqlexpression(_t);
@@ -31790,7 +31810,7 @@ inputState.guessing--;
 			case RIGHT:
 			{
 				AST __t2443 = _t;
-				AST tmp1765_AST_in = (AST)_t;
+				AST tmp1767_AST_in = (AST)_t;
 				match(_t,RIGHT);
 				_t = _t.getFirstChild();
 				{
@@ -31798,7 +31818,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case OUTER:
 				{
-					AST tmp1766_AST_in = (AST)_t;
+					AST tmp1768_AST_in = (AST)_t;
 					match(_t,OUTER);
 					_t = _t.getNextSibling();
 					break;
@@ -31813,12 +31833,12 @@ inputState.guessing--;
 				}
 				}
 				}
-				AST tmp1767_AST_in = (AST)_t;
+				AST tmp1769_AST_in = (AST)_t;
 				match(_t,JOIN);
 				_t = _t.getNextSibling();
 				select_sqltableref(_t);
 				_t = _retTree;
-				AST tmp1768_AST_in = (AST)_t;
+				AST tmp1770_AST_in = (AST)_t;
 				match(_t,ON);
 				_t = _t.getNextSibling();
 				sqlexpression(_t);
@@ -31830,15 +31850,15 @@ inputState.guessing--;
 			case INNER:
 			{
 				AST __t2445 = _t;
-				AST tmp1769_AST_in = (AST)_t;
+				AST tmp1771_AST_in = (AST)_t;
 				match(_t,INNER);
 				_t = _t.getFirstChild();
-				AST tmp1770_AST_in = (AST)_t;
+				AST tmp1772_AST_in = (AST)_t;
 				match(_t,JOIN);
 				_t = _t.getNextSibling();
 				select_sqltableref(_t);
 				_t = _retTree;
-				AST tmp1771_AST_in = (AST)_t;
+				AST tmp1773_AST_in = (AST)_t;
 				match(_t,ON);
 				_t = _t.getNextSibling();
 				sqlexpression(_t);
@@ -31850,15 +31870,15 @@ inputState.guessing--;
 			case OUTER:
 			{
 				AST __t2446 = _t;
-				AST tmp1772_AST_in = (AST)_t;
+				AST tmp1774_AST_in = (AST)_t;
 				match(_t,OUTER);
 				_t = _t.getFirstChild();
-				AST tmp1773_AST_in = (AST)_t;
+				AST tmp1775_AST_in = (AST)_t;
 				match(_t,JOIN);
 				_t = _t.getNextSibling();
 				select_sqltableref(_t);
 				_t = _retTree;
-				AST tmp1774_AST_in = (AST)_t;
+				AST tmp1776_AST_in = (AST)_t;
 				match(_t,ON);
 				_t = _t.getNextSibling();
 				sqlexpression(_t);
@@ -31870,12 +31890,12 @@ inputState.guessing--;
 			case JOIN:
 			{
 				AST __t2447 = _t;
-				AST tmp1775_AST_in = (AST)_t;
+				AST tmp1777_AST_in = (AST)_t;
 				match(_t,JOIN);
 				_t = _t.getFirstChild();
 				select_sqltableref(_t);
 				_t = _retTree;
-				AST tmp1776_AST_in = (AST)_t;
+				AST tmp1778_AST_in = (AST)_t;
 				match(_t,ON);
 				_t = _t.getNextSibling();
 				sqlexpression(_t);
@@ -31897,7 +31917,7 @@ inputState.guessing--;
 		case WHERE:
 		{
 			AST __t2450 = _t;
-			AST tmp1777_AST_in = (AST)_t;
+			AST tmp1779_AST_in = (AST)_t;
 			match(_t,WHERE);
 			_t = _t.getFirstChild();
 			sqlexpression(_t);
@@ -31931,14 +31951,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ASC:
 		{
-			AST tmp1778_AST_in = (AST)_t;
+			AST tmp1780_AST_in = (AST)_t;
 			match(_t,ASC);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DESCENDING:
 		{
-			AST tmp1779_AST_in = (AST)_t;
+			AST tmp1781_AST_in = (AST)_t;
 			match(_t,DESCENDING);
 			_t = _t.getNextSibling();
 			break;
@@ -31959,7 +31979,7 @@ inputState.guessing--;
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1780_AST_in = (AST)_t;
+				AST tmp1782_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				sqlscalar(_t);
@@ -31969,14 +31989,14 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case ASC:
 				{
-					AST tmp1781_AST_in = (AST)_t;
+					AST tmp1783_AST_in = (AST)_t;
 					match(_t,ASC);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case DESCENDING:
 				{
-					AST tmp1782_AST_in = (AST)_t;
+					AST tmp1784_AST_in = (AST)_t;
 					match(_t,DESCENDING);
 					_t = _t.getNextSibling();
 					break;
@@ -32017,7 +32037,7 @@ inputState.guessing--;
 		}
 		case ID:
 		{
-			AST tmp1783_AST_in = (AST)_t;
+			AST tmp1785_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
@@ -32033,7 +32053,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ID:
 		{
-			AST tmp1784_AST_in = (AST)_t;
+			AST tmp1786_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
@@ -32063,8 +32083,8 @@ inputState.guessing--;
 		
 		AST sqlupdate_equal_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1351 = _t;
-		AST tmp1785_AST_in = (AST)_t;
+		AST __t1356 = _t;
+		AST tmp1787_AST_in = (AST)_t;
 		match(_t,EQUAL);
 		_t = _t.getFirstChild();
 		fld(_t,CQ.REF);
@@ -32091,7 +32111,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t1351;
+		_t = __t1356;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -32100,7 +32120,7 @@ inputState.guessing--;
 		
 		AST sqlaggregatefunc_arg_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST tmp1786_AST_in = (AST)_t;
+		AST tmp1788_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		{
@@ -32108,7 +32128,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case DISTINCT:
 		{
-			AST tmp1787_AST_in = (AST)_t;
+			AST tmp1789_AST_in = (AST)_t;
 			match(_t,DISTINCT);
 			_t = _t.getNextSibling();
 			{
@@ -32116,12 +32136,12 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case LEFTPAREN:
 			{
-				AST tmp1788_AST_in = (AST)_t;
+				AST tmp1790_AST_in = (AST)_t;
 				match(_t,LEFTPAREN);
 				_t = _t.getNextSibling();
 				fld(_t,CQ.REF);
 				_t = _retTree;
-				AST tmp1789_AST_in = (AST)_t;
+				AST tmp1791_AST_in = (AST)_t;
 				match(_t,RIGHTPAREN);
 				_t = _t.getNextSibling();
 				break;
@@ -32142,7 +32162,7 @@ inputState.guessing--;
 		}
 		case STAR:
 		{
-			AST tmp1790_AST_in = (AST)_t;
+			AST tmp1792_AST_in = (AST)_t;
 			match(_t,STAR);
 			_t = _t.getNextSibling();
 			break;
@@ -32153,7 +32173,7 @@ inputState.guessing--;
 				{
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==ALL)) {
-					AST tmp1791_AST_in = (AST)_t;
+					AST tmp1793_AST_in = (AST)_t;
 					match(_t,ALL);
 					_t = _t.getNextSibling();
 				}
@@ -32172,7 +32192,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1792_AST_in = (AST)_t;
+		AST tmp1794_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		_retTree = _t;
@@ -32187,7 +32207,7 @@ inputState.guessing--;
 		case PLUS:
 		{
 			AST __t2509 = _t;
-			AST tmp1793_AST_in = (AST)_t;
+			AST tmp1795_AST_in = (AST)_t;
 			match(_t,PLUS);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -32201,7 +32221,7 @@ inputState.guessing--;
 		case MINUS:
 		{
 			AST __t2510 = _t;
-			AST tmp1794_AST_in = (AST)_t;
+			AST tmp1796_AST_in = (AST)_t;
 			match(_t,MINUS);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -32215,7 +32235,7 @@ inputState.guessing--;
 		case MULTIPLY:
 		{
 			AST __t2511 = _t;
-			AST tmp1795_AST_in = (AST)_t;
+			AST tmp1797_AST_in = (AST)_t;
 			match(_t,MULTIPLY);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -32229,7 +32249,7 @@ inputState.guessing--;
 		case DIVIDE:
 		{
 			AST __t2512 = _t;
-			AST tmp1796_AST_in = (AST)_t;
+			AST tmp1798_AST_in = (AST)_t;
 			match(_t,DIVIDE);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -32243,7 +32263,7 @@ inputState.guessing--;
 		case MODULO:
 		{
 			AST __t2513 = _t;
-			AST tmp1797_AST_in = (AST)_t;
+			AST tmp1799_AST_in = (AST)_t;
 			match(_t,MODULO);
 			_t = _t.getFirstChild();
 			sqlscalar(_t);
@@ -32257,7 +32277,7 @@ inputState.guessing--;
 		case UNARY_PLUS:
 		{
 			AST __t2514 = _t;
-			AST tmp1798_AST_in = (AST)_t;
+			AST tmp1800_AST_in = (AST)_t;
 			match(_t,UNARY_PLUS);
 			_t = _t.getFirstChild();
 			exprt(_t);
@@ -32269,7 +32289,7 @@ inputState.guessing--;
 		case UNARY_MINUS:
 		{
 			AST __t2515 = _t;
-			AST tmp1799_AST_in = (AST)_t;
+			AST tmp1801_AST_in = (AST)_t;
 			match(_t,UNARY_MINUS);
 			_t = _t.getFirstChild();
 			exprt(_t);
@@ -32287,7 +32307,7 @@ inputState.guessing--;
 				inputState.guessing++;
 				try {
 					{
-					AST tmp1800_AST_in = (AST)_t;
+					AST tmp1802_AST_in = (AST)_t;
 					match(_t,LEFTPAREN);
 					_t = _t.getNextSibling();
 					}
@@ -32300,12 +32320,12 @@ inputState.guessing--;
 			}
 			if ( synPredMatched2517 ) {
 				AST __t2518 = _t;
-				AST tmp1801_AST_in = (AST)_t;
+				AST tmp1803_AST_in = (AST)_t;
 				match(_t,LEFTPAREN);
 				_t = _t.getFirstChild();
 				sqlexpression(_t);
 				_t = _retTree;
-				AST tmp1802_AST_in = (AST)_t;
+				AST tmp1804_AST_in = (AST)_t;
 				match(_t,RIGHTPAREN);
 				_t = _t.getNextSibling();
 				_t = __t2518;
@@ -32404,7 +32424,7 @@ inputState.guessing--;
 		}
 		case USERID:
 		{
-			AST tmp1803_AST_in = (AST)_t;
+			AST tmp1805_AST_in = (AST)_t;
 			match(_t,USERID);
 			_t = _t.getNextSibling();
 			break;
@@ -32421,11 +32441,11 @@ inputState.guessing--;
 		
 		AST labeled_block_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
-		AST __t1375 = _t;
-		AST tmp1804_AST_in = (AST)_t;
+		AST __t1380 = _t;
+		AST tmp1806_AST_in = (AST)_t;
 		match(_t,BLOCK_LABEL);
 		_t = _t.getFirstChild();
-		AST tmp1805_AST_in = (AST)_t;
+		AST tmp1807_AST_in = (AST)_t;
 		match(_t,LEXCOLON);
 		_t = _t.getNextSibling();
 		{
@@ -32455,7 +32475,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		_t = __t1375;
+		_t = __t1380;
 		_t = _t.getNextSibling();
 		_retTree = _t;
 	}
@@ -33391,7 +33411,7 @@ inputState.guessing--;
 		AST aatracestatement_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1615 = _t;
-		AST tmp1806_AST_in = (AST)_t;
+		AST tmp1808_AST_in = (AST)_t;
 		match(_t,AATRACE);
 		_t = _t.getFirstChild();
 		{
@@ -33399,7 +33419,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case OFF:
 		{
-			AST tmp1807_AST_in = (AST)_t;
+			AST tmp1809_AST_in = (AST)_t;
 			match(_t,OFF);
 			_t = _t.getNextSibling();
 			state_end(_t);
@@ -33409,7 +33429,7 @@ inputState.guessing--;
 		case ON:
 		{
 			AST __t1617 = _t;
-			AST tmp1808_AST_in = (AST)_t;
+			AST tmp1810_AST_in = (AST)_t;
 			match(_t,ON);
 			_t = _t.getFirstChild();
 			{
@@ -33417,7 +33437,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case AALIST:
 			{
-				AST tmp1809_AST_in = (AST)_t;
+				AST tmp1811_AST_in = (AST)_t;
 				match(_t,AALIST);
 				_t = _t.getNextSibling();
 				break;
@@ -33478,21 +33498,21 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case TO:
 				{
-					AST tmp1810_AST_in = (AST)_t;
+					AST tmp1812_AST_in = (AST)_t;
 					match(_t,TO);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case FROM:
 				{
-					AST tmp1811_AST_in = (AST)_t;
+					AST tmp1813_AST_in = (AST)_t;
 					match(_t,FROM);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case THROUGH:
 				{
-					AST tmp1812_AST_in = (AST)_t;
+					AST tmp1814_AST_in = (AST)_t;
 					match(_t,THROUGH);
 					_t = _t.getNextSibling();
 					break;
@@ -33511,7 +33531,7 @@ inputState.guessing--;
 			}
 			case CLOSE:
 			{
-				AST tmp1813_AST_in = (AST)_t;
+				AST tmp1815_AST_in = (AST)_t;
 				match(_t,CLOSE);
 				_t = _t.getNextSibling();
 				state_end(_t);
@@ -33542,7 +33562,7 @@ inputState.guessing--;
 		AST accumulatestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1624 = _t;
-		AST tmp1814_AST_in = (AST)_t;
+		AST tmp1816_AST_in = (AST)_t;
 		match(_t,ACCUMULATE);
 		_t = _t.getFirstChild();
 		{
@@ -33571,7 +33591,7 @@ inputState.guessing--;
 		AST analyzestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1636 = _t;
-		AST tmp1815_AST_in = (AST)_t;
+		AST tmp1817_AST_in = (AST)_t;
 		match(_t,ANALYZE);
 		_t = _t.getFirstChild();
 		filenameorvalue(_t);
@@ -33584,7 +33604,7 @@ inputState.guessing--;
 		case OUTPUT:
 		{
 			AST __t1638 = _t;
-			AST tmp1816_AST_in = (AST)_t;
+			AST tmp1818_AST_in = (AST)_t;
 			match(_t,OUTPUT);
 			_t = _t.getFirstChild();
 			filenameorvalue(_t);
@@ -33614,21 +33634,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case APPEND:
 			{
-				AST tmp1817_AST_in = (AST)_t;
+				AST tmp1819_AST_in = (AST)_t;
 				match(_t,APPEND);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case ALL:
 			{
-				AST tmp1818_AST_in = (AST)_t;
+				AST tmp1820_AST_in = (AST)_t;
 				match(_t,ALL);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOERROR_KW:
 			{
-				AST tmp1819_AST_in = (AST)_t;
+				AST tmp1821_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
@@ -33652,7 +33672,7 @@ inputState.guessing--;
 		AST applystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1642 = _t;
-		AST tmp1820_AST_in = (AST)_t;
+		AST tmp1822_AST_in = (AST)_t;
 		match(_t,APPLY);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -33663,7 +33683,7 @@ inputState.guessing--;
 		case TO:
 		{
 			AST __t1644 = _t;
-			AST tmp1821_AST_in = (AST)_t;
+			AST tmp1823_AST_in = (AST)_t;
 			match(_t,TO);
 			_t = _t.getFirstChild();
 			gwidget(_t);
@@ -33695,7 +33715,7 @@ inputState.guessing--;
 		AST assignstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1651 = _t;
-		AST tmp1822_AST_in = (AST)_t;
+		AST tmp1824_AST_in = (AST)_t;
 		match(_t,ASSIGN);
 		_t = _t.getFirstChild();
 		assignment_list(_t);
@@ -33705,7 +33725,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1823_AST_in = (AST)_t;
+			AST tmp1825_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -33733,7 +33753,7 @@ inputState.guessing--;
 		AST bellstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1667 = _t;
-		AST tmp1824_AST_in = (AST)_t;
+		AST tmp1826_AST_in = (AST)_t;
 		match(_t,BELL);
 		_t = _t.getFirstChild();
 		state_end(_t);
@@ -33748,7 +33768,7 @@ inputState.guessing--;
 		AST callstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1669 = _t;
-		AST tmp1825_AST_in = (AST)_t;
+		AST tmp1827_AST_in = (AST)_t;
 		match(_t,CALL);
 		_t = _t.getFirstChild();
 		filenameorvalue(_t);
@@ -33779,7 +33799,7 @@ inputState.guessing--;
 		AST casestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1675 = _t;
-		AST tmp1826_AST_in = (AST)_t;
+		AST tmp1828_AST_in = (AST)_t;
 		match(_t,CASE);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -33787,7 +33807,7 @@ inputState.guessing--;
 		block_colon(_t);
 		_t = _retTree;
 		AST __t1676 = _t;
-		AST tmp1827_AST_in = (AST)_t;
+		AST tmp1829_AST_in = (AST)_t;
 		match(_t,Code_block);
 		_t = _t.getFirstChild();
 		{
@@ -33796,12 +33816,12 @@ inputState.guessing--;
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==WHEN)) {
 				AST __t1678 = _t;
-				AST tmp1828_AST_in = (AST)_t;
+				AST tmp1830_AST_in = (AST)_t;
 				match(_t,WHEN);
 				_t = _t.getFirstChild();
 				case_expression(_t);
 				_t = _retTree;
-				AST tmp1829_AST_in = (AST)_t;
+				AST tmp1831_AST_in = (AST)_t;
 				match(_t,THEN);
 				_t = _t.getNextSibling();
 				blockorstate(_t);
@@ -33823,7 +33843,7 @@ inputState.guessing--;
 		case OTHERWISE:
 		{
 			AST __t1681 = _t;
-			AST tmp1830_AST_in = (AST)_t;
+			AST tmp1832_AST_in = (AST)_t;
 			match(_t,OTHERWISE);
 			_t = _t.getFirstChild();
 			blockorstate(_t);
@@ -33848,7 +33868,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EOF:
 		{
-			AST tmp1831_AST_in = (AST)_t;
+			AST tmp1833_AST_in = (AST)_t;
 			match(_t,Token.EOF_TYPE);
 			_t = _t.getNextSibling();
 			break;
@@ -33856,7 +33876,7 @@ inputState.guessing--;
 		case END:
 		{
 			AST __t1683 = _t;
-			AST tmp1832_AST_in = (AST)_t;
+			AST tmp1834_AST_in = (AST)_t;
 			match(_t,END);
 			_t = _t.getFirstChild();
 			{
@@ -33864,7 +33884,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case CASE:
 			{
-				AST tmp1833_AST_in = (AST)_t;
+				AST tmp1835_AST_in = (AST)_t;
 				match(_t,CASE);
 				_t = _t.getNextSibling();
 				break;
@@ -33901,10 +33921,10 @@ inputState.guessing--;
 		AST closestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2404 = _t;
-		AST tmp1834_AST_in = (AST)_t;
+		AST tmp1836_AST_in = (AST)_t;
 		match(_t,CLOSE);
 		_t = _t.getFirstChild();
-		AST tmp1835_AST_in = (AST)_t;
+		AST tmp1837_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -33919,13 +33939,13 @@ inputState.guessing--;
 		AST closequerystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1692 = _t;
-		AST tmp1836_AST_in = (AST)_t;
+		AST tmp1838_AST_in = (AST)_t;
 		match(_t,CLOSE);
 		_t = _t.getFirstChild();
-		AST tmp1837_AST_in = (AST)_t;
+		AST tmp1839_AST_in = (AST)_t;
 		match(_t,QUERY);
 		_t = _t.getNextSibling();
-		AST tmp1838_AST_in = (AST)_t;
+		AST tmp1840_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -33940,7 +33960,7 @@ inputState.guessing--;
 		AST compilestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1723 = _t;
-		AST tmp1839_AST_in = (AST)_t;
+		AST tmp1841_AST_in = (AST)_t;
 		match(_t,COMPILE);
 		_t = _t.getFirstChild();
 		filenameorvalue(_t);
@@ -33953,7 +33973,7 @@ inputState.guessing--;
 			case ATTRSPACE:
 			{
 				AST __t1725 = _t;
-				AST tmp1840_AST_in = (AST)_t;
+				AST tmp1842_AST_in = (AST)_t;
 				match(_t,ATTRSPACE);
 				_t = _t.getFirstChild();
 				{
@@ -33962,7 +33982,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1727 = _t;
-					AST tmp1841_AST_in = (AST)_t;
+					AST tmp1843_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -33987,7 +34007,7 @@ inputState.guessing--;
 			}
 			case NOATTRSPACE:
 			{
-				AST tmp1842_AST_in = (AST)_t;
+				AST tmp1844_AST_in = (AST)_t;
 				match(_t,NOATTRSPACE);
 				_t = _t.getNextSibling();
 				break;
@@ -33995,7 +34015,7 @@ inputState.guessing--;
 			case SAVE:
 			{
 				AST __t1728 = _t;
-				AST tmp1843_AST_in = (AST)_t;
+				AST tmp1845_AST_in = (AST)_t;
 				match(_t,SAVE);
 				_t = _t.getFirstChild();
 				{
@@ -34004,7 +34024,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1730 = _t;
-					AST tmp1844_AST_in = (AST)_t;
+					AST tmp1846_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34030,7 +34050,7 @@ inputState.guessing--;
 				case INTO:
 				{
 					AST __t1732 = _t;
-					AST tmp1845_AST_in = (AST)_t;
+					AST tmp1847_AST_in = (AST)_t;
 					match(_t,INTO);
 					_t = _t.getFirstChild();
 					filenameorvalue(_t);
@@ -34056,7 +34076,7 @@ inputState.guessing--;
 			case LISTING:
 			{
 				AST __t1733 = _t;
-				AST tmp1846_AST_in = (AST)_t;
+				AST tmp1848_AST_in = (AST)_t;
 				match(_t,LISTING);
 				_t = _t.getFirstChild();
 				filenameorvalue(_t);
@@ -34075,7 +34095,7 @@ inputState.guessing--;
 					case PAGESIZE_KW:
 					{
 						AST __t1735 = _t;
-						AST tmp1847_AST_in = (AST)_t;
+						AST tmp1849_AST_in = (AST)_t;
 						match(_t,PAGESIZE_KW);
 						_t = _t.getFirstChild();
 						expression(_t);
@@ -34087,7 +34107,7 @@ inputState.guessing--;
 					case PAGEWIDTH:
 					{
 						AST __t1736 = _t;
-						AST tmp1848_AST_in = (AST)_t;
+						AST tmp1850_AST_in = (AST)_t;
 						match(_t,PAGEWIDTH);
 						_t = _t.getFirstChild();
 						expression(_t);
@@ -34110,7 +34130,7 @@ inputState.guessing--;
 			case XCODE:
 			{
 				AST __t1738 = _t;
-				AST tmp1849_AST_in = (AST)_t;
+				AST tmp1851_AST_in = (AST)_t;
 				match(_t,XCODE);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -34122,7 +34142,7 @@ inputState.guessing--;
 			case XREF:
 			{
 				AST __t1739 = _t;
-				AST tmp1850_AST_in = (AST)_t;
+				AST tmp1852_AST_in = (AST)_t;
 				match(_t,XREF);
 				_t = _t.getFirstChild();
 				filenameorvalue(_t);
@@ -34153,7 +34173,7 @@ inputState.guessing--;
 			case STRINGXREF:
 			{
 				AST __t1741 = _t;
-				AST tmp1851_AST_in = (AST)_t;
+				AST tmp1853_AST_in = (AST)_t;
 				match(_t,STRINGXREF);
 				_t = _t.getFirstChild();
 				filenameorvalue(_t);
@@ -34184,7 +34204,7 @@ inputState.guessing--;
 			case STREAMIO:
 			{
 				AST __t1743 = _t;
-				AST tmp1852_AST_in = (AST)_t;
+				AST tmp1854_AST_in = (AST)_t;
 				match(_t,STREAMIO);
 				_t = _t.getFirstChild();
 				{
@@ -34193,7 +34213,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1745 = _t;
-					AST tmp1853_AST_in = (AST)_t;
+					AST tmp1855_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34219,7 +34239,7 @@ inputState.guessing--;
 			case MINSIZE:
 			{
 				AST __t1746 = _t;
-				AST tmp1854_AST_in = (AST)_t;
+				AST tmp1856_AST_in = (AST)_t;
 				match(_t,MINSIZE);
 				_t = _t.getFirstChild();
 				{
@@ -34228,7 +34248,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1748 = _t;
-					AST tmp1855_AST_in = (AST)_t;
+					AST tmp1857_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34254,10 +34274,10 @@ inputState.guessing--;
 			case LANGUAGES:
 			{
 				AST __t1749 = _t;
-				AST tmp1856_AST_in = (AST)_t;
+				AST tmp1858_AST_in = (AST)_t;
 				match(_t,LANGUAGES);
 				_t = _t.getFirstChild();
-				AST tmp1857_AST_in = (AST)_t;
+				AST tmp1859_AST_in = (AST)_t;
 				match(_t,LEFTPAREN);
 				_t = _t.getNextSibling();
 				{
@@ -34273,7 +34293,7 @@ inputState.guessing--;
 					do {
 						if (_t==null) _t=ASTNULL;
 						if ((_t.getType()==COMMA)) {
-							AST tmp1858_AST_in = (AST)_t;
+							AST tmp1860_AST_in = (AST)_t;
 							match(_t,COMMA);
 							_t = _t.getNextSibling();
 							compile_lang(_t);
@@ -34297,7 +34317,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				AST tmp1859_AST_in = (AST)_t;
+				AST tmp1861_AST_in = (AST)_t;
 				match(_t,RIGHTPAREN);
 				_t = _t.getNextSibling();
 				_t = __t1749;
@@ -34307,11 +34327,11 @@ inputState.guessing--;
 			case TEXTSEGGROW:
 			{
 				AST __t1753 = _t;
-				AST tmp1860_AST_in = (AST)_t;
+				AST tmp1862_AST_in = (AST)_t;
 				match(_t,TEXTSEGGROW);
 				_t = _t.getFirstChild();
 				AST __t1754 = _t;
-				AST tmp1861_AST_in = (AST)_t;
+				AST tmp1863_AST_in = (AST)_t;
 				match(_t,EQUAL);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -34325,7 +34345,7 @@ inputState.guessing--;
 			case DEBUGLIST:
 			{
 				AST __t1755 = _t;
-				AST tmp1862_AST_in = (AST)_t;
+				AST tmp1864_AST_in = (AST)_t;
 				match(_t,DEBUGLIST);
 				_t = _t.getFirstChild();
 				filenameorvalue(_t);
@@ -34337,7 +34357,7 @@ inputState.guessing--;
 			case DEFAULTNOXLATE:
 			{
 				AST __t1756 = _t;
-				AST tmp1863_AST_in = (AST)_t;
+				AST tmp1865_AST_in = (AST)_t;
 				match(_t,DEFAULTNOXLATE);
 				_t = _t.getFirstChild();
 				{
@@ -34346,7 +34366,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1758 = _t;
-					AST tmp1864_AST_in = (AST)_t;
+					AST tmp1866_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34372,7 +34392,7 @@ inputState.guessing--;
 			case GENERATEMD5:
 			{
 				AST __t1759 = _t;
-				AST tmp1865_AST_in = (AST)_t;
+				AST tmp1867_AST_in = (AST)_t;
 				match(_t,GENERATEMD5);
 				_t = _t.getFirstChild();
 				{
@@ -34381,7 +34401,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1761 = _t;
-					AST tmp1866_AST_in = (AST)_t;
+					AST tmp1868_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34407,7 +34427,7 @@ inputState.guessing--;
 			case PREPROCESS:
 			{
 				AST __t1762 = _t;
-				AST tmp1867_AST_in = (AST)_t;
+				AST tmp1869_AST_in = (AST)_t;
 				match(_t,PREPROCESS);
 				_t = _t.getFirstChild();
 				filenameorvalue(_t);
@@ -34419,7 +34439,7 @@ inputState.guessing--;
 			case USEREVVIDEO:
 			{
 				AST __t1763 = _t;
-				AST tmp1868_AST_in = (AST)_t;
+				AST tmp1870_AST_in = (AST)_t;
 				match(_t,USEREVVIDEO);
 				_t = _t.getFirstChild();
 				{
@@ -34428,7 +34448,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1765 = _t;
-					AST tmp1869_AST_in = (AST)_t;
+					AST tmp1871_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34454,7 +34474,7 @@ inputState.guessing--;
 			case USEUNDERLINE:
 			{
 				AST __t1766 = _t;
-				AST tmp1870_AST_in = (AST)_t;
+				AST tmp1872_AST_in = (AST)_t;
 				match(_t,USEUNDERLINE);
 				_t = _t.getFirstChild();
 				{
@@ -34463,7 +34483,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1768 = _t;
-					AST tmp1871_AST_in = (AST)_t;
+					AST tmp1873_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34489,7 +34509,7 @@ inputState.guessing--;
 			case V6FRAME:
 			{
 				AST __t1769 = _t;
-				AST tmp1872_AST_in = (AST)_t;
+				AST tmp1874_AST_in = (AST)_t;
 				match(_t,V6FRAME);
 				_t = _t.getFirstChild();
 				{
@@ -34498,7 +34518,7 @@ inputState.guessing--;
 				case EQUAL:
 				{
 					AST __t1771 = _t;
-					AST tmp1873_AST_in = (AST)_t;
+					AST tmp1875_AST_in = (AST)_t;
 					match(_t,EQUAL);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -34523,7 +34543,7 @@ inputState.guessing--;
 			}
 			case NOERROR_KW:
 			{
-				AST tmp1874_AST_in = (AST)_t;
+				AST tmp1876_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
@@ -34547,7 +34567,7 @@ inputState.guessing--;
 		AST connectstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1781 = _t;
-		AST tmp1875_AST_in = (AST)_t;
+		AST tmp1877_AST_in = (AST)_t;
 		match(_t,CONNECT);
 		_t = _t.getFirstChild();
 		{
@@ -34557,14 +34577,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOERROR_KW:
 			{
-				AST tmp1876_AST_in = (AST)_t;
+				AST tmp1878_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DDE:
 			{
-				AST tmp1877_AST_in = (AST)_t;
+				AST tmp1879_AST_in = (AST)_t;
 				match(_t,DDE);
 				_t = _t.getNextSibling();
 				break;
@@ -34595,13 +34615,13 @@ inputState.guessing--;
 		AST copylobstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1795 = _t;
-		AST tmp1878_AST_in = (AST)_t;
+		AST tmp1880_AST_in = (AST)_t;
 		match(_t,COPYLOB);
 		_t = _t.getFirstChild();
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==FROM)) {
-			AST tmp1879_AST_in = (AST)_t;
+			AST tmp1881_AST_in = (AST)_t;
 			match(_t,FROM);
 			_t = _t.getNextSibling();
 		}
@@ -34615,7 +34635,7 @@ inputState.guessing--;
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==FILE)) {
-			AST tmp1880_AST_in = (AST)_t;
+			AST tmp1882_AST_in = (AST)_t;
 			match(_t,FILE);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -34625,7 +34645,7 @@ inputState.guessing--;
 			{
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==OBJECT)) {
-				AST tmp1881_AST_in = (AST)_t;
+				AST tmp1883_AST_in = (AST)_t;
 				match(_t,OBJECT);
 				_t = _t.getNextSibling();
 			}
@@ -34650,10 +34670,10 @@ inputState.guessing--;
 		case STARTING:
 		{
 			AST __t1800 = _t;
-			AST tmp1882_AST_in = (AST)_t;
+			AST tmp1884_AST_in = (AST)_t;
 			match(_t,STARTING);
 			_t = _t.getFirstChild();
-			AST tmp1883_AST_in = (AST)_t;
+			AST tmp1885_AST_in = (AST)_t;
 			match(_t,AT);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -34679,7 +34699,7 @@ inputState.guessing--;
 		case FOR:
 		{
 			AST __t1802 = _t;
-			AST tmp1884_AST_in = (AST)_t;
+			AST tmp1886_AST_in = (AST)_t;
 			match(_t,FOR);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -34698,13 +34718,13 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1885_AST_in = (AST)_t;
+		AST tmp1887_AST_in = (AST)_t;
 		match(_t,TO);
 		_t = _t.getNextSibling();
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==FILE)) {
-			AST tmp1886_AST_in = (AST)_t;
+			AST tmp1888_AST_in = (AST)_t;
 			match(_t,FILE);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -34714,7 +34734,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case APPEND:
 			{
-				AST tmp1887_AST_in = (AST)_t;
+				AST tmp1889_AST_in = (AST)_t;
 				match(_t,APPEND);
 				_t = _t.getNextSibling();
 				break;
@@ -34737,7 +34757,7 @@ inputState.guessing--;
 			{
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==OBJECT)) {
-				AST tmp1888_AST_in = (AST)_t;
+				AST tmp1890_AST_in = (AST)_t;
 				match(_t,OBJECT);
 				_t = _t.getNextSibling();
 			}
@@ -34755,10 +34775,10 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case OVERLAY:
 			{
-				AST tmp1889_AST_in = (AST)_t;
+				AST tmp1891_AST_in = (AST)_t;
 				match(_t,OVERLAY);
 				_t = _t.getNextSibling();
-				AST tmp1890_AST_in = (AST)_t;
+				AST tmp1892_AST_in = (AST)_t;
 				match(_t,AT);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -34768,7 +34788,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case TRIM:
 				{
-					AST tmp1891_AST_in = (AST)_t;
+					AST tmp1893_AST_in = (AST)_t;
 					match(_t,TRIM);
 					_t = _t.getNextSibling();
 					break;
@@ -34812,7 +34832,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOCONVERT:
 		{
-			AST tmp1892_AST_in = (AST)_t;
+			AST tmp1894_AST_in = (AST)_t;
 			match(_t,NOCONVERT);
 			_t = _t.getNextSibling();
 			break;
@@ -34839,7 +34859,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1893_AST_in = (AST)_t;
+			AST tmp1895_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -34864,18 +34884,18 @@ inputState.guessing--;
 		AST createaliasstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1811 = _t;
-		AST tmp1894_AST_in = (AST)_t;
+		AST tmp1896_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1895_AST_in = (AST)_t;
+		AST tmp1897_AST_in = (AST)_t;
 		match(_t,ALIAS);
 		_t = _t.getNextSibling();
 		anyorvalue(_t);
 		_t = _retTree;
-		AST tmp1896_AST_in = (AST)_t;
+		AST tmp1898_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
-		AST tmp1897_AST_in = (AST)_t;
+		AST tmp1899_AST_in = (AST)_t;
 		match(_t,DATABASE);
 		_t = _t.getNextSibling();
 		anyorvalue(_t);
@@ -34885,7 +34905,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1898_AST_in = (AST)_t;
+			AST tmp1900_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -34913,10 +34933,10 @@ inputState.guessing--;
 		AST createcallstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1814 = _t;
-		AST tmp1899_AST_in = (AST)_t;
+		AST tmp1901_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1900_AST_in = (AST)_t;
+		AST tmp1902_AST_in = (AST)_t;
 		match(_t,CALL);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -34933,10 +34953,10 @@ inputState.guessing--;
 		AST createclientprincipalstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1816 = _t;
-		AST tmp1901_AST_in = (AST)_t;
+		AST tmp1903_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1902_AST_in = (AST)_t;
+		AST tmp1904_AST_in = (AST)_t;
 		match(_t,CLIENTPRINCIPAL);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -34953,10 +34973,10 @@ inputState.guessing--;
 		AST createdatabasestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1818 = _t;
-		AST tmp1903_AST_in = (AST)_t;
+		AST tmp1905_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1904_AST_in = (AST)_t;
+		AST tmp1906_AST_in = (AST)_t;
 		match(_t,DATABASE);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -34967,7 +34987,7 @@ inputState.guessing--;
 		case FROM:
 		{
 			AST __t1820 = _t;
-			AST tmp1905_AST_in = (AST)_t;
+			AST tmp1907_AST_in = (AST)_t;
 			match(_t,FROM);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -34977,7 +34997,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NEWINSTANCE:
 			{
-				AST tmp1906_AST_in = (AST)_t;
+				AST tmp1908_AST_in = (AST)_t;
 				match(_t,NEWINSTANCE);
 				_t = _t.getNextSibling();
 				break;
@@ -35014,7 +35034,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case REPLACE:
 		{
-			AST tmp1907_AST_in = (AST)_t;
+			AST tmp1909_AST_in = (AST)_t;
 			match(_t,REPLACE);
 			_t = _t.getNextSibling();
 			break;
@@ -35036,7 +35056,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1908_AST_in = (AST)_t;
+			AST tmp1910_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35064,10 +35084,10 @@ inputState.guessing--;
 		AST createdatasetstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1825 = _t;
-		AST tmp1909_AST_in = (AST)_t;
+		AST tmp1911_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1910_AST_in = (AST)_t;
+		AST tmp1912_AST_in = (AST)_t;
 		match(_t,DATASET);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35084,10 +35104,10 @@ inputState.guessing--;
 		AST createdatasourcestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1827 = _t;
-		AST tmp1911_AST_in = (AST)_t;
+		AST tmp1913_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1912_AST_in = (AST)_t;
+		AST tmp1914_AST_in = (AST)_t;
 		match(_t,DATASOURCE);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35104,10 +35124,10 @@ inputState.guessing--;
 		AST createquerystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1829 = _t;
-		AST tmp1913_AST_in = (AST)_t;
+		AST tmp1915_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1914_AST_in = (AST)_t;
+		AST tmp1916_AST_in = (AST)_t;
 		match(_t,QUERY);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35124,10 +35144,10 @@ inputState.guessing--;
 		AST createsaxreaderstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1831 = _t;
-		AST tmp1915_AST_in = (AST)_t;
+		AST tmp1917_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1916_AST_in = (AST)_t;
+		AST tmp1918_AST_in = (AST)_t;
 		match(_t,SAXREADER);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35144,10 +35164,10 @@ inputState.guessing--;
 		AST createsaxwriterstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1833 = _t;
-		AST tmp1917_AST_in = (AST)_t;
+		AST tmp1919_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1918_AST_in = (AST)_t;
+		AST tmp1920_AST_in = (AST)_t;
 		match(_t,SAXWRITER);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35164,10 +35184,10 @@ inputState.guessing--;
 		AST createsoapheaderstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1835 = _t;
-		AST tmp1919_AST_in = (AST)_t;
+		AST tmp1921_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1920_AST_in = (AST)_t;
+		AST tmp1922_AST_in = (AST)_t;
 		match(_t,SOAPHEADER);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35184,10 +35204,10 @@ inputState.guessing--;
 		AST createsoapheaderentryrefstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1837 = _t;
-		AST tmp1921_AST_in = (AST)_t;
+		AST tmp1923_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1922_AST_in = (AST)_t;
+		AST tmp1924_AST_in = (AST)_t;
 		match(_t,SOAPHEADERENTRYREF);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35204,16 +35224,16 @@ inputState.guessing--;
 		AST createtablestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2406 = _t;
-		AST tmp1923_AST_in = (AST)_t;
+		AST tmp1925_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1924_AST_in = (AST)_t;
+		AST tmp1926_AST_in = (AST)_t;
 		match(_t,TABLE);
 		_t = _t.getNextSibling();
-		AST tmp1925_AST_in = (AST)_t;
+		AST tmp1927_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
-		AST tmp1926_AST_in = (AST)_t;
+		AST tmp1928_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		{
@@ -35228,13 +35248,13 @@ inputState.guessing--;
 		case UNIQUE:
 		{
 			AST __t2408 = _t;
-			AST tmp1927_AST_in = (AST)_t;
+			AST tmp1929_AST_in = (AST)_t;
 			match(_t,UNIQUE);
 			_t = _t.getFirstChild();
-			AST tmp1928_AST_in = (AST)_t;
+			AST tmp1930_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
-			AST tmp1929_AST_in = (AST)_t;
+			AST tmp1931_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			{
@@ -35242,10 +35262,10 @@ inputState.guessing--;
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==COMMA)) {
-					AST tmp1930_AST_in = (AST)_t;
+					AST tmp1932_AST_in = (AST)_t;
 					match(_t,COMMA);
 					_t = _t.getNextSibling();
-					AST tmp1931_AST_in = (AST)_t;
+					AST tmp1933_AST_in = (AST)_t;
 					match(_t,ID);
 					_t = _t.getNextSibling();
 				}
@@ -35255,7 +35275,7 @@ inputState.guessing--;
 				
 			} while (true);
 			}
-			AST tmp1932_AST_in = (AST)_t;
+			AST tmp1934_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
 			_t = __t2408;
@@ -35273,7 +35293,7 @@ inputState.guessing--;
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp1933_AST_in = (AST)_t;
+				AST tmp1935_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				{
@@ -35288,13 +35308,13 @@ inputState.guessing--;
 				case UNIQUE:
 				{
 					AST __t2413 = _t;
-					AST tmp1934_AST_in = (AST)_t;
+					AST tmp1936_AST_in = (AST)_t;
 					match(_t,UNIQUE);
 					_t = _t.getFirstChild();
-					AST tmp1935_AST_in = (AST)_t;
+					AST tmp1937_AST_in = (AST)_t;
 					match(_t,LEFTPAREN);
 					_t = _t.getNextSibling();
-					AST tmp1936_AST_in = (AST)_t;
+					AST tmp1938_AST_in = (AST)_t;
 					match(_t,ID);
 					_t = _t.getNextSibling();
 					{
@@ -35302,10 +35322,10 @@ inputState.guessing--;
 					do {
 						if (_t==null) _t=ASTNULL;
 						if ((_t.getType()==COMMA)) {
-							AST tmp1937_AST_in = (AST)_t;
+							AST tmp1939_AST_in = (AST)_t;
 							match(_t,COMMA);
 							_t = _t.getNextSibling();
-							AST tmp1938_AST_in = (AST)_t;
+							AST tmp1940_AST_in = (AST)_t;
 							match(_t,ID);
 							_t = _t.getNextSibling();
 						}
@@ -35315,7 +35335,7 @@ inputState.guessing--;
 						
 					} while (true);
 					}
-					AST tmp1939_AST_in = (AST)_t;
+					AST tmp1941_AST_in = (AST)_t;
 					match(_t,RIGHTPAREN);
 					_t = _t.getNextSibling();
 					_t = __t2413;
@@ -35335,7 +35355,7 @@ inputState.guessing--;
 			
 		} while (true);
 		}
-		AST tmp1940_AST_in = (AST)_t;
+		AST tmp1942_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -35350,10 +35370,10 @@ inputState.guessing--;
 		AST createwidgetpoolstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1839 = _t;
-		AST tmp1941_AST_in = (AST)_t;
+		AST tmp1943_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1942_AST_in = (AST)_t;
+		AST tmp1944_AST_in = (AST)_t;
 		match(_t,WIDGETPOOL);
 		_t = _t.getNextSibling();
 		{
@@ -35374,7 +35394,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case PERSISTENT:
 		{
-			AST tmp1943_AST_in = (AST)_t;
+			AST tmp1945_AST_in = (AST)_t;
 			match(_t,PERSISTENT);
 			_t = _t.getNextSibling();
 			break;
@@ -35396,7 +35416,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1944_AST_in = (AST)_t;
+			AST tmp1946_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35424,10 +35444,10 @@ inputState.guessing--;
 		AST createxdocumentstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1844 = _t;
-		AST tmp1945_AST_in = (AST)_t;
+		AST tmp1947_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1946_AST_in = (AST)_t;
+		AST tmp1948_AST_in = (AST)_t;
 		match(_t,XDOCUMENT);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35444,10 +35464,10 @@ inputState.guessing--;
 		AST createxnoderefstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1846 = _t;
-		AST tmp1947_AST_in = (AST)_t;
+		AST tmp1949_AST_in = (AST)_t;
 		match(_t,CREATE);
 		_t = _t.getFirstChild();
-		AST tmp1948_AST_in = (AST)_t;
+		AST tmp1950_AST_in = (AST)_t;
 		match(_t,XNODEREF);
 		_t = _t.getNextSibling();
 		create_whatever_args(_t);
@@ -35464,10 +35484,10 @@ inputState.guessing--;
 		AST ddeadvisestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1857 = _t;
-		AST tmp1949_AST_in = (AST)_t;
+		AST tmp1951_AST_in = (AST)_t;
 		match(_t,DDE);
 		_t = _t.getFirstChild();
-		AST tmp1950_AST_in = (AST)_t;
+		AST tmp1952_AST_in = (AST)_t;
 		match(_t,ADVISE);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -35477,14 +35497,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case START:
 		{
-			AST tmp1951_AST_in = (AST)_t;
+			AST tmp1953_AST_in = (AST)_t;
 			match(_t,START);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case STOP:
 		{
-			AST tmp1952_AST_in = (AST)_t;
+			AST tmp1954_AST_in = (AST)_t;
 			match(_t,STOP);
 			_t = _t.getNextSibling();
 			break;
@@ -35495,7 +35515,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp1953_AST_in = (AST)_t;
+		AST tmp1955_AST_in = (AST)_t;
 		match(_t,ITEM);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -35506,7 +35526,7 @@ inputState.guessing--;
 		case TIME:
 		{
 			AST __t1860 = _t;
-			AST tmp1954_AST_in = (AST)_t;
+			AST tmp1956_AST_in = (AST)_t;
 			match(_t,TIME);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -35532,7 +35552,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1955_AST_in = (AST)_t;
+			AST tmp1957_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35560,15 +35580,15 @@ inputState.guessing--;
 		AST ddeexecutestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1863 = _t;
-		AST tmp1956_AST_in = (AST)_t;
+		AST tmp1958_AST_in = (AST)_t;
 		match(_t,DDE);
 		_t = _t.getFirstChild();
-		AST tmp1957_AST_in = (AST)_t;
+		AST tmp1959_AST_in = (AST)_t;
 		match(_t,EXECUTE);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
-		AST tmp1958_AST_in = (AST)_t;
+		AST tmp1960_AST_in = (AST)_t;
 		match(_t,COMMAND);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -35579,7 +35599,7 @@ inputState.guessing--;
 		case TIME:
 		{
 			AST __t1865 = _t;
-			AST tmp1959_AST_in = (AST)_t;
+			AST tmp1961_AST_in = (AST)_t;
 			match(_t,TIME);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -35605,7 +35625,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1960_AST_in = (AST)_t;
+			AST tmp1962_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35633,20 +35653,20 @@ inputState.guessing--;
 		AST ddesendstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1868 = _t;
-		AST tmp1961_AST_in = (AST)_t;
+		AST tmp1963_AST_in = (AST)_t;
 		match(_t,DDE);
 		_t = _t.getFirstChild();
-		AST tmp1962_AST_in = (AST)_t;
+		AST tmp1964_AST_in = (AST)_t;
 		match(_t,SEND);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
-		AST tmp1963_AST_in = (AST)_t;
+		AST tmp1965_AST_in = (AST)_t;
 		match(_t,SOURCE);
 		_t = _t.getNextSibling();
 		expression(_t);
 		_t = _retTree;
-		AST tmp1964_AST_in = (AST)_t;
+		AST tmp1966_AST_in = (AST)_t;
 		match(_t,ITEM);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -35657,7 +35677,7 @@ inputState.guessing--;
 		case TIME:
 		{
 			AST __t1870 = _t;
-			AST tmp1965_AST_in = (AST)_t;
+			AST tmp1967_AST_in = (AST)_t;
 			match(_t,TIME);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -35683,7 +35703,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1966_AST_in = (AST)_t;
+			AST tmp1968_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35711,10 +35731,10 @@ inputState.guessing--;
 		AST ddeterminatestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1873 = _t;
-		AST tmp1967_AST_in = (AST)_t;
+		AST tmp1969_AST_in = (AST)_t;
 		match(_t,DDE);
 		_t = _t.getFirstChild();
-		AST tmp1968_AST_in = (AST)_t;
+		AST tmp1970_AST_in = (AST)_t;
 		match(_t,TERMINATE);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -35724,7 +35744,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1969_AST_in = (AST)_t;
+			AST tmp1971_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35752,16 +35772,16 @@ inputState.guessing--;
 		AST declarecursorstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2418 = _t;
-		AST tmp1970_AST_in = (AST)_t;
+		AST tmp1972_AST_in = (AST)_t;
 		match(_t,DECLARE);
 		_t = _t.getFirstChild();
-		AST tmp1971_AST_in = (AST)_t;
+		AST tmp1973_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
-		AST tmp1972_AST_in = (AST)_t;
+		AST tmp1974_AST_in = (AST)_t;
 		match(_t,CURSOR);
 		_t = _t.getNextSibling();
-		AST tmp1973_AST_in = (AST)_t;
+		AST tmp1975_AST_in = (AST)_t;
 		match(_t,FOR);
 		_t = _t.getNextSibling();
 		selectstatea(_t);
@@ -35772,7 +35792,7 @@ inputState.guessing--;
 		case FOR:
 		{
 			AST __t2420 = _t;
-			AST tmp1974_AST_in = (AST)_t;
+			AST tmp1976_AST_in = (AST)_t;
 			match(_t,FOR);
 			_t = _t.getFirstChild();
 			{
@@ -35781,7 +35801,7 @@ inputState.guessing--;
 			case READ:
 			{
 				AST __t2422 = _t;
-				AST tmp1975_AST_in = (AST)_t;
+				AST tmp1977_AST_in = (AST)_t;
 				match(_t,READ);
 				_t = _t.getFirstChild();
 				{
@@ -35789,7 +35809,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case ONLY:
 				{
-					AST tmp1976_AST_in = (AST)_t;
+					AST tmp1978_AST_in = (AST)_t;
 					match(_t,ONLY);
 					_t = _t.getNextSibling();
 					break;
@@ -35810,7 +35830,7 @@ inputState.guessing--;
 			}
 			case UPDATE:
 			{
-				AST tmp1977_AST_in = (AST)_t;
+				AST tmp1979_AST_in = (AST)_t;
 				match(_t,UPDATE);
 				_t = _t.getNextSibling();
 				break;
@@ -35848,7 +35868,7 @@ inputState.guessing--;
 		AST dictionarystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1898 = _t;
-		AST tmp1978_AST_in = (AST)_t;
+		AST tmp1980_AST_in = (AST)_t;
 		match(_t,DICTIONARY);
 		_t = _t.getFirstChild();
 		state_end(_t);
@@ -35863,10 +35883,10 @@ inputState.guessing--;
 		AST deletealiasstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1881 = _t;
-		AST tmp1979_AST_in = (AST)_t;
+		AST tmp1981_AST_in = (AST)_t;
 		match(_t,DELETE_KW);
 		_t = _t.getFirstChild();
-		AST tmp1980_AST_in = (AST)_t;
+		AST tmp1982_AST_in = (AST)_t;
 		match(_t,ALIAS);
 		_t = _t.getNextSibling();
 		{
@@ -35874,14 +35894,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ID:
 		{
-			AST tmp1981_AST_in = (AST)_t;
+			AST tmp1983_AST_in = (AST)_t;
 			match(_t,ID);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case QSTRING:
 		{
-			AST tmp1982_AST_in = (AST)_t;
+			AST tmp1984_AST_in = (AST)_t;
 			match(_t,QSTRING);
 			_t = _t.getNextSibling();
 			break;
@@ -35910,10 +35930,10 @@ inputState.guessing--;
 		AST deleteobjectstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1884 = _t;
-		AST tmp1983_AST_in = (AST)_t;
+		AST tmp1985_AST_in = (AST)_t;
 		match(_t,DELETE_KW);
 		_t = _t.getFirstChild();
-		AST tmp1984_AST_in = (AST)_t;
+		AST tmp1986_AST_in = (AST)_t;
 		match(_t,OBJECT);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -35923,7 +35943,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1985_AST_in = (AST)_t;
+			AST tmp1987_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35951,10 +35971,10 @@ inputState.guessing--;
 		AST deleteprocedurestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1887 = _t;
-		AST tmp1986_AST_in = (AST)_t;
+		AST tmp1988_AST_in = (AST)_t;
 		match(_t,DELETE_KW);
 		_t = _t.getFirstChild();
-		AST tmp1987_AST_in = (AST)_t;
+		AST tmp1989_AST_in = (AST)_t;
 		match(_t,PROCEDURE);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -35964,7 +35984,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1988_AST_in = (AST)_t;
+			AST tmp1990_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -35992,10 +36012,10 @@ inputState.guessing--;
 		AST deletewidgetstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1890 = _t;
-		AST tmp1989_AST_in = (AST)_t;
+		AST tmp1991_AST_in = (AST)_t;
 		match(_t,DELETE_KW);
 		_t = _t.getFirstChild();
-		AST tmp1990_AST_in = (AST)_t;
+		AST tmp1992_AST_in = (AST)_t;
 		match(_t,WIDGET);
 		_t = _t.getNextSibling();
 		{
@@ -36024,10 +36044,10 @@ inputState.guessing--;
 		AST deletewidgetpoolstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1894 = _t;
-		AST tmp1991_AST_in = (AST)_t;
+		AST tmp1993_AST_in = (AST)_t;
 		match(_t,DELETE_KW);
 		_t = _t.getFirstChild();
-		AST tmp1992_AST_in = (AST)_t;
+		AST tmp1994_AST_in = (AST)_t;
 		match(_t,WIDGETPOOL);
 		_t = _t.getNextSibling();
 		{
@@ -36048,7 +36068,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp1993_AST_in = (AST)_t;
+			AST tmp1995_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -36076,13 +36096,13 @@ inputState.guessing--;
 		AST dropindexstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2425 = _t;
-		AST tmp1994_AST_in = (AST)_t;
+		AST tmp1996_AST_in = (AST)_t;
 		match(_t,DROP);
 		_t = _t.getFirstChild();
-		AST tmp1995_AST_in = (AST)_t;
+		AST tmp1997_AST_in = (AST)_t;
 		match(_t,INDEX);
 		_t = _t.getNextSibling();
-		AST tmp1996_AST_in = (AST)_t;
+		AST tmp1998_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -36097,13 +36117,13 @@ inputState.guessing--;
 		AST dropviewstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2427 = _t;
-		AST tmp1997_AST_in = (AST)_t;
+		AST tmp1999_AST_in = (AST)_t;
 		match(_t,DROP);
 		_t = _t.getFirstChild();
-		AST tmp1998_AST_in = (AST)_t;
+		AST tmp2000_AST_in = (AST)_t;
 		match(_t,VIEW);
 		_t = _t.getNextSibling();
-		AST tmp1999_AST_in = (AST)_t;
+		AST tmp2001_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -36118,12 +36138,12 @@ inputState.guessing--;
 		AST getstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1935 = _t;
-		AST tmp2000_AST_in = (AST)_t;
+		AST tmp2002_AST_in = (AST)_t;
 		match(_t,GET);
 		_t = _t.getFirstChild();
 		findwhich(_t);
 		_t = _retTree;
-		AST tmp2001_AST_in = (AST)_t;
+		AST tmp2003_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		{
@@ -36141,7 +36161,7 @@ inputState.guessing--;
 			}
 			case NOWAIT:
 			{
-				AST tmp2002_AST_in = (AST)_t;
+				AST tmp2004_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
@@ -36165,7 +36185,7 @@ inputState.guessing--;
 		AST hidestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1949 = _t;
-		AST tmp2003_AST_in = (AST)_t;
+		AST tmp2005_AST_in = (AST)_t;
 		match(_t,HIDE);
 		_t = _t.getFirstChild();
 		{
@@ -36198,14 +36218,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case MESSAGE:
 		{
-			AST tmp2004_AST_in = (AST)_t;
+			AST tmp2006_AST_in = (AST)_t;
 			match(_t,MESSAGE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case ALL:
 		{
-			AST tmp2005_AST_in = (AST)_t;
+			AST tmp2007_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getNextSibling();
 			break;
@@ -36243,7 +36263,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOPAUSE:
 		{
-			AST tmp2006_AST_in = (AST)_t;
+			AST tmp2008_AST_in = (AST)_t;
 			match(_t,NOPAUSE);
 			_t = _t.getNextSibling();
 			break;
@@ -36266,10 +36286,10 @@ inputState.guessing--;
 		case IN_KW:
 		{
 			AST __t1956 = _t;
-			AST tmp2007_AST_in = (AST)_t;
+			AST tmp2009_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp2008_AST_in = (AST)_t;
+			AST tmp2010_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -36301,12 +36321,12 @@ inputState.guessing--;
 		AST ifstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1958 = _t;
-		AST tmp2009_AST_in = (AST)_t;
+		AST tmp2011_AST_in = (AST)_t;
 		match(_t,IF);
 		_t = _t.getFirstChild();
 		expression(_t);
 		_t = _retTree;
-		AST tmp2010_AST_in = (AST)_t;
+		AST tmp2012_AST_in = (AST)_t;
 		match(_t,THEN);
 		_t = _t.getNextSibling();
 		{
@@ -36453,7 +36473,7 @@ inputState.guessing--;
 		case ELSE:
 		{
 			AST __t1961 = _t;
-			AST tmp2011_AST_in = (AST)_t;
+			AST tmp2013_AST_in = (AST)_t;
 			match(_t,ELSE);
 			_t = _t.getFirstChild();
 			{
@@ -36617,10 +36637,10 @@ inputState.guessing--;
 		AST inputclearstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1980 = _t;
-		AST tmp2012_AST_in = (AST)_t;
+		AST tmp2014_AST_in = (AST)_t;
 		match(_t,INPUT);
 		_t = _t.getFirstChild();
-		AST tmp2013_AST_in = (AST)_t;
+		AST tmp2015_AST_in = (AST)_t;
 		match(_t,CLEAR);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -36635,7 +36655,7 @@ inputState.guessing--;
 		AST inputclosestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1982 = _t;
-		AST tmp2014_AST_in = (AST)_t;
+		AST tmp2016_AST_in = (AST)_t;
 		match(_t,INPUT);
 		_t = _t.getFirstChild();
 		{
@@ -36657,7 +36677,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2015_AST_in = (AST)_t;
+		AST tmp2017_AST_in = (AST)_t;
 		match(_t,CLOSE);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -36672,7 +36692,7 @@ inputState.guessing--;
 		AST inputfromstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1985 = _t;
-		AST tmp2016_AST_in = (AST)_t;
+		AST tmp2018_AST_in = (AST)_t;
 		match(_t,INPUT);
 		_t = _t.getFirstChild();
 		{
@@ -36694,7 +36714,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2017_AST_in = (AST)_t;
+		AST tmp2019_AST_in = (AST)_t;
 		match(_t,FROM);
 		_t = _t.getNextSibling();
 		io_phrase(_t);
@@ -36711,7 +36731,7 @@ inputState.guessing--;
 		AST inputthroughstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1988 = _t;
-		AST tmp2018_AST_in = (AST)_t;
+		AST tmp2020_AST_in = (AST)_t;
 		match(_t,INPUT);
 		_t = _t.getFirstChild();
 		{
@@ -36733,7 +36753,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2019_AST_in = (AST)_t;
+		AST tmp2021_AST_in = (AST)_t;
 		match(_t,THROUGH);
 		_t = _t.getNextSibling();
 		io_phrase(_t);
@@ -36750,7 +36770,7 @@ inputState.guessing--;
 		AST inputoutputclosestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1991 = _t;
-		AST tmp2020_AST_in = (AST)_t;
+		AST tmp2022_AST_in = (AST)_t;
 		match(_t,INPUTOUTPUT);
 		_t = _t.getFirstChild();
 		{
@@ -36772,7 +36792,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2021_AST_in = (AST)_t;
+		AST tmp2023_AST_in = (AST)_t;
 		match(_t,CLOSE);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -36787,7 +36807,7 @@ inputState.guessing--;
 		AST inputoutputthroughstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1994 = _t;
-		AST tmp2022_AST_in = (AST)_t;
+		AST tmp2024_AST_in = (AST)_t;
 		match(_t,INPUTOUTPUT);
 		_t = _t.getFirstChild();
 		{
@@ -36809,7 +36829,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2023_AST_in = (AST)_t;
+		AST tmp2025_AST_in = (AST)_t;
 		match(_t,THROUGH);
 		_t = _t.getNextSibling();
 		io_phrase(_t);
@@ -36826,10 +36846,10 @@ inputState.guessing--;
 		AST interfacestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1997 = _t;
-		AST tmp2024_AST_in = (AST)_t;
+		AST tmp2026_AST_in = (AST)_t;
 		match(_t,INTERFACE);
 		_t = _t.getFirstChild();
-		AST tmp2025_AST_in = (AST)_t;
+		AST tmp2027_AST_in = (AST)_t;
 		match(_t,TYPE_NAME);
 		_t = _t.getNextSibling();
 		block_colon(_t);
@@ -36837,7 +36857,7 @@ inputState.guessing--;
 		code_block(_t);
 		_t = _retTree;
 		AST __t1998 = _t;
-		AST tmp2026_AST_in = (AST)_t;
+		AST tmp2028_AST_in = (AST)_t;
 		match(_t,END);
 		_t = _t.getFirstChild();
 		{
@@ -36845,7 +36865,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case INTERFACE:
 		{
-			AST tmp2027_AST_in = (AST)_t;
+			AST tmp2029_AST_in = (AST)_t;
 			match(_t,INTERFACE);
 			_t = _t.getNextSibling();
 			break;
@@ -36874,7 +36894,7 @@ inputState.guessing--;
 		AST leavestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2026 = _t;
-		AST tmp2028_AST_in = (AST)_t;
+		AST tmp2030_AST_in = (AST)_t;
 		match(_t,LEAVE);
 		_t = _t.getFirstChild();
 		{
@@ -36882,7 +36902,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BLOCK_LABEL:
 		{
-			AST tmp2029_AST_in = (AST)_t;
+			AST tmp2031_AST_in = (AST)_t;
 			match(_t,BLOCK_LABEL);
 			_t = _t.getNextSibling();
 			break;
@@ -36910,7 +36930,7 @@ inputState.guessing--;
 		AST loadstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2031 = _t;
-		AST tmp2030_AST_in = (AST)_t;
+		AST tmp2032_AST_in = (AST)_t;
 		match(_t,LOAD);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -36923,7 +36943,7 @@ inputState.guessing--;
 			case DIR:
 			{
 				AST __t2033 = _t;
-				AST tmp2031_AST_in = (AST)_t;
+				AST tmp2033_AST_in = (AST)_t;
 				match(_t,DIR);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -36934,21 +36954,21 @@ inputState.guessing--;
 			}
 			case APPLICATION:
 			{
-				AST tmp2032_AST_in = (AST)_t;
+				AST tmp2034_AST_in = (AST)_t;
 				match(_t,APPLICATION);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DYNAMIC:
 			{
-				AST tmp2033_AST_in = (AST)_t;
+				AST tmp2035_AST_in = (AST)_t;
 				match(_t,DYNAMIC);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NEW:
 			{
-				AST tmp2034_AST_in = (AST)_t;
+				AST tmp2036_AST_in = (AST)_t;
 				match(_t,NEW);
 				_t = _t.getNextSibling();
 				break;
@@ -36956,7 +36976,7 @@ inputState.guessing--;
 			case BASEKEY:
 			{
 				AST __t2034 = _t;
-				AST tmp2035_AST_in = (AST)_t;
+				AST tmp2037_AST_in = (AST)_t;
 				match(_t,BASEKEY);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -36967,7 +36987,7 @@ inputState.guessing--;
 			}
 			case NOERROR_KW:
 			{
-				AST tmp2036_AST_in = (AST)_t;
+				AST tmp2038_AST_in = (AST)_t;
 				match(_t,NOERROR_KW);
 				_t = _t.getNextSibling();
 				break;
@@ -36991,7 +37011,7 @@ inputState.guessing--;
 		AST nextstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2044 = _t;
-		AST tmp2037_AST_in = (AST)_t;
+		AST tmp2039_AST_in = (AST)_t;
 		match(_t,NEXT);
 		_t = _t.getFirstChild();
 		{
@@ -36999,7 +37019,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BLOCK_LABEL:
 		{
-			AST tmp2038_AST_in = (AST)_t;
+			AST tmp2040_AST_in = (AST)_t;
 			match(_t,BLOCK_LABEL);
 			_t = _t.getNextSibling();
 			break;
@@ -37027,10 +37047,10 @@ inputState.guessing--;
 		AST openstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2438 = _t;
-		AST tmp2039_AST_in = (AST)_t;
+		AST tmp2041_AST_in = (AST)_t;
 		match(_t,OPEN);
 		_t = _t.getFirstChild();
-		AST tmp2040_AST_in = (AST)_t;
+		AST tmp2042_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -37045,7 +37065,7 @@ inputState.guessing--;
 		AST osappendstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2067 = _t;
-		AST tmp2041_AST_in = (AST)_t;
+		AST tmp2043_AST_in = (AST)_t;
 		match(_t,OSAPPEND);
 		_t = _t.getFirstChild();
 		anyorvalue(_t);
@@ -37068,7 +37088,7 @@ inputState.guessing--;
 		case OS400:
 		{
 			AST __t2069 = _t;
-			AST tmp2042_AST_in = (AST)_t;
+			AST tmp2044_AST_in = (AST)_t;
 			match(_t,OS400);
 			_t = _t.getFirstChild();
 			{
@@ -37076,21 +37096,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2043_AST_in = (AST)_t;
+				AST tmp2045_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2044_AST_in = (AST)_t;
+				AST tmp2046_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2045_AST_in = (AST)_t;
+				AST tmp2047_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37131,7 +37151,7 @@ inputState.guessing--;
 		case BTOS:
 		{
 			AST __t2073 = _t;
-			AST tmp2046_AST_in = (AST)_t;
+			AST tmp2048_AST_in = (AST)_t;
 			match(_t,BTOS);
 			_t = _t.getFirstChild();
 			{
@@ -37139,21 +37159,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2047_AST_in = (AST)_t;
+				AST tmp2049_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2048_AST_in = (AST)_t;
+				AST tmp2050_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2049_AST_in = (AST)_t;
+				AST tmp2051_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37194,7 +37214,7 @@ inputState.guessing--;
 		case DOS:
 		{
 			AST __t2077 = _t;
-			AST tmp2050_AST_in = (AST)_t;
+			AST tmp2052_AST_in = (AST)_t;
 			match(_t,DOS);
 			_t = _t.getFirstChild();
 			{
@@ -37202,21 +37222,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2051_AST_in = (AST)_t;
+				AST tmp2053_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2052_AST_in = (AST)_t;
+				AST tmp2054_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2053_AST_in = (AST)_t;
+				AST tmp2055_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37257,7 +37277,7 @@ inputState.guessing--;
 		case MPE:
 		{
 			AST __t2081 = _t;
-			AST tmp2054_AST_in = (AST)_t;
+			AST tmp2056_AST_in = (AST)_t;
 			match(_t,MPE);
 			_t = _t.getFirstChild();
 			{
@@ -37265,21 +37285,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2055_AST_in = (AST)_t;
+				AST tmp2057_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2056_AST_in = (AST)_t;
+				AST tmp2058_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2057_AST_in = (AST)_t;
+				AST tmp2059_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37320,7 +37340,7 @@ inputState.guessing--;
 		case OS2:
 		{
 			AST __t2085 = _t;
-			AST tmp2058_AST_in = (AST)_t;
+			AST tmp2060_AST_in = (AST)_t;
 			match(_t,OS2);
 			_t = _t.getFirstChild();
 			{
@@ -37328,21 +37348,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2059_AST_in = (AST)_t;
+				AST tmp2061_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2060_AST_in = (AST)_t;
+				AST tmp2062_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2061_AST_in = (AST)_t;
+				AST tmp2063_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37383,7 +37403,7 @@ inputState.guessing--;
 		case OSCOMMAND:
 		{
 			AST __t2089 = _t;
-			AST tmp2062_AST_in = (AST)_t;
+			AST tmp2064_AST_in = (AST)_t;
 			match(_t,OSCOMMAND);
 			_t = _t.getFirstChild();
 			{
@@ -37391,21 +37411,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2063_AST_in = (AST)_t;
+				AST tmp2065_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2064_AST_in = (AST)_t;
+				AST tmp2066_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2065_AST_in = (AST)_t;
+				AST tmp2067_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37446,7 +37466,7 @@ inputState.guessing--;
 		case UNIX:
 		{
 			AST __t2093 = _t;
-			AST tmp2066_AST_in = (AST)_t;
+			AST tmp2068_AST_in = (AST)_t;
 			match(_t,UNIX);
 			_t = _t.getFirstChild();
 			{
@@ -37454,21 +37474,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2067_AST_in = (AST)_t;
+				AST tmp2069_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2068_AST_in = (AST)_t;
+				AST tmp2070_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2069_AST_in = (AST)_t;
+				AST tmp2071_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37509,7 +37529,7 @@ inputState.guessing--;
 		case VMS:
 		{
 			AST __t2097 = _t;
-			AST tmp2070_AST_in = (AST)_t;
+			AST tmp2072_AST_in = (AST)_t;
 			match(_t,VMS);
 			_t = _t.getFirstChild();
 			{
@@ -37517,21 +37537,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SILENT:
 			{
-				AST tmp2071_AST_in = (AST)_t;
+				AST tmp2073_AST_in = (AST)_t;
 				match(_t,SILENT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWAIT:
 			{
-				AST tmp2072_AST_in = (AST)_t;
+				AST tmp2074_AST_in = (AST)_t;
 				match(_t,NOWAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCONSOLE:
 			{
-				AST tmp2073_AST_in = (AST)_t;
+				AST tmp2075_AST_in = (AST)_t;
 				match(_t,NOCONSOLE);
 				_t = _t.getNextSibling();
 				break;
@@ -37582,7 +37602,7 @@ inputState.guessing--;
 		AST oscopystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2102 = _t;
-		AST tmp2074_AST_in = (AST)_t;
+		AST tmp2076_AST_in = (AST)_t;
 		match(_t,OSCOPY);
 		_t = _t.getFirstChild();
 		anyorvalue(_t);
@@ -37601,7 +37621,7 @@ inputState.guessing--;
 		AST oscreatedirstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2104 = _t;
-		AST tmp2075_AST_in = (AST)_t;
+		AST tmp2077_AST_in = (AST)_t;
 		match(_t,OSCREATEDIR);
 		_t = _t.getFirstChild();
 		{
@@ -37632,7 +37652,7 @@ inputState.guessing--;
 		AST osdeletestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2108 = _t;
-		AST tmp2076_AST_in = (AST)_t;
+		AST tmp2078_AST_in = (AST)_t;
 		match(_t,OSDELETE);
 		_t = _t.getFirstChild();
 		{
@@ -37646,7 +37666,7 @@ inputState.guessing--;
 			}
 			else if ((_tokenSet_37.member(_t.getType()))) {
 				{
-				AST tmp2077_AST_in = (AST)_t;
+				AST tmp2079_AST_in = (AST)_t;
 				match(_t,_tokenSet_37);
 				_t = _t.getNextSibling();
 				}
@@ -37663,7 +37683,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case RECURSIVE:
 		{
-			AST tmp2078_AST_in = (AST)_t;
+			AST tmp2080_AST_in = (AST)_t;
 			match(_t,RECURSIVE);
 			_t = _t.getNextSibling();
 			break;
@@ -37691,7 +37711,7 @@ inputState.guessing--;
 		AST osrenamestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2114 = _t;
-		AST tmp2079_AST_in = (AST)_t;
+		AST tmp2081_AST_in = (AST)_t;
 		match(_t,OSRENAME);
 		_t = _t.getFirstChild();
 		anyorvalue(_t);
@@ -37710,7 +37730,7 @@ inputState.guessing--;
 		AST outputclosestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2116 = _t;
-		AST tmp2080_AST_in = (AST)_t;
+		AST tmp2082_AST_in = (AST)_t;
 		match(_t,OUTPUT);
 		_t = _t.getFirstChild();
 		{
@@ -37732,7 +37752,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2081_AST_in = (AST)_t;
+		AST tmp2083_AST_in = (AST)_t;
 		match(_t,CLOSE);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -37747,7 +37767,7 @@ inputState.guessing--;
 		AST outputthroughstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2119 = _t;
-		AST tmp2082_AST_in = (AST)_t;
+		AST tmp2084_AST_in = (AST)_t;
 		match(_t,OUTPUT);
 		_t = _t.getFirstChild();
 		{
@@ -37769,7 +37789,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2083_AST_in = (AST)_t;
+		AST tmp2085_AST_in = (AST)_t;
 		match(_t,THROUGH);
 		_t = _t.getNextSibling();
 		io_phrase(_t);
@@ -37786,7 +37806,7 @@ inputState.guessing--;
 		AST outputtostate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2122 = _t;
-		AST tmp2084_AST_in = (AST)_t;
+		AST tmp2086_AST_in = (AST)_t;
 		match(_t,OUTPUT);
 		_t = _t.getFirstChild();
 		{
@@ -37808,7 +37828,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2085_AST_in = (AST)_t;
+		AST tmp2087_AST_in = (AST)_t;
 		match(_t,TO);
 		_t = _t.getNextSibling();
 		io_phrase(_t);
@@ -37825,7 +37845,7 @@ inputState.guessing--;
 		AST pagestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2125 = _t;
-		AST tmp2086_AST_in = (AST)_t;
+		AST tmp2088_AST_in = (AST)_t;
 		match(_t,PAGE);
 		_t = _t.getFirstChild();
 		{
@@ -37860,7 +37880,7 @@ inputState.guessing--;
 		AST pausestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2128 = _t;
-		AST tmp2087_AST_in = (AST)_t;
+		AST tmp2089_AST_in = (AST)_t;
 		match(_t,PAUSE);
 		_t = _t.getFirstChild();
 		{
@@ -37883,7 +37903,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case BEFOREHIDE:
 			{
-				AST tmp2088_AST_in = (AST)_t;
+				AST tmp2090_AST_in = (AST)_t;
 				match(_t,BEFOREHIDE);
 				_t = _t.getNextSibling();
 				break;
@@ -37891,7 +37911,7 @@ inputState.guessing--;
 			case MESSAGE:
 			{
 				AST __t2131 = _t;
-				AST tmp2089_AST_in = (AST)_t;
+				AST tmp2091_AST_in = (AST)_t;
 				match(_t,MESSAGE);
 				_t = _t.getFirstChild();
 				constant(_t);
@@ -37902,7 +37922,7 @@ inputState.guessing--;
 			}
 			case NOMESSAGE:
 			{
-				AST tmp2090_AST_in = (AST)_t;
+				AST tmp2092_AST_in = (AST)_t;
 				match(_t,NOMESSAGE);
 				_t = _t.getNextSibling();
 				break;
@@ -37910,10 +37930,10 @@ inputState.guessing--;
 			case IN_KW:
 			{
 				AST __t2132 = _t;
-				AST tmp2091_AST_in = (AST)_t;
+				AST tmp2093_AST_in = (AST)_t;
 				match(_t,IN_KW);
 				_t = _t.getFirstChild();
-				AST tmp2092_AST_in = (AST)_t;
+				AST tmp2094_AST_in = (AST)_t;
 				match(_t,WINDOW);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -37941,10 +37961,10 @@ inputState.guessing--;
 		AST processeventsstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2135 = _t;
-		AST tmp2093_AST_in = (AST)_t;
+		AST tmp2095_AST_in = (AST)_t;
 		match(_t,PROCESS);
 		_t = _t.getFirstChild();
-		AST tmp2094_AST_in = (AST)_t;
+		AST tmp2096_AST_in = (AST)_t;
 		match(_t,EVENTS);
 		_t = _t.getNextSibling();
 		state_end(_t);
@@ -37959,7 +37979,7 @@ inputState.guessing--;
 		AST publishstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2137 = _t;
-		AST tmp2095_AST_in = (AST)_t;
+		AST tmp2097_AST_in = (AST)_t;
 		match(_t,PUBLISH);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -37970,7 +37990,7 @@ inputState.guessing--;
 		case FROM:
 		{
 			AST __t2139 = _t;
-			AST tmp2096_AST_in = (AST)_t;
+			AST tmp2098_AST_in = (AST)_t;
 			match(_t,FROM);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -38023,7 +38043,7 @@ inputState.guessing--;
 		AST putstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2142 = _t;
-		AST tmp2097_AST_in = (AST)_t;
+		AST tmp2099_AST_in = (AST)_t;
 		match(_t,PUT);
 		_t = _t.getFirstChild();
 		{
@@ -38044,14 +38064,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CONTROL:
 		{
-			AST tmp2098_AST_in = (AST)_t;
+			AST tmp2100_AST_in = (AST)_t;
 			match(_t,CONTROL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case UNFORMATTED:
 		{
-			AST tmp2099_AST_in = (AST)_t;
+			AST tmp2101_AST_in = (AST)_t;
 			match(_t,UNFORMATTED);
 			_t = _t.getNextSibling();
 			break;
@@ -38092,7 +38112,7 @@ inputState.guessing--;
 					try {
 						{
 						AST __t2147 = _t;
-						AST tmp2100_AST_in = (AST)_t;
+						AST tmp2102_AST_in = (AST)_t;
 						match(_t,NULL_KW);
 						_t = _t.getFirstChild();
 						{
@@ -38100,7 +38120,7 @@ inputState.guessing--;
 						switch ( _t.getType()) {
 						case LEFTPAREN:
 						{
-							AST tmp2101_AST_in = (AST)_t;
+							AST tmp2103_AST_in = (AST)_t;
 							match(_t,LEFTPAREN);
 							_t = _t.getNextSibling();
 							break;
@@ -38127,7 +38147,7 @@ inputState.guessing--;
 				}
 				if ( synPredMatched2149 ) {
 					AST __t2150 = _t;
-					AST tmp2102_AST_in = (AST)_t;
+					AST tmp2104_AST_in = (AST)_t;
 					match(_t,NULL_KW);
 					_t = _t.getFirstChild();
 					{
@@ -38163,7 +38183,7 @@ inputState.guessing--;
 						case FORMAT:
 						{
 							AST __t2153 = _t;
-							AST tmp2103_AST_in = (AST)_t;
+							AST tmp2105_AST_in = (AST)_t;
 							match(_t,FORMAT);
 							_t = _t.getFirstChild();
 							expression(_t);
@@ -38175,7 +38195,7 @@ inputState.guessing--;
 						case AT:
 						{
 							AST __t2154 = _t;
-							AST tmp2104_AST_in = (AST)_t;
+							AST tmp2106_AST_in = (AST)_t;
 							match(_t,AT);
 							_t = _t.getFirstChild();
 							expression(_t);
@@ -38187,7 +38207,7 @@ inputState.guessing--;
 						case TO:
 						{
 							AST __t2155 = _t;
-							AST tmp2105_AST_in = (AST)_t;
+							AST tmp2107_AST_in = (AST)_t;
 							match(_t,TO);
 							_t = _t.getFirstChild();
 							expression(_t);
@@ -38222,10 +38242,10 @@ inputState.guessing--;
 		AST putcursorstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2159 = _t;
-		AST tmp2106_AST_in = (AST)_t;
+		AST tmp2108_AST_in = (AST)_t;
 		match(_t,PUT);
 		_t = _t.getFirstChild();
-		AST tmp2107_AST_in = (AST)_t;
+		AST tmp2109_AST_in = (AST)_t;
 		match(_t,CURSOR);
 		_t = _t.getNextSibling();
 		{
@@ -38233,7 +38253,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case OFF:
 		{
-			AST tmp2108_AST_in = (AST)_t;
+			AST tmp2110_AST_in = (AST)_t;
 			match(_t,OFF);
 			_t = _t.getNextSibling();
 			break;
@@ -38251,7 +38271,7 @@ inputState.guessing--;
 				case ROW:
 				{
 					AST __t2162 = _t;
-					AST tmp2109_AST_in = (AST)_t;
+					AST tmp2111_AST_in = (AST)_t;
 					match(_t,ROW);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -38263,7 +38283,7 @@ inputState.guessing--;
 				case COLUMN:
 				{
 					AST __t2163 = _t;
-					AST tmp2110_AST_in = (AST)_t;
+					AST tmp2112_AST_in = (AST)_t;
 					match(_t,COLUMN);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -38299,10 +38319,10 @@ inputState.guessing--;
 		AST putscreenstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2166 = _t;
-		AST tmp2111_AST_in = (AST)_t;
+		AST tmp2113_AST_in = (AST)_t;
 		match(_t,PUT);
 		_t = _t.getFirstChild();
-		AST tmp2112_AST_in = (AST)_t;
+		AST tmp2114_AST_in = (AST)_t;
 		match(_t,SCREEN);
 		_t = _t.getNextSibling();
 		{
@@ -38312,14 +38332,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case ATTRSPACE:
 			{
-				AST tmp2113_AST_in = (AST)_t;
+				AST tmp2115_AST_in = (AST)_t;
 				match(_t,ATTRSPACE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOATTRSPACE:
 			{
-				AST tmp2114_AST_in = (AST)_t;
+				AST tmp2116_AST_in = (AST)_t;
 				match(_t,NOATTRSPACE);
 				_t = _t.getNextSibling();
 				break;
@@ -38327,7 +38347,7 @@ inputState.guessing--;
 			case COLOR:
 			{
 				AST __t2168 = _t;
-				AST tmp2115_AST_in = (AST)_t;
+				AST tmp2117_AST_in = (AST)_t;
 				match(_t,COLOR);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
@@ -38339,7 +38359,7 @@ inputState.guessing--;
 			case COLUMN:
 			{
 				AST __t2169 = _t;
-				AST tmp2116_AST_in = (AST)_t;
+				AST tmp2118_AST_in = (AST)_t;
 				match(_t,COLUMN);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -38351,7 +38371,7 @@ inputState.guessing--;
 			case ROW:
 			{
 				AST __t2170 = _t;
-				AST tmp2117_AST_in = (AST)_t;
+				AST tmp2119_AST_in = (AST)_t;
 				match(_t,ROW);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -38384,7 +38404,7 @@ inputState.guessing--;
 		AST putkeyvaluestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2173 = _t;
-		AST tmp2118_AST_in = (AST)_t;
+		AST tmp2120_AST_in = (AST)_t;
 		match(_t,PUTKEYVALUE);
 		_t = _t.getFirstChild();
 		{
@@ -38392,18 +38412,18 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case SECTION:
 		{
-			AST tmp2119_AST_in = (AST)_t;
+			AST tmp2121_AST_in = (AST)_t;
 			match(_t,SECTION);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			AST tmp2120_AST_in = (AST)_t;
+			AST tmp2122_AST_in = (AST)_t;
 			match(_t,KEY);
 			_t = _t.getNextSibling();
 			{
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==DEFAULT)) {
-				AST tmp2121_AST_in = (AST)_t;
+				AST tmp2123_AST_in = (AST)_t;
 				match(_t,DEFAULT);
 				_t = _t.getNextSibling();
 			}
@@ -38416,7 +38436,7 @@ inputState.guessing--;
 			}
 			
 			}
-			AST tmp2122_AST_in = (AST)_t;
+			AST tmp2124_AST_in = (AST)_t;
 			match(_t,VALUE);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -38431,14 +38451,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case COLOR:
 			{
-				AST tmp2123_AST_in = (AST)_t;
+				AST tmp2125_AST_in = (AST)_t;
 				match(_t,COLOR);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case FONT:
 			{
-				AST tmp2124_AST_in = (AST)_t;
+				AST tmp2126_AST_in = (AST)_t;
 				match(_t,FONT);
 				_t = _t.getNextSibling();
 				break;
@@ -38456,7 +38476,7 @@ inputState.guessing--;
 				_t = _retTree;
 			}
 			else if ((_t.getType()==ALL)) {
-				AST tmp2125_AST_in = (AST)_t;
+				AST tmp2127_AST_in = (AST)_t;
 				match(_t,ALL);
 				_t = _t.getNextSibling();
 			}
@@ -38478,7 +38498,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2126_AST_in = (AST)_t;
+			AST tmp2128_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -38506,7 +38526,7 @@ inputState.guessing--;
 		AST quitstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2189 = _t;
-		AST tmp2127_AST_in = (AST)_t;
+		AST tmp2129_AST_in = (AST)_t;
 		match(_t,QUIT);
 		_t = _t.getFirstChild();
 		state_end(_t);
@@ -38521,7 +38541,7 @@ inputState.guessing--;
 		AST readkeystate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2207 = _t;
-		AST tmp2128_AST_in = (AST)_t;
+		AST tmp2130_AST_in = (AST)_t;
 		match(_t,READKEY);
 		_t = _t.getFirstChild();
 		{
@@ -38551,7 +38571,7 @@ inputState.guessing--;
 		case PAUSE:
 		{
 			AST __t2210 = _t;
-			AST tmp2129_AST_in = (AST)_t;
+			AST tmp2131_AST_in = (AST)_t;
 			match(_t,PAUSE);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -38583,16 +38603,16 @@ inputState.guessing--;
 		AST releaseexternalstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2212 = _t;
-		AST tmp2130_AST_in = (AST)_t;
+		AST tmp2132_AST_in = (AST)_t;
 		match(_t,RELEASE);
 		_t = _t.getFirstChild();
-		AST tmp2131_AST_in = (AST)_t;
+		AST tmp2133_AST_in = (AST)_t;
 		match(_t,EXTERNAL);
 		_t = _t.getNextSibling();
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==PROCEDURE)) {
-			AST tmp2132_AST_in = (AST)_t;
+			AST tmp2134_AST_in = (AST)_t;
 			match(_t,PROCEDURE);
 			_t = _t.getNextSibling();
 		}
@@ -38610,7 +38630,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2133_AST_in = (AST)_t;
+			AST tmp2135_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -38638,10 +38658,10 @@ inputState.guessing--;
 		AST releaseobjectstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2216 = _t;
-		AST tmp2134_AST_in = (AST)_t;
+		AST tmp2136_AST_in = (AST)_t;
 		match(_t,RELEASE);
 		_t = _t.getFirstChild();
-		AST tmp2135_AST_in = (AST)_t;
+		AST tmp2137_AST_in = (AST)_t;
 		match(_t,OBJECT);
 		_t = _t.getNextSibling();
 		expression(_t);
@@ -38651,7 +38671,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2136_AST_in = (AST)_t;
+			AST tmp2138_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -38679,10 +38699,10 @@ inputState.guessing--;
 		AST repositionstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2219 = _t;
-		AST tmp2137_AST_in = (AST)_t;
+		AST tmp2139_AST_in = (AST)_t;
 		match(_t,REPOSITION);
 		_t = _t.getFirstChild();
-		AST tmp2138_AST_in = (AST)_t;
+		AST tmp2140_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		{
@@ -38691,7 +38711,7 @@ inputState.guessing--;
 		case TO:
 		{
 			AST __t2221 = _t;
-			AST tmp2139_AST_in = (AST)_t;
+			AST tmp2141_AST_in = (AST)_t;
 			match(_t,TO);
 			_t = _t.getFirstChild();
 			{
@@ -38699,7 +38719,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case ROWID:
 			{
-				AST tmp2140_AST_in = (AST)_t;
+				AST tmp2142_AST_in = (AST)_t;
 				match(_t,ROWID);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -38709,7 +38729,7 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp2141_AST_in = (AST)_t;
+						AST tmp2143_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						expression(_t);
@@ -38725,7 +38745,7 @@ inputState.guessing--;
 			}
 			case RECID:
 			{
-				AST tmp2142_AST_in = (AST)_t;
+				AST tmp2144_AST_in = (AST)_t;
 				match(_t,RECID);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -38734,7 +38754,7 @@ inputState.guessing--;
 			}
 			case ROW:
 			{
-				AST tmp2143_AST_in = (AST)_t;
+				AST tmp2145_AST_in = (AST)_t;
 				match(_t,ROW);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -38754,7 +38774,7 @@ inputState.guessing--;
 		case ROW:
 		{
 			AST __t2225 = _t;
-			AST tmp2144_AST_in = (AST)_t;
+			AST tmp2146_AST_in = (AST)_t;
 			match(_t,ROW);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -38766,7 +38786,7 @@ inputState.guessing--;
 		case FORWARDS:
 		{
 			AST __t2226 = _t;
-			AST tmp2145_AST_in = (AST)_t;
+			AST tmp2147_AST_in = (AST)_t;
 			match(_t,FORWARDS);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -38778,7 +38798,7 @@ inputState.guessing--;
 		case BACKWARDS:
 		{
 			AST __t2227 = _t;
-			AST tmp2146_AST_in = (AST)_t;
+			AST tmp2148_AST_in = (AST)_t;
 			match(_t,BACKWARDS);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -38798,7 +38818,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2147_AST_in = (AST)_t;
+			AST tmp2149_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -38826,7 +38846,7 @@ inputState.guessing--;
 		AST returnstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2230 = _t;
-		AST tmp2148_AST_in = (AST)_t;
+		AST tmp2150_AST_in = (AST)_t;
 		match(_t,RETURN);
 		_t = _t.getFirstChild();
 		{
@@ -38854,13 +38874,13 @@ inputState.guessing--;
 		AST runstoredprocedurestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2242 = _t;
-		AST tmp2149_AST_in = (AST)_t;
+		AST tmp2151_AST_in = (AST)_t;
 		match(_t,RUN);
 		_t = _t.getFirstChild();
-		AST tmp2150_AST_in = (AST)_t;
+		AST tmp2152_AST_in = (AST)_t;
 		match(_t,STOREDPROCEDURE);
 		_t = _t.getNextSibling();
-		AST tmp2151_AST_in = (AST)_t;
+		AST tmp2153_AST_in = (AST)_t;
 		match(_t,ID);
 		_t = _t.getNextSibling();
 		{
@@ -38890,7 +38910,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2152_AST_in = (AST)_t;
+			AST tmp2154_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -38939,10 +38959,10 @@ inputState.guessing--;
 		AST runsuperstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2247 = _t;
-		AST tmp2153_AST_in = (AST)_t;
+		AST tmp2155_AST_in = (AST)_t;
 		match(_t,RUN);
 		_t = _t.getFirstChild();
-		AST tmp2154_AST_in = (AST)_t;
+		AST tmp2156_AST_in = (AST)_t;
 		match(_t,SUPER);
 		_t = _t.getNextSibling();
 		{
@@ -38971,7 +38991,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2155_AST_in = (AST)_t;
+			AST tmp2157_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -38999,10 +39019,10 @@ inputState.guessing--;
 		AST savecachestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2251 = _t;
-		AST tmp2156_AST_in = (AST)_t;
+		AST tmp2158_AST_in = (AST)_t;
 		match(_t,SAVE);
 		_t = _t.getFirstChild();
-		AST tmp2157_AST_in = (AST)_t;
+		AST tmp2159_AST_in = (AST)_t;
 		match(_t,CACHE);
 		_t = _t.getNextSibling();
 		{
@@ -39010,14 +39030,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CURRENT:
 		{
-			AST tmp2158_AST_in = (AST)_t;
+			AST tmp2160_AST_in = (AST)_t;
 			match(_t,CURRENT);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case COMPLETE:
 		{
-			AST tmp2159_AST_in = (AST)_t;
+			AST tmp2161_AST_in = (AST)_t;
 			match(_t,COMPLETE);
 			_t = _t.getNextSibling();
 			break;
@@ -39030,7 +39050,7 @@ inputState.guessing--;
 		}
 		anyorvalue(_t);
 		_t = _retTree;
-		AST tmp2160_AST_in = (AST)_t;
+		AST tmp2162_AST_in = (AST)_t;
 		match(_t,TO);
 		_t = _t.getNextSibling();
 		filenameorvalue(_t);
@@ -39040,7 +39060,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2161_AST_in = (AST)_t;
+			AST tmp2163_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -39068,7 +39088,7 @@ inputState.guessing--;
 		AST seekstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2255 = _t;
-		AST tmp2162_AST_in = (AST)_t;
+		AST tmp2164_AST_in = (AST)_t;
 		match(_t,SEEK);
 		_t = _t.getFirstChild();
 		{
@@ -39076,14 +39096,14 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case INPUT:
 		{
-			AST tmp2163_AST_in = (AST)_t;
+			AST tmp2165_AST_in = (AST)_t;
 			match(_t,INPUT);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case OUTPUT:
 		{
-			AST tmp2164_AST_in = (AST)_t;
+			AST tmp2166_AST_in = (AST)_t;
 			match(_t,OUTPUT);
 			_t = _t.getNextSibling();
 			break;
@@ -39100,7 +39120,7 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2165_AST_in = (AST)_t;
+		AST tmp2167_AST_in = (AST)_t;
 		match(_t,TO);
 		_t = _t.getNextSibling();
 		{
@@ -39110,7 +39130,7 @@ inputState.guessing--;
 			_t = _retTree;
 		}
 		else if ((_t.getType()==END)) {
-			AST tmp2166_AST_in = (AST)_t;
+			AST tmp2168_AST_in = (AST)_t;
 			match(_t,END);
 			_t = _t.getNextSibling();
 		}
@@ -39131,7 +39151,7 @@ inputState.guessing--;
 		AST showstatsstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2271 = _t;
-		AST tmp2167_AST_in = (AST)_t;
+		AST tmp2169_AST_in = (AST)_t;
 		match(_t,SHOWSTATS);
 		_t = _t.getFirstChild();
 		{
@@ -39139,7 +39159,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CLEAR:
 		{
-			AST tmp2168_AST_in = (AST)_t;
+			AST tmp2170_AST_in = (AST)_t;
 			match(_t,CLEAR);
 			_t = _t.getNextSibling();
 			break;
@@ -39167,7 +39187,7 @@ inputState.guessing--;
 		AST statusstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2295 = _t;
-		AST tmp2169_AST_in = (AST)_t;
+		AST tmp2171_AST_in = (AST)_t;
 		match(_t,STATUS);
 		_t = _t.getFirstChild();
 		{
@@ -39176,7 +39196,7 @@ inputState.guessing--;
 		case DEFAULT:
 		{
 			AST __t2297 = _t;
-			AST tmp2170_AST_in = (AST)_t;
+			AST tmp2172_AST_in = (AST)_t;
 			match(_t,DEFAULT);
 			_t = _t.getFirstChild();
 			{
@@ -39199,7 +39219,7 @@ inputState.guessing--;
 		case INPUT:
 		{
 			AST __t2299 = _t;
-			AST tmp2171_AST_in = (AST)_t;
+			AST tmp2173_AST_in = (AST)_t;
 			match(_t,INPUT);
 			_t = _t.getFirstChild();
 			{
@@ -39207,7 +39227,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case OFF:
 			{
-				AST tmp2172_AST_in = (AST)_t;
+				AST tmp2174_AST_in = (AST)_t;
 				match(_t,OFF);
 				_t = _t.getNextSibling();
 				break;
@@ -39243,10 +39263,10 @@ inputState.guessing--;
 		case IN_KW:
 		{
 			AST __t2302 = _t;
-			AST tmp2173_AST_in = (AST)_t;
+			AST tmp2175_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
-			AST tmp2174_AST_in = (AST)_t;
+			AST tmp2176_AST_in = (AST)_t;
 			match(_t,WINDOW);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -39278,7 +39298,7 @@ inputState.guessing--;
 		AST stopstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2304 = _t;
-		AST tmp2175_AST_in = (AST)_t;
+		AST tmp2177_AST_in = (AST)_t;
 		match(_t,STOP);
 		_t = _t.getFirstChild();
 		state_end(_t);
@@ -39293,14 +39313,14 @@ inputState.guessing--;
 		AST subscribestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2308 = _t;
-		AST tmp2176_AST_in = (AST)_t;
+		AST tmp2178_AST_in = (AST)_t;
 		match(_t,SUBSCRIBE);
 		_t = _t.getFirstChild();
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==PROCEDURE)) {
 			AST __t2310 = _t;
-			AST tmp2177_AST_in = (AST)_t;
+			AST tmp2179_AST_in = (AST)_t;
 			match(_t,PROCEDURE);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39318,7 +39338,7 @@ inputState.guessing--;
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==TO)) {
-			AST tmp2178_AST_in = (AST)_t;
+			AST tmp2180_AST_in = (AST)_t;
 			match(_t,TO);
 			_t = _t.getNextSibling();
 		}
@@ -39336,7 +39356,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ANYWHERE:
 		{
-			AST tmp2179_AST_in = (AST)_t;
+			AST tmp2181_AST_in = (AST)_t;
 			match(_t,ANYWHERE);
 			_t = _t.getNextSibling();
 			break;
@@ -39344,7 +39364,7 @@ inputState.guessing--;
 		case IN_KW:
 		{
 			AST __t2313 = _t;
-			AST tmp2180_AST_in = (AST)_t;
+			AST tmp2182_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39365,7 +39385,7 @@ inputState.guessing--;
 		case RUNPROCEDURE:
 		{
 			AST __t2315 = _t;
-			AST tmp2181_AST_in = (AST)_t;
+			AST tmp2183_AST_in = (AST)_t;
 			match(_t,RUNPROCEDURE);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39391,7 +39411,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2182_AST_in = (AST)_t;
+			AST tmp2184_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -39419,7 +39439,7 @@ inputState.guessing--;
 		AST systemhelpstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2320 = _t;
-		AST tmp2183_AST_in = (AST)_t;
+		AST tmp2185_AST_in = (AST)_t;
 		match(_t,SYSTEMHELP);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -39430,7 +39450,7 @@ inputState.guessing--;
 		case WINDOWNAME:
 		{
 			AST __t2322 = _t;
-			AST tmp2184_AST_in = (AST)_t;
+			AST tmp2186_AST_in = (AST)_t;
 			match(_t,WINDOWNAME);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39469,7 +39489,7 @@ inputState.guessing--;
 		case ALTERNATEKEY:
 		{
 			AST __t2324 = _t;
-			AST tmp2185_AST_in = (AST)_t;
+			AST tmp2187_AST_in = (AST)_t;
 			match(_t,ALTERNATEKEY);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39481,7 +39501,7 @@ inputState.guessing--;
 		case CONTEXT:
 		{
 			AST __t2325 = _t;
-			AST tmp2186_AST_in = (AST)_t;
+			AST tmp2188_AST_in = (AST)_t;
 			match(_t,CONTEXT);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39492,7 +39512,7 @@ inputState.guessing--;
 		}
 		case CONTENTS:
 		{
-			AST tmp2187_AST_in = (AST)_t;
+			AST tmp2189_AST_in = (AST)_t;
 			match(_t,CONTENTS);
 			_t = _t.getNextSibling();
 			break;
@@ -39500,7 +39520,7 @@ inputState.guessing--;
 		case SETCONTENTS:
 		{
 			AST __t2326 = _t;
-			AST tmp2188_AST_in = (AST)_t;
+			AST tmp2190_AST_in = (AST)_t;
 			match(_t,SETCONTENTS);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39511,7 +39531,7 @@ inputState.guessing--;
 		}
 		case FINDER:
 		{
-			AST tmp2189_AST_in = (AST)_t;
+			AST tmp2191_AST_in = (AST)_t;
 			match(_t,FINDER);
 			_t = _t.getNextSibling();
 			break;
@@ -39519,7 +39539,7 @@ inputState.guessing--;
 		case CONTEXTPOPUP:
 		{
 			AST __t2327 = _t;
-			AST tmp2190_AST_in = (AST)_t;
+			AST tmp2192_AST_in = (AST)_t;
 			match(_t,CONTEXTPOPUP);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39531,7 +39551,7 @@ inputState.guessing--;
 		case HELPTOPIC:
 		{
 			AST __t2328 = _t;
-			AST tmp2191_AST_in = (AST)_t;
+			AST tmp2193_AST_in = (AST)_t;
 			match(_t,HELPTOPIC);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39543,7 +39563,7 @@ inputState.guessing--;
 		case KEY:
 		{
 			AST __t2329 = _t;
-			AST tmp2192_AST_in = (AST)_t;
+			AST tmp2194_AST_in = (AST)_t;
 			match(_t,KEY);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39555,7 +39575,7 @@ inputState.guessing--;
 		case PARTIALKEY:
 		{
 			AST __t2330 = _t;
-			AST tmp2193_AST_in = (AST)_t;
+			AST tmp2195_AST_in = (AST)_t;
 			match(_t,PARTIALKEY);
 			_t = _t.getFirstChild();
 			{
@@ -39578,12 +39598,12 @@ inputState.guessing--;
 		case MULTIPLEKEY:
 		{
 			AST __t2332 = _t;
-			AST tmp2194_AST_in = (AST)_t;
+			AST tmp2196_AST_in = (AST)_t;
 			match(_t,MULTIPLEKEY);
 			_t = _t.getFirstChild();
 			expression(_t);
 			_t = _retTree;
-			AST tmp2195_AST_in = (AST)_t;
+			AST tmp2197_AST_in = (AST)_t;
 			match(_t,TEXT);
 			_t = _t.getNextSibling();
 			expression(_t);
@@ -39595,7 +39615,7 @@ inputState.guessing--;
 		case COMMAND:
 		{
 			AST __t2333 = _t;
-			AST tmp2196_AST_in = (AST)_t;
+			AST tmp2198_AST_in = (AST)_t;
 			match(_t,COMMAND);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39607,7 +39627,7 @@ inputState.guessing--;
 		case POSITION:
 		{
 			AST __t2334 = _t;
-			AST tmp2197_AST_in = (AST)_t;
+			AST tmp2199_AST_in = (AST)_t;
 			match(_t,POSITION);
 			_t = _t.getFirstChild();
 			{
@@ -39615,29 +39635,29 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case MAXIMIZE:
 			{
-				AST tmp2198_AST_in = (AST)_t;
+				AST tmp2200_AST_in = (AST)_t;
 				match(_t,MAXIMIZE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case X:
 			{
-				AST tmp2199_AST_in = (AST)_t;
+				AST tmp2201_AST_in = (AST)_t;
 				match(_t,X);
 				_t = _t.getNextSibling();
 				expression(_t);
 				_t = _retTree;
-				AST tmp2200_AST_in = (AST)_t;
+				AST tmp2202_AST_in = (AST)_t;
 				match(_t,Y);
 				_t = _t.getNextSibling();
 				expression(_t);
 				_t = _retTree;
-				AST tmp2201_AST_in = (AST)_t;
+				AST tmp2203_AST_in = (AST)_t;
 				match(_t,WIDTH);
 				_t = _t.getNextSibling();
 				expression(_t);
 				_t = _retTree;
-				AST tmp2202_AST_in = (AST)_t;
+				AST tmp2204_AST_in = (AST)_t;
 				match(_t,HEIGHT);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -39656,21 +39676,21 @@ inputState.guessing--;
 		}
 		case FORCEFILE:
 		{
-			AST tmp2203_AST_in = (AST)_t;
+			AST tmp2205_AST_in = (AST)_t;
 			match(_t,FORCEFILE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case HELP:
 		{
-			AST tmp2204_AST_in = (AST)_t;
+			AST tmp2206_AST_in = (AST)_t;
 			match(_t,HELP);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case QUIT:
 		{
-			AST tmp2205_AST_in = (AST)_t;
+			AST tmp2207_AST_in = (AST)_t;
 			match(_t,QUIT);
 			_t = _t.getNextSibling();
 			break;
@@ -39693,10 +39713,10 @@ inputState.guessing--;
 		AST transactionmodeautomaticstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2354 = _t;
-		AST tmp2206_AST_in = (AST)_t;
+		AST tmp2208_AST_in = (AST)_t;
 		match(_t,TRANSACTIONMODE);
 		_t = _t.getFirstChild();
-		AST tmp2207_AST_in = (AST)_t;
+		AST tmp2209_AST_in = (AST)_t;
 		match(_t,AUTOMATIC);
 		_t = _t.getNextSibling();
 		{
@@ -39704,7 +39724,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case CHAINED:
 		{
-			AST tmp2208_AST_in = (AST)_t;
+			AST tmp2210_AST_in = (AST)_t;
 			match(_t,CHAINED);
 			_t = _t.getNextSibling();
 			break;
@@ -39732,7 +39752,7 @@ inputState.guessing--;
 		AST undostate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2357 = _t;
-		AST tmp2209_AST_in = (AST)_t;
+		AST tmp2211_AST_in = (AST)_t;
 		match(_t,UNDO);
 		_t = _t.getFirstChild();
 		{
@@ -39740,7 +39760,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BLOCK_LABEL:
 		{
-			AST tmp2210_AST_in = (AST)_t;
+			AST tmp2212_AST_in = (AST)_t;
 			match(_t,BLOCK_LABEL);
 			_t = _t.getNextSibling();
 			break;
@@ -39762,7 +39782,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case COMMA:
 		{
-			AST tmp2211_AST_in = (AST)_t;
+			AST tmp2213_AST_in = (AST)_t;
 			match(_t,COMMA);
 			_t = _t.getNextSibling();
 			{
@@ -39771,38 +39791,8 @@ inputState.guessing--;
 			case LEAVE:
 			{
 				AST __t2361 = _t;
-				AST tmp2212_AST_in = (AST)_t;
-				match(_t,LEAVE);
-				_t = _t.getFirstChild();
-				{
-				if (_t==null) _t=ASTNULL;
-				switch ( _t.getType()) {
-				case BLOCK_LABEL:
-				{
-					AST tmp2213_AST_in = (AST)_t;
-					match(_t,BLOCK_LABEL);
-					_t = _t.getNextSibling();
-					break;
-				}
-				case 3:
-				{
-					break;
-				}
-				default:
-				{
-					throw new NoViableAltException(_t);
-				}
-				}
-				}
-				_t = __t2361;
-				_t = _t.getNextSibling();
-				break;
-			}
-			case NEXT:
-			{
-				AST __t2363 = _t;
 				AST tmp2214_AST_in = (AST)_t;
-				match(_t,NEXT);
+				match(_t,LEAVE);
 				_t = _t.getFirstChild();
 				{
 				if (_t==null) _t=ASTNULL;
@@ -39824,15 +39814,15 @@ inputState.guessing--;
 				}
 				}
 				}
-				_t = __t2363;
+				_t = __t2361;
 				_t = _t.getNextSibling();
 				break;
 			}
-			case RETRY:
+			case NEXT:
 			{
-				AST __t2365 = _t;
+				AST __t2363 = _t;
 				AST tmp2216_AST_in = (AST)_t;
-				match(_t,RETRY);
+				match(_t,NEXT);
 				_t = _t.getFirstChild();
 				{
 				if (_t==null) _t=ASTNULL;
@@ -39854,6 +39844,36 @@ inputState.guessing--;
 				}
 				}
 				}
+				_t = __t2363;
+				_t = _t.getNextSibling();
+				break;
+			}
+			case RETRY:
+			{
+				AST __t2365 = _t;
+				AST tmp2218_AST_in = (AST)_t;
+				match(_t,RETRY);
+				_t = _t.getFirstChild();
+				{
+				if (_t==null) _t=ASTNULL;
+				switch ( _t.getType()) {
+				case BLOCK_LABEL:
+				{
+					AST tmp2219_AST_in = (AST)_t;
+					match(_t,BLOCK_LABEL);
+					_t = _t.getNextSibling();
+					break;
+				}
+				case 3:
+				{
+					break;
+				}
+				default:
+				{
+					throw new NoViableAltException(_t);
+				}
+				}
+				}
 				_t = __t2365;
 				_t = _t.getNextSibling();
 				break;
@@ -39861,7 +39881,7 @@ inputState.guessing--;
 			case RETURN:
 			{
 				AST __t2367 = _t;
-				AST tmp2218_AST_in = (AST)_t;
+				AST tmp2220_AST_in = (AST)_t;
 				match(_t,RETURN);
 				_t = _t.getFirstChild();
 				{
@@ -39912,7 +39932,7 @@ inputState.guessing--;
 		AST unloadstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2370 = _t;
-		AST tmp2219_AST_in = (AST)_t;
+		AST tmp2221_AST_in = (AST)_t;
 		match(_t,UNLOAD);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -39922,7 +39942,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2220_AST_in = (AST)_t;
+			AST tmp2222_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -39950,14 +39970,14 @@ inputState.guessing--;
 		AST unsubscribestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2373 = _t;
-		AST tmp2221_AST_in = (AST)_t;
+		AST tmp2223_AST_in = (AST)_t;
 		match(_t,UNSUBSCRIBE);
 		_t = _t.getFirstChild();
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==PROCEDURE)) {
 			AST __t2375 = _t;
-			AST tmp2222_AST_in = (AST)_t;
+			AST tmp2224_AST_in = (AST)_t;
 			match(_t,PROCEDURE);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -39975,7 +39995,7 @@ inputState.guessing--;
 		{
 		if (_t==null) _t=ASTNULL;
 		if ((_t.getType()==TO)) {
-			AST tmp2223_AST_in = (AST)_t;
+			AST tmp2225_AST_in = (AST)_t;
 			match(_t,TO);
 			_t = _t.getNextSibling();
 		}
@@ -39993,7 +40013,7 @@ inputState.guessing--;
 			_t = _retTree;
 		}
 		else if ((_t.getType()==ALL)) {
-			AST tmp2224_AST_in = (AST)_t;
+			AST tmp2226_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getNextSibling();
 		}
@@ -40008,7 +40028,7 @@ inputState.guessing--;
 		case IN_KW:
 		{
 			AST __t2379 = _t;
-			AST tmp2225_AST_in = (AST)_t;
+			AST tmp2227_AST_in = (AST)_t;
 			match(_t,IN_KW);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -40040,7 +40060,7 @@ inputState.guessing--;
 		AST usestate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2381 = _t;
-		AST tmp2226_AST_in = (AST)_t;
+		AST tmp2228_AST_in = (AST)_t;
 		match(_t,USE);
 		_t = _t.getFirstChild();
 		expression(_t);
@@ -40050,7 +40070,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case NOERROR_KW:
 		{
-			AST tmp2227_AST_in = (AST)_t;
+			AST tmp2229_AST_in = (AST)_t;
 			match(_t,NOERROR_KW);
 			_t = _t.getNextSibling();
 			break;
@@ -40078,12 +40098,12 @@ inputState.guessing--;
 		AST waitforstate_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2387 = _t;
-		AST tmp2228_AST_in = (AST)_t;
+		AST tmp2230_AST_in = (AST)_t;
 		match(_t,WAITFOR);
 		_t = _t.getFirstChild();
 		eventlist(_t);
 		_t = _retTree;
-		AST tmp2229_AST_in = (AST)_t;
+		AST tmp2231_AST_in = (AST)_t;
 		match(_t,OF);
 		_t = _t.getNextSibling();
 		widgetlist(_t);
@@ -40094,12 +40114,12 @@ inputState.guessing--;
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==OR)) {
 				AST __t2389 = _t;
-				AST tmp2230_AST_in = (AST)_t;
+				AST tmp2232_AST_in = (AST)_t;
 				match(_t,OR);
 				_t = _t.getFirstChild();
 				eventlist(_t);
 				_t = _retTree;
-				AST tmp2231_AST_in = (AST)_t;
+				AST tmp2233_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
 				widgetlist(_t);
@@ -40119,7 +40139,7 @@ inputState.guessing--;
 		case FOCUS:
 		{
 			AST __t2392 = _t;
-			AST tmp2232_AST_in = (AST)_t;
+			AST tmp2234_AST_in = (AST)_t;
 			match(_t,FOCUS);
 			_t = _t.getFirstChild();
 			gwidget(_t);
@@ -40147,7 +40167,7 @@ inputState.guessing--;
 		case PAUSE:
 		{
 			AST __t2394 = _t;
-			AST tmp2233_AST_in = (AST)_t;
+			AST tmp2235_AST_in = (AST)_t;
 			match(_t,PAUSE);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -40173,7 +40193,7 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case EXCLUSIVEWEBUSER:
 		{
-			AST tmp2234_AST_in = (AST)_t;
+			AST tmp2236_AST_in = (AST)_t;
 			match(_t,EXCLUSIVEWEBUSER);
 			_t = _t.getNextSibling();
 			{
@@ -40234,10 +40254,10 @@ inputState.guessing--;
 		AST method_param_list_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1607 = _t;
-		AST tmp2235_AST_in = (AST)_t;
+		AST tmp2237_AST_in = (AST)_t;
 		match(_t,Method_param_list);
 		_t = _t.getFirstChild();
-		AST tmp2236_AST_in = (AST)_t;
+		AST tmp2238_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		{
@@ -40269,7 +40289,7 @@ inputState.guessing--;
 		do {
 			if (_t==null) _t=ASTNULL;
 			if ((_t.getType()==COMMA)) {
-				AST tmp2237_AST_in = (AST)_t;
+				AST tmp2239_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				{
@@ -40303,7 +40323,7 @@ inputState.guessing--;
 			
 		} while (true);
 		}
-		AST tmp2238_AST_in = (AST)_t;
+		AST tmp2240_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		_t = __t1607;
@@ -40321,15 +40341,15 @@ inputState.guessing--;
 		case OSDIR:
 		{
 			AST __t2002 = _t;
-			AST tmp2239_AST_in = (AST)_t;
+			AST tmp2241_AST_in = (AST)_t;
 			match(_t,OSDIR);
 			_t = _t.getFirstChild();
-			AST tmp2240_AST_in = (AST)_t;
+			AST tmp2242_AST_in = (AST)_t;
 			match(_t,LEFTPAREN);
 			_t = _t.getNextSibling();
 			expression(_t);
 			_t = _retTree;
-			AST tmp2241_AST_in = (AST)_t;
+			AST tmp2243_AST_in = (AST)_t;
 			match(_t,RIGHTPAREN);
 			_t = _t.getNextSibling();
 			{
@@ -40337,7 +40357,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NOATTRLIST:
 			{
-				AST tmp2242_AST_in = (AST)_t;
+				AST tmp2244_AST_in = (AST)_t;
 				match(_t,NOATTRLIST);
 				_t = _t.getNextSibling();
 				break;
@@ -40359,13 +40379,13 @@ inputState.guessing--;
 		case PRINTER:
 		{
 			AST __t2004 = _t;
-			AST tmp2243_AST_in = (AST)_t;
+			AST tmp2245_AST_in = (AST)_t;
 			match(_t,PRINTER);
 			_t = _t.getFirstChild();
 			{
 			if (_t==null) _t=ASTNULL;
 			if (((_t.getType() >= LEXDATE && _t.getType() <= SYMMETRICENCRYPTIONALGORITHM))) {
-				AST tmp2244_AST_in = (AST)_t;
+				AST tmp2246_AST_in = (AST)_t;
 				if ( _t==null ) throw new MismatchedTokenException();
 				_t = _t.getNextSibling();
 			}
@@ -40382,7 +40402,7 @@ inputState.guessing--;
 		}
 		case TERMINAL:
 		{
-			AST tmp2245_AST_in = (AST)_t;
+			AST tmp2247_AST_in = (AST)_t;
 			match(_t,TERMINAL);
 			_t = _t.getNextSibling();
 			break;
@@ -40422,7 +40442,7 @@ inputState.guessing--;
 				}
 				case FILENAME:
 				{
-					AST tmp2246_AST_in = (AST)_t;
+					AST tmp2248_AST_in = (AST)_t;
 					match(_t,FILENAME);
 					_t = _t.getNextSibling();
 					break;
@@ -40449,21 +40469,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case APPEND:
 			{
-				AST tmp2247_AST_in = (AST)_t;
+				AST tmp2249_AST_in = (AST)_t;
 				match(_t,APPEND);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case BINARY:
 			{
-				AST tmp2248_AST_in = (AST)_t;
+				AST tmp2250_AST_in = (AST)_t;
 				match(_t,BINARY);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case COLLATE:
 			{
-				AST tmp2249_AST_in = (AST)_t;
+				AST tmp2251_AST_in = (AST)_t;
 				match(_t,COLLATE);
 				_t = _t.getNextSibling();
 				break;
@@ -40471,7 +40491,7 @@ inputState.guessing--;
 			case CONVERT:
 			{
 				AST __t2009 = _t;
-				AST tmp2250_AST_in = (AST)_t;
+				AST tmp2252_AST_in = (AST)_t;
 				match(_t,CONVERT);
 				_t = _t.getFirstChild();
 				{
@@ -40484,14 +40504,14 @@ inputState.guessing--;
 						switch ( _t.getType()) {
 						case SOURCE:
 						{
-							AST tmp2251_AST_in = (AST)_t;
+							AST tmp2253_AST_in = (AST)_t;
 							match(_t,SOURCE);
 							_t = _t.getNextSibling();
 							break;
 						}
 						case TARGET:
 						{
-							AST tmp2252_AST_in = (AST)_t;
+							AST tmp2254_AST_in = (AST)_t;
 							match(_t,TARGET);
 							_t = _t.getNextSibling();
 							break;
@@ -40518,7 +40538,7 @@ inputState.guessing--;
 			case LOBDIR:
 			{
 				AST __t2013 = _t;
-				AST tmp2253_AST_in = (AST)_t;
+				AST tmp2255_AST_in = (AST)_t;
 				match(_t,LOBDIR);
 				_t = _t.getFirstChild();
 				filenameorvalue(_t);
@@ -40529,35 +40549,35 @@ inputState.guessing--;
 			}
 			case NOCONVERT:
 			{
-				AST tmp2254_AST_in = (AST)_t;
+				AST tmp2256_AST_in = (AST)_t;
 				match(_t,NOCONVERT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case ECHO:
 			{
-				AST tmp2255_AST_in = (AST)_t;
+				AST tmp2257_AST_in = (AST)_t;
 				match(_t,ECHO);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOECHO:
 			{
-				AST tmp2256_AST_in = (AST)_t;
+				AST tmp2258_AST_in = (AST)_t;
 				match(_t,NOECHO);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case KEEPMESSAGES:
 			{
-				AST tmp2257_AST_in = (AST)_t;
+				AST tmp2259_AST_in = (AST)_t;
 				match(_t,KEEPMESSAGES);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LANDSCAPE:
 			{
-				AST tmp2258_AST_in = (AST)_t;
+				AST tmp2260_AST_in = (AST)_t;
 				match(_t,LANDSCAPE);
 				_t = _t.getNextSibling();
 				break;
@@ -40565,7 +40585,7 @@ inputState.guessing--;
 			case MAP:
 			{
 				AST __t2014 = _t;
-				AST tmp2259_AST_in = (AST)_t;
+				AST tmp2261_AST_in = (AST)_t;
 				match(_t,MAP);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
@@ -40576,7 +40596,7 @@ inputState.guessing--;
 			}
 			case NOMAP:
 			{
-				AST tmp2260_AST_in = (AST)_t;
+				AST tmp2262_AST_in = (AST)_t;
 				match(_t,NOMAP);
 				_t = _t.getNextSibling();
 				break;
@@ -40584,7 +40604,7 @@ inputState.guessing--;
 			case NUMCOPIES:
 			{
 				AST __t2015 = _t;
-				AST tmp2261_AST_in = (AST)_t;
+				AST tmp2263_AST_in = (AST)_t;
 				match(_t,NUMCOPIES);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
@@ -40595,7 +40615,7 @@ inputState.guessing--;
 			}
 			case PAGED:
 			{
-				AST tmp2262_AST_in = (AST)_t;
+				AST tmp2264_AST_in = (AST)_t;
 				match(_t,PAGED);
 				_t = _t.getNextSibling();
 				break;
@@ -40603,7 +40623,7 @@ inputState.guessing--;
 			case PAGESIZE_KW:
 			{
 				AST __t2016 = _t;
-				AST tmp2263_AST_in = (AST)_t;
+				AST tmp2265_AST_in = (AST)_t;
 				match(_t,PAGESIZE_KW);
 				_t = _t.getFirstChild();
 				anyorvalue(_t);
@@ -40614,14 +40634,14 @@ inputState.guessing--;
 			}
 			case PORTRAIT:
 			{
-				AST tmp2264_AST_in = (AST)_t;
+				AST tmp2266_AST_in = (AST)_t;
 				match(_t,PORTRAIT);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case UNBUFFERED:
 			{
-				AST tmp2265_AST_in = (AST)_t;
+				AST tmp2267_AST_in = (AST)_t;
 				match(_t,UNBUFFERED);
 				_t = _t.getNextSibling();
 				break;
@@ -40645,7 +40665,7 @@ inputState.guessing--;
 		case COLUMN:
 		{
 			AST __t1658 = _t;
-			AST tmp2266_AST_in = (AST)_t;
+			AST tmp2268_AST_in = (AST)_t;
 			match(_t,COLUMN);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -40657,7 +40677,7 @@ inputState.guessing--;
 		case COLUMNOF:
 		{
 			AST __t1659 = _t;
-			AST tmp2267_AST_in = (AST)_t;
+			AST tmp2269_AST_in = (AST)_t;
 			match(_t,COLUMNOF);
 			_t = _t.getFirstChild();
 			referencepoint(_t);
@@ -40669,7 +40689,7 @@ inputState.guessing--;
 		case ROW:
 		{
 			AST __t1660 = _t;
-			AST tmp2268_AST_in = (AST)_t;
+			AST tmp2270_AST_in = (AST)_t;
 			match(_t,ROW);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -40681,7 +40701,7 @@ inputState.guessing--;
 		case ROWOF:
 		{
 			AST __t1661 = _t;
-			AST tmp2269_AST_in = (AST)_t;
+			AST tmp2271_AST_in = (AST)_t;
 			match(_t,ROWOF);
 			_t = _t.getFirstChild();
 			referencepoint(_t);
@@ -40693,7 +40713,7 @@ inputState.guessing--;
 		case X:
 		{
 			AST __t1662 = _t;
-			AST tmp2270_AST_in = (AST)_t;
+			AST tmp2272_AST_in = (AST)_t;
 			match(_t,X);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -40705,7 +40725,7 @@ inputState.guessing--;
 		case XOF:
 		{
 			AST __t1663 = _t;
-			AST tmp2271_AST_in = (AST)_t;
+			AST tmp2273_AST_in = (AST)_t;
 			match(_t,XOF);
 			_t = _t.getFirstChild();
 			referencepoint(_t);
@@ -40717,7 +40737,7 @@ inputState.guessing--;
 		case Y:
 		{
 			AST __t1664 = _t;
-			AST tmp2272_AST_in = (AST)_t;
+			AST tmp2274_AST_in = (AST)_t;
 			match(_t,Y);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -40729,7 +40749,7 @@ inputState.guessing--;
 		case YOF:
 		{
 			AST __t1665 = _t;
-			AST tmp2273_AST_in = (AST)_t;
+			AST tmp2275_AST_in = (AST)_t;
 			match(_t,YOF);
 			_t = _t.getFirstChild();
 			referencepoint(_t);
@@ -40759,10 +40779,10 @@ inputState.guessing--;
 			try {
 				{
 				AST __t1687 = _t;
-				AST tmp2274_AST_in = (AST)_t;
+				AST tmp2276_AST_in = (AST)_t;
 				match(_t,OR);
 				_t = _t.getFirstChild();
-				AST tmp2275_AST_in = (AST)_t;
+				AST tmp2277_AST_in = (AST)_t;
 				if ( _t==null ) throw new MismatchedTokenException();
 				_t = _t.getNextSibling();
 				_t = __t1687;
@@ -40777,7 +40797,7 @@ inputState.guessing--;
 		}
 		if ( synPredMatched1688 ) {
 			AST __t1689 = _t;
-			AST tmp2276_AST_in = (AST)_t;
+			AST tmp2278_AST_in = (AST)_t;
 			match(_t,OR);
 			_t = _t.getFirstChild();
 			case_expression(_t);
@@ -40789,7 +40809,7 @@ inputState.guessing--;
 		}
 		else if ((_t.getType()==WHEN)) {
 			AST __t1690 = _t;
-			AST tmp2277_AST_in = (AST)_t;
+			AST tmp2279_AST_in = (AST)_t;
 			match(_t,WHEN);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -40813,7 +40833,7 @@ inputState.guessing--;
 		AST comboboxphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1709 = _t;
-		AST tmp2278_AST_in = (AST)_t;
+		AST tmp2280_AST_in = (AST)_t;
 		match(_t,COMBOBOX);
 		_t = _t.getFirstChild();
 		{
@@ -40824,7 +40844,7 @@ inputState.guessing--;
 			case LISTITEMS:
 			{
 				AST __t1711 = _t;
-				AST tmp2279_AST_in = (AST)_t;
+				AST tmp2281_AST_in = (AST)_t;
 				match(_t,LISTITEMS);
 				_t = _t.getFirstChild();
 				constant(_t);
@@ -40834,7 +40854,7 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp2280_AST_in = (AST)_t;
+						AST tmp2282_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						constant(_t);
@@ -40853,7 +40873,7 @@ inputState.guessing--;
 			case LISTITEMPAIRS:
 			{
 				AST __t1714 = _t;
-				AST tmp2281_AST_in = (AST)_t;
+				AST tmp2283_AST_in = (AST)_t;
 				match(_t,LISTITEMPAIRS);
 				_t = _t.getFirstChild();
 				constant(_t);
@@ -40863,7 +40883,7 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp2282_AST_in = (AST)_t;
+						AST tmp2284_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						constant(_t);
@@ -40882,7 +40902,7 @@ inputState.guessing--;
 			case INNERLINES:
 			{
 				AST __t1717 = _t;
-				AST tmp2283_AST_in = (AST)_t;
+				AST tmp2285_AST_in = (AST)_t;
 				match(_t,INNERLINES);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -40893,7 +40913,7 @@ inputState.guessing--;
 			}
 			case SORT:
 			{
-				AST tmp2284_AST_in = (AST)_t;
+				AST tmp2286_AST_in = (AST)_t;
 				match(_t,SORT);
 				_t = _t.getNextSibling();
 				break;
@@ -40906,21 +40926,21 @@ inputState.guessing--;
 			}
 			case SIMPLE:
 			{
-				AST tmp2285_AST_in = (AST)_t;
+				AST tmp2287_AST_in = (AST)_t;
 				match(_t,SIMPLE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DROPDOWN:
 			{
-				AST tmp2286_AST_in = (AST)_t;
+				AST tmp2288_AST_in = (AST)_t;
 				match(_t,DROPDOWN);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DROPDOWNLIST:
 			{
-				AST tmp2287_AST_in = (AST)_t;
+				AST tmp2289_AST_in = (AST)_t;
 				match(_t,DROPDOWNLIST);
 				_t = _t.getNextSibling();
 				break;
@@ -40928,10 +40948,10 @@ inputState.guessing--;
 			case MAXCHARS:
 			{
 				AST __t1718 = _t;
-				AST tmp2288_AST_in = (AST)_t;
+				AST tmp2290_AST_in = (AST)_t;
 				match(_t,MAXCHARS);
 				_t = _t.getFirstChild();
-				AST tmp2289_AST_in = (AST)_t;
+				AST tmp2291_AST_in = (AST)_t;
 				match(_t,NUMBER);
 				_t = _t.getNextSibling();
 				_t = __t1718;
@@ -40941,7 +40961,7 @@ inputState.guessing--;
 			case AUTOCOMPLETION:
 			{
 				AST __t1719 = _t;
-				AST tmp2290_AST_in = (AST)_t;
+				AST tmp2292_AST_in = (AST)_t;
 				match(_t,AUTOCOMPLETION);
 				_t = _t.getFirstChild();
 				{
@@ -40949,7 +40969,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case UNIQUEMATCH:
 				{
-					AST tmp2291_AST_in = (AST)_t;
+					AST tmp2293_AST_in = (AST)_t;
 					match(_t,UNIQUEMATCH);
 					_t = _t.getNextSibling();
 					break;
@@ -40993,7 +41013,7 @@ inputState.guessing--;
 		AST compile_append_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1777 = _t;
-		AST tmp2292_AST_in = (AST)_t;
+		AST tmp2294_AST_in = (AST)_t;
 		match(_t,APPEND);
 		_t = _t.getFirstChild();
 		{
@@ -41002,7 +41022,7 @@ inputState.guessing--;
 		case EQUAL:
 		{
 			AST __t1779 = _t;
-			AST tmp2293_AST_in = (AST)_t;
+			AST tmp2295_AST_in = (AST)_t;
 			match(_t,EQUAL);
 			_t = _t.getFirstChild();
 			expression(_t);
@@ -41040,7 +41060,7 @@ inputState.guessing--;
 		}
 		case TYPELESS_TOKEN:
 		{
-			AST tmp2294_AST_in = (AST)_t;
+			AST tmp2296_AST_in = (AST)_t;
 			match(_t,TYPELESS_TOKEN);
 			_t = _t.getNextSibling();
 			{
@@ -41048,10 +41068,10 @@ inputState.guessing--;
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==LEXCOLON)) {
-					AST tmp2295_AST_in = (AST)_t;
+					AST tmp2297_AST_in = (AST)_t;
 					match(_t,LEXCOLON);
 					_t = _t.getNextSibling();
-					AST tmp2296_AST_in = (AST)_t;
+					AST tmp2298_AST_in = (AST)_t;
 					match(_t,TYPELESS_TOKEN);
 					_t = _t.getNextSibling();
 				}
@@ -41076,7 +41096,7 @@ inputState.guessing--;
 		AST convertphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1785 = _t;
-		AST tmp2297_AST_in = (AST)_t;
+		AST tmp2299_AST_in = (AST)_t;
 		match(_t,CONVERT);
 		_t = _t.getFirstChild();
 		{
@@ -41085,7 +41105,7 @@ inputState.guessing--;
 		case SOURCE:
 		{
 			AST __t1787 = _t;
-			AST tmp2298_AST_in = (AST)_t;
+			AST tmp2300_AST_in = (AST)_t;
 			match(_t,SOURCE);
 			_t = _t.getFirstChild();
 			{
@@ -41093,14 +41113,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case BASE64:
 			{
-				AST tmp2299_AST_in = (AST)_t;
+				AST tmp2301_AST_in = (AST)_t;
 				match(_t,BASE64);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case CODEPAGE:
 			{
-				AST tmp2300_AST_in = (AST)_t;
+				AST tmp2302_AST_in = (AST)_t;
 				match(_t,CODEPAGE);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -41110,7 +41130,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case BASE64:
 				{
-					AST tmp2301_AST_in = (AST)_t;
+					AST tmp2303_AST_in = (AST)_t;
 					match(_t,BASE64);
 					_t = _t.getNextSibling();
 					break;
@@ -41154,7 +41174,7 @@ inputState.guessing--;
 		case TARGET:
 		{
 			AST __t1791 = _t;
-			AST tmp2302_AST_in = (AST)_t;
+			AST tmp2304_AST_in = (AST)_t;
 			match(_t,TARGET);
 			_t = _t.getFirstChild();
 			{
@@ -41162,14 +41182,14 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case BASE64:
 			{
-				AST tmp2303_AST_in = (AST)_t;
+				AST tmp2305_AST_in = (AST)_t;
 				match(_t,BASE64);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case CODEPAGE:
 			{
-				AST tmp2304_AST_in = (AST)_t;
+				AST tmp2306_AST_in = (AST)_t;
 				match(_t,CODEPAGE);
 				_t = _t.getNextSibling();
 				expression(_t);
@@ -41179,7 +41199,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case BASE64:
 				{
-					AST tmp2305_AST_in = (AST)_t;
+					AST tmp2307_AST_in = (AST)_t;
 					match(_t,BASE64);
 					_t = _t.getNextSibling();
 					break;
@@ -41229,42 +41249,42 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case BYTE:
 		{
-			AST tmp2306_AST_in = (AST)_t;
+			AST tmp2308_AST_in = (AST)_t;
 			match(_t,BYTE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case DOUBLE:
 		{
-			AST tmp2307_AST_in = (AST)_t;
+			AST tmp2309_AST_in = (AST)_t;
 			match(_t,DOUBLE);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case FLOAT:
 		{
-			AST tmp2308_AST_in = (AST)_t;
+			AST tmp2310_AST_in = (AST)_t;
 			match(_t,FLOAT);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case LONG:
 		{
-			AST tmp2309_AST_in = (AST)_t;
+			AST tmp2311_AST_in = (AST)_t;
 			match(_t,LONG);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SHORT:
 		{
-			AST tmp2310_AST_in = (AST)_t;
+			AST tmp2312_AST_in = (AST)_t;
 			match(_t,SHORT);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case UNSIGNEDSHORT:
 		{
-			AST tmp2311_AST_in = (AST)_t;
+			AST tmp2313_AST_in = (AST)_t;
 			match(_t,UNSIGNEDSHORT);
 			_t = _t.getNextSibling();
 			break;
@@ -41282,7 +41302,7 @@ inputState.guessing--;
 		AST editorphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1907 = _t;
-		AST tmp2312_AST_in = (AST)_t;
+		AST tmp2314_AST_in = (AST)_t;
 		match(_t,EDITOR);
 		_t = _t.getFirstChild();
 		{
@@ -41293,7 +41313,7 @@ inputState.guessing--;
 			case INNERCHARS:
 			{
 				AST __t1909 = _t;
-				AST tmp2313_AST_in = (AST)_t;
+				AST tmp2315_AST_in = (AST)_t;
 				match(_t,INNERCHARS);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -41305,7 +41325,7 @@ inputState.guessing--;
 			case INNERLINES:
 			{
 				AST __t1910 = _t;
-				AST tmp2314_AST_in = (AST)_t;
+				AST tmp2316_AST_in = (AST)_t;
 				match(_t,INNERLINES);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -41317,7 +41337,7 @@ inputState.guessing--;
 			case BUFFERCHARS:
 			{
 				AST __t1911 = _t;
-				AST tmp2315_AST_in = (AST)_t;
+				AST tmp2317_AST_in = (AST)_t;
 				match(_t,BUFFERCHARS);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -41329,7 +41349,7 @@ inputState.guessing--;
 			case BUFFERLINES:
 			{
 				AST __t1912 = _t;
-				AST tmp2316_AST_in = (AST)_t;
+				AST tmp2318_AST_in = (AST)_t;
 				match(_t,BUFFERLINES);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -41340,7 +41360,7 @@ inputState.guessing--;
 			}
 			case LARGE:
 			{
-				AST tmp2317_AST_in = (AST)_t;
+				AST tmp2319_AST_in = (AST)_t;
 				match(_t,LARGE);
 				_t = _t.getNextSibling();
 				break;
@@ -41348,7 +41368,7 @@ inputState.guessing--;
 			case MAXCHARS:
 			{
 				AST __t1913 = _t;
-				AST tmp2318_AST_in = (AST)_t;
+				AST tmp2320_AST_in = (AST)_t;
 				match(_t,MAXCHARS);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -41359,28 +41379,28 @@ inputState.guessing--;
 			}
 			case NOBOX:
 			{
-				AST tmp2319_AST_in = (AST)_t;
+				AST tmp2321_AST_in = (AST)_t;
 				match(_t,NOBOX);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOWORDWRAP:
 			{
-				AST tmp2320_AST_in = (AST)_t;
+				AST tmp2322_AST_in = (AST)_t;
 				match(_t,NOWORDWRAP);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case SCROLLBARHORIZONTAL:
 			{
-				AST tmp2321_AST_in = (AST)_t;
+				AST tmp2323_AST_in = (AST)_t;
 				match(_t,SCROLLBARHORIZONTAL);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case SCROLLBARVERTICAL:
 			{
-				AST tmp2322_AST_in = (AST)_t;
+				AST tmp2324_AST_in = (AST)_t;
 				match(_t,SCROLLBARVERTICAL);
 				_t = _t.getNextSibling();
 				break;
@@ -41416,7 +41436,7 @@ inputState.guessing--;
 		AST fillinphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t1926 = _t;
-		AST tmp2323_AST_in = (AST)_t;
+		AST tmp2325_AST_in = (AST)_t;
 		match(_t,FILLIN);
 		_t = _t.getFirstChild();
 		{
@@ -41426,7 +41446,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case NATIVE:
 			{
-				AST tmp2324_AST_in = (AST)_t;
+				AST tmp2326_AST_in = (AST)_t;
 				match(_t,NATIVE);
 				_t = _t.getNextSibling();
 				break;
@@ -41462,7 +41482,7 @@ inputState.guessing--;
 		AST goon_elem_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		{
-		AST tmp2325_AST_in = (AST)_t;
+		AST tmp2327_AST_in = (AST)_t;
 		match(_t,_tokenSet_11);
 		_t = _t.getNextSibling();
 		}
@@ -41475,7 +41495,7 @@ inputState.guessing--;
 			inputState.guessing++;
 			try {
 				{
-				AST tmp2326_AST_in = (AST)_t;
+				AST tmp2328_AST_in = (AST)_t;
 				match(_t,OF);
 				_t = _t.getNextSibling();
 				}
@@ -41487,7 +41507,7 @@ inputState.guessing--;
 inputState.guessing--;
 		}
 		if ( synPredMatched1947 ) {
-			AST tmp2327_AST_in = (AST)_t;
+			AST tmp2329_AST_in = (AST)_t;
 			match(_t,OF);
 			_t = _t.getNextSibling();
 			gwidget(_t);
@@ -41508,7 +41528,7 @@ inputState.guessing--;
 		AST loadpicturefunc_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2037 = _t;
-		AST tmp2328_AST_in = (AST)_t;
+		AST tmp2330_AST_in = (AST)_t;
 		match(_t,LOADPICTURE);
 		_t = _t.getFirstChild();
 		{
@@ -41549,16 +41569,16 @@ inputState.guessing--;
 			try {
 				{
 				AST __t2235 = _t;
-				AST tmp2329_AST_in = (AST)_t;
+				AST tmp2331_AST_in = (AST)_t;
 				match(_t,ERROR);
 				_t = _t.getFirstChild();
-				AST tmp2330_AST_in = (AST)_t;
+				AST tmp2332_AST_in = (AST)_t;
 				match(_t,LEFTPAREN);
 				_t = _t.getNextSibling();
-				AST tmp2331_AST_in = (AST)_t;
+				AST tmp2333_AST_in = (AST)_t;
 				match(_t,RECORD_NAME);
 				_t = _t.getNextSibling();
-				AST tmp2332_AST_in = (AST)_t;
+				AST tmp2334_AST_in = (AST)_t;
 				match(_t,RIGHTPAREN);
 				_t = _t.getNextSibling();
 				_t = __t2235;
@@ -41584,7 +41604,7 @@ inputState.guessing--;
 				inputState.guessing++;
 				try {
 					{
-					AST tmp2333_AST_in = (AST)_t;
+					AST tmp2335_AST_in = (AST)_t;
 					match(_t,ERROR);
 					_t = _t.getNextSibling();
 					}
@@ -41596,7 +41616,7 @@ inputState.guessing--;
 inputState.guessing--;
 			}
 			if ( synPredMatched2238 ) {
-				AST tmp2334_AST_in = (AST)_t;
+				AST tmp2336_AST_in = (AST)_t;
 				match(_t,ERROR);
 				_t = _t.getNextSibling();
 				{
@@ -41614,7 +41634,7 @@ inputState.guessing--;
 				}
 			}
 			else if ((_t.getType()==NOAPPLY)) {
-				AST tmp2335_AST_in = (AST)_t;
+				AST tmp2337_AST_in = (AST)_t;
 				match(_t,NOAPPLY);
 				_t = _t.getNextSibling();
 				{
@@ -41648,7 +41668,7 @@ inputState.guessing--;
 		AST radiosetphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2191 = _t;
-		AST tmp2336_AST_in = (AST)_t;
+		AST tmp2338_AST_in = (AST)_t;
 		match(_t,RADIOSET);
 		_t = _t.getFirstChild();
 		{
@@ -41659,7 +41679,7 @@ inputState.guessing--;
 			case HORIZONTAL:
 			{
 				AST __t2193 = _t;
-				AST tmp2337_AST_in = (AST)_t;
+				AST tmp2339_AST_in = (AST)_t;
 				match(_t,HORIZONTAL);
 				_t = _t.getFirstChild();
 				{
@@ -41667,7 +41687,7 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case EXPAND:
 				{
-					AST tmp2338_AST_in = (AST)_t;
+					AST tmp2340_AST_in = (AST)_t;
 					match(_t,EXPAND);
 					_t = _t.getNextSibling();
 					break;
@@ -41688,7 +41708,7 @@ inputState.guessing--;
 			}
 			case VERTICAL:
 			{
-				AST tmp2339_AST_in = (AST)_t;
+				AST tmp2341_AST_in = (AST)_t;
 				match(_t,VERTICAL);
 				_t = _t.getNextSibling();
 				break;
@@ -41706,7 +41726,7 @@ inputState.guessing--;
 			case RADIOBUTTONS:
 			{
 				AST __t2196 = _t;
-				AST tmp2340_AST_in = (AST)_t;
+				AST tmp2342_AST_in = (AST)_t;
 				match(_t,RADIOBUTTONS);
 				_t = _t.getFirstChild();
 				{
@@ -41714,14 +41734,14 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case QSTRING:
 				{
-					AST tmp2341_AST_in = (AST)_t;
+					AST tmp2343_AST_in = (AST)_t;
 					match(_t,QSTRING);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case UNQUOTEDSTRING:
 				{
-					AST tmp2342_AST_in = (AST)_t;
+					AST tmp2344_AST_in = (AST)_t;
 					match(_t,UNQUOTEDSTRING);
 					_t = _t.getNextSibling();
 					break;
@@ -41732,7 +41752,7 @@ inputState.guessing--;
 				}
 				}
 				}
-				AST tmp2343_AST_in = (AST)_t;
+				AST tmp2345_AST_in = (AST)_t;
 				match(_t,COMMA);
 				_t = _t.getNextSibling();
 				{
@@ -41787,7 +41807,7 @@ inputState.guessing--;
 				}
 				case TODAY:
 				{
-					AST tmp2344_AST_in = (AST)_t;
+					AST tmp2346_AST_in = (AST)_t;
 					match(_t,TODAY);
 					_t = _t.getNextSibling();
 					break;
@@ -41803,7 +41823,7 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp2345_AST_in = (AST)_t;
+						AST tmp2347_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						{
@@ -41811,14 +41831,14 @@ inputState.guessing--;
 						switch ( _t.getType()) {
 						case QSTRING:
 						{
-							AST tmp2346_AST_in = (AST)_t;
+							AST tmp2348_AST_in = (AST)_t;
 							match(_t,QSTRING);
 							_t = _t.getNextSibling();
 							break;
 						}
 						case UNQUOTEDSTRING:
 						{
-							AST tmp2347_AST_in = (AST)_t;
+							AST tmp2349_AST_in = (AST)_t;
 							match(_t,UNQUOTEDSTRING);
 							_t = _t.getNextSibling();
 							break;
@@ -41829,7 +41849,7 @@ inputState.guessing--;
 						}
 						}
 						}
-						AST tmp2348_AST_in = (AST)_t;
+						AST tmp2350_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						{
@@ -41884,7 +41904,7 @@ inputState.guessing--;
 						}
 						case TODAY:
 						{
-							AST tmp2349_AST_in = (AST)_t;
+							AST tmp2351_AST_in = (AST)_t;
 							match(_t,TODAY);
 							_t = _t.getNextSibling();
 							break;
@@ -41929,7 +41949,7 @@ inputState.guessing--;
 		AST selectionlistphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2259 = _t;
-		AST tmp2350_AST_in = (AST)_t;
+		AST tmp2352_AST_in = (AST)_t;
 		match(_t,SELECTIONLIST);
 		_t = _t.getFirstChild();
 		{
@@ -41939,21 +41959,21 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case SINGLE:
 			{
-				AST tmp2351_AST_in = (AST)_t;
+				AST tmp2353_AST_in = (AST)_t;
 				match(_t,SINGLE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MULTIPLE:
 			{
-				AST tmp2352_AST_in = (AST)_t;
+				AST tmp2354_AST_in = (AST)_t;
 				match(_t,MULTIPLE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NODRAG:
 			{
-				AST tmp2353_AST_in = (AST)_t;
+				AST tmp2355_AST_in = (AST)_t;
 				match(_t,NODRAG);
 				_t = _t.getNextSibling();
 				break;
@@ -41961,7 +41981,7 @@ inputState.guessing--;
 			case LISTITEMS:
 			{
 				AST __t2261 = _t;
-				AST tmp2354_AST_in = (AST)_t;
+				AST tmp2356_AST_in = (AST)_t;
 				match(_t,LISTITEMS);
 				_t = _t.getFirstChild();
 				constant(_t);
@@ -41971,7 +41991,7 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp2355_AST_in = (AST)_t;
+						AST tmp2357_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						constant(_t);
@@ -41990,7 +42010,7 @@ inputState.guessing--;
 			case LISTITEMPAIRS:
 			{
 				AST __t2264 = _t;
-				AST tmp2356_AST_in = (AST)_t;
+				AST tmp2358_AST_in = (AST)_t;
 				match(_t,LISTITEMPAIRS);
 				_t = _t.getFirstChild();
 				constant(_t);
@@ -42000,7 +42020,7 @@ inputState.guessing--;
 				do {
 					if (_t==null) _t=ASTNULL;
 					if ((_t.getType()==COMMA)) {
-						AST tmp2357_AST_in = (AST)_t;
+						AST tmp2359_AST_in = (AST)_t;
 						match(_t,COMMA);
 						_t = _t.getNextSibling();
 						constant(_t);
@@ -42018,14 +42038,14 @@ inputState.guessing--;
 			}
 			case SCROLLBARHORIZONTAL:
 			{
-				AST tmp2358_AST_in = (AST)_t;
+				AST tmp2360_AST_in = (AST)_t;
 				match(_t,SCROLLBARHORIZONTAL);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case SCROLLBARVERTICAL:
 			{
-				AST tmp2359_AST_in = (AST)_t;
+				AST tmp2361_AST_in = (AST)_t;
 				match(_t,SCROLLBARVERTICAL);
 				_t = _t.getNextSibling();
 				break;
@@ -42033,7 +42053,7 @@ inputState.guessing--;
 			case INNERCHARS:
 			{
 				AST __t2267 = _t;
-				AST tmp2360_AST_in = (AST)_t;
+				AST tmp2362_AST_in = (AST)_t;
 				match(_t,INNERCHARS);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -42045,7 +42065,7 @@ inputState.guessing--;
 			case INNERLINES:
 			{
 				AST __t2268 = _t;
-				AST tmp2361_AST_in = (AST)_t;
+				AST tmp2363_AST_in = (AST)_t;
 				match(_t,INNERLINES);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -42056,7 +42076,7 @@ inputState.guessing--;
 			}
 			case SORT:
 			{
-				AST tmp2362_AST_in = (AST)_t;
+				AST tmp2364_AST_in = (AST)_t;
 				match(_t,SORT);
 				_t = _t.getNextSibling();
 				break;
@@ -42092,7 +42112,7 @@ inputState.guessing--;
 		AST sliderphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2281 = _t;
-		AST tmp2363_AST_in = (AST)_t;
+		AST tmp2365_AST_in = (AST)_t;
 		match(_t,SLIDER);
 		_t = _t.getFirstChild();
 		{
@@ -42102,7 +42122,7 @@ inputState.guessing--;
 			switch ( _t.getType()) {
 			case HORIZONTAL:
 			{
-				AST tmp2364_AST_in = (AST)_t;
+				AST tmp2366_AST_in = (AST)_t;
 				match(_t,HORIZONTAL);
 				_t = _t.getNextSibling();
 				break;
@@ -42110,7 +42130,7 @@ inputState.guessing--;
 			case MAXVALUE:
 			{
 				AST __t2283 = _t;
-				AST tmp2365_AST_in = (AST)_t;
+				AST tmp2367_AST_in = (AST)_t;
 				match(_t,MAXVALUE);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -42122,7 +42142,7 @@ inputState.guessing--;
 			case MINVALUE:
 			{
 				AST __t2284 = _t;
-				AST tmp2366_AST_in = (AST)_t;
+				AST tmp2368_AST_in = (AST)_t;
 				match(_t,MINVALUE);
 				_t = _t.getFirstChild();
 				expression(_t);
@@ -42133,21 +42153,21 @@ inputState.guessing--;
 			}
 			case VERTICAL:
 			{
-				AST tmp2367_AST_in = (AST)_t;
+				AST tmp2369_AST_in = (AST)_t;
 				match(_t,VERTICAL);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOCURRENTVALUE:
 			{
-				AST tmp2368_AST_in = (AST)_t;
+				AST tmp2370_AST_in = (AST)_t;
 				match(_t,NOCURRENTVALUE);
 				_t = _t.getNextSibling();
 				break;
 			}
 			case LARGETOSMALL:
 			{
-				AST tmp2369_AST_in = (AST)_t;
+				AST tmp2371_AST_in = (AST)_t;
 				match(_t,LARGETOSMALL);
 				_t = _t.getNextSibling();
 				break;
@@ -42155,7 +42175,7 @@ inputState.guessing--;
 			case TICMARKS:
 			{
 				AST __t2285 = _t;
-				AST tmp2370_AST_in = (AST)_t;
+				AST tmp2372_AST_in = (AST)_t;
 				match(_t,TICMARKS);
 				_t = _t.getFirstChild();
 				{
@@ -42163,42 +42183,42 @@ inputState.guessing--;
 				switch ( _t.getType()) {
 				case NONE:
 				{
-					AST tmp2371_AST_in = (AST)_t;
+					AST tmp2373_AST_in = (AST)_t;
 					match(_t,NONE);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case TOP:
 				{
-					AST tmp2372_AST_in = (AST)_t;
+					AST tmp2374_AST_in = (AST)_t;
 					match(_t,TOP);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case BOTTOM:
 				{
-					AST tmp2373_AST_in = (AST)_t;
+					AST tmp2375_AST_in = (AST)_t;
 					match(_t,BOTTOM);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case LEFT:
 				{
-					AST tmp2374_AST_in = (AST)_t;
+					AST tmp2376_AST_in = (AST)_t;
 					match(_t,LEFT);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case RIGHT:
 				{
-					AST tmp2375_AST_in = (AST)_t;
+					AST tmp2377_AST_in = (AST)_t;
 					match(_t,RIGHT);
 					_t = _t.getNextSibling();
 					break;
 				}
 				case BOTH:
 				{
-					AST tmp2376_AST_in = (AST)_t;
+					AST tmp2378_AST_in = (AST)_t;
 					match(_t,BOTH);
 					_t = _t.getNextSibling();
 					break;
@@ -42215,7 +42235,7 @@ inputState.guessing--;
 				case FREQUENCY:
 				{
 					AST __t2288 = _t;
-					AST tmp2377_AST_in = (AST)_t;
+					AST tmp2379_AST_in = (AST)_t;
 					match(_t,FREQUENCY);
 					_t = _t.getFirstChild();
 					expression(_t);
@@ -42269,7 +42289,7 @@ inputState.guessing--;
 		AST textphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2337 = _t;
-		AST tmp2378_AST_in = (AST)_t;
+		AST tmp2380_AST_in = (AST)_t;
 		match(_t,TEXT);
 		_t = _t.getFirstChild();
 		{
@@ -42308,7 +42328,7 @@ inputState.guessing--;
 		AST toggleboxphrase_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2347 = _t;
-		AST tmp2379_AST_in = (AST)_t;
+		AST tmp2381_AST_in = (AST)_t;
 		match(_t,TOGGLEBOX);
 		_t = _t.getFirstChild();
 		{
@@ -42347,7 +42367,7 @@ inputState.guessing--;
 		AST sql_comp_query_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		AST __t2506 = _t;
-		AST tmp2380_AST_in = (AST)_t;
+		AST tmp2382_AST_in = (AST)_t;
 		match(_t,Sql_comp_query);
 		_t = _t.getFirstChild();
 		{
@@ -42355,21 +42375,21 @@ inputState.guessing--;
 		switch ( _t.getType()) {
 		case ANY:
 		{
-			AST tmp2381_AST_in = (AST)_t;
+			AST tmp2383_AST_in = (AST)_t;
 			match(_t,ANY);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case ALL:
 		{
-			AST tmp2382_AST_in = (AST)_t;
+			AST tmp2384_AST_in = (AST)_t;
 			match(_t,ALL);
 			_t = _t.getNextSibling();
 			break;
 		}
 		case SOME:
 		{
-			AST tmp2383_AST_in = (AST)_t;
+			AST tmp2385_AST_in = (AST)_t;
 			match(_t,SOME);
 			_t = _t.getNextSibling();
 			break;
@@ -42384,12 +42404,12 @@ inputState.guessing--;
 		}
 		}
 		}
-		AST tmp2384_AST_in = (AST)_t;
+		AST tmp2386_AST_in = (AST)_t;
 		match(_t,LEFTPAREN);
 		_t = _t.getNextSibling();
 		selectstatea(_t);
 		_t = _retTree;
-		AST tmp2385_AST_in = (AST)_t;
+		AST tmp2387_AST_in = (AST)_t;
 		match(_t,RIGHTPAREN);
 		_t = _t.getNextSibling();
 		_t = __t2506;

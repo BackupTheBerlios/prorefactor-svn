@@ -227,6 +227,20 @@ exprt
 	|	tbl[CQ.REF] // for DISPLAY buffername, etc.
 	;
 
+gwidget
+	:	#(	Widget_ref s_widget
+			(	#(	IN_KW
+					(	MENU ID
+					|	FRAME f:ID { action.frameRef(#f); }
+					|	BROWSE b:ID { action.browseRef(#b); }
+					|	SUBMENU ID
+					|	BUFFER ID
+					)
+				)
+			)?
+		)
+	;
+
 s_widget
 	:	widname	| fld[CQ.REF]
 	;
