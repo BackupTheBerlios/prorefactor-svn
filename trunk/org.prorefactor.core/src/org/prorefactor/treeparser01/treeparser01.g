@@ -624,7 +624,7 @@ definedatasetstate
 	;
 data_relation
 	:	#(	DATARELATION (ID)? FOR tbl[CQ.INIT] COMMA tbl[CQ.INIT]
-			(field_mapping_phrase)? (REPOSITION)?
+			(field_mapping_phrase)? (REPOSITION|NESTED)*
 		)
 	;
 field_mapping_phrase

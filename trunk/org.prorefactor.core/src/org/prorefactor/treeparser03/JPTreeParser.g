@@ -1365,7 +1365,7 @@ definedatasetstate
 	;
 data_relation
 	:	#(	DATARELATION (ID)?
-			FOR RECORD_NAME COMMA RECORD_NAME (field_mapping_phrase)? (REPOSITION)?
+			FOR RECORD_NAME COMMA RECORD_NAME (field_mapping_phrase)? (REPOSITION|NESTED)*
 		)
 	;
 field_mapping_phrase
