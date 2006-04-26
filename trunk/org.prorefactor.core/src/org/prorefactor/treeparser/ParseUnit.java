@@ -13,6 +13,7 @@
 package org.prorefactor.treeparser;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.prorefactor.core.JPNode;
 import org.prorefactor.core.PRCException;
@@ -81,6 +82,7 @@ public class ParseUnit {
 			RefactorSession refpack = RefactorSession.getInstance();
 			String [] projFile = refpack.getIDE().getProjectRelativePath(getFile());
 			pub = new PUB(projFile[0], projFile[1], FileStuff.fullpath(file));
+			pub.setParseUnit(this);
 		}
 		return pub;
 	}
@@ -91,6 +93,23 @@ public class ParseUnit {
 
 	/** Get the syntax tree top (Program_root) node */
 	public JPNode getTopNode() { return topNode; }
+	
+	
+	/** Load from PUB, or build PUB if it's out of date.
+	 * TreeParser01 is run in order to build the PUB.
+	 * If the PUB was up to date, then TreeParser01 is run
+	 * after the PUB is loaded. (Either way, the symbol tables
+	 * etc. are available.)
+	 */
+	public void loadOrBuildPUB() throws RefactorException, IOException {
+		getPUB();
+		if (pub.load()) {
+			setTopNode(pub.getTree());
+			treeParser01();
+		} else {
+			pub.build();
+		}
+	}
 
 
 	public void parse() throws RefactorException {

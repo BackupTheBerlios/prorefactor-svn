@@ -153,6 +153,7 @@ public class PUB {
 	private File cuFile;
 	private File pubFile;
 	private JPNode tree;
+	private ParseUnit parseUnit;
 	private ProparseLdr parser = ProparseLdr.getInstance();
 	private RefactorSession refpack = RefactorSession.getInstance();
 	private String className;
@@ -209,14 +210,16 @@ public class PUB {
 	 * a fresh build is really necessary. Once a build() has been done,
 	 * then all of the values for the PUB are available - it is not necessary
 	 * for you to call load() or loadTo().
-	 * This takes care of creating the ParseUnit and running treeParser01.
+	 * This takes care of creating the ParseUnit (if not already set) and running treeParser01.
 	 * @throws RefactorException
 	 */
 	public ParseUnit build() throws IOException, RefactorException {
-		ParseUnit pu = new ParseUnit(cuFile);
-		pu.setPUB(this);
-		pu.treeParser01(); // This calls build(TP01Support)
-		return pu;
+		if (parseUnit==null) {
+			parseUnit = new ParseUnit(cuFile);
+			parseUnit.setPUB(this);
+		}
+		parseUnit.treeParser01(); // This calls build(TP01Support)
+		return parseUnit;
 	}
 	
 
@@ -498,6 +501,10 @@ public class PUB {
 		if (in.readInt() != LAYOUT_VERSION) return false;
 		return true;
 	}
+	
+	
+	
+	public void setParseUnit(ParseUnit pu) {this.parseUnit = pu;}
 	
 	
 	
