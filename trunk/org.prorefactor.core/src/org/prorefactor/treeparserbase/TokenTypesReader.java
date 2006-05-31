@@ -1,7 +1,7 @@
 /* Created on 25-Nov-2005
  * Authors: john
  * 
- * Copyright (C) 2005 Joanju Limited.
+ * Copyright (C) 2005-2006 Joanju Limited.
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,13 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 
-/** Reads the "XYZTokenTypes.txt" file in this class's package directory.
+/** Provides a lookup of token names from numbers,
+ * for ASTs which have more than the usual Proparse token types.
+ * This is for specialized ASTs, and wouldn't be used for the usual
+ * ASTs that flow from Proparse through ProRefactor.
+ * This class gives us a map of token type numbers to token type names
+ * and is useful in generating parsing debugging tools, such as token listers.
+ * Reads the "XYZTokenTypes.txt" file in this class's package directory.
  * Subclass this in your own treeparsers directory in order to use it.
  * IMPORTANT: When subclassing:
  * 1. Copy the constructor to your subclass.

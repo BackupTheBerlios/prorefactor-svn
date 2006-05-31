@@ -2,7 +2,7 @@
  * Created on Nov 20, 2003
  * John Green
  *
- * Copyright (C) 2003, 2005 Joanju (www.joanju.com)
+ * Copyright (C) 2003-2006 Joanju Software (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -37,19 +37,10 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 			info.isNatural = typeName.equals(typeName.toUpperCase());
 			allTokens[i] = info;
 		}
-		
-		// Deal with Proparse's 10877/1087 token number issue.
-		TokenInfo info = new TokenInfo();
-		info.isNatural = true;
-		allTokens[1087] = info;
-
 		assignDefaultText();
 	}
 	
 	private static TokenInfo getInfo(int tokenType) {
-		// One stupid mistake in Proparse's token numbers causes us headaches.
-		// Is an issue in Proparse 2.2b01, hopefully will be fixed next release.
-		if (tokenType == 10877) return allTokens[1087];
 		if (tokenType < 1 || tokenType > Last_Token_Number) return null;
 		return allTokens[tokenType];
 	}
@@ -112,6 +103,7 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 		allTokens[SLASH].keywordText = "/";
 		allTokens[LEXCOLON].keywordText = ":";
 		allTokens[OBJCOLON].keywordText = ":";
+		allTokens[DOUBLECOLON].keywordText = "::";
 		allTokens[LEXAT].keywordText = "@";
 		allTokens[LEFTBRACE].keywordText = "[";
 		allTokens[RIGHTBRACE].keywordText = "]";
@@ -1085,10 +1077,50 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 		allTokens[SECURITYPOLICY].keywordText = "SECURITY-POLICY";
 		allTokens[SHA1DIGEST].keywordText = "SHA1-DIGEST";
 		allTokens[SSLSERVERNAME].keywordText = "SSL-SERVER-NAME";
-		allTokens[1087].keywordText = "SYMMETRIC-ENCRYPTION-ALGORITHM";
+		allTokens[SYMMETRICENCRYPTIONALGORITHM].keywordText = "SYMMETRIC-ENCRYPTION-ALGORITHM";
 		allTokens[SYMMETRICENCRYPTIONIV].keywordText = "SYMMETRIC-ENCRYPTION-IV";
 		allTokens[SYMMETRICENCRYPTIONKEY].keywordText = "SYMMETRIC-ENCRYPTION-KEY";
 		allTokens[SYMMETRICSUPPORT].keywordText = "SYMMETRIC-SUPPORT";
 		allTokens[TRANSINITPROCEDURE].keywordText = "TRANS-INIT-PROCEDURE";
+
+		// OpenEdge 10.1, Proparse 3.0.
+		allTokens[BIGINT].keywordText = "BIGINT";
+		allTokens[TIMESTAMP].keywordText = "TIMESTAMP";
+		allTokens[FIXCHAR].keywordText = "FIXCHAR";
+		allTokens[AUDITCONTROL].keywordText = "AUDIT-CONTROL";
+		allTokens[AUDITENABLED].keywordText = "AUDIT-ENABLED";
+		allTokens[AUDITPOLICY].keywordText = "AUDIT-POLICY";
+		allTokens[BIND].keywordText = "BIND";
+		allTokens[CAST].keywordText = "CAST";
+		allTokens[CLASS].keywordText = "CLASS";
+		allTokens[CLIENTPRINCIPAL].keywordText = "CLIENT-PRINCIPAL";
+		allTokens[CONSTRUCTOR].keywordText = "CONSTRUCTOR";
+		allTokens[FINAL].keywordText = "FINAL";
+		allTokens[GENERATEUUID].keywordText = "GENERATE-UUID";
+		allTokens[GUID].keywordText = "GUID";
+		allTokens[HEXDECODE].keywordText = "HEX-DECODE";
+		allTokens[HEXENCODE].keywordText = "HEX-ENCODE";
+		allTokens[IMPLEMENTS].keywordText = "IMPLEMENTS";
+		allTokens[INHERITS].keywordText = "INHERITS";
+		allTokens[INTERFACE].keywordText = "INTERFACE";
+		allTokens[METHOD].keywordText = "METHOD";
+		allTokens[NAMESPACEPREFIX].keywordText = "NAMESPACE-PREFIX";
+		allTokens[NAMESPACEURI].keywordText = "NAMESPACE-URI";
+		allTokens[NEWINSTANCE].keywordText = "NEW-INSTANCE";
+		allTokens[PROTECTED].keywordText = "PROTECTED";
+		allTokens[REFERENCEONLY].keywordText = "REFERENCE-ONLY";
+		allTokens[SAXWRITER].keywordText = "SAX-WRITER";
+		allTokens[SETDBCLIENT].keywordText = "SET-DB-CLIENT";
+		allTokens[THISOBJECT].keywordText = "THIS-OBJECT";
+		allTokens[TYPEOF].keywordText = "TYPE-OF";
+		allTokens[VALIDOBJECT].keywordText = "VALID-OBJECT";
+		allTokens[XMLDATATYPE].keywordText = "XML-DATA-TYPE";
+		allTokens[XMLNODETYPE].keywordText = "XML-NODE-TYPE";
+		allTokens[WIDGETID].keywordText = "WIDGET-ID";
+		allTokens[DESTRUCTOR].keywordText = "DESTRUCTOR";
+		allTokens[VOID].keywordText = "VOID";
+		allTokens[NESTED].keywordText = "NESTED";
+
+	
 	}
 }
