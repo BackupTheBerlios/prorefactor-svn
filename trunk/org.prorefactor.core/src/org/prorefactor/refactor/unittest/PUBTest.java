@@ -50,7 +50,7 @@ public class PUBTest extends UnitTestBase2 {
 		pub.build();
 		pub = new PUB(relPath, parseFile.getCanonicalPath());
 		assertTrue(pub.load());
-		String [] fileIndex = pub.getFileIndex();
+		String [] fileIndex = pub.getTree().getFilenames();
 		
 		// Test that file at index 1 matches the include file name that we expect
 		File iGet = new File(fileIndex[1]);

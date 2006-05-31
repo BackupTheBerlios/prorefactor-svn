@@ -36,8 +36,8 @@ import org.prorefactor.core.TokenTypes;
 import org.prorefactor.core.schema.Field;
 import org.prorefactor.core.schema.Table;
 import org.prorefactor.nodetypes.NodeFactory;
+import org.prorefactor.nodetypes.ProgramRootNode;
 import org.prorefactor.nodetypes.ProparseDirectiveNode;
-import org.prorefactor.refactor.source.CompileUnit;
 import org.prorefactor.treeparser.FieldBuffer;
 import org.prorefactor.treeparser.ParseUnit;
 import org.prorefactor.treeparser.Primative;
@@ -47,8 +47,6 @@ import org.prorefactor.treeparser.SymbolScopeRoot;
 import org.prorefactor.treeparser.SymbolScopeSuper;
 import org.prorefactor.treeparser.TableBuffer;
 import org.prorefactor.treeparser01.TP01Support;
-
-import com.joanju.ProparseLdr;
 
 /** The API for "Parse Unit Binary" files, which contain import and export
  * tables as well as a minimal AST for a parse unit.
@@ -98,7 +96,7 @@ public class PUB {
 		pubFile = new File(refpack.getProRefactorProjectDir() + subdir + relPath + ".pub");
 	}
 	
-	public static final int LAYOUT_VERSION = 6;
+	public static final int LAYOUT_VERSION = 9;
 
 
 	/** loadTo(PUBFILE_TIMESTAMP) - just check if the binary exists and
@@ -152,11 +150,10 @@ public class PUB {
 	private DualHashBidiMap stringTable;
 	private File cuFile;
 	private File pubFile;
-	private JPNode tree;
+	private ProgramRootNode tree;
 	private ParseUnit parseUnit;
-	private ProparseLdr parser = ProparseLdr.getInstance();
 	private RefactorSession refpack = RefactorSession.getInstance();
-	private String className;
+	private String unitClassName;
 	
 	private String superClassName;
 	private String [] stringArray;
@@ -177,7 +174,7 @@ public class PUB {
 		/** The symbol name (Symbol.fullName), with caseAsDefined. */
 		public String symbolName;
 		/** If is a CLASS object ref, then the class name, null otherwise. */
-		public String className = null;
+		public String classSymbolRefName = null;
 	}
 	
 	private class TableRef {
@@ -218,6 +215,7 @@ public class PUB {
 			parseUnit = new ParseUnit(cuFile);
 			parseUnit.setPUB(this);
 		}
+		pubFile.delete();
 		parseUnit.treeParser01(); // This calls build(TP01Support)
 		return parseUnit;
 	}
@@ -228,6 +226,7 @@ public class PUB {
 		ParseUnit pu = support.getParseUnit();
 		// treeParser01 needs to have been run already.
 		assert pu.getRootScope()!=null;
+		tree = pu.getTopNode();
 		_refresh();
 		pubFile.getParentFile().mkdirs();
 		OutputStream fileOut = new BufferedOutputStream(new FileOutputStream(pubFile));
@@ -239,7 +238,6 @@ public class PUB {
 		writeSchemaSegment(out, rootSymbols);
 		writeImportSegment(out, rootSymbols);
 		writeExportSegment(out, rootSymbols);
-		tree = pu.getTopNode();
 		writeTree(out, tree);
 		writeStrings(out);
 		out.close();
@@ -280,7 +278,7 @@ public class PUB {
 	
 
 	
-	public String getClassName() { return className; }
+	public String getClassName() { return unitClassName; }
 	
 	
 	
@@ -295,18 +293,6 @@ public class PUB {
 	
 	
 
-	/** Get the array of file names. The file at index zero is always the compile unit.
-	 * The others are include files. The array index position corresponds to JPNode.getFileIndex().
-	 * It is possible (even likely) that there will be "" or null String entries.
-	 */
-	public String [] getFileIndex() {
-		String [] ret = new String[fileList.size()];
-		fileList.toArray(ret);
-		return ret;
-	}
-	
-	
-	
 	/** Get the array of imported symbols, in no particular order.
 	 * Currently just for DEF SHARED symbols.
 	 */
@@ -335,8 +321,17 @@ public class PUB {
 	public String getSuperClassName() { return superClassName; }
 	
 	
+	/** Get the time stamp (File.lastModified()) of the PUB file.
+	 * Returns zero if the PUB file does not exist.
+	 */
+	public long getTimestamp() {
+		if (pubFile==null) return 0;
+		return pubFile.lastModified();
+	}
+	
+	
 	/** Return the JPNode syntax tree that was loaded with load() */
-	public JPNode getTree() { return tree; }
+	public ProgramRootNode getTree() { return tree; }
 	
 	
 	/** Has the PUB been checked to see if it's current?
@@ -385,7 +380,8 @@ public class PUB {
 			if (lastSegmentToLoad==PUB.IMPORTS) return true;
 			readExportSegment(inStream);
 			if (lastSegmentToLoad==PUB.EXPORTS) return true;
-			tree = readTree(inStream);
+			tree = (ProgramRootNode) readTree(inStream);
+			tree.setFilenames(fileList.toArray(new String[fileList.size()]));
 			if (lastSegmentToLoad==PUB.AST) return true;
 			readStrings(inStream);
 			setStrings(tree);
@@ -423,7 +419,7 @@ public class PUB {
 	
 	
 	private void readHeader(ObjectInputStream in) throws IOException {
-		className = in.readUTF(); if (className.length()==0) className = null;
+		unitClassName = in.readUTF(); if (unitClassName.length()==0) unitClassName = null;
 		superClassName = in.readUTF(); if (superClassName.length()==0) superClassName = null;
 	}
 	
@@ -469,7 +465,7 @@ public class PUB {
 		SymbolRef symbolRef = new SymbolRef(in.readInt(), in.readUTF());
 		if (symbolRef.progressType == -1) return null;
 		symbolRef.dataType = in.readInt();
-		if (symbolRef.dataType==TokenTypes.CLASS) symbolRef.className = in.readUTF();
+		if (symbolRef.dataType==TokenTypes.CLASS) symbolRef.classSymbolRefName = in.readUTF();
 		return symbolRef;
 	}
 	
@@ -480,6 +476,9 @@ public class PUB {
 		if (nodeClass == -1) return null;
 		JPNode node = NodeFactory.createByIndex(nodeClass);
 		node.setType(in.readInt());
+		node.setFileIndex(in.readShort());
+		node.setLine(in.readInt());
+		node.setColumn(in.readShort());
 		int key;
 		int value;
 		for (	key=in.readInt(), value=in.readInt()
@@ -557,7 +556,7 @@ public class PUB {
 	
 	
 	private void writeFileIndex(ObjectOutputStream out) throws IOException {
-		String [] files = parser.getFilenameArray();
+		String [] files = tree.getFilenames();
 		for (int i = 0; i < files.length; i++) {
 			out.writeInt(i);
 			out.writeUTF(files[i]);
@@ -605,6 +604,9 @@ public class PUB {
 	private void writeTree(ObjectOutputStream out, JPNode node) throws IOException {
 		out.writeInt(node.getSubtypeIndex());
 		out.writeInt(node.getType());
+		out.writeShort(node.getFileIndex());
+		out.writeInt(node.getLine());
+		out.writeShort(node.getColumn());
 		if ( ! TokenTypes.hasDefaultText(node.getType()) ) {
 			out.writeInt(NODETEXT);
 			out.writeInt(stringIndex(node.getText()));

@@ -400,7 +400,17 @@ public class TP01Support extends TP01Action {
 		 */
 		JPNode defNode = (JPNode) defAST;
 		JPNode idNode = (JPNode) idAST;
-		Variable variable = new Variable(idNode.getText(), currentScope);
+		String name = idNode.getText();
+		if (name==null || name.length()==0) {
+			/* Variable Name: There was a subtle bug here when parsing trees extracted
+			 * from PUB files. In PUB files, the text of keyword nodes are not stored.
+			 * But in the case of an ACCUMULATE statement -> aggregatephrase -> aggregate_opt,
+			 * we are defining variable/symbols using the COUNT|MAXIMUM|TOTAL|whatever node.
+			 * I added a check for empty text from the "id" node.
+			 */
+			name = TokenTypes.getTokenName(idNode.getType());
+		}
+		Variable variable = new Variable(name, currentScope);
 		variable.setDefOrIdNode(defNode);
 		currSymbol = variable;
 		idNode.setLink(JPNode.SYMBOL, variable);
@@ -564,7 +574,7 @@ public class TP01Support extends TP01Action {
 		if (forwardScope==null) funcSymbolCreate(idAST);
 		// If there are symbols (i.e. parameters, buffer params) already defined in
 		// this function scope, then we don't do anything.
-		if (	currentScope.getVariableSet().size() > 0
+		if (	currentScope.getVariables().size() > 0
 			||	currentScope.getBufferSet().size() > 0
 			) return;
 		if (forwardScope==null) return;

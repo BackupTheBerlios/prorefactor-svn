@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import org.prorefactor.core.JPNode;
 import org.prorefactor.core.PRCException;
+import org.prorefactor.nodetypes.ProgramRootNode;
 import org.prorefactor.refactor.FileStuff;
 import org.prorefactor.refactor.PUB;
 import org.prorefactor.refactor.RefactorException;
@@ -50,11 +51,10 @@ public class ParseUnit {
 
 	protected int style = DEFAULT;
 	protected File file;
-	private JPNode topNode;
+	private ProgramRootNode topNode;
 	protected ProparseLdr parser = ProparseLdr.getInstance();
 	protected PUB pub = null;
 	protected RefactorSession refpack = RefactorSession.getInstance();
-	private String [] filenames = null;
 	private SymbolScopeRoot rootScope;
 
 	
@@ -64,13 +64,18 @@ public class ParseUnit {
 			// A lot of old code starts with a string filename, sends that to Proparse, gets the top node
 			// handle, builds JPNode, and then runs TreeParser01 from that. (All the stuff ParseUnit does
 			// now.) In those cases, this ParseUnit might have been created as an empty shell by TreeParser01
-			// itself, and "file" would not be set. In that case, we attempt to find the File from Proparse's
-			// files index.
-			if (filenames==null) filenames = parser.getFilenameArray();
-			if (filenames==null) return null;
-			file = new File(filenames[0]);
+			// itself, and "file" would not be set. In that case, we attempt to find the File from the file index.
+			if (topNode==null) return null;
+			file = new File(topNode.getFilenames()[0]);
 		}
 		return file;
+	}
+	
+	
+	/** Get the file index, either from the PUB file or from the parser, whichever was used to get the tree. */
+	public String [] getFileIndex() {
+		if (topNode==null) return null;
+		return topNode.getFilenames();
 	}
 	
 	
@@ -79,7 +84,6 @@ public class ParseUnit {
 		if (pub==null) {
 			// Note that we might be parsing a super class from another project, because it was
 			// found on the propath. We have to tell the PUB which project the file was found in.
-			RefactorSession refpack = RefactorSession.getInstance();
 			String [] projFile = refpack.getIDE().getProjectRelativePath(getFile());
 			pub = new PUB(projFile[0], projFile[1], FileStuff.fullpath(file));
 			pub.setParseUnit(this);
@@ -92,7 +96,7 @@ public class ParseUnit {
 
 
 	/** Get the syntax tree top (Program_root) node */
-	public JPNode getTopNode() { return topNode; }
+	public ProgramRootNode getTopNode() { return topNode; }
 	
 	
 	/** Load from PUB, or build PUB if it's out of date.
@@ -115,7 +119,6 @@ public class ParseUnit {
 	public void parse() throws RefactorException {
 		parser.parse(file.getPath());
 		if (parser.errorGetStatus() < 0) throw new RefactorException(parser.errorGetText());
-		filenames = parser.getFilenameArray();
 		int topHandle = parser.getHandle();
 		parser.nodeTop(topHandle);
 		if ((style & DISCONNECTED) == 0) {
@@ -123,7 +126,7 @@ public class ParseUnit {
 		}
 		else {
 			JPNode.TreeConfig config = new JPNode.TreeConfig();
-			config.makeDisconnected(filenames);
+			config.makeDisconnected();
 			this.setTopNode(JPNode.getTree(topHandle, config));
 		}
 		assert parser.errorGetStatus()==0 : parser.errorGetText();
@@ -136,8 +139,8 @@ public class ParseUnit {
 	public void setRootScope(SymbolScopeRoot rootScope) { this.rootScope = rootScope; }
 
 	
-	/** Set the syntax tree top (Program_root) node */
-	public void setTopNode(JPNode topNode) { this.topNode = topNode; }
+	/** Set the syntax tree top (Program_root) node. */
+	public void setTopNode(JPNode topNode) { this.topNode = (ProgramRootNode) topNode; }
 
 
 	/** Run any IJPTreeParser against the AST.

@@ -147,7 +147,7 @@ functioncall
 	|	#(ADDINTERVAL LEFTPAREN expression COMMA expression COMMA expression RIGHTPAREN )
 	|	#(AUDITENABLED LEFTPAREN (expression)? RIGHTPAREN )
 	|	canfindfunc // has extra "action." support handling in this tree parser.
-	|	#(CAST LEFTPAREN field COMMA TYPE_NAME RIGHTPAREN )
+	|	#(CAST LEFTPAREN expression COMMA TYPE_NAME RIGHTPAREN )
 	|	currentvaluefunc // is also a pseudfn.
 	|	dynamiccurrentvaluefunc // is also a pseudfn.
 	|	#(DYNAMICFUNCTION LEFTPAREN expression (#(IN_KW expression))? (COMMA parameter)* RIGHTPAREN (NOERROR_KW)? )
@@ -175,6 +175,7 @@ functioncall
 	|	substringfunc // is also a pseudfn.
 	|	#(SUPER (parameterlist)? )
 	|	#(TIMEZONE LEFTPAREN (expression)? RIGHTPAREN )
+	|	#(TYPEOF LEFTPAREN expression COMMA TYPE_NAME RIGHTPAREN )
 	|	#(USERID (funargs)? )
 	|	#(USER (funargs)? )
 	|	sqlaggregatefunc  

@@ -39,6 +39,8 @@ public final class NodeFactory {
 	
 	public static JPNode create(int handle) {
 		switch (parser.getNodeTypeI(handle)) {
+		case TokenTypes.Program_root:
+			return new ProgramRootNode(handle, JPNode.nullConfig);
 		case TokenTypes.Field_ref:
 			return new FieldRefNode(handle, JPNode.nullConfig);
 		case TokenTypes.RECORD_NAME:
@@ -58,7 +60,6 @@ public final class NodeFactory {
 				return new BlockNode(handle, JPNode.nullConfig);
 			else
 				return new JPNode(handle, JPNode.nullConfig);
-		case TokenTypes.Program_root:
 		case TokenTypes.CANFIND:
 			// CANFIND is reserved, and only used in the syntax for the CAN-FIND function.
 			// It is a "block" because it has special buffer/index-cursor handling.
@@ -91,6 +92,8 @@ public final class NodeFactory {
 			return new RecordNameNode();
 		case 5:
 			return new ProparseDirectiveNode();
+		case 6:
+			return new ProgramRootNode();
 		default:
 			throw new IllegalArgumentException();
 		}

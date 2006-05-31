@@ -50,11 +50,13 @@ public class FieldRefNode extends JPNode {
 	}
 	
 	/** Every JPNode subtype has its own index. Used for persistent storage. */
+	@Override
 	public int getSubtypeIndex() { return 3; }
 
 	/** Get the Symbol for a Field_ref node.
 	 * @return Always returns one of two Symbol types: Variable or FieldBuffer.
 	 */
+	@Override
 	public Symbol getSymbol() {
 		Symbol symbol = (Symbol) getLink(JPNode.SYMBOL);
 		assert symbol != null;

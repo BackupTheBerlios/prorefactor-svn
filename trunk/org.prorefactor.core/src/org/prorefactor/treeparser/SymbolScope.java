@@ -13,6 +13,7 @@ package org.prorefactor.treeparser;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -254,8 +255,8 @@ public class SymbolScope {
 
 	
 	
-	/** Get the set of Variables. (vars, params, etc, etc.) */
-	public Set getVariableSet() { return variableMap.entrySet(); }
+	/** Get the Variables. (vars, params, etc, etc.) */
+	public Collection<Variable> getVariables() { return variableMap.values(); }
 
 
 	/** Answer whether the scope has a Routine named

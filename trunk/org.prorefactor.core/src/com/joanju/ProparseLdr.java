@@ -77,6 +77,8 @@ public class ProparseLdr {
 	/** Because the filenames are not actually stored, but an integer index is,
 	 * it is common to need an array representation of the filenames.
 	 * Important note: Sometimes Proparse will stick a blank "" entry into this list.
+	 * @deprecated May,2006. The new "filename-list" node attribute is used when the tree is loaded
+	 * into JPNode, and the filename array is stored in the ProgramRootNode object.
 	 */
 	public String [] getFilenameArray() {
 		ArrayList names = new ArrayList();
@@ -288,6 +290,7 @@ public class ProparseLdr {
 	 * @param index The file index
 	 * @return The file name, as stored within Proparse.
 	 * Raises warning condition if the index number is invalid.
+	 * @deprecated See the new "filename-list" node attribute in Proparse.
 	 * @see ProparseLdr#getNodeFileIndex(int)
 	 * @see ProparseLdr#getNodeFilename(int)
 	 */
@@ -316,7 +319,6 @@ public class ProparseLdr {
 	 * storage of the syntax tree.
 	 * @param handle The node handle
 	 * @return The integer index to the file's name
-	 * @see ProparseLdr#getIndexFilename(int)
 	 * @see ProparseLdr#getNodeFilename(int)
 	 */
 	public native int getNodeFileIndex(int handle);

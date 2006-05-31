@@ -1,7 +1,7 @@
 /** Created: October, 2002
  * Authors: John Green
  * 
- * Copyright (c) 2002-2005 Joanju (www.joanju.com)
+ * Copyright (c) 2002-2006 Joanju Software (www.joanju.com)
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -117,9 +117,9 @@ public class JPNode extends BaseAST implements IJPNode {
 	private int line = -1;
 	private int nodeHandle = 0;
 	private int type = 0;
+	private static final long serialVersionUID = 328939790131475436L;
 	private HashMap attrMap;
 	private JPNode parent;
-	private String filename;
 	private String text;
 
 	public static class TreeConfig {
@@ -128,11 +128,11 @@ public class JPNode extends BaseAST implements IJPNode {
 		public ICallback callback;
 		/** Disconnected mode? Default is false. */
 		boolean disconnected = false;
-		String [] filenames;
+		/** @deprecated May,2006. The filename array is no longer used. */
 		public void makeDisconnected(String [] filenames) {
-			this.filenames = filenames;
 			disconnected = true;
 		}
+		public void makeDisconnected() {disconnected = true;}
 		/** Store the file/line/column positions in JPNode?
 		 * Some functions make heavy use of these node attributes.
 		 * For those, it makes sense to store those attributes within JPNode,
@@ -239,7 +239,6 @@ public class JPNode extends BaseAST implements IJPNode {
 		if (config.disconnected) {
 			attrSet(JPNode.STATE2, parser.attrGetI(nodeHandle, IConstants.STATE2));
 			fileIndex = parser.getNodeFileIndex(nodeHandle);
-			filename = config.filenames[fileIndex];
 			line = parser.getNodeLine(nodeHandle);
 			column = parser.getNodeColumn(nodeHandle);
 			if (config.storeComments) setComments(getComments());
@@ -270,6 +269,14 @@ public class JPNode extends BaseAST implements IJPNode {
 		nodeHandle = 0;
 		if (down != null) ((JPNode)down).disconnectBranch2();
 		if (right != null) ((JPNode)right).disconnectBranch2();
+	}
+	
+	
+
+	/** Walk up the tree until we get to the ProgramRootNode, which has the filename array. */
+	protected String filenameFromIndex(int index) {
+		if (parent==null) return null;
+		return parent.filenameFromIndex(index);
 	}
 
 
@@ -367,8 +374,8 @@ public class JPNode extends BaseAST implements IJPNode {
 
 
 	public String getFilename() {
-		if (filename==null) return parser.getNodeFilename(nodeHandle);
-		return filename;
+		if (fileIndex == -1) return parser.getNodeFilename(nodeHandle);
+		return filenameFromIndex(fileIndex);
 	}
 	
 	
@@ -512,18 +519,28 @@ public class JPNode extends BaseAST implements IJPNode {
 
 
 
+	/** Used when re-loading serialized nodes. */
+	public void setColumn(int column) { this.column = column; }
+	
+	
 	/** Set the comments preceding this node.
 	 * CAUTION: Does not change any values in Proparse. Only use this
 	 * if the JPNode tree is "disconnected", because getComments returns
 	 * the comments from the "hidden tokens" in Proparse in "connected" mode.
 	 */
 	public void setComments(String comments) { setLink(COMMENTS, comments); }
-
 	
 
 	/** @see #getFieldContainer() */
 	public void setFieldContainer(FieldContainer fieldContainer) { setLink(FIELD_CONTAINER, fieldContainer); }
 
+	
+	/** Used when re-loading serialized nodes. */
+	public void setFileIndex(int fileIndex) { this.fileIndex = fileIndex; }
+	
+	
+	/** Used when re-loading serialized nodes. */
+	public void setLine(int line) { this.line = line; }
 	
 	
 	/** @see #getLink(Integer) */
@@ -538,6 +555,24 @@ public class JPNode extends BaseAST implements IJPNode {
 		for (JPNode child = firstChild(); child!=null; child = child.nextSibling()) {
 			child.parent = this;
 		}
+	}
+	
+	
+	@Override
+	public String toString() {
+		StringBuffer buff = new StringBuffer();
+		buff
+			.append(TokenTypes.getTokenName(getType()))
+			.append(" \"")
+			.append(getText())
+			.append("\" ")
+			.append(getFilename())
+			.append(':')
+			.append(getLine())
+			.append(':')
+			.append(getColumn())
+			;
+		return buff.toString();
 	}
 
 
