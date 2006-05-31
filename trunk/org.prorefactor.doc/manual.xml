@@ -7,7 +7,7 @@
 
     <date>2006</date>
 
-    <pubdate>March 2006, ProRefactor version 1.4.0</pubdate>
+    <pubdate>May 2006, ProRefactor version 1.5.0</pubdate>
 
     <author>
       <firstname>John</firstname>
@@ -1493,6 +1493,23 @@ END.
     <title>Release Notes</title>
 
     <variablelist>
+      <varlistentry>
+        <term>Version 1.5.0</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>More support for 10.1 and Proparse 3.0.</para>
+            </listitem>
+
+            <listitem>
+              <para>Various internal fixes and tweaks, mostly for
+              Callgraph.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term>Version 1.4.0</term>
 

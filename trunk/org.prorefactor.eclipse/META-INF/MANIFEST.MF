@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ProRefactor
 Bundle-SymbolicName: org.prorefactor.eclipse; singleton:=true
-Bundle-Version: 1.4.0
+Bundle-Version: 1.5.0
 Bundle-ClassPath: eclipse.jar
 Bundle-Activator: org.prorefactor.eclipse.Plugin
 Bundle-Vendor: ProRefactor.org
