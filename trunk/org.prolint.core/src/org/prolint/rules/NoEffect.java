@@ -39,10 +39,13 @@ public class NoEffect extends NodeRule {
 			new Integer(TokenTypes.Expr_statement)
 		};
 
+	@Override
 	public String getName() { return RULENAME; }
 
+	@Override
 	public Integer[] getWatchedNodeTypes() { return watchedTypes; }
 
+	@Override
 	public List run(JPNode node) {
 		int nodeType = node.getType();
 		assert nodeType==TokenTypes.Expr_statement;
@@ -72,6 +75,7 @@ public class NoEffect extends NodeRule {
 		int nodeHandle = node.getHandle();
 		/* User-defined functions and the following built-in functions might have an effect. */
 		if (parser.queryCreate(nodeHandle, qname, "USER_FUNC") > 0) return true;
+		if (parser.queryCreate(nodeHandle, qname, "LOCAL_METHOD_REF") > 0) return true;
 		if (parser.queryCreate(nodeHandle, qname, "DYNAMICFUNCTION") > 0) return true;
 		if (parser.queryCreate(nodeHandle, qname, "ETIME") > 0) return true;
 		if (parser.queryCreate(nodeHandle, qname, "SETUSERID") > 0) return true;

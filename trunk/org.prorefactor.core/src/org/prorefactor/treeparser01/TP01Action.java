@@ -22,7 +22,7 @@ import antlr.collections.AST;
 
 
 /** Superclass of empty actions methods for TreeParser01.
- * Sublcasses can override and implement any of these methods,
+ * Subclasses can override and implement any of these methods,
  * which are all called directly by TreeParser01.
  * TP01Support is the default implementation.
  */

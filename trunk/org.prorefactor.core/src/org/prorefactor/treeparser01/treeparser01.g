@@ -334,7 +334,7 @@ referencepoint
 	;
 
 browse_ref
-	:	#(BROWSE i:ID) { action.frameRef(#i); }
+	:	#(BROWSE i:ID) { action.browseRef(#i); }
 	;
 
 buffercomparestate

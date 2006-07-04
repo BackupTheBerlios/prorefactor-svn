@@ -36,6 +36,7 @@ public class AllPRCoreTests {
 		suite.addTest(new TestSuite(TP01SymbolActionTest.class));
 		suite.addTest(new TestSuite(TP01ProcessActionTest.class));
 		suite.addTest(new TestSuite(TP01FramesTest.class));
+		suite.addTest(new TestSuite(BugFixTests.class));
 		//$JUnit-END$
 		return suite;
 	}

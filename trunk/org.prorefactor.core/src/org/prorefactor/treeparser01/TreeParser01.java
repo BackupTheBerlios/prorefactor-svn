@@ -7872,7 +7872,7 @@ inputState.guessing--;
 		_t = __t162;
 		_t = _t.getNextSibling();
 		if ( inputState.guessing==0 ) {
-			action.frameRef(i);
+			action.browseRef(i);
 		}
 		_retTree = _t;
 	}
