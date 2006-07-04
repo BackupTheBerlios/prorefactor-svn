@@ -216,7 +216,6 @@ public class TP01Support extends TP01Action {
 		if (! file.exists()) throw new Error("Could not find source on PROPATH for class: " + className);
 		RefactorSession refpack = RefactorSession.getInstance();
 		String [] projFile = refpack.getIDE().getProjectRelativePath(file);
-		if (projFile==null) throw new Error("Could not find IDE project/file for class: " + className);
 		PUB pub = new PUB(projFile[0], projFile[1], FileStuff.fullpath(file));
 		boolean pubIsCurrent = pub.loadTo(PUB.HEADER);
 		ParseUnit pu = new ParseUnit(file);

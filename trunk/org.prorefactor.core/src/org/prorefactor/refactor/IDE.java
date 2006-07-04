@@ -31,7 +31,8 @@ public interface IDE {
 	 * The return is an array of two strings. The first entry is the project
 	 * name, ex: "projectName". The second entry is the relative path, ex:
 	 * "src/com/joanju/Example.cls".
-	 * @return null if the IDE does not find the file.
+	 * @return Must never return null. The project name may be anything
+	 * including null. The relative path must never be null.
 	 */
 	String [] getProjectRelativePath(File file);
 	

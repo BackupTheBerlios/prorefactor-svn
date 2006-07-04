@@ -133,7 +133,11 @@ public class ParseUnit {
 	}
 	
 	
-	public ParseUnit setPUB(PUB pub) { this.pub = pub; return this; }
+	public ParseUnit setPUB(PUB pub) {
+		this.pub = pub;
+		if (pub.getParseUnit()!=this) pub.setParseUnit(this);
+		return this;
+	}
 
 	
 	public void setRootScope(SymbolScopeRoot rootScope) { this.rootScope = rootScope; }

@@ -78,20 +78,21 @@ public class PUB {
 	 * @param fullPath The fully qualified path to the compile unit's source file.
 	 */
 	public PUB(String relPath, String fullPath) {
-		init(null, relPath, fullPath);
+		init(relPath, fullPath, true);
 	}
 
 	/** Work with a PUB for any compile unit from any project.
+	 * For any project name other than the current RefactorSession getProjectName(),
+	 * the PUB file is treated as a "foreign" pub.
 	 * @see PUB(String, String)
 	 */
 	public PUB(String project, String relPath, String fullPath) {
-		init(project, relPath, fullPath);
+		boolean isLocalProjectFile = (project!=null && project.equalsIgnoreCase(refpack.getProjectName()));
+		init(relPath, fullPath, isLocalProjectFile);
 	}
 	
-	private void init(String project, String relPath, String fullPath) {
-		String subdir;
-		if (project==null || project.equalsIgnoreCase(refpack.getProjectName())) subdir = "/pubs/";
-		else subdir = "/foreign_pubs/";
+	private void init(String relPath, String fullPath, boolean isLocalProjectFile) {
+		String subdir = isLocalProjectFile ? "/pubs/" : "/foreign_pubs/";
 		cuFile = new File(fullPath);
 		pubFile = new File(refpack.getProRefactorProjectDir() + subdir + relPath + ".pub");
 	}
@@ -317,6 +318,8 @@ public class PUB {
 	}
 	
 	
+	public ParseUnit getParseUnit() { return parseUnit; }
+	
 	
 	public String getSuperClassName() { return superClassName; }
 	
@@ -503,7 +506,10 @@ public class PUB {
 	
 	
 	
-	public void setParseUnit(ParseUnit pu) {this.parseUnit = pu;}
+	public void setParseUnit(ParseUnit pu) {
+		this.parseUnit = pu;
+		if (pu.getPUB()!=this) pu.setPUB(this);
+	}
 	
 	
 	
