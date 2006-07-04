@@ -2,7 +2,7 @@
 <feature
       id="org.prorefactor"
       label="org.prorefactor"
-      version="1.5.0"
+      version="1.5.1"
       provider-name="ProRefactor.org"
       plugin="org.prorefactor.eclipse">
 
@@ -69,31 +69,31 @@ archives.
          id="org.prorefactor.core"
          download-size="0"
          install-size="0"
-         version="1.5.0"/>
+         version="1.5.1"/>
 
    <plugin
          id="org.prorefactor.eclipse"
          download-size="0"
          install-size="0"
-         version="1.5.0"/>
+         version="1.5.1"/>
 
    <plugin
          id="org.prorefactor.javadoc"
          download-size="0"
          install-size="0"
-         version="1.5.0"/>
+         version="1.5.1"/>
 
    <plugin
          id="org.prorefactor.doc"
          download-size="0"
          install-size="0"
-         version="1.5.0"/>
+         version="1.5.1"/>
 
    <plugin
          id="org.prorefactor.lib"
          download-size="0"
          install-size="0"
-         version="1.5.0"/>
+         version="1.5.1"/>
 
    <plugin
          id="org.prolint"

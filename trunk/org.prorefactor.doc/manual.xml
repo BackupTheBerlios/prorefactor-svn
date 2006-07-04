@@ -7,7 +7,7 @@
 
     <date>2006</date>
 
-    <pubdate>May 2006, ProRefactor version 1.5.0</pubdate>
+    <pubdate>May 2006, ProRefactor version 1.5.1</pubdate>
 
     <author>
       <firstname>John</firstname>
@@ -1493,6 +1493,22 @@ END.
     <title>Release Notes</title>
 
     <variablelist>
+      <varlistentry>
+        <term>Version 1.5.1</term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>Fixed INPUT BROWSE field bug.</para>
+            </listitem>
+
+            <listitem>
+              <para>Fixes for working with Eclipse linked resources.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term>Version 1.5.0</term>
 
