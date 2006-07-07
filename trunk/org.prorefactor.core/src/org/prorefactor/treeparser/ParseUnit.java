@@ -72,7 +72,11 @@ public class ParseUnit {
 	}
 	
 	
-	/** Get the file index, either from the PUB file or from the parser, whichever was used to get the tree. */
+	/** Get the file index, either from the PUB file or from the parser, whichever was used to get the tree.
+	 * The return is the array of file names. The file at index zero is always the compile unit.
+	 * The others are include files. The array index position corresponds to JPNode.getFileIndex().
+	 * @see org.prorefactor.nodetypes.ProgramRootNode#getFilenames()
+	 */
 	public String [] getFileIndex() {
 		if (topNode==null) return null;
 		return topNode.getFilenames();

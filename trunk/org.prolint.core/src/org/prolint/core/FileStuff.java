@@ -26,9 +26,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.eclipse.core.resources.IFile;
-import org.prorefactor.eclipse.ResourceUtil;
-
 /** Long and short term extensions to org.prorefactor.refactor.FileStuff.
  * Some of the methods added here may be migrated to ProRefactor. 
  */
@@ -60,15 +57,6 @@ public class FileStuff extends org.prorefactor.refactor.FileStuff {
 		}
 		buff.close();
 		throw new IOException("No such line: " + line + " in file: " + file.getPath());
-	}
-
-	/** Find an IFile for a string filename, or null if not found.
-	 * Maybe later: Remove once it's been added to org.prorefactor.eclipse.ResourceUtil.
-	 */
-	public static IFile getIFileRelaxed(String filename) {
-		File file = FileStuff.findFile(filename);
-		if (file==null) return null;
-		return ResourceUtil.getIFile((FileStuff.fullpath(file)));
 	}
 
 }

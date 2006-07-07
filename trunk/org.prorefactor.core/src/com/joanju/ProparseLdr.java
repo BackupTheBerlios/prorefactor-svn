@@ -79,6 +79,7 @@ public class ProparseLdr {
 	 * Important note: Sometimes Proparse will stick a blank "" entry into this list.
 	 * @deprecated May,2006. The new "filename-list" node attribute is used when the tree is loaded
 	 * into JPNode, and the filename array is stored in the ProgramRootNode object.
+	 * @see org.prorefactor.treeparser.ParseUnit#getFileIndex()
 	 */
 	public String [] getFilenameArray() {
 		ArrayList names = new ArrayList();

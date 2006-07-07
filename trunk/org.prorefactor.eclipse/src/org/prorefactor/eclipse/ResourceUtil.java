@@ -19,11 +19,14 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.prorefactor.refactor.FileStuff;
+import org.prorefactor.refactor.RefactorSession;
 import org.prorefactor.refactor.messages.Message;
 
 
@@ -55,21 +58,44 @@ public class ResourceUtil {
 	} // clearRefactorMarkers
 
 
-
-	/** Find an IFile in the workspace that matches a full String pathname. */
+	/** Attempt to find an appropriate IFile for a file fullpath.
+	 * Since more than one linked resource can point at any one file
+	 * on the OS filesystem, any number of IFile matches are possible.
+	 * This attempts to find an IFile, in the following order:
+	 * 1. Unique "simple" (not linked) IFile in the workspace.
+	 * 2. First in current ProRefactor project.
+	 * 3. First in workspace.
+	 * @return null if there is no IFile representation.
+	 */
 	public static IFile getIFile(String fullPath) {
-		Path temp = new Path(fullPath);
-		if (! temp.toFile().exists() ) return null;
-		IFile tempIFile = Plugin.getWorkspace().getRoot().getFileForLocation(temp);
-		return tempIFile;
+		Path path = new Path(fullPath);
+		IFile ifile = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path);
+		/* If we found a "simple" IFile, we're done and we don't need to
+		 * widen the search to include linked resources.
+		 */ 
+		if (ifile!=null) return ifile;
+		
+		try {
+			IWorkspaceRoot workspaceRoot = null;
+			workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+			String projectName = RefactorSession.getInstance().getProjectName();
+			for (IFile i : workspaceRoot.findFilesForLocation(path)) {
+				if (i.getProject().getName().equalsIgnoreCase(projectName)) {
+					return i;
+				}
+				if (ifile==null) ifile = i;
+			}
+		} catch (IllegalStateException e) {
+			// The workspace is closed, and can't be searched.
+		}
+		return ifile;
 	}
-
 	
 	
 	/** Find an IFile in the workspace for any relative or qualified file path.
 	 * Returns null if the file or resource is not found.
 	 */
-	private static IFile getIFileRelaxed(String filename) {
+	public static IFile getIFileRelaxed(String filename) {
 		File file = FileStuff.findFile(filename);
 		if (file==null) return null;
 		return getIFile((FileStuff.fullpath(file)));
@@ -82,11 +108,13 @@ public class ResourceUtil {
 	 */
 	public static void messagesToMarkers(final ArrayList messages) {
 		WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
+			@Override
 			protected void execute(IProgressMonitor monitor) {
 				for (Iterator it = messages.iterator(); it.hasNext();) {
 					try {
 						Message message = (Message) it.next();
 						IFile file = getIFile(message.file.getCanonicalPath());
+						if (file==null) continue;
 						IMarker marker = file.createMarker("org.prorefactor.markers.refactor");
 						marker.setAttribute(IMarker.LINE_NUMBER, message.line);
 						marker.setAttribute(IMarker.MESSAGE, message.message);

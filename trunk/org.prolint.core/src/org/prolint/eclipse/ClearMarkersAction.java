@@ -33,7 +33,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
-import org.prolint.core.FileStuff;
+import org.prorefactor.eclipse.ResourceUtil;
 
 
 /** This class is responsible for clearing Prolint problem markers
@@ -48,7 +48,7 @@ public class ClearMarkersAction implements IViewActionDelegate {
 	 * Is recursive for directory names.
 	 */
 	public static void clear(String filename) {
-		IFile ifile = FileStuff.getIFileRelaxed(filename);
+		IFile ifile = ResourceUtil.getIFileRelaxed(filename);
 		if (ifile==null) return;
 		clear(ifile);
 	}

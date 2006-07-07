@@ -37,10 +37,9 @@ import org.prolint.rules.NoEffect;
 import org.prolint.rules.NodeRule;
 import org.prolint.rules.Rule;
 import org.prorefactor.core.JPNode;
+import org.prorefactor.eclipse.ResourceUtil;
 import org.prorefactor.refactor.RefactorException;
 import org.prorefactor.refactor.source.CompileUnit;
-
-import com.joanju.ProparseLdr;
 
 
 /** This class stores the configuration for a lint run, and it contains
@@ -59,10 +58,10 @@ public class LintRun {
 	private int fileIndexSequence = 1;
 	private int ruleIndexSequence = 1;
 	private ArrayList cuRulesList = new ArrayList();
-	private HashMap indexToResourceMap = new HashMap();
+	private HashMap<Integer, IFile> indexToResourceMap = new HashMap<Integer, IFile>();
 	private HashMap nodeRulesMap = new HashMap();
 	private HashMap ruleIndexMap = new HashMap();
-	private HashMap resourceToIndexMap = new HashMap();
+	private HashMap<IFile, Integer> resourceToIndexMap = new HashMap<IFile, Integer>();
 	private IFile [] currentUnitIFiles = null;
 	private TempMarkerTable tempMarkerTable = new TempMarkerTable();
 
@@ -134,14 +133,14 @@ public class LintRun {
 	 * file index can be retrieved quickly.
 	 */
 	private void clearAndIndexFiles(CompileUnit cu) {
-		ArrayList resourceList = new ArrayList();
-		String [] filenameArray = ProparseLdr.getInstance().getFilenameArray();
+		ArrayList<IFile> resourceList = new ArrayList<IFile>();
+		String [] filenameArray = cu.getFileIndex();
 		for (int i = 0; i < filenameArray.length; i++) {
 			String name = filenameArray[i];
 			IFile ifile = null;
-			if (name.length() > 0) ifile = FileStuff.getIFileRelaxed(name);
-			resourceList.add(ifile);
+			if (name.length() > 0) ifile = ResourceUtil.getIFileRelaxed(name);
 			if (ifile==null) continue;
+			resourceList.add(ifile);
 			if (resourceToIndexMap.containsKey(ifile)) continue;
 			ClearMarkersAction.clear(ifile);
 			Integer index = new Integer(fileIndexSequence++);
