@@ -12,8 +12,10 @@ package org.prorefactor.eclipse;
 import java.io.File;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.prorefactor.refactor.FileStuff;
 import org.prorefactor.refactor.IDE;
@@ -44,13 +46,48 @@ public class ProRefactorIDEGateway implements IDE {
 		try {
 			workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 			String projectName = RefactorSession.getInstance().getProjectName();
-			for (IFile i : workspaceRoot.findFilesForLocation(Path.fromOSString(FileStuff.fullpath(file)))) {
-				if (i.getProject().getName().equalsIgnoreCase(projectName)) {
-					ifile = i;
-					break;
-				}
-				if (ifile==null) ifile = i;
+			IPath ipath = Path.fromOSString(FileStuff.fullpath(file));
+
+			
+			
+			
+			// TODO new
+			
+			
+			IProject iproject = workspaceRoot.getProject(projectName);
+			if (iproject!=null) {
+				ifile = iproject.getFile(ipath);
 			}
+			if (ifile==null) {
+				for (IProject proj : workspaceRoot.getProjects()) {
+					ifile = proj.getFile(ipath);
+					if (ifile!=null) break;
+				}
+			}
+			
+			
+			
+			// TODO remove. I'm having trouble with findFilesForLocation.
+//			for (IFile i : workspaceRoot.findFilesForLocation(ipath)) {
+//				if (i.getProject().getName().equalsIgnoreCase(projectName)) {
+//					ifile = i;
+//					break;
+//				}
+//				if (ifile==null) ifile = i;
+//			}
+//			// Bug in Eclipse 3.2? findFiles was failing, but getFile was working...?!
+//			if (ifile==null) ifile = workspaceRoot.getFileForLocation(ipath);
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		} catch (IllegalStateException e) {
 			// The workspace is closed, and can't be searched.
 		}

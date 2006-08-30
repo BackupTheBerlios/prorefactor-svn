@@ -1490,6 +1490,8 @@ definerectanglestate
 			|	#(LIKE field (VALIDATE)?)
 			|	sizephrase
 			|	tooltip_expr
+			|	ROUNDED
+			|	GROUPBOX
 			)*
 			(triggerphrase)?
 			state_end
@@ -1758,6 +1760,7 @@ formatphrase
 			|	#(LIKE field )
 			|	NOLABELS
 			|	NOTABSTOP 
+			|	PASSWORDFIELD
 			|	#(VALIDATE funargs)
 			|	#(WHEN expression)
 			|	viewasphrase

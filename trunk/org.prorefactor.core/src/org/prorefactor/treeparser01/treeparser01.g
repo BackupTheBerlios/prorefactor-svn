@@ -784,6 +784,8 @@ definerectanglestate
 			|	#(LIKE fld[CQ.SYMBOL] (VALIDATE)?)
 			|	sizephrase
 			|	tooltip_expr
+			|	ROUNDED
+			|	GROUPBOX
 			)*
 			(triggerphrase)?
 			state_end
@@ -1064,6 +1066,7 @@ formatphrase
 			|	#(LIKE fld[CQ.SYMBOL] )
 			|	NOLABELS
 			|	NOTABSTOP 
+			|	PASSWORDFIELD
 			|	#(VALIDATE funargs)
 			|	#(WHEN expression)
 			|	viewasphrase 

@@ -1006,7 +1006,6 @@ public interface TreeParser01TokenTypes {
 	int USER_FUNC = 997;
 	int TYPELESS_TOKEN = 998;
 	int IMPOSSIBLE_TOKEN = 999;
-	int ACCUM = 1000;
 	int GATEWAYS = 1001;
 	int FUNCTIONCALLTYPE = 1002;
 	int GETATTRCALLTYPE = 1003;
@@ -1138,5 +1137,8 @@ public interface TreeParser01TokenTypes {
 	int ANNOTATION = 1130;
 	int DOUBLECOLON = 1131;
 	int NESTED = 1132;
-	int Last_Token_Number = 1133;
+	int PASSWORDFIELD = 1133;
+	int ROUNDED = 1134;
+	int GROUPBOX = 1135;
+	int Last_Token_Number = 1136;
 }

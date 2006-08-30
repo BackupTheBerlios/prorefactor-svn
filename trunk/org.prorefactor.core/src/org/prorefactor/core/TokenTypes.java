@@ -1120,6 +1120,9 @@ public class TokenTypes implements JPTreeParserTokenTypes {
 		allTokens[DESTRUCTOR].keywordText = "DESTRUCTOR";
 		allTokens[VOID].keywordText = "VOID";
 		allTokens[NESTED].keywordText = "NESTED";
+		allTokens[ROUNDED].keywordText = "ROUNDED";
+		allTokens[GROUPBOX].keywordText = "GROUP-BOX";
+		allTokens[PASSWORDFIELD].keywordText = "PASSWORD-FIELD";
 
 	
 	}

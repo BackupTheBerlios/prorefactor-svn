@@ -246,17 +246,6 @@
       </super>
    </extension>
    <extension
-         id="searchPage"
-         name="ProRefactor Search Page"
-         point="org.eclipse.search.searchPages">
-      <page
-            enabled="false"
-            label="ProRefactor"
-            class="org.prorefactor.eclipse.search.SearchPage1"
-            id="prorefactor.search.page1">
-      </page>
-   </extension>
-   <extension
          id="org.prorefactor.popup"
          name="ProRefactor Popup Menus"
          point="org.eclipse.ui.popupMenus">

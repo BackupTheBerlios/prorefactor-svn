@@ -1,8 +1,8 @@
 Readme File
 
-April 2006
+July 2006
 
-This package contains HSQLDB 1.8.0.4
+This package contains HSQLDB 1.8.0.5
 
 HSQLDB is a relational database engine and a set of tools written in Java.
 
